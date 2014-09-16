@@ -26,13 +26,11 @@ class SpaCMS_Reports_Model {
 		$status = $status_list[rand(0, 2)];
 		$id = ($i + 1);
 		$records["aaData"][] = array(
-		  '<input type="checkbox" name="id[]" value="'.$id.'">',
 		  $id,
 		  '12/09/2013',
 		  'Jhon Doe',
-		  'Jhon Doe',
+		  'Jhon Doe Service',
 		  '450.60$',
-		  rand(1, 10),
 		  '<span class="label label-sm label-'.(key($status)).'">'.(current($status)).'</span>',
 		  '<a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a>',
 		);

@@ -89,11 +89,17 @@
 
 				default:
 					$this->view->style = array(
-						URL . 'Views/spaCMS/reports/css/spaCMS_reports.css',
+						
 						ASSETS . 'plugins/select2/select2.css',
 						ASSETS . 'plugins/select2/select2-metronic.css',
 						ASSETS . 'plugins/data-tables/DT_bootstrap.css',
-						ASSETS . 'plugins/bootstrap-datepicker/css/datepicker.css'
+						ASSETS . 'plugins/bootstrap-datepicker/css/datepicker.css',
+						ASSETS . 'css/style-metronic.css',
+						ASSETS . 'css/style.css',
+						ASSETS . 'css/style-responsive.css',
+						ASSETS . 'css/plugins.css',
+						ASSETS . 'css/custom.css',
+						URL . 'Views/spaCMS/reports/css/spaCMS_reports.css'
 					);
 
 					$this->view->script = array(

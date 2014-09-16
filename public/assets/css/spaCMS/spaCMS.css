@@ -15491,13 +15491,14 @@ html body.menu-module #feedbackify .fby-tab {
 }
 
 #bookings .home-data {
-     background: none repeat scroll 0% 0% #ffffff;
-     bottom: 20px;
-     left: 20px;
-     overflow: hidden;
-     position: absolute;
-     right: 20px;
-     top: 54px;
+     background: none repeat scroll 0 0 #ffffff;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+    top: 31px;
 }
 
 #bookings .home-data table {
