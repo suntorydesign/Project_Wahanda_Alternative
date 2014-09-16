@@ -245,6 +245,7 @@ function loadServiceDetail(user_service_id) {
 				month_in_sp_year[10] = 31;
 				month_in_sp_year[11] = 30;
 				month_in_sp_year[12] = 31;
+				var evou_html = '';
 				//console.log(month_in_sp_year);
 				for ( mon = 1; mon <= 12; mon++) {
 					if (mon == month) {
@@ -387,7 +388,9 @@ function loadServiceDetail(user_service_id) {
 					}			
 					if (key == 'user_service_use_evoucher') {
 						if (value == '0') {
-							$('#btn_evoucher_booking_zone').attr('disabled', 'disabled');
+							$('#btn_evoucher_booking_zone').attr('disabled', true);
+						}else{
+							$('#btn_evoucher_booking_zone').attr('disabled', false);
 						}
 					}
 					$('#' + key).val(value);
@@ -434,25 +437,25 @@ function loadServiceDetail(user_service_id) {
 								//console.log(SUN_OPEN_CLOSE);
 							}							
 							switch(day) {
-							case 'Mon':
+							case '2':
 								day = 'Thứ 2';
 								break;
-							case 'Tue':
+							case '3':
 								day = 'Thứ 3';
 								break;
-							case 'Wed':
+							case '4':
 								day = 'Thứ 4';
 								break;
-							case 'Thu':
+							case '5':
 								day = 'Thứ 5';
 								break;
-							case 'Fri':
+							case '6':
 								day = 'Thứ 6';
 								break;
-							case 'Sat':
+							case '7':
 								day = 'Thứ 7';
 								break;
-							case 'Sun':
+							case '8':
 								day = 'Chủ Nhật';
 								break;
 							}
@@ -469,7 +472,14 @@ function loadServiceDetail(user_service_id) {
 									user_open_hour_1 += '<p><i>' + day + ' : Nghỉ</i></p>';
 								}
 							}
+							if(hour[0] == 1){
+								evou_html += '<span class="fa fa-check"></span>';
+								
+							}else if(hour[0] == 0){
+								evou_html += '<span class="fa fa-times"></span>';
+							}
 						});
+						$('#use_eVoucher').children().html(evou_html);
 					}
 				});
 				//response[0].user_open_hour;
@@ -483,7 +493,8 @@ function loadServiceDetail(user_service_id) {
 		complete : function() {
 			$('i.waiting_booking_detail').fadeOut();
 			$('#service_detail').modal('show');
-			$('#btn_user_service_price').text(USER_SERVICE_SALE_PRICE);
+			$('#btn_user_service_price_b').text(USER_SERVICE_SALE_PRICE);
+			$('#btn_user_service_price_e').text(USER_SERVICE_SALE_PRICE);
 			var time_html = '';
 			$('#date_booking span').on('click', function() {
 				var time_html = '';

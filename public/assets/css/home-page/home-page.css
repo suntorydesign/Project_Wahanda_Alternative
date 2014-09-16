@@ -489,13 +489,24 @@ input, select, textarea {
 	background-color: #FDBD0E;
 	margin-top: 6px;
 }
-#days_booking span {
+#days_booking span, #days_eVoucher span {
 	margin: 0 5.75px 0 5.75px;
-	padding: 7px;
+	padding: 5px 6px 5px 6px;
+	font-weight: bold;
+}
+#days_eVoucher span {
+	margin: 0 4px 0 4px;
+	padding: 5px 6px 5px 6px;
+	font-weight: bold;
+}
+#use_eVoucher span {
+	margin: 0 8.5px 0 6px;
+	padding: 5px 6px 5px 5.5px;
+	font-weight: bold;
 }
 #date_booking span {
 	margin: 0 5.95px 0 5.95px;
-	padding: 7px;
+	padding: 5px 6px 5px 6px;
 }
 #date_booking span:hover, #days_booking span:focus {
 	cursor: pointer;
@@ -503,7 +514,7 @@ input, select, textarea {
 	border-radius: 50%;
 	color: #FFFFFF;
 	border-width: 5px;
-	padding: 7px;
+	padding: 5px 6px 5px 6px;
 }
 #date_booking span.active {
 	cursor: pointer;
@@ -511,7 +522,7 @@ input, select, textarea {
 	border-radius: 50%;
 	color: #FFFFFF;
 	border-width: 5px;
-	padding: 7px;
+	padding: 5px 6px 5px 6px;
 }
 #time_booking {
 	margin-top: 15px;

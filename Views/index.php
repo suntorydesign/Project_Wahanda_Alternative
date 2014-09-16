@@ -149,7 +149,7 @@
 			</img>
 		</div>
 	</div>
-	<!-- MODAL -->
+	<!--SERVICE DETAIL MODAL -->
 	<div id="service_detail" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-max-height="840" data-backdrop="static">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content" >
@@ -526,36 +526,36 @@
 											<button onclick="jumbToTab('evoucher_booking_zone')" id="btn_evoucher_booking_zone" class="btn btn-block btn-orange">MUA VOUCHER</button>
 										</div>
 									</div>
-									<br />
-									<div class="row">
-										<div style="cursor: default;" id="month_and_year" class="col-md-12">
-											<div class="text-center">&nbsp;&nbsp;&nbsp;AUGUST 2014&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"></i></div>
-										</div>
-									</div>
-									<div class="row" id="days_booking">
-										<div class="col-md-12 text-center">
-											<span>T2</span>
-											<span>T3</span>
-											<span>T4</span>
-											<span>T5</span>
-											<span>T6</span>
-											<span>T7</span>
-											<span>CN</span>
-										</div>
-									</div>
-									<div class="row" id="date_booking" style="margin-top: 6px;">
-										<div class="col-md-12 text-center">
-											<span class="active">12</span>
-											<span>13</span>
-											<span>14</span>
-											<span>15</span>
-											<span>16</span>
-											<span>17</span>
-											<span>18</span>
-										</div>
-									</div>
+									<br />												
 									<div>
 										<div id="online_booking_zone">
+											<div class="row">
+												<div style="cursor: default;" id="month_and_year" class="col-md-12">
+													<div class="text-center">&nbsp;&nbsp;&nbsp;AUGUST 2014&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"></i></div>
+												</div>
+											</div>	
+											<div class="row" id="days_booking">
+												<div class="col-md-12 text-center">
+													<span>T2</span>
+													<span>T3</span>
+													<span>T4</span>
+													<span>T5</span>
+													<span>T6</span>
+													<span>T7</span>
+													<span>CN</span>
+												</div>
+											</div>
+											<div class="row" id="date_booking" style="margin-top: 6px;">
+												<div class="col-md-12 text-center">
+													<span class="active">12</span>
+													<span>13</span>
+													<span>14</span>
+													<span>15</span>
+													<span>16</span>
+													<span>17</span>
+													<span>18</span>
+												</div>
+											</div>
 											<div id="time_booking">
 												<hr />
 												<div class="row">
@@ -603,24 +603,65 @@
 													<div class="col-md-5">400.000 Vnđ</div>
 												</div>
 											</div>
+											<br />
+											<div class="row">
+												<div class="col-md-12">
+													<button onclick="getBookingInfo()" id="booking_button" style="height: 48px;box-shadow: 0 0 6px #9A9797;" class="btn btn-block btn-black">
+														<span>Tổng cộng : </span>
+														<span id="btn_user_service_price_b">400.000</span><span> VNĐ</span>
+														<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+														<span class="span-separate"></span>
+														<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+														<span>ĐẶT <i id="waiting_for_booking_save" style="display: none;" class="fa fa-refresh fa-spin"></i></span>
+													</button>
+												</div>
+											</div>
 										</div>
 										<div id="evoucher_booking_zone" style="display: none;">
 											<!-- evoucher here -->
+											<div class="row">
+												<div class="col-md-12">
+													<span style="font-size: 14px;"><i class="fa fa-2x fa-ticket"></i> Chi tiết eVoucher</span>
+												</div>
+											</div>
+											<div class="row" id="days_eVoucher">
+												<div class="col-md-12 text-center">
+													<span>T2</span>
+													<span>T3</span>
+													<span>T4</span>
+													<span>T5</span>
+													<span>T6</span>
+													<span>T7</span>
+													<span>CN</span>
+												</div>
+											</div>
+											<div class="row" id="use_eVoucher">
+												<div class="col-md-12 text-center">
+													<span class="fa fa-check"></span>
+													<span class="fa fa-check"></span>
+													<span class="fa fa-check"></span>
+													<span class="fa fa-check"></span>
+													<span class="fa fa-check"></span>
+													<span class="fa fa-check"></span>
+													<span class="fa fa-check"></span>
+												</div>
+											</div>
+											<br />
+											<div class="row">
+												<div class="col-md-12">
+													<button onclick="getBookingInfo()" id="booking_button" style="height: 48px;box-shadow: 0 0 6px #9A9797;" class="btn btn-block btn-black">
+														<span>Tổng cộng : </span>
+														<span id="btn_user_service_price_e">400.000</span><span> VNĐ</span>
+														<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+														<span class="span-separate"></span>
+														<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+														<span>ĐẶT <i id="waiting_for_booking_save" style="display: none;" class="fa fa-refresh fa-spin"></i></span>
+													</button>
+												</div>
+											</div>
 										</div>
 									</div>
-									<br />
-									<div class="row">
-										<div class="col-md-12">
-											<button onclick="getBookingInfo()" id="booking_button" style="height: 48px;box-shadow: 0 0 6px #9A9797;" class="btn btn-block btn-black">
-												<span>Tổng cộng : </span>
-												<span id="btn_user_service_price">400.000</span><span> VNĐ</span>
-												<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-												<span class="span-separate"></span>
-												<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-												<span>ĐẶT <i id="waiting_for_booking_save" style="display: none;" class="fa fa-refresh fa-spin"></i></span>
-											</button>
-										</div>
-									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -634,5 +675,5 @@
 			</div>
 		</div>
 	</div>
-	<!-- END MODAL -->
+	<!-- END SERVICE DETAIL MODAL -->
 </div>
