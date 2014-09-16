@@ -218,6 +218,7 @@
 											Business hours
 										</div>
 										<ul class="week">
+											<input name="user_open_hour_old[]" type="hidden" val="">
 										</ul>
 									</li>
 									<li data-tooltip="&lt;strong&gt;Time zone&lt;/strong&gt; - Set the timezone that your venue is operating in." aria-describedby="ui-tooltip-173">

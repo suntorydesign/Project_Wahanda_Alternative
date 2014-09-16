@@ -61,15 +61,28 @@ class SpaCMS_Settings_Model {
 
 	function update_user_open_hour() {
 		$user_id = Session::get('user_id');
-		$user_open_hour_from = $_GET['user_open_hour_from'];
-		$user_open_hour_to = $_GET['user_open_hour_to'];
+		$user_open_hour_from = $_POST['user_open_hour_from'];
+		$user_open_hour_to = $_POST['user_open_hour_to'];
 
-		print_r($user_open_hour_from); die;
-
-		$user_open_hour = '';
+		$aData = '{';
+		for ($i=2; $i < 9; $i++) { 
+			$is_open = 0;
+			$is_from = 8;
+			$is_to	 = 22;
+			foreach ($user_open_hour_from as $key => $hour_from) {
+				if($i == $key) {
+					$is_open = 1;
+					$is_from = $hour_from;
+					$is_to	 = $user_open_hour_to[$key];
+				} 
+			}
+			$aData .= '"'.$i.'":['.$is_open.','.$is_from.','.$is_to.'],';
+		}
+		$aData = rtrim($aData, ',');
+		$aData .= '}';
 
 		$data = array(
-				'user_open_hour' => $user_open_hour,
+				'user_open_hour' => $aData,
 			);
 
 		$sth = $this->db->update('user', $data, "user_id = $user_id");
@@ -99,9 +112,9 @@ class SpaCMS_Settings_Model {
 
 	function update_user_is_use_voucher() {
 		$user_id = Session::get('user_id');
-		$data = array('user_is_use_voucher'=>false);
+		$data = array('user_is_use_voucher'=>0);
 		if(isset($_POST['user_is_use_voucher'])) {
-			$data['user_is_use_voucher'] = $_POST['user_is_use_voucher'];
+			$data['user_is_use_voucher'] = 1;
 		}
 		$sth = $this->db->update('user', $data, "user_id = $user_id");
 

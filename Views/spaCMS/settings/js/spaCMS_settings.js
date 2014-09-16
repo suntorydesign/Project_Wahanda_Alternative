@@ -16,6 +16,21 @@ function get_thumbnail(url_image, user_id) {
     return url_thumbnail;
 }
 
+function get_day_vi(day_en) {
+    switch(day_en) {
+        case '2': return "Thứ 2";
+        case '3': return "Thứ 3";
+        case '4': return "Thứ 4";
+        case '5': return "Thứ 5";
+        case '6': return "Thứ 6";
+        case '7': return "Thứ 7";
+        case '8': return "Chủ nhật";
+        default: return false;
+    }
+}
+
+
+
 var ImageManager = function () {
     return {
         init: function() {
@@ -168,7 +183,6 @@ var UserDetail = function (){
             var done = $(this).find('.done');
             loading.fadeIn();
             done.hide();
-            console.log(data);
             var url = URL + 'spaCMS/settings/xhrUpdate_user_is_use_voucher';
             $.post(url, data, function(result) {
                 loading.fadeOut();
@@ -196,7 +210,7 @@ var UserDetail = function (){
         $.get(url, function(data){
             if(typeof data !== 'undefined'){
                 images = data[0]['user_slide'].split(",");
-                console.log(images[0]);
+                // console.log(images[0]);
                 for(var i=0; i<images.length; i++) {
                     var url_thumbnail = get_thumbnail(images[i], user_id);
                     out = html.replace(':img_thumbnail', url_thumbnail);
@@ -240,11 +254,12 @@ var UserOpenHour = function (){
             var close_hour = null;
             var option_open_hour = '';
             var option_close_hour = '';
+            // $('input[name=user_open_hour_old').val(data);
 
             var out_html = '<li class=":status">';
                 out_html += '<div>';
-                out_html += '<input type="checkbox" :checked id=":day">';
-                out_html += '<label for=":day">:day</label>';
+                out_html += '<input class="user_open_hour_checked" type="checkbox" :checked id=":day">';
+                out_html += '<label for=":day">:vi_day</label>';
                 out_html += '<select :disabled name="user_open_hour_from[:day]">';
                 out_html += ':option_open_hour';
                 out_html += '</select> - ';
@@ -256,8 +271,11 @@ var UserOpenHour = function (){
 
             var weekly = $('#opening-hours ul.week');
             $.each(data, function(day, hour){
-                open_hour = hour[1];
-                close_hour = hour[2];
+                var vi_day = get_day_vi(day);
+                var open_hour = hour[1];
+                var close_hour = hour[2];
+                option_open_hour = '';
+                option_close_hour = '';
 
                 if(hour[0] == 0) {
                     status  = 'off';
@@ -273,6 +291,7 @@ var UserOpenHour = function (){
                     out = out.replace(/:checked/g, checked);
                     out = out.replace(/:disabled/g, disabled);
                     out = out.replace(/:day/g, day);
+                    out = out.replace(/:vi_day/g, vi_day);
 
                     for (var i = 0; i < 24; i++) {
                         if(i == open_hour) {
@@ -308,6 +327,21 @@ var UserOpenHour = function (){
 
                 weekly.append(out);
             });
+
+            $('.user_open_hour_checked').change(function() {
+                if ($(this).is(':checked')) {
+                    var li = $(this).parent().parent();
+                    li.removeClass('off');
+                    li.addClass('on');
+                    li.find('select').removeAttr('disabled');
+                }
+                else {
+                    var li = $(this).parent().parent();
+                    li.removeClass('on');
+                    li.addClass('off');
+                    li.find('select').attr('disabled','disabled');
+                }
+            });
         }, 'json');
     }
 
@@ -318,11 +352,10 @@ var UserOpenHour = function (){
             var done = $(this).find('.done');
             loading.fadeIn();
             done.hide();
-            // console.log(data);
             var url = URL + 'spaCMS/settings/xhrUpdate_user_open_hour';
 
-            $.get(url, data, function(result) {
-                console.log(result);
+            $.post(url, data, function(result) {
+                // console.log(result);
                 loading.fadeOut();
                 done.fadeIn();
             }, 'json');
