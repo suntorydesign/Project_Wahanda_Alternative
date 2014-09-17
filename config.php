@@ -14,3 +14,9 @@ define('HASH_GENERAL_KEY', 'MixitUp200');
 
 // This is for database passwords only
 define('HASH_PASSWORD_KEY', 'dvlGroupbestgroupITinVietNam');
+
+// eVoucher due date
+define('EVOUCHER_DUE_DATE', 5);
+
+// Max eVoucher quantity
+define('MAX_QUANTITY_EVOUCHER', 10);

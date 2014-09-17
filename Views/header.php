@@ -140,11 +140,15 @@
                                 	</span>
                                 	<span id="booking_amount">
                                 		<?php Session::init(); 
-                                			if (empty($_SESSION['booking_detail'])) {
-												echo 0;
-											} else {
-												echo count($_SESSION['booking_detail']);
+											$eVoucher_count = 0;
+											$booking_count = 0;
+											if(isset($_SESSION['booking_detail'])){
+												$booking_count = count($_SESSION['booking_detail']);
 											}
+											if(isset($_SESSION['eVoucher_detail'])){
+												$eVoucher_count = count($_SESSION['eVoucher_detail']);
+											}
+                                			echo $booking_count + $eVoucher_count;
                                 		?>
                                 	</span>
                                 </button>

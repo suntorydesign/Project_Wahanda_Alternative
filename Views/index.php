@@ -606,13 +606,13 @@
 											<br />
 											<div class="row">
 												<div class="col-md-12">
-													<button onclick="getBookingInfo()" id="booking_button" style="height: 48px;box-shadow: 0 0 6px #9A9797;" class="btn btn-block btn-black">
+													<button onclick="getBookingInfo()" style="height: 48px;box-shadow: 0 0 6px #9A9797;" class="btn btn-block btn-black booking_button">
 														<span>Tổng cộng : </span>
 														<span id="btn_user_service_price_b">400.000</span><span> VNĐ</span>
 														<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 														<span class="span-separate"></span>
 														<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-														<span>ĐẶT <i id="waiting_for_booking_save" style="display: none;" class="fa fa-refresh fa-spin"></i></span>
+														<span>ĐẶT <i id="waiting_for_booking_save_b" style="display: none;" class="fa fa-refresh fa-spin"></i></span>
 													</button>
 												</div>
 											</div>
@@ -646,16 +646,39 @@
 													<span class="fa fa-check"></span>
 												</div>
 											</div>
+											<hr />
+											<div class="row" id="evoucher_expire">
+												<div class="col-md-12">
+													<p id="evoucher_due_date"></p>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<p>Bạn sẽ cần phải liên hệ trực tiếp với các địa điểm mà bạn đã mua eVoucher
+														 để đặt cuộc hẹn của bạn một khi đã nhận được xác nhận đặt hàng.
+													</p>
+												</div>
+											</div>
+											<div class="row" style="margin-bottom: 160px;">
+												<div class="col-md-12">
+													<form class="form-horizontal">
+														<label class="control-label col-md-4">Số lượng</label>
+														<div class="col-md-8">
+															<select id="e_quantity" name="e_quantity" class="form-control"></select>
+														</div>
+													</form>
+												</div>
+											</div>
 											<br />
 											<div class="row">
 												<div class="col-md-12">
-													<button onclick="getBookingInfo()" id="booking_button" style="height: 48px;box-shadow: 0 0 6px #9A9797;" class="btn btn-block btn-black">
+													<button onclick="geteVoucherInfo()" style="height: 48px;box-shadow: 0 0 6px #9A9797;" class="btn btn-block btn-black booking_button">
 														<span>Tổng cộng : </span>
 														<span id="btn_user_service_price_e">400.000</span><span> VNĐ</span>
 														<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 														<span class="span-separate"></span>
 														<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-														<span>ĐẶT <i id="waiting_for_booking_save" style="display: none;" class="fa fa-refresh fa-spin"></i></span>
+														<span>ĐẶT <i id="waiting_for_booking_save_e" style="display: none;" class="fa fa-refresh fa-spin"></i></span>
 													</button>
 												</div>
 											</div>

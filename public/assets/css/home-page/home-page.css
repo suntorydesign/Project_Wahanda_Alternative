@@ -605,3 +605,6 @@ button.btn-close:hover, button.btn-close:focus, button.btn-close:active{
 	color: #FFFFFF;
 	background-color: #000000;
 }
+#evoucher_booking_zone hr{
+	border-top: 2px solid #eee;
+}

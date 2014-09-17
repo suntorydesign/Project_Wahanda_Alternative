@@ -185,6 +185,7 @@ function loadServiceDetail(user_service_id) {
 	// console.log(CHOOSEN_TIME);
 	// console.log(CHOOSEN_PRICE);
 	// console.log(USER_SERVICE_ID);
+	resetTab('online_booking_zone');
 	$.ajax({
 		url : URL + 'index/loadServiceDetail',
 		type : 'post',
@@ -246,6 +247,8 @@ function loadServiceDetail(user_service_id) {
 				month_in_sp_year[11] = 30;
 				month_in_sp_year[12] = 31;
 				var evou_html = '';
+				EVOUCHER_DUE_DATE = (response[0].evoucher_due_date);
+				var USER_SERVICE_USE_EVOUCHER = parseInt(response[0].user_service_use_evoucher);
 				//console.log(month_in_sp_year);
 				for ( mon = 1; mon <= 12; mon++) {
 					if (mon == month) {
@@ -386,18 +389,11 @@ function loadServiceDetail(user_service_id) {
 					if (key == 'user_service_name') {
 						USER_SERVICE_NAME = value;
 					}			
-					if (key == 'user_service_use_evoucher') {
-						if (value == '0') {
-							$('#btn_evoucher_booking_zone').attr('disabled', true);
-						}else{
-							$('#btn_evoucher_booking_zone').attr('disabled', false);
-						}
-					}
 					$('#' + key).val(value);
 					$('#' + key + ', .' + key).text(value);
 					if (key == 'user_open_hour') {
 						json_user_open_hour = jQuery.parseJSON(value);
-						console.log(json_user_open_hour);
+						//console.log(json_user_open_hour);
 						$.each(json_user_open_hour, function(day, hour) {
 							separate_count++;
 							if (separate_count == '1') {
@@ -479,9 +475,30 @@ function loadServiceDetail(user_service_id) {
 								evou_html += '<span class="fa fa-times"></span>';
 							}
 						});
-						$('#use_eVoucher').children().html(evou_html);
 					}
 				});
+				//console.log(evou_html);
+				if (USER_SERVICE_USE_EVOUCHER == 0) {
+					$('#btn_evoucher_booking_zone').attr('disabled', true);
+				}else{
+					$('#btn_evoucher_booking_zone').attr('disabled', false);
+					var date = new Date(EVOUCHER_DUE_DATE);
+					var due_month = date.getMonth();
+					var due_date = date.getDate();
+					if(date.getMonth() < 10){
+						due_month = '0' + date.getMonth();
+					}
+					if(date.getDate() < 10){
+						due_date = '0' + date.getDate();
+					}
+					$('#evoucher_expire div #evoucher_due_date').html('<strong>Ngày hết hạn eVoucher : </strong>' + due_date + '-' + due_month + '-' + date.getFullYear());
+					var evoucher_quantity = '';			
+					for ( i = 1; i <= parseInt(MAX_QUANTITY_EVOUCHER); i++) {
+						evoucher_quantity += '<option value="' + i + '">' + i + '</option>';
+					}
+					$('#e_quantity').html(evoucher_quantity);
+					$('#use_eVoucher').children().html(evou_html);
+				}
 				//response[0].user_open_hour;
 				$('#user_open_hour_1').html(user_open_hour_1);
 				$('#user_open_hour_2').html(user_open_hour_2);
@@ -824,16 +841,27 @@ function jumbToTab(tab) {
 /*END JUMP TO TAB*/
 /*-----------------------*/
 
-/*GET ONLINE BOOKING INFOMATION*/
+/*RESET TAB*/
+function resetTab(tab) {
+	$('#' + tab).siblings().hide();
+	$('#' + tab).fadeIn();
+	$('#btn_' + tab).addClass('btn-choose').removeClass('btn-orange');
+	$('#btn_' + tab).parent().siblings().children().addClass('btn-orange').removeClass('btn-choose'); 
+}
+/*END JRESET TAB*/
+/*-----------------------*/
+
+/*GET ONLINE BOOKING OR EVOUCHER INFOMATION*/
 function getBookingInfo() {
 	if (USER_SERVICE_ID == '' || CHOOSEN_DATE == '' || CHOOSEN_DATE_STORE == '' || CHOOSEN_TIME == '' || CHOOSEN_PRICE == '') {
 		alert('Bạn chưa chọn dịch vụ, vui lòng chọn!');
 	} else {
-		$('#waiting_for_booking_save').fadeIn();
+		$('#waiting_for_booking_save_b').fadeIn();
 		// console.log(CHOOSEN_DATE);
 		// console.log(CHOOSEN_TIME);
 		// console.log(CHOOSEN_PRICE);
 		// console.log(USER_SERVICE_ID);
+		$('button.booking_button').attr('disabled', true);
 		$.ajax({
 			url : URL + 'index/getBookingInfo',
 			type : 'post',
@@ -852,12 +880,44 @@ function getBookingInfo() {
 				$('#booking_amount').text(response);
 			},
 			complete: function(){
-				$('#waiting_for_booking_save').fadeOut(function(){
+				$('#waiting_for_booking_save_b').fadeOut(function(){
 					$('#service_detail').modal('hide');
+					$('button.booking_button').attr('disabled', false);
 				});
 			}
 		});
 		
+	}
+}
+function geteVoucherInfo(){
+	if (USER_SERVICE_ID == '' || EVOUCHER_DUE_DATE == '' || USER_SERVICE_SALE_PRICE == '') {
+		alert('Có sự cố với dịch vụ, vui lòng chọn lại!');
+	} else {
+		$('#waiting_for_booking_save_e').fadeIn();
+		$('button.booking_button').attr('disabled', true);
+		$.ajax({
+			url : URL + 'index/geteVoucherInfo',
+			type : 'post',
+			//dataType : 'json',
+			data : {
+				user_service_id : USER_SERVICE_ID,
+				eVoucher_due_date : EVOUCHER_DUE_DATE,
+				choosen_price : USER_SERVICE_SALE_PRICE,
+				user_business_name : USER_BUSINESS_NAME,
+				user_service_name : USER_SERVICE_NAME,
+				booking_quantity : $('#e_quantity').val()
+			},
+			success: function(response){
+				//console.log(response);
+				$('#booking_amount').text(response);
+			},
+			complete: function(){
+				$('#waiting_for_booking_save_e').fadeOut(function(){
+					$('#service_detail').modal('hide');
+					$('button.booking_button').attr('disabled', false);
+				});
+			}
+		});
 	}
 }
 /*END GET ONLINE BOOKING INFOMATION*/
@@ -872,7 +932,7 @@ function shoppingCartDetail(){
 		dataType : 'json',
 		success : function(response){
 			var html = '';
-			if(response[0] != null){
+			if(response.booking != '' || response.eVoucher != ''){
 				html = '<tr>';
 				html += '<th  style="border: none">DỊCH VỤ</th>';
 				html += '<th  style="border: none">NGÀY - GIỜ</th>';
@@ -882,14 +942,24 @@ function shoppingCartDetail(){
 				html += '</tr>';
 				$('#update_cart').attr('disabled',false);
 				$('#confirm_cart').attr('disabled',false);
-				$('#cart_amount').text(response.length);
+				$('#cart_amount').text(response.booking.length + response.eVoucher.length);
 				var total_money = 0;
-				$.each(response, function(index, item){
+				$.each(response.booking, function(index, item){
 					html += '<tr>';
 					html += '<td width="30%">' + item.user_service_name.toUpperCase() + ' - <b>' + item.user_business_name + '</b></td>';
 					html += '<td width="20%">' + item.booking_detail_date + ' - ' + item.booking_detail_time + '</td>'; 
 					html += '<td width="19%">' + item.choosen_price + ' VNĐ</td>';
 					html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control appointment_quantity" value="' + item.booking_quantity + '"/></td>';
+					html += '<td width="19%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
+					html += '</tr>';
+					total_money = total_money + parseInt(item.choosen_price) * parseInt(item.booking_quantity);
+				});
+				$.each(response.eVoucher, function(index, item){
+					html += '<tr>';
+					html += '<td width="30%">' + item.user_service_name.toUpperCase() + ' - <b>' + item.user_business_name + '</b></td>';
+					html += '<td width="20%"><i class="text-success">e-Voucher</i> - Ngày hết hạn : ' + item.eVoucher_due_date + '</td>'; 
+					html += '<td width="19%">' + item.choosen_price + ' VNĐ</td>';
+					html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control eVoucher_quantity" value="' + item.booking_quantity + '"/></td>';
 					html += '<td width="19%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
 					html += '</tr>';
 					total_money = total_money + parseInt(item.choosen_price) * parseInt(item.booking_quantity);
@@ -926,7 +996,11 @@ function shoppingCartDetail(){
 function getQuantityNumber(){
 	var quantity_list = '';
 	$('.appointment_quantity').each(function(index){
-		quantity_list += $(this).val()+',';
+		if($(this).val() == ''){
+			quantity_list += '0,';
+		}else{
+			quantity_list += $(this).val()+',';
+		}
 	});
 	return quantity_list;
 }

@@ -220,13 +220,16 @@
 		var TODAY_HOUR;
 		var TODAY_MINUTE;
 		var LIMIT_TIME_BEFORE_SERVICE;
-		var USER_SERVICE_SALE_PRICE;
+		var USER_SERVICE_SALE_PRICE = '';
 		var USER_SERVICE_DURATION;
 		var CHOOSEN_DATE = '';
 		var CHOOSEN_DATE_STORE = '';
 		var CHOOSEN_TIME = '';
 		var CHOOSEN_PRICE = '';
 		var QUANTITY_LIST_BEFORE = '';
+		var USER_SERVICE_USE_EVOUCHER = '';
+		var EVOUCHER_DUE_DATE = '';
+		var MAX_QUANTITY_EVOUCHER = "<?php echo MAX_QUANTITY_EVOUCHER; ?>";
     </script>
 
     <?php
