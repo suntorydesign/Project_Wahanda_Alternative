@@ -266,3 +266,6 @@
 
 	</div>
 </div>
+<script>
+	var USER_ID = "<?php echo $this -> user_id; ?>";
+</script>

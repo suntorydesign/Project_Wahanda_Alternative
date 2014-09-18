@@ -31,6 +31,18 @@ class index_model extends Model {
 			echo '[]';
 		}		
 	}
+	
+	function loadLocation(){
+		$select = $this -> db -> select('SELECT user_id, user_business_name, user_logo, user_description 
+							   FROM `user` 
+							   WHERE `user_delete_flg` = 0 order by `user_id` desc 
+							   limit 8');
+		if($select){
+			echo json_encode($select);
+		}else{
+			echo '[]';
+		}	
+	}
 
 	function loadServiceDetail($user_service_id = 1) {
 		$evoucher_due_date = EVOUCHER_DUE_DATE;

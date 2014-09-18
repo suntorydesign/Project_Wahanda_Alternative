@@ -10,6 +10,7 @@ class Index extends Controller {
 	}
 
 	public function index() {
+		$this -> view -> script = array(ASSETS . 'js/homepage.js');
 		$this -> view -> render('index');
 	}
 
@@ -19,6 +20,10 @@ class Index extends Controller {
 
 	public function loadNewServiceList() {
 		$this -> model -> loadNewServiceList();
+	}
+	
+	public function loadLocation(){
+		$this -> model -> loadLocation();
 	}
 
 	public function loadServiceDetail() {

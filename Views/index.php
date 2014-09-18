@@ -132,21 +132,23 @@
 			<span class="fa-stack"> <i class="fa fa-map-marker fa-stack-2x"></i> </span>
 			<strong style="font-size: 20px;">ĐỊA ĐIỂM MỚI NHẤT CHO BẠN</strong>
 		</div>
-
-		<div class="col-sm-6 col-md-3 remove-padding">
-			<img class="image img-responsive" alt="Responsive image" src="<?php echo ASSETS; ?>img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" >
-			<div class="info">
-				<div class="info-content clearfix">
-					<div class="name">
-						SPA SEN
+		<div id="new_location">
+			<div id="waiting_for_new_location" class="text-center"><i style="color: #FDBD0E" class="fa fa-3x fa-refresh fa-spin text-center"></i></div>
+			<!-- <div class="col-sm-6 col-md-3 remove-padding new_location_items">
+				<img class="image img-responsive" alt="Responsive image" src="<?php echo ASSETS; ?>img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" >
+				<div class="info">
+					<div class="info-content clearfix">
+						<div class="name">
+							SPA SEN
+						</div>
+						<div class="description">
+							Spa cao cấp số 1 Sài Gòn với những dịch vụ thời thượng. Đem đến cho bạn những cảm giác thư giãn và nghỉ ngơi tuyệt vời
+						</div>
+						<a class="readmore pull-right" href="#">Xem thêm chi tiết >></a>
 					</div>
-					<div class="description">
-						Spa cao cấp số 1 Sài Gòn với những dịch vụ thời thượng. Đem đến cho bạn những cảm giác thư giãn và nghỉ ngơi tuyệt vời
-					</div>
-					<a class="readmore pull-right" href="#">Xem thêm chi tiết >></a>
 				</div>
-			</div>
-			</img>
+				</img>
+			</div> -->
 		</div>
 	</div>
 	<!--SERVICE DETAIL MODAL -->

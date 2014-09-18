@@ -561,8 +561,8 @@ input, select, textarea {
 }
 p.description, p.name {
 	white-space: nowrap;
-	overflow: hidden;
 	text-overflow: ellipsis;
+	overflow: hidden;
 }
 p#user_description {
 	white-space: nowrap;
