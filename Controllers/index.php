@@ -108,20 +108,41 @@ class Index extends Controller {
 
 	public function updateShoppingCart() {
 		Session::init();
-		if (isset($_SESSION['booking_detail']) && isset($_POST['quantity_list'])) {
-			$quantity_list = rtrim($_POST['quantity_list'], ',');
-			$quantity_list = explode(',', $quantity_list);
-			foreach ($_SESSION['booking_detail'] as $key => $value) {
-				$_SESSION['booking_detail'][$key]['booking_quantity'] = $quantity_list[$key];
-			}
-			foreach ($_SESSION['booking_detail'] as $key => $value) {
-				if($_SESSION['booking_detail'][$key]['booking_quantity'] == 0){
-					unset($_SESSION['booking_detail'][$key]);
+		$count_b = 0;
+		$count_e = 0;
+		if (isset($_SESSION['booking_detail']) && isset($_POST['appointment_quantity_list'])) {
+			if($_POST['appointment_quantity_list'] != ''){
+				$quantity_list = rtrim($_POST['appointment_quantity_list'], ',');
+				$quantity_list = explode(',', $quantity_list);
+				foreach ($_SESSION['booking_detail'] as $key => $value) {
+					$_SESSION['booking_detail'][$key]['booking_quantity'] = $quantity_list[$key];
 				}
+				foreach ($_SESSION['booking_detail'] as $key => $value) {
+					if($_SESSION['booking_detail'][$key]['booking_quantity'] == 0){
+						unset($_SESSION['booking_detail'][$key]);
+					}
+				}
+				$_SESSION['booking_detail'] = array_values($_SESSION['booking_detail']);
 			}
-			$_SESSION['booking_detail'] = array_values($_SESSION['booking_detail']);
-			echo count($_SESSION['booking_detail']);
+			$count_b = count($_SESSION['booking_detail']);
 		}
+		if (isset($_SESSION['eVoucher_detail']) && isset($_POST['eVoucher_quantity_list'])) {
+			if($_POST['eVoucher_quantity_list'] != ''){
+				$quantity_list = rtrim($_POST['eVoucher_quantity_list'], ',');
+				$quantity_list = explode(',', $quantity_list);
+				foreach ($_SESSION['eVoucher_detail'] as $key => $value) {
+					$_SESSION['eVoucher_detail'][$key]['booking_quantity'] = $quantity_list[$key];
+				}
+				foreach ($_SESSION['eVoucher_detail'] as $key => $value) {
+					if($_SESSION['eVoucher_detail'][$key]['booking_quantity'] == 0){
+						unset($_SESSION['eVoucher_detail'][$key]);
+					}
+				}
+				$_SESSION['eVoucher_detail'] = array_values($_SESSION['eVoucher_detail']);
+			}
+			$count_e = count($_SESSION['eVoucher_detail']);
+		}
+		echo $count_b + $count_e;
 	}
 
 }

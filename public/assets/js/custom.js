@@ -983,7 +983,8 @@ function shoppingCartDetail(){
 		},
 		complete : function(){
 			$('#waiting_cart_detail').fadeOut(function(){
-				QUANTITY_LIST_BEFORE = getQuantityNumber();
+				APPOINTMENT_QUANTITY_LIST_BEFORE = getQuantityNumber('appointment_quantity');
+				EVOUCHER_QUANTITY_LIST_BEFORE = getQuantityNumber('eVoucher_quantity');
 				$('#Shopping_cart_info').modal('show');
 			});			
 		}
@@ -993,9 +994,9 @@ function shoppingCartDetail(){
 /*-----------------------*/
 
 /*GET QUANTITY*/
-function getQuantityNumber(){
+function getQuantityNumber(cls){
 	var quantity_list = '';
-	$('.appointment_quantity').each(function(index){
+	$('.' + cls).each(function(index){
 		if($(this).val() == ''){
 			quantity_list += '0,';
 		}else{
@@ -1009,16 +1010,18 @@ function getQuantityNumber(){
 
 /*SAVE QUANTITY*/
 function saveQuantityNumber() {
-	var quantity_list_after = getQuantityNumber();
+	var appointment_quantity_list_after = getQuantityNumber('appointment_quantity');
+	var eVoucher_quantity_list_after = getQuantityNumber('eVoucher_quantity');
 	// console.log(QUANTITY_LIST_BEFORE);
 	// console.log(quantity_list_after);
-	if(QUANTITY_LIST_BEFORE != quantity_list_after){
+	if(APPOINTMENT_QUANTITY_LIST_BEFORE != appointment_quantity_list_after || EVOUCHER_QUANTITY_LIST_BEFORE != eVoucher_quantity_list_after){
 		$('#waiting_for_update_cart').fadeIn();
 		$.ajax({
 			url : URL + 'index/updateShoppingCart',
 			type : 'post',
 			data : {
-				quantity_list : quantity_list_after
+				appointment_quantity_list : appointment_quantity_list_after,
+				eVoucher_quantity_list : eVoucher_quantity_list_after,
 			},
 			success : function(response) {
 				//console.log(response);
