@@ -18,11 +18,11 @@
         <link rel="apple-touch-icon" href="../img/ico/Cat-Brown-icon-72px.png" />
 
         <!-- Chèn link CSS -->
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+        <!-- <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/> -->
         <style type="text/css">
-            * {
+            /** {
                 font-family: "Open Sans";
-            }
+            }*/
         </style>
         <link rel="stylesheet" href="<?php echo ASSETS ?>plugins/bootstrap/css/bootstrap.min.css" type="text/css"  />
 
