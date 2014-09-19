@@ -137,7 +137,7 @@ function loadNewServiceList(){
 				html += '<span>' + value.user_service_sale_price + ' VNĐ</span>';
 				html += '</div>';
 				html += '<div class="sale-percent col-md-3">';
-				html += '<span>GIẢM' +  + Math.floor((value.user_service_full_price - value.user_service_sale_price) / value.user_service_full_price * 100) + '%</span>';
+				html += '<span>GIẢM' + Math.floor((value.user_service_full_price - value.user_service_sale_price) / value.user_service_full_price * 100) + '%</span>';
 				html += '</div>';
 				html += '<div class="clearfix"></div>';
 				html += '<p align="center" class="name">' + value.user_service_name.toUpperCase() + '</p>';
@@ -242,6 +242,8 @@ function loadServiceDetail(user_service_id) {
 				$('#service_detail_modal_body').show();
 				$('#error_service_detail_modal_body').hide();
 				//console.log(response);
+				USER_ID_2 = parseInt(response[0].user_id);
+				//console.log(USER_ID);
 				var user_open_hour_1 = '';
 				var user_open_hour_2 = '';
 				var separate_count = 0;
@@ -292,7 +294,7 @@ function loadServiceDetail(user_service_id) {
 				month_in_sp_year[12] = 31;
 				var evou_html = '';
 				EVOUCHER_DUE_DATE = (response[0].evoucher_due_date);
-				var USER_SERVICE_USE_EVOUCHER = parseInt(response[0].user_service_use_evoucher);
+				USER_SERVICE_USE_EVOUCHER = parseInt(response[0].user_service_use_evoucher);
 				//console.log(month_in_sp_year);
 				for ( mon = 1; mon <= 12; mon++) {
 					if (mon == month) {

@@ -200,6 +200,7 @@
 							      echo $_SESSION['client_username']; 
 						?>";
 		var USER_SERVICE_ID = '';
+		var USER_ID_2 = '';
 		var USER_BUSINESS_NAME = '';
 		var USER_SERVICE_NAME = '';
 		var BOOKING_DETAIL_DATE;
