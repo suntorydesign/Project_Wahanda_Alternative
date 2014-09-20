@@ -30,16 +30,18 @@
 			<div data-spy="scroll" data-target="#tabs">
 				<div id="tab-introduce">
 					<div id="user_description">
-						With the four tiers of grids available you're bound to run into issues where, at certain breakpoints, your columns don't clear quite right as one is taller than the other. To fix that, use a combination of a .clearfix and our responsive utility classes.
+						<!-- With the four tiers of grids available you're bound to run into issues where, at certain breakpoints, your columns don't clear quite right as one is taller than the other. To fix that, use a combination of a .clearfix and our responsive utility classes. -->
 					</div>
 				</div>
 				<div id="tab-services">
 					<div id="tab-services">
-						<div class="one-service">
-							<div class="title">
-								DỊCH VỤ NỔI BẬT
-							</div>
-							<div id="location_service">
+						<div id="location_service">
+							<!-- <div class="one-service">
+							
+								<div class="title">
+									DỊCH VỤ NỔI BẬT
+								</div>
+							
 								<div class="divider"></div>
 								<div class="item clearfix">
 									<div class="col-sm-5 item-info-1">
@@ -75,7 +77,7 @@
 										</button>
 									</div>
 								</div>
-							</div>
+							</div> -->
 							
 						</div>
 					</div>
@@ -256,32 +258,33 @@
 						<i class="fa fa-search-plus"></i>
 					</div>
 					<div class="">
-						<p id="user_address" class="text-center">68 Lý Tự Trọng, P.Bến Thành, Q.1</p>
-						<p class="text-center">SĐT: <span id="user_phone">(+84) 8237 6789</span></p>
-						<p class="text-center">Email: <span id="user_email">abcd@ladiva.com</span></p>
+						<p id="user_address" class="text-center"></p>
+						<p class="text-center">SĐT: <span id="user_phone"></span></p>
+						<p class="text-center">Email: <span id="user_email"></span></p>
 					</div>
 				</div>
 				<div class="divider"></div>
 
 				<h3 class="text-orange" align="center">GIỜ MỞ CỬA</h3>
-
-				<div class="clearfix">
-					<div class="col-sm-6">
-						<span>Thứ 2 - Thứ 6</span>
-					</div>
-					<div class="col-sm-6">
-						<span>07am - 20pm</span>
+				<div id="location_open_hour">
+					<div class="clearfix">
+						<div class="col-sm-offset-1 col-sm-5">
+							<span>Thứ 2 - Thứ 6</span>
+						</div>
+						<div class="col-sm-6">
+							<span>07am - 20pm</span>
+						</div>
+					</div>	
+	
+					<div class="clearfix" style="padding-top: 10px;">
+						<div class="col-sm-offset-1 col-sm-5">
+							<span>Thứ 7 - Chủ nhật</span>
+						</div>
+						<div class="col-sm-6">
+							<span>16pm - 24pm</span>
+						</div>
 					</div>
 				</div>	
-
-				<div class="clearfix" style="padding-top: 10px;">
-					<div class="col-sm-6">
-						<span>Thứ 7 - Chủ nhật</span>
-					</div>
-					<div class="col-sm-6">
-						<span>16pm - 24pm</span>
-					</div>
-				</div>
 				<div class="divider"></div>
 
 				<div class="pay-with"></div>
