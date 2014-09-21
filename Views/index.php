@@ -21,28 +21,30 @@
 	<div class="container">
 		<div id="search" class="clearfix">
 			<h4>BẠN CẦN TÌM</h4>
-			<div class="item col-md-7">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-search"></i></span>
-					<input type="text" class="form-control" placeHolder="Loại hình dịch vụ...">
+			<form method="get" action="<?php echo URL.'servicelocation/searchLocation'; ?>">
+				<div class="item col-md-7">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-search"></i></span>
+						<input type="text" name="s" class="form-control" placeHolder="Loại hình dịch vụ...">
+					</div>
 				</div>
-			</div>
-			<div class="item col-md-3">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-					<select class="form-control">
-						<option value="" disabled selected>Tại...</option>
-						<option value="" >Hà Nội</option>
-						<option value="" >Tp Hồ Chí Minh</option>
-					</select>
+				<div class="item col-md-3">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+						<select name="l" class="form-control">
+							<option value="0" selected>Tại...</option>
+							<option value="2" >Hà Nội</option>
+							<option value="1" >Tp Hồ Chí Minh</option>
+						</select>
+					</div>
+	
 				</div>
-
-			</div>
-			<div class="item col-md-2">
-				<button type="button" class="btn btn-default btn-block">
-					TÌM KIẾM
-				</button>
-			</div>
+				<div class="item col-md-2">
+					<button type="submit" class="btn btn-default btn-block">
+						TÌM KIẾM
+					</button>
+				</div>
+			</form>
 		</div>
 	</div>
 

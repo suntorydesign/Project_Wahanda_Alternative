@@ -46,7 +46,7 @@
 						  	<i class="fa fa-circle fa-stack-2x text-orange"></i>
 						  	<i class="fa fa-stack-1x fa-inverse"><b>new</b></i>
 						</span>
-						<img class="img-rounded" src="http://webdesignledger.com/wp-content/uploads/2014/08/1-ipad-apps-for-web-designers.jpg">
+						<img width="100%" height="auto" class="img-responsive img-rounded" src="http://webdesignledger.com/wp-content/uploads/2014/08/1-ipad-apps-for-web-designers.jpg">
 					</div>
 					<div class="col-md-12 clearfix">
 						<div class="price clearfix">
@@ -181,7 +181,7 @@
 				</div>
 			</div>
 			
-			<div class="sidebar-image" class="clearfix">
+			<div class="sidebar-image" align="center" class="clearfix">
 				<img class="img-responsive" alt="Responsive image" src="http://webdesignledger.com/wp-content/uploads/2014/08/1-ipad-apps-for-web-designers.jpg">
 			</div>
 			<div class="sidebar-image" align="center">
@@ -226,3 +226,7 @@
 		<div class="col-md-2"></div>
 	</div>
 </div>
+<script>
+	var SERVICE_NAME = "<?php echo $this -> service; ?>";
+	var DISTRICT_ID = "<?php echo $this -> location; ?>";
+</script>

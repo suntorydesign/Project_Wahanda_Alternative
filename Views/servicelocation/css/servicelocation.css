@@ -68,8 +68,9 @@
 }
 
 #result-list div.image, #result-list div.image img{
-	width: 270px;
-	height: 205px;
+	max-width: 400px;
+	max-height: 250px;
+	min-height: 180px;
 }
 
 #side-bar {
