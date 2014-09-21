@@ -19,4 +19,4 @@ define('HASH_PASSWORD_KEY', 'dvlGroupbestgroupITinVietNam');
 define('EVOUCHER_DUE_DATE', 5);
 
 // Max eVoucher quantity
-define('MAX_QUANTITY_EVOUCHER', 10);
+define('MAX_QUANTITY_EVOUCHER', 9);
