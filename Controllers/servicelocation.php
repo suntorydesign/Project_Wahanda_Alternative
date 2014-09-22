@@ -24,5 +24,11 @@ class servicelocation extends Controller {
 		}
 		$this -> view -> render('servicelocation/index');
 	}
+	public function loadResultSearch(){
+		if(isset($_POST['service_name'])){
+			$data['service_name'] = $_POST['service_name'];
+			$this -> model -> loadResultSearch($data);
+		}
+	}
 
 }

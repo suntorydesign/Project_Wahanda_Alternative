@@ -521,6 +521,7 @@ function loadServiceDetail(user_service_id) {
 		complete : function() {
 			$('i.waiting_booking_detail').fadeOut();
 			$('#service_detail').modal('show');
+			$('#user_service_name').text(shorten($('#user_service_name').text(),22));
 			$('#btn_user_service_price_b').text(USER_SERVICE_SALE_PRICE);
 			$('#btn_user_service_price_e').text(USER_SERVICE_SALE_PRICE);
 			var time_html = '';

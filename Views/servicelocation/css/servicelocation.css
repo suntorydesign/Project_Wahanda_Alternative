@@ -51,6 +51,7 @@
 	padding-top: 5px;
 	padding-bottom: 5px;
 	box-shadow: 0 0 4px #CCC;
+	margin-bottom: 10px;
 }
 
 #result-list .price .price-info-1, #result-list .price .price-info-2, #result-list .price .price-info-3{
@@ -70,7 +71,7 @@
 #result-list div.image, #result-list div.image img{
 	max-width: 400px;
 	max-height: 250px;
-	min-height: 180px;
+	min-height: 200px;
 }
 
 #side-bar {

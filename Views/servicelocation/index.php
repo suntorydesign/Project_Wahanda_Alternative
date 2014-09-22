@@ -11,22 +11,28 @@
 
 		<div class="col-md-8">
 			<div id="result-total" class="clearfix">
-				<div class="col-md-6">
-					<p>1280 Địa điểm được tìm thấy</p>
+				<div class="col-md-4">
+					<div class="form-horizontal">
+						<label class="control-label" style="color: #FFFFFF"><span id="count_result">1280</span> Địa điểm được tìm thấy</label>
+					</div>
 				</div>
 
-				<div class="col-md-6">
-					<!-- <span>Tìm theo:</span> -->
-					<select class="form-control">
-						<option value="" disabled>Tìm theo...</option>
-					</select>
+				<div class="col-md-8">
+					<div class="form-horizontal">
+						<label style="color: #A09E9E;" class="control-label col-md-4">Tìm theo</label>
+						<div class="col-md-8">
+							<select class="form-control">
+								<option value="" disabled selected="">Tìm theo...</option>
+							</select>
+						</div>
+					</div>
 				</div>
 			</div>
 
 			<div id="result-list" class="clearfix">
-				<div class="item clearfix">
+				<!-- <div class="item clearfix">
 					<div class="col-md-6 clearfix">
-						<p class="name">LADIVA NAIL SPA | CHĂM SÓC MÓNG CHUYÊN NGHIỆP</p>
+						<p style="white-space: normal" class="name">LADIVA NAIL SPA | CHĂM SÓC MÓNG CHUYÊN NGHIỆP</p>
 						<div class="rating clearfix">
 							<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
 						</div>
@@ -54,19 +60,19 @@
 								<strong>Móng gắn đá kim tuyến Hàn Quốc</strong>
 							</div>
 							<div class="col-sm-3 price-info-2">
-								<i class="fa fa-circle text-orange"></i> 30 phút - 1 giờ
+								<i class="fa fa-clock-o text-orange"></i> 30 phút - 1 giờ
 							</div>
 							<div class="col-sm-2 price-info-3">
-								<i class="fa fa-circle text-orange"></i> Giảm 20%
+								<i class="fa fa-arrow-down text-orange"></i> Giảm 20%
 							</div>
 							<div class="col-sm-2 price-info-4" >
 								<button type="button" class="btn btn-sm btn-orange pull-right">
-									<i class="fa fa-circle text-white"></i> 250.000 đ
+									<i class="fa fa-dollar text-white"></i> 250.000 đ
 								</button>
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 
 			<div id="result-pagination" align="center">
