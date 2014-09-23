@@ -47,9 +47,22 @@ class SpaCMS_Model extends Model {
 	}
 
 
+	///////////////////////////// MENU //////////////////////////
+	function get_menu() {
+		SpaCMS_Reports_Model::get_booking_detail();
+	}
+
+	function get_service_featured() {
+		
+	}
+
 	///////////////////////////// REPORTS //////////////////////////
-	function get_list_booking() {
-		SpaCMS_Reports_Model::get_list_booking();
+	function get_booking_detail() {
+		SpaCMS_Reports_Model::get_booking_detail();
+	}
+
+	function get_sales_report() {
+		SpaCMS_Reports_Model::get_sales_report();
 	}
 
 	///////////////////////////// SETTING //////////////////////////

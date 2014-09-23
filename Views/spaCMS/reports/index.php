@@ -146,7 +146,7 @@
                                 </tr>
                                 <tr role="row" class="filter">
                                     <td>
-                                        <input type="text" class="form-control form-filter input-sm" name="booking_id">
+                                        <input type="text" class="form-control form-filter input-sm" name="booking_detail_id">
                                     </td>
                                     <td>
                                         <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
@@ -166,7 +166,7 @@
                                         <input type="text" class="form-control form-filter input-sm" name="booking_client_name">
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control form-filter input-sm" name="user_service_name">
+                                        <input type="text" class="form-control form-filter input-sm" name="booking_user_service_name">
                                     </td>
                                     <td>
                                         <div class="margin-bottom-5">
@@ -175,34 +175,23 @@
                                         <input type="text" class="form-control form-filter input-sm" name="booking_detail_price_to" placeholder="To"/>
                                     </td>
                                     <td>
-                                        <select name="booking_status" class="form-control form-filter input-sm">
+                                        <select name="booking_detail_status" class="form-control form-filter input-sm">
                                             <option value="">Select...</option>
-                                            <option value="pending">Pending</option>
-                                            <option value="closed">Closed</option>
-                                            <option value="hold">On Hold</option>
-                                            <option value="fraud">Fraud</option>
+                                            <option value="1">Completed</option>
+                                            <option value="2">Deleted</option>
+                                            <option value="3">Confirmed</option>
                                         </select>
                                     </td>
                                     <td>
                                         <div class="margin-bottom-5">
-                                            <button class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-search"></i> Search</button>
+                                            <button class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-search"></i> Tìm kiếm</button>
                                         </div>
                                         <button class="btn btn-sm red filter-cancel"><i class="fa fa-times"></i> Reset</button>
                                     </td>
                                 </tr>
                                 </thead>
                                 <tbody role="alert" aria-live="polite" aria-relevant="all">
-                                    <tr class="odd">
-                                        <td class="">1</td>
-                                        <td class=" sorting_1">12/09/2013</td>
-                                        <td class="">Jhon Doe</td>
-                                        <td class="">Jhon Doe Service</td>
-                                        <td class="">450.60$</td>
-                                        <td class=""><span class="label label-sm label-danger">On Hold</span></td>
-                                        <td class=""><a href="javascript:;"  data-toggle="modal" data-target="#confirmedAppointment_modal" class="btn btn-xs default">
-                                            <i class="fa fa-search"></i> View</a>
-                                        </td>
-                                    </tr><tr class="even"><td class="">2</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-danger">On Hold</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="odd"><td class="">3</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-success">Pending</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="even"><td class="">4</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-danger">On Hold</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="odd"><td class="">5</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-danger">On Hold</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="even"><td class="">6</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-danger">On Hold</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="odd"><td class="">7</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-success">Pending</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="even"><td class="">8</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-info">Closed</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="odd"><td class="">9</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-danger">On Hold</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="even"><td class="">10</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-info">Closed</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="odd"><td class="">11</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-success">Pending</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="even"><td class="">12</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-danger">On Hold</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="odd"><td class="">13</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-info">Closed</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="even"><td class="">14</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-danger">On Hold</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="odd"><td class="">15</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-info">Closed</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="even"><td class="">16</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-info">Closed</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="odd"><td class="">17</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-info">Closed</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="even"><td class="">18</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-success">Pending</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="odd"><td class="">19</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-success">Pending</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr><tr class="even"><td class="">20</td><td class=" sorting_1">12/09/2013</td><td class="">Jhon Doe</td><td class="">Jhon Doe Service</td><td class="">450.60$</td><td class=""><span class="label label-sm label-info">Closed</span></td><td class=""><a href="javascript:;" class="btn btn-xs default"><i class="fa fa-search"></i> View</a></td></tr>
+                    
                                 </tbody>
                                 </table>
                             </div>
@@ -216,62 +205,23 @@
             <div class="tab-pane" id="sales">
                 <div class="report-actions">
                     <div class="date-range-selector">
-                        <div class="current">
+                        <div id="dashboard-report-range" class="dashboard-date-range tooltips current" data-placement="top" data-original-title="Change dashboard date range">
                             <div class="icon icons-date-selector"></div>
-                            <div class="value">Day: 12/08/2014</div>
+                            <span>
+                            </span>
+                            <!-- <i class="fa fa-angle-down"></i> -->
                             <div class="arrow icons-arrow-bottom2"></div>
                         </div>
-                        <div class="selection hidden">
-                            <div class="title">
-                                <div class="icon icons-date-selector"></div>
-                                <div class="value">Select date range</div>
-                            </div>
-                            <form>
-                                <div class="period-granularity">
-                                    <label>
-                                        <input type="radio" checked="" value="day" name="period-granularity">
-                                        Day
-                                    </label>
-                                    <label>
-                                        <input type="radio" value="week" name="period-granularity">
-                                        Week
-                                    </label>
-                                    <label>
-                                        <input type="radio" value="month" name="period-granularity">
-                                        Month
-                                    </label>
-                                </div>
-                                <div class="date">
-                                    <label>
-                                        <span class="v-day" style="display: inline;">Date:</span>
-                                        <span class="v-week" style="display: none;">Starting with day:</span>
-                                        <span class="v-month" style="display: none;">Starting with day:</span>
-                                    </label>
-                                    <div class="txt-input date-input">
-                                        <input type="text" readonly="" id="dp1407904445433" value="" class="datepicker hasDatepicker" name="" date-format="dd/mm/yy">
-                                    </div>
-                                </div>
-                                <div class="buttons">
-                                    <span class="action cancel">
-                                        <span class="icon icons-action-cancel"></span>
-                                        <span class="value">Cancel</span>
-                                    </span>
-                                    <span class="action main">
-                                        <span class="icon icons-action-ok"></span>
-                                        <span class="value">Show report</span>
-                                    </span>
-                                </div>
-                            </form>
-                        </div>
                     </div>
+                    
                 </div>
                 <div class="report-content">
-                    <div class="printed-date">
+                    <div class="printed-date hidden">
                         <span class="title">Printed date</span>
                         <span class="date">2014-08-13 14:46</span>
                     </div>
                     <h1>Sales summary</h1>
-                    <h2>Sunspa Resort</h2>
+                    <h2><?php echo Session::get('user_business_name');?></h2>
                     <div class="stats-group general">
                         <table>
                             <tbody>
@@ -289,10 +239,10 @@
                                     </td>
                                     <td>
                                         <span class="highlighted">£40</span>
-                                        <!-- <div class="change positive">
+                                        <div class="change positive hidden">
                                             <div class="icon icons-change-up"></div>
                                             <div class="value">17%</div>
-                                        </div> -->
+                                        </div>
                                     </td>
                                     <td>
                                         <span>1</span>
@@ -397,7 +347,7 @@
                         <div scrollleft="0" scrolltop="0" class="ui-dialog-content ui-widget-content">
                             <div class="calendar-appointment-wrapper">
                                 <div class="dialog-content">
-                                    <div class="form-intro warning b-no-employee hidden">
+                                    <div class="form-intro warning b-no-employee">
                                         <div class="icon icons-attention"></div>
                                         <p>
                                             <span class="warning-title">Please assign employee for this appointment</span>
@@ -405,15 +355,15 @@
                                     </div>
                                     <div class="clearfix appointment-info">
                                         <div class="calendar-time">
-                                            <div class="weekday">Tuesday</div>
-                                            <div class="day">19</div>
+                                            <div class="weekday">Thứ 3 weekday</div>
+                                            <div class="day">19 day</div>
                                             <div class="year-month">
-                                                <span class="month">August</span>, <span class="year">2014</span>
+                                                <span class="month">Tháng 8 month</span>, <span class="year">2014 year</span>
                                             </div>
-                                            <div class="time">13:00</div>
+                                            <div class="time">13:00 time</div>
                                         </div>
                                         <div class="title-and-sku">
-                                            <div class="title">Acupuncture</div>
+                                            <div class="title service_name">Service name</div>
                                             <div class="sku hidden"></div>
                                         </div>
                                         <table class="default-data-table" cellpadding="0" cellspacing="0">

@@ -83,10 +83,14 @@
 			Auth::handleSpaCMSLogin();
 
 			switch ($xhr) {
-				case 'xhrGet_list_booking':
-					$this->model->get_list_booking();
+				case 'xhrGet_booking_detail':
+					$this->model->get_booking_detail();
 					break;
 
+				case 'xhrGet_sales_report':
+					$this->model->get_sales_report();
+					break;
+					
 				default:
 					$this->view->style = array(
 						
@@ -94,6 +98,7 @@
 						ASSETS . 'plugins/select2/select2-metronic.css',
 						ASSETS . 'plugins/data-tables/DT_bootstrap.css',
 						ASSETS . 'plugins/bootstrap-datepicker/css/datepicker.css',
+						ASSETS . 'plugins/bootstrap-daterangepicker/daterangepicker-bs3.css',
 						ASSETS . 'css/style-metronic.css',
 						ASSETS . 'css/style.css',
 						ASSETS . 'css/style-responsive.css',
@@ -109,7 +114,9 @@
 						ASSETS . 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.js',
 						ASSETS . 'js/core/app.js',
 						ASSETS . 'js/core/datatable.js',
-						ASSETS . 'js/spaCMS/table-ajax.js',
+						ASSETS . 'plugins/bootstrap-daterangepicker/moment.min.js',
+						ASSETS . 'plugins/bootstrap-daterangepicker/daterangepicker.js',
+						ASSETS . 'js/spaCMS/index.js',
 						URL . 'Views/spaCMS/reports/js/spaCMS_reports.js'
 					);
 

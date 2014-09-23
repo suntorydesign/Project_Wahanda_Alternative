@@ -2273,12 +2273,12 @@ a.button {
 }
 
 .calendar {
-     bottom: 0px;
+     /*bottom: 0px;
      left: 0px;
      position: absolute;
      right: 0px;
      top: 74px;
-     z-index: 1;
+     z-index: 1;*/
 }
 
 .wc-container {
@@ -12364,7 +12364,7 @@ a.reset {
      overflow: auto;
      position: absolute;
      right: 0px;
-     /*top: 149px;*/
+     top: 115px;
 }
 
 .offer-form table {
@@ -15745,10 +15745,12 @@ html body.menu-module #feedbackify .fby-tab {
 }
 
 .date-range-selector {
-     border-right: 1px solid #c3c4bd;
+     border-left: 1px solid #c3c4bd;
+     margin-right: 20px;
      height: 36px;
-     position: relative;
-     width: 286px;
+     /*position: relative;*/
+     /*width: 286px;*/
+     float:right;
 }
 
 .date-range-selector .current, .date-range-selector .selection .title {

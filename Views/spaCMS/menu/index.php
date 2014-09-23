@@ -9,7 +9,7 @@
 			<div data-offer-group-id="22810" class="offer-group">
 				<div class="icon icons-drag"></div>
 				<h2 class="group-title"><a href="javascript:;" data-toggle="modal" data-target="#editGroupName_modal"> Body </a>
-				<button class="button button-basic button-mini discount-button " type="button" data-toggle="modal" data-target="#editGroupName_modal">
+				<button class="button button-basic button-mini discount-button hidden" type="button" data-toggle="modal" data-target="#editGroupName_modal">
 					<div class="button-inner">
 						Discounts: Off
 					</div>
@@ -18,7 +18,7 @@
 				<button class="button button-basic button-mini add-offer" type="button" data-toggle="modal" data-target="#addServices_modal">
 					<div class="button-inner">
 						<div class="button-icon icons-plus4"></div>
-						Add new service
+						Thêm dịch vụ
 					</div>
 				</button></h2>
 				<div class="offers ui-sortable">
@@ -1077,6 +1077,7 @@
 										<div class="txts description">
 											<h2 class="part-title">Description</h2>
 											<!-- bb code -->
+											<textarea max-text-lines="4" id="user_description" name="user_description" cols="5" rows="4" class="full required"></textarea>
 										</div>
 									</div>
 								</div>
