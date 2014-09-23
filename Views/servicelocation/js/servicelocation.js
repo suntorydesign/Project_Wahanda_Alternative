@@ -1,18 +1,46 @@
 $(document).ready(function() {
-	loadResultSearch();
+	loadResultSearch(1);
 });
 
-function loadResultSearch() {
+function loadResultSearch(page) {
 	$.ajax({
 		url : URL + 'servicelocation/loadResultSearch',
 		type : 'post',
 		dataType : 'json',
 		data : {
 			service_name : SERVICE_NAME,
+			page : page
 			// district_id : DISTRICT_ID
 		},
 		success : function(response) {
+			var total_row = response.total_row;
 			$('#count_result').text(response.total_row);
+			var total_page = (total_row - total_row % 1) / 1;
+			if (total_row % 1 != 0) {
+				total_page = total_page + 1;
+			}
+			var pagination = '';
+			if(total_page != 0){
+				if(page == 1){
+					pagination += '<li class="disabled"><a href="javascript:void(0);">&laquo;</a></li>';
+				}else{
+					pagination += '<li><a href="javascript:loadResultSearch(' + (page - 1) + ');">&laquo;</a></li>';
+				}
+				
+				for ( i = 1; i <= total_page; i++) {
+					if (page == i)
+						pagination += '<li class="active"><a href="javascript:loadResultSearch(' + i + ');">' + i + '</a></li>';
+					else
+						pagination += '<li><a href="javascript:loadResultSearch(' + i + ');">' + i + '</a></li>';
+				}
+				
+				if (page == total_page){
+					pagination += '<li class="disabled"><a href="javascript:void(0);">&raquo;</a></li>';
+				}else{
+					pagination += '<li><a href="javascript:loadResultSearch(' + (page + 1) + ');">&raquo;</a></li>';
+				}
+				$('#result-pagination ul').html(pagination);
+			}
 			var html = '';
 			if (response.data[0] != null) {
 				$.each(response.data, function(key, value) {
