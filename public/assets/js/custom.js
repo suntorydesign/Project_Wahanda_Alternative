@@ -267,8 +267,8 @@ function loadServiceDetail(user_service_id) {
 					}
 				}
 				var week = 1;
-				month_year += '<span style="display:none" class="week_' + week + '"> ' + this_month.toUpperCase() + ', ';
-				month_year += ' ' + year + ' </span>';
+				// month_year += '<span style="display:none" class="week_' + week + '"> ' + this_month.toUpperCase() + ', ';
+				// month_year += ' ' + year + ' </span>';
 				TOTAL_WEEK = week;
 				var days_order = 1;
 				for ( i = 1; i <= user_limit_before_booking; i++) {
@@ -386,7 +386,7 @@ function loadServiceDetail(user_service_id) {
 				month_year += ' ' + year + ' </span>';
 				$('#days_booking').children().html(day);
 				$('#date_booking').children().html(date);
-				$('#month_and_year').children().html('<span onclick="clickLastWeek()" id="last_week" style="cursor:pointer" class="glyphicon glyphicon-chevron-left pull-left"></span>' + month_year + '<span onclick="clickNextWeek()" id="next_week" style="cursor:pointer" class="glyphicon glyphicon-chevron-right pull-right"></span>');
+				$('#month_and_year').children().html('<span onclick="clickLastWeek()" id="last_week" class="glyphicon glyphicon-chevron-left pull-left dis-arm"></span>' + month_year + '<span onclick="clickNextWeek()" id="next_week" class="glyphicon glyphicon-chevron-right pull-right"></span>');
 				$.each(response[0], function(key, value) {
 					if (key == 'user_service_sale_price') {
 						USER_SERVICE_SALE_PRICE = value;
@@ -736,9 +736,14 @@ function loadServiceDetail(user_service_id) {
 
 /*WEEK PAGE*/
 function clickNextWeek() {
+	if (WEEK_PAGE == (TOTAL_WEEK - 1)) {
+		$('#next_week').addClass('dis-arm');
+	}
 	if (WEEK_PAGE == TOTAL_WEEK) {
+		$('#next_week').addClass('dis-arm');
 		return false;
 	} else {
+		$('#last_week').removeClass('dis-arm');
 		WEEK_PAGE++;
 		for ( i = 1; i <= TOTAL_WEEK; i++) {
 			$('.week_' + i).hide();
@@ -748,9 +753,13 @@ function clickNextWeek() {
 }
 
 function clickLastWeek() {
+	if(WEEK_PAGE == 2){
+		$('#last_week').addClass('dis-arm');
+	}
 	if (WEEK_PAGE == 1) {
 		return false;
 	} else {
+		$('#next_week').removeClass('dis-arm');
 		WEEK_PAGE--;
 		for ( i = 1; i <= TOTAL_WEEK; i++) {
 			$('.week_' + i).hide();

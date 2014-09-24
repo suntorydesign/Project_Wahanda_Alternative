@@ -608,3 +608,11 @@ button.btn-close:hover, button.btn-close:focus, button.btn-close:active{
 #evoucher_booking_zone hr{
 	border-top: 2px solid #eee;
 }
+.dis-arm{
+	color: #777;
+	opacity: 0.4;
+	cursor: not-allowed !important;
+}
+#last_week, #next_week{
+	cursor: pointer;
+}

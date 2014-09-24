@@ -20,3 +20,6 @@ define('EVOUCHER_DUE_DATE', 5);
 
 // Max eVoucher quantity
 define('MAX_QUANTITY_EVOUCHER', 9);
+
+// Max pagination item
+define('MAX_PAGINATION_ITEM', 1);

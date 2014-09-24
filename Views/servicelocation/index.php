@@ -235,4 +235,6 @@
 <script>
 	var SERVICE_NAME = "<?php echo $this -> service; ?>";
 	var DISTRICT_ID = "<?php echo $this -> location; ?>";
+	var TOTAL_PAGE = 0;
+	var CURRENT_PAGE = 1;
 </script>

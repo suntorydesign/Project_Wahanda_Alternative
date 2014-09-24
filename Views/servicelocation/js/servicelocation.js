@@ -15,29 +15,29 @@ function loadResultSearch(page) {
 		success : function(response) {
 			var total_row = response.total_row;
 			$('#count_result').text(response.total_row);
-			var total_page = (total_row - total_row % 1) / 1;
-			if (total_row % 1 != 0) {
-				total_page = total_page + 1;
+			TOTAL_PAGE = (total_row - total_row % MAX_PAGINATION_ITEM) / MAX_PAGINATION_ITEM;
+			if (total_row % MAX_PAGINATION_ITEM != 0) {
+				TOTAL_PAGE = TOTAL_PAGE + 1;
 			}
 			var pagination = '';
-			if(total_page != 0){
+			if(TOTAL_PAGE != 0){
 				if(page == 1){
-					pagination += '<li class="disabled"><a href="javascript:void(0);">&laquo;</a></li>';
+					pagination += '<li class="disabled"><a href="javascript:void(0);"><b>&laquo;</b></a></li>';
 				}else{
-					pagination += '<li><a href="javascript:loadResultSearch(' + (page - 1) + ');">&laquo;</a></li>';
+					pagination += '<li><a href="javascript:loadResultSearch(' + (page - 1) + ');"><b>&laquo;</b></a></li>';
 				}
 				
-				for ( i = 1; i <= total_page; i++) {
+				for ( i = 1; i <= TOTAL_PAGE; i++) {
 					if (page == i)
-						pagination += '<li class="active"><a href="javascript:loadResultSearch(' + i + ');">' + i + '</a></li>';
+						pagination += '<li style="display:none" class="active item_'+i+'"><a href="javascript:loadResultSearch(' + i + ');"><b>' + i + '</b></a></li>';
 					else
-						pagination += '<li><a href="javascript:loadResultSearch(' + i + ');">' + i + '</a></li>';
+						pagination += '<li style="display:none" class="item_'+i+'"><a href="javascript:loadResultSearch(' + i + ');"><b>' + i + '</b></a></li>';
 				}
 				
-				if (page == total_page){
-					pagination += '<li class="disabled"><a href="javascript:void(0);">&raquo;</a></li>';
+				if (page == TOTAL_PAGE){
+					pagination += '<li class="disabled"><a href="javascript:void(0);"><b>&raquo;</b></a></li>';
 				}else{
-					pagination += '<li><a href="javascript:loadResultSearch(' + (page + 1) + ');">&raquo;</a></li>';
+					pagination += '<li><a href="javascript:loadResultSearch(' + (page + 1) + ');"><b>&raquo;</b></a></li>';
 				}
 				$('#result-pagination ul').html(pagination);
 			}
@@ -99,6 +99,30 @@ function loadResultSearch(page) {
 			}
 		},
 		complete : function() {
+			if(CURRENT_PAGE == 1 || CURRENT_PAGE == 2){
+				$('ul.pagination li.item_1').show();
+				$('ul.pagination li.item_2').show();
+				$('ul.pagination li.item_3').show();
+				$('ul.pagination li.item_4').show();
+				$('ul.pagination li.item_5').show();
+			}
+			if (CURRENT_PAGE > 2 && CURRENT_PAGE < (TOTAL_PAGE - 1)) {
+				$('ul.pagination li.item_' + (current_page - 2)).show();
+				$('ul.pagination li.item_' + (current_page - 1)).show();
+				$('ul.pagination li.item_' + (current_page)).show();
+				$('ul.pagination li.item_' + (current_page + 1)).show();
+				$('ul.pagination li.item_' + (current_page + 2)).show();
+			}		
+			if (CURRENT_PAGE == TOTAL_PAGE || CURRENT_PAGE == (TOTAL_PAGE - 1)) {
+				$('ul.pagination li.item_' + (TOTAL_PAGE)).show();
+				$('ul.pagination li.item_' + (TOTAL_PAGE - 1)).show();
+				$('ul.pagination li.item_' + (TOTAL_PAGE - 2)).show();
+				$('ul.pagination li.item_' + (TOTAL_PAGE - 3)).show();
+				$('ul.pagination li.item_' + (TOTAL_PAGE - 4)).show();
+			}
+			$('ul.pagination li').on('click', function(){
+				CURRENT_PAGE = parseInt($(this).find('a b').text());			
+			});
 			$('.btn_location_booking').on('click', function(e) {
 				$(this).find('i.waiting_booking_detail').fadeIn();
 				USER_SERVICE_ID = $(this).attr('data-user-service');

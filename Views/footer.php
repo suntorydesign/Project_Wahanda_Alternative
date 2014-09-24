@@ -781,6 +781,7 @@
 		var USER_SERVICE_USE_EVOUCHER = '';
 		var EVOUCHER_DUE_DATE = '';
 		var MAX_QUANTITY_EVOUCHER = "<?php echo MAX_QUANTITY_EVOUCHER; ?>";
+		var MAX_PAGINATION_ITEM = "<?php echo MAX_PAGINATION_ITEM; ?>";
     </script>
 
     <?php

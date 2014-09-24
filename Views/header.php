@@ -44,7 +44,7 @@
                 <div id="top-header-center" class="col-md-6">
                     <div class="logo">
                         <h1 class="logo-text text-center"><a href="<?php echo URL; ?>">COMPANY NAME</a></h1>
-                        <img class="logo-image" src=""/>
+                        <!-- <img class="logo-image" src=""/> -->
                     </div>
                 </div>         
                 <div id="top-header-right" class="col-md-3">
@@ -76,7 +76,8 @@
                     	<?php } ?>
                     </div>
                     <div class="col-md-12 remove-padding clearfix">
-                        <input type="text" class="form-control search-global" placeHolder="Gõ nội dung cần tìm">
+                    	<i class="fa fa-search" style="position: absolute; z-index: 1000;top: 30%;left: 10px;color: #777;"></i>
+                        <input style="position: relative;padding-left: 30px" type="text" class="form-control search-global empty" placeHolder="Gõ nội dung cần tìm...">
                     </div>
                 </div>                
             </div><!-- END TOP HEADER -->

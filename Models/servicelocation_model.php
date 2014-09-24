@@ -13,7 +13,8 @@ class servicelocation_model extends Model {
 	}
 
 	public function loadResultSearch($data) {
-		$page = ($data['page'] - 1)*1;
+		$page = ($data['page'] - 1)*MAX_PAGINATION_ITEM;
+		$item_per_page = MAX_PAGINATION_ITEM;
 		$return = array();
 		$sql = <<<SQL
 SELECT COUNT(DISTINCT user.user_id) AS total_row
@@ -38,7 +39,7 @@ AND user_service.user_service_group_id = group_service.group_service_id
 AND user_service.user_service_service_id = service.service_id
 AND service.service_name LIKE '%{$data["service_name"]}%'
 ORDER BY user.user_id DESC
-LIMIT {$page}, 1
+LIMIT {$page}, {$item_per_page}
 SQL;
 		$select = $this -> db -> select($sql);
 		$array = array();

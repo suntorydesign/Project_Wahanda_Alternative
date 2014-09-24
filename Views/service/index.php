@@ -84,7 +84,7 @@
 				</div>
 				<div id="tab-ratings">
 					<div id="tab-banner">
-						<img class="img-responsive" src="">
+						<!-- <img class="img-responsive" src=""> -->
 					</div>
 		
 					<div id="tab-ratings" class="clearfix">
@@ -253,10 +253,10 @@
 		<div class="col-md-4">
 			<div id="side-bar">
 				<div class="map">
-					<img class="img-responsive" src="">
-					<div class="zoom-tool">
+					<!-- <img class="img-responsive" src=""> -->
+					<!-- <div class="zoom-tool">
 						<i class="fa fa-search-plus"></i>
-					</div>
+					</div> -->
 					<div class="">
 						<p id="user_address" class="text-center"></p>
 						<p class="text-center">SĐT: <span id="user_phone"></span></p>

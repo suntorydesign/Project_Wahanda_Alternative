@@ -33,10 +33,16 @@ class index_model extends Model {
 	}
 	
 	function loadLocation(){
-		$select = $this -> db -> select('SELECT user_id, user_business_name, user_logo, user_description 
-							   FROM `user` 
-							   WHERE `user_delete_flg` = 0 order by `user_id` desc 
-							   limit 8');
+		$select = $this -> db -> select('SELECT DISTINCT 
+										   user.user_id, 
+										   user.user_business_name, 
+										   user.user_logo, 
+										   user.user_description 
+										   FROM user_service, user, group_service
+										   WHERE user.user_id = group_service.group_service_user_id
+										   AND user_service.user_service_group_id = group_service.group_service_id
+										   AND user.user_delete_flg = 0 order by user.user_id desc
+										   limit 8');
 		if($select){
 			echo json_encode($select);
 		}else{
