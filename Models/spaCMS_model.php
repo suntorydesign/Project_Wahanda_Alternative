@@ -53,7 +53,7 @@ class SpaCMS_Model extends Model {
 	}
 
 	function get_service_featured() {
-		
+		SpaCMS_Reports_Model::get_service_featured();
 	}
 
 	///////////////////////////// REPORTS //////////////////////////
@@ -64,6 +64,10 @@ class SpaCMS_Model extends Model {
 	function get_sales_report() {
 		SpaCMS_Reports_Model::get_sales_report();
 	}
+
+	// function get_sales_report() {
+	// 	SpaCMS_Reports_Model::get_sales_report();
+	// }
 
 	///////////////////////////// SETTING //////////////////////////
 	function get_type_business() {

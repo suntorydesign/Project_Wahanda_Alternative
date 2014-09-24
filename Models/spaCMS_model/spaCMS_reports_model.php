@@ -5,44 +5,53 @@ class SpaCMS_Reports_Model {
 	public function get_booking_detail() {
 		$user_id = Session::get('user_id');
 
-		$where = '';
+		// $where = '';
 
-		$arrColumn = array(
-            '0' => array('type' => 'number', 'col_nm' => 'virtTable.booking_detail_id'),
-            '1' => array('type' => 'string', 'col_nm' => 'virtTable.booking_date_from'),
-            '2' => array('type' => 'date', 'col_nm' => 'virtTable.client_name'),
-            '3' => array('type' => 'date', 'col_nm' => 'virtTable.user_sevice_name'),
-            '4' => array('type' => 'string', 'col_nm' => 'virtTable.booking_detail_price'),
-            '5' => array('type' => 'string', 'col_nm' => 'virtTable.booking_detail_status')
-        );
+		// $arrColumn = array(
+  //           '0' => array('type' => 'number', 'col_nm' => 'virtTable.booking_detail_id'),
+  //           '1' => array('type' => 'string', 'col_nm' => 'virtTable.booking_date_from'),
+  //           '2' => array('type' => 'date', 'col_nm' => 'virtTable.client_name'),
+  //           '3' => array('type' => 'date', 'col_nm' => 'virtTable.user_sevice_name'),
+  //           '4' => array('type' => 'string', 'col_nm' => 'virtTable.booking_detail_price'),
+  //           '5' => array('type' => 'string', 'col_nm' => 'virtTable.booking_detail_status')
+  //       );
 
 		// Search columns
-		if(isset($_GET['sAction']) && $_GET['sAction'] == 'filter'){
-			$booking_detail_id 		= $_GET['booking_detail_id'];
-			$booking_date_from 		= $_GET['booking_date_from'];
-			$booking_date_to		= $_GET['booking_date_to'];
-			$booking_client_name 	= $_GET['booking_client_name'];
-			$booking_sevice_name 	= $_GET['booking_user_sevice_name'];
-			$booking_detail_price_from = $_GET['booking_detail_price_from'];
-			$booking_detail_price_to = $_GET['booking_detail_price_to'];
-			$booking_detail_status = $_GET['booking_detail_status'];
+		// $column_search = array();
+		// if(isset($_GET['sAction']) && $_GET['sAction'] == 'filter'){
+		// 	$column_search = array(
+		// 		'booking_detail_id' 		=> $_GET['booking_detail_id'],
+		// 		'booking_date_from' 		=> $_GET['booking_date_from'],
+		// 		'booking_date_to' 			=> $_GET['booking_date_to'],
+		// 		'booking_client_name' 		=> $_GET['booking_client_name'],
+		// 		'booking_sevice_name' 		=> $_GET['booking_sevice_name'],
+		// 		'booking_detail_price_from' => $_GET['booking_detail_price_from'],
+		// 		'booking_detail_price_to' 	=> $_GET['booking_detail_price_to'],
+		// 		'booking_detail_status' 	=> $_GET['booking_detail_status']
+		// 	);
 
-			$where = '';
-		}
+		// 	foreach ($column_search as $key => $value) {
+		// 		if($value != '') {
+		// 			$where .= " AND $key = ";
+		// 		}
+		// 	}
 
-		// 
+		// 	$where = '';
+		// }
 
-		$aQuery = <<<SQL
-		SELECT us.user_service_name, bd.booking_detail_id, b.booking_date, 
-			c.client_name, bd.booking_detail_price, b.booking_status
-		FROM user_service as us, booking_detail as bd, booking as b, client as c
-		WHERE bd.user_id = {$user_id} 
-			AND bd.user_service_id = us.user_service_id
-			AND bd.booking_id = b.booking_id
-			AND b.client_id = c.client_id
-SQL;
+// 		// 
 
-		$data = $this->db->select($aQuery);
+// 		$aQuery = <<<SQL
+// 		SELECT us.user_service_name, bd.booking_detail_id, b.booking_date, 
+// 			c.client_name, bd.booking_detail_price, b.booking_status
+// 		FROM user_service as us, booking_detail as bd, booking as b, client as c
+// 		WHERE bd.user_id = {$user_id} 
+// 			AND bd.user_service_id = us.user_service_id
+// 			AND bd.booking_id = b.booking_id
+// 			AND b.client_id = c.client_id
+// SQL;
+
+// 		$data = $this->db->select($aQuery);
 		// echo json_encode($data);
 		
 		$data = array();
@@ -145,34 +154,85 @@ SQL;
 		$user_id = Session::get('user_id');
 		$from 	= $_GET['from'];
 		$to 	= $_GET['to'];
-		$where 	= '';
-		$total_sales = 0;
-		$count_sales = 0;
 
+		// Result
+		$data_sales_report = array();
+
+		// Lọc hóa đơn theo thời gian
+		$where 	= ' user_id = {$user_id} ';
 		if($from == $to) {
-			$where .= ' AND booking_detail_date = {$from} ';
+			$where .= ' AND booking_detail.booking_detail_date = {$from} ';
 		} else {
-			$where .= ' AND booking_detail_date BETWEEN {$from} AND {$to} ';
+			$where .= ' AND booking_detail.booking_detail_date BETWEEN {$from} AND {$to} ';
 		}
 
-		$aQuery = <<<SQL
-		SELECT *
+		// Total price and count for Summary
+		// Câu query lấy tổng tất cả trong thời gian trên
+		$aQuery_summary = <<<SQL
+		SELECT SUM(booking_detail.booking_detail_price) as 'total_summary',
+			COUNT(*) as 'count_summary'
 		FROM booking_detail
-		WHERE user_id = {$user_id}
-			{$where}
+		WHERE {$where}
 SQL;
+		$data_summary = $this->db->select($aQuery_summary);
+	
+		$data_sales_report['summary'] = array(
+			'name' => 'summary',
+			'total' => $data_summary['total_summary'],
+			'count' => $data_summary['count_summary']
+		);
+		
+		// Total price and count for By service group
+		$aQuery_group_service = <<<SQL
+		SELECT group_service.group_service_name, 
+			SUM(booking_detail.booking_detail_price) as 'total_group_service',
+			COUNT(*) as 'count_group_service'
+		FROM group_service, user_service, booking_detail
+		WHERE {$where}
+			AND group_service.group_service_id = user_service.group_service_id
+			AND user_service.user_service_id = booking_detail.user_service_id
+		GROUP BY (group_service.group_service_id)
+SQL;
+		$data_group_service = $this->db->select($aQuery_group_service);
 
-		$data = $this->db->select($aQuery);
+		foreach ($data_group_service as $key => $group) {
+			$name = $group['group_service_name'];
+			$total_group_service = $group['total_group_service'];
+			$count_group_service = $group['count_group_service'];
 
-		foreach ($data as $key => $book) {
-			$total_sales += $book['booking_detail_price'];
-			$count_sales++;
+			$data_sales_report['group_service'][] = array(
+				'name' => $name,
+				'total' => $total_group_service,
+				'count' => $count_group_service
+			);
 		}
 
-		$data['total_sales'] = $total_sales;
-		$data['count_sales'] = $count_sales;
-		
-		echo json_encode($data);
+
+		// Total price and Count for Top service
+		$aQuery_top_service = <<<SQL
+		SELECT user_service.user_service_name, 
+			SUM(booking_detail.booking_detail_price) as 'total_top_service',
+			COUNT(*) as 'count_top_service'
+		FROM user_service, booking_detail
+		WHERE {$where}
+			AND user_service.user_service_id = booking_detail.user_service_id
+		GROUP BY (booking_detail.user_service_id)
+SQL;
+		$data_top_service = $this->db->select($aQuery_top_service);
+
+		foreach ($data_top_service as $key => $service) {
+			$name = $service['user_service_name'];
+			$total_top_service = $service['total_top_service'];
+			$count_top_service = $service['count_top_service'];
+
+			$data_sales_report['top_service'][] = array(
+				'name' => $name,
+				'total' => $total_top_service,
+				'count' => $count_top_service
+			);
+		}
+
+		echo json_encode($data_sales_report);
 	}
 
 }

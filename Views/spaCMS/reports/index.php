@@ -274,21 +274,7 @@
                         </table>
                     </div>
                     <div class="stats-group">
-                        <table>
-                            <tbody><tr>
-                                <th><h3>By employee</h3></th>
-                                <th>Total value</th>
-                                <th>Count</th>
-                            </tr>
-                            <tr>
-                                <td><span>Sunspa Resort</span></td>
-                                <td><span>£40</span></td>
-                                <td><span>1</span></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                    <div class="stats-group">
-                        <table>
+                        <table id="sale_report_by_service_group">
                             <tbody><tr>
                                 <th><h3>By service group</h3></th>
                                 <th>Total value</th>
@@ -302,7 +288,7 @@
                         </tbody></table>
                     </div>
                     <div class="stats-group">
-                        <table>
+                        <table id="sale_report_top_service">
                             <tbody><tr>
                                 <th><h3>Top services</h3></th>
                                 <th>Total value</th>
@@ -310,20 +296,6 @@
                             </tr>
                             <tr>
                                 <td><span>Body Wraps</span></td>
-                                <td><span>£40</span></td>
-                                <td><span>1</span></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                    <div class="stats-group">
-                        <table>
-                            <tbody><tr>
-                                <th><h3>By channel</h3></th>
-                                <th>Total value</th>
-                                <th>Count</th>
-                            </tr>
-                            <tr>
-                                <td><span>Direct sales</span></td>
                                 <td><span>£40</span></td>
                                 <td><span>1</span></td>
                             </tr>
