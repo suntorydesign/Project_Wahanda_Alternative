@@ -26,4 +26,15 @@ class service extends Controller {
 		}
 	}
 
+	public function sendComment() {
+		Session::init();
+		if (isset($_POST['comment_content']) && isset($_SESSION['client_id'])) {
+			$data['comment_content'] = $_POST['comment_content'];
+			$data['comment_status'] = 0;
+			$data['comment_client_id'] = $_SESSION['client_id'];
+			$data['comment_user_id'] = $_POST['comment_user_id'];
+			$this -> model -> sendComment($data);
+		}
+	}
+
 }

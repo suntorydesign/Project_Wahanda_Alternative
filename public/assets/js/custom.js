@@ -812,11 +812,12 @@ function login() {
 					//window.location = URL;
 					$('#login_group').children().remove();
 					$('#login_group').append('<div class="col-sm-12 remove-padding" style="margin-bottom: 10px;">' + '<div class="dropdown">' + '<a id="dropdown_profile" data-toggle="dropdown" class="btn btn-warning btn-block dropdown-toggle" style="border-radius: 4px;">' + 'Xin chào bạn: <i class="fa fa-user"></i> ' + user_name + ' <span class="caret"></span>' + '</a>' + '<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdown_profile">' + '<li role="presentation"><a role="menuitem" tabindex="-1" href="' + URL + 'clientsetting"><i class="fa fa-wrench"></i> Quản lý tài khoản</a></li>' + '<li role="presentation" class="divider"></li>' + '<li role="presentation"><a role="menuitem" tabindex="-1" onclick="javascript:logout()" style="cursor: pointer;"><i class="fa fa-power-off"></i> Thoát</a></li>' + '</ul>' + '</div>' + '</div>');
-					var http_path = window.location.href.replace('http:', '');
-					var https_path = window.location.href.replace('https:', '');
-					if (http_path != URL && https_path != URL) {
-						window.location = URL;
-					}
+					// var http_path = window.location.href.replace('http:', '');
+					// var https_path = window.location.href.replace('https:', '');
+					// if (http_path != URL && https_path != URL) {
+						// window.location = URL;
+					// }
+					window.location.reload();
 				}
 			}
 		});
@@ -839,11 +840,12 @@ function logout() {
 									 '<div class="col-sm-5 remove-padding">' + 
 									 '<button class="btn btn-block login-face-btn" type="button">Login Face</button>' + 
 									 '</div>');
-			var http_path = window.location.href.replace('http:', '');
-			var https_path = window.location.href.replace('https:', '');
-			if (http_path != URL && https_path != URL) {
-				window.location = URL;
-			}
+			// var http_path = window.location.href.replace('http:', '');
+			// var https_path = window.location.href.replace('https:', '');
+			// if (http_path != URL && https_path != URL) {
+				// window.location = URL;
+			// }
+			window.location.reload();
 		}
 	});
 }

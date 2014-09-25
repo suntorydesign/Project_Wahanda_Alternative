@@ -22,6 +22,8 @@
         <link rel="stylesheet" href="<?php echo ASSETS ?>plugins/bootstrap/css/bootstrap.min.css" type="text/css"  />
 
         <link rel="stylesheet" href="<?php echo ASSETS ?>plugins/font-awesome/css/font-awesome.min.css" type="text/css"  />
+        
+        <link rel="stylesheet" href="<?php echo ASSETS ?>plugins/wysibb/theme/default/wbbtheme.css" type="text/css"  />
 
         <link rel="stylesheet" href="<?php echo ASSETS ?>css/home-page/home-page.css" type="text/css"  />
 
@@ -63,10 +65,10 @@
                         <?php }else{ ?>
                         	<div class="col-sm-12 remove-padding" style="margin-bottom: 10px;">
 								<div class="dropdown"> 
-                        			<a id="dropdown_profile" data-toggle="dropdown" class="btn btn-warning btn-block dropdown-toggle" style="border-radius: 4px;"> 
+                        			<a id="dropdown_profile" data-toggle="dropdown" class="btn btn-warning btn-block dropdown-toggle"> 
                         				Xin chào bạn: <i class="fa fa-user"></i> <?php echo $_SESSION['client_username']; ?> <span class="caret"></span>
                         			</a>
-                        			<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdown_profile">
+                        			<ul style="border-radius: 0px;" class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdown_profile">
 									    <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo URL . 'clientsetting'; ?>"><i class="fa fa-wrench"></i> Quản lý tài khoản</a></li>
 									    <li role="presentation" class="divider"></li>
 									    <li role="presentation"><a role="menuitem" tabindex="-1" onclick="logout()" style="cursor: pointer;"><i class="fa fa-power-off"></i> Thoát</a></li>

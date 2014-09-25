@@ -1,15 +1,14 @@
 <?php
 /**
- * 
+ *
  */
 class service_model extends Model {
-	
+
 	function __construct() {
 		parent::__construct();
 	}
-	
-	public function loadLocationDetail($user_id)
-	{
+
+	public function loadLocationDetail($user_id) {
 		$return = array();
 		$query = <<<SQL
 SELECT 
@@ -49,7 +48,7 @@ SQL;
 SELECT service_type_id, service_type_name
 FROM service_type
 SQL;
-		$select = $this -> db ->select($query);
+		$select = $this -> db -> select($query);
 		foreach ($select as $key => $value) {
 			$sql = <<<SQL
 SELECT 
@@ -75,6 +74,14 @@ SQL;
 		}
 		echo json_encode($return);
 	}
-}
 
+	public function sendComment($data) {
+		$insert = $this -> db ->insert('comment', $data);
+		if ($insert) {
+			echo 200;
+		} else {
+			echo -1;
+		}
+	}
+}
 ?>

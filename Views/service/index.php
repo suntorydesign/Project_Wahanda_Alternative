@@ -204,12 +204,41 @@
 						</div>
 						<div class="clearfix"></div>
 		
-						<i class="">Bạn đã sử dụng dịch vụ ở đây chưa? </i>
-						<button type="button" class="btn btn-sm btn-orange">Viết đánh giá</button>
-		
+						<i class="">Bạn đã sử dụng dịch vụ ở đây chưa?&nbsp;&nbsp;</i>
+						<?php Session::init();
+						if(isset($_SESSION['client_id'])){ 
+						?>
+						<button type="button" class="btn btn-sm btn-orange" id="write_comment">Viết đánh giá</button>
+						<div id="comment_input" style="display: none">
+							<hr />
+							<div id="error_comment" style="display: none;" class="alert alert-block alert-warning">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<small><b>Cảnh báo! </b>Gửi đánh giá thất bại (kiểm tra lại kết nối internet) ...</small>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<textarea id="comment_form" placeholder="Bình luận tại đây (bạn phải nhập ít nhất 15 ký tự)..." style="max-width: 100%;min-width: 100%;min-height: 50px;" class="form-control"></textarea>
+									<small class="pull-right" style="color : #C10000;"><i>(*) Bạn phải nhập ít nhất 10 ký tự</i></small>
+								</div>
+								<div class="col-md-12">
+									<div class="pull-right">
+										<i id="waiting_for_comment" style="display: none" class="fa fa-refresh fa-spin"></i> 
+										<button onclick="sendComment()" id="send_comment" type="button" class="btn btn-sm btn-orange">Gửi bình luận</button>
+									</div>
+								</div>						
+							</div>
+						</div>
+						<?php 
+						}else{ ?>
+						<button disabled type="button" class="btn btn-sm btn-orange" id="write_comment">Viết đánh giá</button>
+						<?php } ?>
+						<div style="margin-top: 10px; display: none;" id="success_comment" class="alert alert-block alert-success">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<small><b>Chúng mừng! </b>Gửi đánh giá thành công</small>
+						</div>
 						<div class="divider"></div>
 						<div class="rating-comment clearfix">
-							<div class="media">
+							<div class="media" id="comment_field">
 								<a class="pull-left" href="#"> <img width="55" height="55" class="media-object" src="<?php echo ASSETS; ?>img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" alt="avatar"> </a>
 								<div class="media-body">
 									<h5 class="media-heading"><strong>Việt Nguyễn</strong><small class="pull-right"><i>tham gia thang 6-2014</i></small></h5>

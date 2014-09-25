@@ -1,5 +1,9 @@
 $(document).ready(function() {
 	loadLocationDetail();
+	//$("#comment_form").wysibb();
+	$('#write_comment').on('click', function() {
+		$('#comment_input').slideToggle();
+	});
 });
 /*LOAD LOCATION DETAIL*/
 function loadLocationDetail() {
@@ -11,10 +15,10 @@ function loadLocationDetail() {
 			user_id : USER_ID
 		},
 		success : function(response) {
-			if(response.user[0] != null){
-				$.each(response.user[0], function(key, value){
+			if (response.user[0] != null) {
+				$.each(response.user[0], function(key, value) {
 					$('#' + key).html(value);
-					if(key == 'user_open_hour'){
+					if (key == 'user_open_hour') {
 						json_user_open_hour = jQuery.parseJSON(value);
 						// console.log(json_user_open_hour);
 						user_open_hour = '';
@@ -65,15 +69,15 @@ function loadLocationDetail() {
 				});
 			}
 			var html = '';
-			$.each(response, function(key, value){
-				if(key != 'user'){
-					if(value[0] != null){
-						if(key == 'user_service'){
+			$.each(response, function(key, value) {
+				if (key != 'user') {
+					if (value[0] != null) {
+						if (key == 'user_service') {
 							key = 'DỊCH VỤ NỔI BẬT';
 						}
 						html += '<div class="one-service" style="margin-bottom: 20px;">';
 						html += '<div class="title">' + key + '</div>';
-						$.each(value, function(key, item){
+						$.each(value, function(key, item) {
 							html += '<div class="divider"></div>';
 							html += '<div class="item clearfix">';
 							html += '<div class="col-sm-5 item-info-1">' + item.user_service_name + '</div>';
@@ -104,3 +108,60 @@ function loadLocationDetail() {
 /*END LOAD LOCATION DETAIL*/
 /*-----------------------*/
 
+/*SEND COMMENT*/
+function sendComment() {
+	if (($('#comment_form').val()).length < 10) {
+		$('#comment_form').css('border', '#C10000 solid 2px');
+		setTimeout(function() {
+			$('#comment_form').css('border', '#CCC solid 1px');
+			setTimeout(function() {
+				$('#comment_form').css('border', '#C10000 solid 2px');
+				setTimeout(function() {
+					$('#comment_form').css('border', '#CCC solid 1px');
+					setTimeout(function() {
+						$('#comment_form').css('border', '#C10000 solid 2px');
+						setTimeout(function() {
+							$('#comment_form').css('border', '#CCC solid 1px');
+						}, 100);
+					}, 100);
+				}, 100);
+			}, 100);
+		}, 100);
+	} else {
+		$('#waiting_for_comment').fadeIn();
+		$.ajax({
+			url : URL + 'service/sendComment',
+			type : 'post',
+			dataType : 'json',
+			data : {
+				comment_content : $('#comment_form').val(),
+				comment_user_id : USER_ID
+			},
+			success : function(response) {
+				if (response == 200) {
+					$('#waiting_for_comment').fadeOut(function() {
+						$('#comment_form').val('');
+						$('#comment_input').slideUp();
+						$('#success_comment').fadeIn();
+						setTimeout(function() {
+							$('#success_comment').fadeOut();
+						}, 1000);
+					});
+				} else if ( response = -1) {
+					$('#waiting_for_comment').fadeOut(function() {
+						$('#error_comment').fadeIn();
+					});
+					setTimeout(function() {
+						$('#error_comment').fadeOut();
+					}, 8000);
+				}
+			},
+			complete : function() {
+				$('#waiting_for_comment').fadeOut();
+			}
+		});
+	}
+}
+
+/*END SEND COMMENT*/
+/*-----------------------*/
