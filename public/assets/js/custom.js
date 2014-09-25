@@ -740,7 +740,6 @@ function clickNextWeek() {
 		$('#next_week').addClass('dis-arm');
 	}
 	if (WEEK_PAGE == TOTAL_WEEK) {
-		$('#next_week').addClass('dis-arm');
 		return false;
 	} else {
 		$('#last_week').removeClass('dis-arm');

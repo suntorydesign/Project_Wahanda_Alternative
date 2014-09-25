@@ -458,7 +458,7 @@ img{
 }
 
 .pagination-sm > li > a, .pagination-sm > li > span {
-	margin-right: 13px;
+	margin-right: 5px;
 	border-radius: 0;
 }
 
@@ -468,6 +468,13 @@ img{
 
 .pagination {
 	border-radius: 0;
+}
+.pagination > li > a{
+	color : #A09E9E;
+}
+.pagination > .active > a{
+	background-color: #FDBD0E;
+	border-color: #FDBD0E;
 }
 .well {
 	border-radius: 0px;

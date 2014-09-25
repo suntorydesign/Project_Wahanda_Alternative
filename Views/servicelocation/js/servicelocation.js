@@ -22,22 +22,22 @@ function loadResultSearch(page) {
 			var pagination = '';
 			if(TOTAL_PAGE != 0){
 				if(page == 1){
-					pagination += '<li class="disabled"><a href="javascript:void(0);"><b>&laquo;</b></a></li>';
+					pagination += '<li class="pre_page disabled"><a href="javascript:void(0);"><b>&laquo;</b></a></li>';
 				}else{
-					pagination += '<li><a href="javascript:loadResultSearch(' + (page - 1) + ');"><b>&laquo;</b></a></li>';
+					pagination += '<li class="pre_page"><a href="javascript:loadResultSearch(' + (page - 1) + ');"><b>&laquo;</b></a></li>';
 				}
 				
 				for ( i = 1; i <= TOTAL_PAGE; i++) {
 					if (page == i)
-						pagination += '<li style="display:none" class="active item_'+i+'"><a href="javascript:loadResultSearch(' + i + ');"><b>' + i + '</b></a></li>';
+						pagination += '<li style="display:none" class="active page_number item_'+i+'"><a href="javascript:void(0);"><b>' + i + '</b></a></li>';
 					else
-						pagination += '<li style="display:none" class="item_'+i+'"><a href="javascript:loadResultSearch(' + i + ');"><b>' + i + '</b></a></li>';
+						pagination += '<li style="display:none" class="page_number item_'+i+'"><a href="javascript:loadResultSearch(' + i + ');"><b>' + i + '</b></a></li>';
 				}
 				
 				if (page == TOTAL_PAGE){
-					pagination += '<li class="disabled"><a href="javascript:void(0);"><b>&raquo;</b></a></li>';
+					pagination += '<li class="next_page disabled"><a href="javascript:void(0);"><b>&raquo;</b></a></li>';
 				}else{
-					pagination += '<li><a href="javascript:loadResultSearch(' + (page + 1) + ');"><b>&raquo;</b></a></li>';
+					pagination += '<li class="next_page"><a href="javascript:loadResultSearch(' + (page + 1) + ');"><b>&raquo;</b></a></li>';
 				}
 				$('#result-pagination ul').html(pagination);
 			}
@@ -120,8 +120,14 @@ function loadResultSearch(page) {
 				$('ul.pagination li.item_' + (TOTAL_PAGE - 3)).show();
 				$('ul.pagination li.item_' + (TOTAL_PAGE - 4)).show();
 			}
-			$('ul.pagination li').on('click', function(){
+			$('ul.pagination li.page_number').on('click', function(){
 				CURRENT_PAGE = parseInt($(this).find('a b').text());			
+			});
+			$('ul.pagination li.pre_page').on('click', function(){
+				CURRENT_PAGE--;	
+			});
+			$('ul.pagination li.next_page').on('click', function(){
+				CURRENT_PAGE++;		
 			});
 			$('.btn_location_booking').on('click', function(e) {
 				$(this).find('i.waiting_booking_detail').fadeIn();
