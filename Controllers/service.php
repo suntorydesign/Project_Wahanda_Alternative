@@ -26,14 +26,39 @@ class service extends Controller {
 		}
 	}
 
-	public function sendComment() {
+	public function loadReview() {
+		if (isset($_POST['review_user_id'])) {
+			$data['user_id'] = $_POST['review_user_id'];
+			$this -> model -> loadReview($data);
+		}
+	}
+
+	public function loadPersonReview() {
 		Session::init();
-		if (isset($_POST['comment_content']) && isset($_SESSION['client_id'])) {
-			$data['comment_content'] = $_POST['comment_content'];
-			$data['comment_status'] = 0;
-			$data['comment_client_id'] = $_SESSION['client_id'];
-			$data['comment_user_id'] = $_POST['comment_user_id'];
-			$this -> model -> sendComment($data);
+		if (isset($_SESSION['client_id'])) {
+			if (isset($_POST['review_user_id'])) {
+				$data['user_id'] = $_POST['review_user_id'];
+				$data['client_id'] = $_SESSION['client_id'];
+				$this -> model -> loadPersonReview($data);
+			}
+		} else {
+			echo '[]';
+		}
+	}
+
+	public function sendReview() {
+		Session::init();
+		if (isset($_POST['review_content']) && isset($_SESSION['client_id'])) {
+			$data['user_id'] = $_POST['review_user_id'];
+			$data['client_id'] = $_SESSION['client_id'];
+			$data['user_review_content'] = $_POST['review_content'];
+			$data['user_review_active'] = 0;
+			$data['user_review_clean'] = 0;
+			$data['user_review_quality'] = 0;
+			$data['user_review_staff'] = 0;
+			$data['user_review_valuable'] = 0;
+			//print_r($data);
+			$this -> model -> sendReview($data);
 		}
 	}
 

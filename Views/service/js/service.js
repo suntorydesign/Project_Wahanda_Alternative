@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	loadLocationDetail();
 	//$("#comment_form").wysibb();
-	$('#write_comment').on('click', function() {
-		$('#comment_input').slideToggle();
+	$('#write_review').on('click', function() {
+		$('#review_input').slideToggle();
 	});
 });
 /*LOAD LOCATION DETAIL*/
@@ -95,6 +95,8 @@ function loadLocationDetail() {
 			$('#location_service').html(html);
 		},
 		complete : function() {
+			loadPersonReview();
+			loadReview();
 			$('.btn_location_booking').on('click', function(e) {
 				$(this).find('i.waiting_booking_detail').fadeIn();
 				USER_SERVICE_ID = $(this).attr('data-user-service');
@@ -108,60 +110,123 @@ function loadLocationDetail() {
 /*END LOAD LOCATION DETAIL*/
 /*-----------------------*/
 
-/*SEND COMMENT*/
-function sendComment() {
-	if (($('#comment_form').val()).length < 10) {
-		$('#comment_form').css('border', '#C10000 solid 2px');
+/*LOAD REVIEW*/
+function loadReview() {
+	$.ajax({
+		url : URL + 'service/loadReview',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			review_user_id : USER_ID
+		},
+		success : function(response) {
+			var html = '';
+			if (response[0] != null) {
+				$.each(response, function(key, value) {
+					html += '<div class="media" >';
+					html += '<a class="pull-left" href="#"> <img width="55" height="55" class="media-object" src="' + URL + 'public/assets/img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" alt="avatar"> </a>';
+					html += '<div class="media-body">';
+					html += '<h5 class="media-heading"><strong>' + value.client_username + '</strong><small class="pull-right"><i>tham gia ' + value.client_join_date + '&nbsp</i></small></h5>';
+					html += '<small style="font-size: 75%;color: #999"><i>Đăng lúc ' + value.user_review_time + ' - ' + value.user_review_date + '</i></small>';
+					if(value.user_review_content.length > 170){
+						html += '<p id="text_after">' + shorten(value.user_review_content, 170) + ' <span><a id="see_more_review" style="cursor : pointer;"> Xem thêm >>></a></span></p>';
+					}else{
+						html += '<p id="text_after">' + value.user_review_content + '</p>';
+					}			
+					html += '<p style="display : none;" id="text_before">' + value.user_review_content + '</p>';
+					html += '</div>';
+					html += '</div>';
+				});
+			}
+			$('#waiting_for_review_load').fadeOut(function(){
+				$('#review_field').html(html);
+			});
+		},
+		complete : function() {
+			
+		}
+	});
+}
+
+/*END LOAD REVIEW*/
+/*-----------------------*/
+
+/*LOAD REVIEW*/
+function loadPersonReview() {
+	$.ajax({
+		url : URL + 'service/loadPersonReview',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			review_user_id : USER_ID
+		},
+		success : function(response) {
+			if (response[0] != null) {
+				$('#review_form').text(response[0].user_review_content);
+			}
+		},
+		complete : function() {
+
+		}
+	});
+}
+
+/*END LOAD REVIEW*/
+/*-----------------------*/
+
+/*SEND REVIEW*/
+function sendReview() {
+	if (($('#review_form').val()).length < 10) {
+		$('#review_form').css('border', '#C10000 solid 2px');
 		setTimeout(function() {
-			$('#comment_form').css('border', '#CCC solid 1px');
+			$('#review_form').css('border', '#CCC solid 1px');
 			setTimeout(function() {
-				$('#comment_form').css('border', '#C10000 solid 2px');
+				$('#review_form').css('border', '#C10000 solid 2px');
 				setTimeout(function() {
-					$('#comment_form').css('border', '#CCC solid 1px');
+					$('#review_form').css('border', '#CCC solid 1px');
 					setTimeout(function() {
-						$('#comment_form').css('border', '#C10000 solid 2px');
+						$('#review_form').css('border', '#C10000 solid 2px');
 						setTimeout(function() {
-							$('#comment_form').css('border', '#CCC solid 1px');
+							$('#review_form').css('border', '#CCC solid 1px');
 						}, 100);
 					}, 100);
 				}, 100);
 			}, 100);
 		}, 100);
 	} else {
-		$('#waiting_for_comment').fadeIn();
+		$('#waiting_for_review').fadeIn();
 		$.ajax({
-			url : URL + 'service/sendComment',
+			url : URL + 'service/sendreview',
 			type : 'post',
 			dataType : 'json',
 			data : {
-				comment_content : $('#comment_form').val(),
-				comment_user_id : USER_ID
+				review_content : $('#review_form').val(),
+				review_user_id : USER_ID
 			},
 			success : function(response) {
 				if (response == 200) {
-					$('#waiting_for_comment').fadeOut(function() {
-						$('#comment_form').val('');
-						$('#comment_input').slideUp();
-						$('#success_comment').fadeIn();
+					$('#waiting_for_review').fadeOut(function() {
+						$('#review_input').slideUp();
+						$('#success_review').fadeIn();
 						setTimeout(function() {
-							$('#success_comment').fadeOut();
+							$('#success_review').fadeOut();
 						}, 1000);
 					});
 				} else if ( response = -1) {
-					$('#waiting_for_comment').fadeOut(function() {
-						$('#error_comment').fadeIn();
+					$('#waiting_for_review').fadeOut(function() {
+						$('#error_review').fadeIn();
 					});
 					setTimeout(function() {
-						$('#error_comment').fadeOut();
+						$('#error_review').fadeOut();
 					}, 8000);
 				}
 			},
 			complete : function() {
-				$('#waiting_for_comment').fadeOut();
+				$('#waiting_for_review').fadeOut();
 			}
 		});
 	}
 }
 
-/*END SEND COMMENT*/
+/*END SEND REVIEW*/
 /*-----------------------*/
