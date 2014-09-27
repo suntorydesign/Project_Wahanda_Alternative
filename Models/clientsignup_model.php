@@ -17,7 +17,7 @@ class clientsignup_model extends Model {
 		$insert = $this -> db -> insert('client', $data);
 		if ($insert) {
 			Session::set('checkSignup', TRUE);
-			header("Location:" . URL . "homepage");
+			header("Location:" . URL);
 		} else {
 			Session::set('checkSignup', FALSE);
 			header("Location:" . URL . "clientsignup");
@@ -44,7 +44,7 @@ class clientsignup_model extends Model {
 		$data['client_is_active'] = 1;
 		$update = $this -> db ->update('client', $data, "client_verify='".$verify."'");
 		if ($update != 0) {
-			header("Location:" . URL . "homepage");
+			header("Location:" . URL);
 		} else {
 			header("Location:" . URL . "clientsignup");
 		}

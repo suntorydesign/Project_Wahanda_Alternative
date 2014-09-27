@@ -4,6 +4,18 @@ $(document).ready(function() {
 	$('#write_review').on('click', function() {
 		$('#review_input').slideToggle();
 	});
+	$('textarea#review_form').focusout(function() {
+		setTimeIdle();
+	});
+	$('textarea#review_form').focusin(function() {
+		setTimeIdle();
+	});
+	$('textarea#review_form').keydown(function(event) {
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if (keycode == '32') {
+			setTimeIdle();
+		}
+	});
 });
 /*LOAD LOCATION DETAIL*/
 function loadLocationDetail() {
@@ -18,6 +30,9 @@ function loadLocationDetail() {
 			if (response.user[0] != null) {
 				$.each(response.user[0], function(key, value) {
 					$('#' + key).html(value);
+					if (key == 'user_description') {
+						$('#user_location_description').html(value);
+					}
 					if (key == 'user_open_hour') {
 						json_user_open_hour = jQuery.parseJSON(value);
 						// console.log(json_user_open_hour);
@@ -25,40 +40,40 @@ function loadLocationDetail() {
 						$.each(json_user_open_hour, function(day, hour) {
 							switch(day) {
 							case '2':
-								day = 'Thứ 2';
+								day = 'Thứ 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 								break;
 							case '3':
-								day = 'Thứ 3';
+								day = 'Thứ 3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 								break;
 							case '4':
-								day = 'Thứ 4';
+								day = 'Thứ 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 								break;
 							case '5':
-								day = 'Thứ 5';
+								day = 'Thứ 5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 								break;
 							case '6':
-								day = 'Thứ 6';
+								day = 'Thứ 6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 								break;
 							case '7':
-								day = 'Thứ 7';
+								day = 'Thứ 7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 								break;
 							case '8':
 								day = 'Chủ Nhật';
 								break;
 							}
 							user_open_hour += '<div class="clearfix" style="padding-top: 10px;">';
-							user_open_hour += '<div class="col-sm-offset-1 col-sm-5">';
-							user_open_hour += '<span><i>' + day + '</i></span>';
+							user_open_hour += '<div class="col-lg-offset-1 col-sm-6">';
+							user_open_hour += '<span><i>' + day + ' :</i></span>';
 							user_open_hour += '</div>';
-							user_open_hour += '<div class="col-sm-1">';
-							user_open_hour += '<span><i>:</i></span>';
-							user_open_hour += '</div>';
+							// user_open_hour += '<div class="col-sm-1">';
+							// user_open_hour += '<span><i>:</i></span>';
+							// user_open_hour += '</div>';
 							if (hour[0] == 1) {
-								user_open_hour += '<div class="col-sm-4">';
-								user_open_hour += '<span><i>' + hour[1] + ' h - ' + hour[2] + ' h</i></span>';
+								user_open_hour += '<div class="col-lg-4">';
+								user_open_hour += '<span><i>' + hour[1] + 'h - ' + hour[2] + 'h</i></span>';
 								user_open_hour += '</div>';
 							} else if (hour[0] == 0) {
-								user_open_hour += '<div class="col-sm-4">';
+								user_open_hour += '<div class="col-lg-4">';
 								user_open_hour += '<span><i>Nghỉ</i></span>';
 								user_open_hour += '</div>';
 							}
@@ -112,38 +127,66 @@ function loadLocationDetail() {
 
 /*LOAD REVIEW*/
 function loadReview() {
+	$('div#disallow').show();
+	$('#waiting_for_review_load').fadeIn();
 	$.ajax({
 		url : URL + 'service/loadReview',
 		type : 'post',
 		dataType : 'json',
 		data : {
-			review_user_id : USER_ID
+			review_user_id : USER_ID,
+			review_result : REVIEW_RESULT
+		},
+		beforeSend : function() {
+
 		},
 		success : function(response) {
-			var html = '';
-			if (response[0] != null) {
-				$.each(response, function(key, value) {
-					html += '<div class="media" >';
+			var html = '<div style="display : none;" id="disallow"></div>';
+			html += '<div style="display : none;" id="waiting_for_review_load" class="text-center">' + '<i style="color: #FDBD0E" class="fa fa-2x fa-spin fa-refresh"></i>' + '</div>';
+			if (response.data[0] != null) {
+				$.each(response.data, function(key, value) {
+					html += '<div class="media review_count" >';
 					html += '<a class="pull-left" href="#"> <img width="55" height="55" class="media-object" src="' + URL + 'public/assets/img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" alt="avatar"> </a>';
 					html += '<div class="media-body">';
-					html += '<h5 class="media-heading"><strong>' + value.client_username + '</strong><small class="pull-right"><i>tham gia ' + value.client_join_date + '&nbsp</i></small></h5>';
-					html += '<small style="font-size: 75%;color: #999"><i>Đăng lúc ' + value.user_review_time + ' - ' + value.user_review_date + '</i></small>';
-					if(value.user_review_content.length > 170){
-						html += '<p id="text_after">' + shorten(value.user_review_content, 170) + ' <span><a id="see_more_review" style="cursor : pointer;"> Xem thêm >>></a></span></p>';
-					}else{
-						html += '<p id="text_after">' + value.user_review_content + '</p>';
-					}			
-					html += '<p style="display : none;" id="text_before">' + value.user_review_content + '</p>';
+					var client_join_date = value.client_join_date.substring(0, 10);
+					html += '<h5 class="media-heading"><strong>' + value.client_username + '</strong><small class="pull-right"><i>tham gia ' + formatDate(client_join_date) + '&nbsp</i></small></h5>';
+					var date_review = new Date(value.user_review_date);
+					var current_date = new Date(value.review_current_date);
+					var user_date_review;
+					if (date_review.getDate() == (current_date.getDate() - 1) && date_review.getMonth() == current_date.getMonth() && date_review.getFullYear() == current_date.getFullYear()) {
+						user_date_review = 'Hôm qua';
+					} else {
+						user_date_review = formatDate(value.user_review_date);
+					}
+					if (value.user_review_date == value.review_current_date) {
+						user_date_review = 'Hôm nay';
+					}
+					html += '<small style="font-size: 75%;color: #999"><i>Đăng lúc ' + value.user_review_time + ' - ' + user_date_review + '</i></small>';
+					if (value.user_review_content.length > 270) {
+						html += '<p class="text_after">' + shorten(value.user_review_content, 270) + ' <span><a class="see_more_review" style="cursor : pointer;"> Xem thêm >>></a></span></p>';
+						html += '<p style="display : none;" class="text_before">' + value.user_review_content + '</p>';
+					} else {
+						html += '<p class="text_after">' + value.user_review_content + '</p>';
+					}
 					html += '</div>';
 					html += '</div>';
 				});
 			}
-			$('#waiting_for_review_load').fadeOut(function(){
+			if (response.number_result > RESULT_PER_SHOW_MORE) {
+				html += '<div onclick="showMoreReview()" id="see_more_review_all" align="center"><span style="display : none;" class="fa fa-spin fa-refresh" id="waiting_for_show_review"></span><span id="text_show_review"> Xem các đánh giá cũ hơn >>></span></div>';
+			}
+			$('#waiting_for_review_load').fadeOut(function() {
 				$('#review_field').html(html);
 			});
 		},
 		complete : function() {
-			
+			// setTimeout(function(){
+			// loadReview();
+			// },60000*2);
+			$('#review_field').delegate('.see_more_review', 'click', function() {
+				$(this).parent().parent().hide();
+				$(this).parent().parent().siblings('.text_before').show();
+			});
 		}
 	});
 }
@@ -196,7 +239,7 @@ function sendReview() {
 	} else {
 		$('#waiting_for_review').fadeIn();
 		$.ajax({
-			url : URL + 'service/sendreview',
+			url : URL + 'service/sendReview',
 			type : 'post',
 			dataType : 'json',
 			data : {
@@ -207,10 +250,12 @@ function sendReview() {
 				if (response == 200) {
 					$('#waiting_for_review').fadeOut(function() {
 						$('#review_input').slideUp();
-						$('#success_review').fadeIn();
+						$('#success_review').fadeIn(function() {
+							loadReview();
+						});
 						setTimeout(function() {
 							$('#success_review').fadeOut();
-						}, 1000);
+						}, 3000);
 					});
 				} else if ( response = -1) {
 					$('#waiting_for_review').fadeOut(function() {
@@ -229,4 +274,69 @@ function sendReview() {
 }
 
 /*END SEND REVIEW*/
+/*-----------------------*/
+
+/*SHOW MORE REVIEW*/
+function showMoreReview() {
+	$('#text_show_review').fadeOut(function() {
+		$('#waiting_for_show_review').fadeIn(function() {
+			REVIEW_RESULT++;
+			var html = '';
+			var number_result;
+			$.ajax({
+				url : URL + 'service/loadReview',
+				type : 'post',
+				dataType : 'json',
+				data : {
+					review_user_id : USER_ID,
+					review_result : REVIEW_RESULT
+				},
+				success : function(response) {
+					number_result = response.number_result;
+					if (response.data[0] != null) {
+						$.each(response.data, function(key, value) {
+							html += '<div class="media review_count" >';
+							html += '<a class="pull-left" href="#"> <img width="55" height="55" class="media-object" src="' + URL + 'public/assets/img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" alt="avatar"> </a>';
+							html += '<div class="media-body">';
+							var client_join_date = value.client_join_date.substring(0, 10);
+							html += '<h5 class="media-heading"><strong>' + value.client_username + '</strong><small class="pull-right"><i>tham gia ' + formatDate(client_join_date) + '&nbsp</i></small></h5>';
+							var date_review = new Date(value.user_review_date);
+							var current_date = new Date(value.review_current_date);
+							var user_date_review;
+							if (date_review.getDate() == (current_date.getDate() - 1) && date_review.getMonth() == current_date.getMonth() && date_review.getFullYear() == current_date.getFullYear()) {
+								user_date_review = 'Hôm qua';
+							} else {
+								user_date_review = formatDate(value.user_review_date);
+							}
+							if (value.user_review_date == value.review_current_date) {
+								user_date_review = 'Hôm nay';
+							}
+							html += '<small style="font-size: 75%;color: #999"><i>Đăng lúc ' + value.user_review_time + ' - ' + user_date_review + '</i></small>';
+							if (value.user_review_content.length > 270) {
+								html += '<p class="text_after">' + shorten(value.user_review_content, 270) + ' <span><a class="see_more_review" style="cursor : pointer;"> Xem thêm >>></a></span></p>';
+								html += '<p style="display : none;" class="text_before">' + value.user_review_content + '</p>';
+							} else {
+								html += '<p class="text_after">' + value.user_review_content + '</p>';
+							}
+							html += '</div>';
+							html += '</div>';
+						});
+					}
+
+				},
+				complete : function() {
+					$('#waiting_for_show_review').fadeOut(function() {
+						$('#text_show_review').show();
+						$('#review_field .media:last').after(html);
+						if ($('.review_count').length == number_result) {
+							$('#see_more_review_all').hide();
+						}
+					});
+				}
+			});
+		});
+	});
+}
+
+/*END SHOW MORE REVIEW*/
 /*-----------------------*/

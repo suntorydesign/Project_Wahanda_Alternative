@@ -56,7 +56,7 @@
 		                if(empty($_SESSION['client_id'])){ 
 		                ?>
 	                        <div class="col-sm-5 remove-padding">
-	                        	<button id="login_btn" class="btn btn-block login-btn" data-toggle="modal" data-target="#login_modal" type="button">Đăng nhập</button>
+	                        	<button id="login_btn" onclick="setTimeIdle()" class="btn btn-block login-btn" data-toggle="modal" data-target="#login_modal" type="button">Đăng nhập</button>
 	                        </div>
 	                        <div class="col-sm-2"></div>
 	                        <div class="col-sm-5 remove-padding">

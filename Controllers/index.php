@@ -10,28 +10,46 @@ class Index extends Controller {
 	}
 
 	public function index() {
+		Session::initIdle();
 		$this -> view -> script = array(ASSETS . 'js/homepage.js');
 		$this -> view -> render('index');
 	}
 
+	public function checkSessionIdle() {
+		Session::init();
+		if (isset($_SESSION['check_idle'])) {
+			if ((time() - $_SESSION['check_idle']) >= IDLE_TIME) {
+				Session::destroy();
+				echo 200;
+			}else{
+				echo 0;
+			}
+		}
+	}
+
 	public function loadTopServiceList() {
+		Session::initIdle();
 		$this -> model -> loadTopServiceList();
 	}
 
 	public function loadNewServiceList() {
+		Session::initIdle();
 		$this -> model -> loadNewServiceList();
 	}
-	
-	public function loadLocation(){
+
+	public function loadLocation() {
+		Session::initIdle();
 		$this -> model -> loadLocation();
 	}
 
 	public function loadServiceDetail() {
+		Session::initIdle();
 		$user_service_id = $_POST['user_service_id'];
 		$this -> model -> loadServiceDetail($user_service_id);
 	}
 
 	public function getBookingInfo() {
+		Session::initIdle();
 		Session::init();
 		$index_e = 0;
 		if (isset($_SESSION['eVoucher_detail'])) {
@@ -43,7 +61,7 @@ class Index extends Controller {
 				$_SESSION['booking_detail'][$index][$key] = $value;
 			}
 		} else {
-			if(empty($_POST)){
+			if (empty($_POST)) {
 				return FALSE;
 			}
 			$index = count($_SESSION['booking_detail']);
@@ -63,7 +81,8 @@ class Index extends Controller {
 		echo($index + $index_e + 1);
 	}
 
-	public function geteVoucherInfo(){
+	public function geteVoucherInfo() {
+		Session::initIdle();
 		Session::init();
 		$index_b = 0;
 		if (isset($_SESSION['booking_detail'])) {
@@ -75,7 +94,7 @@ class Index extends Controller {
 				$_SESSION['eVoucher_detail'][$index][$key] = $value;
 			}
 		} else {
-			if(empty($_POST)){
+			if (empty($_POST)) {
 				return FALSE;
 			}
 			$index = count($_SESSION['eVoucher_detail']);
@@ -96,6 +115,7 @@ class Index extends Controller {
 	}
 
 	public function shoppingCartDetail() {
+		Session::initIdle();
 		Session::init();
 		$result = array();
 		if (isset($_SESSION['booking_detail'])) {
@@ -103,27 +123,28 @@ class Index extends Controller {
 		} else {
 			$result['booking'] = '';
 		}
-		if(isset($_SESSION['eVoucher_detail'])){
+		if (isset($_SESSION['eVoucher_detail'])) {
 			$result['eVoucher'] = $_SESSION['eVoucher_detail'];
-		}else{
+		} else {
 			$result['eVoucher'] = '';
 		}
 		echo json_encode($result);
 	}
 
 	public function updateShoppingCart() {
+		Session::initIdle();
 		Session::init();
 		$count_b = 0;
 		$count_e = 0;
 		if (isset($_SESSION['booking_detail']) && isset($_POST['appointment_quantity_list'])) {
-			if($_POST['appointment_quantity_list'] != ''){
+			if ($_POST['appointment_quantity_list'] != '') {
 				$quantity_list = rtrim($_POST['appointment_quantity_list'], ',');
 				$quantity_list = explode(',', $quantity_list);
 				foreach ($_SESSION['booking_detail'] as $key => $value) {
 					$_SESSION['booking_detail'][$key]['booking_quantity'] = $quantity_list[$key];
 				}
 				foreach ($_SESSION['booking_detail'] as $key => $value) {
-					if($_SESSION['booking_detail'][$key]['booking_quantity'] == 0){
+					if ($_SESSION['booking_detail'][$key]['booking_quantity'] == 0) {
 						unset($_SESSION['booking_detail'][$key]);
 					}
 				}
@@ -132,14 +153,14 @@ class Index extends Controller {
 			$count_b = count($_SESSION['booking_detail']);
 		}
 		if (isset($_SESSION['eVoucher_detail']) && isset($_POST['eVoucher_quantity_list'])) {
-			if($_POST['eVoucher_quantity_list'] != ''){
+			if ($_POST['eVoucher_quantity_list'] != '') {
 				$quantity_list = rtrim($_POST['eVoucher_quantity_list'], ',');
 				$quantity_list = explode(',', $quantity_list);
 				foreach ($_SESSION['eVoucher_detail'] as $key => $value) {
 					$_SESSION['eVoucher_detail'][$key]['booking_quantity'] = $quantity_list[$key];
 				}
 				foreach ($_SESSION['eVoucher_detail'] as $key => $value) {
-					if($_SESSION['eVoucher_detail'][$key]['booking_quantity'] == 0){
+					if ($_SESSION['eVoucher_detail'][$key]['booking_quantity'] == 0) {
 						unset($_SESSION['eVoucher_detail'][$key]);
 					}
 				}
@@ -149,6 +170,8 @@ class Index extends Controller {
 		}
 		echo $count_b + $count_e;
 	}
-
+	public function setTimeIdle() {
+		Session::initIdle();
+	}
 }
 ?>

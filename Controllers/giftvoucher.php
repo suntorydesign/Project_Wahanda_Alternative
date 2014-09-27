@@ -10,6 +10,7 @@
 		}
 		
 		function index() {
+			Session::initIdle();
 			$this->view->style = array(
 				URL . 'Views/giftvoucher/css/giftvoucher.css'
 			);

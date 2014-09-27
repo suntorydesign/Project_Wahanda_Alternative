@@ -14,6 +14,7 @@ class servicelocation extends Controller {
 	}
 
 	public function searchLocation() {
+		Session::initIdle();
 		$this -> view -> style = array(URL . 'Views/servicelocation/css/servicelocation.css');
 		$this -> view -> script = array(URL . 'Views/servicelocation/js/servicelocation.js');
 		if (isset($_GET['s']) && isset($_GET['l'])) {
@@ -25,6 +26,7 @@ class servicelocation extends Controller {
 		$this -> view -> render('servicelocation/index');
 	}
 	public function loadResultSearch(){
+		Session::initIdle();
 		if(isset($_POST['service_name']) && isset($_POST['page'])){
 			$data['service_name'] = $_POST['service_name'];
 			$data['page'] = $_POST['page'];

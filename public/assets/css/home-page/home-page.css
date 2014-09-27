@@ -8,6 +8,9 @@
 * {
 	font-family: "OpenSans";
 }
+a{
+	text-decoration: none !important;
+}
 .container {
 
 }

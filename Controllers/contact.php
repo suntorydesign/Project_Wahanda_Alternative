@@ -10,6 +10,7 @@
 		}
 		
 		function index() {
+			Session::initIdle();
 			$this->view->style = array(
 				URL . 'Views/contact/css/contact.css'
 			);

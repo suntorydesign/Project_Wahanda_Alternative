@@ -23,3 +23,13 @@ define('MAX_QUANTITY_EVOUCHER', 9);
 
 // Max pagination item
 define('MAX_PAGINATION_ITEM', 1);
+
+//IDLE TIME (secs)
+define('IDLE_TIME', 60*9);
+
+//IDLE TIME (milisecs)
+define('IDLE_CHECK', 60000*1);
+
+//RESULT PER SHOW MORE
+define('RESULT_PER_SHOW_MORE', 2);
+

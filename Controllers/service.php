@@ -10,10 +10,12 @@ class service extends Controller {
 	}
 
 	function index() {
+		Session::initIdle();
 		header('location:' . URL);
 	}
 
 	public function servicePlace($user_id) {
+		Session::initIdle();
 		$this -> view -> style = array(URL . 'Views/service/css/service.css');
 		$this -> view -> script = array(URL . 'Views/service/js/service.js');
 		$this -> view -> user_id = $user_id;
@@ -21,19 +23,23 @@ class service extends Controller {
 	}
 
 	public function loadLocationDetail() {
+		Session::initIdle();
 		if (isset($_POST['user_id'])) {
 			$this -> model -> loadLocationDetail($_POST['user_id']);
 		}
 	}
 
 	public function loadReview() {
-		if (isset($_POST['review_user_id'])) {
+		Session::initIdle();
+		if (isset($_POST['review_user_id']) && isset($_POST['review_result'])) {
 			$data['user_id'] = $_POST['review_user_id'];
+			$data['review_result'] = $_POST['review_result'];
 			$this -> model -> loadReview($data);
 		}
 	}
 
 	public function loadPersonReview() {
+		Session::initIdle();
 		Session::init();
 		if (isset($_SESSION['client_id'])) {
 			if (isset($_POST['review_user_id'])) {
@@ -47,6 +53,7 @@ class service extends Controller {
 	}
 
 	public function sendReview() {
+		Session::initIdle();
 		Session::init();
 		if (isset($_POST['review_content']) && isset($_SESSION['client_id'])) {
 			$data['user_id'] = $_POST['review_user_id'];

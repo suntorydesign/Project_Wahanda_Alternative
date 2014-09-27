@@ -76,18 +76,33 @@ SQL;
 	}
 
 	public function loadReview($data) {
+		$result = ($data['review_result']) * RESULT_PER_SHOW_MORE;
+		$result_per_show = RESULT_PER_SHOW_MORE;
+		$sql = <<<SQL
+SELECT COUNT(*) AS number_result
+FROM user_review
+WHERE user_id = {$data["user_id"]}
+AND user_review_status = 1
+SQL;
+		$select = $this -> db -> select($sql);
+		$return['number_result'] = $select[0]['number_result'];
 		$sql = <<<SQL
 SELECT user_review_content
 ,user_review_time
 ,user_review_date
+,CURRENT_DATE as review_current_date
 ,client.client_username
 ,client.client_join_date
 FROM user_review, client
 WHERE user_review.client_id = client.client_id 
 AND user_id = {$data["user_id"]}
+AND user_review_status = 1
+ORDER BY user_review_date DESC
+LIMIT {$result},{$result_per_show}
 SQL;
 		$select = $this -> db -> select($sql);
-		echo json_encode($select);
+		$return['data'] = $select;
+		echo json_encode($return);
 	}
 
 	public function loadPersonReview($data) {
@@ -122,7 +137,8 @@ VALUES(
 ,?
 ,?
 ,CURRENT_TIME
-,CURRENT_DATE)
+,CURRENT_DATE
+,0)
 SQL;
 			$insert_array = array();
 			foreach ($data as $key => $value) {
@@ -151,6 +167,7 @@ SET
 ,`user_review_valuable`=?
 ,`user_review_time` = CURRENT_TIME
 ,`user_review_date` = CURRENT_DATE
+,`user_review_status` = 0
 {$where}
 SQL;
 			$update_array = array();

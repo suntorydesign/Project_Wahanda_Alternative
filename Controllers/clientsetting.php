@@ -9,17 +9,20 @@ class clientsetting extends Controller {
 	}
 	
 	function index(){
+		Session::initIdle();
 		Auth::handleClientLogin();
 		$this -> view -> script = array(URL . 'Views/clientsetting/js/default.js');
 		$this -> view -> render('clientsetting/index');
 	}
 	
 	function loadUserDetail(){
+		Session::initIdle();
 		Auth::handleClientLogin();
 		$this -> model -> loadUserDetail();
 	}
 	
 	function changePass(){
+		Session::initIdle();
 		Auth::handleClientLogin();
 		$data['client_id'] = Session::get('client_id');
 		$client_pass = $this -> model ->getPass();
@@ -44,6 +47,7 @@ class clientsetting extends Controller {
 		$this -> model -> changePass($data);
 	}
 	function editUserDetail(){
+		Session::initIdle();
 		Auth::handleClientLogin();
 		if(isset($_POST['client_name'])){
 			if($_POST['client_name'] == ''){

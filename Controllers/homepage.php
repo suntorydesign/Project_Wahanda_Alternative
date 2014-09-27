@@ -10,6 +10,7 @@
 		}
 		
 		function index() {
+			Session::initIdle();
 			$this->view->render('index');
 		}
 		

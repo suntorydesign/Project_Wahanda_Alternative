@@ -10,6 +10,7 @@ class Error extends Controller {
 	}
 
 	function index() {
+		Session::initIdle();
 		$this->view->render('error/index',true);
 	}
 

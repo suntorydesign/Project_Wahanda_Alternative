@@ -539,7 +539,7 @@
 							</div>
 						</div>
 					</div>
-					<div style="border: none;" class="modal-footer" id="footer_login">
+					<div style="border: none;" class="modal-footer">
 						<button type="button" class="btn btn-black" data-dismiss="modal">
 							Đóng
 						</button>
@@ -783,6 +783,11 @@
 		var EVOUCHER_DUE_DATE = '';
 		var MAX_QUANTITY_EVOUCHER = "<?php echo MAX_QUANTITY_EVOUCHER; ?>";
 		var MAX_PAGINATION_ITEM = "<?php echo MAX_PAGINATION_ITEM; ?>";
+		var IDLE_TIME = "<?php echo IDLE_TIME; ?>";
+		var IDLE_CHECK = "<?php echo IDLE_CHECK; ?>";
+		$(document).ready(function(){
+			checkSessionIdle();
+		});
     </script>
 
     <?php

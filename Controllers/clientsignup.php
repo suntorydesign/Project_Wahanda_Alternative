@@ -9,6 +9,7 @@ class clientsignup extends Controller {
 	}
 
 	public function index() {
+		Session::initIdle();
 		Session::init();
 		if (empty($_SESSION['client_id'])) {
 			$this -> view -> script = array(URL . 'Views/clientsignup/js/default.js');
@@ -19,6 +20,7 @@ class clientsignup extends Controller {
 	}
 
 	public function signup() {
+		Session::initIdle();
 		//Dữ liệu input từ form
 		$data['client_name'] = $_POST['client_name'];
 		$data['client_email'] = $_POST['client_email'];
@@ -87,6 +89,7 @@ class clientsignup extends Controller {
 	}
 
 	public function checkExist() {
+		Session::initIdle();
 		if (isset($_POST['email'])) {
 			$client_email = $_POST['email'];
 			$count = $this -> model -> checkExistEmail($client_email);
@@ -99,6 +102,7 @@ class clientsignup extends Controller {
 	}
 
 	public function VrcFl($verify = "") {
+		Session::initIdle();
 		if ($verify != "") {
 			$this -> model -> verify($verify);
 		}

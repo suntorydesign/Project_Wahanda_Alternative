@@ -1,7 +1,11 @@
 <?php
 
 class Session {
-
+	public static function initIdle(){
+		@session_start();
+		$_SESSION['check_idle'] = time();
+	}
+	
 	public static function init() {
 		@session_start();
 		// $_SESSION['start'] = time();

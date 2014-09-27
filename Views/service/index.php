@@ -29,7 +29,7 @@
 			</div>
 			<div data-spy="scroll" data-target="#tabs">
 				<div id="tab-introduce">
-					<div id="user_description">
+					<div id="user_location_description">
 						<!-- With the four tiers of grids available you're bound to run into issues where, at certain breakpoints, your columns don't clear quite right as one is taller than the other. To fix that, use a combination of a .clearfix and our responsive utility classes. -->
 					</div>
 				</div>
@@ -203,12 +203,12 @@
 							</div>
 						</div>
 						<div class="clearfix"></div>
-		
-						<i class="">Bạn đã sử dụng dịch vụ ở đây chưa?&nbsp;&nbsp;</i>
+								
 						<?php Session::init();
 						if(isset($_SESSION['client_id'])){ 
 						?>
-						<button type="button" class="btn btn-sm btn-orange" id="write_review">Viết đánh giá</button>
+						<i class="">Bạn đã sử dụng dịch vụ ở đây chưa?&nbsp;&nbsp;</i>
+						<button onclick="setTimeIdle()" type="button" class="btn btn-sm btn-orange" id="write_review">Viết đánh giá</button>
 						<div id="review_input" style="display: none">
 							<hr />
 							<div id="error_review" style="display: none;" class="alert alert-block alert-warning">
@@ -217,8 +217,10 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12">
-									<textarea id="review_form" placeholder="Bình luận tại đây (bạn phải nhập ít nhất 15 ký tự)..." style="max-width: 100%;min-width: 100%;min-height: 50px;" class="form-control"></textarea>
+									<textarea id="review_form" placeholder="Bình luận tại đây (bạn phải nhập ít nhất 15 ký tự)..." style="max-width: 100%;min-width: 100%;min-height: 150px;" class="form-control"></textarea>
 									<small class="pull-right" style="color : #C10000;"><i>(*) Bạn phải nhập ít nhất 10 ký tự</i></small>
+									<br />
+									<small class="pull-right" style="color : #C10000;"><i>(*) Khi bạn sửa đánh giá đã duyệt rồi, bạn sẽ phải chờ Admin duyệt lại.</i></small>
 								</div>
 								<div class="col-md-12">
 									<div class="pull-right">
@@ -231,6 +233,11 @@
 						<?php 
 						}else{ ?>
 						<button disabled type="button" class="btn btn-sm btn-orange" id="write_review">Viết đánh giá</button>
+						<small><i>Bạn chưa đăng nhập, hãy&nbsp;</i></small>
+							<span onclick="setTimeIdle()" class="label label-danger" style="cursor: pointer; text-decoration: none;" data-toggle="modal" data-target="#login_modal">
+								Đăng nhập
+							</span>
+						<small><i>&nbsp; để viết đánh giá</i></small>
 						<?php } ?>
 						<div style="margin-top: 10px; display: none;" id="success_review" class="alert alert-block alert-success">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -238,8 +245,9 @@
 						</div>
 						<div class="divider"></div>
 						<div id="review_field" class="rating-comment clearfix">
+							<div style="display : none;" id="disallow"></div>
 							<div id="waiting_for_review_load" class="text-center">
-								<i style="color: #FDBD0E" class="fa fa-3x fa-spin fa-refresh"></i>
+								<i style="color: #FDBD0E" class="fa fa-2x fa-spin fa-refresh"></i>
 							</div>
 							<!-- <div class="media" >
 								<a class="pull-left" href="#"> <img width="55" height="55" class="media-object" src="<?php echo ASSETS; ?>img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" alt="avatar"> </a>
@@ -327,4 +335,6 @@
 </div>
 <script>
 	var USER_ID = "<?php echo $this -> user_id; ?>";
+	var REVIEW_RESULT = 0;
+	var RESULT_PER_SHOW_MORE = "<?php echo RESULT_PER_SHOW_MORE; ?>";
 </script>

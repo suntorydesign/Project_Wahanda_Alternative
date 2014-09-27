@@ -9,11 +9,13 @@ class requestpass extends Controller {
 	}
 
 	public function index() {
+		Session::initIdle();
 		$this -> view -> script = array(URL . 'Views/requestpass/js/default.js');
 		$this -> view -> render('requestpass/index');
 	}
 
 	public function checkEmailExistPassRequest() {
+		Session::initIdle();
 		if (isset($_POST['re_email'])) {
 			$client_email = $_POST['re_email'];
 			$this -> model -> checkEmailExistPassRequest($client_email);
@@ -21,6 +23,7 @@ class requestpass extends Controller {
 	}
 
 	public function sendRequestPassword() {
+		Session::initIdle();
 		if (isset($_POST['email_address'])) {
 			if ($_POST['email_address'] != "") {
 				$data['new_pass'] = bin2hex(openssl_random_pseudo_bytes(3));
