@@ -45,10 +45,10 @@ class SpaCMS_Reports_Model {
 // 		SELECT us.user_service_name, bd.booking_detail_id, b.booking_date, 
 // 			c.client_name, bd.booking_detail_price, b.booking_status
 // 		FROM user_service as us, booking_detail as bd, booking as b, client as c
-// 		WHERE bd.user_id = {$user_id} 
-// 			AND bd.user_service_id = us.user_service_id
-// 			AND bd.booking_id = b.booking_id
-// 			AND b.client_id = c.client_id
+// 		WHERE bd.booking_detail_user_id = {$user_id} 
+// 			AND bd.booking_detail_user_service_id = us.user_service_id
+// 			AND bd.booking_detail_booking_id = b.booking_id
+// 			AND b.booking_client_id = c.client_id
 // SQL;
 
 // 		$data = $this->db->select($aQuery);
