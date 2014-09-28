@@ -5,10 +5,117 @@
 			....All active services
 			-->
 		</div>
-		<div id="list_group_user_service" class="data-content menu-content ui-sortable">
+		<div class="data-content menu-content ui-sortable">
+			<div data-offer-group-id="22810" class="offer-group">
+				<div class="icon icons-drag"></div>
+				<h2 class="group-title"><a href="javascript:;" data-toggle="modal" data-target="#editGroupName_modal"> Body </a>
+				<button class="button button-basic button-mini discount-button hidden" type="button" data-toggle="modal" data-target="#editGroupName_modal">
+					<div class="button-inner">
+						Discounts: Off
+					</div>
+					<div class="button-icon icons-edit"></div>
+				</button>
+				<button class="button button-basic button-mini add-offer" type="button" data-toggle="modal" data-target="#addServices_modal">
+					<div class="button-inner">
+						<div class="button-icon icons-plus4"></div>
+						Thêm dịch vụ
+					</div>
+				</button></h2>
+				<div class="offers ui-sortable">
+					<div onclick="" data-offer-id="593320" class="offer ">
+						<div class="offer-in">
+							<div class="main clearfix">
+								<div class="icon icons-treatment"></div>
+								<div class="title">
+									<a href="javascript:;"> <span class="offer-name">Body Wraps</span> <span class="label label-type v-fulfillment hidden">Appointment or eVoucher</span> </a>
+								</div>
+								<div class="custom-info">
+									50 min
+								</div>
+								<div class="price sku-price">
+									<span class="sku-price--previous">£50</span><span class="sku-price--discount">£40</span>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-offer-group-id="22811" class="offer-group">
+				<div class="icon icons-drag"></div>
+				<h2 class="group-title"><a href="javascript:;"> Spa </a>
+				<button class="button button-basic button-mini discount-button " type="button">
+					<div class="button-inner">
+						Discounts: Off
+					</div>
+					<div class="button-icon icons-edit"></div>
+				</button>
+				<button class="button button-basic button-mini add-offer" type="button">
+					<div class="button-inner">
+						<div class="button-icon icons-plus4"></div>
+						Add new service
+					</div>
+				</button></h2>
+				<div class="offers ui-sortable">
+					<div onclick="" data-offer-id="597142" class="offer ">
+						<div class="offer-in">
+							<div class="main clearfix">
+								<div class="icon icons-treatment"></div>
+								<div class="title">
+									<a href="javascript:;"> <span class="offer-name">dfdfdsfdf</span> <span class="label label-type v-fulfillment hidden">Appointment or eVoucher</span> </a>
+								</div>
+								<div class="custom-info">
+									1 h
+								</div>
+								<div class="price sku-price">
+									<span class="sku-price--previous">£45</span><span class="sku-price--discount">£40</span>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
 
 		</div>
-
+		<div class="data-content menu-empty">
+			<div class="empty-message">
+				<h1>A service menu for this venue has not been set up yet.</h1>
+				<div class="option first">
+					<button class="button button-primary button-big add-multiple-services" type="button">
+						<div class="button-inner">
+							<div class="button-icon icons-plus-big"></div>
+							Add services
+						</div>
+					</button>
+					<strong>Recommended.</strong> Select services from our treatment list. It's a super-easy way to set up your basic menu in no time.
+				</div>
+				<div class="option second">
+					<button class="button button-basic button-bigger add-group" type="button">
+						<div class="button-inner">
+							<div class="button-icon icons-plus2"></div>
+							Add service group
+						</div>
+					</button>
+					You can add services to the menu one by one. First create a group and then add services inside it.
+				</div>
+			</div>
+		</div>
+		<div class="data-content no-permission">
+			<div class="empty-message">
+				<h1>You are not allowed to view this venue's menu.</h1>
+			</div>
+		</div>
+		<div class="data-content menu-empty-filter">
+			<div class="menu-empty-inner">
+				No services in this list, <a href="#ACT">view all</a>
+			</div>
+		</div>
+		<div class="data-content menu-empty-list">
+			<div class="menu-empty-inner">
+				No services in this list
+			</div>
+		</div>
 		<div class="data-actions b-menu-edit-actions">
 			<div id="menu_group" title='<strong>Add a group</strong> - Menu groups allow you to arrange your services in the way you prefer our customers to see them. Using generic treatment types like "Hair", "Nails" or "Spa days" works best.' class="tooltips tooltips-top button-wrapper b-action">
 				<button class="button button-primary add-group" type="button" data-toggle="modal" data-target="#addGroupName_modal">
@@ -120,7 +227,7 @@
 								<table cellspacing="0" cellpadding="0" class="default-form">
 									<tbody>
 										<tr class="form-row">
-											<td class="label-part"><label for="cat-name" style="padding-top: 3px;">Menu group name</label></td>
+											<td class="label-part"><label for="cat-name">Menu group name</label></td>
 											<td class="input-part">
 											<div class="txt-input form-element-wrapper">
 												<input type="text" maxlength="100" name="name" id="cat-name">
@@ -173,6 +280,23 @@
 				<div class="multiple-services-form ui-dialog-content ui-widget-content" id="1089" scrolltop="0" scrollleft="0">
 
 					<form onsubmit="return false">
+						<div class="dialog-head">
+							<h1>What services does <span class="highlight">Sunspa Resort</span> provide?</h1>
+							<p>
+								To quickly set up your menu, tick the boxes next to the treatment names. Choose treatment types by clicking them on the left side.
+							</p>
+						</div>
+						<div class="sorting">
+							Sort by:
+							<ul class="sort-type">
+								<li data-sort="pop">
+									<a href="#">Popularity</a>
+								</li>
+								<li data-sort="abc" class="on">
+									<a href="#">Alphabetical</a>
+								</li>
+							</ul>
+						</div>
 						<div id="multiple-services-tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
 							<div class="multiple-services-groups">
 								<ul class="multiple-services-groups-list ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
@@ -289,7 +413,7 @@
 										</li>
 									</ul>
 								</div>
-								
+								<div class="top-shadow hidden" style="top: -1px; left: 280px; width: 400px;"></div><div class="bottom-shadow" style="top: 341px; left: 280px; width: 400px;"></div>
 							</div>
 							<div class="top-shadow" style="top: -1px; left: 0px; width: 280px;"></div><div class="bottom-shadow hidden" style="top: 341px; left: 0px; width: 280px;"></div>
 						</div>
@@ -320,7 +444,7 @@
 
 <!-- Modal Edit group name -->
 <div id="editGroupName_modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-685" aria-hidden="true">
-	<div class="modal-dialog" style="width: 600px;">
+	<div class="modal-dialog" style="width: 925px;">
 		<div class="modal-content">
 			<div class="ui-dialog ui-widget ui-widget-content ui-corner-all no-title ui-draggable">
 				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
@@ -333,9 +457,7 @@
 								<table cellspacing="0" cellpadding="0" class="default-form">
 									<tbody>
 										<tr class="form-row">
-											<td class="label-part">
-												<label for="cat-name" style="padding-top: 3px;">Menu group name</label>
-											</td>
+											<td class="label-part"><label for="cat-name">Menu group name</label></td>
 											<td class="input-part">
 											<div class="txt-input form-element-wrapper">
 												<input type="text" maxlength="100" name="name" id="cat-name" class="valid">
@@ -344,9 +466,348 @@
 									</tbody>
 								</table>
 							</li>
+
+							<li class="discount top">
+								<h2 class="part-title discount-title">Discounts</h2>
+								<div class="discount-note">
+									<span class="icon icons-attention-small"></span>
+									Discounts will only apply for bookings made through <strong>Wahanda and its partners</strong>. If <strong>multiple</strong> discounts apply, only the largest will be applied. Note that it may take <strong>up to an hour</strong> to show discounts in the browse results page once enabled.
+								</div>
+							</li>
+
+							<li class="jit discount">
+								<h2 class="part-title">Last minute discounts</h2>
+								<input type="checkbox" name="jitPricingDiscount-enabled" id="jit-checkbox">
+								<label for="jit-checkbox">Discount last minute appointments</label>
+								<div class="settings hidden" style="margin: 10px 0">
+									<select id="jit-discount-select" name="jitPricingDiscount-percentage">
+										<?php
+											for ($i=1; $i < 20; $i++) { 
+												$value = $i*5;
+												echo '<option value="'.$value.'">'.$value.'%</option>';
+											}
+										?>
+									</select>
+									when booked
+									<select id="jit-hours" name="jitPricingDiscount-hours">
+										<?php
+											for ($i=1; $i <= 12; $i++) { 
+												echo '<option value="'.$i.'">'.$i.' business hour</option>';
+											}
+										?>
+									</select>
+									before appointment starts.
+									<div class="lead-time-note note">
+										<span class="icon icons-attention-small"></span>
+										Your lead-time is currently set to 5 hours. To make discounted last-minute slots available, you will need to increase your last-minute period or reduce your lead-time by going to <a target="_blank" href="/settings#online-booking">Settings &gt; Online booking</a>
+									</div>
+								</div>
+							</li>
+							<li class="off-peak discount">
+								<h2 class="part-title">Off-peak time discounts</h2>
+								<input type="checkbox" name="offPeakDiscount-enabled" id="off-peak-checkbox">
+								<label for="off-peak-checkbox">Enable time based discount for appointments</label>
+
+								<div class="settings hidden">
+									<div></div>
+									<table class="off-peak-table">
+										<tbody>
+											<tr class="weekdays part-title">
+												<td class="no-border time"></td>
+												<td class="no-border">Monday</td>
+												<td class="no-border">Tuesday</td>
+												<td class="no-border">Wednesday</td>
+												<td class="no-border">Thursday</td>
+												<td class="no-border">Friday</td>
+												<td class="no-border">Saturday</td>
+												<td class="no-border">Sunday</td>
+
+											</tr>
+											<tr>
+												<td class="time">
+												<div>
+													<span class="part-title">Morning</span>
+													<span class="time-slot">until 12:00 pm</span>
+												</div></td>
+												<td class="morning discount-cell ">
+												<div>
+													<select>
+														<option selected="selected" value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="morning discount-cell ">
+												<div>
+													<select>
+														<option selected="selected" value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="morning discount-cell ">
+												<div>
+													<select>
+														<option selected="selected" value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="morning discount-cell ">
+												<div>
+													<select>
+														<option selected="selected" value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="morning discount-cell ">
+												<div>
+													<select>
+														<option selected="selected" value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="morning discount-cell ">
+												<div>
+													<select>
+														<option selected="selected" value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="morning discount-cell closed" rowspan="3">
+												<div>
+													<select>
+														<option selected="selected" value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+													<span class="venue-closed-note">Venue closed</span>
+												</div></td>
+											</tr>
+											<tr>
+												<td class="time">
+												<div>
+													<span class="part-title">Afternoon</span>
+													<span class="time-slot">12:00 pm - 17:00 pm</span>
+												</div></td>
+												<td class="afternoon discount-cell ">
+												<div>
+													<select>
+														<option selected="selected" value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="afternoon discount-cell ">
+												<div>
+													<select>
+														<option selected="selected" value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="afternoon discount-cell ">
+												<div>
+													<select>
+														<option selected="selected" value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="afternoon discount-cell ">
+												<div>
+													<select>
+														<option selected="selected" value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="afternoon discount-cell ">
+												<div>
+													<select>
+														<option selected="selected" value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="afternoon discount-cell ">
+												<div>
+													<select>
+														<option selected="selected" value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="afternoon discount-cell hidden">
+												<div>
+													<select>
+														<option selected="selected" value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+											</tr>
+											<tr>
+												<td class="time">
+												<div>
+													<span class="part-title">Evening</span>
+													<span class="time-slot">17:00 pm and after</span>
+												</div></td>
+												<td class="evening discount-cell ">
+												<div>
+													<select>
+														<option value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="evening discount-cell ">
+												<div>
+													<select>
+														<option value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="evening discount-cell ">
+												<div>
+													<select>
+														<option value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="evening discount-cell ">
+												<div>
+													<select>
+														<option value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="evening discount-cell ">
+												<div>
+													<select>
+														<option value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="evening discount-cell ">
+												<div>
+													<select>
+														<option value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+												<td class="evening discount-cell hidden">
+												<div>
+													<select>
+														<option selected="selected" value="0">Full price</option>
+														<?php
+															for ($i=1; $i < 20; $i++) { 
+																$value = $i*5;
+																echo '<option value="'.$value.'">'.$value.'%</option>';
+															}
+														?>
+													</select>
+												</div></td>
+
+											</tr>
+										</tbody>
+									</table>
+									<div class="note">
+										To change when afternoon and evening starts, go to <a target="_blank" href="/Project_Wahanda_Alternative/spaCMS/settings#online-booking">Settings &gt; Online booking</a>
+									</div>
+								</div>
+							</li>
 						</ul>
 
-						<div class="dialog-actions" style="margin-top: 0px;">
+						<div class="dialog-actions">
 							<button class="button action action-default button-primary save-action" type="submit">
 								<div class="button-inner">
 									<div class="button-icon icons-tick"></div><span class="msg msg-action-default">Save</span><span class="msg msg-action-doing">Saving...</span>
@@ -710,3 +1171,27 @@
 		</div>
 	</div>
 </div>
+<!-- le javascript -->
+<script src="<?php echo URL ?>public/assets/js/jquery.min.js" type="text/javascript"></script>
+<script src="<?php echo URL ?>public/assets/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- transition -->
+<style>
+	.tooltip{
+		font-size: 11.5px;
+		z-index: 9999;
+	}
+</style>
+<script>
+	$(document).ready(function() {
+		$("#service_name, #price, #sell_service, #sold_as").tooltip({
+			placement : 'right',
+			html : true,
+			container : 'body'
+		});
+		$("#menu_group").tooltip({
+			placement : 'top',
+			html : true,
+			container : 'body'
+		});
+	}); 
+</script>

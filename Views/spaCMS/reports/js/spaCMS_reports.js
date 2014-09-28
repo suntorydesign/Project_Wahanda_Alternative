@@ -1,5 +1,4 @@
 
-
 var GetMoreInfo = function () {
 
     var xhrGet_service = function() {

@@ -50,14 +50,53 @@
 			}
 		}
 
-		function menu() {
+		function menu($xhr = false) {
 			Auth::handleSpaCMSLogin();
+			switch ($xhr) {
+				case 'xhrGet_group_user_service':
+					$this->model->get_group_user_service();
+					break;
 
-			$this->view->script = array(
-				URL . 'Views/spaCMS/menu/js/spaCMS_menu.js'
-			);
+				case 'xhrGet_user_service_featured':
+					$this->model->get_user_service_featured();
+					break;
 
-			$this->view->render_spaCMS('menu/index');
+				case 'xhrGet_service':
+					$this->model->get_service();
+					break;
+
+				case 'xhrUpdate_user_service':
+					$this->model->update_user_service();
+					break;
+
+				case 'xhrUpdate_group_service':
+					$this->model->update_group_service();
+					break;
+
+				case 'xhrUpdate_user_service_featured':
+					$this->model->update_group_service();
+					break;
+
+				case 'xhrInsert_group_service':
+					$this->model->insert_group_service();
+					break;
+					
+				case 'xhrInsert_user_service':
+					$this->model->insert_user_service();
+					break;
+
+				default:
+					$this->view->style = array(
+
+					);
+
+					$this->view->script = array(
+						URL . 'Views/spaCMS/menu/js/spaCMS_menu.js'
+					);
+
+					$this->view->render_spaCMS('menu/index');
+					break;
+			}
 		}
 		
 
@@ -122,9 +161,7 @@
 
 					$this->view->render_spaCMS('reports/index');
 					break;
-			}
-
-					
+			}			
 		}	
 
 		function settings( $xhr = false ) {

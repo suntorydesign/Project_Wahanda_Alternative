@@ -48,12 +48,16 @@ class SpaCMS_Model extends Model {
 
 
 	///////////////////////////// MENU //////////////////////////
-	function get_menu() {
-		SpaCMS_Reports_Model::get_booking_detail();
+	function get_group_user_service() {
+		SpaCMS_Menu_Model::get_group_user_service();
 	}
 
-	function get_service_featured() {
-		SpaCMS_Reports_Model::get_service_featured();
+	function get_user_service_featured() {
+		SpaCMS_Menu_Model::get_user_service_featured();
+	}
+	
+	function get_service() {
+		SpaCMS_Menu_Model::get_service();
 	}
 
 	///////////////////////////// REPORTS //////////////////////////

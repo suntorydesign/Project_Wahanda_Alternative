@@ -29,6 +29,11 @@ table {
      border-spacing: 0px;
 }
 
+.tooltip{
+     font-size: 11.5px;
+     z-index: 9999;
+}
+
 .ui-tooltip, .qtip {
      display: none;
      font-size: 10.5px;
