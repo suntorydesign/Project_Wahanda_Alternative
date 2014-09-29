@@ -108,12 +108,25 @@ SQL;
 	public function loadPersonReview($data) {
 		$sql = <<<SQL
 SELECT user_review_content
+, user_review_overall
+, user_review_active
+, user_review_clean
+, user_review_quality
+, user_review_staff
+, user_review_valuable
 FROM user_review
 WHERE user_id = {$data["user_id"]}
 AND client_id = {$data["client_id"]}
 SQL;
 		$select = $this -> db -> select($sql);
-		echo json_encode($select);
+		$return['user_review'] = $select; 
+		$sql = <<<SQL
+SELECT *
+FROM review
+SQL;
+		$select = $this -> db -> select($sql);
+		$return['review_type'] = $select; 
+		echo json_encode($return);
 	}
 
 	public function sendReview($data) {
@@ -129,6 +142,7 @@ SQL;
 INSERT INTO user_review 
 VALUES(
 ?
+,?
 ,?
 ,?
 ,?
@@ -165,6 +179,7 @@ SET
 ,`user_review_quality`=?
 ,`user_review_staff`=?
 ,`user_review_valuable`=?
+,`user_review_overall`=?
 ,`user_review_time` = CURRENT_TIME
 ,`user_review_date` = CURRENT_DATE
 ,`user_review_status` = 0

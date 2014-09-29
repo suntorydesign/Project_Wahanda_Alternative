@@ -210,10 +210,148 @@
 						<i class="">Bạn đã sử dụng dịch vụ ở đây chưa?&nbsp;&nbsp;</i>
 						<button onclick="setTimeIdle()" type="button" class="btn btn-sm btn-orange" id="write_review">Viết đánh giá</button>
 						<div id="review_input" style="display: none">
-							<hr />
+							<h5 style="font-weight: bold;" class="page-header"><i style="font-weight: bold;color: #FDBD0E;" class="fa fa-building-o"></i>&nbsp;&nbsp;ĐÁNH GIÁ ĐỊA ĐIỂM</h5>
 							<div id="error_review" style="display: none;" class="alert alert-block alert-warning">
 								<button type="button" class="close" data-dismiss="alert">&times;</button>
 								<small><b>Cảnh báo! </b>Gửi đánh giá thất bại (kiểm tra lại kết nối internet) ...</small>
+							</div>
+							<div id="review_rating">
+								<div id="place_rating"></div>
+								<!-- <div id="over_all_rating">
+									<div class="row">
+										<div class="col-md-5">
+											<span class="rating_text pull-right">Tổng thể</span>
+										</div>
+										<div class="col-md-offset-1 col-md-6">
+											<span class="rating">
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+											</span>
+										</div>
+									</div>
+								</div>
+								<hr />
+								<div id="venue_rating">
+									<div class="row">
+										<div class="col-md-5">
+											<span class="rating_text pull-right">Đánh giá địa điểm</span>
+										</div>
+										<div class="col-md-offset-1 col-md-6">&nbsp;</div>
+									</div>
+									<br />
+									<div class="row">
+										<div class="col-md-5">
+											<span class="pull-right">Sự nhiệt tình</span>
+										</div>
+										<div class="col-md-offset-1 col-md-6">
+											<span class="rating">
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+											</span>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-5">
+											<span class="pull-right">Vệ sinh</span>
+										</div>
+										<div class="col-md-offset-1 col-md-6">
+											<span class="rating">
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+											</span>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-5">
+											<span class="pull-right">Chất lượng</span>
+										</div>
+										<div class="col-md-offset-1 col-md-6">
+											<span class="rating">
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+											</span>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-5">
+											<span class="pull-right">Nhân viên</span>
+										</div>
+										<div class="col-md-offset-1 col-md-6">
+											<span class="rating">
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+											</span>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-5">
+											<span class="pull-right">Giá trị</span>
+										</div>
+										<div class="col-md-offset-1 col-md-6">
+											<span class="rating">
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+											</span>
+										</div>
+									</div>
+								</div>
+								<hr />
+								<div id="user_service_rating">
+									<div class="row">								
+										<div class="col-md-5">
+											<span class="rating_text pull-right">Đánh giá dịch vụ</span>
+										</div>
+										<div class="col-md-offset-1 col-md-6">&nbsp;</div>
+									</div>
+									<div class="row">
+										<div class="col-md-5">
+											<span class="pull-right">Waxing</span>
+										</div>
+										<div class="col-md-offset-1 col-md-6">
+											<span class="rating">
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+											</span>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-5">
+											<span class="pull-right">Làm móng chuyên nghiệp</span>
+										</div>
+										<div class="col-md-offset-1 col-md-6">
+											<span class="rating">
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+												<span class="fa fa-star-o rating_text"></span>
+											</span>
+										</div>
+									</div>
+									<br />
+								</div>
+								<hr /> -->
 							</div>
 							<div class="row">
 								<div class="col-md-12">

@@ -64,6 +64,7 @@ class service extends Controller {
 			$data['user_review_quality'] = 0;
 			$data['user_review_staff'] = 0;
 			$data['user_review_valuable'] = 0;
+			$data['user_review_overall'] = 0;
 			//print_r($data);
 			$this -> model -> sendReview($data);
 		}

@@ -2,7 +2,13 @@ $(document).ready(function() {
 	loadLocationDetail();
 	//$("#comment_form").wysibb();
 	$('#write_review').on('click', function() {
-		$('#review_input').slideToggle();
+		$('#review_input').slideToggle(function() {
+			if ($('#review_input').is(":visible")) {
+				$('#write_review').text('Đóng');
+			} else {
+				$('#write_review').text('Viết đánh giá');
+			}
+		});
 	});
 	$('textarea#review_form').focusout(function() {
 		setTimeIdle();
@@ -16,6 +22,7 @@ $(document).ready(function() {
 			setTimeIdle();
 		}
 	});
+
 });
 /*LOAD LOCATION DETAIL*/
 function loadLocationDetail() {
@@ -204,12 +211,141 @@ function loadPersonReview() {
 			review_user_id : USER_ID
 		},
 		success : function(response) {
-			if (response[0] != null) {
-				$('#review_form').text(response[0].user_review_content);
+			var html = '';
+			if (response.user_review[0] != null) {
+				$.each(response.review_type, function(key, value) {
+					html += '<div class="row">';
+					html += '<div class="col-md-5">';
+					html += '<span class="pull-right">' + value.review_name + '</span>';
+					html += '</div>';
+					html += '<div class="col-md-offset-1 col-md-6">';
+					html += '<span class="rating">';
+					var star = 0;
+					$.each(response.user_review[0], function(key, item) {
+						if (key == value.review_field) {
+							star = parseInt(item);
+							return false;
+						}
+					});
+					for (var i = 1; i <= star; i++) {
+						html += '<span data-field="' + value.review_field + '" data-rating="' + i + '" class="fa fa-star choosen rating_text"></span>';
+					}
+					for (var j = star + 1; j <= 5; j++) {
+						html += '<span data-field="' + value.review_field + '" data-rating="' + j + '" class="fa fa-star-o rating_text"></span>';
+					}
+					html += '</span>';
+					html += '</div>';
+					html += '</div>';
+					if (value.review_id == '1') {
+						html += '<hr/>';
+					}
+				});
+				$('#review_form').text(response.user_review[0].user_review_content);
+			} else {
+				$.each(response.review_type, function(key, value) {
+					html += '<div class="row">';
+					html += '<div class="col-md-5">';
+					html += '<span class="pull-right">' + value.review_name + '</span>';
+					html += '</div>';
+					html += '<div class="col-md-offset-1 col-md-6">';
+					html += '<span class="rating">';
+					for (var j = 1; j <= 5; j++) {
+						html += '<span data-field="' + value.review_field + '" data-rating="' + j + '" class="fa fa-star-o rating_text"></span>';
+					}
+					html += '</span>';
+					html += '</div>';
+					html += '</div>';
+					if (value.review_id == '1') {
+						html += '<hr/>';
+					}
+				});
 			}
+			// html += '<div id="over_all_rating">';
+			// html += '<div class="row">';
+			// html += '<div class="col-md-5">';
+			// html += '<span class="rating_text pull-right">Tổng thể</span>';
+			// html += '</div>';
+			// html += '<div class="col-md-offset-1 col-md-6">';
+			// html += '<span class="rating">';
+			// if (response[0].user_review_overall) {
+			// for (var i = 0; i < response[0].user_review_overall; i++) {
+			// html += '<span class="fa fa-star choosen rating_text"></span>';
+			// }
+			// for (var j = 0; j < 5 - response[0].user_review_overall; j++) {
+			// html += '<span class="fa fa-star-o rating_text"></span>';
+			// }
+			// } else {
+			//
+			// }
+			// html += '</span>';
+			// html += '</div>';
+			// html += '</div>';
+			// html += '</div>';
+			// html += '<hr />';
+			// html += '<div id="venue_rating">';
+			// html += '<div class="row">';
+			// html += '<div class="col-md-5">';
+			// html += '<span class="rating_text pull-right">Đánh giá địa điểm</span>';
+			// html += '</div>';
+			// html += '<div class="col-md-offset-1 col-md-6">&nbsp;</div>';
+			// html += '</div>';
+			// html += '<br />';
+			// $.each(response[0], function(key, value) {
+			// if (key != 'user_review_overall' && key != 'user_review_content') {
+			// html += '<div class="row">';
+			// html += '<div class="col-md-5">';
+			// html += '<span class="pull-right">' + key + '</span>';
+			// html += '</div>';
+			// html += '<div class="col-md-offset-1 col-md-6">';
+			// html += '<span class="rating">';
+			// for (var i = 0; i < value; i++) {
+			// html += '<span class="fa fa-star choosen rating_text"></span>';
+			//
+			// }
+			// for (var j = 0; j < 5 - value; j++) {
+			// html += '<span class="fa fa-star-o rating_text"></span>';
+			// }
+			// html += '</span>';
+			// html += '</div>';
+			// html += '</div>';
+			// }
+			// });
+			// html += '</div>';
+			html += '<hr />';
+			$('#review_rating #place_rating').append(html);
 		},
 		complete : function() {
+			$('.fa.rating_text').on('mouseover', function() {
+				$(this).removeClass('fa-star-o');
+				$(this).addClass('fa-star');
+				$(this).prevAll().removeClass('fa-star-o');
+				$(this).prevAll().addClass('fa-star');
 
+			}).on('mouseout', function() {
+				$(this).removeClass('fa-star');
+				$(this).addClass('fa-star-o');
+				$(this).siblings().removeClass('fa-star');
+				$(this).siblings().addClass('fa-star-o');
+				$('.fa.rating_text').each(function() {
+					if ($(this).hasClass('choosen')) {
+						$(this).removeClass('fa-star-o');
+						$(this).addClass('fa-star');
+					} else {
+						$(this).removeClass('fa-star');
+						$(this).addClass('fa-star-o');
+					}
+				});
+			}).on('click', function() {
+				$(this).prevAll().removeClass('fa-star-o');
+				$(this).prevAll().addClass('fa-star');
+				$(this).addClass('fa-star');
+				$(this).removeClass('fa-star-o');
+				$(this).nextAll().removeClass('fa-star');
+				$(this).nextAll().addClass('fa-star-o');
+				$(this).siblings().removeClass('choosen');
+				$(this).prevAll().addClass('choosen');
+				$(this).addClass('choosen');
+			});
 		}
 	});
 }
@@ -250,6 +386,7 @@ function sendReview() {
 				if (response == 200) {
 					$('#waiting_for_review').fadeOut(function() {
 						$('#review_input').slideUp();
+						$('#write_review').text('Viết đánh giá');
 						$('#success_review').fadeIn(function() {
 							loadReview();
 						});
@@ -259,6 +396,7 @@ function sendReview() {
 					});
 				} else if ( response = -1) {
 					$('#waiting_for_review').fadeOut(function() {
+						$('#write_review').text('Viết đánh giá');
 						$('#error_review').fadeIn();
 					});
 					setTimeout(function() {

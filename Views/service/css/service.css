@@ -60,9 +60,9 @@
 	margin-bottom: 10px;
 }
 
-#tab-ratings .rating .fa-star {
+/*#tab-ratings .rating .fa-star {
 	padding-right: 8px;
-}
+}*/
 
 #tab-ratings .rating{
 	font-size: 15px;
@@ -146,4 +146,15 @@
 #see_more_review_all:hover{
 	background-color: #777;
 	color: #e7e7e7;
+}
+.rating_text{
+	font-size: 20px;
+	//font-weight: bold;
+	margin-right: 4px;
+}
+span.rating:hover{
+	cursor: pointer;
+}
+.choosen{
+
 }
