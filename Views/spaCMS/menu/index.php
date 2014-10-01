@@ -6,7 +6,7 @@
 			-->
 		</div>
 		<div id="list_group_user_service" class="data-content menu-content ui-sortable">
-
+			<!-- list user service -->
 		</div>
 
 		<div class="data-actions b-menu-edit-actions">
@@ -104,8 +104,8 @@
 	</div>
 </div>
 
-<!-- Modal Add group name -->
-<div id="addGroupName_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-802" aria-hidden="true">
+<!-- Modal Edit group name -->
+<div id="editGroupName_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-802" aria-hidden="true">
 	<div class="modal-dialog" style="width: 700px;">
 		<div class="modal-content">
 			<div class="ui-dialog ui-widget ui-widget-content ui-corner-all no-title ui-draggable">
@@ -129,17 +129,6 @@
 									</tbody>
 								</table>
 							</li>
-
-							<li class="discount top hidden">
-								<h2 class="part-title discount-title">Discounts</h2>
-								<div class="discount-note">
-									<span class="icon icons-attention-small"></span>
-									Discounts will only apply for bookings made through <strong>Wahanda and its partners</strong>. If <strong>multiple</strong> discounts apply, only the largest will be applied. Note that it may take <strong>up to an hour</strong> to show discounts in the browse results page once enabled.
-								</div>
-							</li>
-
-							<li class="jit discount hidden"></li>
-							<li class="off-peak discount hidden"></li>
 						</ul>
 
 						<div class="dialog-actions" style="border-top: medium none;">
@@ -162,6 +151,50 @@
 	</div>
 </div>
 
+<!-- Modal add group name -->
+<div id="addGroupName_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-8023" aria-hidden="true">
+	<div class="modal-dialog" style="width: 700px;">
+		<div class="modal-content">
+			<div class="ui-dialog ui-widget ui-widget-content ui-corner-all no-title ui-draggable">
+				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+					<span class="ui-dialog-title" id="ui-dialog-title-8023">Menu group</span>
+					<a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"> <span class="ui-icon ui-icon-closethick">close</span> </a>
+				</div>
+				<div class="menu-group-form ui-dialog-content ui-widget-content" id="8023" scrolltop="0" scrollleft="0">
+					<form id="addGroupName_form" novalidate="novalidate">
+						<ul class="offer-type-selection">
+							<li class="menu-name">
+								<table cellspacing="0" cellpadding="0" class="default-form">
+									<tbody>
+										<tr class="form-row">
+											<td class="label-part"><label for="cat-name" style="padding-top: 3px;">Menu group name</label></td>
+											<td class="input-part">
+											<div class="txt-input form-element-wrapper">
+												<input type="text" maxlength="100" name="group_service_name" id="cat-name">
+											</div></td>
+										</tr>
+									</tbody>
+								</table>
+							</li>
+						</ul>
+
+						<div class="dialog-actions" style="border-top: medium none;">
+							<button class="button action action-default button-primary save-action" type="submit">
+								<div class="button-inner">
+									<div class="button-icon icons-tick done"></div>
+									<div class="button-icon fa fa-spin fa-refresh loading" style="display:none;"></div>
+									<span class="msg msg-action-default">Thêm</span>
+								</div>
+							</button>
+							<a class="button-cancel" href="javascript:;" data-dismiss="modal">Hủy</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- Modal Quick menu setup -->
 <div id="servicesList_modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-1089" aria-hidden="true">
 	<div class="modal-dialog" style="width: 685px;">
@@ -172,24 +205,24 @@
 				</div>
 				<div class="multiple-services-form ui-dialog-content ui-widget-content" id="1089" scrolltop="0" scrollleft="0">
 
-					<form onsubmit="return false">
+					<form id="addQuickMenu_form" onsubmit="return false">
 						<div id="multiple-services-tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
 							<div class="multiple-services-groups">
 								<ul class="multiple-services-groups-list ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-									<li id="treatment-type-2" class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
-										<a href="#treatment-type-cat-2"> Body <span class="count hidden">0</span> </a>
+									<li id="treatment-type-2" class="ui-state-default ui-corner-top">
+										<a href="#treatment-type-cat-2" role="tab" data-toggle="tab"> 
+											Body <span class="count">0</span> 
+										</a>
 									</li>
 									<li id="treatment-type-41" class="ui-state-default ui-corner-top">
-										<a href="#treatment-type-cat-41"> Counselling &amp; Holistic <span class="count hidden">0</span> </a>
+										<a href="#treatment-type-cat-41" role="tab" data-toggle="tab"> 
+											Counselling &amp; Holistic <span class="count hidden">0</span>
+										</a>
 									</li>
-									<li id="treatment-type-32" class="ui-state-default ui-corner-top">
-										<a href="#treatment-type-cat-32"> Dance <span class="count hidden">0</span> </a>
-									</li>
-
 								</ul>
 							</div>
-							<div class="multiple-service-items">
-								<div class="multiple-services-list ui-tabs-panel ui-widget-content ui-corner-bottom" data-treatment-type-id="2" id="treatment-type-cat-2">
+							<div class="multiple-service-items tab-content">
+								<div class="multiple-services-list ui-tabs-panel ui-widget-content ui-corner-bottom tab-pane fade" id="treatment-type-cat-2">
 									<ul>
 										<li>
 											<input type="checkbox" value="633" id="treatment-633">
@@ -229,7 +262,7 @@
 										</li>
 									</ul>
 								</div>
-								<div class="multiple-services-list ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" data-treatment-type-id="41" id="treatment-type-cat-41">
+								<div class="multiple-services-list ui-tabs-panel ui-widget-content ui-corner-bottom tab-pane fade" id="treatment-type-cat-41">
 									<ul>
 										<li>
 											<input type="checkbox" value="440" id="treatment-440">
@@ -291,20 +324,15 @@
 								</div>
 								
 							</div>
-							<div class="top-shadow" style="top: -1px; left: 0px; width: 280px;"></div><div class="bottom-shadow hidden" style="top: 341px; left: 0px; width: 280px;"></div>
 						</div>
 						<div class="dialog-actions">
-							<button class="button action action-default button-primary save-action disabled" type="submit" disabled="">
+							<button class="button action action-default button-primary save-action" type="submit">
 								<div class="button-inner">
-									<div class="button-icon icons-tick"></div><span class="msg msg-action-default">Save</span><span class="msg msg-action-doing">Saving...</span>
+									<div class="button-icon icons-tick"></div>
+									<span class="msg msg-action-default">Save</span>
 								</div>
 							</button>
 							<a class="button-cancel" href="javascript:;" data-dismiss="modal">Cancel</a>
-							<button class="button action action-default button-primary button-continue disabled" type="submit" disabled="">
-								<div class="button-inner">
-									<div class="button-icon icons-arrow-right2"></div><span class="msg msg-action-default">Continue</span><span class="msg msg-action-doing">Saving...</span>
-								</div>
-							</button>
 
 							<div class="dialog-note hidden b-items-limit-note">
 								<span class="icon icons-attention-small"></span>
@@ -372,7 +400,7 @@
 		<div class="modal-content">
 			<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable">
 				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
-					<span class="ui-dialog-title" id="ui-dialog-title-1">Service</span><a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
+					<span class="ui-dialog-title" id="ui-dialog-title-1">Dịch vụ</span><a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
 				</div>
 				<div class="offer-form ui-dialog-content ui-widget-content" style="height: 550px;" scrolltop="0" scrollleft="0">
 					<form novalidate="novalidate">
@@ -381,7 +409,7 @@
 								<div class="offer-type">
 									<div class="icon icons-treatment-big"></div>
 									<div class="type-select">
-										<select name="primaryTreatmentId" class="chzn-select required chzn-done" data-placeholder="Please select service type" id="selF0G" style="display: none;">
+										<select id="select2_service" name="service" class="form-control select2" data-placeholder="Please select service type">
 											<option value=""></option>
 											<optgroup data-id="2" label="Body">
 												<option value="633">24 Carat Gold Body Treatment</option>
@@ -411,10 +439,6 @@
 											</optgroup>
 										</select>
 										<div id="selF0G_chzn" class="chzn-container chzn-container-single" style="width: 534px;">
-											<a class="chzn-single" href="javascript:void(0)" tabindex="-1"><span>24 Carat Gold Body Treatment</span>
-											<div>
-												<b></b>
-											</div></a>
 											<div style="left: -9000px; width: 532px; top: 34px;" class="chzn-drop">
 												<div class="chzn-search">
 													<input type="text" autocomplete="off" style="width: 485px;" placeholder="Look up service type by typing in a name" tabindex="-1">

@@ -61,8 +61,8 @@
 					$this->model->get_user_service_featured();
 					break;
 
-				case 'xhrGet_service':
-					$this->model->get_service();
+				case 'xhrGet_service_system':
+					$this->model->get_service_system();
 					break;
 
 				case 'xhrUpdate_user_service':
@@ -87,10 +87,15 @@
 
 				default:
 					$this->view->style = array(
-
+						ASSETS . 'plugins/bootstrap-select/bootstrap-select.min.css',
+						ASSETS . 'plugins/select2/select2.css',
+						ASSETS . 'plugins/select2/select2-metronic.css',
+						URL . 'Views/spaCMS/menu/css/spaCMS_menu.css'
 					);
 
 					$this->view->script = array(
+						ASSETS . 'plugins/bootstrap-select/bootstrap-select.min.js',
+						ASSETS . 'plugins/select2/select2.min.js',
 						URL . 'Views/spaCMS/menu/js/spaCMS_menu.js'
 					);
 

@@ -26,8 +26,80 @@ $(document).ready(function() {
  //            $("li.off-peak .settings").addClass('hidden');
  //        }
  //    });
+
+    $('#select2_service').select2({
+        placeholder: "Select an option",
+        allowClear: true
+    });
  
 });
+
+var MoreInfo = function() {
+
+    var get_service_system = function() {
+        var html = '<li id="treatment-type-:service_type_id" class="ui-state-default ui-corner-top :is_first_gs">';
+            html += '<a href="#treatment-type-cat-:service_type_id" role="tab" data-toggle="tab"> ';
+                    html += ':service_type_name <span class="count hidden">0</span>';
+                html += '</a>';
+            html += '</li>';
+
+        var html_ls = '<div id="treatment-type-cat-:service_type_id" class="multiple-services-list ui-tabs-panel ui-widget-content ui-corner-bottom tab-pane fade :is_first_s">';
+            html_ls += '<ul>';
+            html_ls += ':list_service_system';
+            html_ls += '</ul>';
+            html_ls += '</div>';
+
+        var html_s = '<li>';
+                html_s += '<input type="checkbox" value=":service_id" id="treatment-:service_id">';
+                html_s += '<label for="treatment-:service_id">:service_name</label>';
+            html_s += '</li>';
+            html_s += ':list_service_system';
+
+        var url = URL + 'spaCMS/menu/xhrGet_service_system';
+
+        $.get(url, function(data){
+            var out_gs = '';
+            var out_ls = '';
+
+            console.log(data);
+            // for(var i = 0; i < data.length; i++) {
+
+            // }
+
+            $.each(data, function(index, group_s){
+                out_gs = html.replace(/:service_type_id/g, group_s['service_type_id']);
+                out_gs = out_gs.replace(/:service_type_name/g, group_s['service_type_name']);
+
+                out_ls = html_ls.replace(/:service_type_id/g, group_s['service_type_id']);
+                if(index == 0) {
+                    out_gs = out_gs.replace(/:is_first_gs/g, 'active');
+                    out_ls = out_ls.replace(/:is_first_s/g, 'in active');
+                } else {
+                    out_gs = out_gs.replace(/:is_first_gs/g, '');
+                    out_ls = out_ls.replace(/:is_first_s/g, '');
+                }
+
+                $.each(group_s['list_service_system'], function(index, s){
+                    out_ls = out_ls.replace(':list_service_system', html_s);
+                    out_ls = out_ls.replace(/:service_id/g, s['service_id']);
+                    out_ls = out_ls.replace(/:service_name/g, s['service_name']);
+                });
+                out_ls = out_ls.replace(':list_service_system', '');
+                console.log(out_ls);
+                $('.multiple-service-items').append(out_ls);
+                $('.multiple-services-groups-list').append(out_gs);
+            }); 
+            
+        }, 'json');
+    }
+
+    return {
+        init: function(){
+            get_service_system();
+        }
+    }
+}();
+
 
 var Menu = function () {
 
@@ -98,11 +170,31 @@ var Menu = function () {
         }, 'json');
     }
 
+    var xhrInsert_group_service = function() {
+        $("#addGroupName_form").on('submit', function() {
+            var data = $(this).serialize();
+            var loading = $(this).find('.loading');
+            var done = $(this).find('.done');
+            loading.fadeIn();
+            done.hide();
+            var url = URL + 'spaCMS/menu/xhrInsert_group_service';
+            $.post(url, data, function(result) {
+                loading.fadeOut();
+                done.fadeIn();
+            }, 'json');
+            return false;
+        });
+        
+    }
+
     return {
         init: function() {
             xhrGet_group_user_service();
+            xhrInsert_group_service();
         }
     }
 }();
 
+
+MoreInfo.init();
 Menu.init();

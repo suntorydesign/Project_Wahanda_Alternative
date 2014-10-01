@@ -7838,9 +7838,9 @@ table .status-wrapper .status-note {
 .tab-content {
      /*bottom: 0px;*/
      /*left: 0px;*/
-     padding: 17px;
+     /*padding: 17px;*/
      position: absolute;
-     /*right: 0px;*/
+     right: 0px;
      /*top: 31px;*/
 }
 

@@ -56,8 +56,12 @@ class SpaCMS_Model extends Model {
 		SpaCMS_Menu_Model::get_user_service_featured();
 	}
 	
-	function get_service() {
-		SpaCMS_Menu_Model::get_service();
+	function get_service_system() {
+		SpaCMS_Menu_Model::get_service_system();
+	}
+	
+	function insert_group_service() {
+		SpaCMS_Menu_Model::insert_group_service();
 	}
 
 	///////////////////////////// REPORTS //////////////////////////
