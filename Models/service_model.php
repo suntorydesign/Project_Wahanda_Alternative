@@ -119,13 +119,13 @@ WHERE user_id = {$data["user_id"]}
 AND client_id = {$data["client_id"]}
 SQL;
 		$select = $this -> db -> select($sql);
-		$return['user_review'] = $select; 
+		$return['user_review'] = $select;
 		$sql = <<<SQL
 SELECT *
 FROM review
 SQL;
 		$select = $this -> db -> select($sql);
-		$return['review_type'] = $select; 
+		$return['review_type'] = $select;
 		echo json_encode($return);
 	}
 
@@ -173,30 +173,58 @@ SQL;
 			$sql = <<<SQL
 UPDATE user_review 
 SET 
-`user_review_content`=?
-,`user_review_active`=?
-,`user_review_clean`=?
-,`user_review_quality`=?
-,`user_review_staff`=?
-,`user_review_valuable`=?
-,`user_review_overall`=?
-,`user_review_time` = CURRENT_TIME
-,`user_review_date` = CURRENT_DATE
+`user_review_content` = '{$data["user_review_content"]}'
 ,`user_review_status` = 0
 {$where}
 SQL;
-			$update_array = array();
-			unset($data['user_id']);
-			unset($data['client_id']);
-			foreach ($data as $key => $value) {
-				$update_array[] = $value;
-			}
-			// echo "$sql";
-			// print_r($update_array);
-			// exit;
 			$update = $this -> db -> prepare($sql);
-			$update -> execute($update_array);
+			$update -> execute();
 			if ($update) {
+				echo 200;
+			} else {
+				echo -1;
+			}
+		}
+	}
+
+	public function sendRating($data) {
+		$sql = <<<SQL
+SELECT COUNT(*) AS check_review
+FROM user_review
+WHERE user_id = {$data["user_id"]}
+AND client_id = {$data["client_id"]}
+SQL;
+		$select = $this -> db -> select($sql);
+		if ($select[0]['check_review'] == 0) {
+			$field = $data['field'];
+			$sql = <<<SQL
+INSERT INTO user_review 
+SET user_id = {$data["user_id"]},
+client_id = {$data["client_id"]},
+user_review_content = '',
+$field = {$data[$data['field']]},
+user_review_date = CURRENT_DATE,
+user_review_time = CURRENT_TIME
+SQL;
+			$insert = $this -> db -> prepare($sql);
+			$insert -> execute();
+			if ($insert -> rowCount() > 0) {
+				echo 200;
+			} else {
+				echo -1;
+			}
+		} else {
+			$field = $data['field'];
+			$where = 'WHERE user_id = ' . $data['user_id'] . ' AND client_id = ' . $data['client_id'];
+			$sql = <<<SQL
+UPDATE user_review 
+SET 
+$field = {$data[$data['field']]}
+{$where}
+SQL;
+			$update = $this -> db -> prepare($sql);
+			$update -> execute();
+			if ($update -> rowCount() > 0) {
 				echo 200;
 			} else {
 				echo -1;

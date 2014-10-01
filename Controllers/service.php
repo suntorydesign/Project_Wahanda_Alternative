@@ -69,5 +69,17 @@ class service extends Controller {
 			$this -> model -> sendReview($data);
 		}
 	}
+	
+	public function sendRating(){
+		Session::initIdle();
+		Session::init();
+		if(isset($_POST['review_user_id']) && isset($_POST['field']) & isset($_POST['rating_value']) && isset($_SESSION['client_id'])){
+			$data['user_id'] = $_POST['review_user_id'];
+			$data['client_id'] = $_SESSION['client_id'];
+			$data[$_POST['field']] = $_POST['rating_value'];
+			$data['field'] = $_POST['field'];
+			$this -> model -> sendRating($data);
+		}
+	}
 
 }

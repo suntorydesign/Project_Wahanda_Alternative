@@ -179,7 +179,7 @@ function loadReview() {
 					html += '</div>';
 				});
 			}
-			if (response.number_result > RESULT_PER_SHOW_MORE) {
+			if (parseInt(response.number_result) > RESULT_PER_SHOW_MORE) {
 				html += '<div onclick="showMoreReview()" id="see_more_review_all" align="center"><span style="display : none;" class="fa fa-spin fa-refresh" id="waiting_for_show_review"></span><span id="text_show_review"> Xem các đánh giá cũ hơn >>></span></div>';
 			}
 			$('#waiting_for_review_load').fadeOut(function() {
@@ -201,156 +201,186 @@ function loadReview() {
 /*END LOAD REVIEW*/
 /*-----------------------*/
 
-/*LOAD REVIEW*/
+/*LOAD PERSONAL REVIEW*/
 function loadPersonReview() {
+	if (USERNAME != '') {
+		$.ajax({
+			url : URL + 'service/loadPersonReview',
+			type : 'post',
+			dataType : 'json',
+			data : {
+				review_user_id : USER_ID
+			},
+			success : function(response) {
+				var html = '';
+				if (response.user_review[0] != null) {
+					$.each(response.review_type, function(key, value) {
+						html += '<div class="row">';
+						html += '<div class="col-md-5">';
+						html += '<span class="pull-right">' + value.review_name + '</span>';
+						html += '</div>';
+						html += '<div class="col-md-offset-1 col-md-6">';
+						html += '<span class="rating">';
+						var star = 0;
+						$.each(response.user_review[0], function(key, item) {
+							if (key == value.review_field) {
+								star = parseInt(item);
+								return false;
+							}
+						});
+						for (var i = 1; i <= star; i++) {
+							html += '<span data-field="' + value.review_field + '" data-rating="' + i + '" class="fa fa-star choosen rating_text"></span>';
+						}
+						for (var j = star + 1; j <= 5; j++) {
+							html += '<span data-field="' + value.review_field + '" data-rating="' + j + '" class="fa fa-star-o rating_text"></span>';
+						}
+						html += '</span>';
+						html += '</div>';
+						html += '</div>';
+						if (value.review_id == '1') {
+							html += '<hr/>';
+						}
+					});
+					$('#review_form').text(response.user_review[0].user_review_content);
+				} else {
+					$.each(response.review_type, function(key, value) {
+						html += '<div class="row">';
+						html += '<div class="col-md-5">';
+						html += '<span class="pull-right">' + value.review_name + '</span>';
+						html += '</div>';
+						html += '<div class="col-md-offset-1 col-md-6">';
+						html += '<span class="rating">';
+						for (var j = 1; j <= 5; j++) {
+							html += '<span data-field="' + value.review_field + '" data-rating="' + j + '" class="fa fa-star-o rating_text"></span>';
+						}
+						html += '</span>';
+						html += '</div>';
+						html += '</div>';
+						if (value.review_id == '1') {
+							html += '<hr/>';
+						}
+					});
+				}
+				// html += '<div id="over_all_rating">';
+				// html += '<div class="row">';
+				// html += '<div class="col-md-5">';
+				// html += '<span class="rating_text pull-right">Tổng thể</span>';
+				// html += '</div>';
+				// html += '<div class="col-md-offset-1 col-md-6">';
+				// html += '<span class="rating">';
+				// if (response[0].user_review_overall) {
+				// for (var i = 0; i < response[0].user_review_overall; i++) {
+				// html += '<span class="fa fa-star choosen rating_text"></span>';
+				// }
+				// for (var j = 0; j < 5 - response[0].user_review_overall; j++) {
+				// html += '<span class="fa fa-star-o rating_text"></span>';
+				// }
+				// } else {
+				//
+				// }
+				// html += '</span>';
+				// html += '</div>';
+				// html += '</div>';
+				// html += '</div>';
+				// html += '<hr />';
+				// html += '<div id="venue_rating">';
+				// html += '<div class="row">';
+				// html += '<div class="col-md-5">';
+				// html += '<span class="rating_text pull-right">Đánh giá địa điểm</span>';
+				// html += '</div>';
+				// html += '<div class="col-md-offset-1 col-md-6">&nbsp;</div>';
+				// html += '</div>';
+				// html += '<br />';
+				// $.each(response[0], function(key, value) {
+				// if (key != 'user_review_overall' && key != 'user_review_content') {
+				// html += '<div class="row">';
+				// html += '<div class="col-md-5">';
+				// html += '<span class="pull-right">' + key + '</span>';
+				// html += '</div>';
+				// html += '<div class="col-md-offset-1 col-md-6">';
+				// html += '<span class="rating">';
+				// for (var i = 0; i < value; i++) {
+				// html += '<span class="fa fa-star choosen rating_text"></span>';
+				//
+				// }
+				// for (var j = 0; j < 5 - value; j++) {
+				// html += '<span class="fa fa-star-o rating_text"></span>';
+				// }
+				// html += '</span>';
+				// html += '</div>';
+				// html += '</div>';
+				// }
+				// });
+				// html += '</div>';
+				html += '<hr />';
+				$('#review_rating #place_rating').append(html);
+			},
+			complete : function() {
+				$('.fa.rating_text').on('mouseover', function() {
+					$(this).removeClass('fa-star-o');
+					$(this).addClass('fa-star');
+					$(this).prevAll().removeClass('fa-star-o');
+					$(this).prevAll().addClass('fa-star');
+
+				}).on('mouseout', function() {
+					$(this).removeClass('fa-star');
+					$(this).addClass('fa-star-o');
+					$(this).siblings().removeClass('fa-star');
+					$(this).siblings().addClass('fa-star-o');
+					$('.fa.rating_text').each(function() {
+						if ($(this).hasClass('choosen')) {
+							$(this).removeClass('fa-star-o');
+							$(this).addClass('fa-star');
+						} else {
+							$(this).removeClass('fa-star');
+							$(this).addClass('fa-star-o');
+						}
+					});
+				}).on('click', function() {
+					$(this).prevAll().removeClass('fa-star-o');
+					$(this).prevAll().addClass('fa-star');
+					$(this).addClass('fa-star');
+					$(this).removeClass('fa-star-o');
+					$(this).nextAll().removeClass('fa-star');
+					$(this).nextAll().addClass('fa-star-o');
+					$(this).siblings().removeClass('choosen');
+					$(this).prevAll().addClass('choosen');
+					$(this).addClass('choosen');
+					// console.log($(this).attr('data-rating'));
+					// console.log($(this).attr('data-field'));
+					sendRating($(this).attr('data-field'), $(this).attr('data-rating'));
+				});
+			}
+		});
+	}
+}
+
+/*END LOAD PERSONAL REVIEW*/
+/*-----------------------*/
+
+/*SEND RATING*/
+function sendRating(field, rating_value){
 	$.ajax({
-		url : URL + 'service/loadPersonReview',
+		url : URL + 'service/sendRating',
 		type : 'post',
 		dataType : 'json',
 		data : {
-			review_user_id : USER_ID
+			review_user_id : USER_ID,
+			field : field,
+			rating_value : rating_value
 		},
-		success : function(response) {
-			var html = '';
-			if (response.user_review[0] != null) {
-				$.each(response.review_type, function(key, value) {
-					html += '<div class="row">';
-					html += '<div class="col-md-5">';
-					html += '<span class="pull-right">' + value.review_name + '</span>';
-					html += '</div>';
-					html += '<div class="col-md-offset-1 col-md-6">';
-					html += '<span class="rating">';
-					var star = 0;
-					$.each(response.user_review[0], function(key, item) {
-						if (key == value.review_field) {
-							star = parseInt(item);
-							return false;
-						}
-					});
-					for (var i = 1; i <= star; i++) {
-						html += '<span data-field="' + value.review_field + '" data-rating="' + i + '" class="fa fa-star choosen rating_text"></span>';
-					}
-					for (var j = star + 1; j <= 5; j++) {
-						html += '<span data-field="' + value.review_field + '" data-rating="' + j + '" class="fa fa-star-o rating_text"></span>';
-					}
-					html += '</span>';
-					html += '</div>';
-					html += '</div>';
-					if (value.review_id == '1') {
-						html += '<hr/>';
-					}
-				});
-				$('#review_form').text(response.user_review[0].user_review_content);
-			} else {
-				$.each(response.review_type, function(key, value) {
-					html += '<div class="row">';
-					html += '<div class="col-md-5">';
-					html += '<span class="pull-right">' + value.review_name + '</span>';
-					html += '</div>';
-					html += '<div class="col-md-offset-1 col-md-6">';
-					html += '<span class="rating">';
-					for (var j = 1; j <= 5; j++) {
-						html += '<span data-field="' + value.review_field + '" data-rating="' + j + '" class="fa fa-star-o rating_text"></span>';
-					}
-					html += '</span>';
-					html += '</div>';
-					html += '</div>';
-					if (value.review_id == '1') {
-						html += '<hr/>';
-					}
+		success : function(response){
+			if(response != 200){
+				$('#error_review').fadeIn(function(){
+					setTimeout(function() {
+						$('#error_review').fadeOut();
+					}, 8000);
 				});
 			}
-			// html += '<div id="over_all_rating">';
-			// html += '<div class="row">';
-			// html += '<div class="col-md-5">';
-			// html += '<span class="rating_text pull-right">Tổng thể</span>';
-			// html += '</div>';
-			// html += '<div class="col-md-offset-1 col-md-6">';
-			// html += '<span class="rating">';
-			// if (response[0].user_review_overall) {
-			// for (var i = 0; i < response[0].user_review_overall; i++) {
-			// html += '<span class="fa fa-star choosen rating_text"></span>';
-			// }
-			// for (var j = 0; j < 5 - response[0].user_review_overall; j++) {
-			// html += '<span class="fa fa-star-o rating_text"></span>';
-			// }
-			// } else {
-			//
-			// }
-			// html += '</span>';
-			// html += '</div>';
-			// html += '</div>';
-			// html += '</div>';
-			// html += '<hr />';
-			// html += '<div id="venue_rating">';
-			// html += '<div class="row">';
-			// html += '<div class="col-md-5">';
-			// html += '<span class="rating_text pull-right">Đánh giá địa điểm</span>';
-			// html += '</div>';
-			// html += '<div class="col-md-offset-1 col-md-6">&nbsp;</div>';
-			// html += '</div>';
-			// html += '<br />';
-			// $.each(response[0], function(key, value) {
-			// if (key != 'user_review_overall' && key != 'user_review_content') {
-			// html += '<div class="row">';
-			// html += '<div class="col-md-5">';
-			// html += '<span class="pull-right">' + key + '</span>';
-			// html += '</div>';
-			// html += '<div class="col-md-offset-1 col-md-6">';
-			// html += '<span class="rating">';
-			// for (var i = 0; i < value; i++) {
-			// html += '<span class="fa fa-star choosen rating_text"></span>';
-			//
-			// }
-			// for (var j = 0; j < 5 - value; j++) {
-			// html += '<span class="fa fa-star-o rating_text"></span>';
-			// }
-			// html += '</span>';
-			// html += '</div>';
-			// html += '</div>';
-			// }
-			// });
-			// html += '</div>';
-			html += '<hr />';
-			$('#review_rating #place_rating').append(html);
-		},
-		complete : function() {
-			$('.fa.rating_text').on('mouseover', function() {
-				$(this).removeClass('fa-star-o');
-				$(this).addClass('fa-star');
-				$(this).prevAll().removeClass('fa-star-o');
-				$(this).prevAll().addClass('fa-star');
-
-			}).on('mouseout', function() {
-				$(this).removeClass('fa-star');
-				$(this).addClass('fa-star-o');
-				$(this).siblings().removeClass('fa-star');
-				$(this).siblings().addClass('fa-star-o');
-				$('.fa.rating_text').each(function() {
-					if ($(this).hasClass('choosen')) {
-						$(this).removeClass('fa-star-o');
-						$(this).addClass('fa-star');
-					} else {
-						$(this).removeClass('fa-star');
-						$(this).addClass('fa-star-o');
-					}
-				});
-			}).on('click', function() {
-				$(this).prevAll().removeClass('fa-star-o');
-				$(this).prevAll().addClass('fa-star');
-				$(this).addClass('fa-star');
-				$(this).removeClass('fa-star-o');
-				$(this).nextAll().removeClass('fa-star');
-				$(this).nextAll().addClass('fa-star-o');
-				$(this).siblings().removeClass('choosen');
-				$(this).prevAll().addClass('choosen');
-				$(this).addClass('choosen');
-			});
 		}
 	});
 }
-
-/*END LOAD REVIEW*/
+/*END SEND RATING*/
 /*-----------------------*/
 
 /*SEND REVIEW*/
