@@ -217,6 +217,8 @@
 							</div>
 							<div id="review_rating">
 								<div id="place_rating"></div>
+								<h5 class="page-header" style="font-weight: bold;"><i style="font-weight: bold;color: #FDBD0E;" class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;ĐÁNH GIÁ DỊCH VỤ</h5>
+								<div id="service_rating"></div>
 								<!-- <div id="over_all_rating">
 									<div class="row">
 										<div class="col-md-5">

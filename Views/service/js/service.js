@@ -213,6 +213,7 @@ function loadPersonReview() {
 			},
 			success : function(response) {
 				var html = '';
+				var html_2 = '';
 				if (response.user_review[0] != null) {
 					$.each(response.review_type, function(key, value) {
 						html += '<div class="row">';
@@ -242,25 +243,49 @@ function loadPersonReview() {
 						}
 					});
 					$('#review_form').text(response.user_review[0].user_review_content);
-				} else {
-					$.each(response.review_type, function(key, value) {
-						html += '<div class="row">';
-						html += '<div class="col-md-5">';
-						html += '<span class="pull-right">' + value.review_name + '</span>';
-						html += '</div>';
-						html += '<div class="col-md-offset-1 col-md-6">';
-						html += '<span class="rating">';
-						for (var j = 1; j <= 5; j++) {
-							html += '<span data-field="' + value.review_field + '" data-rating="' + j + '" class="fa fa-star-o rating_text"></span>';
-						}
-						html += '</span>';
-						html += '</div>';
-						html += '</div>';
-						if (value.review_id == '1') {
-							html += '<hr/>';
-						}
-					});
 				}
+				if(response.user_service_review[0] != null){
+					$.each(response.user_service_review, function(key, value) {
+						html_2 += '<div class="row">';
+						html_2 += '<div class="col-md-5">';
+						html_2 += '<span class="pull-right">' + value.user_service_name + '</span>';
+						html_2 += '</div>';
+						html_2 += '<div class="col-md-offset-1 col-md-6">';
+						html_2 += '<span class="rating">';
+						var star = parseInt(value.user_service_review_value);
+						for (var i = 1; i <= star; i++) {
+							html_2 += '<span data-service-id="' + value.user_service_id + '" data-rating="' + i + '" class="fa fa-star choosen rating_service"></span>';
+						}
+						for (var j = star + 1; j <= 5; j++) {
+							html_2 += '<span data-service-id="' + value.user_service_id + '" data-rating="' + j + '" class="fa fa-star-o rating_service"></span>';
+						}
+						html_2 += '</span>';
+						html_2 += '</div>';
+						html_2 += '</div>';
+					});
+					html_2 += '<hr/>';
+				}
+				$('#review_rating #place_rating').append(html);
+				$('#review_rating #service_rating').append(html_2);
+				// else {
+					// $.each(response.review_type, function(key, value) {
+						// html += '<div class="row">';
+						// html += '<div class="col-md-5">';
+						// html += '<span class="pull-right">' + value.review_name + '</span>';
+						// html += '</div>';
+						// html += '<div class="col-md-offset-1 col-md-6">';
+						// html += '<span class="rating">';
+						// for (var j = 1; j <= 5; j++) {
+							// html += '<span data-field="' + value.review_field + '" data-rating="' + j + '" class="fa fa-star-o rating_text"></span>';
+						// }
+						// html += '</span>';
+						// html += '</div>';
+						// html += '</div>';
+						// if (value.review_id == '1') {
+							// html += '<hr/>';
+						// }
+					// });
+				// }
 				// html += '<div id="over_all_rating">';
 				// html += '<div class="row">';
 				// html += '<div class="col-md-5">';
@@ -312,8 +337,6 @@ function loadPersonReview() {
 				// }
 				// });
 				// html += '</div>';
-				html += '<hr />';
-				$('#review_rating #place_rating').append(html);
 			},
 			complete : function() {
 				$('.fa.rating_text').on('mouseover', function() {
@@ -349,6 +372,40 @@ function loadPersonReview() {
 					// console.log($(this).attr('data-rating'));
 					// console.log($(this).attr('data-field'));
 					sendRating($(this).attr('data-field'), $(this).attr('data-rating'));
+				});
+				$('.fa.rating_service').on('mouseover', function() {
+					$(this).removeClass('fa-star-o');
+					$(this).addClass('fa-star');
+					$(this).prevAll().removeClass('fa-star-o');
+					$(this).prevAll().addClass('fa-star');
+
+				}).on('mouseout', function() {
+					$(this).removeClass('fa-star');
+					$(this).addClass('fa-star-o');
+					$(this).siblings().removeClass('fa-star');
+					$(this).siblings().addClass('fa-star-o');
+					$('.fa.rating_service').each(function() {
+						if ($(this).hasClass('choosen')) {
+							$(this).removeClass('fa-star-o');
+							$(this).addClass('fa-star');
+						} else {
+							$(this).removeClass('fa-star');
+							$(this).addClass('fa-star-o');
+						}
+					});
+				}).on('click', function() {
+					$(this).prevAll().removeClass('fa-star-o');
+					$(this).prevAll().addClass('fa-star');
+					$(this).addClass('fa-star');
+					$(this).removeClass('fa-star-o');
+					$(this).nextAll().removeClass('fa-star');
+					$(this).nextAll().addClass('fa-star-o');
+					$(this).siblings().removeClass('choosen');
+					$(this).prevAll().addClass('choosen');
+					$(this).addClass('choosen');
+					// console.log($(this).attr('data-rating'));
+					// console.log($(this).attr('data-field'));
+					//sendRating($(this).attr('data-field'), $(this).attr('data-rating'));
 				});
 			}
 		});

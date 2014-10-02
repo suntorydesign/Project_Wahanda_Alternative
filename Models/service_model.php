@@ -107,16 +107,21 @@ SQL;
 
 	public function loadPersonReview($data) {
 		$sql = <<<SQL
-SELECT user_review_content
-, user_review_overall
-, user_review_active
-, user_review_clean
-, user_review_quality
-, user_review_staff
-, user_review_valuable
-FROM user_review
-WHERE user_id = {$data["user_id"]}
-AND client_id = {$data["client_id"]}
+SELECT IF(user_review.user_review_content IS NULL, '', user_review.user_review_content) AS user_review_content
+, IF(user_review.user_review_overall IS NULL, 0, user_review.user_review_overall) AS user_review_overall
+, IF(user_review.user_review_active IS NULL, 0, user_review.user_review_active) AS user_review_active
+, IF(user_review.user_review_clean IS NULL, 0, user_review.user_review_clean) AS user_review_clean
+, IF(user_review.user_review_quality IS NULL, 0, user_review.user_review_quality) AS user_review_quality
+, IF(user_review.user_review_staff IS NULL, 0, user_review.user_review_staff) AS user_review_staff
+, IF(user_review.user_review_valuable IS NULL, 0, user_review.user_review_valuable) AS user_review_valuable
+FROM client
+LEFT JOIN(
+    SELECT *
+    FROM user_review
+    WHERE user_review.user_id = {$data["user_id"]}
+	AND user_review.client_id = {$data["client_id"]}
+)user_review ON user_review.client_id = client.client_id
+WHERE client.client_id = {$data["client_id"]}
 SQL;
 		$select = $this -> db -> select($sql);
 		$return['user_review'] = $select;
@@ -126,6 +131,33 @@ FROM review
 SQL;
 		$select = $this -> db -> select($sql);
 		$return['review_type'] = $select;
+		$sql = <<<SQL
+SELECT user_service.user_service_id
+,group_service.group_service_user_id AS user_id
+,user_service.user_service_name
+,IF(user_service_review.user_service_review_value IS NULL,0,user_service_review.user_service_review_value) AS user_service_review_value
+FROM user_service
+INNER JOIN(
+    SELECT group_service_id
+    ,group_service_user_id
+    FROM group_service
+    WHERE group_service_delete_flg = 0
+)group_service ON user_service.user_service_group_id = group_service.group_service_id
+INNER JOIN(
+	SELECT user_id
+    FROM user
+    WHERE user_delete_flg = 0
+)user ON user.user_id = group_service.group_service_user_id
+LEFT JOIN(
+    SELECT *
+    FROM user_service_review
+    WHERE client_id = {$data["client_id"]}
+)user_service_review ON user_service_review.user_service_id = user_service.user_service_id
+WHERE user.user_id = {$data["user_id"]}
+AND user_service.user_service_delete_flg = 0
+SQL;
+		$select = $this -> db -> select($sql);
+		$return['user_service_review'] = $select;
 		echo json_encode($return);
 	}
 
