@@ -187,6 +187,54 @@ SQL;
 		echo json_encode($return);
 	}
 
+	public function loadServiceStarRating($user_id) {
+		$sql = <<<SQL
+SELECT 
+user_service_id
+FROM user_service, user, group_service
+WHERE user.user_id = group_service.group_service_user_id
+AND user_service.user_service_group_id = group_service.group_service_id
+AND user.user_id = {$user_id}
+ORDER BY user_service_id DESC
+SQL;
+		$select = $this -> db -> select($sql);
+		$return = array();
+		foreach ($select as $key => $value) {
+			$client_amount = 0;
+			$star_point = 0;
+			$sql = <<<SQL
+SELECT user_service.user_service_name
+, service_type.service_type_name
+, user_service_review.user_service_id
+, user_service_review.user_service_review_value
+, COUNT(*) AS star_amount
+FROM user_service, group_service, user, user_service_review, service, service_type
+WHERE user.user_id = group_service.group_service_user_id
+AND user_service.user_service_group_id = group_service.group_service_id
+AND user_service_review.user_service_id = user_service.user_service_id
+AND user_service.user_service_service_id = service.service_id
+AND service.service_service_type_id = service_type.service_type_id
+AND user.user_id = {$user_id}
+AND user_service.user_service_id = {$value['user_service_id']}
+GROUP BY user_service.user_service_name
+, service_type.service_type_name
+, user_service_review.user_service_id
+, user_service_review.user_service_review_value
+			
+SQL;
+			$select = $this -> db -> select($sql);
+			foreach ($select as $key => $value) {
+				$star_point = $star_point + $value['user_service_review_value'] * $value['star_amount'];
+				$client_amount = $client_amount + $value['star_amount'];
+			}
+			$star_review = $star_point / $client_amount;
+			$data['user_service_name'] = $value['user_service_name'];
+			$data['star_review'] = round($star_review, 1);
+			$return[] = $data;
+		}
+		echo json_encode($return);
+	}
+
 	public function loadReview($data) {
 		$result = ($data['review_result']) * RESULT_PER_SHOW_MORE;
 		$result_per_show = RESULT_PER_SHOW_MORE;

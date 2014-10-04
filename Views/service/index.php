@@ -115,10 +115,10 @@
 								</div>
 								<div class="col-xs-6">
 									<div class="rating pull-left">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
 										<i class="fa fa-star-o"></i>
 									</div>
 								</div>
@@ -128,7 +128,11 @@
 								</div>
 								<div class="col-xs-6">
 									<div class="rating pull-left">
-										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
 									</div>
 								</div>
 								<div class="clearfix"></div>
@@ -137,7 +141,11 @@
 								</div>
 								<div class="col-xs-6">
 									<div class="rating pull-left">
-										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
 									</div>
 								</div>
 								<div class="clearfix"></div>
@@ -146,7 +154,11 @@
 								</div>
 								<div class="col-xs-6">
 									<div class="rating pull-left">
-										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
 									</div>
 								</div>
 								<div class="clearfix"></div>
@@ -155,60 +167,88 @@
 								</div>
 								<div class="col-xs-6">
 									<div class="rating pull-left">
-										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="tab-ratings-2 col-sm-6">
+							<div style="display : none;" id="disallow-star-service"></div>
+							<div style="display: none;" id="waiting_for_star_rating_service" class="text-center">
+								<i style="color: #FDBD0E" class="fa fa-2x fa-spin fa-refresh"></i>
+							</div>
 							<div class="rating-service clearfix">
 								<div class="col-xs-12">
 									ĐÁNH GIÁ THEO DỊCH VỤ
 								</div>
 							</div>
-							<div class="rating-info clearfix">
+							<div id="user_service_review" class="rating-info clearfix">
 								<div class="col-xs-6">
-									<span class="pull-right">Sự nhiệt tình</span>
+									<span class="pull-right">...</span>
 								</div>
 								<div class="col-xs-6">
 									<div class="rating pull-left">
-										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
 									</div>
 								</div>
 								<div class="clearfix"></div>
 								<div class="col-xs-6">
-									<span class="pull-right">Vệ sinh</span>
+									<span class="pull-right">...</span>
 								</div>
 								<div class="col-xs-6">
 									<div class="rating pull-left">
-										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
 									</div>
 								</div>
 								<div class="clearfix"></div>
 								<div class="col-xs-6">
-									<span class="pull-right">Chất lượng</span>
+									<span class="pull-right">...</span>
 								</div>
 								<div class="col-xs-6">
 									<div class="rating pull-left">
-										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
 									</div>
 								</div>
 								<div class="clearfix"></div>
 								<div class="col-xs-6">
-									<span class="pull-right">Nhân viên</span>
+									<span class="pull-right">...</span>
 								</div>
 								<div class="col-xs-6">
 									<div class="rating pull-left">
-										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
 									</div>
 								</div>
 								<div class="clearfix"></div>
 								<div class="col-xs-6">
-									<span class="pull-right">Giá trị</span>
+									<span class="pull-right">...</span>
 								</div>
 								<div class="col-xs-6">
 									<div class="rating pull-left">
-										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
 									</div>
 								</div>
 							</div>

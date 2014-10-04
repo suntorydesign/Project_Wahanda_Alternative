@@ -43,25 +43,40 @@ function formatDate(date) {
 /*-----------------------*/
 
 /*CHECK SESSION IDLE*/
-function checkSessionIdle(){
+function checkSessionIdle() {
 	$.ajax({
 		url : URL + 'index/checkSessionIdle',
 		type : 'post',
 		//dataType : 'json',
-		success : function(response){
-			if(response == 200){
+		success : function(response) {
+			if (response == 200) {
 				alert('Bạn đã bị kick out vì không hoạt động quá lâu,bạn còn đó không, quay lại với chúng tôi nào!');
-				location.reload(); 
-			}else if(response == 0){
-				
+				location.reload();
+			} else if (response == 0) {
+
 			}
 		},
-		complete : function(){
-			setTimeout(function(){
+		complete : function() {
+			setTimeout(function() {
 				checkSessionIdle();
-			},IDLE_CHECK);
+			}, IDLE_CHECK);
 		}
 	});
 }
+
 /*END CHECK SESSION IDLE*/
+/*-----------------------*/
+
+/*END SHOW MORE*/
+function showMore(cls, txt) {
+	$('.' + cls).fadeToggle(function() {
+		if ($('.' + cls).is(":visible")) {
+			$('.' + txt).text('Ẩn đi');
+		} else {
+			$('.' + txt).text('Xem thêm');
+		}
+	});
+}
+
+/*END SHOW MORE*/
 /*-----------------------*/

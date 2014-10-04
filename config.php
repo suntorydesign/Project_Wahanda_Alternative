@@ -31,5 +31,5 @@ define('IDLE_TIME', 60*9);
 define('IDLE_CHECK', 60000*1);
 
 //RESULT PER SHOW MORE
-define('RESULT_PER_SHOW_MORE', 10);
+define('RESULT_PER_SHOW_MORE', 5);
 

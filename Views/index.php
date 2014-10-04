@@ -154,3 +154,7 @@
 		</div>
 	</div>
 </div>
+<script>
+	var REVIEW_RESULT = 0;
+	var RESULT_PER_SHOW_MORE = "<?php echo RESULT_PER_SHOW_MORE; ?>";
+</script>

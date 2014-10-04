@@ -28,11 +28,18 @@ class service extends Controller {
 			$this -> model -> loadLocationDetail($_POST['user_id']);
 		}
 	}
-	
-	public function loadLocationStarRating(){
+
+	public function loadLocationStarRating() {
 		Session::initIdle();
 		if (isset($_POST['user_id'])) {
 			$this -> model -> loadLocationStarRating($_POST['user_id']);
+		}
+	}
+
+	public function loadServiceStarRating() {
+		Session::initIdle();
+		if (isset($_POST['user_id'])) {
+			$this -> model -> loadServiceStarRating($_POST['user_id']);
 		}
 	}
 
@@ -76,11 +83,11 @@ class service extends Controller {
 			$this -> model -> sendReview($data);
 		}
 	}
-	
-	public function sendRating(){
+
+	public function sendRating() {
 		Session::initIdle();
 		Session::init();
-		if(isset($_POST['review_user_id']) && isset($_POST['field']) && isset($_POST['rating_value']) && isset($_SESSION['client_id'])){
+		if (isset($_POST['review_user_id']) && isset($_POST['field']) && isset($_POST['rating_value']) && isset($_SESSION['client_id'])) {
 			$data['user_id'] = $_POST['review_user_id'];
 			$data['client_id'] = $_SESSION['client_id'];
 			$data[$_POST['field']] = $_POST['rating_value'];
@@ -88,11 +95,11 @@ class service extends Controller {
 			$this -> model -> sendRating($data);
 		}
 	}
-	
-	public function sendServiceRating(){
+
+	public function sendServiceRating() {
 		Session::initIdle();
 		Session::init();
-		if(isset($_POST['user_service_id']) && isset($_POST['user_service_review_value']) && isset($_SESSION['client_id'])){
+		if (isset($_POST['user_service_id']) && isset($_POST['user_service_review_value']) && isset($_SESSION['client_id'])) {
 			$data['user_service_id'] = $_POST['user_service_id'];
 			$data['client_id'] = $_SESSION['client_id'];
 			$data['user_service_review_value'] = $_POST['user_service_review_value'];

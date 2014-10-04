@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	loadLocationDetail();
 	loadLocationStarRating();
+	loadServiceStarRating();
 	//$("#comment_form").wysibb();
 	$('#write_review').on('click', function() {
 		$('#review_input').slideToggle(function() {
@@ -145,8 +146,8 @@ function loadLocationStarRating() {
 			user_id : USER_ID
 		},
 		success : function(response) {
-			var html = '';
 			if (response.general_info[0] != null) {
+				var html = '';
 				var rating_value = parseFloat(response.general_info[0].star_review);
 				var head = parseInt(rating_value);
 				var tail = rating_value - head;
@@ -185,10 +186,46 @@ function loadLocationStarRating() {
 				html += '';
 				$('#place_star_rating #user_review_overall').html(html);
 			}
-			if(response.data[0] != null){
-				$.each(response.data, function(key, value){
+			if (response.data[0] != null) {
+				var html_2 = '';
+				// console.log(rating_value);
+				// console.log(head);
+				// console.log(tail);
+				$.each(response.data, function(key, value) {
+					var rating_value = parseFloat(value.star_review);
+					var head = parseInt(rating_value);
+					var tail = rating_value - head;
+					tail = Math.round(tail * 100) / 100;
 					// console.log(value.star_review);
+					html_2 += '<div class="col-xs-6">';
+					html_2 += '<small class="pull-right">' + value.review_name + '</small></div>';
+					html_2 += '<div class="col-xs-6">';
+					html_2 += '<div class="rating pull-left">';
+					for (var i = 1; i <= head; i++) {
+						html_2 += '<i class="fa fa-star"></i>';
+					}
+					if (tail != 0) {
+						if (tail == 0.9) {
+							html_2 += '<i class="fa fa-star"></i>';
+						} else if (tail == 0.2 || tail == 0.3 || tail == 0.4 || tail == 0.5 || tail == 0.6 || tail == 0.7 || tail == 0.8) {
+							html_2 += '<i class="fa fa-star-half-empty"></i>';
+						} else if (tail == 0.1) {
+							html_2 += '<i class="fa fa fa-star-o"></i>';
+						}
+						for (var j = head + 2; j <= 5; j++) {
+							html_2 += '<i class="fa fa-star-o"></i>';
+						}
+					} else {
+						for (var j = head + 1; j <= 5; j++) {
+							html_2 += '<i class="fa fa-star-o"></i>';
+						}
+					}
+					html_2 += '</div>';
+					html_2 += '</div>';
+					html_2 += '<div class="clearfix"></div>';
 				});
+				//console.log(html_2);
+				$('#place_star_rating #user_review_properties').html(html_2);
 			}
 		},
 		complete : function() {
@@ -199,6 +236,80 @@ function loadLocationStarRating() {
 }
 
 /*END LOAD LOCATION RATING*/
+/*-----------------------*/
+
+/*LOAD SERVICE RATING*/
+function loadServiceStarRating() {
+	$('#disallow-star-service').show();
+	$('#waiting_for_star_rating_service').fadeIn();
+	$.ajax({
+		url : URL + 'service/loadServiceStarRating',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			user_id : USER_ID
+		},
+		success : function(response) {
+			if (response[0] != null) {
+				var html = '';
+				var index = 0;
+				$.each(response, function(key, value) {
+					index++;
+					var rating_value = parseFloat(value.star_review);
+					var head = parseInt(rating_value);
+					var tail = rating_value - head;
+					tail = Math.round(tail * 100) / 100;
+					// console.log(value.star_review);
+					if (index > 4) {
+						html += '<div style="display: none;" class="col-xs-6 see_more_rating_service">';
+					} else {
+						html += '<div class="col-xs-6">';
+					}
+					html += '<small style="cursor: help;" title="' + value.user_service_name + '" class="pull-right">' + shorten(value.user_service_name, 20) + '</small></div>';
+					if (index > 4) {
+						html += '<div style="display: none;" class="col-xs-6 see_more_rating_service">';
+					} else {
+						html += '<div class="col-xs-6">';
+					}
+					html += '<div class="rating pull-left">';
+					for (var i = 1; i <= head; i++) {
+						html += '<i class="fa fa-star"></i>';
+					}
+					if (tail != 0) {
+						if (tail == 0.9) {
+							html += '<i class="fa fa-star"></i>';
+						} else if (tail == 0.2 || tail == 0.3 || tail == 0.4 || tail == 0.5 || tail == 0.6 || tail == 0.7 || tail == 0.8) {
+							html += '<i class="fa fa-star-half-empty"></i>';
+						} else if (tail == 0.1) {
+							html += '<i class="fa fa fa-star-o"></i>';
+						}
+						for (var j = head + 2; j <= 5; j++) {
+							html += '<i class="fa fa-star-o"></i>';
+						}
+					} else {
+						for (var j = head + 1; j <= 5; j++) {
+							html += '<i class="fa fa-star-o"></i>';
+						}
+					}
+					html += '</div>';
+					html += '</div>';
+					html += '<div class="clearfix"></div>';
+				});
+				if (index > 4) {
+					html += '<div class="col-xs-12 text-center"><a onclick=showMore("see_more_rating_service","see_more_text") style="cursor: pointer;"><small><span class="see_more_text">Xem thêm</span> ' + (index - 4) + ' dịch vụ</small><a></div>';
+				}
+			}
+			// console.log(html);
+			$('#user_service_review').html(html);
+		},
+		complete : function() {
+			$('#disallow-star-service').hide();
+			$('#waiting_for_star_rating_service').fadeOut();
+		}
+	});
+}
+
+/*END LOAD SERVICE RATING*/
 /*-----------------------*/
 
 /*LOAD REVIEW*/
@@ -317,7 +428,7 @@ function loadPersonReview() {
 					$.each(response.user_service_review, function(key, value) {
 						html_2 += '<div class="row">';
 						html_2 += '<div class="col-md-5">';
-						html_2 += '<span class="pull-right">' + value.user_service_name + '</span>';
+						html_2 += '<span class="pull-right">' + shorten(value.user_service_name, 35) + '</span>';
 						html_2 += '</div>';
 						html_2 += '<div class="col-md-offset-1 col-md-6">';
 						html_2 += '<span class="rating">';

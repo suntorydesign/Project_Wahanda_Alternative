@@ -23,8 +23,14 @@
 									<div class="col-md-4" style="color: #FFFFFF;">
 										<strong class="user_business_name">Sun Spa Resort</strong>
 									</div>
-									<div class="col-md-4">
-										<span style="color: #FFCC00;"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </span>
+									<div class="col-md-4" id="general_rating_detail">
+										<span style="color: #FFCC00;"> 
+											<i class="fa fa-star"></i> 
+											<i class="fa fa-star"></i> 
+											<i class="fa fa-star"></i> 
+											<i class="fa fa-star"></i> 
+											<i class="fa fa-star-o"></i> 
+										</span>
 										<span style="color: #FFFFFF;">345 lượt bình chọn</span>
 									</div>
 								</div>
@@ -123,17 +129,23 @@
 											</div>
 											<div class="row" >
 												<div class="col-md-12 well" style="padding: 0 10px 0 10px; margin-left: 12px; border: none;">
-													<div class="row">
-														<div class="col-md-3">
+													<div class="row" id="user_review_overall_detail">
+														<!-- <div class="col-md-3">
 															<span style="color: #FFCC00; font-size: 40px;">4.2</span>
 														</div>
 														<div class="col-md-7">
 															<span><small>điểm đánh giá</small></span>
 															<br />
-															<span style="color: #FFCC00"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star-half-empty"></span> </span>
+															<span style="color: #FFCC00"> 
+																<span class="fa fa-star"></span> 
+																<span class="fa fa-star"></span> 
+																<span class="fa fa-star"></span> 
+																<span class="fa fa-star"></span> 
+																<span class="fa fa-star-half-empty"></span> 
+															</span>
 															<br />
 															<span><small>169 lượt đánh giá</small></span>
-														</div>
+														</div> -->
 													</div>
 												</div>
 											</div>
@@ -180,47 +192,21 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-md-6  pull-right" style="border-left: 1px solid #CCCCCA;">
-													<div class="row">
+												<div id="user_review_properties_detail" class="col-md-6  pull-right" style="border-left: 1px solid #CCCCCA;">
+													<!-- <div class="row">
 														<div class="col-md-6">
 															<small class="pull-right">Nhiệt tình</small>
 														</div>
 														<div class="col-md-6">
-															<span class="pull-right" style="color: #FFCC00"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star-half-empty"></span> </span>
+															<span class="pull-right" style="color: #FFCC00"> 
+																<span class="fa fa-star"></span> 
+																<span class="fa fa-star"></span> 
+																<span class="fa fa-star"></span> 
+																<span class="fa fa-star"></span> 
+																<span class="fa fa-star-half-empty"></span> 
+															</span>
 														</div>
-													</div>
-													<div class="row">
-														<div class="col-md-6">
-															<small class="pull-right">Vệ sinh</small>
-														</div>
-														<div class="col-md-6">
-															<span class="pull-right" style="color: #FFCC00"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star-half-empty"></span> </span>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-md-6">
-															<small class="pull-right">Chất lượng</small>
-														</div>
-														<div class="col-md-6">
-															<span class="pull-right" style="color: #FFCC00"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star-half-empty"></span> </span>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-md-6">
-															<small class="pull-right">Nhân viên</small>
-														</div>
-														<div class="col-md-6">
-															<span class="pull-right" style="color: #FFCC00"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star-half-empty"></span> </span>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-md-6">
-															<small class="pull-right">Giá trị</small>
-														</div>
-														<div class="col-md-6">
-															<span class="pull-right" style="color: #FFCC00"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star-half-empty"></span> </span>
-														</div>
-													</div>
+													</div> -->
 												</div>
 											</div>
 											<hr />
@@ -278,47 +264,22 @@
 												</div>
 											</div>
 											<hr />
-											<div class="media">
-												<a class="pull-left" href="#"> <img width="55" height="55" class="media-object" src="<?php echo ASSETS; ?>img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" alt="avatar"> </a>
-												<div class="media-body">
-													<h5 class="media-heading"><strong>Việt Nguyễn</strong><small class="pull-right"><i>tham gia thang 6-2014</i></small></h5>
-													<small><i>cách đây 3 giờ</i></small>
-													<p>
-														Nhân viên tận tình, môi trường sạch sẽ, tác... <span><a href="">Xem thêm >>></a></span>
-													</p>
+											<div id="review_field_detail">
+												<div style="display : none;" id="disallow_detail"></div>
+												<div id="waiting_for_review_load_detail" class="text-center">
+													<i style="color: #FDBD0E" class="fa fa-2x fa-spin fa-refresh"></i>
 												</div>
+												<!-- <div class="media">
+													<a class="pull-left" href="#"> <img width="55" height="55" class="media-object" src="<?php echo ASSETS; ?>img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" alt="avatar"> </a>
+													<div class="media-body">
+														<h5 class="media-heading"><strong>Việt Nguyễn</strong><small class="pull-right"><i>tham gia thang 6-2014</i></small></h5>
+														<small><i>cách đây 3 giờ</i></small>
+														<p>
+															Nhân viên tận tình, môi trường sạch sẽ, tác... <span><a href="">Xem thêm >>></a></span>
+														</p>
+													</div>
+												</div> -->
 											</div>
-											<div class="media">
-												<a class="pull-left" href="#"> <img width="55" height="55" class="media-object" src="<?php echo ASSETS; ?>img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" alt="avatar"> </a>
-												<div class="media-body">
-													<h5 class="media-heading"><strong>Việt Nguyễn</strong><small class="pull-right"><i>tham gia thang 6-2014</i></small></h5>
-													<small><i>cách đây 3 giờ</i></small>
-													<p>
-														Nhân viên tận tình, môi trường sạch sẽ, tác... <span><a href="">Xem thêm >>></a></span>
-													</p>
-												</div>
-											</div>
-											<div class="media">
-												<a class="pull-left" href="#"> <img width="55" height="55" class="media-object" src="<?php echo ASSETS; ?>img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" alt="avatar"> </a>
-												<div class="media-body">
-													<h5 class="media-heading"><strong>Việt Nguyễn</strong><small class="pull-right"><i>tham gia thang 6-2014</i></small></h5>
-													<small><i>cách đây 3 giờ</i></small>
-													<p>
-														Nhân viên tận tình, môi trường sạch sẽ, tác... <span><a href="">Xem thêm >>></a></span>
-													</p>
-												</div>
-											</div>
-											<div class="media">
-												<a class="pull-left" href="#"> <img width="55" height="55" class="media-object" src="<?php echo ASSETS; ?>img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" alt="avatar"> </a>
-												<div class="media-body">
-													<h5 class="media-heading"><strong>Việt Nguyễn</strong><small class="pull-right"><i>tham gia thang 6-2014</i></small></h5>
-													<small><i>cách đây 3 giờ</i></small>
-													<p>
-														Nhân viên tận tình, môi trường sạch sẽ, tác... <span><a href="">Xem thêm >>></a></span>
-													</p>
-												</div>
-											</div>
-											<span><a href="">Xem các đánh giá cũ hơn >>></a></span>
 											<hr />
 										</div>
 										<div id="about_venue" class="container-fluid">
