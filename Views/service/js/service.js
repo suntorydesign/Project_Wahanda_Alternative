@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	loadLocationDetail();
+	loadLocationStarRating();
 	//$("#comment_form").wysibb();
 	$('#write_review').on('click', function() {
 		$('#review_input').slideToggle(function() {
@@ -69,18 +70,18 @@ function loadLocationDetail() {
 								break;
 							}
 							user_open_hour += '<div class="clearfix" style="padding-top: 10px;">';
-							user_open_hour += '<div class="col-lg-offset-1 col-sm-6">';
+							user_open_hour += '<div class="col-sm-offset-1 col-sm-6">';
 							user_open_hour += '<span><i>' + day + ' :</i></span>';
 							user_open_hour += '</div>';
 							// user_open_hour += '<div class="col-sm-1">';
 							// user_open_hour += '<span><i>:</i></span>';
 							// user_open_hour += '</div>';
 							if (hour[0] == 1) {
-								user_open_hour += '<div class="col-lg-4">';
+								user_open_hour += '<div class="col-sm-4">';
 								user_open_hour += '<span><i>' + hour[1] + 'h - ' + hour[2] + 'h</i></span>';
 								user_open_hour += '</div>';
 							} else if (hour[0] == 0) {
-								user_open_hour += '<div class="col-lg-4">';
+								user_open_hour += '<div class="col-sm-4">';
 								user_open_hour += '<span><i>Nghỉ</i></span>';
 								user_open_hour += '</div>';
 							}
@@ -130,6 +131,74 @@ function loadLocationDetail() {
 }
 
 /*END LOAD LOCATION DETAIL*/
+/*-----------------------*/
+
+/*LOAD LOCATION RATING*/
+function loadLocationStarRating() {
+	$('#disallow-star-place').show();
+	$('#waiting_for_star_rating').fadeIn();
+	$.ajax({
+		url : URL + 'service/loadLocationStarRating',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			user_id : USER_ID
+		},
+		success : function(response) {
+			var html = '';
+			if (response.general_info[0] != null) {
+				var rating_value = parseFloat(response.general_info[0].star_review);
+				var head = parseInt(rating_value);
+				var tail = rating_value - head;
+				tail = Math.round(tail * 100) / 100;
+				var round_tail = tail * 10;
+				// console.log(rating_value);
+				// console.log(head);
+				// console.log(tail);
+				html += '<div class="col-xs-6"><span class="text-orange pull-left rating-point-1">' + head + '.' + round_tail + '</span>';
+				html += '</div>';
+				html += '<div class="col-xs-6 rating-point-2" align="center">';
+				html += '<span>Điểm đánh giá</span>';
+				html += '<div class="rating">';
+				for (var i = 1; i <= head; i++) {
+					html += '<i class="fa fa-star"></i>';
+				}
+				if (tail != 0) {
+					if (tail == 0.9) {
+						html += '<i class="fa fa-star"></i>';
+					} else if (tail == 0.2 || tail == 0.3 || tail == 0.4 || tail == 0.5 || tail == 0.6 || tail == 0.7 || tail == 0.8) {
+						html += '<i class="fa fa-star-half-empty"></i>';
+					} else if (tail == 0.1) {
+						html += '<i class="fa fa fa-star-o"></i>';
+					}
+					for (var j = head + 2; j <= 5; j++) {
+						html += '<i class="fa fa-star-o"></i>';
+					}
+				} else {
+					for (var j = head + 1; j <= 5; j++) {
+						html += '<i class="fa fa-star-o"></i>';
+					}
+				}
+				html += '</div>';
+				html += '<span >' + response.general_info[0].client_amount + ' Lượt đánh giá</span>';
+				html += '</div>';
+				html += '';
+				$('#place_star_rating #user_review_overall').html(html);
+			}
+			if(response.data[0] != null){
+				$.each(response.data, function(key, value){
+					// console.log(value.star_review);
+				});
+			}
+		},
+		complete : function() {
+			$('#disallow-star-place').hide();
+			$('#waiting_for_star_rating').fadeOut();
+		}
+	});
+}
+
+/*END LOAD LOCATION RATING*/
 /*-----------------------*/
 
 /*LOAD REVIEW*/
@@ -218,7 +287,7 @@ function loadPersonReview() {
 					$.each(response.review_type, function(key, value) {
 						html += '<div class="row">';
 						html += '<div class="col-md-5">';
-						html += '<span class="pull-right">' + value.review_name + '</span>';
+						html += '<span class="pull-right">' + shorten(value.review_name, 270) + '</span>';
 						html += '</div>';
 						html += '<div class="col-md-offset-1 col-md-6">';
 						html += '<span class="rating">';
@@ -244,7 +313,7 @@ function loadPersonReview() {
 					});
 					$('#review_form').text(response.user_review[0].user_review_content);
 				}
-				if(response.user_service_review[0] != null){
+				if (response.user_service_review[0] != null) {
 					$.each(response.user_service_review, function(key, value) {
 						html_2 += '<div class="row">';
 						html_2 += '<div class="col-md-5">';
@@ -268,23 +337,23 @@ function loadPersonReview() {
 				$('#review_rating #place_rating').append(html);
 				$('#review_rating #service_rating').append(html_2);
 				// else {
-					// $.each(response.review_type, function(key, value) {
-						// html += '<div class="row">';
-						// html += '<div class="col-md-5">';
-						// html += '<span class="pull-right">' + value.review_name + '</span>';
-						// html += '</div>';
-						// html += '<div class="col-md-offset-1 col-md-6">';
-						// html += '<span class="rating">';
-						// for (var j = 1; j <= 5; j++) {
-							// html += '<span data-field="' + value.review_field + '" data-rating="' + j + '" class="fa fa-star-o rating_text"></span>';
-						// }
-						// html += '</span>';
-						// html += '</div>';
-						// html += '</div>';
-						// if (value.review_id == '1') {
-							// html += '<hr/>';
-						// }
-					// });
+				// $.each(response.review_type, function(key, value) {
+				// html += '<div class="row">';
+				// html += '<div class="col-md-5">';
+				// html += '<span class="pull-right">' + value.review_name + '</span>';
+				// html += '</div>';
+				// html += '<div class="col-md-offset-1 col-md-6">';
+				// html += '<span class="rating">';
+				// for (var j = 1; j <= 5; j++) {
+				// html += '<span data-field="' + value.review_field + '" data-rating="' + j + '" class="fa fa-star-o rating_text"></span>';
+				// }
+				// html += '</span>';
+				// html += '</div>';
+				// html += '</div>';
+				// if (value.review_id == '1') {
+				// html += '<hr/>';
+				// }
+				// });
 				// }
 				// html += '<div id="over_all_rating">';
 				// html += '<div class="row">';
@@ -403,9 +472,9 @@ function loadPersonReview() {
 					$(this).siblings().removeClass('choosen');
 					$(this).prevAll().addClass('choosen');
 					$(this).addClass('choosen');
+					// console.log($(this).attr('data-service-id'));
 					// console.log($(this).attr('data-rating'));
-					// console.log($(this).attr('data-field'));
-					//sendRating($(this).attr('data-field'), $(this).attr('data-rating'));
+					sendServiceRating($(this).attr('data-service-id'), $(this).attr('data-rating'));
 				});
 			}
 		});
@@ -416,7 +485,7 @@ function loadPersonReview() {
 /*-----------------------*/
 
 /*SEND RATING*/
-function sendRating(field, rating_value){
+function sendRating(field, rating_value) {
 	$.ajax({
 		url : URL + 'service/sendRating',
 		type : 'post',
@@ -426,9 +495,9 @@ function sendRating(field, rating_value){
 			field : field,
 			rating_value : rating_value
 		},
-		success : function(response){
-			if(response != 200){
-				$('#error_review').fadeIn(function(){
+		success : function(response) {
+			if (response != 200) {
+				$('#error_review').fadeIn(function() {
 					setTimeout(function() {
 						$('#error_review').fadeOut();
 					}, 8000);
@@ -437,7 +506,33 @@ function sendRating(field, rating_value){
 		}
 	});
 }
+
 /*END SEND RATING*/
+/*-----------------------*/
+
+/*SEND SERVICE RATING*/
+function sendServiceRating(service_id, rating_value) {
+	$.ajax({
+		url : URL + 'service/sendServiceRating',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			user_service_id : service_id,
+			user_service_review_value : rating_value
+		},
+		success : function(response) {
+			if (response != 200) {
+				$('#error_review').fadeIn(function() {
+					setTimeout(function() {
+						$('#error_review').fadeOut();
+					}, 8000);
+				});
+			}
+		}
+	});
+}
+
+/*END SEND SERVICE RATING*/
 /*-----------------------*/
 
 /*SEND REVIEW*/

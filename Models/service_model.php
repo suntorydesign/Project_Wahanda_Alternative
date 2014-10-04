@@ -75,6 +75,118 @@ SQL;
 		echo json_encode($return);
 	}
 
+	public function loadLocationStarRating($user_id) {
+		$sql = <<<SQL
+SELECT user_review_overall, COUNT(*) AS star_amount
+FROM user_review
+WHERE user_id = {$user_id}
+GROUP BY user_review_overall
+SQL;
+		$select = $this -> db -> select($sql);
+		$client_amount = 0;
+		$star_point = 0;
+		$result = array();
+		foreach ($select as $key => $value) {
+			$star_point = $star_point + $value['user_review_overall'] * $value['star_amount'];
+			$client_amount = $client_amount + $value['star_amount'];
+		}
+		$star_review = $star_point / $client_amount;
+		$result['star_review'] = round($star_review, 1);
+		$result['client_amount'] = $client_amount;
+		$return['general_info'][] = $result;
+
+		$sql = <<<SQL
+SELECT user_review_active, COUNT(*) AS star_amount
+FROM user_review
+WHERE user_id = {$user_id}
+GROUP BY user_review_active
+SQL;
+		$select = $this -> db -> select($sql);
+		$client_amount = 0;
+		$star_point = 0;
+		$data = array();
+		foreach ($select as $key => $value) {
+			$star_point = $star_point + $value['user_review_active'] * $value['star_amount'];
+			$client_amount = $client_amount + $value['star_amount'];
+		}
+		$star_review = $star_point / $client_amount;
+		$data['star_review'] = round($star_review, 1);
+		$data['review_name'] = 'Sự nhiệt tình';
+		//$result['client_amount'] = $client_amount;
+		$return['data'][] = $data;
+		$sql = <<<SQL
+SELECT user_review_clean, COUNT(*) AS star_amount
+FROM user_review
+WHERE user_id = {$user_id}
+GROUP BY user_review_clean
+SQL;
+		$select = $this -> db -> select($sql);
+		$client_amount = 0;
+		$star_point = 0;
+		foreach ($select as $key => $value) {
+			$star_point = $star_point + $value['user_review_clean'] * $value['star_amount'];
+			$client_amount = $client_amount + $value['star_amount'];
+		}
+		$star_review = $star_point / $client_amount;
+		$data['star_review'] = round($star_review, 1);
+		$data['review_name'] = 'Vệ sinh';
+		//$result['client_amount'] = $client_amount;
+		$return['data'][] = $data;
+		$sql = <<<SQL
+SELECT user_review_quality, COUNT(*) AS star_amount
+FROM user_review
+WHERE user_id = {$user_id}
+GROUP BY user_review_quality
+SQL;
+		$select = $this -> db -> select($sql);
+		$client_amount = 0;
+		$star_point = 0;
+		foreach ($select as $key => $value) {
+			$star_point = $star_point + $value['user_review_quality'] * $value['star_amount'];
+			$client_amount = $client_amount + $value['star_amount'];
+		}
+		$star_review = $star_point / $client_amount;
+		$data['star_review'] = round($star_review, 1);
+		$data['review_name'] = 'Chất lượng';
+		//$result['client_amount'] = $client_amount;
+		$return['data'][] = $data;
+		$sql = <<<SQL
+SELECT user_review_staff, COUNT(*) AS star_amount
+FROM user_review
+WHERE user_id = {$user_id}
+GROUP BY user_review_staff
+SQL;
+		$select = $this -> db -> select($sql);
+		$client_amount = 0;
+		$star_point = 0;
+		foreach ($select as $key => $value) {
+			$star_point = $star_point + $value['user_review_staff'] * $value['star_amount'];
+			$client_amount = $client_amount + $value['star_amount'];
+		}
+		$star_review = $star_point / $client_amount;
+		$data['star_review'] = round($star_review, 1);
+		$data['review_name'] = 'Nhân viên';
+		$return['data'][] = $data;
+		$sql = <<<SQL
+SELECT user_review_valuable, COUNT(*) AS star_amount
+FROM user_review
+WHERE user_id = {$user_id}
+GROUP BY user_review_valuable
+SQL;
+		$select = $this -> db -> select($sql);
+		$client_amount = 0;
+		$star_point = 0;
+		foreach ($select as $key => $value) {
+			$star_point = $star_point + $value['user_review_valuable'] * $value['star_amount'];
+			$client_amount = $client_amount + $value['star_amount'];
+		}
+		$star_review = $star_point / $client_amount;
+		$data['star_review'] = round($star_review, 1);
+		$data['review_name'] = 'Giá trị';
+		$return['data'][] = $data;
+		echo json_encode($return);
+	}
+
 	public function loadReview($data) {
 		$result = ($data['review_result']) * RESULT_PER_SHOW_MORE;
 		$result_per_show = RESULT_PER_SHOW_MORE;
@@ -252,6 +364,46 @@ SQL;
 UPDATE user_review 
 SET 
 $field = {$data[$data['field']]}
+{$where}
+SQL;
+			$update = $this -> db -> prepare($sql);
+			$update -> execute();
+			if ($update -> rowCount() > 0) {
+				echo 200;
+			} else {
+				echo -1;
+			}
+		}
+	}
+
+	public function sendServiceRating($data) {
+		$sql = <<<SQL
+SELECT COUNT(*) AS check_review
+FROM user_service_review
+WHERE user_service_id = {$data["user_service_id"]}
+AND client_id = {$data["client_id"]}
+SQL;
+		$select = $this -> db -> select($sql);
+		if ($select[0]['check_review'] == 0) {
+			$sql = <<<SQL
+INSERT INTO user_service_review 
+SET user_service_id = {$data["user_service_id"]},
+client_id = {$data["client_id"]},
+user_service_review_value = {$data["user_service_review_value"]}
+SQL;
+			$insert = $this -> db -> prepare($sql);
+			$insert -> execute();
+			if ($insert -> rowCount() > 0) {
+				echo 200;
+			} else {
+				echo -1;
+			}
+		} else {
+			$where = 'WHERE user_service_id = ' . $data['user_service_id'] . ' AND client_id = ' . $data['client_id'];
+			$sql = <<<SQL
+UPDATE user_service_review 
+SET 
+user_service_review_value = {$data["user_service_review_value"]}
 {$where}
 SQL;
 			$update = $this -> db -> prepare($sql);

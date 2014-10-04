@@ -88,27 +88,38 @@
 					</div>
 		
 					<div id="tab-ratings" class="clearfix">
-						<div class="tab-ratings-1 col-sm-6">
-							<div class="rating-point clearfix">
+						<div id="place_star_rating" class="tab-ratings-1 col-sm-6">
+							<div style="display : none;" id="disallow-star-place"></div>
+							<div style="display: none;" id="waiting_for_star_rating" class="text-center">
+								<i style="color: #FDBD0E" class="fa fa-2x fa-spin fa-refresh"></i>
+							</div>
+							<div id="user_review_overall" class="rating-point clearfix">
 								<div class="col-xs-6">
-									<span class="text-orange pull-left rating-point-1">4.2</span>
+									<span class="text-orange pull-left rating-point-1">0.0</span>
 								</div>
 								<div class="col-xs-6 rating-point-2" align="center">
 									<span>Điểm đánh giá</span>
 									<div class="rating">
-										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
 									</div>
-									<span >67 Lượt đánh giá</span>
-								</div>
-								
+									<span >0 Lượt đánh giá</span>
+								</div>						
 							</div>
-							<div class="rating-info clearfix">
+							<div id="user_review_properties" class="rating-info clearfix">
 								<div class="col-xs-6">
 									<span class="pull-right">Sự nhiệt tình</span>
 								</div>
 								<div class="col-xs-6">
 									<div class="rating pull-left">
-										<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i>
 									</div>
 								</div>
 								<div class="clearfix"></div>
