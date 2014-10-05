@@ -14,7 +14,7 @@
 				<button class="button button-primary add-group" type="button" data-toggle="modal" data-target="#addGroupName_modal">
 					<div class="button-inner">
 						<div class="button-icon icons-plus"></div>
-						Add a group
+						Thêm nhóm dịch vụ
 					</div>
 				</button>
 			</div>
@@ -106,7 +106,7 @@
 
 <!-- Modal Edit group name -->
 <div id="editGroupName_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-802" aria-hidden="true">
-	<div class="modal-dialog" style="width: 700px;">
+	<div class="modal-dialog" style="width: 600px;">
 		<div class="modal-content">
 			<div class="ui-dialog ui-widget ui-widget-content ui-corner-all no-title ui-draggable">
 				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
@@ -114,16 +114,17 @@
 					<a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"> <span class="ui-icon ui-icon-closethick">close</span> </a>
 				</div>
 				<div class="menu-group-form ui-dialog-content ui-widget-content" id="802" scrolltop="0" scrollleft="0">
-					<form novalidate="novalidate">
+					<form id="editGroupName_form" action="#" method="POST" novalidate="novalidate">
 						<ul class="offer-type-selection">
 							<li class="menu-name">
 								<table cellspacing="0" cellpadding="0" class="default-form">
 									<tbody>
 										<tr class="form-row">
-											<td class="label-part"><label for="cat-name" style="padding-top: 3px;">Menu group name</label></td>
+											<td class="label-part"><label for="cat-name" style="padding-top: 3px;">Tên nhóm dịch vụ</label></td>
 											<td class="input-part">
 											<div class="txt-input form-element-wrapper">
-												<input type="text" maxlength="100" name="name" id="cat-name">
+												<input type="text" maxlength="100" name="group_service_name" id="cat-name" required pattern=".{6,}" title="ít nhất 6 ký tự">
+												<input type="hidden" name="group_service_id">
 											</div></td>
 										</tr>
 									</tbody>
@@ -134,15 +135,19 @@
 						<div class="dialog-actions" style="border-top: medium none;">
 							<button class="button action action-default button-primary save-action" type="submit">
 								<div class="button-inner">
-									<div class="button-icon icons-tick"></div><span class="msg msg-action-default">Save</span><span class="msg msg-action-doing">Saving...</span>
+									<div class="button-icon icons-tick done"></div>
+									<div class="button-icon fa fa-spin fa-refresh loading" style="display:none;"></div>
+									<span class="msg msg-action-default">Lưu</span>
 								</div>
 							</button>
-							<button class="button action action-default button-secondary delete-action" type="button">
+							<button class="button action action-default button-secondary delete-action aDeleteGroup" type="button">
 								<div class="button-inner">
-									<div class="button-icon icons-delete"></div><span class="msg msg-action-default">Delete</span><span class="msg msg-action-doing">Deleting...</span>
+									<div class="button-icon icons-delete done"></div>
+									<div class="button-icon fa fa-spin fa-refresh loading" style="display:none;"></div>
+									<span class="msg msg-action-default">Xóa</span>
 								</div>
 							</button>
-							<a class="button-cancel" href="javascript:;" data-dismiss="modal">Cancel</a>
+							<a class="button-cancel" href="javascript:;" data-dismiss="modal">Hủy</a>
 						</div>
 					</form>
 				</div>
@@ -153,24 +158,24 @@
 
 <!-- Modal add group name -->
 <div id="addGroupName_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-8023" aria-hidden="true">
-	<div class="modal-dialog" style="width: 700px;">
+	<div class="modal-dialog" style="width: 600px;">
 		<div class="modal-content">
 			<div class="ui-dialog ui-widget ui-widget-content ui-corner-all no-title ui-draggable">
 				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
-					<span class="ui-dialog-title" id="ui-dialog-title-8023">Menu group</span>
+					<span class="ui-dialog-title" id="ui-dialog-title-8023">Nhóm dịch vụ</span>
 					<a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"> <span class="ui-icon ui-icon-closethick">close</span> </a>
 				</div>
 				<div class="menu-group-form ui-dialog-content ui-widget-content" id="8023" scrolltop="0" scrollleft="0">
-					<form id="addGroupName_form" novalidate="novalidate">
+					<form id="addGroupName_form" action="#" method="POST">
 						<ul class="offer-type-selection">
 							<li class="menu-name">
 								<table cellspacing="0" cellpadding="0" class="default-form">
 									<tbody>
 										<tr class="form-row">
-											<td class="label-part"><label for="cat-name" style="padding-top: 3px;">Menu group name</label></td>
+											<td class="label-part"><label for="cat-name" style="padding-top: 3px;">Tên nhóm dịch vụ</label></td>
 											<td class="input-part">
 											<div class="txt-input form-element-wrapper">
-												<input type="text" maxlength="100" name="group_service_name" id="cat-name">
+												<input type="text" maxlength="100" name="group_service_name" id="cat-name" required pattern=".{6,}" title="ít nhất 6 ký tự">
 											</div></td>
 										</tr>
 									</tbody>
@@ -209,120 +214,11 @@
 						<div id="multiple-services-tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
 							<div class="multiple-services-groups">
 								<ul class="multiple-services-groups-list ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-									<li id="treatment-type-2" class="ui-state-default ui-corner-top">
-										<a href="#treatment-type-cat-2" role="tab" data-toggle="tab"> 
-											Body <span class="count">0</span> 
-										</a>
-									</li>
-									<li id="treatment-type-41" class="ui-state-default ui-corner-top">
-										<a href="#treatment-type-cat-41" role="tab" data-toggle="tab"> 
-											Counselling &amp; Holistic <span class="count hidden">0</span>
-										</a>
-									</li>
+									<!-- List services-groups-list -->
 								</ul>
 							</div>
 							<div class="multiple-service-items tab-content">
-								<div class="multiple-services-list ui-tabs-panel ui-widget-content ui-corner-bottom tab-pane fade" id="treatment-type-cat-2">
-									<ul>
-										<li>
-											<input type="checkbox" value="633" id="treatment-633">
-											<label for="treatment-633">24 Carat Gold Body Treatment</label>
-										</li>
-										<li>
-											<input type="checkbox" value="265" id="treatment-265">
-											<label for="treatment-265">Acoustic Wave Therapy</label>
-										</li>
-										<li>
-											<input type="checkbox" value="2" id="treatment-2">
-											<label for="treatment-2">Acupuncture</label>
-										</li>
-										<li>
-											<input type="checkbox" value="275" id="treatment-275">
-											<label for="treatment-275">Akasuri</label>
-										</li>
-										<li>
-											<input type="checkbox" value="463" id="treatment-463">
-											<label for="treatment-463">Arasys Toning and Inch Loss Treatment</label>
-										</li>
-										<li>
-											<input type="checkbox" value="246" id="treatment-246">
-											<label for="treatment-246">Backcials</label>
-										</li>
-										<li>
-											<input type="checkbox" value="316" id="treatment-316">
-											<label for="treatment-316">Bikini Facial</label>
-										</li>
-										<li>
-											<input type="checkbox" value="184" id="treatment-184">
-											<label for="treatment-184">Body Exfoliation Treatments</label>
-										</li>
-										<li>
-											<input type="checkbox" value="525" id="treatment-525">
-											<label for="treatment-525">Body Treatments</label>
-										</li>
-									</ul>
-								</div>
-								<div class="multiple-services-list ui-tabs-panel ui-widget-content ui-corner-bottom tab-pane fade" id="treatment-type-cat-41">
-									<ul>
-										<li>
-											<input type="checkbox" value="440" id="treatment-440">
-											<label for="treatment-440">Acustaple</label>
-										</li>
-										<li>
-											<input type="checkbox" value="343" id="treatment-343">
-											<label for="treatment-343">Addictions Counselling</label>
-										</li>
-										<li>
-											<input type="checkbox" value="14" id="treatment-14">
-											<label for="treatment-14">Angel Therapy</label>
-										</li>
-										<li>
-											<input type="checkbox" value="491" id="treatment-491">
-											<label for="treatment-491">Anger Management</label>
-										</li>
-										<li>
-											<input type="checkbox" value="15" id="treatment-15">
-											<label for="treatment-15">Aromatherapy</label>
-										</li>
-										<li>
-											<input type="checkbox" value="18" id="treatment-18">
-											<label for="treatment-18">Ayurvedic</label>
-										</li>
-										<li>
-											<input type="checkbox" value="19" id="treatment-19">
-											<label for="treatment-19">Bach Flower Remedies</label>
-										</li>
-										<li>
-											<input type="checkbox" value="613" id="treatment-613">
-											<label for="treatment-613">BioMeridian Analysis</label>
-										</li>
-										<li>
-											<input type="checkbox" value="563" id="treatment-563">
-											<label for="treatment-563">Bioresonance Therapy</label>
-										</li>
-										<li>
-											<input type="checkbox" value="383" id="treatment-383">
-											<label for="treatment-383">BodyTalk</label>
-										</li>
-										<li>
-											<input type="checkbox" value="391" id="treatment-391">
-											<label for="treatment-391">Coaching</label>
-										</li>
-										<li>
-											<input type="checkbox" value="385" id="treatment-385">
-											<label for="treatment-385">Cognitive Behaviour Therapy</label>
-										</li>
-										<li>
-											<input type="checkbox" value="38" id="treatment-38">
-											<label for="treatment-38">Colour Therapy</label>
-										</li>
-										<li>
-											<input type="checkbox" value="120" id="treatment-120">
-											<label for="treatment-120">Combined Decongestive Therapy</label>
-										</li>
-									</ul>
-								</div>
-								
+								<!-- List service-items -->
 							</div>
 						</div>
 						<div class="dialog-actions">
@@ -346,56 +242,8 @@
 	</div>
 </div>
 
-<!-- Modal Edit group name -->
-<div id="editGroupName_modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-685" aria-hidden="true">
-	<div class="modal-dialog" style="width: 600px;">
-		<div class="modal-content">
-			<div class="ui-dialog ui-widget ui-widget-content ui-corner-all no-title ui-draggable">
-				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
-					<span class="ui-dialog-title" id="ui-dialog-title-685">Menu group</span><a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
-				</div>
-				<div class="menu-group-form ui-dialog-content ui-widget-content" id="685" scrolltop="0" scrollleft="0">
-					<form novalidate="novalidate">
-						<ul class="offer-type-selection">
-							<li class="menu-name">
-								<table cellspacing="0" cellpadding="0" class="default-form">
-									<tbody>
-										<tr class="form-row">
-											<td class="label-part">
-												<label for="cat-name" style="padding-top: 3px;">Menu group name</label>
-											</td>
-											<td class="input-part">
-											<div class="txt-input form-element-wrapper">
-												<input type="text" maxlength="100" name="name" id="cat-name" class="valid">
-											</div></td>
-										</tr>
-									</tbody>
-								</table>
-							</li>
-						</ul>
-
-						<div class="dialog-actions" style="margin-top: 0px;">
-							<button class="button action action-default button-primary save-action" type="submit">
-								<div class="button-inner">
-									<div class="button-icon icons-tick"></div><span class="msg msg-action-default">Save</span><span class="msg msg-action-doing">Saving...</span>
-								</div>
-							</button>
-							<button class="button action action-default button-secondary delete-action" type="button">
-								<div class="button-inner">
-									<div class="button-icon icons-delete"></div><span class="msg msg-action-default">Delete</span><span class="msg msg-action-doing">Deleting...</span>
-								</div>
-							</button>
-							<a class="button-cancel" href="javascript:;" data-dismiss="modal">Cancel</a>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!-- Modal Add services -->
-<div id="addServices_modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-1" aria-hidden="true">
+<!-- Modal Add & Edit User services -->
+<div id="addUserServices_modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 	<div class="modal-dialog" style="width: 800px;">
 		<div class="modal-content">
 			<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable">
@@ -403,41 +251,21 @@
 					<span class="ui-dialog-title" id="ui-dialog-title-1">Dịch vụ</span><a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
 				</div>
 				<div class="offer-form ui-dialog-content ui-widget-content" style="height: 550px;" scrolltop="0" scrollleft="0">
-					<form novalidate="novalidate">
+					<form id="addUserService_form" action="#" method="POST" novalidate="novalidate">
 						<div class="dialog-content clearfix">
 							<div class="offer-form-main">
 								<div class="offer-type">
 									<div class="icon icons-treatment-big"></div>
 									<div class="type-select">
-										<select id="select2_service" name="service" class="form-control select2" data-placeholder="Please select service type">
+										<select id="select2_service" class="form-control select2" data-placeholder="Vui lòng chọn loại dịch vụ" required>
 											<option value=""></option>
-											<optgroup data-id="2" label="Body">
-												<option value="633">24 Carat Gold Body Treatment</option>
-												<option value="265">Acoustic Wave Therapy</option>
-												<option value="2">Acupuncture</option>
-												<option value="275">Akasuri</option>
-												<option value="463">Arasys Toning and Inch Loss Treatment</option>
-												<option value="246">Backcials</option>
-												<option value="316">Bikini Facial</option>
-												<option value="184">Body Exfoliation Treatments</option>
-												<option value="525">Body Treatments</option>
-												<option value="205">Body Treatments - CACI</option>
-												<option value="25">Body Wraps</option>
-												<option value="40">Cellulite Treatments</option>
-											</optgroup>
-											<optgroup data-id="41" label="Counselling &amp; Holistic">
-												<option value="440">Acustaple</option>
-												<option value="343">Addictions Counselling</option>
-												<option value="14">Angel Therapy</option>
-												<option value="491">Anger Management</option>
-												<option value="15">Aromatherapy</option>
-												<option value="18">Ayurvedic</option>
-												<option value="19">Bach Flower Remedies</option>
-												<option value="613">BioMeridian Analysis</option>
-												<option value="563">Bioresonance Therapy</option>
-												<option value="383">BodyTalk</option>
-											</optgroup>
+											<!-- List service system -->
+
 										</select>
+
+										<input type="hidden" name="user_service_group_id">
+										<input type="hidden" name="user_service_service_id">
+										
 										<div id="selF0G_chzn" class="chzn-container chzn-container-single" style="width: 534px;">
 											<div style="left: -9000px; width: 532px; top: 34px;" class="chzn-drop">
 												<div class="chzn-search">
@@ -467,7 +295,7 @@
 										</div>
 									</div>
 									<div id="service_name" title="<strong>Service name</strong> - Type in the name of the service. Avoid using pricing or discount rate in the name as we will calculate and show them based on pricing information below." class="tooltips tooltips-bottom b-select-valid txt-input txt-input-big form-element-wrapper" aria-describedby="ui-tooltip-1">
-										<input type="text" value="" maxlength="150" placeholder="Service name" class="offer-name" name="offer-name">
+										<input type="text" value="" maxlength="150" placeholder="Tên dịch vụ của bạn" class="offer-name" name="user_service_name">
 									</div>
 								</div>
 								<div tabindex="-1" class="offer-content">
@@ -504,9 +332,9 @@
 											<table cellspacing="0" cellpadding="0" class="default-form skus-edit">
 												<tbody>
 													<tr class="form-row sku-duration">
-														<td class="label-part"><label>Duration</label></td>
+														<td class="label-part"><label>Thời gian</label></td>
 														<td class="input-part">
-														<select name="duration[view730]">
+														<select name="user_service_duration">
 															<option value="0">Not set</option>
 															<option value="10">10 min</option>
 															<option value="15">15 min</option>
@@ -554,20 +382,13 @@
 														</select></td>
 													</tr>
 													<tr id="price" title="<strong>Full and Sale price</strong> - Full price is the pricelist price of your service. If you are offering a special price on this offer, add it to Sale price." class="form-row" aria-describedby="ui-tooltip-5">
-														<td class="label-part sku-rrp"><label>Full price, £</label></td>
+														<td class="label-part sku-rrp"><label>Giá gốc </label></td>
 														<td data-tooltips="&lt;strong&gt;Full and Sale price&lt;/strong&gt; - Full price is the pricelist price of your service. If you are offering a special price on this offer, add it to Sale price." class="tooltips tooltips-top input-part">
 														<div class="txt-input txt-input-mini form-element-wrapper">
-															<input type="text" min="1" class="required number" value="" name="fullPriceAmount[view730]" more-than="#sku-discountPriceAmount-view730">
-														</div><label class="optional">Sale price, £</label>
+															<input type="text" min="1" class="required number" value="" name="user_service_full_price" required >
+														</div><label class="optional"> Giá khuyến mãi </label>
 														<div class="txt-input txt-input-mini form-element-wrapper">
-															<input type="text" class="number sku-amount" value="" name="discountPriceAmount[view730]" id="sku-discountPriceAmount-view730">
-														</div></td>
-													</tr>
-													<tr class="form-row sku-stock inventory-managed hidden">
-														<td class="label-part"><label>Inventory left</label></td>
-														<td class="input-part">
-														<div class="txt-input txt-input-mini form-element-wrapper">
-															<input type="text" min="0" class="number" value="" name="stockAmount[view730]">
+															<input type="text" class="number sku-amount" value="" name="user_service_sale_price">
 														</div></td>
 													</tr>
 												</tbody>
@@ -579,24 +400,10 @@
 										<h2 class="part-title">How would you like to sell this service?</h2>
 										<div id="sell_service" title="<strong>Feature on Wahanda</strong> - Featuring a service will put it on top on your listing and expose it through all partners&amp;#39; websites. You can feature up to five of your top services." class="choices form-element-wrapper enhanced-listing-only">
 											<label>
-												<input type="checkbox" name="featured" id="service-feature">
-												Feature service (max 5 per venue) </label>
+												<input type="checkbox" name="user_service_is_featured" id="service-feature">
+												Dịch vụ nổi bật (tối đa 5 dịch vụ) </label>
 										</div>
 										<div class="fullfilment">
-											<div class="empty not-purchasable hidden">
-												<p class="intro">
-													<span class="icons-attention-small"></span>
-													Your menu is currently set up to only sell featured services. Fancy selling your non-featured offers on Wahanda? Make your menu purchasable now.
-												</p>
-												<button class="button button-basic make-purchasable" type="button">
-													<div class="button-inner">
-														<div class="button-icon icons-tick4"></div>
-														Make my menu purchasable
-													</div>
-												</button>
-
-											</div>
-
 											<div class="empty standard-listing hidden">
 												<p class="intro">
 													<span class="icons-attention-small"></span>
@@ -618,15 +425,15 @@
 													<tr class="form-row voucher-part">
 														<td class="label-part"><label>Trạng thái</label></td>
 														<td class="input-part">
-														<select id="fulfillment-expiry-type" name="expiryType">
-															<option value="">Hoạt động</option>
-															<option value="after">Ngưng hoạt động</option>
+														<select id="fulfillment-expiry-type" name="user_service_status">
+															<option value="1">Hoạt động</option>
+															<option value="0">Ngưng hoạt động</option>
 														</select>
 													</tr>
 													<tr id="sold_as" title="<strong>Sell as</strong> - Service can be fulfilled as: <strong><em>Appointment</em></strong> - customers book in directly by finding available slots in your calendar. It’s much more convenient both for you and your customers. <strong><em>eVoucher</em></strong> - customers receive vouchers that they can redeem in your venue." class="form-row">
 														<td class="label-part"><label for="service-type">Sold as</label></td>
 														<td class="input-part">
-														<select id="fulfillment-types" name="fulfillmentTypes">
+														<select id="fulfillment-types" name="user_service_use_evoucher">
 															<option value="AE">Appointment or eVoucher</option>
 															<option value="A">Appointment</option>
 															<option value="E">eVoucher</option>
@@ -638,9 +445,9 @@
 									</div>
 									<div class="descriptions group-dependancy">
 										<div class="txts description">
-											<h2 class="part-title">Description</h2>
+											<h2 class="part-title">Mô tả dịch vụ</h2>
 											<!-- bb code -->
-											<textarea max-text-lines="4" id="user_description" name="user_description" cols="5" rows="4" class="full required"></textarea>
+											<textarea max-text-lines="4" id="user_description" name="user_service_description" cols="5" rows="4" class="full required"></textarea>
 										</div>
 									</div>
 								</div>
@@ -648,85 +455,39 @@
 								<div class="bottom-shadow"></div>
 							</div>
 							<div class="offer-form-aside pictures ui-sortable">
-								<h2 class="part-title">Menu item images</h2>
+								<h2 class="part-title">Hình ảnh dịch vụ</h2>
 								<ul class="menu-item-pictures">
+									<div id="list_user_service_image">
+										<!-- List user service image -->
+
+									</div> 
 									<li class="single-picture empty">
-										<div class="single-picture-wrapper" style="position: relative;">
+										<div id="iM_user_slide" class="single-picture-wrapper imageManager_openModal" style="position: relative;" data-toggle="modal" data-target="#imageManager_modal">
 											<div class="add-picture vertically-centered" style="position: absolute; height: 34px; top: 50%; margin-top: -17px;">
 												<div class="icon icons-plus3"></div>
-												Add image
+												Thêm hình
 											</div>
-										</div>
-										<div class="single-picture-title">
-											<span>Primary image</span>
 										</div>
 									</li>
 
-									<li class="single-picture empty not-editable">
-										<div class="single-picture-wrapper" style="position: relative;">
-											<div class="add-picture vertically-centered" style="position: absolute; height: 34px; top: 50%; margin-top: -17px;">
-												<div class="icon icons-plus3"></div>
-												Add image
-											</div>
-										</div>
-										<div class="single-picture-title">
-											<span>Primary image</span>
-										</div>
-									</li>
-
-									<li class="single-picture empty not-editable">
-										<div class="single-picture-wrapper" style="position: relative;">
-											<div class="add-picture vertically-centered" style="position: absolute; height: 34px; top: 50%; margin-top: -17px;">
-												<div class="icon icons-plus3"></div>
-												Add image
-											</div>
-										</div>
-										<div class="single-picture-title">
-											<span>Primary image</span>
-										</div>
-									</li>
-
-									<li class="single-picture empty not-editable">
-										<div class="single-picture-wrapper" style="position: relative;">
-											<div class="add-picture vertically-centered" style="position: absolute; height: 34px; top: 50%; margin-top: -17px;">
-												<div class="icon icons-plus3"></div>
-												Add image
-											</div>
-										</div>
-										<div class="single-picture-title">
-											<span>Primary image</span>
-										</div>
-									</li>
-
-									<li class="single-picture empty not-editable">
-										<div class="single-picture-wrapper" style="position: relative;">
-											<div class="add-picture vertically-centered" style="position: absolute; height: 34px; top: 50%; margin-top: -17px;">
-												<div class="icon icons-plus3"></div>
-												Add image
-											</div>
-										</div>
-										<div class="single-picture-title">
-											<span>Primary image</span>
-										</div>
-									</li>
 								</ul>
 							</div>
 						</div>
 						<div class="dialog-actions">
 							<button class="button action action-default button-primary save-action" type="submit">
 								<div class="button-inner">
-									<div class="button-icon icons-tick"></div><span class="msg msg-action-default">Save</span><span class="msg msg-action-doing">Saving...</span>
+									<div class="button-icon icons-tick done"></div>
+									<div class="button-icon fa fa-spin fa-refresh loading hidden"></div>
+									<span class="msg msg-action-default">Thêm</span>
 								</div>
 							</button>
-							<button class="button action action-default button-basic offer-archive" type="button">
+							<button class="button action action-default button-basic offer-archive hidden" type="button">
 								<div class="button-inner">
 									<div class="button-icon icons-archive"></div>
 									<span class="msg msg-action-default">Move to archive</span>
-									<span class="msg msg-action-doing">Archiving...</span>
 								</div>
 							</button>
-							<a target="_blank" class="button-link listing-link" href="javascript:;">View on Wahanda.com</a>
-							<a class="button-cancel" href="javascript:;" data-dismiss="modal">Cancel</a>
+							<a class="button-cancel" href="javascript:;" data-dismiss="modal">Hủy</a>
 						</div>
 					</form>
 				</div>
@@ -734,3 +495,70 @@
 		</div>
 	</div>
 </div>
+
+
+<!-- Image Manager Modal -->
+<div class="modal" id="imageManager_modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="imageManager_modalLabel">Upload image</h4>
+      </div>
+      <div class="modal-body">
+        <div id="imageManager_descriptionImage">
+            <div id="imageManager_descriptionImage-content">
+                <strong>Image title:</strong> </br>
+                <span class="cover_title"></span>
+                <div>
+                    <h6>Image name: </h6><h6 class="cover_image_name"> </h6>
+                    <h6>Image size: </h6><h6 class="cover_image_size"> </h6>
+                    <h6>Thumbnail: </h6><h6 class="cover_thumbnail_name"> </h6>
+                </div>
+            </div>
+            <button type="button" id="imageManager_removeImage" class="btn btn-sm btn-danger pull-left" disabled="disabled"><i class="fa fa-trash-o"></i> Remove</button>
+        </div>
+        <div id="imageManager_allImage">
+            <!-- All image show here --> 
+                
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="modal-footer" style="margin-top: 0px;">
+        <div class="col-md-9" style="border-right: 1px solid #CCC; margin-bottom: 10px;">
+            <form id="imageManager_uploadForm" method="post" action="upload.php" enctype="multipart/form-data">
+                
+                <div id="upload_imagePreview" class="pull-left" >
+                    <img src="" style="width: 127px; height: 70px;"/>
+                </div>
+                <div class="pull-left" align="left" style="margin-left: 10px; width: 120px;">
+                    <span class="btn btn-sm btn-success fileinput-button" style="margin-bottom: 11px;">
+                        <i class="fa fa-plus"></i>
+                        <span>Add file ...</span>
+                        <input type="file" name="file" id="imageManger_inputFile" >
+                    </span>
+                    </br>
+                    <button type="submit" class="btn btn-sm btn-primary" value="Upload" id="imageManager_startUpload" >
+                        <i class="fa fa-upload"></i>
+                        <span>Start upload</span>
+                    </button>
+                </div>
+                <div class="pull-left" style="width: 315px">
+                    <input id="cover_title" name="cover_title" type="text" class="form-control" pattern=".{3,}" required title="3 characters minimum" placeHolder="Nhập tiêu đề cho cover" >
+                    </br>
+                    <div class="progress progress-striped active" style="margin-bottom: 0px;">
+                      <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">
+                        <span class="sr-only">45% Complete</span>
+                      </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3">
+            <button type="submit" id="imageManager_saveChange" class="btn btn-sm btn-primary" >Save changes</button>
+            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!--// END Image Manager Modal -->

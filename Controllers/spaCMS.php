@@ -53,49 +53,67 @@
 		function menu($xhr = false) {
 			Auth::handleSpaCMSLogin();
 			switch ($xhr) {
+				case 'xhrGet_service_system':
+					$this->model->get_service_system();
+					break;
+
 				case 'xhrGet_group_user_service':
 					$this->model->get_group_user_service();
 					break;
 
-				case 'xhrGet_user_service_featured':
-					$this->model->get_user_service_featured();
-					break;
-
-				case 'xhrGet_service_system':
-					$this->model->get_service_system();
+				case 'xhrInsert_user_service':
+					$this->model->insert_user_service();
 					break;
 
 				case 'xhrUpdate_user_service':
 					$this->model->update_user_service();
 					break;
 
-				case 'xhrUpdate_group_service':
-					$this->model->update_group_service();
-					break;
-
-				case 'xhrUpdate_user_service_featured':
-					$this->model->update_group_service();
+				case 'xhrDelete_user_service':
+					$this->model->delete_user_service();
 					break;
 
 				case 'xhrInsert_group_service':
 					$this->model->insert_group_service();
 					break;
-					
-				case 'xhrInsert_user_service':
-					$this->model->insert_user_service();
+
+				case 'xhrUpdate_group_service':
+					$this->model->update_group_service();
 					break;
 
+				case 'xhrDelete_group_service':
+					$this->model->delete_group_service();
+					break;
+
+				case 'xhrGet_user_service_featured':
+					$this->model->get_user_service_featured();
+					break;
+
+				case 'xhrInsert_user_service_featured':
+					$this->model->insert_user_service_featured();
+					break;
+
+				case 'xhrUpdate_user_service_featured':
+					$this->model->update_user_service_featured();
+					break;
+
+				case 'xhrDelete_user_service_featured':
+					$this->model->delete_user_service_featured();
+					break;
+					
 				default:
 					$this->view->style = array(
 						ASSETS . 'plugins/bootstrap-select/bootstrap-select.min.css',
 						ASSETS . 'plugins/select2/select2.css',
 						ASSETS . 'plugins/select2/select2-metronic.css',
+						ASSETS . 'plugins/image-manager/css/image-manager.min.css',
 						URL . 'Views/spaCMS/menu/css/spaCMS_menu.css'
 					);
 
 					$this->view->script = array(
 						ASSETS . 'plugins/bootstrap-select/bootstrap-select.min.js',
 						ASSETS . 'plugins/select2/select2.min.js',
+						ASSETS . 'plugins/image-manager/js/image-manager.js',
 						URL . 'Views/spaCMS/menu/js/spaCMS_menu.js'
 					);
 

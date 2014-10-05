@@ -152,7 +152,16 @@ SQL;
 		$data = array(
 			"group_service_name" => $_POST["group_service_name"]
 		);
-		$result = $this->db->update('group_service', $data, "group_service_id = $group_service_id");
+		$where = "group_service_user_id = $user_id";
+		$where .= " AND group_service_id = $group_service_id";
+
+		$result = $this->db->update('group_service', $data, $where);
+		
+		if($result) {
+			echo 'success';
+		} else {
+			echo 'error';
+		}
 	}
 
 	function insert_group_service() {
@@ -174,8 +183,37 @@ SQL;
 		$group_service_id = $_POST['group_service_id'];
 		$table = 'group_service';
 		$where = "group_service_id = $group_service_id AND group_service_user_id = $user_id";
-		$this->db->delete($table, $where);
+		$result = $this->db->delete($table, $where);
+		if($result) {
+			echo 'success';
+		} else {
+			echo 'error';
+		}
 	}
+
+
+	/////////// User service
+	function insert_user_service() {
+		$user_id = Session::get('user_id');
+
+		foreach ($_POST as $key => $value) {
+			if($key == "url") {
+				continue;
+			}
+			if($key == "user_service_image"){
+				$data["$key"] = implode(',', $value);
+				continue;
+			}
+			$data["$key"] = $value;
+		}
+
+		if( $this->db->insert('user_service', $data) ){
+			echo 'success';
+		} else {
+			echo 'error';
+		}
+	}
+
 
 	/////////// Service featured
 	function get_user_service_featured() {

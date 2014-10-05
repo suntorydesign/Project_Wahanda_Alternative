@@ -52,6 +52,10 @@ class SpaCMS_Model extends Model {
 		SpaCMS_Menu_Model::get_group_user_service();
 	}
 
+	function insert_user_service() {
+		SpaCMS_Menu_Model::insert_user_service();
+	}
+
 	function get_user_service_featured() {
 		SpaCMS_Menu_Model::get_user_service_featured();
 	}
@@ -62,6 +66,14 @@ class SpaCMS_Model extends Model {
 	
 	function insert_group_service() {
 		SpaCMS_Menu_Model::insert_group_service();
+	}
+	
+	function update_group_service() {
+		SpaCMS_Menu_Model::update_group_service();
+	}
+	
+	function delete_group_service() {
+		SpaCMS_Menu_Model::delete_group_service();
 	}
 
 	///////////////////////////// REPORTS //////////////////////////
