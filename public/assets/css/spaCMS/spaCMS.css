@@ -11458,7 +11458,7 @@ a.reset {
 .featured .offer {
      background: none repeat scroll 0% 0% #ffffff;
      border: 2px solid #74756f;
-     cursor: pointer;
+     /*cursor: pointer;*/
      height: 65px;
      margin-bottom: 15px;
      padding: 5px 112px 6px 6px;

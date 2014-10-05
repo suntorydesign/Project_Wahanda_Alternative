@@ -415,7 +415,67 @@ var ImageManager = function () {
     }
 }();
 
-var UserService = function() {
+var UserServiceFeatured = function() {
+    var xhrGet_user_service_featured = function() {
+        var html = '<div data-id=":user_service_id" class="offer state-act">';
+            html += '<div tabindex="-1" class="offer-content">';
+                    html += '<img class="pic" alt="" src=":user_service_image">';
+                    html += '<div class="title">';
+                        html += '<span class="icon icons-act"></span>';
+                        html += ':user_service_name';
+                    html += '</div>';
+                html += '</div>';
+                html += '<div class="offer-delete" data-id=":user_service_id">';
+                    html += '<div class="icons-delete2 unfeature"></div>';
+                html += '</div>';
+            html += '</div>';
+
+        var html_empty = '<div class="offer offer-empty">';
+                html_empty += '<p>';
+                    html_empty += 'Empty slot';
+                html_empty += '</p>';
+            html_empty += '</div>';
+
+        var url = URL + 'spaCMS/menu/xhrGet_user_service_featured';
+        $.get(url, function(data){
+            var out = '';
+            var num_ept = 5 - data.length;
+            var primary_img = '';
+
+            $.each(data, function(index, us_featured) {
+                primary_img = us_featured['user_service_image'].split(',');
+                primary_img = primary_img[0];
+
+                out = html.replace(/:user_service_id/g, us_featured['user_service_id']);
+                out = out.replace(/:user_service_name/g, us_featured['user_service_name']);
+                out = out.replace(/:user_service_image/g, primary_img);
+
+                $('.featured').append(out);
+            });
+
+            if(num_ept > 0) {
+                for (var i = 0; i < num_ept; i++) {
+                    $('.featured').append(html_empty);
+                };
+            }
+
+            // delete user service featured
+            $('.offer-delete').on('click', function() {
+                var self = $(this);
+                var data_id = self.attr('data-id');
+                
+                var url = URL + 'spaCMS/menu/xhrDelete_user_service_featured';
+                $.post(url, {'user_service_id':data_id}, function(rs) {
+                    if(rs === 'success'){
+                        var parent = self.parent();
+                        parent.fadeOut();
+                        $('.featured').append(html_empty);
+                    }
+                });
+            });
+        },'json');
+    }
+
     var xhrInsert_user_service = function() {
         $("#addUserService_form").on('submit', function() {
             var self    = $(this);
@@ -446,7 +506,8 @@ var UserService = function() {
 
     return {
         init: function(){
-            xhrInsert_user_service();
+            xhrGet_user_service_featured();
+            // xhrInsert_user_service();
         }
     }
 }();
@@ -455,4 +516,4 @@ var UserService = function() {
 LoadMoreInfo.init();
 MenuGroupService.init();
 ImageManager.init();
-// UserService.init();
+UserServiceFeatured.init();

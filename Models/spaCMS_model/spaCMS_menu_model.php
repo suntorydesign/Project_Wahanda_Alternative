@@ -218,11 +218,12 @@ SQL;
 	/////////// Service featured
 	function get_user_service_featured() {
 		$user_id = Session::get('user_id');
+
 		$aQuery = <<<SQL
 		SELECT us.user_service_name, us.user_service_id, us.user_service_image
 		FROM user_service us, group_service gs
 		WHERE gs.group_service_user_id = {$user_id}
-			AND us.group_service_id = gs.group_service_id
+			AND us.user_service_group_id = gs.group_service_id
 			AND us.user_service_is_featured = 1
 SQL;
 		$data = $this->db->select($aQuery);
@@ -244,6 +245,22 @@ SQL;
 		
 	}
 
+	function delete_user_service_featured() {
+		$user_id = Session::get('user_id');
+		$user_service_id = $_POST['user_service_id'];
+		$data = array(
+			'user_service_is_featured' => 0
+		);
+		$where = "user_service_id = $user_service_id";
+
+		$result = $this->db->update('user_service', $data, $where);
+
+		if($result) {
+			echo 'success';
+		} else {
+			echo 'error';
+		}
+	}
 
 
 }

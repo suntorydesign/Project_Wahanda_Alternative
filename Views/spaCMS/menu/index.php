@@ -24,7 +24,7 @@
 	</div>
 
 	<div class="section-aside2 featured-services">
-		<h2 class="section-title">Featured services</h2>
+		<h2 class="section-title">Những dịch vụ nổi bật</h2>
 
 		<div class="listing listing-enhanced">
 			<div class="view-standard">
@@ -55,49 +55,7 @@
 				</div>
 
 				<div class="featured">
-					<div data-id="593323" class="offer state-act">
-						<div tabindex="-1" class="offer-content">
-							<img class="pic" alt="" src="https://connect.wahanda.com/api/v2.0.0/media/venue/285925/gallery/image/10411?width=100&amp;height=70">
-							<div class="title">
-								<span class="icon icons-act"></span>
-								TEst
-							</div>
-
-						</div>
-						<div class="offer-delete">
-							<div class="icons-delete2 unfeature"></div>
-						</div>
-					</div>
-					<div data-id="593319" class="offer state-act">
-						<div tabindex="-1" class="offer-content">
-							<img class="pic" alt="" src="https://connect.wahanda.com/api/v2.0.0/media/venue/285925/gallery/image/10437?width=100&amp;height=70">
-							<div class="title">
-								<span class="icon icons-act"></span>
-								Body Exfoliation Treatments
-							</div>
-
-						</div>
-						<div class="offer-delete">
-							<div class="icons-delete2 unfeature"></div>
-						</div>
-					</div>
-					<div class="offer offer-empty">
-						<p>
-							Empty slot
-						</p>
-					</div>
-
-					<div class="offer offer-empty">
-						<p>
-							Empty slot
-						</p>
-					</div>
-
-					<div class="offer offer-empty">
-						<p>
-							Empty slot
-						</p>
-					</div>
+					
 				</div>
 			</div>
 		</div>

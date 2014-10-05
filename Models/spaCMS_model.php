@@ -59,6 +59,10 @@ class SpaCMS_Model extends Model {
 	function get_user_service_featured() {
 		SpaCMS_Menu_Model::get_user_service_featured();
 	}
+
+	function delete_user_service_featured() {
+		SpaCMS_Menu_Model::delete_user_service_featured();
+	}
 	
 	function get_service_system() {
 		SpaCMS_Menu_Model::get_service_system();
