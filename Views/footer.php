@@ -150,13 +150,13 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-md-6">
+												<div class="col-md-6" id="chart_rating">
 													<div class="row">
 														<div class="col-md-offset-1 col-md-3">
 															<small>5 sao </small>
 														</div>
 														<div class="col-md-8">
-															<span style="width: 100%" class="progress_bar" ></span>
+															<span id="five_stars" style="width: 100%" class="progress_bar" ></span>
 														</div>
 													</div>
 													<div class="row">
@@ -164,7 +164,7 @@
 															<small>4 sao </small>
 														</div>
 														<div class="col-md-8">
-															<span style="width: 80%" class="progress_bar" ></span>
+															<span id="four_stars" style="width: 80%" class="progress_bar" ></span>
 														</div>
 													</div>
 													<div class="row">
@@ -172,7 +172,7 @@
 															<small>3 sao </small>
 														</div>
 														<div class="col-md-8">
-															<span style="width: 60%" class="progress_bar" ></span>
+															<span id="three_stars" style="width: 60%" class="progress_bar" ></span>
 														</div>
 													</div>
 													<div class="row">
@@ -180,7 +180,7 @@
 															<small>2 sao </small>
 														</div>
 														<div class="col-md-8">
-															<span style="width: 40%" class="progress_bar" ></span>
+															<span id="two_stars" style="width: 40%" class="progress_bar" ></span>
 														</div>
 													</div>
 													<div class="row">
@@ -188,7 +188,7 @@
 															<small>1 sao </small>
 														</div>
 														<div class="col-md-8">
-															<span style="width: 20%" class="progress_bar" ></span>
+															<span id="one_star" style="width: 20%" class="progress_bar" ></span>
 														</div>
 													</div>
 												</div>

@@ -37,7 +37,8 @@ SQL;
 	function loadNewServiceList() {
 		$select = $this -> db -> select('SELECT * 
 							   FROM `user_service` 
-							   WHERE `user_service_delete_flg` = 0 order by `user_service_id` desc 
+							   WHERE `user_service_delete_flg` = 0
+							   order by `user_service_id` desc 
 							   limit 8');
 		if($select){
 			echo json_encode($select);

@@ -86,6 +86,29 @@ SQL;
 		$client_amount = 0;
 		$star_point = 0;
 		$result = array();
+		$chart_info = array();
+		$chart_info['one_star'] = 0;
+		$chart_info['two_stars'] = 0;
+		$chart_info['three_stars'] = 0;
+		$chart_info['four_stars'] = 0;
+		$chart_info['five_stars'] = 0;
+		foreach ($select as $key => $value) {
+			if($value['user_review_overall'] == '1'){
+				$chart_info['one_star'] = $value['star_amount'];
+			}
+			if($value['user_review_overall'] == '2'){
+				$chart_info['two_stars'] = $value['star_amount'];
+			}
+			if($value['user_review_overall'] == '3'){
+				$chart_info['three_stars'] = $value['star_amount'];
+			}
+			if($value['user_review_overall'] == '4'){
+				$chart_info['four_stars'] = $value['star_amount'];
+			}
+			if($value['user_review_overall'] == '5'){
+				$chart_info['five_stars'] = $value['star_amount'];
+			}
+		}
 		foreach ($select as $key => $value) {
 			$star_point = $star_point + $value['user_review_overall'] * $value['star_amount'];
 			$client_amount = $client_amount + $value['star_amount'];
@@ -93,7 +116,9 @@ SQL;
 		$star_review = $star_point / $client_amount;
 		$result['star_review'] = round($star_review, 1);
 		$result['client_amount'] = $client_amount;
+		$chart_info['client_amount'] = $client_amount;
 		$return['general_info'][] = $result;
+		$return['chart_info'][] = $chart_info;
 
 		$sql = <<<SQL
 SELECT user_review_active, COUNT(*) AS star_amount

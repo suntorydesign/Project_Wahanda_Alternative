@@ -873,6 +873,21 @@ function loadLocationStarRatingDetail() {
 				$('#user_review_overall_detail').html(html);
 				$('#general_rating_detail').html(general_html);
 			}
+			if(response.chart_info[0] != null) {
+				if(response.chart_info[0].client_amount == '0'){
+					$('#five_stars').attr('style','width: 0%');
+					$('#four_stars').attr('style','width: 0%');
+					$('#three_stars').attr('style','width: 0%');
+					$('#two_stars').attr('style','width: 0%');
+					$('#one_star').attr('style','width: 0%');
+				}else{
+					$('#five_stars').attr('style','width: ' + (parseInt(response.chart_info[0].five_stars)/parseInt(response.chart_info[0].client_amount)*100) + '%');
+					$('#four_stars').attr('style','width: ' + (parseInt(response.chart_info[0].four_stars)/parseInt(response.chart_info[0].client_amount)*100) + '%');
+					$('#three_stars').attr('style','width: ' + (parseInt(response.chart_info[0].three_stars)/parseInt(response.chart_info[0].client_amount)*100) + '%');
+					$('#two_stars').attr('style','width: ' + (parseInt(response.chart_info[0].two_stars)/parseInt(response.chart_info[0].client_amount)*100) + '%');
+					$('#one_star').attr('style','width: ' + (parseInt(response.chart_info[0].one_star)/parseInt(response.chart_info[0].client_amount)*100) + '%');
+				}
+			}
 			if (response.data[0] != null) {
 				var html_2 = '';
 				// console.log(rating_value);

@@ -22,7 +22,8 @@ FROM user, user_service, group_service, service
 WHERE user.user_id = group_service.group_service_user_id
 AND user_service.user_service_group_id = group_service.group_service_id
 AND user_service.user_service_service_id = service.service_id
-AND service.service_name LIKE '%{$data["service_name"]}%'
+AND (service.service_name LIKE '%{$data["service_name"]}%'
+	OR user_service.user_service_name LIKE '%{$data["service_name"]}%')
 AND user.user_district_id LIKE '%{$data["district_id"]}%'
 SQL;
 		$select = $this -> db -> select($sql);
@@ -38,7 +39,8 @@ FROM user, user_service, group_service, service
 WHERE user.user_id = group_service.group_service_user_id
 AND user_service.user_service_group_id = group_service.group_service_id
 AND user_service.user_service_service_id = service.service_id
-AND service.service_name LIKE '%{$data["service_name"]}%'
+AND (service.service_name LIKE '%{$data["service_name"]}%'
+	OR user_service.user_service_name LIKE '%{$data["service_name"]}%')
 AND user.user_district_id LIKE '%{$data["district_id"]}%'
 ORDER BY user.user_id DESC
 LIMIT {$page}, {$item_per_page}
@@ -63,7 +65,8 @@ WHERE user.user_id = group_service.group_service_user_id
 AND user_service.user_service_group_id = group_service.group_service_id
 AND user_service.user_service_service_id = service.service_id
 AND user.user_id = {$value["user_id"]}
-AND service.service_name LIKE '%{$data["service_name"]}%'
+AND (service.service_name LIKE '%{$data["service_name"]}%'
+	OR user_service.user_service_name LIKE '%{$data["service_name"]}%')
 AND user.user_district_id LIKE '%{$data["district_id"]}%'
 ORDER BY user_service.user_service_id DESC
 SQL;
