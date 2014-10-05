@@ -31,10 +31,8 @@
 				<div class="item col-md-3">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-						<select name="l" class="form-control">
-							<option value="0" selected>Tại...</option>
-							<option value="2" >Hà Nội</option>
-							<option value="1" >Tp Hồ Chí Minh</option>
+						<select id="district_field" name="l" class="form-control">
+							<option value="" selected>Tại...</option>
 						</select>
 					</div>
 	

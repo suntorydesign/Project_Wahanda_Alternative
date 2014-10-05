@@ -21,10 +21,14 @@ class Index extends Controller {
 			if ((time() - $_SESSION['check_idle']) >= IDLE_TIME) {
 				Session::destroy();
 				echo 200;
-			}else{
+			} else {
 				echo 0;
 			}
 		}
+	}
+
+	public function loadDistrict() {
+		$this -> model -> loadDistrict();
 	}
 
 	public function loadTopServiceList() {
@@ -170,8 +174,10 @@ class Index extends Controller {
 		}
 		echo $count_b + $count_e;
 	}
+
 	public function setTimeIdle() {
 		Session::initIdle();
 	}
+
 }
 ?>

@@ -9,8 +9,8 @@ function loadResultSearch(page) {
 		dataType : 'json',
 		data : {
 			service_name : SERVICE_NAME,
-			page : page
-			// district_id : DISTRICT_ID
+			page : page,
+			district_id : DISTRICT_ID
 		},
 		success : function(response) {
 			var total_row = response.total_row;
@@ -95,7 +95,7 @@ function loadResultSearch(page) {
 				});
 				$('#result-list').html(html);
 			}else{
-				$('#result-list').html('<h3>Không có dịch vụ nào được tìm thấy...</h3>');
+				$('#result-list').html('<h4>Không có địa điểm nào được tìm thấy...</h4>');
 			}
 		},
 		complete : function() {

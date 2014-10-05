@@ -7,7 +7,21 @@ class index_model extends Model {
 	function __construct() {
 		parent::__construct();
 	}
-
+	
+	public function loadDistrict() {
+		$sql = <<<SQL
+SELECT *
+FROM district
+ORDER BY district_name ASC
+SQL;
+		$select = $this -> db -> select($sql);
+		if($select){
+			echo json_encode($select);
+		}else{
+			echo '[]';
+		}
+	}
+	
 	function loadTopServiceList() {
 		$select = $this -> db -> select('SELECT * 
 							   FROM `user_service` 

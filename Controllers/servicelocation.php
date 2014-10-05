@@ -29,6 +29,7 @@ class servicelocation extends Controller {
 		Session::initIdle();
 		if(isset($_POST['service_name']) && isset($_POST['page'])){
 			$data['service_name'] = $_POST['service_name'];
+			$data['district_id'] = $_POST['district_id'];
 			$data['page'] = $_POST['page'];
 			$this -> model -> loadResultSearch($data);
 		}

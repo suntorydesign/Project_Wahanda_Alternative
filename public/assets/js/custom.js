@@ -19,6 +19,26 @@ $(document).ready(function(){
 		$('#user_description_see_more').show();
 	});
 });
+/*LOAD DISTRICT*/
+function loadDistrict(){
+	$.ajax({
+		url : URL + 'index/loadDistrict',
+		type : 'post',
+		dataType : 'json',
+		success : function(response) {
+			if(response[0] != null){
+				var html = '';
+				$.each(response, function(key, value){
+					html += '<option value="' + value.district_id + '">' + value.district_name + '</option>';
+				});
+				$('#district_field').append(html);
+			}
+		}
+	});
+}
+/*END LOAD DISTRICT*/
+/*-----------------------*/
+
 /*LOAD TOP SERVICE LIST*/
 function loadTopServiceList() {
 	$.ajax({
@@ -91,7 +111,6 @@ function loadTopServiceList() {
 		}
 	});
 }
-
 /*END LOAD TOP SERVICE LIST*/
 /*-----------------------*/
 

@@ -13,7 +13,7 @@ class servicelocation_model extends Model {
 	}
 
 	public function loadResultSearch($data) {
-		$page = ($data['page'] - 1)*MAX_PAGINATION_ITEM;
+		$page = ($data['page'] - 1) * MAX_PAGINATION_ITEM;
 		$item_per_page = MAX_PAGINATION_ITEM;
 		$return = array();
 		$sql = <<<SQL
@@ -23,6 +23,7 @@ WHERE user.user_id = group_service.group_service_user_id
 AND user_service.user_service_group_id = group_service.group_service_id
 AND user_service.user_service_service_id = service.service_id
 AND service.service_name LIKE '%{$data["service_name"]}%'
+AND user.user_district_id LIKE '%{$data["district_id"]}%'
 SQL;
 		$select = $this -> db -> select($sql);
 		$return['total_row'] = $select[0]['total_row'];
@@ -38,6 +39,7 @@ WHERE user.user_id = group_service.group_service_user_id
 AND user_service.user_service_group_id = group_service.group_service_id
 AND user_service.user_service_service_id = service.service_id
 AND service.service_name LIKE '%{$data["service_name"]}%'
+AND user.user_district_id LIKE '%{$data["district_id"]}%'
 ORDER BY user.user_id DESC
 LIMIT {$page}, {$item_per_page}
 SQL;
@@ -62,6 +64,7 @@ AND user_service.user_service_group_id = group_service.group_service_id
 AND user_service.user_service_service_id = service.service_id
 AND user.user_id = {$value["user_id"]}
 AND service.service_name LIKE '%{$data["service_name"]}%'
+AND user.user_district_id LIKE '%{$data["district_id"]}%'
 ORDER BY user_service.user_service_id DESC
 SQL;
 			$select_service = $this -> db -> select($query);
