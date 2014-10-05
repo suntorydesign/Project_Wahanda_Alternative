@@ -436,7 +436,7 @@
 								<div class="button-inner">
 									<div class="button-icon icons-tick done"></div>
 									<div class="button-icon fa fa-spin fa-refresh loading hidden"></div>
-									<span class="msg msg-action-default">Thêm</span>
+									<span class="msg msg-action-default">Lưu</span>
 								</div>
 							</button>
 							<button class="button action action-default button-basic offer-archive hidden" type="button">
@@ -454,6 +454,259 @@
 	</div>
 </div>
 
+<!-- Modal Edit User services -->
+<div id="editUserServices_modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+	<div class="modal-dialog" style="width: 800px;">
+		<div class="modal-content">
+			<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable">
+				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+					<span class="ui-dialog-title" id="ui-dialog-title-1">Dịch vụ</span><a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
+				</div>
+				<div class="offer-form ui-dialog-content ui-widget-content" style="height: 550px;" scrolltop="0" scrollleft="0">
+					<form id="editUserService_form" action="#" method="POST" novalidate="novalidate">
+						<div class="dialog-content clearfix">
+							<div class="offer-form-main">
+								<div class="offer-type">
+									<div class="icon icons-treatment-big"></div>
+									<div class="type-select">
+										<select id="select2_editService" class="form-control select2" data-placeholder="Vui lòng chọn loại dịch vụ" required>
+											<option value=""></option>
+											<!-- List service system -->
+
+										</select>
+
+										<input type="hidden" name="user_service_group_id">
+										<input type="hidden" name="user_service_service_id">
+										
+										<div id="selF0G_chzn" class="chzn-container chzn-container-single" style="width: 534px;">
+											<div style="left: -9000px; width: 532px; top: 34px;" class="chzn-drop">
+												<div class="chzn-search">
+													<input type="text" autocomplete="off" style="width: 485px;" placeholder="Look up service type by typing in a name" tabindex="-1">
+												</div>
+												<ul class="chzn-results" style="max-height: 431.9px;">
+													<li class="group-result" id="selF0G_chzn_g_1" style="display: list-item;">
+														Body
+													</li>
+													<li style="" class="active-result group-option result-selected" id="selF0G_chzn_o_2">
+														24 Carat Gold Body Treatment
+													</li>
+													<li style="" class="active-result group-option" id="selF0G_chzn_o_3">
+														Acoustic Wave Therapy
+													</li>
+													<li style="" class="active-result group-option" id="selF0G_chzn_o_4">
+														Acupuncture
+													</li>
+													<li style="" class="active-result group-option" id="selF0G_chzn_o_5">
+														Akasuri
+													</li>
+													<li style="" class="active-result group-option" id="selF0G_chzn_o_6">
+														Arasys Toning and Inch Loss Treatment
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div id="service_name" title="<strong>Service name</strong> - Type in the name of the service. Avoid using pricing or discount rate in the name as we will calculate and show them based on pricing information below." class="tooltips tooltips-bottom b-select-valid txt-input txt-input-big form-element-wrapper" aria-describedby="ui-tooltip-1">
+										<input type="text" value="" maxlength="150" placeholder="Tên dịch vụ của bạn" class="offer-name" name="user_service_name">
+									</div>
+								</div>
+								<div tabindex="-1" class="offer-content">
+									<div class="warning warning-archived hidden">
+										<div class="icon icons-archive-medium"></div>
+										<span class="title"> This service is archived. It will not be visible to your clients. <a class="offer-activate" href="javascript:;">Move this service back to your menu</a> </span>
+										<span class="info"></span>
+									</div>
+									<div class="warning warning-locked hidden">
+										<div class="icon icons-lock"></div>
+										<span class="title">You can only edit limited information for this menu item.</span>
+										<span class="info"></span>
+									</div>
+									<div class="warning warning-pending hidden">
+										<div class="icon icons-clock"></div>
+										<span class="title">Menu item is waiting for approval.</span>
+										This item is not published on Wahanda.com as a featured offer yet, as it needs to be reviewed by our support team.
+									</div>
+									<div class="warning warning-chain hidden">
+										<div class="icon icons-lock"></div>
+										<span class="title">Menu item is defined at a chain level.</span>
+										You can only edit limited information for this menu item. Contact Wahanda's support team if you need to modify anything else.
+									</div>
+									<div class="warning warning-permissions hidden">
+										<div class="icon icons-lock"></div>
+										<span class="title">You are not allowed to edit this item.</span>
+									</div>
+
+									<div class="skus-pricing group-dependancy">
+										<h2 class="part-title">Price</h2>
+
+										<table cellspacing="0" cellpadding="0" class="skus-list hidden"></table>
+										<div class="single-sku-container">
+											<table cellspacing="0" cellpadding="0" class="default-form skus-edit">
+												<tbody>
+													<tr class="form-row sku-duration">
+														<td class="label-part"><label>Thời gian</label></td>
+														<td class="input-part">
+														<select name="user_service_duration">
+															<option value="0">Not set</option>
+															<option value="10">10 min</option>
+															<option value="15">15 min</option>
+															<option value="20">20 min</option>
+															<option value="25">25 min</option>
+															<option value="30">30 min</option>
+															<option value="35">35 min</option>
+															<option value="40">40 min</option>
+															<option value="45">45 min</option>
+															<option value="50">50 min</option>
+															<option value="55">55 min</option>
+															<option selected="selected" value="60">1 h </option>
+															<option value="65">1 h 05 min</option>
+															<option value="70">1 h 10 min</option>
+															<option value="75">1 h 15 min</option>
+															<option value="80">1 h 20 min</option>
+															<option value="85">1 h 25 min</option>
+															<option value="90">1 h 30 min</option>
+															<option value="95">1 h 35 min</option>
+															<option value="100">1 h 40 min</option>
+															<option value="105">1 h 45 min</option>
+															<option value="110">1 h 50 min</option>
+															<option value="115">1 h 55 min</option>
+															<option value="120">2 h </option>
+															<option value="135">2 h 15 min</option>
+															<option value="150">2 h 30 min</option>
+															<option value="165">2 h 45 min</option>
+															<option value="180">3 h </option>
+															<option value="195">3 h 15 min</option>
+															<option value="210">3 h 30 min</option>
+															<option value="225">3 h 45 min</option>
+															<option value="240">4 h </option>
+															<option value="270">4 h 30 min</option>
+															<option value="300">5 h </option>
+															<option value="330">5 h 30 min</option>
+															<option value="360">6 h </option>
+															<option value="390">6 h 30 min</option>
+															<option value="420">7 h </option>
+															<option value="450">7 h 30 min</option>
+															<option value="480">8 h </option>
+															<option value="540">9 h </option>
+															<option value="600">10 h </option>
+															<option value="660">11 h </option>
+															<option value="720">12 h </option>
+														</select></td>
+													</tr>
+													<tr id="price" title="<strong>Full and Sale price</strong> - Full price is the pricelist price of your service. If you are offering a special price on this offer, add it to Sale price." class="form-row" aria-describedby="ui-tooltip-5">
+														<td class="label-part sku-rrp"><label>Giá gốc </label></td>
+														<td data-tooltips="&lt;strong&gt;Full and Sale price&lt;/strong&gt; - Full price is the pricelist price of your service. If you are offering a special price on this offer, add it to Sale price." class="tooltips tooltips-top input-part">
+														<div class="txt-input txt-input-mini form-element-wrapper">
+															<input type="text" min="1" class="required number" value="" name="user_service_full_price" required >
+														</div><label class="optional"> Giá khuyến mãi </label>
+														<div class="txt-input txt-input-mini form-element-wrapper">
+															<input type="text" class="number sku-amount" value="" name="user_service_sale_price">
+														</div></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+									</div>
+									<div class="listing group-dependancy">
+										<h2 class="part-title">How would you like to sell this service?</h2>
+										<div id="sell_service" title="<strong>Feature on Wahanda</strong> - Featuring a service will put it on top on your listing and expose it through all partners&amp;#39; websites. You can feature up to five of your top services." class="choices form-element-wrapper enhanced-listing-only">
+											<label>
+												<input type="checkbox" name="user_service_is_featured" id="service-feature">
+												Dịch vụ nổi bật (tối đa 5 dịch vụ) </label>
+										</div>
+										<div class="fullfilment">
+											<div class="empty standard-listing hidden">
+												<p class="intro">
+													<span class="icons-attention-small"></span>
+													You're not selling on Wahanda.
+												</p>
+												<p class="after-txt">
+													Do you know that you can start selling on Wahanda today? It's a no-brainer - we'll charge you only if we sell.
+												</p>
+												<button class="button button-basic upgrade-to-enhanced" type="button">
+													<div class="button-inner">
+														<div class="button-icon icons-upgrade2"></div>
+														Find out more
+													</div>
+												</button>
+											</div>
+
+											<table cellspacing="0" cellpadding="0" class="fulfillment-edit">
+												<tbody>
+													<tr class="form-row voucher-part">
+														<td class="label-part"><label>Trạng thái</label></td>
+														<td class="input-part">
+														<select id="fulfillment-expiry-type" name="user_service_status">
+															<option value="1">Hoạt động</option>
+															<option value="0">Ngưng hoạt động</option>
+														</select>
+													</tr>
+													<tr id="sold_as" title="<strong>Sell as</strong> - Service can be fulfilled as: <strong><em>Appointment</em></strong> - customers book in directly by finding available slots in your calendar. It’s much more convenient both for you and your customers. <strong><em>eVoucher</em></strong> - customers receive vouchers that they can redeem in your venue." class="form-row">
+														<td class="label-part"><label for="service-type">Sold as</label></td>
+														<td class="input-part">
+														<select id="fulfillment-types" name="user_service_use_evoucher">
+															<option value="AE">Appointment or eVoucher</option>
+															<option value="A">Appointment</option>
+															<option value="E">eVoucher</option>
+														</select></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="descriptions group-dependancy">
+										<div class="txts description">
+											<h2 class="part-title">Mô tả dịch vụ</h2>
+											<!-- bb code -->
+											<textarea max-text-lines="4" id="user_description" name="user_service_description" cols="5" rows="4" class="full required"></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="top-shadow"></div>
+								<div class="bottom-shadow"></div>
+							</div>
+							<div class="offer-form-aside pictures ui-sortable">
+								<h2 class="part-title">Hình ảnh dịch vụ</h2>
+								<ul class="menu-item-pictures">
+									<div id="list_edit_user_service_image">
+										<!-- List user service image -->
+
+									</div> 
+									<li class="single-picture empty">
+										<div id="iM_user_slide" class="single-picture-wrapper imageManager_openModal" style="position: relative;" data-toggle="modal" data-target="#imageManager_modal">
+											<div class="add-picture vertically-centered" style="position: absolute; height: 34px; top: 50%; margin-top: -17px;">
+												<div class="icon icons-plus3"></div>
+												Thêm hình
+											</div>
+										</div>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+						<div class="dialog-actions">
+							<button class="button action action-default button-primary save-action" type="submit">
+								<div class="button-inner">
+									<div class="button-icon icons-tick done"></div>
+									<div class="button-icon fa fa-spin fa-refresh loading hidden"></div>
+									<span class="msg msg-action-default">Lưu</span>
+								</div>
+							</button>
+							<button class="button action action-default button-basic offer-archive" type="button">
+								<div class="button-inner">
+									<div class="button-icon icons-archive"></div>
+									<span class="msg msg-action-default">Xóa bỏ dịch vụ</span>
+								</div>
+							</button>
+							<a class="button-cancel" href="javascript:;" data-dismiss="modal">Hủy</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <!-- Image Manager Modal -->
 <div class="modal" id="imageManager_modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">

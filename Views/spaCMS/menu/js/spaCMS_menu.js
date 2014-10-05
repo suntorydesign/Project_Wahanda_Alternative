@@ -108,12 +108,13 @@ var LoadMoreInfo = function() {
                 $('.multiple-services-groups-list').append(out_gs);
                 // Append to Add service
                 $('#select2_service').append(out_optgroup);
+                $('#select2_editService').append(out_optgroup);
             }); 
             
             // Run select 2
-            $('#select2_service').select2({
-                placeholder: "Select an option",
-                allowClear: true
+            $('#select2_service, #select2_editService').select2({
+                placeholder: "Vui lòng chọn loại dịch vụ",
+                allowClear: true,
             }).on("select2-selecting", function(e) {
                 // console.log("selecting val=" + e.val + " choice=" + e.object.text);
                 $('input[name=user_service_name]', $('#addUserService_form')).val(e.object.text);
@@ -132,6 +133,12 @@ var LoadMoreInfo = function() {
 
 var MenuGroupService = function () {
 
+    var refresh_addUS_form = function() {
+        $('#addUserService_form')[0].reset();
+        $('#select2_service').select2("val", "");
+        $('#list_user_service_image').html('');
+    }
+
     var xhrGet_group_user_service = function() {
         var html = '<div class="offer-group">';
             html += '<div class="icon icons-drag"></div>';
@@ -148,7 +155,9 @@ var MenuGroupService = function () {
             html += '</div>';
 
         var html_us = '<div class="offers ui-sortable">';
-                html_us += '<div class="offer edit-offer" data-user_service_id=":user_service_id" data-toggle="modal" data-target="#addUserServices_modal">';
+                html_us += '<div class="offer edit-offer" data-sid=":user_service_service_id" data-id=":user_service_id" ';
+                html_us += 'data-name=":user_service_name" data-duration=":user_service_duration" data-price=":user_service_full_price" data-sale=":user_service_sale_price" data-featured=":user_service_is_featured" ';
+                html_us += 'data-status=":user_service_status" data-description=":user_service_description" data-image=":user_service_image" data-toggle="modal" data-target="#editUserServices_modal">';
                     html_us += '<div class="offer-in">';
                         html_us += '<div class="main clearfix">';
                             html_us += '<div class="icon icons-treatment"></div>';
@@ -178,7 +187,6 @@ var MenuGroupService = function () {
         var out = '';
         $.get(url, function(data){
             $('#list_group_user_service').html('');
-
             $.each(data, function(index, group_us){
                 out = html.replace(/:group_service_id/g, group_us['group_service_id']);
                 out = out.replace(/:group_service_name/g, group_us['group_service_name']);
@@ -186,9 +194,12 @@ var MenuGroupService = function () {
                 if(typeof group_us['list_user_service'] !== 'undefined'){
                     $.each(group_us['list_user_service'], function(index, us){
                         out = out.replace(':list_user_service', html_us);
+                        out = out.replace(/:user_service_service_id/g, us['user_service_service_id']);
                         out = out.replace(/:user_service_id/g, us['user_service_id']);
                         out = out.replace(/:user_service_name/g, us['user_service_name']);
                         out = out.replace(/:user_service_duration/g, us['user_service_duration']);
+                        out = out.replace(/:user_service_status/g, us['user_service_status']);
+                        out = out.replace(/:user_service_description/g, us['user_service_description']);
                         if( us['user_service_sale_price'] == '' ) {
                             out = out.replace(/:user_service_full_price/g, '');
                             out = out.replace(/:user_service_sale_price/g, us['user_service_full_price']);
@@ -213,14 +224,22 @@ var MenuGroupService = function () {
 
             // Set group_service_id to addUserService_form
             $('.add-offer').on('click', function() {
+                // Refresh form
+                refresh_addUS_form();
                 var group_service_id = $(this).attr('data-group_service_id');
                 $('input[name=user_service_group_id]', $('#addUserService_form') ).val(group_service_id);
-            })
+
+            });
 
             // Get info user service for edit this
             $('.edit-offer').on('click', function() {
-                $('.offer-archive').fadeIn();
+                var self = $(this);
+                var user_service_service_id = self.attr('data-sid');
+                var user_service_id = self.attr('data-id');
+
+                $('#select2_service').select2("val", user_service_service_id);
             });
+
         }, 'json');
     }
 
@@ -247,7 +266,6 @@ var MenuGroupService = function () {
             });
             return false;
         });
-        
     }
 
     var xhrDelete_group_service = function() {

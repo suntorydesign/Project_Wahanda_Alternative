@@ -20,11 +20,14 @@ class SpaCMS_Menu_Model {
 			$get_user_service = self::get_user_service($group['group_service_id']);
 			foreach ($get_user_service as $u_service) {
 				$data[$index]['list_user_service'][] = array(
-					'user_service_id' => $u_service['user_service_id'],
-					'user_service_name' => $u_service['user_service_name'],
-					'user_service_duration' => $u_service['user_service_duration'],
-					'user_service_sale_price' => $u_service['user_service_sale_price'],
-					'user_service_full_price' => $u_service['user_service_full_price']
+					'user_service_id' 			=> $u_service['user_service_id'],
+					'user_service_name' 		=> $u_service['user_service_name'],
+					'user_service_duration' 	=> $u_service['user_service_duration'],
+					'user_service_sale_price' 	=> $u_service['user_service_sale_price'],
+					'user_service_full_price' 	=> $u_service['user_service_full_price'],
+					'user_service_status' 		=> $u_service['user_service_status'],
+					'user_service_description' 	=> $u_service['user_service_description'],
+					'user_service_service_id' 	=> $u_service['user_service_service_id']
 				);
 			}
 			$index++;
@@ -65,7 +68,8 @@ SQL;
 		$user_id = Session::get('user_id');
 		$aQuery = <<<SQL
 		SELECT us.user_service_id, us.user_service_name, us.user_service_duration,
-				us.user_service_sale_price, us.user_service_full_price
+				us.user_service_sale_price, us.user_service_full_price, us.user_service_service_id,
+				us.user_service_status, us.user_service_description
 		FROM user_service us
 		WHERE us.user_service_group_id = {$group_service_id}
 SQL;
