@@ -29,6 +29,17 @@ $(document).ready(function() {
 
 });
 
+function get_thumbnail(url_image, user_id) {
+    var res = url_image.split('/'); // chặt url ra
+    var image_name = res[res.length - 1]; // lấy tên image
+    res[res.length - 1] = "thumbnails/" + user_id; // thay thế phần tên image = "/thumbnails/{user_id}"
+    var thumbnail_name = image_name.split('.'); // tách phần extension
+    thumbnail_name = thumbnail_name[0] + '_165x95.jpg'; // đổi tên => tên file thumbnail
+    res[res.length] = thumbnail_name// chèn tên hình thumbnail vào cuối
+    var url_thumbnail = res.join('/');// ghép lại thành => url thumbnail
+    return url_thumbnail;
+}
+
 var LoadMoreInfo = function() {
 
     var xhrGet_service_system = function() {
@@ -107,18 +118,27 @@ var LoadMoreInfo = function() {
                 $('.multiple-service-items').append(out_ls);
                 $('.multiple-services-groups-list').append(out_gs);
                 // Append to Add service
-                $('#select2_service').append(out_optgroup);
+                $('#select2_addService').append(out_optgroup);
                 $('#select2_editService').append(out_optgroup);
             }); 
             
             // Run select 2
-            $('#select2_service, #select2_editService').select2({
+            $('#select2_addService').select2({
                 placeholder: "Vui lòng chọn loại dịch vụ",
                 allowClear: true,
             }).on("select2-selecting", function(e) {
                 // console.log("selecting val=" + e.val + " choice=" + e.object.text);
                 $('input[name=user_service_name]', $('#addUserService_form')).val(e.object.text);
                 $('input[name=user_service_service_id]', $('#addUserService_form')).val(e.val); //
+            });
+
+            $('#select2_editService').select2({
+                placeholder: "Vui lòng chọn loại dịch vụ",
+                allowClear: true,
+            }).on("select2-selecting", function(e) {
+                // console.log("selecting val=" + e.val + " choice=" + e.object.text);
+                $('input[name=user_service_name]', $('#editUserService_form')).val(e.object.text);
+                $('input[name=user_service_service_id]', $('#editUserService_form')).val(e.val); //
             });
         }, 'json');
     }
@@ -135,8 +155,8 @@ var MenuGroupService = function () {
 
     var refresh_addUS_form = function() {
         $('#addUserService_form')[0].reset();
-        $('#select2_service').select2("val", "");
-        $('#list_user_service_image').html('');
+        $('#select2_addService').select2("val", "");
+        $('#ListIM_addUS').html('');
     }
 
     var xhrGet_group_user_service = function() {
@@ -155,7 +175,7 @@ var MenuGroupService = function () {
             html += '</div>';
 
         var html_us = '<div class="offers ui-sortable">';
-                html_us += '<div class="offer edit-offer" data-sid=":user_service_service_id" data-id=":user_service_id" ';
+                html_us += '<div class="offer edit-offer" data-sid=":user_service_service_id" data-id=":user_service_id" data-gid=":user_service_group_id"';
                 html_us += 'data-name=":user_service_name" data-duration=":user_service_duration" data-price=":user_service_full_price" data-sale=":user_service_sale_price" data-featured=":user_service_is_featured" ';
                 html_us += 'data-status=":user_service_status" data-description=":user_service_description" data-image=":user_service_image" data-toggle="modal" data-target="#editUserServices_modal">';
                     html_us += '<div class="offer-in">';
@@ -195,11 +215,13 @@ var MenuGroupService = function () {
                     $.each(group_us['list_user_service'], function(index, us){
                         out = out.replace(':list_user_service', html_us);
                         out = out.replace(/:user_service_service_id/g, us['user_service_service_id']);
+                        out = out.replace(/:user_service_group_id/g, us['user_service_group_id']);
                         out = out.replace(/:user_service_id/g, us['user_service_id']);
                         out = out.replace(/:user_service_name/g, us['user_service_name']);
                         out = out.replace(/:user_service_duration/g, us['user_service_duration']);
                         out = out.replace(/:user_service_status/g, us['user_service_status']);
                         out = out.replace(/:user_service_description/g, us['user_service_description']);
+                        out = out.replace(/:user_service_image/g, us['user_service_image']);
                         if( us['user_service_sale_price'] == '' ) {
                             out = out.replace(/:user_service_full_price/g, '');
                             out = out.replace(/:user_service_sale_price/g, us['user_service_full_price']);
@@ -233,11 +255,77 @@ var MenuGroupService = function () {
 
             // Get info user service for edit this
             $('.edit-offer').on('click', function() {
-                var self = $(this);
-                var user_service_service_id = self.attr('data-sid');
-                var user_service_id = self.attr('data-id');
+                // Clear old info
+                $('#ListIM_editUS').html('');
 
-                $('#select2_service').select2("val", user_service_service_id);
+                var self = $(this);
+                var editUserService_form = $('#editUserService_form');
+
+                // get data
+                var user_service_group_id   = self.attr('data-gid');
+                var user_service_service_id = self.attr('data-sid');
+                var user_service_id         = self.attr('data-id');
+                var user_service_name       = self.attr('data-name');
+                var user_service_duration   = self.attr('data-duration');
+                var user_service_sale_price = self.attr('data-sale');
+                var user_service_full_price = self.attr('data-price');
+                var user_service_status     = self.attr('data-status');
+                var user_service_image      = self.attr('data-image');
+                var user_service_is_featured = self.attr('data-featured');
+                var user_service_description = self.attr('data-description');
+
+                // set data
+                $('#select2_editService').select2("val", user_service_service_id);
+                $('input[name=user_service_group_id]', editUserService_form).val(user_service_group_id);
+                $('input[name=user_service_service_id]', editUserService_form).val(user_service_service_id);
+                $('input[name=user_service_id]', editUserService_form).val(user_service_id);
+                $('input[name=user_service_name]', editUserService_form).val(user_service_name);
+                $('select[name=user_service_duration]', editUserService_form).val(user_service_duration);
+                $('select[name=user_service_is_featured]', editUserService_form).val(user_service_is_featured);
+                $('input[name=user_service_sale_price]', editUserService_form).val(user_service_sale_price);
+                $('input[name=user_service_full_price]', editUserService_form).val(user_service_full_price);
+                $('select[name=user_service_status]', editUserService_form).val(user_service_status);
+                $('textarea[name=user_service_description]', editUserService_form).val(user_service_description);
+
+                console.log(user_service_image);
+                
+                if(user_service_image != ''){
+                    var images = user_service_image.split(',');
+                    var out_leUS = null;
+                    var html_leUS = '<li class="single-picture">';
+                        html_leUS += '<div class="single-picture-wrapper">';
+                        html_leUS += '<img src=":img_thumbnail">';
+                        html_leUS += '<input type="hidden" name="user_service_image[]" value=":image">';
+                        html_leUS += '</div>';
+                        html_leUS += '<div class="del_image icons-delete2"></div>';
+                        html_leUS += '</li>';
+
+                    for(var i = 0; i < images.length; i++) {
+                        var thumbnail = get_thumbnail(images[i], user_id);
+                        out_leUS = html_leUS.replace(':img_thumbnail', thumbnail);
+                        out_leUS = out_leUS.replace(':image', images[i]);
+                        $('#ListIM_editUS').append(out_leUS);
+                    }
+
+                    // del image 
+                    $('.del_image').on("click", function(){
+                        var self = $(this).parent();
+                        // self.attr("disabled","disabled");
+                        self.remove();
+
+                        // Truong hop dac biet, ktra so luong hinh anh da co 
+                        var childrens = $('#ListIM_editUS').children().length;
+                        if(childrens < 5) {
+                            $('#iM_editUS').fadeIn();
+                        }
+                    });
+
+                    if( images.length >= 5 ) {
+                        $('#iM_editUS').hide();
+                    }
+                }
+                
+
             });
 
         }, 'json');
@@ -366,23 +454,18 @@ var MenuGroupService = function () {
 var ImageManager = function () {
     return {
         init: function() {
-            $('#iM_user_logo').click(function(){
-                $('#imageManager_saveChange').attr('cover_id','user_logo');
+            // Gán thuộc tính cover_id tương ứng
+            $('#iM_editUS').click(function(){
+                $('#imageManager_saveChange').attr('cover_id','editUS');
             });
 
-            $('#iM_user_slide').click(function(){
-                $('#imageManager_saveChange').attr('cover_id','user_slide');
+            $('#iM_addUS').click(function(){
+                $('#imageManager_saveChange').attr('cover_id','addUS');
             });
+
 
             // <!-- Save Change -->
             $('#imageManager_saveChange').on('click', function(evt) {
-                // Truong hop dac biet, ktra so luong hinh anh da co 
-                var childrens = $('#list_user_service_image').children().length + 1;
-                if(childrens == 5) {
-                    $('#iM_user_slide').hide();
-                }
-
-                // 
                 evt.preventDefault();
                 // Define position insert to image
                 var cover_id = $(this).attr('cover_id');
@@ -393,38 +476,53 @@ var ImageManager = function () {
                 var thumbnail = radio_checked.attr('data-image');
 
                 // Truong hop dac biet
-                if(cover_id == 'user_slide') {
-                    var out = null;
-                    var list_image = $('#list_user_service_image');
-                    var html = '<li class="single-picture">';
-                        html += '<div class="single-picture-wrapper">';
-                        html += '<img id="user_slide_thumbnail" src=":img_thumbnail">';
-                        html += '<input type="hidden" name="user_service_image[]" value=":image">';
-                        html += '</div>';
-                        html += '<div class="del_image icons-delete2"></div>';
-                        html += '</li>';
-
-                    out = html.replace(':img_thumbnail', thumbnail);
-                    out = out.replace(':image', image);
-
-                    list_image.append(out);
-
-                    // del image 
-                    $('.del_image').on("click", function(){
-                        var self = $(this).parent();
-                        // self.attr("disabled","disabled");
-                        self.remove();
-
-                        // Truong hop dac biet, ktra so luong hinh anh da co 
-                        var childrens = $('#list_user_service_image').children().length;
-                        if(childrens < 5) {
-                            $('#iM_user_slide').fadeIn();
-                        }
-                    });
-                } else {
-                    $('#' + cover_id + '_thumbnail').attr('src', thumbnail);
-                    $('input[name=' + cover_id + ']').val(image);
+                if(cover_id == 'addUS') {
+                    var caller = $('#iM_addUS');
+                    var items = $('#ListIM_addUS');
+                } 
+                else if(cover_id == 'editUS') {
+                    var caller = $('#iM_editUS');
+                    var items = $('#ListIM_editUS');
                 }
+
+
+                // ktra so luong hinh anh da co 
+                var childrens = items.children().length + 1;
+                if(childrens == 5) {
+                    caller.hide();
+                }
+
+                var out = null;
+                var html = '<li class="single-picture">';
+                    html += '<div class="single-picture-wrapper">';
+                    html += '<img id="user_slide_thumbnail" src=":img_thumbnail">';
+                    html += '<input type="hidden" name="user_service_image[]" value=":image">';
+                    html += '</div>';
+                    html += '<div class="del_image icons-delete2"></div>';
+                    html += '</li>';
+
+                out = html.replace(':img_thumbnail', thumbnail);
+                out = out.replace(':image', image);
+
+                items.append(out);
+
+                // del image 
+                $('.del_image').on("click", function(){
+                    var self = $(this).parent();
+                    // self.attr("disabled","disabled");
+                    self.remove();
+
+                    // Truong hop dac biet, ktra so luong hinh anh da co 
+                    var childrens = items.children().length;
+                    if(childrens < 5) {
+                        caller.fadeIn();
+                    }
+                });
+                
+                // else {
+                //     $('#' + cover_id + '_thumbnail').attr('src', thumbnail);
+                //     $('input[name=' + cover_id + ']').val(image);
+                // }
 
                 // Hide Modal
                 $("#imageManager_modal").modal('hide'); 

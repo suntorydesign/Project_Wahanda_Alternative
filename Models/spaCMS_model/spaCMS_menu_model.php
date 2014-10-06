@@ -26,8 +26,11 @@ class SpaCMS_Menu_Model {
 					'user_service_sale_price' 	=> $u_service['user_service_sale_price'],
 					'user_service_full_price' 	=> $u_service['user_service_full_price'],
 					'user_service_status' 		=> $u_service['user_service_status'],
+					'user_service_is_featured' 	=> $u_service['user_service_is_featured'],
 					'user_service_description' 	=> $u_service['user_service_description'],
-					'user_service_service_id' 	=> $u_service['user_service_service_id']
+					'user_service_image' 		=> $u_service['user_service_image'],
+					'user_service_service_id' 	=> $u_service['user_service_service_id'],
+					'user_service_group_id' 	=> $u_service['user_service_group_id']
 				);
 			}
 			$index++;
@@ -69,9 +72,11 @@ SQL;
 		$aQuery = <<<SQL
 		SELECT us.user_service_id, us.user_service_name, us.user_service_duration,
 				us.user_service_sale_price, us.user_service_full_price, us.user_service_service_id,
-				us.user_service_status, us.user_service_description
+				us.user_service_status, us.user_service_description, us.user_service_group_id,
+				us.user_service_is_featured, us.user_service_image
 		FROM user_service us
 		WHERE us.user_service_group_id = {$group_service_id}
+			AND us.user_service_delete_flg = 0
 SQL;
 		$data = $this->db->select($aQuery);
 		

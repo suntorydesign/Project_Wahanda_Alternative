@@ -200,7 +200,7 @@
 	</div>
 </div>
 
-<!-- Modal Add & Edit User services -->
+<!-- Modal Add User services -->
 <div id="addUserServices_modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 	<div class="modal-dialog" style="width: 800px;">
 		<div class="modal-content">
@@ -215,7 +215,7 @@
 								<div class="offer-type">
 									<div class="icon icons-treatment-big"></div>
 									<div class="type-select">
-										<select id="select2_service" class="form-control select2" data-placeholder="Vui lòng chọn loại dịch vụ" required>
+										<select id="select2_addService" class="form-control select2" data-placeholder="Vui lòng chọn loại dịch vụ" required>
 											<option value=""></option>
 											<!-- List service system -->
 
@@ -229,26 +229,6 @@
 												<div class="chzn-search">
 													<input type="text" autocomplete="off" style="width: 485px;" placeholder="Look up service type by typing in a name" tabindex="-1">
 												</div>
-												<ul class="chzn-results" style="max-height: 431.9px;">
-													<li class="group-result" id="selF0G_chzn_g_1" style="display: list-item;">
-														Body
-													</li>
-													<li style="" class="active-result group-option result-selected" id="selF0G_chzn_o_2">
-														24 Carat Gold Body Treatment
-													</li>
-													<li style="" class="active-result group-option" id="selF0G_chzn_o_3">
-														Acoustic Wave Therapy
-													</li>
-													<li style="" class="active-result group-option" id="selF0G_chzn_o_4">
-														Acupuncture
-													</li>
-													<li style="" class="active-result group-option" id="selF0G_chzn_o_5">
-														Akasuri
-													</li>
-													<li style="" class="active-result group-option" id="selF0G_chzn_o_6">
-														Arasys Toning and Inch Loss Treatment
-													</li>
-												</ul>
 											</div>
 										</div>
 									</div>
@@ -415,12 +395,12 @@
 							<div class="offer-form-aside pictures ui-sortable">
 								<h2 class="part-title">Hình ảnh dịch vụ</h2>
 								<ul class="menu-item-pictures">
-									<div id="list_user_service_image">
+									<div id="ListIM_addUS">
 										<!-- List user service image -->
 
 									</div> 
 									<li class="single-picture empty">
-										<div id="iM_user_slide" class="single-picture-wrapper imageManager_openModal" style="position: relative;" data-toggle="modal" data-target="#imageManager_modal">
+										<div id="iM_addUS" class="single-picture-wrapper imageManager_openModal" style="position: relative;" data-toggle="modal" data-target="#imageManager_modal">
 											<div class="add-picture vertically-centered" style="position: absolute; height: 34px; top: 50%; margin-top: -17px;">
 												<div class="icon icons-plus3"></div>
 												Thêm hình
@@ -437,12 +417,6 @@
 									<div class="button-icon icons-tick done"></div>
 									<div class="button-icon fa fa-spin fa-refresh loading hidden"></div>
 									<span class="msg msg-action-default">Lưu</span>
-								</div>
-							</button>
-							<button class="button action action-default button-basic offer-archive hidden" type="button">
-								<div class="button-inner">
-									<div class="button-icon icons-archive"></div>
-									<span class="msg msg-action-default">Move to archive</span>
 								</div>
 							</button>
 							<a class="button-cancel" href="javascript:;" data-dismiss="modal">Hủy</a>
@@ -669,12 +643,12 @@
 							<div class="offer-form-aside pictures ui-sortable">
 								<h2 class="part-title">Hình ảnh dịch vụ</h2>
 								<ul class="menu-item-pictures">
-									<div id="list_edit_user_service_image">
+									<div id="ListIM_editUS">
 										<!-- List user service image -->
 
 									</div> 
 									<li class="single-picture empty">
-										<div id="iM_user_slide" class="single-picture-wrapper imageManager_openModal" style="position: relative;" data-toggle="modal" data-target="#imageManager_modal">
+										<div id="iM_editUS" class="single-picture-wrapper imageManager_openModal" style="position: relative;" data-toggle="modal" data-target="#imageManager_modal">
 											<div class="add-picture vertically-centered" style="position: absolute; height: 34px; top: 50%; margin-top: -17px;">
 												<div class="icon icons-plus3"></div>
 												Thêm hình
