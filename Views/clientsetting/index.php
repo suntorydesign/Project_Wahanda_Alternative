@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-offset-1 col-md-10 well">
-			<h2 class="page-header text-center text-warning"><i id="gear" class="fa fa-gear"></i>&nbsp;&nbsp;&nbsp;QUẢN LÝ TÀI KHOẢN</i></h2>
+			<h3 class="page-header text-center text-warning"><i id="gear" class="fa fa-gear"></i>&nbsp;&nbsp;&nbsp;QUẢN LÝ TÀI KHOẢN</i></h3>
 			<div class="row">
 				<div class="col-md-offset-3 col-md-3"><p class=""><strong>EMAIL :</strong></p></div>
 				<div class="col-md-6"><p class="text-warning" id="client_email"></p></div>
@@ -45,9 +45,9 @@
 			<br />
 			<div class="row">
 				<div class="col-md-12">
-					<h2 class="text-center text-warning page-header">
+					<h3 class="text-center text-warning page-header">
 						<a id="hidden_change_pass" style="cursor: pointer;"><i class="fa fa-shield"></i>&nbsp;&nbsp;&nbsp;ĐỔI MẬT KHẨU</i></a>
-					</h2>
+					</h3>
 				</div>
 			</div>
 			<br />

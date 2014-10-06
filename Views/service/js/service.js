@@ -250,10 +250,10 @@ function loadServiceStarRating() {
 			user_id : USER_ID
 		},
 		success : function(response) {
-			if (response[0] != null) {
+			if (response.data[0] != null) {
 				var html = '';
 				var index = 0;
-				$.each(response, function(key, value) {
+				$.each(response.data, function(key, value) {
 					index++;
 					var rating_value = parseFloat(value.star_review);
 					var head = parseInt(rating_value);

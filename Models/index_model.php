@@ -23,10 +23,58 @@ SQL;
 	}
 	
 	function loadTopServiceList() {
-		$select = $this -> db -> select('SELECT * 
-							   FROM `user_service` 
-							   WHERE `user_service_delete_flg` = 0 order by `user_service_id` desc 
-							   limit 3');
+		$sql = <<<SQL
+SELECT user_service.user_service_id
+, user_service.user_service_name
+, user_service.user_service_full_price
+, user_service.user_service_sale_price
+, user_service.user_service_image
+, user_service.user_service_description
+, IF(top.star_amount IS NULL,0,top.star_amount) AS star_amount
+FROM user_service
+LEFT JOIN
+(SELECT user_service.user_service_id
+, COUNT(*) AS star_amount
+FROM user_service, user_service_review
+WHERE user_service.user_service_id = user_service_review.user_service_id
+AND (user_service_review_value = 3 
+     OR user_service_review_value = 4 
+     OR user_service_review_value = 5)
+GROUP BY user_service_review.user_service_id) top 
+ON top.user_service_id = user_service.user_service_id
+ORDER BY star_amount DESC
+LIMIT 0,3
+SQL;
+		$select = $this -> db -> select($sql);
+		foreach ($select as $key => $value) {
+			$client_amount = 0;
+			$star_point = 0;
+			$sql = <<<SQL
+SELECT user_service.user_service_name
+, service_type.service_type_name
+, user_service_review.user_service_id
+, user_service_review.user_service_review_value
+, COUNT(*) AS star_amount
+FROM user_service, user_service_review, service, service_type
+WHERE user_service_review.user_service_id = user_service.user_service_id
+AND user_service.user_service_service_id = service.service_id
+AND service.service_service_type_id = service_type.service_type_id
+AND user_service.user_service_id = {$value['user_service_id']}
+GROUP BY user_service.user_service_name
+, service_type.service_type_name
+, user_service_review.user_service_id
+, user_service_review.user_service_review_value
+SQL;
+			$select_detail = $this -> db -> select($sql);
+			
+			foreach ($select_detail as $i => $item) {
+				$star_point = $star_point + $item['user_service_review_value'] * $item['star_amount'];
+				$client_amount = $client_amount + $item['star_amount'];
+			}
+			$star_review = $star_point / $client_amount;
+			$select[$key]['star_review'] = round($star_review, 1);
+			$select[$key]['total_client_amount'] = $client_amount;
+		}
 		if($select){
 			echo json_encode($select);
 		}else{
@@ -35,11 +83,48 @@ SQL;
 	}
 	
 	function loadNewServiceList() {
-		$select = $this -> db -> select('SELECT * 
-							   FROM `user_service` 
-							   WHERE `user_service_delete_flg` = 0
-							   order by `user_service_id` desc 
-							   limit 8');
+		$sql = <<<SQL
+SELECT user_service.user_service_id
+, user_service.user_service_name
+, user_service.user_service_full_price
+, user_service.user_service_sale_price
+, user_service.user_service_image
+, user_service.user_service_description
+FROM `user_service` 
+WHERE `user_service_delete_flg` = 0
+order by `user_service_id` desc 
+limit 8
+SQL;
+		$select = $this -> db -> select($sql);
+		foreach ($select as $key => $value) {
+			$client_amount = 0;
+			$star_point = 0;
+			$sql = <<<SQL
+SELECT user_service.user_service_name
+, service_type.service_type_name
+, user_service_review.user_service_id
+, user_service_review.user_service_review_value
+, COUNT(*) AS star_amount
+FROM user_service, user_service_review, service, service_type
+WHERE user_service_review.user_service_id = user_service.user_service_id
+AND user_service.user_service_service_id = service.service_id
+AND service.service_service_type_id = service_type.service_type_id
+AND user_service.user_service_id = {$value['user_service_id']}
+GROUP BY user_service.user_service_name
+, service_type.service_type_name
+, user_service_review.user_service_id
+, user_service_review.user_service_review_value
+SQL;
+			$select_detail = $this -> db -> select($sql);
+			
+			foreach ($select_detail as $i => $item) {
+				$star_point = $star_point + $item['user_service_review_value'] * $item['star_amount'];
+				$client_amount = $client_amount + $item['star_amount'];
+			}
+			$star_review = $star_point / $client_amount;
+			$select[$key]['star_review'] = round($star_review, 1);
+			$select[$key]['total_client_amount'] = $client_amount;
+		}
 		if($select){
 			echo json_encode($select);
 		}else{

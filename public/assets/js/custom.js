@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function() {
 	$('#user_description_see_more').on('click', function() {
 		$('#user_description').css({
 			'white-space' : 'normal',
@@ -20,15 +20,15 @@ $(document).ready(function(){
 	});
 });
 /*LOAD DISTRICT*/
-function loadDistrict(){
+function loadDistrict() {
 	$.ajax({
 		url : URL + 'index/loadDistrict',
 		type : 'post',
 		dataType : 'json',
 		success : function(response) {
-			if(response[0] != null){
+			if (response[0] != null) {
 				var html = '';
-				$.each(response, function(key, value){
+				$.each(response, function(key, value) {
 					html += '<option value="' + value.district_id + '">' + value.district_name + '</option>';
 				});
 				$('#district_field').append(html);
@@ -36,6 +36,7 @@ function loadDistrict(){
 		}
 	});
 }
+
 /*END LOAD DISTRICT*/
 /*-----------------------*/
 
@@ -54,6 +55,9 @@ function loadTopServiceList() {
 
 			var html = '';
 			$.each(response, function(key, value) {
+				var rating_value = parseFloat(value.star_review);
+				var head = parseInt(rating_value);
+				var tail = rating_value - head;
 				html += '<div class="col-sm-6 col-md-4 top_service_items" style="display : none;">';
 				html += '<div class="item">';
 				html += '<input class="user_service_id" name="user_service_id" type="hidden" value="' + value.user_service_id + '"/>';
@@ -61,13 +65,33 @@ function loadTopServiceList() {
 				html += value.user_service_name.toUpperCase();
 				html += '</p>';
 				html += '<div class="clearfix svl-01">';
-				html += '<span class="rating pull-left"> <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i> </span>';
+				html += '<span class="rating pull-left">';
+				for (var i = 1; i <= head; i++) {
+					html += '<i class="fa fa-star"></i>';
+				}
+				if (tail != 0) {
+					if (tail == 0.9) {
+						html += '<i class="fa fa-star"></i>';
+					} else if (tail == 0.2 || tail == 0.3 || tail == 0.4 || tail == 0.5 || tail == 0.6 || tail == 0.7 || tail == 0.8) {
+						html += '<i class="fa fa-star-half-empty"></i>';
+					} else if (tail == 0.1) {
+						html += '<i class="fa fa fa-star-o"></i>';
+					}
+					for (var j = head + 2; j <= 5; j++) {
+						html += '<i class="fa fa-star-o"></i>';
+					}
+				} else {
+					for (var j = head + 1; j <= 5; j++) {
+						html += '<i class="fa fa-star-o"></i>';
+					}
+				}
+				html += '</span>';
 				html += '<span class="count-rating pull-right">';
-				html += '345 lượt bình chọn';
+				html += value.total_client_amount + ' lượt bình chọn';
 				html += '</span>';
 				html += '</div>';
 				html += '<div class="image" class="clearfix">';
-				html += '<img class="img-responsive" alt="Responsive image" src="' + URL + 'public/assets/img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" />';
+				html += '<img class="img-responsive" alt="Responsive image" src="' + value.user_service_image + '" />';
 				html += '</div>';
 				html += '<div class="clearfix">';
 				html += '<span class="price pull-left">' + value.user_service_sale_price + ' VNĐ</span>';
@@ -91,7 +115,7 @@ function loadTopServiceList() {
 				$('#top_service').append('<div id="error_top_ser_loading" style="color : #A1A1A1;display : none" class="text-center"><h4>Xin lỗi quý khách, hiện không có dịch vụ nào cả!</h4></div>');
 				setTimeout(function() {
 					$('#error_top_ser_loading').fadeIn();
-				}, 600);				
+				}, 600);
 			}
 		},
 		complete : function() {
@@ -111,11 +135,12 @@ function loadTopServiceList() {
 		}
 	});
 }
+
 /*END LOAD TOP SERVICE LIST*/
 /*-----------------------*/
 
 /*LOAD NEW SERVICE LIST*/
-function loadNewServiceList(){
+function loadNewServiceList() {
 	$.ajax({
 		url : URL + 'index/loadNewServiceList',
 		type : 'post',
@@ -128,15 +153,38 @@ function loadNewServiceList(){
 			// console.log(USER_SERVICE_ID);
 			var html = '';
 			$.each(response, function(key, value) {
+				var rating_value = parseFloat(value.star_review);
+				var head = parseInt(rating_value);
+				var tail = rating_value - head;
 				html += '<div class="col-sm-6 col-md-3 col-padding-5px new_service_items" style="display : none;">';
 				html += '<div class="item">';
 				html += '<input class="user_service_id" name="user_service_id" type="hidden" value="' + value.user_service_id + '"/>';
 				html += '<div class="image" class="clearfix">';
-				html += '<img class="img-responsive" alt="Responsive image" src="' + URL + 'public/assets/img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" />';
+				html += '<img class="img-responsive" alt="Responsive image" src="' + value.user_service_image + '" />';
 				html += '</div>';
 				html += '<div class="col-md-4 remove-padding">';
-				html += '<span class="rating"> <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i> </span>';
-				html += '<small class="count-rating pull-right">345 lượt đánh giá</small>';
+				html += '<span class="rating">';
+				for (var i = 1; i <= head; i++) {
+					html += '<i class="fa fa-star"></i>';
+				}
+				if (tail != 0) {
+					if (tail == 0.9) {
+						html += '<i class="fa fa-star"></i>';
+					} else if (tail == 0.2 || tail == 0.3 || tail == 0.4 || tail == 0.5 || tail == 0.6 || tail == 0.7 || tail == 0.8) {
+						html += '<i class="fa fa-star-half-empty"></i>';
+					} else if (tail == 0.1) {
+						html += '<i class="fa fa fa-star-o"></i>';
+					}
+					for (var j = head + 2; j <= 5; j++) {
+						html += '<i class="fa fa-star-o"></i>';
+					}
+				} else {
+					for (var j = head + 1; j <= 5; j++) {
+						html += '<i class="fa fa-star-o"></i>';
+					}
+				}
+				html += '</span>';
+				html += '<small class="count-rating pull-right">' + value.total_client_amount + ' lượt đánh giá</small>';
 				html += '</div>';
 				html += '<div class="price col-md-5">';
 				html += '<span>' + value.user_service_sale_price + ' VNĐ</span>';
@@ -162,7 +210,7 @@ function loadNewServiceList(){
 				$('#new_service').append('<div id="error_new_ser_loading" style="color : #A1A1A1;display : none" class="text-center"><h4>Xin lỗi quý khách, hiện không có dịch vụ nào cả!</h4></div>');
 				setTimeout(function() {
 					$('#error_new_ser_loading').fadeIn();
-				}, 600);				
+				}, 600);
 			}
 		},
 		complete : function() {
@@ -182,19 +230,20 @@ function loadNewServiceList(){
 		}
 	});
 }
+
 /*END LOAD NEW SERVICE LIST*/
 /*-----------------------*/
 
 /*LOAD LOCATION*/
-function loadLocation(){
+function loadLocation() {
 	$.ajax({
 		url : URL + 'index/loadLocation',
 		type : 'post',
 		dataType : 'json',
 		success : function(response) {
-			if(response[0] != null){
+			if (response[0] != null) {
 				var html = '';
-				$.each(response, function(key, value){
+				$.each(response, function(key, value) {
 					html += '<div class="col-sm-6 col-md-3 remove-padding new_location_items" style="display : none;">';
 					html += '<img class="image img-responsive" alt="Responsive image" src="' + value.user_logo + '" >';
 					html += '<div class="info">';
@@ -211,25 +260,26 @@ function loadLocation(){
 				});
 				$('#error_new_loc_loading').remove();
 				$('#new_location').append(html);
-			}else{
+			} else {
 				$('#new_location').append('<div id="error_new_loc_loading" style="color : #A1A1A1;display : none" class="text-center"><h4>Xin lỗi quý khách, hiện không có dịch vụ nào cả!</h4></div>');
 				setTimeout(function() {
 					$('#error_new_loc_loading').fadeIn();
 				}, 600);
 			}
 		},
-		complete : function(){
+		complete : function() {
 			$('#waiting_for_new_location').fadeOut(function() {
 				$('.new_location_items').fadeIn();
 			});
 		}
 	});
 }
+
 /*END LOAD LOCATION*/
 /*-----------------------*/
 
 /*LOAD SERVICE DETAIL*/
-function loadServiceDetail(user_service_id) {				
+function loadServiceDetail(user_service_id) {
 	// console.log(CHOOSEN_DATE);
 	// console.log(CHOOSEN_TIME);
 	// console.log(CHOOSEN_PRICE);
@@ -324,7 +374,7 @@ function loadServiceDetail(user_service_id) {
 						date += '<span day-data="' + day_of_week + '" value="' + year + '-' + month + '-' + day_of_month + '" class="week_' + week + '" style="display:none">' + days_of_month + '</span>';
 						if (day_of_week == 1) {
 							day += '<span class="week_' + week + '" style="display:none"><b>CN</b></span>';
-							
+
 							month_year += '<span style="display:none" class="week_' + week + '"> ' + this_month.toUpperCase() + ', ';
 							month_year += ' ' + year + ' </span>';
 							week++;
@@ -347,7 +397,7 @@ function loadServiceDetail(user_service_id) {
 							date += '<span day-data="' + day_of_week + '" value="' + year + '-' + month + '-' + day_of_month + '" class="week_' + week + '">' + days_of_month + '</span>';
 							if (day_of_week == 1) {
 								day += '<span class="week_' + week + '"><b>CN</b></span>';
-								
+
 								month_year += '<span class="week_' + week + '"> ' + this_month.toUpperCase() + ', ';
 								month_year += ' ' + year + ' </span>';
 								week++;
@@ -369,7 +419,7 @@ function loadServiceDetail(user_service_id) {
 							date += '<span day-data="' + day_of_week + '" value="' + year + '-' + month + '-' + day_of_month + '" class="week_1 week_' + week + '">' + days_of_month + '</span>';
 							if (day_of_week == 1) {
 								day += '<span class="week_1 week_' + week + '"><b>CN</b></span>';
-								
+
 								month_year += '<span style="display:none" class="week_' + week + '"> ' + this_month.toUpperCase() + ', ';
 								month_year += ' ' + year + ' </span>';
 								week++;
@@ -439,7 +489,7 @@ function loadServiceDetail(user_service_id) {
 					}
 					if (key == 'user_service_name') {
 						USER_SERVICE_NAME = value;
-					}			
+					}
 					$('#' + key).val(value);
 					$('#' + key + ', .' + key).text(value);
 					if (key == 'user_open_hour') {
@@ -482,7 +532,7 @@ function loadServiceDetail(user_service_id) {
 								SUN_OPEN_CLOSE['open'] = hour[1];
 								SUN_OPEN_CLOSE['close'] = hour[2];
 								//console.log(SUN_OPEN_CLOSE);
-							}							
+							}
 							switch(day) {
 							case '2':
 								day = 'Thứ 2';
@@ -519,10 +569,10 @@ function loadServiceDetail(user_service_id) {
 									user_open_hour_1 += '<p><i>' + day + ' : Nghỉ</i></p>';
 								}
 							}
-							if(hour[0] == 1){
+							if (hour[0] == 1) {
 								evou_html += '<span class="fa fa-check"></span>';
-								
-							}else if(hour[0] == 0){
+
+							} else if (hour[0] == 0) {
 								evou_html += '<span class="fa fa-times"></span>';
 							}
 						});
@@ -531,19 +581,19 @@ function loadServiceDetail(user_service_id) {
 				//console.log(evou_html);
 				if (USER_SERVICE_USE_EVOUCHER == 0) {
 					$('#btn_evoucher_booking_zone').attr('disabled', true);
-				}else{
+				} else {
 					$('#btn_evoucher_booking_zone').attr('disabled', false);
 					var date = new Date(EVOUCHER_DUE_DATE);
 					var due_month = date.getMonth();
 					var due_date = date.getDate();
-					if(date.getMonth() < 10){
+					if (date.getMonth() < 10) {
 						due_month = '0' + date.getMonth();
 					}
-					if(date.getDate() < 10){
+					if (date.getDate() < 10) {
 						due_date = '0' + date.getDate();
 					}
 					$('#evoucher_expire div #evoucher_due_date').html('<strong>Ngày hết hạn eVoucher : </strong>' + due_date + '-' + due_month + '-' + date.getFullYear());
-					var evoucher_quantity = '';			
+					var evoucher_quantity = '';
 					for ( i = 1; i <= parseInt(MAX_QUANTITY_EVOUCHER); i++) {
 						evoucher_quantity += '<option value="' + i + '">' + i + '</option>';
 					}
@@ -553,9 +603,13 @@ function loadServiceDetail(user_service_id) {
 				//response[0].user_open_hour;
 				$('#user_open_hour_1').html(user_open_hour_1);
 				$('#user_open_hour_2').html(user_open_hour_2);
+				////////////REVIEW/////////////////
 				loadLocationStarRatingDetail();
+				loadServiceStarRatingDetail();
 				loadReviewDetail();
-			} else {
+				///////////////////////////////////
+			}
+			else {
 				$('#error_service_detail_modal_body').show();
 				$('#service_detail_modal_body').hide();
 			}
@@ -563,7 +617,7 @@ function loadServiceDetail(user_service_id) {
 		complete : function() {
 			$('i.waiting_booking_detail').fadeOut();
 			$('#service_detail').modal('show');
-			$('#user_service_name').text(shorten($('#user_service_name').text(),22));
+			$('#user_service_name').text(shorten($('#user_service_name').text(), 22));
 			$('#btn_user_service_price_b').text(USER_SERVICE_SALE_PRICE);
 			$('#btn_user_service_price_e').text(USER_SERVICE_SALE_PRICE);
 			var time_html = '';
@@ -648,7 +702,7 @@ function loadServiceDetail(user_service_id) {
 					time_html += '<hr/>';
 					$('#btn_user_service_price').text('');
 				}
-				if(time_html == '' && service_remain == false){
+				if (time_html == '' && service_remain == false) {
 					time_html += '<hr/>';
 					time_html += '<div class="row can_not_book">';
 					time_html += '<div class="col-md-offset-1 col-md-11 text-center"><strong>Hết lịch hẹn trong ngày!<strong></div>';
@@ -657,7 +711,7 @@ function loadServiceDetail(user_service_id) {
 					$('#btn_user_service_price').text('');
 				}
 				$('#time_booking').html(time_html);
-				
+
 				$('#time_booking div.row:not(.can_not_book)').on('click', function() {
 					$(this).addClass('active');
 					$(this).siblings().removeClass('active');
@@ -747,7 +801,7 @@ function loadServiceDetail(user_service_id) {
 							$('#btn_user_service_price').text('');
 						}
 					}
-					if(time_html == '' && service_remain_default == false){
+					if (time_html == '' && service_remain_default == false) {
 						time_html += '<hr/>';
 						time_html += '<div class="row can_not_book">';
 						time_html += '<div class="col-md-offset-1 col-md-11 text-center"><strong>Hết lịch hẹn trong ngày!<strong></div>';
@@ -794,7 +848,7 @@ function clickNextWeek() {
 }
 
 function clickLastWeek() {
-	if(WEEK_PAGE == 2){
+	if (WEEK_PAGE == 2) {
 		$('#last_week').addClass('dis-arm');
 	}
 	if (WEEK_PAGE == 1) {
@@ -873,19 +927,19 @@ function loadLocationStarRatingDetail() {
 				$('#user_review_overall_detail').html(html);
 				$('#general_rating_detail').html(general_html);
 			}
-			if(response.chart_info[0] != null) {
-				if(response.chart_info[0].client_amount == '0'){
-					$('#five_stars').attr('style','width: 0%');
-					$('#four_stars').attr('style','width: 0%');
-					$('#three_stars').attr('style','width: 0%');
-					$('#two_stars').attr('style','width: 0%');
-					$('#one_star').attr('style','width: 0%');
-				}else{
-					$('#five_stars').attr('style','width: ' + (parseInt(response.chart_info[0].five_stars)/parseInt(response.chart_info[0].client_amount)*100) + '%');
-					$('#four_stars').attr('style','width: ' + (parseInt(response.chart_info[0].four_stars)/parseInt(response.chart_info[0].client_amount)*100) + '%');
-					$('#three_stars').attr('style','width: ' + (parseInt(response.chart_info[0].three_stars)/parseInt(response.chart_info[0].client_amount)*100) + '%');
-					$('#two_stars').attr('style','width: ' + (parseInt(response.chart_info[0].two_stars)/parseInt(response.chart_info[0].client_amount)*100) + '%');
-					$('#one_star').attr('style','width: ' + (parseInt(response.chart_info[0].one_star)/parseInt(response.chart_info[0].client_amount)*100) + '%');
+			if (response.chart_info[0] != null) {
+				if (response.chart_info[0].client_amount == '0') {
+					$('#five_stars').attr('style', 'width: 0%');
+					$('#four_stars').attr('style', 'width: 0%');
+					$('#three_stars').attr('style', 'width: 0%');
+					$('#two_stars').attr('style', 'width: 0%');
+					$('#one_star').attr('style', 'width: 0%');
+				} else {
+					$('#five_stars').attr('style', 'width: ' + (parseInt(response.chart_info[0].five_stars) / parseInt(response.chart_info[0].client_amount) * 100) + '%');
+					$('#four_stars').attr('style', 'width: ' + (parseInt(response.chart_info[0].four_stars) / parseInt(response.chart_info[0].client_amount) * 100) + '%');
+					$('#three_stars').attr('style', 'width: ' + (parseInt(response.chart_info[0].three_stars) / parseInt(response.chart_info[0].client_amount) * 100) + '%');
+					$('#two_stars').attr('style', 'width: ' + (parseInt(response.chart_info[0].two_stars) / parseInt(response.chart_info[0].client_amount) * 100) + '%');
+					$('#one_star').attr('style', 'width: ' + (parseInt(response.chart_info[0].one_star) / parseInt(response.chart_info[0].client_amount) * 100) + '%');
 				}
 			}
 			if (response.data[0] != null) {
@@ -937,7 +991,84 @@ function loadLocationStarRatingDetail() {
 		}
 	});
 }
+
 /*END LOAD LOCATION RATING*/
+/*-----------------------*/
+
+/*LOAD SERVICE RATING*/
+function loadServiceStarRatingDetail() {
+	$.ajax({
+		url : URL + 'service/loadServiceStarRating',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			user_id : USER_ID_2
+		},
+		success : function(response) {
+			var html = '';
+			var count_hidden = 0;
+			if (response.group_data[0] != null) {
+				$.each(response.group_data[0], function(key, value) {
+					count_hidden++;
+					if(count_hidden > 10){
+						html += '<div style="display: none" class="col-md-12 see_more_rating_service">';
+					}else{
+						html += '<div class="col-md-12">';
+					}			
+					html += '<span><b>' + key + '</b></span>';
+					$.each(value, function(i, item) {
+						count_hidden++;
+						var rating_value = parseFloat(item.star_review);
+						var head = parseInt(rating_value);
+						var tail = rating_value - head;
+						if(count_hidden > 10){
+							html += '<div style="display: none" class="row see_more_rating_service">';
+						}else{
+							html += '<div class="row">';
+						}
+						html += '<div class="col-md-6">';
+						html += '<small style="cursor: help" title="' + item.user_service_name + '">' +shorten(item.user_service_name, 30) + '</small>';
+						html += '</div>';
+						html += '<div class="col-md-6">';
+						html += '<span style="color: #FFCC00">';
+						for (var i = 1; i <= head; i++) {
+							html += '<i class="fa fa-star"></i>';
+						}
+						if (tail != 0) {
+							if (tail == 0.9) {
+								html += '<i class="fa fa-star"></i>';
+							} else if (tail == 0.2 || tail == 0.3 || tail == 0.4 || tail == 0.5 || tail == 0.6 || tail == 0.7 || tail == 0.8) {
+								html += '<i class="fa fa-star-half-empty"></i>';
+							} else if (tail == 0.1) {
+								html += '<i class="fa fa fa-star-o"></i>';
+							}
+							for (var j = head + 2; j <= 5; j++) {
+								html += '<i class="fa fa-star-o"></i>';
+							}
+						} else {
+							for (var j = head + 1; j <= 5; j++) {
+								html += '<i class="fa fa-star-o"></i>';
+							}
+						}
+						html += '</span>';
+						html += '</div>';
+						html += '</div>';
+					});
+					html += '<br />';
+					html += '</div>';
+				});
+				if(count_hidden > 10){
+					html += '<div class="col-md-12">';
+					html += '<span><a onclick=showMore("see_more_rating_service","see_more_text_detail") style="cursor: pointer;"><span class="see_more_text_detail">Xem thêm</span> >>></a></span>';
+					html += '</div>';
+				}
+				$('#group_service_rating').html(html);
+			}
+		}
+	});
+}
+
+/*END LOAD SERVICE RATING*/
 /*-----------------------*/
 
 /*LOAD REVIEW*/
@@ -1070,6 +1201,7 @@ function showMoreReviewDetail() {
 		});
 	});
 }
+
 /*END SHOW MORE REVIEW*/
 /*-----------------------*/
 
@@ -1118,7 +1250,7 @@ function login() {
 					// var http_path = window.location.href.replace('http:', '');
 					// var https_path = window.location.href.replace('https:', '');
 					// if (http_path != URL && https_path != URL) {
-						// window.location = URL;
+					// window.location = URL;
 					// }
 					window.location.reload();
 				}
@@ -1136,17 +1268,11 @@ function logout() {
 		complete : function() {
 			$('#booking_amount').text('0');
 			$('#login_group').children().remove();
-			$('#login_group').append('<div class="col-sm-5 remove-padding">' + 
-									 '<button id="login_btn" class="btn btn-block login-btn" data-toggle="modal" data-target="#login_modal" type="button">Đăng nhập</button>' + 
-									 '</div>' + 
-									 '<div class="col-sm-2"></div>' + 
-									 '<div class="col-sm-5 remove-padding">' + 
-									 '<button class="btn btn-block login-face-btn" type="button">Login Face</button>' + 
-									 '</div>');
+			$('#login_group').append('<div class="col-sm-5 remove-padding">' + '<button id="login_btn" class="btn btn-block login-btn" data-toggle="modal" data-target="#login_modal" type="button">Đăng nhập</button>' + '</div>' + '<div class="col-sm-2"></div>' + '<div class="col-sm-5 remove-padding">' + '<button class="btn btn-block login-face-btn" type="button">Login Face</button>' + '</div>');
 			// var http_path = window.location.href.replace('http:', '');
 			// var https_path = window.location.href.replace('https:', '');
 			// if (http_path != URL && https_path != URL) {
-				// window.location = URL;
+			// window.location = URL;
 			// }
 			window.location.reload();
 		}
@@ -1161,8 +1287,9 @@ function jumbToTab(tab) {
 	$('#' + tab).siblings().hide();
 	$('#' + tab).fadeIn();
 	$('#btn_' + tab).addClass('btn-choose').removeClass('btn-orange');
-	$('#btn_' + tab).parent().siblings().children().addClass('btn-orange').removeClass('btn-choose'); 
+	$('#btn_' + tab).parent().siblings().children().addClass('btn-orange').removeClass('btn-choose');
 }
+
 /*END JUMP TO TAB*/
 /*-----------------------*/
 
@@ -1171,8 +1298,9 @@ function resetTab(tab) {
 	$('#' + tab).siblings().hide();
 	$('#' + tab).fadeIn();
 	$('#btn_' + tab).addClass('btn-choose').removeClass('btn-orange');
-	$('#btn_' + tab).parent().siblings().children().addClass('btn-orange').removeClass('btn-choose'); 
+	$('#btn_' + tab).parent().siblings().children().addClass('btn-orange').removeClass('btn-choose');
 }
+
 /*END JRESET TAB*/
 /*-----------------------*/
 
@@ -1201,21 +1329,22 @@ function getBookingInfo() {
 				user_service_name : USER_SERVICE_NAME,
 				booking_quantity : 1
 			},
-			success: function(response){
+			success : function(response) {
 				//console.log(response);
 				$('#booking_amount').text(response);
 			},
-			complete: function(){
-				$('#waiting_for_booking_save_b').fadeOut(function(){
+			complete : function() {
+				$('#waiting_for_booking_save_b').fadeOut(function() {
 					$('#service_detail').modal('hide');
 					$('button.booking_button').attr('disabled', false);
 				});
 			}
 		});
-		
+
 	}
 }
-function geteVoucherInfo(){
+
+function geteVoucherInfo() {
 	if (USER_SERVICE_ID == '' || EVOUCHER_DUE_DATE == '' || USER_SERVICE_SALE_PRICE == '') {
 		alert('Có sự cố với dịch vụ, vui lòng chọn lại!');
 	} else {
@@ -1234,12 +1363,12 @@ function geteVoucherInfo(){
 				user_service_name : USER_SERVICE_NAME,
 				booking_quantity : $('#e_quantity').val()
 			},
-			success: function(response){
+			success : function(response) {
 				//console.log(response);
 				$('#booking_amount').text(response);
 			},
-			complete: function(){
-				$('#waiting_for_booking_save_e').fadeOut(function(){
+			complete : function() {
+				$('#waiting_for_booking_save_e').fadeOut(function() {
 					$('#service_detail').modal('hide');
 					$('button.booking_button').attr('disabled', false);
 				});
@@ -1247,19 +1376,20 @@ function geteVoucherInfo(){
 		});
 	}
 }
+
 /*END GET ONLINE BOOKING INFOMATION*/
 /*-----------------------*/
 
 /*LOAD SHOPPING CART*/
-function shoppingCartDetail(){
+function shoppingCartDetail() {
 	$('#waiting_cart_detail').fadeIn();
 	$.ajax({
 		url : URL + 'index/shoppingCartDetail',
-		type: 'post',
+		type : 'post',
 		dataType : 'json',
-		success : function(response){
+		success : function(response) {
 			var html = '';
-			if(response.booking != '' || response.eVoucher != ''){
+			if (response.booking != '' || response.eVoucher != '') {
 				html = '<tr>';
 				html += '<th  style="border: none">DỊCH VỤ</th>';
 				html += '<th  style="border: none">NGÀY - GIỜ</th>';
@@ -1267,36 +1397,36 @@ function shoppingCartDetail(){
 				html += '<th  style="border: none">SỐ LƯỢNG</th>';
 				html += '<th  style="border: none">TỔNG TIỀN</th>';
 				html += '</tr>';
-				$('#update_cart').attr('disabled',false);
-				$('#confirm_cart').attr('disabled',false);
+				$('#update_cart').attr('disabled', false);
+				$('#confirm_cart').attr('disabled', false);
 				$('#cart_amount').text(response.booking.length + response.eVoucher.length);
 				var total_money = 0;
-				$.each(response.booking, function(index, item){
+				$.each(response.booking, function(index, item) {
 					html += '<tr>';
 					html += '<td width="30%">' + item.user_service_name.toUpperCase() + ' - <b>' + item.user_business_name + '</b></td>';
-					html += '<td width="20%">' + item.booking_detail_date + ' - ' + item.booking_detail_time + '</td>'; 
+					html += '<td width="20%">' + item.booking_detail_date + ' - ' + item.booking_detail_time + '</td>';
 					html += '<td width="19%">' + item.choosen_price + ' VNĐ</td>';
 					html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control appointment_quantity" value="' + item.booking_quantity + '"/></td>';
 					html += '<td width="19%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
 					html += '</tr>';
 					total_money = total_money + parseInt(item.choosen_price) * parseInt(item.booking_quantity);
 				});
-				$.each(response.eVoucher, function(index, item){
+				$.each(response.eVoucher, function(index, item) {
 					html += '<tr>';
 					html += '<td width="30%">' + item.user_service_name.toUpperCase() + ' - <b>' + item.user_business_name + '</b></td>';
-					html += '<td width="20%"><i class="text-success">e-Voucher</i> - Ngày hết hạn : ' + item.eVoucher_due_date + '</td>'; 
+					html += '<td width="20%"><i class="text-success">e-Voucher</i> - Ngày hết hạn : ' + item.eVoucher_due_date + '</td>';
 					html += '<td width="19%">' + item.choosen_price + ' VNĐ</td>';
 					html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control eVoucher_quantity" value="' + item.booking_quantity + '"/></td>';
 					html += '<td width="19%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
 					html += '</tr>';
 					total_money = total_money + parseInt(item.choosen_price) * parseInt(item.booking_quantity);
 				});
-				$('#total_cart').text(total_money);	
-			}else{	
-				$('#update_cart').attr('disabled',true);
-				$('#confirm_cart').attr('disabled',true);
-				$('#total_cart').text('0');	
-				$('#cart_amount').text('0');	
+				$('#total_cart').text(total_money);
+			} else {
+				$('#update_cart').attr('disabled', true);
+				$('#confirm_cart').attr('disabled', true);
+				$('#total_cart').text('0');
+				$('#cart_amount').text('0');
 				html = '<tr>';
 				html += '<th  style="border: none">DỊCH VỤ</th>';
 				html += '<th  style="border: none">NGÀY - GIỜ</th>';
@@ -1306,32 +1436,34 @@ function shoppingCartDetail(){
 				html += '</tr>';
 				html += '<tr><td class="text-center" colspan="5"><h3><i class="fa fa-exclamation-circle"></i> Giỏ hàng của bạn đang rỗng! <i class="fa fa-frown-o"></i></h3></td></tr>';
 			}
-			$('table#table_shopping_cart').html(html); 
+			$('table#table_shopping_cart').html(html);
 		},
-		complete : function(){
-			$('#waiting_cart_detail').fadeOut(function(){
+		complete : function() {
+			$('#waiting_cart_detail').fadeOut(function() {
 				APPOINTMENT_QUANTITY_LIST_BEFORE = getQuantityNumber('appointment_quantity');
 				EVOUCHER_QUANTITY_LIST_BEFORE = getQuantityNumber('eVoucher_quantity');
 				$('#Shopping_cart_info').modal('show');
-			});			
+			});
 		}
 	});
 }
+
 /*END LOAD SHOPPING CART*/
 /*-----------------------*/
 
 /*GET QUANTITY*/
-function getQuantityNumber(cls){
+function getQuantityNumber(cls) {
 	var quantity_list = '';
-	$('.' + cls).each(function(index){
-		if($(this).val() == ''){
+	$('.' + cls).each(function(index) {
+		if ($(this).val() == '') {
 			quantity_list += '0,';
-		}else{
-			quantity_list += $(this).val()+',';
+		} else {
+			quantity_list += $(this).val() + ',';
 		}
 	});
 	return quantity_list;
 }
+
 /*END GET QUANTITY*/
 /*-----------------------*/
 
@@ -1341,7 +1473,7 @@ function saveQuantityNumber() {
 	var eVoucher_quantity_list_after = getQuantityNumber('eVoucher_quantity');
 	// console.log(QUANTITY_LIST_BEFORE);
 	// console.log(quantity_list_after);
-	if(APPOINTMENT_QUANTITY_LIST_BEFORE != appointment_quantity_list_after || EVOUCHER_QUANTITY_LIST_BEFORE != eVoucher_quantity_list_after){
+	if (APPOINTMENT_QUANTITY_LIST_BEFORE != appointment_quantity_list_after || EVOUCHER_QUANTITY_LIST_BEFORE != eVoucher_quantity_list_after) {
 		$('#waiting_for_update_cart').fadeIn();
 		$.ajax({
 			url : URL + 'index/updateShoppingCart',
@@ -1352,25 +1484,27 @@ function saveQuantityNumber() {
 			},
 			success : function(response) {
 				//console.log(response);
-				$('#booking_amount').text(response);				
+				$('#booking_amount').text(response);
 			},
-			complete : function(){
-				$('#waiting_for_update_cart').fadeOut(function(){
+			complete : function() {
+				$('#waiting_for_update_cart').fadeOut(function() {
 					shoppingCartDetail();
 				});
 			}
 		});
 	}
 }
+
 /*END SAVE QUANTITY*/
 /*-----------------------*/
 
 /*SET TIME IDLE*/
-function setTimeIdle(){
+function setTimeIdle() {
 	$.ajax({
 		url : URL + 'index/setTimeIdle',
 		type : 'get'
 	});
 }
+
 /*END SET TIME IDLE*/
 /*-----------------------*/

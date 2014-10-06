@@ -210,8 +210,8 @@
 												</div>
 											</div>
 											<hr />
-											<div class="row">
-												<div class="col-md-12">
+											<div class="row" id="group_service_rating">
+												<!-- <div class="col-md-12">
 													<span><b>NAIL</b></span>
 													<div class="row">
 														<div class="col-md-6">
@@ -258,7 +258,7 @@
 														</div>
 													</div>
 													<br />
-												</div>
+												</div> -->
 												<div class="col-md-12">
 													<span><a href="">Xem thêm >>></a></span>
 												</div>

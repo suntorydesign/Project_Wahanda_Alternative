@@ -261,14 +261,14 @@
 						<i class="">Bạn đã sử dụng dịch vụ ở đây chưa?&nbsp;&nbsp;</i>
 						<button onclick="setTimeIdle()" type="button" class="btn btn-sm btn-orange" id="write_review">Viết đánh giá</button>
 						<div id="review_input" style="display: none">
-							<h5 style="font-weight: bold;" class="page-header"><i style="font-weight: bold;color: #FDBD0E;" class="fa fa-building-o"></i>&nbsp;&nbsp;ĐÁNH GIÁ ĐỊA ĐIỂM</h5>
+							<h5 style="font-weight: bold;" class="page-header"><i style="font-weight: bold;color: #FDBD0E;" class="fa fa-2x fa-map-marker"></i>&nbsp;&nbsp;ĐÁNH GIÁ ĐỊA ĐIỂM</h5>
 							<div id="error_review" style="display: none;" class="alert alert-block alert-warning">
 								<button type="button" class="close" data-dismiss="alert">&times;</button>
 								<small><b>Cảnh báo! </b>Gửi đánh giá thất bại (kiểm tra lại kết nối internet) ...</small>
 							</div>
 							<div id="review_rating">
 								<div id="place_rating"></div>
-								<h5 class="page-header" style="font-weight: bold;"><i style="font-weight: bold;color: #FDBD0E;" class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;ĐÁNH GIÁ DỊCH VỤ</h5>
+								<h5 class="page-header" style="font-weight: bold;"><i style="font-weight: bold;color: #FDBD0E;" class="fa fa-2x fa-thumbs-o-up"></i>&nbsp;&nbsp;ĐÁNH GIÁ DỊCH VỤ</h5>
 								<div id="service_rating"></div>
 								<!-- <div id="over_all_rating">
 									<div class="row">

@@ -93,19 +93,19 @@ SQL;
 		$chart_info['four_stars'] = 0;
 		$chart_info['five_stars'] = 0;
 		foreach ($select as $key => $value) {
-			if($value['user_review_overall'] == '1'){
+			if ($value['user_review_overall'] == '1') {
 				$chart_info['one_star'] = $value['star_amount'];
 			}
-			if($value['user_review_overall'] == '2'){
+			if ($value['user_review_overall'] == '2') {
 				$chart_info['two_stars'] = $value['star_amount'];
 			}
-			if($value['user_review_overall'] == '3'){
+			if ($value['user_review_overall'] == '3') {
 				$chart_info['three_stars'] = $value['star_amount'];
 			}
-			if($value['user_review_overall'] == '4'){
+			if ($value['user_review_overall'] == '4') {
 				$chart_info['four_stars'] = $value['star_amount'];
 			}
-			if($value['user_review_overall'] == '5'){
+			if ($value['user_review_overall'] == '5') {
 				$chart_info['five_stars'] = $value['star_amount'];
 			}
 		}
@@ -245,7 +245,7 @@ GROUP BY user_service.user_service_name
 , service_type.service_type_name
 , user_service_review.user_service_id
 , user_service_review.user_service_review_value
-			
+
 SQL;
 			$select = $this -> db -> select($sql);
 			foreach ($select as $key => $value) {
@@ -255,8 +255,23 @@ SQL;
 			$star_review = $star_point / $client_amount;
 			$data['user_service_name'] = $value['user_service_name'];
 			$data['star_review'] = round($star_review, 1);
-			$return[] = $data;
+			$data['service_type_name'] = $value['service_type_name'];
+			$return['data'][] = $data;
 		}
+		$group_data = array();
+		foreach ($return['data'] as $key => $value) {
+			$temp = $value['service_type_name'];
+			$j = 0;
+			foreach ($return['data'] as $i => $item) {
+				if($temp == $item['service_type_name']){
+					$group_data[$temp][$j]['user_service_name'] = $item['user_service_name'];
+					$group_data[$temp][$j]['star_review'] = $item['star_review'];
+					$j++;
+				}
+			}
+		}
+		//print_r($group_data);
+		$return['group_data'][] = $group_data;
 		echo json_encode($return);
 	}
 

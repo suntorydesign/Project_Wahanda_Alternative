@@ -29,7 +29,7 @@ function formatDate(date) {
 	var date_format = new Date(date);
 	re_date = date_format.getDate();
 	re_month = parseInt(date_format.getMonth()) + 1;
-	if (date_format.getMonth() < 10) {
+	if (re_month < 10) {
 		re_month = '0' + re_month;
 	}
 	if (date_format.getDate() < 10) {
