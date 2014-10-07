@@ -42,6 +42,7 @@ AND (user_service_review_value = 3
      OR user_service_review_value = 5)
 GROUP BY user_service_review.user_service_id) top 
 ON top.user_service_id = user_service.user_service_id
+WHERE user_service.user_service_delete_flg = 0
 ORDER BY star_amount DESC
 LIMIT 0,3
 SQL;
