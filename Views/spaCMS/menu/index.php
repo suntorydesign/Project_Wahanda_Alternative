@@ -27,27 +27,11 @@
 		<h2 class="section-title">Những dịch vụ nổi bật</h2>
 
 		<div class="listing listing-enhanced">
-			<div class="view-standard">
-				<div class="intro">
-					<p>
-						You need to switch to Enhanced plan to feature your services on Wahanda.com
-					</p>
-					<p>
-						Featured services attract more customer attention. Start selling through Wahanda!
-					</p>
-				</div>
-				<button class="button button-primary" id="upgrade-to-enhanced" type="button">
-					<div class="button-inner">
-						<div class="button-icon icons-upgrade"></div>
-						Upgrade
-					</div>
-				</button>
-			</div>
 
 			<div class="view-enhanced">
 				<div class="intro">
 					<p>
-						Featured services are shown on top of your listing on Wahanda and our partners' sites.
+						Những dịch vụ nổi bật sẽ được hiển thị ở đầu danh sách dịch vụ của bạn trên Beleza và các website đối tác của chúng tôi.
 					</p>
 					<p>
 						Get more attention to top offers by featuring them.
@@ -93,15 +77,15 @@
 						<div class="dialog-actions" style="border-top: medium none;">
 							<button class="button action action-default button-primary save-action" type="submit">
 								<div class="button-inner">
-									<div class="button-icon icons-tick done"></div>
-									<div class="button-icon fa fa-spin fa-refresh loading" style="display:none;"></div>
+									<div class="button-icon icons-tick e-done"></div>
+									<div class="button-icon fa fa-spin fa-refresh e-loading hidden"></div>
 									<span class="msg msg-action-default">Lưu</span>
 								</div>
 							</button>
 							<button class="button action action-default button-secondary delete-action aDeleteGroup" type="button">
 								<div class="button-inner">
-									<div class="button-icon icons-delete done"></div>
-									<div class="button-icon fa fa-spin fa-refresh loading" style="display:none;"></div>
+									<div class="button-icon icons-delete d-done"></div>
+									<div class="button-icon fa fa-spin fa-refresh d-loading hidden"></div>
 									<span class="msg msg-action-default">Xóa</span>
 								</div>
 							</button>
@@ -145,7 +129,7 @@
 							<button class="button action action-default button-primary save-action" type="submit">
 								<div class="button-inner">
 									<div class="button-icon icons-tick done"></div>
-									<div class="button-icon fa fa-spin fa-refresh loading" style="display:none;"></div>
+									<div class="button-icon fa fa-spin fa-refresh loading hidden"></div>
 									<span class="msg msg-action-default">Thêm</span>
 								</div>
 							</button>
@@ -416,7 +400,7 @@
 								<div class="button-inner">
 									<div class="button-icon icons-tick done"></div>
 									<div class="button-icon fa fa-spin fa-refresh loading hidden"></div>
-									<span class="msg msg-action-default">Lưu</span>
+									<span class="msg msg-action-default">Thêm</span>
 								</div>
 							</button>
 							<a class="button-cancel" href="javascript:;" data-dismiss="modal">Hủy</a>
@@ -449,7 +433,8 @@
 
 										</select>
 
-										<input type="hidden" name="user_service_group_id">
+										<input type="hidden" name="user_service_id">
+										<input type="hidden" name="user_service_group_id" disabled="disabled">
 										<input type="hidden" name="user_service_service_id">
 										
 										<div id="selF0G_chzn" class="chzn-container chzn-container-single" style="width: 534px;">
@@ -662,14 +647,15 @@
 						<div class="dialog-actions">
 							<button class="button action action-default button-primary save-action" type="submit">
 								<div class="button-inner">
-									<div class="button-icon icons-tick done"></div>
-									<div class="button-icon fa fa-spin fa-refresh loading hidden"></div>
+									<div class="button-icon icons-tick e-done"></div>
+									<div class="button-icon fa fa-spin fa-refresh e-loading hidden"></div>
 									<span class="msg msg-action-default">Lưu</span>
 								</div>
 							</button>
-							<button class="button action action-default button-basic offer-archive" type="button">
+							<button id="deleteUserService" class="button action action-default button-basic offer-archive" type="button">
 								<div class="button-inner">
-									<div class="button-icon icons-archive"></div>
+									<div class="button-icon icons-archive d-done"></div>
+									<div class="button-icon fa fa-spin fa-refresh d-loading hidden"></div>
 									<span class="msg msg-action-default">Xóa bỏ dịch vụ</span>
 								</div>
 							</button>

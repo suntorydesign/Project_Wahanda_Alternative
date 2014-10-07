@@ -150,7 +150,6 @@ var LoadMoreInfo = function() {
     }
 }();
 
-
 var MenuGroupService = function () {
 
     var refresh_addUS_form = function() {
@@ -287,7 +286,6 @@ var MenuGroupService = function () {
                 $('select[name=user_service_status]', editUserService_form).val(user_service_status);
                 $('textarea[name=user_service_description]', editUserService_form).val(user_service_description);
 
-                console.log(user_service_image);
                 
                 if(user_service_image != ''){
                     var images = user_service_image.split(',');
@@ -313,7 +311,7 @@ var MenuGroupService = function () {
                         // self.attr("disabled","disabled");
                         self.remove();
 
-                        // Truong hop dac biet, ktra so luong hinh anh da co 
+                        // ktra so luong hinh anh da co 
                         var childrens = $('#ListIM_editUS').children().length;
                         if(childrens < 5) {
                             $('#iM_editUS').fadeIn();
@@ -359,8 +357,8 @@ var MenuGroupService = function () {
     var xhrDelete_group_service = function() {
         $('#editGroupName_form .aDeleteGroup').on('click', function(){
             var self    = $(this);
-            var loading = self.find('.delete-action .loading');
-            var done    = self.find('.delete-action .done');
+            var loading = self.find('.d-loading');
+            var done    = self.find('.d-done');
             
             var group_service_id = $('input[name=group_service_id]', self).val();
             var url = URL + 'spaCMS/menu/xhrDelete_group_service';
@@ -384,8 +382,8 @@ var MenuGroupService = function () {
     var xhrUpdate_group_service = function() {
         $('#editGroupName_form').on('submit', function() {
             var data = $(this).serialize();
-            var loading = $(this).find('.save-action .loading');
-            var done = $(this).find('.save-action .done');
+            var loading = $(this).find('.e-loading');
+            var done = $(this).find('.e-done');
             loading.fadeIn();
             done.hide();
             var url = URL + 'spaCMS/menu/xhrUpdate_group_service';
@@ -418,7 +416,7 @@ var MenuGroupService = function () {
             var done    = self.find('.done');
             loading.fadeIn();
             done.hide();
-            console.log(data);
+
             var url = URL + 'spaCMS/menu/xhrInsert_user_service';
             $.post(url, data, function(result) {
                 if(result === 'success') {
@@ -438,6 +436,63 @@ var MenuGroupService = function () {
         });
     }
 
+    var xhrUpdate_user_service = function() {
+        $("#editUserService_form").on('submit', function() {
+            var self    = $(this);
+            var data    = self.serialize();
+            var loading = self.find('.e-loading');
+            var done    = self.find('.e-done');
+            loading.fadeIn();
+            done.hide();
+
+            console.log(data);
+
+            var url = URL + 'spaCMS/menu/xhrUpdate_user_service';
+            $.post(url, data, function(result) {
+                if(result === 'success') {
+                    // Refresh list
+                    xhrGet_group_user_service();
+                    // Hide Modal
+                    $('.button-cancel', self).click();
+                    alert('Sửa thành công!');
+                } else {
+                    alert('Sorry! Can not edit this service! :(');
+                }
+                loading.fadeOut();
+                done.fadeIn();
+            });
+            return false;
+        });
+    }
+
+    var xhrDelete_user_service = function() {
+        $("#deleteUserService").on('click', function() {
+            var form    = $('#editUserService_form')
+            var self    = $(this);
+            var loading = self.find('.d-loading');
+            var done    = self.find('.d-done');
+            var user_service_id = $('input[name=user_service_id]', form).val();
+            loading.fadeIn();
+            done.hide();
+
+            var url = URL + 'spaCMS/menu/xhrDelete_user_service';
+            $.post(url, {'user_service_id':user_service_id}, function(result) {
+                if(result === 'success') {
+                    // Refresh list
+                    xhrGet_group_user_service();
+                    // Hide Modal
+                    $('.button-cancel', form).click();
+                    alert('Xóa thành công!');
+                } else {
+                    alert('Sorry! Can not edit this service! :(');
+                }
+                loading.fadeOut();
+                done.fadeIn();
+            });
+            return false;
+        });
+    }
+
     return {
         init: function() {
             xhrGet_group_user_service();
@@ -447,6 +502,8 @@ var MenuGroupService = function () {
 
             /////////////// User Service
             xhrInsert_user_service();
+            xhrUpdate_user_service();
+            xhrDelete_user_service();
         }
     }
 }();
@@ -560,7 +617,7 @@ var UserServiceFeatured = function() {
 
             $.each(data, function(index, us_featured) {
                 primary_img = us_featured['user_service_image'].split(',');
-                primary_img = primary_img[0];
+                primary_img = get_thumbnail(primary_img[0], user_id);
 
                 out = html.replace(/:user_service_id/g, us_featured['user_service_id']);
                 out = out.replace(/:user_service_name/g, us_featured['user_service_name']);

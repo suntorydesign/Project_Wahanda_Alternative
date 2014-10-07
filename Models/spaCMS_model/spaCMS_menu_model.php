@@ -71,7 +71,9 @@ SQL;
 		$user_id = Session::get('user_id');
 		$aQuery = <<<SQL
 		SELECT us.user_service_id, us.user_service_name, us.user_service_duration,
-				us.user_service_sale_price, us.user_service_full_price, us.user_service_service_id,
+				FORMAT(us.user_service_sale_price, 0) as 'user_service_sale_price', 
+				FORMAT(us.user_service_full_price, 0) as 'user_service_full_price', 
+				us.user_service_service_id,
 				us.user_service_status, us.user_service_description, us.user_service_group_id,
 				us.user_service_is_featured, us.user_service_image
 		FROM user_service us
@@ -79,7 +81,7 @@ SQL;
 			AND us.user_service_delete_flg = 0
 SQL;
 		$data = $this->db->select($aQuery);
-		
+
 		return $data;
 	}
 
@@ -205,6 +207,7 @@ SQL;
 	function insert_user_service() {
 		$user_id = Session::get('user_id');
 
+		$data = array();
 		foreach ($_POST as $key => $value) {
 			if($key == "url") {
 				continue;
@@ -217,6 +220,51 @@ SQL;
 		}
 
 		if( $this->db->insert('user_service', $data) ){
+			echo 'success';
+		} else {
+			echo 'error';
+		}
+	}
+
+	function update_user_service() {
+		$user_id = Session::get('user_id');
+		$data = array();
+		foreach ($_POST as $key => $value) {
+			if($key == "url" || $key == "user_service_id") {
+				continue;
+			}
+			if($key == "user_service_image"){
+				$data["$key"] = implode(',', $value);
+				continue;
+			}
+			$data["$key"] = $value;
+		}
+
+		// print_r($data); exit();
+		$user_service_id = $_POST['user_service_id'];
+		$where = "user_service_id = $user_service_id";
+
+		$result = $this->db->update('user_service', $data, $where);
+
+		if($result) {
+			echo 'success';
+		} else {
+			echo 'error';
+		}
+	}
+
+	function delete_user_service() {
+		$user_id = Session::get('user_id');
+		$user_service_id = $_POST['user_service_id'];
+		$data = array(
+			'user_service_delete_flg' => 1
+		);
+		
+		$where = "user_service_id = $user_service_id";
+
+		$result = $this->db->update('user_service', $data, $where);
+
+		if($result) {
 			echo 'success';
 		} else {
 			echo 'error';
