@@ -18,7 +18,7 @@
 					</div>
 				</button>
 			</div>
-			<a class="button-link add-multiple-services b-action" data-toggle="modal" data-target="#servicesList_modal" href="javascript:;">Quick menu setup wizard</a>
+			<a class="button-link add-multiple-services b-action hidden" data-toggle="modal" data-target="#servicesList_modal" href="javascript:;">Quick menu setup wizard</a>
 		</div>
 		<div class="top-shadow" style="top: 32px; left: 0px; width: 1067px;"></div><div class="bottom-shadow hidden" style="top: 193px; left: 0px; width: 1067px;"></div>
 	</div>
@@ -307,10 +307,10 @@
 														<td class="label-part sku-rrp"><label>Giá gốc </label></td>
 														<td data-tooltips="&lt;strong&gt;Full and Sale price&lt;/strong&gt; - Full price is the pricelist price of your service. If you are offering a special price on this offer, add it to Sale price." class="tooltips tooltips-top input-part">
 														<div class="txt-input txt-input-mini form-element-wrapper">
-															<input type="text" min="1" class="required number" value="" name="user_service_full_price" required >
+															<input type="number" min="0" class="required number" value="" name="user_service_full_price" required="true" >
 														</div><label class="optional"> Giá khuyến mãi </label>
 														<div class="txt-input txt-input-mini form-element-wrapper">
-															<input type="text" class="number sku-amount" value="" name="user_service_sale_price">
+															<input type="number" class="number sku-amount" value="" name="user_service_sale_price">
 														</div></td>
 													</tr>
 												</tbody>

@@ -20,7 +20,7 @@
 <div id="content-wrap">
 	<div class="container">
 		<div id="search" class="clearfix">
-			<h4>BẠN CẦN TÌM</h4>
+			<h4 class="s-title">BẠN CẦN TÌM</h4>
 			<form method="get" action="<?php echo URL.'servicelocation/searchLocation'; ?>">
 				<div class="item col-md-7">
 					<div class="input-group">
@@ -38,7 +38,7 @@
 	
 				</div>
 				<div class="item col-md-2">
-					<button type="submit" class="btn btn-default btn-block">
+					<button type="submit" class="btn btn-default btn-block btn-submit">
 						TÌM KIẾM
 					</button>
 				</div>
@@ -48,8 +48,8 @@
 
 	<div id="service-list" class="container">
 		<div class="title">
-			<span class="fa-stack"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-thumbs-o-up fa-stack-1x fa-inverse"></i> </span>
-			<strong style="font-size: 20px;">DỊCH VỤ NỔI BẬT </strong>
+			<span class="m-title-icon fa-stack"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-thumbs-o-up fa-stack-1x fa-inverse"></i> </span>
+			<span class="m-title-name">DỊCH VỤ NỔI BẬT </span>
 		</div>
 		<div id="top_service">
 			<div id="waiting_for_top_service" class="text-center"><i style="color: #FDBD0E" class="fa fa-3x fa-refresh fa-spin text-center"></i></div>
@@ -87,8 +87,8 @@
 
 	<div id="service-new" class="container">
 		<div class="title">
-			<span class="fa-stack"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-stack-1x fa-inverse">NEW</i> </span>
-			<strong style="font-size: 20px;">DỊCH VỤ MỚI NHẤT CHO BẠN</strong>
+			<span class="m-title-icon fa-stack"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-stack-1x fa-inverse" style="font-size: 10px;">NEW</i> </span>
+			<span class="m-title-name">DỊCH VỤ MỚI NHẤT CHO BẠN </span>
 		</div>
 		<div id="new_service">
 			<div id="waiting_for_new_service" class="text-center"><i style="color: #FDBD0E" class="fa fa-3x fa-refresh fa-spin text-center"></i></div>
@@ -129,8 +129,8 @@
 
 	<div id="location-new" class="container">
 		<div class="title">
-			<span class="fa-stack"> <i class="fa fa-map-marker fa-stack-2x"></i> </span>
-			<strong style="font-size: 20px;">ĐỊA ĐIỂM MỚI NHẤT CHO BẠN</strong>
+			<span class="m-title-icon fa-stack"> <i class="fa fa-map-marker fa-stack-2x"></i> </span>
+			<span class="m-title-name">ĐỊA ĐIỂM MỚI NHẤT CHO BẠN </span>
 		</div>
 		<div id="new_location">
 			<div id="waiting_for_new_location" class="text-center"><i style="color: #FDBD0E" class="fa fa-3x fa-refresh fa-spin text-center"></i></div>

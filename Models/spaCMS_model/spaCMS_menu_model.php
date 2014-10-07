@@ -71,8 +71,8 @@ SQL;
 		$user_id = Session::get('user_id');
 		$aQuery = <<<SQL
 		SELECT us.user_service_id, us.user_service_name, us.user_service_duration,
-				FORMAT(us.user_service_sale_price, 0) as 'user_service_sale_price', 
-				FORMAT(us.user_service_full_price, 0) as 'user_service_full_price', 
+				us.user_service_sale_price, 
+				us.user_service_full_price, 
 				us.user_service_service_id,
 				us.user_service_status, us.user_service_description, us.user_service_group_id,
 				us.user_service_is_featured, us.user_service_image

@@ -192,14 +192,17 @@ var MenuGroupService = function () {
                                 html_us += ':user_service_duration phút';
                             html_us += '</div>';
                             html_us += '<div class="price sku-price">';
-                                html_us += '<span class="sku-price--previous">:user_service_full_price vnđ</span>';
-                                html_us += '<span class="sku-price--discount">:user_service_sale_price vnđ</span>';
+                                html_us += ':price';
                             html_us += '</div>';
                         html_us += '</div>';
                     html_us += '</div>';
                 html_us += '</div>';
             html_us += '</div>';
             html_us += ':list_user_service';
+
+        var html_price1 = '<span class="">:full_price vnđ</span>';
+        var html_price2 = '<span class="sku-price--previous">:full_price vnđ</span>';
+            html_price2 += '<span class="sku-price--discount">:sale_price vnđ</span>';
 
         // user_id;
         var url = URL + 'spaCMS/menu/xhrGet_group_user_service';
@@ -221,12 +224,15 @@ var MenuGroupService = function () {
                         out = out.replace(/:user_service_status/g, us['user_service_status']);
                         out = out.replace(/:user_service_description/g, us['user_service_description']);
                         out = out.replace(/:user_service_image/g, us['user_service_image']);
+                        out = out.replace(/:user_service_full_price/g, us['user_service_full_price']);
+                        out = out.replace(/:user_service_sale_price/g, us['user_service_sale_price']);
                         if( us['user_service_sale_price'] == '' ) {
-                            out = out.replace(/:user_service_full_price/g, '');
-                            out = out.replace(/:user_service_sale_price/g, us['user_service_full_price']);
+                            out = out.replace(':price', html_price1);
+                            out = out.replace(':full_price', us['user_service_full_price']);
                         } else {
-                            out = out.replace(/:user_service_full_price/g, us['user_service_full_price']);
-                            out = out.replace(/:user_service_sale_price/g, us['user_service_sale_price']);
+                            out = out.replace(':price', html_price2);
+                            out = out.replace(':full_price', us['user_service_full_price']);
+                            out = out.replace(':sale_price', us['user_service_sale_price']);
                         }
                     });
                 }

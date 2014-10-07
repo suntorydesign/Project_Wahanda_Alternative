@@ -18,6 +18,7 @@
         <link rel="apple-touch-icon" href="../img/ico/Cat-Brown-icon-72px.png" />
 
         <!-- Chèn link CSS -->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
 
         <link rel="stylesheet" href="<?php echo ASSETS ?>plugins/bootstrap/css/bootstrap.min.css" type="text/css"  />
 
@@ -136,7 +137,7 @@
 
                             <div class="navbar-form navbar-right">
                             	<i id="waiting_cart_detail" class="fa fa-refresh fa-spin" style="display: none;"></i>
-                                <button onclick="shoppingCartDetail()" type="submit" class="btn btn-sm btn-default cart-shop">    
+                                <button onclick="shoppingCartDetail()" type="submit" class="btn btn-sm btn-default btn-cart-shop">    
                                     <i class="fa fa-shopping-cart"></i> 
                                 	<span>
                                 		GIỎ HÀNG 
@@ -155,8 +156,8 @@
                                 		?>
                                 	</span>
                                 </button>
-                                <button type="submit" class="btn btn-sm btn-default languages">VI</button>
-                                <button type="submit" class="btn btn-sm btn-default languages">EN</button>
+                                <button type="submit" class="btn btn-sm btn-default btn-languages">VI</button>
+                                <button type="submit" class="btn btn-sm btn-default btn-languages">EN</button>
                             </div>
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->

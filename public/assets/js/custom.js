@@ -190,7 +190,7 @@ function loadNewServiceList() {
 				html += '<span>' + value.user_service_sale_price + ' VNĐ</span>';
 				html += '</div>';
 				html += '<div class="sale-percent col-md-3">';
-				html += '<span>GIẢM' + Math.floor((value.user_service_full_price - value.user_service_sale_price) / value.user_service_full_price * 100) + '%</span>';
+				html += '<span>GIẢM ' + Math.floor((value.user_service_full_price - value.user_service_sale_price) / value.user_service_full_price * 100) + '%</span>';
 				html += '</div>';
 				html += '<div class="clearfix"></div>';
 				html += '<p align="center" class="name">' + value.user_service_name.toUpperCase() + '</p>';
