@@ -104,11 +104,11 @@ function loadLocationDetail() {
 						$.each(value, function(key, item) {
 							html += '<div class="divider"></div>';
 							html += '<div class="item clearfix">';
-							html += '<div class="col-sm-5 item-info-1">' + item.user_service_name + '</div>';
-							html += '<div class="col-sm-3 item-info-2"><i class="fa fa-clock-o text-orange"></i> ' + item.user_service_duration + ' phút</div>';
+							html += '<div title="' + item.user_service_name + '" style="cursor: help;" class="col-sm-5 item-info-1">' + shorten(item.user_service_name, 30) + '</div>';
+							html += '<div class="col-sm-2 item-info-2"><i class="fa fa-clock-o text-orange"></i> ' + item.user_service_duration + ' phút</div>';
 							html += '<div class="col-sm-2 item-info-3"><i class="fa fa-arrow-down text-orange"></i> ' + Math.floor((item.user_service_full_price - item.user_service_sale_price) / item.user_service_full_price * 100) + '%</div>';
-							html += '<div class="col-sm-2 item-info-4">';
-							html += '<button data-user-service="' + item.user_service_id + '" type="button" class="btn btn-sm btn-orange btn_location_booking"><i class="fa fa-dollar text-white"></i> ' + item.user_service_sale_price + ' đ <i style="display:none;" class="waiting_booking_detail fa fa-refresh fa-spin"></i></button>';
+							html += '<div class="col-sm-3 item-info-4">';
+							html += '<button data-user-service="' + item.user_service_id + '" type="button" class="btn btn-sm btn-orange btn_location_booking pull-right"><i style="display:none;" class="waiting_booking_detail fa fa-refresh fa-spin"></i> <i class="fa fa-dollar text-white"></i> ' + item.user_service_sale_price + ' đ</button>';
 							html += '</div>';
 							html += '</div>';
 						});
@@ -265,7 +265,7 @@ function loadServiceStarRating() {
 					} else {
 						html += '<div class="col-xs-6">';
 					}
-					html += '<small style="cursor: help;" title="' + value.user_service_name + '" class="pull-right">' + shorten(value.user_service_name, 20) + '</small></div>';
+					html += '<small style="cursor: help;" title="' + value.user_service_name + '" class="pull-right">' + shorten(value.user_service_name, 18) + '</small></div>';
 					if (index > 4) {
 						html += '<div style="display: none;" class="col-xs-6 see_more_rating_service">';
 					} else {

@@ -1,3 +1,11 @@
+/*JUMP TO OTHER PAGE*/
+function jumpToOtherPage(page) {
+	window.location = page;
+}
+
+/*JUMP TO OTHER PAGE*/
+/*-----------------------*/
+
 /*CAN ONLY INPUT NUMBER*/
 function inputNumbers(evt) {
 	var e = evt || window.event;

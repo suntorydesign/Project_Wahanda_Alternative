@@ -21,9 +21,9 @@
 						  	<i class="fa fa-circle fa-stack-2x"></i>
 						  	<b class="fa-stack-1x fa-inverse">?</b>
 						</span>
-						<h4 class="title">PRESALES QUESTION ?</h4>
-						<p class="description">Tại salon Ladive nail các hiệu trình chăm sóc thiết kế nail được thực hiện theo một quy trình hiện đại, bằng tất cả sự khéo léo và cẩn thận. Ladivi Nail chăm sóc từng ngón tay, ngón chân của khách hàng...</p>
-						<a class="link" href="#">Learn more</a>
+						<h4 class="title">ĐẶT CÂU HỎI ?</h4>
+						<p class="">Tại salon Ladive nail các hiệu trình chăm sóc thiết kế nail được thực hiện theo một quy trình hiện đại, bằng tất cả sự khéo léo và cẩn thận. Ladivi Nail chăm sóc từng ngón tay, ngón chân của khách hàng...</p>
+						<a class="link" href="#">Tìm hiểu thêm</a>
 					</div>
 				</div>
 				<div class="col-sm-4">
@@ -32,9 +32,9 @@
 						  	<i class="fa fa-circle fa-stack-2x"></i>
 						  	<b class="fa-stack-1x fa-inverse">?</b>
 						</span>
-						<h4 class="title">PRESALES QUESTION ?</h4>
-						<p class="description">Tại salon Ladive nail các hiệu trình chăm sóc thiết kế nail được thực hiện theo một quy trình hiện đại, bằng tất cả sự khéo léo và cẩn thận. Ladivi Nail chăm sóc từng ngón tay, ngón chân của khách hàng...</p>
-						<a class="link" href="#">Learn more</a>
+						<h4 class="title">CẦN HỖ TRỢ ?</h4>
+						<p class="">Tại salon Ladive nail các hiệu trình chăm sóc thiết kế nail được thực hiện theo một quy trình hiện đại, bằng tất cả sự khéo léo và cẩn thận. Ladivi Nail chăm sóc từng ngón tay, ngón chân của khách hàng...</p>
+						<a class="link" href="#">Tìm hiểu thêm</a>
 					</div>
 				</div>
 				<div class="col-sm-4">
@@ -43,9 +43,9 @@
 						  	<i class="fa fa-circle fa-stack-2x"></i>
 						  	<b class="fa-stack-1x fa-inverse">?</b>
 						</span>
-						<h4 class="title">PRESALES QUESTION ?</h4>
-						<p class="description">Tại salon Ladive nail các hiệu trình chăm sóc thiết kế nail được thực hiện theo một quy trình hiện đại, bằng tất cả sự khéo léo và cẩn thận. Ladivi Nail chăm sóc từng ngón tay, ngón chân của khách hàng...</p>
-						<a class="link" href="#">Learn more</a>
+						<h4 class="title">DIỄN ĐÀN</h4>
+						<p class="">Tại salon Ladive nail các hiệu trình chăm sóc thiết kế nail được thực hiện theo một quy trình hiện đại, bằng tất cả sự khéo léo và cẩn thận. Ladivi Nail chăm sóc từng ngón tay, ngón chân của khách hàng...</p>
+						<a class="link" href="#">Tìm hiểu thêm</a>
 					</div>
 				</div>
 			</div>
@@ -63,8 +63,8 @@
 			<div class="col-sm-6">
 				<p class="intro-2-title">QUẢN LÝ LỊCH HẸN</p>
 				<div class="intro-2-divider"></div>
-				<p class="intro-2-description">Cung cấp khách hàng...</p>
-				<p class="intro-2-description">Cung cấp chủ spa...</p>
+				<p class="intro-2-description">Cung cấp cho chủ spa công cụ quản lý lịch hẹn và booking system</p>
+				<p class="intro-2-description">Cung cấp cho người dùng các tiện ích để người dùng có thể dễ dàng tiếp cận các địa điểm làm đẹp nổi tiếng trên khắp Thành Phố Hồ Chí Minh.</p>
 				<div class="intro-2-divider"></div>
 				<button class="btn btn-orange intro-2-booking-btn">
 					<i class="fa fa-mobile-phone"></i>..Booking System
@@ -77,22 +77,22 @@
 		<div class="container">
 			<p class="intro-3-title" align="center">BẮT ĐẦU THẬT DỄ DÀNG !</p>
 			<ol class="intro-4-steps list-unstyled clearfix">
-				<li>Sign up and tell us about your venue</li>
-				<li>Add your treatment menu and availability and we’ll create your listing</li>
-				<li>Start marketing your business and selling on Wahanda</li>
+				<li>Đăng ký và mô tả địa điểm kinh doanh của bạn</li>
+				<li>Tạo những dịch vụ mà bạn có thể cung cấp trẹn beleza.vn</li>
+				<li>Bắt đầu Marketing dịch vụ cùng Beleza và gia tăng doanh thu</li>
 			</ol>
 			<div class="intro-3-action-btn" align="center">
 				<div class="intro-3-register-wrap">
 					<button class="btn btn-orange-black intro-3-register-btn">ĐĂNG KÝ VÀ TIẾP CẬN KHÁCH HÀNG NGAY</button>
 				</div>
-				<a class="intro-3-link text-brown" href="#"><i>Xem thêm về gói Premium Account</i> <small>></small></a>
+				<a class="intro-3-link text-brown" href="#"><i>Xem thêm về gói Premium Account&nbsp;&nbsp;&nbsp;</i> <small> ></small></a>
 			</div>
 		</div>
 	</div>
 
 	<div id="intro_bussiness_4">
 		<div class="container">
-			COMMENT
+			<!-- COMMENT -->
 		</div>
 	</div>
 </div>

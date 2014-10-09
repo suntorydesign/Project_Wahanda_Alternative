@@ -38,7 +38,7 @@ FROM user_service, user, group_service
 WHERE user.user_id = group_service.group_service_user_id
 AND user_service.user_service_group_id = group_service.group_service_id
 AND user.user_id = {$user_id}
-AND user_service.user_service_highlight = 1
+AND user_service.user_service_is_featured = 1
 ORDER BY user_service.user_service_id DESC
 LIMIT 5
 SQL;
@@ -64,7 +64,7 @@ AND user_service.user_service_group_id = group_service.group_service_id
 AND user_service.user_service_service_id = service.service_id
 AND service.service_service_type_id = service_type.service_type_id
 AND user.user_id = {$user_id}
-AND user_service.user_service_highlight = 0
+AND user_service.user_service_is_featured = 0
 AND service_type.service_type_id = {$value["service_type_id"]}
 ORDER BY user_service.user_service_id DESC
 LIMIT 5
