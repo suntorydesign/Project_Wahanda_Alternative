@@ -107,6 +107,7 @@
 						ASSETS . 'plugins/select2/select2.css',
 						ASSETS . 'plugins/select2/select2-metronic.css',
 						ASSETS . 'plugins/image-manager/css/image-manager.min.css',
+						// ASSETS . 'plugins/jquery-ui/jquery-ui.min.css',
 						URL . 'Views/spaCMS/menu/css/spaCMS_menu.css'
 					);
 
@@ -114,6 +115,7 @@
 						ASSETS . 'plugins/bootstrap-select/bootstrap-select.min.js',
 						ASSETS . 'plugins/select2/select2.min.js',
 						ASSETS . 'plugins/image-manager/js/image-manager.js',
+						// ASSETS . 'plugins/jquery-ui/jquery-ui.min.js',
 						URL . 'Views/spaCMS/menu/js/spaCMS_menu.js'
 					);
 

@@ -759,4 +759,9 @@
             }
         }
     ?>
+
+    <!-- Slide JS -->
+    <script type="text/javascript" src="<?php echo ASSETS ?>plugins/sliderengine/amazingslider.js"></script>
+
+    <script type="text/javascript" src="<?php echo ASSETS ?>plugins/sliderengine/initslider-1.js"></script>
 </html>

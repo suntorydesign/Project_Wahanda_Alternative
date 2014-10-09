@@ -14,7 +14,23 @@
 	?>
 </div>
 <div id="header-2" class="clearfix">
-	<div id="slide"></div>
+	<div id="slide">
+		<div style="margin:0 auto;max-width:1024px;">
+    
+		    <!-- Insert to your webpage where you want to display the slider -->
+		    <div id="amazingslider-1" style="display:block;position:relative;margin:16px auto;">
+		        <ul class="amazingslider-slides" style="display:none;">
+		            <li><img src="<?php echo ASSETS. 'img/73225-1920x1200.jpg'; ?>" alt="73225-1920x1200" /></li>
+		            <li><img src="<?php echo ASSETS. 'img/91706-1366x768.jpg'; ?>" alt="91706-1366x768" /></li>
+		            <li><img src="<?php echo ASSETS. 'img/132382-1366x768.jpg'; ?>" alt="132382-1366x768" /></li>
+		        </ul>
+		        <div class="amazingslider-engine" style="display:none;"></div>
+		    </div>
+		    <!-- End of body section HTML codes -->
+		    
+		</div>
+
+	</div>
 </div>
 
 <div id="content-wrap">

@@ -29,17 +29,6 @@ $(document).ready(function() {
 
 });
 
-function get_thumbnail(url_image, user_id) {
-    var res = url_image.split('/'); // chặt url ra
-    var image_name = res[res.length - 1]; // lấy tên image
-    res[res.length - 1] = "thumbnails/" + user_id; // thay thế phần tên image = "/thumbnails/{user_id}"
-    var thumbnail_name = image_name.split('.'); // tách phần extension
-    thumbnail_name = thumbnail_name[0] + '_165x95.jpg'; // đổi tên => tên file thumbnail
-    res[res.length] = thumbnail_name// chèn tên hình thumbnail vào cuối
-    var url_thumbnail = res.join('/');// ghép lại thành => url thumbnail
-    return url_thumbnail;
-}
-
 var LoadMoreInfo = function() {
 
     var xhrGet_service_system = function() {
@@ -156,6 +145,7 @@ var MenuGroupService = function () {
         $('#addUserService_form')[0].reset();
         $('#select2_addService').select2("val", "");
         $('#ListIM_addUS').html('');
+        $('#addUserService_form').find('.warning').hide();
     }
 
     var xhrGet_group_user_service = function() {
@@ -222,6 +212,7 @@ var MenuGroupService = function () {
                         out = out.replace(/:user_service_name/g, us['user_service_name']);
                         out = out.replace(/:user_service_duration/g, us['user_service_duration']);
                         out = out.replace(/:user_service_status/g, us['user_service_status']);
+                        out = out.replace(/:user_service_is_featured/g, us['user_service_is_featured']);
                         out = out.replace(/:user_service_description/g, us['user_service_description']);
                         out = out.replace(/:user_service_image/g, us['user_service_image']);
                         out = out.replace(/:user_service_full_price/g, us['user_service_full_price']);
@@ -286,12 +277,16 @@ var MenuGroupService = function () {
                 $('input[name=user_service_id]', editUserService_form).val(user_service_id);
                 $('input[name=user_service_name]', editUserService_form).val(user_service_name);
                 $('select[name=user_service_duration]', editUserService_form).val(user_service_duration);
-                $('select[name=user_service_is_featured]', editUserService_form).val(user_service_is_featured);
+                // $('input[name=user_service_is_featured]', editUserService_form).val(user_service_is_featured);
                 $('input[name=user_service_sale_price]', editUserService_form).val(user_service_sale_price);
                 $('input[name=user_service_full_price]', editUserService_form).val(user_service_full_price);
                 $('select[name=user_service_status]', editUserService_form).val(user_service_status);
                 $('textarea[name=user_service_description]', editUserService_form).val(user_service_description);
-
+                if( user_service_is_featured === '1') {
+                    $('input[name=user_service_is_featured]', editUserService_form).attr('checked', true);
+                } else {
+                    $('input[name=user_service_is_featured]', editUserService_form).attr('checked', false);
+                }
                 
                 if(user_service_image != ''){
                     var images = user_service_image.split(',');
@@ -362,7 +357,7 @@ var MenuGroupService = function () {
 
     var xhrDelete_group_service = function() {
         $('#editGroupName_form .aDeleteGroup').on('click', function(){
-            var self    = $(this);
+            var self    = $('#editGroupName_form');
             var loading = self.find('.d-loading');
             var done    = self.find('.d-done');
             
@@ -420,8 +415,10 @@ var MenuGroupService = function () {
             var data    = self.serialize();
             var loading = self.find('.loading');
             var done    = self.find('.done');
+            var warning = self.find('.warning');
             loading.fadeIn();
             done.hide();
+            warning.hide();
 
             var url = URL + 'spaCMS/menu/xhrInsert_user_service';
             $.post(url, data, function(result) {
@@ -429,10 +426,15 @@ var MenuGroupService = function () {
                     self[0].reset(); // Refresh form
                     // Refresh list
                     xhrGet_group_user_service();
+                    xhrGet_user_service_featured();
                     // Hide Modal
                     $('.button-cancel', self).click();
                     alert('Thêm dịch vụ thành công!');
-                } else {
+                } 
+                else if(result === 'max_us_featured') {
+                    warning.fadeIn();
+                }
+                else {
                     alert('Sorry! Can not create this service! :(');
                 }
                 loading.fadeOut();
@@ -448,20 +450,26 @@ var MenuGroupService = function () {
             var data    = self.serialize();
             var loading = self.find('.e-loading');
             var done    = self.find('.e-done');
+            var warning = self.find('.warning');
             loading.fadeIn();
             done.hide();
-
-            console.log(data);
+            warning.hide();
 
             var url = URL + 'spaCMS/menu/xhrUpdate_user_service';
             $.post(url, data, function(result) {
+                console.log(result);
                 if(result === 'success') {
                     // Refresh list
                     xhrGet_group_user_service();
+                    xhrGet_user_service_featured();
                     // Hide Modal
                     $('.button-cancel', self).click();
                     alert('Sửa thành công!');
-                } else {
+                } 
+                else if(result === 'max_us_featured') {
+                    warning.fadeIn();
+                }
+                else {
                     alert('Sorry! Can not edit this service! :(');
                 }
                 loading.fadeOut();
@@ -486,6 +494,7 @@ var MenuGroupService = function () {
                 if(result === 'success') {
                     // Refresh list
                     xhrGet_group_user_service();
+                    xhrGet_user_service_featured();
                     // Hide Modal
                     $('.button-cancel', form).click();
                     alert('Xóa thành công!');
@@ -499,6 +508,67 @@ var MenuGroupService = function () {
         });
     }
 
+    var xhrGet_user_service_featured = function() {
+        var html = '<div data-id=":user_service_id" class="offer state-act">';
+            html += '<div tabindex="-1" class="offer-content">';
+                    html += '<img class="pic" alt="" src=":user_service_image">';
+                    html += '<div class="title">';
+                        html += '<span class="icon icons-act"></span>';
+                        html += ':user_service_name';
+                    html += '</div>';
+                html += '</div>';
+                html += '<div class="offer-delete" data-id=":user_service_id">';
+                    html += '<div class="icons-delete2 unfeature"></div>';
+                html += '</div>';
+            html += '</div>';
+
+        var html_empty = '<div class="offer offer-empty">';
+                html_empty += '<p>';
+                    html_empty += 'Empty slot';
+                html_empty += '</p>';
+            html_empty += '</div>';
+
+        var url = URL + 'spaCMS/menu/xhrGet_user_service_featured';
+        $.get(url, function(data){
+            $('.featured').html('');
+            var out = '';
+            var num_ept = 5 - data.length;
+            var primary_img = '';
+
+            $.each(data, function(index, us_featured) {
+                primary_img = us_featured['user_service_image'].split(',');
+                primary_img = get_thumbnail(primary_img[0], user_id);
+
+                out = html.replace(/:user_service_id/g, us_featured['user_service_id']);
+                out = out.replace(/:user_service_name/g, us_featured['user_service_name']);
+                out = out.replace(/:user_service_image/g, primary_img);
+
+                $('.featured').append(out);
+            });
+
+            if(num_ept > 0) {
+                for (var i = 0; i < num_ept; i++) {
+                    $('.featured').append(html_empty);
+                };
+            }
+
+            // delete user service featured
+            $('.offer-delete').on('click', function() {
+                var self = $(this);
+                var data_id = self.attr('data-id');
+                
+                var url = URL + 'spaCMS/menu/xhrDelete_user_service_featured';
+                $.post(url, {'user_service_id':data_id}, function(rs) {
+                    if(rs === 'success'){
+                        var parent = self.parent();
+                        parent.fadeOut();
+                        $('.featured').append(html_empty);
+                    }
+                });
+            });
+        },'json');
+    }
+
     return {
         init: function() {
             xhrGet_group_user_service();
@@ -510,6 +580,8 @@ var MenuGroupService = function () {
             xhrInsert_user_service();
             xhrUpdate_user_service();
             xhrDelete_user_service();
+
+            xhrGet_user_service_featured();
         }
     }
 }();
@@ -595,97 +667,15 @@ var ImageManager = function () {
 }();
 
 var UserServiceFeatured = function() {
-    var xhrGet_user_service_featured = function() {
-        var html = '<div data-id=":user_service_id" class="offer state-act">';
-            html += '<div tabindex="-1" class="offer-content">';
-                    html += '<img class="pic" alt="" src=":user_service_image">';
-                    html += '<div class="title">';
-                        html += '<span class="icon icons-act"></span>';
-                        html += ':user_service_name';
-                    html += '</div>';
-                html += '</div>';
-                html += '<div class="offer-delete" data-id=":user_service_id">';
-                    html += '<div class="icons-delete2 unfeature"></div>';
-                html += '</div>';
-            html += '</div>';
+    
 
-        var html_empty = '<div class="offer offer-empty">';
-                html_empty += '<p>';
-                    html_empty += 'Empty slot';
-                html_empty += '</p>';
-            html_empty += '</div>';
-
-        var url = URL + 'spaCMS/menu/xhrGet_user_service_featured';
-        $.get(url, function(data){
-            var out = '';
-            var num_ept = 5 - data.length;
-            var primary_img = '';
-
-            $.each(data, function(index, us_featured) {
-                primary_img = us_featured['user_service_image'].split(',');
-                primary_img = get_thumbnail(primary_img[0], user_id);
-
-                out = html.replace(/:user_service_id/g, us_featured['user_service_id']);
-                out = out.replace(/:user_service_name/g, us_featured['user_service_name']);
-                out = out.replace(/:user_service_image/g, primary_img);
-
-                $('.featured').append(out);
-            });
-
-            if(num_ept > 0) {
-                for (var i = 0; i < num_ept; i++) {
-                    $('.featured').append(html_empty);
-                };
-            }
-
-            // delete user service featured
-            $('.offer-delete').on('click', function() {
-                var self = $(this);
-                var data_id = self.attr('data-id');
-                
-                var url = URL + 'spaCMS/menu/xhrDelete_user_service_featured';
-                $.post(url, {'user_service_id':data_id}, function(rs) {
-                    if(rs === 'success'){
-                        var parent = self.parent();
-                        parent.fadeOut();
-                        $('.featured').append(html_empty);
-                    }
-                });
-            });
-        },'json');
-    }
-
-    var xhrInsert_user_service = function() {
-        $("#addUserService_form").on('submit', function() {
-            var self    = $(this);
-            var data    = self.serialize();
-            var loading = self.find('.loading');
-            var done    = self.find('.done');
-            loading.fadeIn();
-            done.hide();
-            console.log(data);
-            var url = URL + 'spaCMS/menu/xhrInsert_user_service';
-            $.post(url, data, function(result) {
-                if(result === 'success') {
-                    self[0].reset(); // Refresh form
-                    // Refresh list
-                    xhrGet_group_user_service();
-                    // Hide Modal
-                    $('.button-cancel', self).click();
-                    alert('Thêm dịch vụ thành công!');
-                } else {
-                    alert('Sorry! Can not create this service! :(');
-                }
-                loading.fadeOut();
-                done.fadeIn();
-            });
-            return false;
-        });
-    }
+    // var xhrInsert_user_service = function() {
+        
+    // }
 
     return {
         init: function(){
-            xhrGet_user_service_featured();
+            // xhrGet_user_service_featured();
             // xhrInsert_user_service();
         }
     }
@@ -695,4 +685,4 @@ var UserServiceFeatured = function() {
 LoadMoreInfo.init();
 MenuGroupService.init();
 ImageManager.init();
-UserServiceFeatured.init();
+// UserServiceFeatured.init();

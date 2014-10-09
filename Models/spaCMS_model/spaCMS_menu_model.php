@@ -208,6 +208,17 @@ SQL;
 		$user_id = Session::get('user_id');
 
 		$data = array();
+		if(!isset($_POST['user_service_is_featured'])) {
+			$data['user_service_is_featured'] = 0;
+		} else {
+			$max_usf = self::max_user_service_is_featured(); // Kiểm tra số lượng user featured
+			if($max_usf >= 5) {
+				echo 'max_us_featured';
+				return;
+			}
+
+			$_POST['user_service_is_featured'] = 1;
+		}
 		foreach ($_POST as $key => $value) {
 			if($key == "url") {
 				continue;
@@ -228,7 +239,20 @@ SQL;
 
 	function update_user_service() {
 		$user_id = Session::get('user_id');
+
 		$data = array();
+		if(!isset($_POST['user_service_is_featured'])) {
+			$data['user_service_is_featured'] = 0;
+		} else {
+			$max_usf = self::max_user_service_is_featured(); // Kiểm tra số lượng user featured
+			if($max_usf >= 5) {
+				echo 'max_us_featured';
+				return;
+			}
+
+			$_POST['user_service_is_featured'] = 1;
+		}
+
 		foreach ($_POST as $key => $value) {
 			if($key == "url" || $key == "user_service_id") {
 				continue;
@@ -271,6 +295,21 @@ SQL;
 		}
 	}
 
+	function max_user_service_is_featured() {
+		$user_id = Session::get('user_id');
+		$aQuery = <<<SQL
+		SELECT count(*) as 'max_usf'
+		FROM user_service us, group_service gs
+		WHERE user_service_is_featured = 1
+			AND us.user_service_group_id = gs.group_service_id
+			AND gs.group_service_user_id = {$user_id}
+SQL;
+		$data = $this->db->select($aQuery);
+
+		$max_usf = $data[0]['max_usf'];
+
+		return $max_usf;
+	}
 
 	/////////// Service featured
 	function get_user_service_featured() {

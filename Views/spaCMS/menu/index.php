@@ -56,7 +56,7 @@
 					<a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"> <span class="ui-icon ui-icon-closethick">close</span> </a>
 				</div>
 				<div class="menu-group-form ui-dialog-content ui-widget-content" id="802" scrolltop="0" scrollleft="0">
-					<form id="editGroupName_form" action="#" method="POST" novalidate="novalidate">
+					<form id="editGroupName_form" action="#" method="POST">
 						<ul class="offer-type-selection">
 							<li class="menu-name">
 								<table cellspacing="0" cellpadding="0" class="default-form">
@@ -78,14 +78,14 @@
 							<button class="button action action-default button-primary save-action" type="submit">
 								<div class="button-inner">
 									<div class="button-icon icons-tick e-done"></div>
-									<div class="button-icon fa fa-spin fa-refresh e-loading hidden"></div>
+									<div class="button-icon fa fa-spin fa-refresh e-loading"></div>
 									<span class="msg msg-action-default">Lưu</span>
 								</div>
 							</button>
 							<button class="button action action-default button-secondary delete-action aDeleteGroup" type="button">
 								<div class="button-inner">
 									<div class="button-icon icons-delete d-done"></div>
-									<div class="button-icon fa fa-spin fa-refresh d-loading hidden"></div>
+									<div class="button-icon fa fa-spin fa-refresh d-loading"></div>
 									<span class="msg msg-action-default">Xóa</span>
 								</div>
 							</button>
@@ -129,7 +129,7 @@
 							<button class="button action action-default button-primary save-action" type="submit">
 								<div class="button-inner">
 									<div class="button-icon icons-tick done"></div>
-									<div class="button-icon fa fa-spin fa-refresh loading hidden"></div>
+									<div class="button-icon fa fa-spin fa-refresh loading"></div>
 									<span class="msg msg-action-default">Thêm</span>
 								</div>
 							</button>
@@ -193,13 +193,13 @@
 					<span class="ui-dialog-title" id="ui-dialog-title-1">Dịch vụ</span><a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
 				</div>
 				<div class="offer-form ui-dialog-content ui-widget-content" style="height: 550px;" scrolltop="0" scrollleft="0">
-					<form id="addUserService_form" action="#" method="POST" novalidate="novalidate">
+					<form id="addUserService_form" action="#" method="POST" >
 						<div class="dialog-content clearfix">
 							<div class="offer-form-main">
 								<div class="offer-type">
 									<div class="icon icons-treatment-big"></div>
 									<div class="type-select">
-										<select id="select2_addService" class="form-control select2" data-placeholder="Vui lòng chọn loại dịch vụ" required>
+										<select id="select2_addService" class="form-control select2" data-placeholder="Vui lòng chọn loại dịch vụ" required title="Trước tiên, bạn hãy chọn loại dịch vụ.">
 											<option value=""></option>
 											<!-- List service system -->
 
@@ -217,33 +217,14 @@
 										</div>
 									</div>
 									<div id="service_name" title="<strong>Service name</strong> - Type in the name of the service. Avoid using pricing or discount rate in the name as we will calculate and show them based on pricing information below." class="tooltips tooltips-bottom b-select-valid txt-input txt-input-big form-element-wrapper" aria-describedby="ui-tooltip-1">
-										<input type="text" value="" maxlength="150" placeholder="Tên dịch vụ của bạn" class="offer-name" name="user_service_name">
+										<input type="text" placeholder="Tên dịch vụ của bạn" class="offer-name" name="user_service_name" required pattern=".{6,}" title="Hãy nhập tên dịch vụ (ít nhất 6 ký tự)">
 									</div>
 								</div>
 								<div tabindex="-1" class="offer-content">
-									<div class="warning warning-archived hidden">
-										<div class="icon icons-archive-medium"></div>
-										<span class="title"> This service is archived. It will not be visible to your clients. <a class="offer-activate" href="javascript:;">Move this service back to your menu</a> </span>
-										<span class="info"></span>
-									</div>
-									<div class="warning warning-locked hidden">
+									<div class="warning warning-archived" style="display:none;">
 										<div class="icon icons-lock"></div>
-										<span class="title">You can only edit limited information for this menu item.</span>
-										<span class="info"></span>
-									</div>
-									<div class="warning warning-pending hidden">
-										<div class="icon icons-clock"></div>
-										<span class="title">Menu item is waiting for approval.</span>
-										This item is not published on Wahanda.com as a featured offer yet, as it needs to be reviewed by our support team.
-									</div>
-									<div class="warning warning-chain hidden">
-										<div class="icon icons-lock"></div>
-										<span class="title">Menu item is defined at a chain level.</span>
-										You can only edit limited information for this menu item. Contact Wahanda's support team if you need to modify anything else.
-									</div>
-									<div class="warning warning-permissions hidden">
-										<div class="icon icons-lock"></div>
-										<span class="title">You are not allowed to edit this item.</span>
+										<span class="title">Dịch vụ nổi bật đã đủ số lượng</span>
+										<div class="info">Số lượng dịch vụ nổi bật đã đủ 5. Nếu bạn muốn chọn đây là dịch vụ nổi bật thì vui lòng tắt tính năng nổi bật của dịch vụ nổi bật khác trước khi thêm.</div>
 									</div>
 
 									<div class="skus-pricing group-dependancy">
@@ -307,7 +288,7 @@
 														<td class="label-part sku-rrp"><label>Giá gốc </label></td>
 														<td data-tooltips="&lt;strong&gt;Full and Sale price&lt;/strong&gt; - Full price is the pricelist price of your service. If you are offering a special price on this offer, add it to Sale price." class="tooltips tooltips-top input-part">
 														<div class="txt-input txt-input-mini form-element-wrapper">
-															<input type="number" min="0" class="required number" value="" name="user_service_full_price" required="true" >
+															<input type="number" min="0" class="required number" value="" name="user_service_full_price" required pattern=".{6,}" title="Hãy nhập giá tiền cho dịch vụ" >
 														</div><label class="optional"> Giá khuyến mãi </label>
 														<div class="txt-input txt-input-mini form-element-wrapper">
 															<input type="number" class="number sku-amount" value="" name="user_service_sale_price">
@@ -399,7 +380,7 @@
 							<button class="button action action-default button-primary save-action" type="submit">
 								<div class="button-inner">
 									<div class="button-icon icons-tick done"></div>
-									<div class="button-icon fa fa-spin fa-refresh loading hidden"></div>
+									<div class="button-icon fa fa-spin fa-refresh loading"></div>
 									<span class="msg msg-action-default">Thêm</span>
 								</div>
 							</button>
@@ -421,13 +402,13 @@
 					<span class="ui-dialog-title" id="ui-dialog-title-1">Dịch vụ</span><a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
 				</div>
 				<div class="offer-form ui-dialog-content ui-widget-content" style="height: 550px;" scrolltop="0" scrollleft="0">
-					<form id="editUserService_form" action="#" method="POST" novalidate="novalidate">
+					<form id="editUserService_form" action="#" method="POST" >
 						<div class="dialog-content clearfix">
 							<div class="offer-form-main">
 								<div class="offer-type">
 									<div class="icon icons-treatment-big"></div>
 									<div class="type-select">
-										<select id="select2_editService" class="form-control select2" data-placeholder="Vui lòng chọn loại dịch vụ" required>
+										<select id="select2_editService" class="form-control select2" data-placeholder="Vui lòng chọn loại dịch vụ" required title="Trước tiên, bạn hãy chọn loại dịch vụ.">
 											<option value=""></option>
 											<!-- List service system -->
 
@@ -442,57 +423,18 @@
 												<div class="chzn-search">
 													<input type="text" autocomplete="off" style="width: 485px;" placeholder="Look up service type by typing in a name" tabindex="-1">
 												</div>
-												<ul class="chzn-results" style="max-height: 431.9px;">
-													<li class="group-result" id="selF0G_chzn_g_1" style="display: list-item;">
-														Body
-													</li>
-													<li style="" class="active-result group-option result-selected" id="selF0G_chzn_o_2">
-														24 Carat Gold Body Treatment
-													</li>
-													<li style="" class="active-result group-option" id="selF0G_chzn_o_3">
-														Acoustic Wave Therapy
-													</li>
-													<li style="" class="active-result group-option" id="selF0G_chzn_o_4">
-														Acupuncture
-													</li>
-													<li style="" class="active-result group-option" id="selF0G_chzn_o_5">
-														Akasuri
-													</li>
-													<li style="" class="active-result group-option" id="selF0G_chzn_o_6">
-														Arasys Toning and Inch Loss Treatment
-													</li>
-												</ul>
 											</div>
 										</div>
 									</div>
 									<div id="service_name" title="<strong>Service name</strong> - Type in the name of the service. Avoid using pricing or discount rate in the name as we will calculate and show them based on pricing information below." class="tooltips tooltips-bottom b-select-valid txt-input txt-input-big form-element-wrapper" aria-describedby="ui-tooltip-1">
-										<input type="text" value="" maxlength="150" placeholder="Tên dịch vụ của bạn" class="offer-name" name="user_service_name">
+										<input type="text" placeholder="Tên dịch vụ của bạn" class="offer-name" name="user_service_name" required pattern=".{6,}" title="Hãy nhập tên dịch vụ (ít nhất 6 ký tự)">
 									</div>
 								</div>
 								<div tabindex="-1" class="offer-content">
-									<div class="warning warning-archived hidden">
-										<div class="icon icons-archive-medium"></div>
-										<span class="title"> This service is archived. It will not be visible to your clients. <a class="offer-activate" href="javascript:;">Move this service back to your menu</a> </span>
-										<span class="info"></span>
-									</div>
-									<div class="warning warning-locked hidden">
+									<div class="warning warning-archived" style="display:none;">
 										<div class="icon icons-lock"></div>
-										<span class="title">You can only edit limited information for this menu item.</span>
-										<span class="info"></span>
-									</div>
-									<div class="warning warning-pending hidden">
-										<div class="icon icons-clock"></div>
-										<span class="title">Menu item is waiting for approval.</span>
-										This item is not published on Wahanda.com as a featured offer yet, as it needs to be reviewed by our support team.
-									</div>
-									<div class="warning warning-chain hidden">
-										<div class="icon icons-lock"></div>
-										<span class="title">Menu item is defined at a chain level.</span>
-										You can only edit limited information for this menu item. Contact Wahanda's support team if you need to modify anything else.
-									</div>
-									<div class="warning warning-permissions hidden">
-										<div class="icon icons-lock"></div>
-										<span class="title">You are not allowed to edit this item.</span>
+										<span class="title">Dịch vụ nổi bật đã đủ số lượng</span>
+										<div class="info">Số lượng dịch vụ nổi bật đã đủ 5. Nếu bạn muốn chọn đây là dịch vụ nổi bật thì vui lòng tắt tính năng nổi bật của dịch vụ nổi bật khác trước khi thêm.</div>
 									</div>
 
 									<div class="skus-pricing group-dependancy">
@@ -556,10 +498,10 @@
 														<td class="label-part sku-rrp"><label>Giá gốc </label></td>
 														<td data-tooltips="&lt;strong&gt;Full and Sale price&lt;/strong&gt; - Full price is the pricelist price of your service. If you are offering a special price on this offer, add it to Sale price." class="tooltips tooltips-top input-part">
 														<div class="txt-input txt-input-mini form-element-wrapper">
-															<input type="text" min="1" class="required number" value="" name="user_service_full_price" required >
+															<input type="number" min="0" class="required number" value="" name="user_service_full_price" required pattern=".{6,}" title="Hãy nhập giá tiền cho dịch vụ" >
 														</div><label class="optional"> Giá khuyến mãi </label>
 														<div class="txt-input txt-input-mini form-element-wrapper">
-															<input type="text" class="number sku-amount" value="" name="user_service_sale_price">
+															<input type="number" class="number sku-amount" value="" name="user_service_sale_price">
 														</div></td>
 													</tr>
 												</tbody>
@@ -648,14 +590,14 @@
 							<button class="button action action-default button-primary save-action" type="submit">
 								<div class="button-inner">
 									<div class="button-icon icons-tick e-done"></div>
-									<div class="button-icon fa fa-spin fa-refresh e-loading hidden"></div>
+									<div class="button-icon fa fa-spin fa-refresh e-loading"></div>
 									<span class="msg msg-action-default">Lưu</span>
 								</div>
 							</button>
 							<button id="deleteUserService" class="button action action-default button-basic offer-archive" type="button">
 								<div class="button-inner">
 									<div class="button-icon icons-archive d-done"></div>
-									<div class="button-icon fa fa-spin fa-refresh d-loading hidden"></div>
+									<div class="button-icon fa fa-spin fa-refresh d-loading"></div>
 									<span class="msg msg-action-default">Xóa bỏ dịch vụ</span>
 								</div>
 							</button>
@@ -667,6 +609,8 @@
 		</div>
 	</div>
 </div>
+
+
 
 <!-- Image Manager Modal -->
 <div class="modal" id="imageManager_modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
@@ -733,3 +677,16 @@
     </div>
   </div>
 </div><!--// END Image Manager Modal -->
+
+<!-- ui-dialog -->
+<div id="dialog-delUS" title="Xóa dịch vụ">
+	<p>Bạn có chắc muốn xóa dịch vụ này không?</p>
+</div>
+
+<div id="dialog-delGUS" title="Xóa nhóm dịch vụ">
+	<p>Bạn có chắc muốn xóa nhóm dịch vụ này không?</p>
+</div>
+
+<div id="dialog-editUS" title="Sửa dịch vụ">
+	<p>Bạn có chắc muốn sửa dịch vụ này không?</p>
+</div>

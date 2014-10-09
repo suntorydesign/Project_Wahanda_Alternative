@@ -28,7 +28,6 @@
 
         <link rel="stylesheet" href="<?php echo ASSETS ?>css/home-page/home-page.css" type="text/css"  />
 
-
         <?php
             if(isset($this->style)){
                 foreach ($this->style as $style) {

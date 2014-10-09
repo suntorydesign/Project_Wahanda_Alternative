@@ -217,7 +217,16 @@ $('.imageManager_openModal').click(function(){
 });
 
 
-
+function get_thumbnail(url_image, user_id) {
+    var res = url_image.split('/'); // chặt url ra
+    var image_name = res[res.length - 1]; // lấy tên image
+    res[res.length - 1] = "thumbnails/" + user_id; // thay thế phần tên image = "/thumbnails/{user_id}"
+    var thumbnail_name = image_name.split('.'); // tách phần extension
+    thumbnail_name = thumbnail_name[0] + '_165x95.jpg'; // đổi tên => tên file thumbnail
+    res[res.length] = thumbnail_name;// chèn tên hình thumbnail vào cuối
+    var url_thumbnail = res.join('/');// ghép lại thành => url thumbnail
+    return url_thumbnail;
+}
 
 // // <!-- Save Change -->
 // $('#imageManager_saveChange').on('click', function(evt){
