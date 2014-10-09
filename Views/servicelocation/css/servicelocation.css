@@ -20,7 +20,7 @@
 	font-size: 18px;
 }
 
-#result-list .fa-star {
+#result-list .fa-star, #result-list .fa-star-half-empty, #result-list .fa-star-empty {
 	padding-right: 8px;
 }
 

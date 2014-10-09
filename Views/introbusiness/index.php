@@ -78,7 +78,7 @@
 			<p class="intro-3-title" align="center">BẮT ĐẦU THẬT DỄ DÀNG !</p>
 			<ol class="intro-4-steps list-unstyled clearfix">
 				<li>Đăng ký và mô tả địa điểm kinh doanh của bạn</li>
-				<li>Tạo những dịch vụ mà bạn có thể cung cấp trẹn beleza.vn</li>
+				<li>Tạo những dịch vụ mà bạn có thể cung cấp trên beleza.vn</li>
 				<li>Bắt đầu Marketing dịch vụ cùng Beleza và gia tăng doanh thu</li>
 			</ol>
 			<div class="intro-3-action-btn" align="center">

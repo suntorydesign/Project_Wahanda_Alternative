@@ -44,11 +44,33 @@ function loadResultSearch(page) {
 			var html = '';
 			if (response.data[0] != null) {
 				$.each(response.data, function(key, value) {
+					var rating_value = parseFloat(value.star_review);
+					var head = parseInt(rating_value);
+					var tail = rating_value - head;
+					tail = Math.round(tail * 100) / 100;
 					html += '<div class="item clearfix">';
 					html += '<div class="col-md-6 clearfix">';
 					html += '<a href="' + URL + 'service/servicePlace/' + value.user_id + '" style="white-space: normal" class="name">' + value.user_business_name.toUpperCase() + '</a>';
 					html += '<div class="rating clearfix">';
-					html += '<i class="fa fa-star"></i>' + '<i class="fa fa-star"></i>' + '<i class="fa fa-star"></i>' + '<i class="fa fa-star"></i>' + '<i class="fa fa-star-o"></i>';
+					for (var i = 1; i <= head; i++) {
+						html += '<i class="fa fa-star"></i>';
+					}
+					if (tail != 0) {
+						if (tail == 0.9) {
+							html += '<i class="fa fa-star"></i>';
+						} else if (tail == 0.2 || tail == 0.3 || tail == 0.4 || tail == 0.5 || tail == 0.6 || tail == 0.7 || tail == 0.8) {
+							html += '<i class="fa fa-star-half-empty"></i>';
+						} else if (tail == 0.1) {
+							html += '<i class="fa fa fa-star-o"></i>';
+						}
+						for (var j = head + 2; j <= 5; j++) {
+							html += '<i class="fa fa-star-o"></i>';
+						}
+					} else {
+						for (var j = head + 1; j <= 5; j++) {
+							html += '<i class="fa fa-star-o"></i>';
+						}
+					}
 					html += '</div>';
 					html += '<div class="address clearfix">';
 					html += '<span class="pull-left">' + value.user_address + '</span>';

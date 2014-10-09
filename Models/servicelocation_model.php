@@ -48,6 +48,21 @@ SQL;
 		$select = $this -> db -> select($sql);
 		$array = array();
 		foreach ($select as $key => $value) {
+			$sql = <<<SQL
+SELECT user_review_overall, COUNT(*) AS star_amount
+FROM user_review
+WHERE user_id = {$value['user_id']}
+GROUP BY user_review_overall
+SQL;
+			$select = $this -> db -> select($sql);
+			$client_amount = 0;
+			$star_point = 0;
+			foreach ($select as $i => $item) {
+				$star_point = $star_point + $item['user_review_overall'] * $item['star_amount'];
+				$client_amount = $client_amount + $item['star_amount'];
+			}
+			$star_review = $star_point / $client_amount;
+			$array[$key]['star_review'] = round($star_review, 1);
 			$array[$key]['user_id'] = $value['user_id'];
 			$array[$key]['user_business_name'] = $value['user_business_name'];
 			$array[$key]['user_address'] = $value['user_address'];
