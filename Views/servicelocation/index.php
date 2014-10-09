@@ -237,4 +237,6 @@
 	var DISTRICT_ID = "<?php echo $this -> location; ?>";
 	var TOTAL_PAGE = 0;
 	var CURRENT_PAGE = 1;
+	var REVIEW_RESULT = 0;
+	var RESULT_PER_SHOW_MORE = "<?php echo RESULT_PER_SHOW_MORE; ?>";
 </script>
