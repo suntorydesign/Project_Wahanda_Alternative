@@ -2,9 +2,10 @@
 	<div class="sidebar">
 		<div class="venue-info">
 			<div class="pending-status">
-				<h2 class="title"><span class="icon icons-status-pending"></span> Pending review </h2>
+				<h2 class="title"><span class="icon icons-status-pending"></span> Đang chờ xác thực </h2>
 				<p class="text">
-					This venue needs to be reviewed by Wahanda staff before being published. Give us a day or two and we’ll have it up and running.
+					Địa điểm và dịch vụ của bạn đang được đánh giá tổng quan bởi nhân viên của W.A trước khi được công khai và cho phép người dùng sử dụng dịch vụ.
+					Quy trình của chúng tôi mất 2, 3 ngày để mang đến chất lượng thông tin tốt nhất.
 				</p>
 			</div>
 
@@ -19,7 +20,10 @@
 				</div>
 			</div>
 
-			<h1 class="venue-title v-venue-title">Sunspa Resort</h1>
+			<h1 class="venue-title v-venue-title"><?php echo Session::get('user_business_name'); ?></h1>
+
+			<span>Loại tài khoản: </span><strong>Miễn phí</strong></br>
+			<p><a href="#">Premium</a></p></br>
 
 			<div class="listing-type b-listing-type hidden" style="display: block;">
 				<span class="type">Listing type: <strong class="v-listing-type">Enhanced</strong></span>
@@ -35,16 +39,22 @@
 			<button class="button button-primary redeem" type="button" data-toggle="modal" data-target="#redeemVoucher_modal">
 				<div class="button-inner">
 					<div class="button-icon icons-voucher"></div>
-					Redeem an eVoucher
+					Xác thực eVoucher
 				</div>
 			</button>
 
 			<ul class="action-links">
 				<li>
-					<a href="/.settings"> <span class="icon icons-edit-link"></span> <span class="link-txt">Edit venue details</span> </a>
+					<a href="<?php echo URL . "spaCMS/settings";?>"> 
+						<span class="icon icons-edit-link"></span> 
+						<span class="link-txt">Chỉnh sửa thông tin địa điểm</span> 
+					</a>
 				</li>
 				<li class="b-venue-page">
-					<a class="l-venue-page" target="_blank" href="http://www.wahanda.com/place/sunspa-resort/overview/"> <span class="icon icons-web-link"></span> <span class="link-txt">View on Wahanda</span> </a>
+					<a class="l-venue-page" target="_blank" href="#"> 
+						<span class="icon icons-web-link"></span> 
+						<span class="link-txt">Xem địa điểm trên Beleza</span> 
+					</a>
 				</li>
 			</ul>
 		</div>
@@ -69,20 +79,29 @@
 
 		<div class="home-contacts">
 			<div class="part-title">
-				Any questions?
+				Hỗ trợ quản lý dịch vụ?
 			</div>
 			<ul class="action-links">
 				<li>
-					<span class="no-link"> <span class="icon icons-phone-link-on"></span> <span class="link-txt">0845 557 7827</span> </span>
+					<span class="no-link"> <span class="icon icons-phone-link-on"></span> <span class="link-txt">0973 708 1292</span> </span>
 				</li>
 				<li>
-					<a href="mailto:supply@wahanda.com"> <span class="icon icons-email-link"></span> <span class="link-txt">supply@wahanda.com</span> </a>
+					<a href="mailto:info@sunstorydesign.net"> 
+						<span class="icon icons-email-link"></span> 
+						<span class="link-txt">info@sunstorydesign.net</span> 
+					</a>
 				</li>
 				<li>
-					<a href="https://www.wahanda.com/info/connect-faq/" target="_blank"> <span class="icon icons-info-link"></span> <span class="link-txt">Read our FAQ</span> </a>
+					<a href="https://www.wahanda.com/info/connect-faq/" target="_blank"> 
+						<span class="icon icons-info-link"></span> 
+						<span class="link-txt">Xem những hỏi-đáp thường gặp - FAQ</span> 
+					</a>
 				</li>
 				<li>
-					<a class="a-livechat" href="javascript:;"> <span class="icon icons-chat-link"></span> <span class="link-txt">Live chat</span> </a>
+					<a class="a-livechat" href="javascript:;"> 
+						<span class="icon icons-chat-link"></span> 
+						<span class="link-txt">Hỗ trợ trực tiếp</span> 
+					</a>
 				</li>
 			</ul>
 		</div>
@@ -91,7 +110,7 @@
 		<div class="dashboard-actions clearfix">
 			<div class="top-search home-search">
 				<div class="txt-input">
-					<input type="text" placeholder="Search: client, phone#, order#..." id="top-search" name="top-search" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
+					<input type="text" placeholder="Tìm kiếm: client, phone#, order#..." id="top-search" name="top-search" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
 					<a class="clear-search" href="#" style="display: none;"><div class="icons-clear-search-mini"></div></a>
 					<div class="search-loader" style="display: none;"></div>
 				</div>
@@ -100,13 +119,13 @@
 		</div>
 
 		<div class="content-box home-bookings b-home-bookings">
-			<h2 class="box-hd"> Unconfirmed Bookings <span class="amount v-count hidden" style="display: none;"></span></h2>
-			<a class="view-all" href="./reports">View all bookings</a>
+			<h2 class="box-hd"> Bookings chưa xác nhận <span class="amount v-count hidden" style="display: none;"></span></h2>
+			<a class="view-all" href="<?php echo URL ."spaCMS/reports";?>">Xem tất cả bookings</a>
 			<div class="data-table">
 				<table>
 					<tbody>
 						<tr class="empty">
-							<td> No pending bookings at this time </td>
+							<td> Không có vé bookings tại thời điểm này </td>
 						</tr>
 					</tbody>
 				</table>
@@ -117,14 +136,14 @@
 			<table>
 				<tbody>
 					<tr>
-						<td class="content-box sales" id="monthly-sales"><h2 class="box-hd">Sales this month</h2>
+						<td class="content-box sales" id="monthly-sales"><h2 class="box-hd">Doanh số tháng này</h2>
 						<div class="totals">
 							<div class="stats-item">
-								<span class="title">Total bookings</span>
+								<span class="title">Tổng lượt bookings</span>
 								<span class="value v-bookings">1</span>
 							</div>
 							<div class="stats-item">
-								<span class="title">Total TTV</span>
+								<span class="title">Tổng doanh số tài chính - Total transaction value</span>
 								<span class="value v-ttv">£40.00</span>
 							</div>
 						</div>
@@ -210,18 +229,18 @@
 						<td class="empty"><span>&nbsp;</span></td>
 						<td class="content-box tops">
 						<div id="top-services">
-							<h2 class="box-hd">Top services</h2>
+							<h2 class="box-hd">Dịch vụ tốt nhất</h2>
 
 							<table>
 								<thead>
 									<tr>
-										<th class="box-subhd">By number of bookings</th>
-										<td>This
+										<th class="box-subhd">Tìm xem số lượt được bookings</th>
+										<td>Tháng
 										<br>
-										month</td>
-										<td>Last
+										này</td>
+										<td>Tháng
 										<br>
-										month</td>
+										trước</td>
 									</tr>
 								</thead>
 								<tbody>
@@ -233,7 +252,9 @@
 								</tbody>
 							</table>
 						</div><div class="box-separator"></div>
-						<div id="top-performers">
+
+
+						<div id="top-performers hidden" style="display:none;">
 							<h2 class="box-hd v-title">Top employees</h2>
 
 							<table>
@@ -262,7 +283,7 @@
 			</table>
 		</div>
 
-		<div class="stats-marketplace">
+		<div class="stats-marketplace hidden">
 			<table>
 				<tbody>
 					<tr>

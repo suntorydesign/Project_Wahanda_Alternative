@@ -5,19 +5,19 @@
 				<li id="venue-settings-tab" class="ui-state-default ui-corner-top active" >
 					<a href="#venue-settings" style="position: relative;" role="tab" data-toggle="tab"> <div class="nav-icon icons-nav-venue"></div>
 					<div class="title" style="position: absolute; height: 17px; top: 50%; margin-top: -8.5px;">
-						Venue
+						Địa điểm
 					</div> </a>
 				</li>
 				<li id="finance-tab" class="ui-state-default ui-corner-top">
 					<a href="#finance" style="position: relative;" role="tab" data-toggle="tab"> <div class="nav-icon icons-nav-supplier"></div>
 					<div class="title" style="position: absolute; height: 17px; top: 50%; margin-top: -8.5px;">
-						Finance
+						Tài chính
 					</div> </a>
 				</li>
 				<li id="notifications-settings-tab" class="ui-state-default ui-corner-top">
 					<a href="#notifications-settings" style="position: relative;" role="tab" data-toggle="tab"> <div class="nav-icon icons-nav-notifications"></div>
 					<div class="title" style="position: absolute; height: 17px; top: 50%; margin-top: -8.5px;">
-						Notifications
+						Thông báo
 					</div> </a>
 				</li>
 				<li id="online-booking-tab" class="ui-state-default ui-corner-top">
@@ -36,14 +36,14 @@
 					<div class="nav3">
 						<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
 							<li class="ui-state-default ui-corner-top active">
-								<a href="#venue-details" role="tab" data-toggle="tab">Venue details</a>
+								<a href="#venue-details" role="tab" data-toggle="tab">Địa điểm</a>
 							</li>
 							<li class="ui-state-default ui-corner-top">
-								<a href="#opening-hours" role="tab" data-toggle="tab">Opening hours</a>
+								<a href="#opening-hours" role="tab" data-toggle="tab">Giờ mở cửa</a>
 							</li>
-							<li class="ui-state-default ui-corner-top">
+							<!-- <li class="ui-state-default ui-corner-top">
 								<a href="#policies" role="tab" data-toggle="tab">Policies</a>
-							</li>
+							</li> -->
 							<li id="venue-vouchers-tab" class="ui-state-default ui-corner-top">
 								<a href="#venue-vouchers" role="tab" data-toggle="tab">Gift Vouchers</a>
 							</li>
@@ -201,7 +201,7 @@
 										<div class="button-inner">
 											<div class="button-icon icons-tick done"></div>
 											<div class="button-icon fa fa-spin fa-refresh loading" style="display: none;"></div>
-											<span class="msg msg-action-default">Save</span>
+											<span class="msg msg-action-default">Lưu</span>
 										</div>
 									</button>
 									<!-- <a target="_blank" class="button-link preview-link" href="http://www.wahanda.com/place/sunspa-resort/overview/">Preview on Wahanda</a> -->
@@ -234,14 +234,14 @@
 									<div class="button-inner">
 										<div class="button-icon icons-tick done"></div>
 										<div class="button-icon fa fa-spin fa-refresh loading" style="display: none;"></div>
-										<span class="msg msg-action-default">Save</span>
+										<span class="msg msg-action-default">Lưu</span>
 									</div>
 								</button>
 							</div>
 							</form>
 						</div><!-- END OPEN HOUR -->
 
-						<div id="policies" class="tab-pane">
+						<div id="policies" class="tab-pane hidden">
 							<div class="form-content">
 								<table cellspacing="0" cellpadding="0" class="default-form">
 									<!-- Appointment policies -->
@@ -480,7 +480,8 @@
 							<div class="form-actions">
 								<button class="button action action-default button-primary save-action" type="submit">
 									<div class="button-inner">
-										<div class="button-icon icons-tick"></div><span class="msg msg-action-default">Save</span><span class="msg msg-action-doing">Saving...</span>
+										<div class="button-icon icons-tick"></div>
+										<span class="msg msg-action-default">Lưu</span>
 									</div>
 								</button>
 							</div>
@@ -500,9 +501,9 @@
 								</div>
 								<div class="enabler">
 									<input type="checkbox" value="true" name="user_is_use_voucher" id="user_is_use_voucher">
-									<label for="user_is_use_voucher"> Accept Wahanda Gift Vouchers </label>
+									<label for="user_is_use_voucher"> Đồng ý sử dụng Gift Vouchers </label>
 								</div>
-								<div class="info smaller b-info-text">
+								<div class="info smaller b-info-text hidden">
 									<p>
 										When a customer uses a voucher in your venue, simply write your venue name and the date on the back of the voucher and write Void on the front. Return to us by post, keeping a note of the serial number, and you’ll receive payment 15 days after we receive your voucher, minus 15% plus VAT commission from the voucher value.
 									</p>
@@ -527,7 +528,7 @@
 									<div class="button-inner">
 										<div class="button-icon icons-tick done"></div>
 										<div class="button-icon fa fa-spin fa-refresh loading" style="display:none"></div>
-										<span class="msg msg-action-default">Save</span>
+										<span class="msg msg-action-default">Lưu</span>
 									</div>
 								</button>
 							</div>
@@ -637,7 +638,7 @@
 									<div class="button-inner">
 										<div class="button-icon icons-tick done"></div>
 										<div class="button-icon fa fa-spin fa-refresh loading" style="display:none"></div>
-										<span class="msg msg-action-default">Save</span>
+										<span class="msg msg-action-default">Lưu</span>
 									</div>
 								</button>
 							</div>
@@ -708,7 +709,7 @@
 									<div class="button-inner">
 										<div class="button-icon icons-tick done"></div>
 										<div class="button-icon fa fa-spin fa-refresh loading" style="display:none"></div>
-										<span class="msg msg-action-default">Save</span>
+										<span class="msg msg-action-default">Lưu</span>
 									</div>
 								</button>
 							</div>
@@ -738,10 +739,10 @@
 								<div class="content-note">
 									<div class="icon icons-info"></div>
 									<p class="second-txt">
-										We will send out automated notifications to your customers reminding them about their appointments. For more information, visit <a href="http://www.wahanda.com/info/connect-faq/#do-you-send-notifications-and-reminders-to-our-clients" target="_blank">Connect FAQ</a>.
+										Khi chúng tôi nhận được đơn hàng từ khách hàng, chúng tôi sẽ gửi email cho bạn. Bạn có thể tùy chỉnh email bạn sử dụng để kiểm tra những thông tin này.
 									</p>
 								</div>
-								<div class="text-message-settings">
+								<div class="text-message-settings hidden">
 									<div class="part-title">Text message settings</div>
 									<div class="content-note b-premium" style="margin-left: 0px;">
 										<div class="icon icons-info"></div>
@@ -789,7 +790,7 @@
 									<div class="button-inner">
 										<div class="button-icon icons-tick done"></div>
 										<div class="button-icon fa fa-spin fa-refresh loading" style="display:none"></div>
-										<span class="msg msg-action-default">Save</span>
+										<span class="msg msg-action-default">Lưu</span>
 									</div>
 								</button>
 							</div>
@@ -800,7 +801,7 @@
 								<div class="content-note">
 									<div class="icon icons-info"></div>
 									<p class="second-txt">
-										aWhen we receive a lead or a sale from a customer, we send an email to you. Here you can specify what address we should send those emails to.
+										Khi chúng tôi nhận được đơn hàng từ khách hàng, chúng tôi sẽ gửi email cho bạn. Bạn có thể tùy chỉnh email bạn sử dụng để kiểm tra những thông tin này.
 									</p>
 								</div>
 
@@ -915,7 +916,8 @@
 							<div class="form-actions">
 								<button class="button action action-default button-primary save-action" type="submit">
 									<div class="button-inner">
-										<div class="button-icon icons-tick"></div><span class="msg msg-action-default">Save</span><span class="msg msg-action-doing">Saving...</span>
+										<div class="button-icon icons-tick"></div>
+										<span class="msg msg-action-default">Lưu</span>
 									</div>
 								</button>
 							</div>

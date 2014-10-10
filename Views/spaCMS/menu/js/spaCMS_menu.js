@@ -174,8 +174,7 @@ var MenuGroupService = function () {
                                 html_us += '<a href="javascript:;"> ';
                                     html_us += '<span class="offer-name">:user_service_name</span> ';
                                     // html_us += '<span class="label label-type v-fulfillment">Appointment or eVoucher</span> ';
-                                    // html_us += '<span class="label label-type v-fulfillment">Appointment</span> ';
-                                    // html_us += '<span class="label label-type v-fulfillment">eVoucher</span> ';
+                                    html_us += ':featured_label';
                                 html_us += '</a>';
                             html_us += '</div>';
                             html_us += '<div class="custom-info">';
@@ -193,6 +192,8 @@ var MenuGroupService = function () {
         var html_price1 = '<span class="">:full_price vnđ</span>';
         var html_price2 = '<span class="sku-price--previous">:full_price vnđ</span>';
             html_price2 += '<span class="sku-price--discount">:sale_price vnđ</span>';
+
+        var html_featured_label = '<span class="label label-featured v-fulfillment">Đặc trưng</span> ';
 
         // user_id;
         var url = URL + 'spaCMS/menu/xhrGet_group_user_service';
@@ -212,6 +213,12 @@ var MenuGroupService = function () {
                         out = out.replace(/:user_service_name/g, us['user_service_name']);
                         out = out.replace(/:user_service_duration/g, us['user_service_duration']);
                         out = out.replace(/:user_service_status/g, us['user_service_status']);
+                        if(us['user_service_is_featured'] == 1){
+                            out = out.replace(':featured_label', html_featured_label);
+                        } else {
+                            // us['user_service_is_featured'] == 0;
+                            out = out.replace(':featured_label', '');
+                        }
                         out = out.replace(/:user_service_is_featured/g, us['user_service_is_featured']);
                         out = out.replace(/:user_service_description/g, us['user_service_description']);
                         out = out.replace(/:user_service_image/g, us['user_service_image']);
@@ -333,7 +340,7 @@ var MenuGroupService = function () {
     var xhrInsert_group_service = function() {
         $("#addGroupName_form").on('submit', function() {
             var data = $(this).serialize();
-            var loading = $(this).find('.loading');
+            var loading = $(this).find('.s-loading');
             var done = $(this).find('.done');
             loading.fadeIn();
             done.hide();
@@ -413,7 +420,7 @@ var MenuGroupService = function () {
         $("#addUserService_form").on('submit', function() {
             var self    = $(this);
             var data    = self.serialize();
-            var loading = self.find('.loading');
+            var loading = self.find('.s-loading');
             var done    = self.find('.done');
             var warning = self.find('.warning');
             loading.fadeIn();
@@ -560,6 +567,7 @@ var MenuGroupService = function () {
                 var url = URL + 'spaCMS/menu/xhrDelete_user_service_featured';
                 $.post(url, {'user_service_id':data_id}, function(rs) {
                     if(rs === 'success'){
+                        xhrGet_group_user_service();
                         var parent = self.parent();
                         parent.fadeOut();
                         $('.featured').append(html_empty);

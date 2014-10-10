@@ -26,28 +26,27 @@
 			$this->model->logout();
 		}
 		
-		function home() {
+		function home($xhr = false) {
 			Auth::handleSpaCMSLogin();
-			
-			$this->view->script = array(
-				URL . 'Views/spaCMS/home/js/spaCMS_home.js'
-			);
+			switch ($xhr) {
+				case 'xhrGet_service_system':
+					$this->model->get_service_system();
+					break;
+					
+				default:
+					$this->view->style = array(
+						// ASSETS . 'plugins/bootstrap-select/bootstrap-select.min.css',
+						URL . 'Views/spaCMS/menu/css/spaCMS_home.css'
+					);
 
-			if($xhr == 'xhrGet'){
-				$this->model->getList_datVe();
+					$this->view->script = array(
+						URL . 'Views/spaCMS/home/js/spaCMS_home.js'
+					);
+
+					$this->view->render_spaCMS('home/index');
+					break;
 			}
-			elseif($xhr == 'xhrInsert'){
-				$this->model->insert_datVe();
-			}
-			elseif($xhr == 'xhrUpdate'){
-				$this->model->update_datVe();
-			}
-			elseif($xhr == 'xhrDelete'){
-				$this->model->delete_datVe();
-			}
-			else {
-				$this->view->render_spaCMS('home/index');
-			}
+
 		}
 
 		function menu($xhr = false) {

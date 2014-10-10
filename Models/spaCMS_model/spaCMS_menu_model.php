@@ -321,6 +321,7 @@ SQL;
 		WHERE gs.group_service_user_id = {$user_id}
 			AND us.user_service_group_id = gs.group_service_id
 			AND us.user_service_is_featured = 1
+			AND us.user_service_delete_flg = 0
 SQL;
 		$data = $this->db->select($aQuery);
 

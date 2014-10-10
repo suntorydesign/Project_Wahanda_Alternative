@@ -18,21 +18,21 @@
         <link rel="apple-touch-icon" href="../img/ico/Cat-Brown-icon-72px.png" />
 
         <!-- Chèn link CSS -->
-        <link rel="stylesheet" href="<?php echo URL ?>public/assets/css/spaCMS/spaCMS.css" type="text/css"  />
+        <link rel="stylesheet" href="<?php echo ASSETS ?>css/spaCMS/spaCMS.css" type="text/css"  />
 
 
         <!-- Chèn link JavaScript-->
-        <script src="<?php echo URL ?>public/js/jquery.min.js" type="text/javascript"></script>
-        <script src="<?php echo URL ?>public/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="<?php echo ASSETS ?>js/jquery.min.js" type="text/javascript"></script>
+        <script src="<?php echo ASSETS ?>js/bootstrap.min.js" type="text/javascript"></script>
     
     </head>
 
-    <body class="loading login-page">
+    <body class="login-page">
 		<div id="login-page">
 			<div class="wrapper1">
 			    <div class="wrapper2">
 			        <div class="wrapper3">
-			            <h1>Wahanda Connect</h1>
+			            <h1>Beleza Connect</h1>
 			            <form action="<?php echo URL . '/spaCMS/login' ?>" novalidate="novalidate" class="login-form" method="POST">
 				            <label class="unauthorised-error-message error-message hidden">
 			        			Sorry, we were unable to log you in. Please check your username and password are correct.
@@ -41,15 +41,15 @@
 			        			Sorry, there are no venues associated with this account.
 			        		</div>
 		                	<input name="user_email" class="required v-email-or-profilename valid" placeholder="Email" type="email">
-			                <input name="user_password" class="required" placeholder="Password" type="password">
+			                <input name="user_password" class="required" placeholder="Mật khẩu" type="password">
 			
 			                <label class="remember">
 			                    <input name="remember" type="checkbox">
-			                    <span class="text">Keep me logged in</span>
+			                    <span class="text">Ghi nhớ tài khoản</span>
 			                </label>
 			                <!-- <a class="forgot" href="https://www.wahanda.com/request-password/">Forgot your password?</a>  -->
 			
-			                <button class="button">Log in</button>
+			                <button class="button">Đăng nhập</button>
 			            </form>
 			
 			            <!-- <div class="signup">

@@ -34,7 +34,7 @@
 						Những dịch vụ nổi bật sẽ được hiển thị ở đầu danh sách dịch vụ của bạn trên Beleza và các website đối tác của chúng tôi.
 					</p>
 					<p>
-						Get more attention to top offers by featuring them.
+						Tạo sự chú ý cho những dịch vụ nổi trội mà bạn tự hào.
 					</p>
 				</div>
 
@@ -129,7 +129,7 @@
 							<button class="button action action-default button-primary save-action" type="submit">
 								<div class="button-inner">
 									<div class="button-icon icons-tick done"></div>
-									<div class="button-icon fa fa-spin fa-refresh loading"></div>
+									<div class="button-icon fa fa-spin fa-refresh s-loading"></div>
 									<span class="msg msg-action-default">Thêm</span>
 								</div>
 							</button>
@@ -380,7 +380,7 @@
 							<button class="button action action-default button-primary save-action" type="submit">
 								<div class="button-inner">
 									<div class="button-icon icons-tick done"></div>
-									<div class="button-icon fa fa-spin fa-refresh loading"></div>
+									<div class="button-icon fa fa-spin fa-refresh s-loading"></div>
 									<span class="msg msg-action-default">Thêm</span>
 								</div>
 							</button>

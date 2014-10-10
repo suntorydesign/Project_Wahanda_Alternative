@@ -83,25 +83,25 @@
                 <li id="nav-calendar">
                     <a title="Calendar" href="./calendar"> <div class="icons-nav-calendar"></div>
                     <div class="title">
-                        Calendar
+                        Lịch Books
                     </div> </a>
                 </li>
                 <li id="nav-menu">
                     <a title="Menu" href="./menu"> <div class="icons-nav-menu"></div>
                     <div class="title">
-                        Menu
+                        Dịch vụ
                     </div> </a>
                 </li>
                 <li id="nav-reports">
                     <a title="Reports" href="./reports"> <div class="icons-nav-reports"></div>
                     <div class="title">
-                        Reports
+                        Báo cáo
                     </div> </a>
                 </li>
                 <li id="nav-settings">
                     <a title="Settings" href="./settings"> <div class="icons-nav-settings"></div>
                     <div class="title">
-                        Settings
+                        Cài đặt
                     </div> </a>
                 </li>
             </ul>
@@ -119,7 +119,7 @@
                     </div> </a>
                     <ul id="logout" class="ddown" role="menu" style="display:none;">
                         <li>
-                            <a href="<?php echo URL . 'spaCMS/logout' ?>"> <div class="icons-logout"></div> Logout </a>
+                            <a href="<?php echo URL . 'spaCMS/logout' ?>"> <div class="icons-logout"></div> Thoát </a>
                         </li>
                     </ul>
                 </div>

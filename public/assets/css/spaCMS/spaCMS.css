@@ -29,7 +29,7 @@ table {
      border-spacing: 0px;
 }
 
-.loading, .d-loading, .e-loading {
+.s-loading, .d-loading, .e-loading {
      display: none;
 }
 
@@ -7387,7 +7387,7 @@ table.wc-time-slots {
      display: block;
      left: 8px;
      position: absolute;
-     top: 6px;
+     top: 3px;
 }
 
 .venue-info .pending-status .text {
