@@ -1,10 +1,6 @@
-
-
 <div id="header-2" class="clearfix">
 
 </div>
-
-
 
 <div id="content-wrap">
 	<div class="container">
@@ -13,7 +9,7 @@
 			<div id="result-total" class="clearfix">
 				<div class="col-md-4">
 					<div class="form-horizontal">
-						<label class="control-label" style="color: #FFFFFF"><span id="count_result">1280</span> Địa điểm được tìm thấy</label>
+						<label class="control-label" style="color: #FFFFFF"><span id="count_result">0</span> Địa điểm được tìm thấy</label>
 					</div>
 				</div>
 
@@ -21,60 +17,69 @@
 					<div class="form-horizontal">
 						<label style="color: #A09E9E;" class="control-label col-md-4">Tìm theo</label>
 						<div class="col-md-8">
-							<select class="form-control">
-								<option value="" disabled selected="">Tìm theo...</option>
+							<select id="sort_by" class="form-control">
+								<option value="1" selected="">Dịch vụ mới nhất</option>
+								<option value="2">Được đánh giá nhiều nhất</option>
+								<option value="3">Giá rẻ nhất</option>
+								<option value="4">Giá mắc nhất</option>
 							</select>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<div id="result-list" class="clearfix">
-				<!-- <div class="item clearfix">
-					<div class="col-md-6 clearfix">
-						<p style="white-space: normal" class="name">LADIVA NAIL SPA | CHĂM SÓC MÓNG CHUYÊN NGHIỆP</p>
-						<div class="rating clearfix">
-							<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-						</div>
-						<div class="address clearfix">
-							<span class="pull-left">68 Lý Tự Trọng - P.Bến Nghé - Q.1 -TP.HCM</span>
-							<a class="pull-right" href="#">Show map >>></a>
-						</div>
-						<div class="description clearfix">
-							Tại salon Ladive nail các hiệu trình chăm sóc thiết kế nail được thực hiện theo một quy trình hiện đại, bằng tất cả sự khéo léo và cẩn thận. Ladivi Nail chăm sóc từng ngón tay, ngón chân của khách hàng...
-						</div>
-						<div class="services">
-							Hair	NAIL 	Face
-						</div>
-					</div>
-					<div class="col-md-6 clearfix image">
-						<span class="fa-stack fa-lg new-item">
-						  	<i class="fa fa-circle fa-stack-2x text-orange"></i>
-						  	<i class="fa fa-stack-1x fa-inverse"><b>new</b></i>
-						</span>
-						<img width="100%" height="auto" class="img-responsive img-rounded" src="http://webdesignledger.com/wp-content/uploads/2014/08/1-ipad-apps-for-web-designers.jpg">
-					</div>
-					<div class="col-md-12 clearfix">
-						<div class="price clearfix">
-							<div class="col-sm-5 text-orange price-info-1">
-								<strong>Móng gắn đá kim tuyến Hàn Quốc</strong>
+			<div id="result_container">
+				<div class="processing_loading">
+				</div>
+				<div id="waiting_for_result_list">
+					<i id="waiting_for_result_list" style="color: #FDBD0E" class="fa fa-3x fa-gear fa-spin"></i>
+				</div>
+				<div id="result-list" class="clearfix">
+					
+					<!-- <div class="item clearfix">
+						<div class="col-md-6 clearfix">
+							<p style="white-space: normal" class="name">LADIVA NAIL SPA | CHĂM SÓC MÓNG CHUYÊN NGHIỆP</p>
+							<div class="rating clearfix">
+								<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
 							</div>
-							<div class="col-sm-3 price-info-2">
-								<i class="fa fa-clock-o text-orange"></i> 30 phút - 1 giờ
+							<div class="address clearfix">
+								<span class="pull-left">68 Lý Tự Trọng - P.Bến Nghé - Q.1 -TP.HCM</span>
+								<a class="pull-right" href="#">Show map >>></a>
 							</div>
-							<div class="col-sm-2 price-info-3">
-								<i class="fa fa-arrow-down text-orange"></i> Giảm 20%
+							<div class="description clearfix">
+								Tại salon Ladive nail các hiệu trình chăm sóc thiết kế nail được thực hiện theo một quy trình hiện đại, bằng tất cả sự khéo léo và cẩn thận. Ladivi Nail chăm sóc từng ngón tay, ngón chân của khách hàng...
 							</div>
-							<div class="col-sm-2 price-info-4" >
-								<button type="button" class="btn btn-sm btn-orange pull-right">
-									<i class="fa fa-dollar text-white"></i> 250.000 đ
-								</button>
+							<div class="services">
+								Hair	NAIL 	Face
 							</div>
 						</div>
-					</div>
-				</div> -->
+						<div class="col-md-6 clearfix image">
+							<span class="fa-stack fa-lg new-item">
+							  	<i class="fa fa-circle fa-stack-2x text-orange"></i>
+							  	<i class="fa fa-stack-1x fa-inverse"><b>new</b></i>
+							</span>
+							<img width="100%" height="auto" class="img-responsive img-rounded" src="http://webdesignledger.com/wp-content/uploads/2014/08/1-ipad-apps-for-web-designers.jpg">
+						</div>
+						<div class="col-md-12 clearfix">
+							<div class="price clearfix">
+								<div class="col-sm-5 text-orange price-info-1">
+									<strong>Móng gắn đá kim tuyến Hàn Quốc</strong>
+								</div>
+								<div class="col-sm-3 price-info-2">
+									<i class="fa fa-clock-o text-orange"></i> 30 phút - 1 giờ
+								</div>
+								<div class="col-sm-2 price-info-3">
+									<i class="fa fa-arrow-down text-orange"></i> Giảm 20%
+								</div>
+								<div class="col-sm-2 price-info-4" >
+									<button type="button" class="btn btn-sm btn-orange pull-right">
+										<i class="fa fa-dollar text-white"></i> 250.000 đ
+									</button>
+								</div>
+							</div>
+						</div>
+					</div> -->
+				</div>
 			</div>
-
 			<div id="result-pagination" align="center">
 				<ul class="pagination pagination-sm">
 				  	<!-- <li><a href="#">&laquo;</a></li>

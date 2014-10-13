@@ -119,7 +119,7 @@
 											<hr />
 										</div>
 										<div id="jugg" class="container-fluid">
-											<div class="row">
+											<div class="row" style="margin-bottom: 10px;">
 												<div class="col-md-12">
 													<h4><strong>ĐÁNH GIÁ</strong></h4>
 												</div>
