@@ -190,65 +190,74 @@
                             </div>
                             <div class="clearfix appointment-info">
                                 <div class="calendar-time">
-                                    <div class="weekday">Thứ </div>
-                                    <div class="day">ngày</div>
+                                    <div class="weekday">Thứ 3 weekday</div>
+                                    <div class="day">19 day</div>
                                     <div class="year-month">
-                                        Tháng <span class="month">8</span>, <span class="year">2014</span>
+                                        <span class="month">Tháng 8 month</span>, <span class="year">2014 year</span>
                                     </div>
-                                    <div class="time">13:00</div>
+                                    <div class="time">13:00 time</div>
                                 </div>
                                 <div class="title-and-sku">
                                     <div class="title user_service_name">Service name</div>
                                     <div class="sku hidden"></div>
                                 </div>
                                 <table class="default-data-table" cellpadding="0" cellspacing="0">
-                                    <tbody>
+                                    <tbody><tr class="b-venue-name hidden">
+                                        <th>Venue name</th>
+                                        <td><span class="v-venue-name"></span></td>
+                                    </tr>
                                     <tr>
-                                        <th>Thời gian phục vụ</th>
-                                        <td><span class="user_service_duration">80 phút </span></td>
+                                        <th>Thời gian</th>
+                                        <td><span class="user_service_duration">1 h </span></td>
                                     </tr>
                                     <tr class="b-price">
-                                        <th class="price">Giá</th>
+                                        <th class="v-price-title user_service_price">Giá</th>
                                         <td>
-                                            <span class="v-price user_service_price">200,000 đ</span>
+                                            <span class="price v-price"></span>
                                             <span class="status-prepaid label label-confirmed">Prepaid</span>
                                             <span class="status status-unpaid">Unpaid</span>
                                             <span class="status-paid label label-confirmed">Paid at venue</span>
-                                            <span class="b-status status status-discounted">status discounted</span>
+                                            <span class="b-status status status-discounted hidden"></span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hidden b-additional-price">
+                                        <th class="v-additional-price-title">Additional Price</th>
+                                        <td>
+                                            <span class="price v-additional-price"></span>
+                                            <span class="status-paid label label-confirmed hidden">Paid at venue</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="b-total hidden">
+                                        <th class="v-total-price-title">Giá</th>
+                                        <td>
+                                            <span class="price v-total-price">-</span>
+                                            <span class="status status-unpaid">Unpaid</span>
+                                            <span class="status-prepaid label label-confirmed hidden">Prepaid</span>
+                                            <span class="status-paid label label-confirmed hidden">Paid at venue</span>
+
+                                            <span class="b-status status status-discounted hidden"></span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Status</th>
-                                        <td><span class="status-paid label label-confirmed">Complete</span>
-                                        	<span class="b-status status payment-status">payment status</span>
-                                        </td>
+                                        <td><span class="status-paid label label-confirmed hidden">Prepaid</span><span class="b-status status payment-status hidden"></span></td>
+                                    </tr> 
+                                    <tr class="b-view-in-calendar hidden">
+                                        <td colspan="2"><a class="v-view-in-calendar" href="/calendar#venue/285925/appointment/appointment/549569">View in calendar</a></td>
                                     </tr>
                                 </tbody></table>
                                 <div class="appointment-actions">
-                                    <button type="button" class="button button-primary accept-action">
-                                    	<div class="button-inner"><div class="button-icon icons-tick5">
-                                    	</div>Accept</div>
-                                    </button>
-                                    <button type="button" class="button button-attention smart-reschedule-action hidden">
-                                    	<div class="button-inner">
-                                    		<div class="button-icon icons-edit2"></div>
-                                    		Smart reschedule
-                                    	</div>
-                                    </button>
-                                    <button type="button" class="button button-secondary reject-action">
-                                    	<div class="button-inner">
-                                    		<div class="button-icon icons-reject2"></div>
-                                    		Reject
-                                    	</div>
-                                    </button>
+                                    <button type="button" class="button button-primary accept-action"><div class="button-inner"><div class="button-icon icons-tick5"></div>Accept</div></button>
+                                    <button type="button" class="button button-attention smart-reschedule-action hidden"><div class="button-inner"><div class="button-icon icons-edit2"></div>Smart reschedule</div></button>
+                                    <button type="button" class="button button-secondary reject-action"><div class="button-inner"><div class="button-icon icons-reject2"></div>Reject</div></button>
                                 </div>
                             </div>
-                            <div class="appointment-notes has-notes">
+                            <div class="appointment-notes has-notes hidden">
                                 <span class="notes-title">Appointment notes:</span>
                                 <span class="notes v-notes"></span>
-                                <div class="wahanda-notes b-verification-notes">
+                                <div style="display: none;" class="wahanda-notes b-verification-notes hidden">
                                     <span class="icon icons-attention-small2"></span>
-                                    <span class="notes-title">Notes from Beleza:</span>
+                                    <span class="notes-title">Notes from Wahanda:</span>
                                     <span class="notes v-verification-notes"></span>
                                 </div>
                             </div>
@@ -256,25 +265,25 @@
                                 <div class="icons-customer"></div>
                                 <ul class="person-info">
                                     <li class="person-name">
-                                        <a href="javascript:;" class="a-view-consumer">
-                                        	<span class="client_name">0903676222</span>
-                                        </a>
+                                        <a href="javascript:;" class="a-view-consumer"><span class="client_name">0903676222</span></a>
                                         <a href="javascript:;" class="edit-link a-rebook">
                                             Rebook
                                         </a>
                                     </li>
                                     <li class="consumer-phone-row">
                                         <div class="icon icons-phone"></div>
-                                        <span class="consumer-phone client_phone">+84 90 367 62 22</span>
+                                        <span class="consumer-phone">+84 90 367 62 22</span>
                                     </li>
                                     <li class="consumer-email-row">
                                         <div class="icon icons-email"></div>
-                                        <a class="consumer-email client_email" href="mailto:vietnt134@gmail.com">vietnt134@gmail.com</a>
+                                        <a class="consumer-email" href="mailto:vietnt134@gmail.com">vietnt134@gmail.com</a>
                                     </li>
                                 </ul>
 
                                 <div class="client-note">
-                                    <span class="note-wrapper v-note client_note">hello</span>
+
+                                    <span class="note-wrapper v-note">hello</span>
+
                                     <div class="icons-note-tip2"></div>
                                 </div>
                             </div>
@@ -282,48 +291,36 @@
                                 Booked at: <span class="full-date">19/08/2014, 13:40</span>
                                 <span class="separator">|</span>
                                 Source:<span class="source">Added in Connect by minhnhat</span>
-                                <span class="order-ref-part">
+                                <span class="order-ref-part hidden">
                                     <span class="separator">|</span>
                                     Order ref#: <a href="javascript:;" class="order-ref">null</a>
                                 </span>
-                                <div class="b-evoucher-ref">
+                                <div class="b-evoucher-ref hidden">
                                     Created by using eVoucher: <a href="javascript:;" class="v-evoucher-ref"></a>
                                 </div>
                             </div>
                         </div>
                         <div class="dialog-actions b-standard-actions">
-                            <button type="button" class="button button-primary a-ok">
-                            	<div class="button-inner"><div class="button-icon icons-tick"></div>
-	                            	OK
-	                            </div>
+                            <button type="button" class="button button-primary a-ok"><div class="button-inner"><div class="button-icon icons-tick"></div>OK</div></button>
+                            <button type="button" class="button button-edit change-only-this edit-appointment" data-toggle="modal" data-target="#appointment_modal">
+                                <div class="button-inner"><div class="button-icon icons-edit2"></div>Edit / Reschedule</div>
                             </button>
-                            <button type="button" class="button button-edit change-only-this edit-appointment" data-toggle="modal" data-target="#editConfirmedAppointment_modal">
-                                <div class="button-inner">
-                                	<div class="button-icon icons-edit2"></div>
-                                	Edit / Reschedule
-                                </div>
-                            </button>
-                            <button type="button" class="button a-no-show button-secondary delete-action hidden">
-                            	<div class="button-inner">
-                            		<div class="button-icon icons-no-show"></div>
-                            		No show
-                            	</div>
-                            </button>
-                            <button type="button" class="button action action-default a-delete button-secondary delete-action">
-                            	<div class="button-inner">
-                            		<div class="button-icon icons-delete"></div>
-                            		<span class="msg msg-action-default">Delete</span>
-                            	</div>
-                            </button>
-                            <button type="button" class="button button-other a-checkout">
-                            	<div class="button-inner">
-                            		<div class="button-icon icons-tick"></div>
-                            		Complete
-                            	</div>
-                            </button>
+                            <button type="button" class="button a-no-show button-secondary delete-action hidden"><div class="button-inner"><div class="button-icon icons-no-show"></div>No show</div></button>
+                            <button type="button" class="button action action-default a-delete button-secondary delete-action"><div class="button-inner"><div class="button-icon icons-delete"></div><span class="msg msg-action-default">Delete</span><span class="msg msg-action-doing">Deleting...</span></div></button>
+                            <button type="button" class="button button-other a-checkout"><div class="button-inner"><div class="button-icon icons-tick"></div>Complete</div></button>
+
                             <div class="sub-actions">
                                 <a href="javascript:;" class="button-cancel" data-dismiss="modal">Close</a>
                             </div>
+                        </div>
+                        <div class="dialog-actions b-unassigned-actions hidden">
+                            <button type="submit" class="button action action-default button-primary save-action">
+                                <div class="button-inner">
+                                    <div class="button-icon icons-tick"></div>
+                                    <span class="msg msg-action-default">Save</span>
+                                </div>
+                            </button>
+                            <a href="javascript:;" class="button-cancel">Cancel</a>
                         </div>
                     </div>
                 </div>
@@ -333,7 +330,7 @@
 </div><!-- END confirmedAppointment_modal-->
 
 <!-- Modal editConfirmedAppointment_modal-->
-<div id="editConfirmedAppointment_modal" class="modal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ui-dialog-title-appointment-dialog">
+<div id="editConfirmedAppointment_modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ui-dialog-title-appointment-dialog">
     <div class="modal-dialog" style="width: 615px;">
         <div class="modal-content">
             <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable">
@@ -555,7 +552,7 @@
 </div><!-- END editConfirmedAppointment_modal-->
 
 <!-- Modal editClient_modal-->
-<div id="editClient_modal" class="modal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ui-dialog-title-4">
+<div id="editClient_modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ui-dialog-title-4">
     <div class="modal-dialog" style="width: 460px;">
         <div class="modal-content">
             <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable">

@@ -31,3 +31,33 @@ td.fc-axis {
 	top: 35px !important;
 	bottom: 0px !important;
 }
+
+.fc-center {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.fc-day-header {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.bg-red {
+	background-color: red;
+}
+
+.e-appointment {
+	background-color: #CE5B5B;
+}
+
+.e-booking {
+	background-color: #5B81CE;
+}
+
+a.fc-event {
+	padding: 5px;
+}
+
+a.fc-event:hover {
+	text-decoration: none;
+}

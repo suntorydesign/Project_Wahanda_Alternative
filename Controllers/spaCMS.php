@@ -124,22 +124,37 @@
 		}
 		
 
-		function calendar() {
+		function calendar($xhr = false) {
 			Auth::handleSpaCMSLogin();
+			switch ($xhr) {
+				case 'xhrGet_calendar':
+					$this->model->get_calendar();
+					break;
+				
+				case 'xhrGet_appointment':
+					$this->model->get_appointment();
+					break;
 
-			$this->view->style = array(
-				ASSETS . 'plugins/fullcalendar-2.1.0-beta2/fullcalendar.css',
-				URL . 'Views/spaCMS/calendar/css/spaCMS_calendar.css'
-				// URL . 'public/assets/plugins/fullcalendar-2.1.0-beta2/fullcalendar.print.css'
-			);
+				case 'xhrGet_booking':
+					$this->model->get_booking();
+					break;
 
-			$this->view->script = array(
-				ASSETS . 'plugins/fullcalendar-2.1.0-beta2/lib/moment.min.js',
-				ASSETS . 'plugins/fullcalendar-2.1.0-beta2/fullcalendar.min.js',
-				URL . 'Views/spaCMS/calendar/js/spaCMS_calendar.js'
-			);
+				default:
+					$this->view->style = array(
+						ASSETS . 'plugins/fullcalendar-2.1.0-beta2/fullcalendar.css',
+						URL . 'Views/spaCMS/calendar/css/spaCMS_calendar.css'
+						// URL . 'public/assets/plugins/fullcalendar-2.1.0-beta2/fullcalendar.print.css'
+					);
 
-			$this->view->render_spaCMS('calendar/index');
+					$this->view->script = array(
+						ASSETS . 'plugins/fullcalendar-2.1.0-beta2/lib/moment.min.js',
+						ASSETS . 'plugins/fullcalendar-2.1.0-beta2/fullcalendar.min.js',
+						URL . 'Views/spaCMS/calendar/js/spaCMS_calendar.js'
+					);
+
+					$this->view->render_spaCMS('calendar/index');
+					break;
+			}
 		}	
 
 		function reports($xhr = false) {

@@ -30,7 +30,9 @@ if (isset($_GET['timezone'])) {
 }
 
 // Read and parse our events JSON file into an array of event data arrays.
+// $url = $_GET['URL'] . 'spaCMS/calendar/xhrGet_calendar?start=' . $_GET['start'] . '&end=' . $_GET['end'];
 $json = file_get_contents(dirname(__FILE__) . '/../json/events.json');
+// $json = file_get_contents($url);
 $input_arrays = json_decode($json, true);
 
 // Accumulate an output array of event data arrays.
@@ -48,3 +50,15 @@ foreach ($input_arrays as $array) {
 
 // Send JSON to the client.
 echo json_encode($output_arrays);
+
+
+// Nạp dữ liệu vào events.json
+//// + data-id, data-
+
+// Cài đặt sự kiện eventclick
+//// + nạp dữ liệu vào confirmApointment_modal
+
+// Cài đặt sự kiện thêm, xóa, sửa Apointment
+
+// Cài đặt sự kiện dayclick
+//// + nạp sự kiện thêm Apointment vào 1 day

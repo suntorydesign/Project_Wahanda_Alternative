@@ -46,6 +46,18 @@ class SpaCMS_Model extends Model {
 		exit;
 	}
 
+	///////////////////////////// CALENDAR //////////////////////////
+	function get_calendar() {
+		SpaCMS_Calendar_Model::get_calendar();
+	}
+
+	function get_appointment() {
+		SpaCMS_Calendar_Model::get_appointment();
+	}
+
+	function get_booking() {
+		SpaCMS_Calendar_Model::get_booking();
+	}
 
 	///////////////////////////// MENU //////////////////////////
 	function get_group_user_service() {
