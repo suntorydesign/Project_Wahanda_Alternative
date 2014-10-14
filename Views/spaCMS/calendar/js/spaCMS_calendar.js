@@ -30,11 +30,10 @@ $(document).ready(function() {
 
 	        // change the day's background color just for fun
 	        $(this).css('background-color', 'red');
-
+      
 	    },
 	    eventClick: function(e) {
-       
-            var cA_modal 	= $("#confirmedAppointment_modal");
+            var cA_modal = $("#confirmedAppointment_modal");
 
             var weekday = cA_modal.find('.weekday');
             var day 	= cA_modal.find('.day');

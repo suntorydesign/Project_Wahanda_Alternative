@@ -512,12 +512,12 @@
 		<!-- Modal Login -->
         <div id="login_modal" onkeydown="enterEvent(event)" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-max-height="440">
     	  <div class="modal-dialog">
-		    <div class="modal-content" style="background-color: #FDBD0E;border-radius: 6px">
-		      <div class="modal-header" >
+		    <div class="modal-content" style="border-radius: 6px">
+		      <div class="modal-header" style="background-color: #FDBD0E; padding: 6px 10px;">
 		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		        <h3 class="modal-title" id="myModalLabel">ĐĂNG NHẬP</h3>
+		        <h5 class="modal-title" id="myModalLabel" style="text-align:center; font-weight:bold;">ĐĂNG NHẬP</h5>
 		      </div>
-		      <div class="modal-body">
+		      <div class="modal-body" style="padding: 30px 20px 0px;">
 		        <form class="form-horizontal">
 		        	<div class="form-group">
 		        		<label class="control-label col-sm-2">Email</label>
@@ -529,17 +529,20 @@
 		        		<label class="control-label col-sm-2">Mật Khẩu</label>
 		        		<div class="col-sm-8">
 		        			<input autocomplete="off" class="form-control" type="password" id="pass_login" name="pass_login" placeholder="Nhập mật khẩu..." />
-		        			<p>
-		        				<a href="<?php echo URL . 'requestpass'; ?>">Quên mật khẩu?</a> Hay chưa có tài khoản, hãy 
-		        				<a href="<?php echo URL . 'clientsignup'; ?>">Đăng ký!</a>
-		        			</p>
+		        			<div style="padding-top:10px">
+		        				<small >
+			        				<a href="<?php echo URL . 'requestpass'; ?>">Quên mật khẩu?</a> Hay chưa có tài khoản, hãy 
+			        				<a href="<?php echo URL . 'clientsignup'; ?>">Đăng ký!</a>
+			        			</small>
+		        			</div>
+		        			
 		        		</div>
 		        	</div>
 		        </form>
 		      </div>
-		      <div class="modal-footer" id="footer_login">
-		        <button type="button" id="check_login_btn" onclick="login()" class="btn btn-default">Đăng Nhập</button>
-		      	<button type="button" class="btn btn-warning" data-dismiss="modal">Hủy</button>
+		      <div class="modal-footer" id="footer_login" style="padding: 15px 20px 15px;">
+		        <button type="button" id="check_login_btn" onclick="login()" class="btn btn-sm btn-warning">Đăng Nhập</button>
+		      	<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Hủy</button>
 		      </div>
 		    </div>
 		  </div>

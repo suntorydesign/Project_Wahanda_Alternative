@@ -182,7 +182,7 @@
                 <div scrollleft="0" scrolltop="0" class="ui-dialog-content ui-widget-content">
                     <div class="calendar-appointment-wrapper">
                         <div class="dialog-content">
-                            <div class="form-intro warning">
+                            <div class="form-intro warning hidden">
                                 <div class="icon icons-attention"></div>
                                 <p>
                                     <span class="warning-title">Please assign employee for this appointment</span>
@@ -243,7 +243,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="appointment-notes has-notes">
+                            <div class="appointment-notes has-notes hidden">
                                 <span class="notes-title">Appointment notes:</span>
                                 <span class="notes v-notes"></span>
                                 <div class="wahanda-notes b-verification-notes">
@@ -259,7 +259,7 @@
                                         <a href="javascript:;" class="a-view-consumer">
                                         	<span class="client_name">0903676222</span>
                                         </a>
-                                        <a href="javascript:;" class="edit-link a-rebook">
+                                        <a href="javascript:;" class="edit-link a-rebook hidden">
                                             Rebook
                                         </a>
                                     </li>
@@ -274,19 +274,23 @@
                                 </ul>
 
                                 <div class="client-note">
-                                    <span class="note-wrapper v-note client_note">hello</span>
+                                    <span class="note-wrapper v-note client_note">Day la khach hang vip</span>
                                     <div class="icons-note-tip2"></div>
                                 </div>
                             </div>
                             <div class="appointment-meta">
                                 Booked at: <span class="full-date">19/08/2014, 13:40</span>
-                                <span class="separator">|</span>
-                                Source:<span class="source">Added in Connect by minhnhat</span>
-                                <span class="order-ref-part">
+                                
+                                <div class="hidden">
+                                	<span class="separator">|</span>
+                                	Source:<span class="source">Added in Connect by minhnhat</span>
+                                </div>
+                                
+                                <span class="order-ref-part hidden">
                                     <span class="separator">|</span>
                                     Order ref#: <a href="javascript:;" class="order-ref">null</a>
                                 </span>
-                                <div class="b-evoucher-ref">
+                                <div class="b-evoucher-ref hidden">
                                     Created by using eVoucher: <a href="javascript:;" class="v-evoucher-ref"></a>
                                 </div>
                             </div>
@@ -297,7 +301,7 @@
 	                            	OK
 	                            </div>
                             </button>
-                            <button type="button" class="button button-edit change-only-this edit-appointment" data-toggle="modal" data-target="#editConfirmedAppointment_modal">
+                            <button type="button" class="button button-edit change-only-this edit-appointment" data-toggle="modal" data-target="#editConfirmedAppointment_modal" data-id="">
                                 <div class="button-inner">
                                 	<div class="button-icon icons-edit2"></div>
                                 	Edit / Reschedule
@@ -365,7 +369,7 @@
                                                 <span class="b-consumer-name">
                                                     <a href="javascript:;" class="f-consumer-name a-show-customer">0903676222</a>
                                                 </span>
-                                                <a href="javascript:;" class="edit-link a-consumer-edit" data-toggle="modal" data-target="#client_modal">Sửa</a>
+                                                <a href="javascript:;" class="edit-link a-consumer-edit" data-toggle="modal" data-target="#editClient_modal">Sửa</a>
                                                 <a style="display: none;" href="javascript:;" class="edit-link a-change-consumer">Change client</a>
                                             </li>
                                             <li class="consumer-phoneNumber-row b-consumer-phone">
@@ -542,10 +546,10 @@
                         <button type="submit" class="button action action-default button-primary save-action">
                             <div class="button-inner">
                                 <div class="button-icon icons-tick"></div>
-                                <span class="msg msg-action-default">Save</span>
+                                <span class="msg msg-action-default">Lưu</span>
                             </div>
                         </button>
-                        <a href="javascript:;" class="button-cancel" data-dismiss="modal">Cancel</a>
+                        <a href="javascript:;" class="button-cancel" data-dismiss="modal">Hủy</a>
                     </div>
                 </form>
                 </div>
@@ -626,11 +630,13 @@
                                 </td>
                                 <td class="input-part">
                                     <div class="txt-input txt-input-mini">
-                                        <select class="" name="client_birthMonth" id="client_birthMonth"><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option><option value="">Month</option></select>
                                         <input name="client_birthDay" pattern="\d*" id="client_birthDay" class="digits" require-with="#client_birthMonth" min="1" max="31" placeholder="day" type="number">
                                     </div>
+                                    <!-- <div class="txt-input txt-input-mini"> -->
+                                    <select class="" name="client_birthMonth" id="client_birthMonth"><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option><option value="">Month</option></select>
+                                    <!-- </div> -->
                                     <a href="javascript:;" class="edit-link a-show-year hidden">Set year</a>
-                                    <div class="txt-input txt-input-mini b-birthYear hidden">
+                                    <div class="txt-input txt-input-mini b-birthYear">
                                         <input name="client_birthYear" pattern="\d*" id="client_birthYear" class="digits birthyear" placeholder="year" maxlength="4" type="number">
                                     </div>
                                 </td>
@@ -652,10 +658,10 @@
                         <button type="submit" class="button action action-default button-primary save-action">
                             <div class="button-inner">
                                 <div class="button-icon icons-tick"></div>
-                                <span class="msg msg-action-default">Save</span>
+                                <span class="msg msg-action-default">Lưu</span>
                             </div>
                         </button>
-                        <a href="javascript:;" class="button-cancel" data-dismiss="modal">Cancel</a>
+                        <a href="javascript:;" class="button-cancel" data-dismiss="modal">Hủy</a>
                     </div>
                 </form>
                 </div>
