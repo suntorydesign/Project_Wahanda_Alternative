@@ -31,6 +31,7 @@ class servicelocation extends Controller {
 			$data['service_name'] = $_POST['service_name'];
 			$data['district_id'] = $_POST['district_id'];
 			$data['page'] = $_POST['page'];
+			$data['sort_by'] = $_POST['sort_by'];
 			$this -> model -> loadResultSearch($data);
 		}
 	}

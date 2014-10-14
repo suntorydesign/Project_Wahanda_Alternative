@@ -1,5 +1,8 @@
 $(document).ready(function() {
 	loadResultSearch(1);
+	$('#sort_by').on('change', function(){
+		loadResultSearch(1);
+	});
 });
 
 function loadResultSearch(page) {
@@ -10,7 +13,8 @@ function loadResultSearch(page) {
 		data : {
 			service_name : SERVICE_NAME,
 			page : page,
-			district_id : DISTRICT_ID
+			district_id : DISTRICT_ID,
+			sort_by : $('#sort_by').val()
 		},
 		success : function(response) {
 			var total_row = response.total_row;
@@ -117,6 +121,9 @@ function loadResultSearch(page) {
 			}
 		},
 		complete : function() {
+			$('#waiting_for_result_list').fadeOut(function(){
+				$('.processing_loading').hide();
+			});
 			if (CURRENT_PAGE == 1 || CURRENT_PAGE == 2) {
 				$('ul.pagination li.item_1').show();
 				$('ul.pagination li.item_2').show();
