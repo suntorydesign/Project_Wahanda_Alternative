@@ -5,6 +5,7 @@ $(document).ready(function() {
 	});
 });
 
+/*LOAD RESULT SEARCH*/
 function loadResultSearch(page) {
 	$.ajax({
 		url : URL + 'servicelocation/loadResultSearch',
@@ -163,4 +164,5 @@ function loadResultSearch(page) {
 		}
 	});
 }
-
+/*END LOAD RESULT SEARCH*/
+/*-----------------------*/

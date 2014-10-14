@@ -77,7 +77,7 @@ function checkSessionIdle() {
 
 /*END SHOW MORE*/
 function showMore(cls, txt) {
-	$('.' + cls).fadeToggle(function() {
+	$('.' + cls).slideToggle(200, function() {
 		if ($('.' + cls).is(":visible")) {
 			$('.' + txt).text('Ẩn đi');
 		} else {
