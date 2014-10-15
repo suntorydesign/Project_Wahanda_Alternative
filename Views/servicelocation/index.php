@@ -136,41 +136,31 @@
 				<div class="divider"></div>
 
 				<div class="filter-4">
-					<p class="filter-name">DỊCH VỤ</p>
-					<div>
-						<input id="filter-4-1" type="checkbox" name=""> 
-						<label for="filter-4-1">Vệ sinh móng</label>
-						<span class="pull-right badge">24</span>
+					<p class="filter-name">LOẠI DỊCH VỤ</p>
+					<div id="service_type">
+						<div>
+							<input id="filter-4-1" type="radio" name="service_type"> 
+							<label for="filter-4-1">Vệ sinh móng</label>
+							<span class="pull-right badge">24</span>
+						</div>
+						<a href="#">>>> Xem thêm loại dịch vụ khác (7)</a>
 					</div>
-					<div>
-						<input id="filter-4-2" type="checkbox" name=""> 
-						<label for="filter-4-2">Sơn</label>
-						<span class="pull-right badge">24</span>
-					</div>
-					<div>
-						<input id="filter-4-3" type="checkbox" name=""> 
-						<label for="filter-4-3">Đắp bột</label>
-						<span class="pull-right badge">24</span>
-					</div>
-					<div>
-						<input id="filter-4-4" type="checkbox" name=""> 
-						<label for="filter-4-4">Vẽ</label>
-						<span class="pull-right badge">24</span>
-					</div>
-					<div>
-						<input id="filter-4-5" type="checkbox" name=""> 
-						<label for="filter-4-5">Đính đá</label>
-						<span class="pull-right badge">24</span>
-					</div>
-					<div>
-						<input id="filter-4-6" type="checkbox" name=""> 
-						<label for="filter-4-6">Móng giả</label>
-						<span class="pull-right badge">24</span>
-					</div>
-					<a href="#">>>> Thêm dịch vụ khác (7)</a>
 				</div>
 				<div class="divider"></div>
-
+				
+				<div class="filter-4">
+					<p class="filter-name">DỊCH VỤ</p>
+					<div id="service">
+						<div>
+							<input id="filter-4-1" type="checkbox" name="service"> 
+							<label for="filter-4-1">Vệ sinh móng</label>
+							<span class="pull-right badge">24</span>
+						</div>
+						<a href="#">>>>Xem thêm dịch vụ khác (7)</a>
+					</div>
+				</div>
+				<div class="divider"></div>
+				
 				<div class="filter-5">
 					<p class="filter-name">SẢN PHẨM</p>
 					<div>
