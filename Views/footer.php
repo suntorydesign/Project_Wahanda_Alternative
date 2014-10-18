@@ -40,7 +40,7 @@
 							<div class="col-md-7" data-spy="scroll" data-target="#service_nav" >
 								<div class="row">
 									<div class="col-md-12">
-										<img height="auto" width="100%" src="<?php echo ASSETS; ?>img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" />
+										<img id="user_logo" height="auto" width="100%" src="<?php echo ASSETS; ?>img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" />
 									</div>
 									<div class="col-md-12">
 										<br />

@@ -7,7 +7,7 @@ class index_model extends Model {
 	function __construct() {
 		parent::__construct();
 	}
-	
+
 	public function loadDistrict() {
 		$sql = <<<SQL
 SELECT *
@@ -15,13 +15,13 @@ FROM district
 ORDER BY district_name ASC
 SQL;
 		$select = $this -> db -> select($sql);
-		if($select){
+		if ($select) {
 			echo json_encode($select);
-		}else{
+		} else {
 			echo '[]';
 		}
 	}
-	
+
 	function loadTopServiceList() {
 		$sql = <<<SQL
 SELECT user_service.user_service_id
@@ -67,7 +67,7 @@ GROUP BY user_service.user_service_name
 , user_service_review.user_service_review_value
 SQL;
 			$select_detail = $this -> db -> select($sql);
-			
+
 			foreach ($select_detail as $i => $item) {
 				$star_point = $star_point + $item['user_service_review_value'] * $item['star_amount'];
 				$client_amount = $client_amount + $item['star_amount'];
@@ -76,13 +76,13 @@ SQL;
 			$select[$key]['star_review'] = round($star_review, 1);
 			$select[$key]['total_client_amount'] = $client_amount;
 		}
-		if($select){
+		if ($select) {
 			echo json_encode($select);
-		}else{
+		} else {
 			echo '[]';
-		}		
+		}
 	}
-	
+
 	function loadNewServiceList() {
 		$sql = <<<SQL
 SELECT user_service.user_service_id
@@ -117,23 +117,28 @@ GROUP BY user_service.user_service_name
 , user_service_review.user_service_review_value
 SQL;
 			$select_detail = $this -> db -> select($sql);
-			
+
 			foreach ($select_detail as $i => $item) {
 				$star_point = $star_point + $item['user_service_review_value'] * $item['star_amount'];
 				$client_amount = $client_amount + $item['star_amount'];
 			}
-			$star_review = $star_point / $client_amount;
-			$select[$key]['star_review'] = round($star_review, 1);
-			$select[$key]['total_client_amount'] = $client_amount;
+			if ($client_amount == 0) {
+				$select[$key]['star_review'] = 0;
+				$select[$key]['total_client_amount'] = 0;
+			} else {
+				$star_review = $star_point / $client_amount;
+				$select[$key]['star_review'] = round($star_review, 1);
+				$select[$key]['total_client_amount'] = $client_amount;
+			}
 		}
-		if($select){
+		if ($select) {
 			echo json_encode($select);
-		}else{
+		} else {
 			echo '[]';
-		}		
+		}
 	}
-	
-	function loadLocation(){
+
+	function loadLocation() {
 		$select = $this -> db -> select('SELECT DISTINCT 
 										   user.user_id, 
 										   user.user_business_name, 
@@ -144,16 +149,16 @@ SQL;
 										   AND user_service.user_service_group_id = group_service.group_service_id
 										   AND user.user_delete_flg = 0 order by user.user_id desc
 										   limit 8');
-		if($select){
+		if ($select) {
 			echo json_encode($select);
-		}else{
+		} else {
 			echo '[]';
-		}	
+		}
 	}
 
 	function loadServiceDetail($user_service_id = 1) {
 		$evoucher_due_date = EVOUCHER_DUE_DATE;
-		$query=<<<SQL
+		$query = <<<SQL
 SELECT 
 user_service.`user_service_id`,
 user_service.`user_service_name`,
@@ -167,6 +172,7 @@ user_service.`user_service_use_evoucher`,
 user_service.`user_service_group_id`,
 user_service.`user_service_service_id`,
 user.`user_id`,
+user.`user_logo`,
 user.`user_business_name`,
 user.`user_description`,
 user.`user_open_hour`,
@@ -190,14 +196,15 @@ FROM user_service,user,group_service
 WHERE user.user_id = group_service.group_service_user_id
 AND user_service.user_service_group_id = group_service.group_service_id
 AND`user_service_delete_flg` = 0 AND `user_service_id`= {$user_service_id}
+AND group_service_delete_flg = 0 AND user_delete_flg = 0
 SQL;
-		
+
 		$select = $this -> db -> select($query);
-		if($select){
+		if ($select) {
 			echo json_encode($select);
-		}else{
+		} else {
 			echo '[]';
-		}		
+		}
 	}
 
 }

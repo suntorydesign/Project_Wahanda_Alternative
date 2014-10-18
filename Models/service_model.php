@@ -39,8 +39,8 @@ WHERE user.user_id = group_service.group_service_user_id
 AND user_service.user_service_group_id = group_service.group_service_id
 AND user.user_id = {$user_id}
 AND user_service.user_service_is_featured = 1
+AND user_service.user_service_delete_flg = 0
 ORDER BY user_service.user_service_id DESC
-LIMIT 5
 SQL;
 		$select = $this -> db -> select($query);
 		$return['user_service'] = $select;
@@ -64,10 +64,11 @@ AND user_service.user_service_group_id = group_service.group_service_id
 AND user_service.user_service_service_id = service.service_id
 AND service.service_service_type_id = service_type.service_type_id
 AND user.user_id = {$user_id}
-AND user_service.user_service_is_featured = 0
+
 AND service_type.service_type_id = {$value["service_type_id"]}
+AND user_service.user_service_delete_flg = 0;
 ORDER BY user_service.user_service_id DESC
-LIMIT 5
+
 SQL;
 			$select_one = $this -> db -> select($sql);
 			$return[$value['service_type_name']] = $select_one;
@@ -214,12 +215,13 @@ SQL;
 
 	public function loadServiceStarRating($user_id) {
 		$sql = <<<SQL
-SELECT 
-user_service_id
+SELECT user_service_id
+, user_service_name
 FROM user_service, user, group_service
 WHERE user.user_id = group_service.group_service_user_id
 AND user_service.user_service_group_id = group_service.group_service_id
 AND user.user_id = {$user_id}
+AND user_service.user_service_delete_flg = 0
 ORDER BY user_service_id DESC
 SQL;
 		$select = $this -> db -> select($sql);
@@ -230,32 +232,36 @@ SQL;
 			$sql = <<<SQL
 SELECT user_service.user_service_name
 , service_type.service_type_name
-, user_service_review.user_service_id
-, user_service_review.user_service_review_value
+, user_service.user_service_id
+, IF(user_service_review.user_service_review_value IS NULL, 0, user_service_review.user_service_review_value) AS user_service_review_value
 , COUNT(*) AS star_amount
-FROM user_service, group_service, user, user_service_review, service, service_type
-WHERE user.user_id = group_service.group_service_user_id
-AND user_service.user_service_group_id = group_service.group_service_id
-AND user_service_review.user_service_id = user_service.user_service_id
-AND user_service.user_service_service_id = service.service_id
-AND service.service_service_type_id = service_type.service_type_id
-AND user.user_id = {$user_id}
+FROM user_service
+INNER JOIN group_service ON user_service.user_service_group_id = group_service.group_service_id
+INNER JOIN user ON user.user_id = group_service.group_service_user_id
+INNER JOIN service ON user_service.user_service_service_id = service.service_id
+INNER JOIN service_type ON service.service_service_type_id = service_type.service_type_id
+LEFT JOIN user_service_review ON user_service_review.user_service_id = user_service.user_service_id
+WHERE user.user_id = {$user_id}
 AND user_service.user_service_id = {$value['user_service_id']}
 GROUP BY user_service.user_service_name
 , service_type.service_type_name
 , user_service_review.user_service_id
 , user_service_review.user_service_review_value
-
 SQL;
 			$select = $this -> db -> select($sql);
-			foreach ($select as $key => $value) {
-				$star_point = $star_point + $value['user_service_review_value'] * $value['star_amount'];
-				$client_amount = $client_amount + $value['star_amount'];
+			foreach ($select as $key => $item) {
+				$star_point = $star_point + $item['user_service_review_value'] * $item['star_amount'];
+				$client_amount = $client_amount + $item['star_amount'];
 			}
-			$star_review = $star_point / $client_amount;
 			$data['user_service_name'] = $value['user_service_name'];
-			$data['star_review'] = round($star_review, 1);
-			$data['service_type_name'] = $value['service_type_name'];
+			if ($client_amount == 0) {
+				$data['star_review'] = 0;
+			} else {
+				$star_review = $star_point / $client_amount;
+				
+				$data['star_review'] = round($star_review, 1);
+			}
+			$data['service_type_name'] = $select[0]['service_type_name'];
 			$return['data'][] = $data;
 		}
 		$group_data = array();
@@ -263,7 +269,7 @@ SQL;
 			$temp = $value['service_type_name'];
 			$j = 0;
 			foreach ($return['data'] as $i => $item) {
-				if($temp == $item['service_type_name']){
+				if ($temp == $item['service_type_name']) {
 					$group_data[$temp][$j]['user_service_name'] = $item['user_service_name'];
 					$group_data[$temp][$j]['star_review'] = $item['star_review'];
 					$j++;
@@ -355,6 +361,7 @@ LEFT JOIN(
 )user_service_review ON user_service_review.user_service_id = user_service.user_service_id
 WHERE user.user_id = {$data["user_id"]}
 AND user_service.user_service_delete_flg = 0
+ORDER BY user_service.user_service_id DESC
 SQL;
 		$select = $this -> db -> select($sql);
 		$return['user_service_review'] = $select;

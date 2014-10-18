@@ -85,13 +85,14 @@ function loadTopServiceList() {
 						html += '<i class="fa fa-star-o"></i>';
 					}
 				}
+				var image_detail = value.user_service_image.split(',');
 				html += '</span>';
 				html += '<span class="count-rating pull-right">';
 				html += value.total_client_amount + ' lượt bình chọn';
 				html += '</span>';
 				html += '</div>';
 				html += '<div class="image" class="clearfix">';
-				html += '<img style="width: 100%; min-height: 200px; max-height: 700px" class="img-responsive" alt="Responsive image" src="' + value.user_service_image + '" />';
+				html += '<img style="width: 100%; min-height: 200px; max-height: 700px" class="img-responsive" alt="Responsive image" src="' + image_detail[0] + '" />';
 				html += '</div>';
 				html += '<div class="clearfix">';
 				html += '<span class="price pull-left">' + value.user_service_sale_price + ' VNĐ</span>';
@@ -156,11 +157,12 @@ function loadNewServiceList() {
 				var rating_value = parseFloat(value.star_review);
 				var head = parseInt(rating_value);
 				var tail = rating_value - head;
+				var image_detail = value.user_service_image.split(',');
 				html += '<div class="col-sm-6 col-md-3 col-padding-5px new_service_items" style="display : none;">';
 				html += '<div class="item">';
 				html += '<input class="user_service_id" name="user_service_id" type="hidden" value="' + value.user_service_id + '"/>';
 				html += '<div class="image" class="clearfix">';
-				html += '<img style="width: 100%; min-height: 140px; max-height: 500px" class="img-responsive" alt="Responsive image" src="' + value.user_service_image + '" />';
+				html += '<img style="width: 100%; min-height: 140px; max-height: 500px" class="img-responsive" alt="Responsive image" src="' + image_detail[0] + '" />';
 				html += '</div>';
 				html += '<div class="col-md-4 remove-padding">';
 				html += '<span class="rating">';
@@ -490,6 +492,9 @@ function loadServiceDetail(user_service_id) {
 					if (key == 'user_service_name') {
 						USER_SERVICE_NAME = value;
 					}
+					// if(key == 'user_logo'){
+						// $('image#user_logo').attr('src', value);
+					// }
 					$('#' + key).val(value);
 					$('#' + key + ', .' + key).text(value);
 					if (key == 'user_open_hour') {
