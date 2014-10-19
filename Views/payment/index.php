@@ -123,7 +123,7 @@
 					<br />
 					<div class="row">
 						<div class="col-md-12">
-							<button onclick="processPayment()" class="btn btn-orange-black pull-right">
+							<button onclick="processVenuePayment()" class="btn btn-orange-black pull-right">
 								Thanh toán
 							</button>
 						</div>

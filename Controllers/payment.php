@@ -15,10 +15,10 @@ class payment extends Controller {
 		$this -> view -> render('payment/index');
 	}
 
-	function processPayment() {
+	function processVenuePayment() {
 		Session::initIdle();
 		if (isset($_SESSION['client_id'])) {
-			echo '200';
+			$this -> model -> processVenuePayment();
 		} else {
 			echo '0';
 		}

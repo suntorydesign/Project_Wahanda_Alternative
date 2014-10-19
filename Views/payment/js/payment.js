@@ -3,9 +3,9 @@ $(document).ready(function() {
 });
 
 /*CHECK LOGIN PROCESSING PAYMENT*/
-function checkIsLoginPayment() {
+function processVenuePayment() {
 	$.ajax({
-		url : URL + 'payment/checkIsLoginPayment',
+		url : URL + 'payment/processVenuePayment',
 		type : 'post',
 		success : function(response) {
 
