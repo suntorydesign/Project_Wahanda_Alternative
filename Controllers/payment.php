@@ -20,16 +20,16 @@ class payment extends Controller {
 		if (isset($_SESSION['client_id'])) {
 			$this -> model -> processVenuePayment();
 		} else {
-			echo '0';
+			echo 0;
 		}
 	}
 
 	function checkIsLoginPayment() {
 		Session::initIdle();
 		if (isset($_SESSION['client_id'])) {
-			echo '200';
+			echo 200;
 		} else {
-			echo '0';
+			echo 0;
 		}
 	}
 

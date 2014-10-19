@@ -4,14 +4,22 @@ $(document).ready(function() {
 
 /*CHECK LOGIN PROCESSING PAYMENT*/
 function processVenuePayment() {
-	$.ajax({
-		url : URL + 'payment/processVenuePayment',
-		type : 'post',
-		success : function(response) {
+	$('#btn_venue_process_payment').attr('disabled', true);
+	$('#waiting_for_venue_payment').fadeIn(function() {
+		$.ajax({
+			url : URL + 'payment/processVenuePayment',
+			type : 'post',
+			success : function(response) {
 
-		}
+			},
+			complete : function() {
+				$('#waiting_for_venue_payment').fadeOut(function(){
+					alert('Cám ơn bạn đã thanh toán thành công');
+					jumpToOtherPage(URL);
+				});
+			}
+		});
 	});
-
 }
 
 /*END CHECK LOGIN PROCESSING PAYMENT*/
@@ -74,6 +82,7 @@ function loadPaymentDetail() {
 	});
 
 }
+
 /*END LOAD PAYMENT DETAIL*/
 /*----------------------------------*/
 
@@ -84,4 +93,5 @@ function jumbToPaymentTab(tab) {
 	$('#btn_' + tab).addClass('btn-choose').removeClass('btn-orange');
 	$('#btn_' + tab).siblings().addClass('btn-orange').removeClass('btn-choose');
 }
+
 /*END JUMP TO PAYMENT TAB*/

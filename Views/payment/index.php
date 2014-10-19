@@ -123,8 +123,8 @@
 					<br />
 					<div class="row">
 						<div class="col-md-12">
-							<button onclick="processVenuePayment()" class="btn btn-orange-black pull-right">
-								Thanh toán
+							<button id="btn_venue_process_payment" onclick="processVenuePayment()" class="btn btn-orange-black pull-right">
+								<i id="waiting_for_venue_payment" class="fa fa-refresh fa-spin" style="display: none;"></i> Thanh toán
 							</button>
 						</div>
 					</div>

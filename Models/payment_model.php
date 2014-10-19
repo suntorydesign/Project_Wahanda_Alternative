@@ -15,7 +15,16 @@ class payment_model extends Model {
 		 * status = 1 completed
 		 * status = 2 venue payment
 		 */
+		Session::initIdle();
 		$status = 2;
+		$client_id = $_SESSION['client_id'];
+		$total_money = 0;
+		foreach ($_SESSION['booking_detail'] as $key => $value) {
+			$total_money += $value['choosen_price'] * $value['booking_quantity'];
+		}
+		foreach ($_SESSION['eVoucher_detail'] as $key => $value) {
+			$total_money += $value['choosen_price'] * $value['booking_quantity'];
+		}
 		try {
 			$bytes = openssl_random_pseudo_bytes(5);
 			$hex = bin2hex($bytes);
@@ -32,11 +41,26 @@ class payment_model extends Model {
 			}
 			$this -> db -> beginTransaction();
 			$sql = <<<SQL
-
+INSERT INTO booking
+VALUES(
+'{$booking_id}'
+, CURRENT_DATE()
+, {$status}
+, {$total_money}
+, {$client_id}
+)
 SQL;
+			$update = $this -> db -> prepare($sql);
+			$update -> execute();
+			if ($update -> rowCount() > 0) {
+				// insert booking detail code mai làm
+			} else {
+				echo 0;
+				exit;
+			}
 			$this -> db -> commit();
 		} catch( Exception $e) {
-			echo '0';
+			echo 0;
 		}
 	}
 
