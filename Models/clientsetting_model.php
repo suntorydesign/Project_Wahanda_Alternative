@@ -30,6 +30,12 @@ class clientsetting_model extends Model {
 
 	function editUserDetail($data) {
 		Session::init();
+		if (isset($data['client_name'])) {
+			Session::set('client_name', $data['client_name']);
+		}
+		if (isset($data['client_phone'])) {
+			Session::set('client_phone', $data['client_phone']);
+		}
 		echo $update = $this -> db -> update('client', $data, 'client_id=' . $_SESSION['client_id']);
 	}
 

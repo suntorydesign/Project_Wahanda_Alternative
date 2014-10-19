@@ -492,9 +492,9 @@ function loadServiceDetail(user_service_id) {
 					if (key == 'user_service_name') {
 						USER_SERVICE_NAME = value;
 					}
-					// if(key == 'user_logo'){
-						// $('image#user_logo').attr('src', value);
-					// }
+					if (key == 'user_logo') {
+						$('img#user_logo').attr('src', value);
+					}
 					$('#' + key).val(value);
 					$('#' + key + ', .' + key).text(value);
 					if (key == 'user_open_hour') {
@@ -1015,24 +1015,24 @@ function loadServiceStarRatingDetail() {
 			if (response.group_data[0] != null) {
 				$.each(response.group_data[0], function(key, value) {
 					count_hidden++;
-					if(count_hidden > 10){
+					if (count_hidden > 10) {
 						html += '<div style="display: none" class="col-md-12 see_more_rating_service">';
-					}else{
+					} else {
 						html += '<div class="col-md-12">';
-					}			
+					}
 					html += '<span><b>' + key + '</b></span>';
 					$.each(value, function(i, item) {
 						count_hidden++;
 						var rating_value = parseFloat(item.star_review);
 						var head = parseInt(rating_value);
 						var tail = rating_value - head;
-						if(count_hidden > 10){
+						if (count_hidden > 10) {
 							html += '<div style="display: none" class="row see_more_rating_service">';
-						}else{
+						} else {
 							html += '<div class="row">';
 						}
 						html += '<div class="col-md-6">';
-						html += '<small style="cursor: help" title="' + item.user_service_name + '">' +shorten(item.user_service_name, 30) + '</small>';
+						html += '<small style="cursor: help" title="' + item.user_service_name + '">' + shorten(item.user_service_name, 30) + '</small>';
 						html += '</div>';
 						html += '<div class="col-md-6">';
 						html += '<span style="color: #FFCC00">';
@@ -1062,7 +1062,7 @@ function loadServiceStarRatingDetail() {
 					html += '<br />';
 					html += '</div>';
 				});
-				if(count_hidden > 10){
+				if (count_hidden > 10) {
 					html += '<div class="col-md-12">';
 					html += '<span><a onclick=showMore("see_more_rating_service","see_more_text_detail") style="cursor: pointer;"><span class="see_more_text_detail">Xem thêm</span> >>></a></span>';
 					html += '</div>';
@@ -1407,9 +1407,15 @@ function shoppingCartDetail() {
 				$('#cart_amount').text(response.booking.length + response.eVoucher.length);
 				var total_money = 0;
 				$.each(response.booking, function(index, item) {
+					var time_booking = item.booking_detail_time.split(':');
+					var total_minutes = parseInt(time_booking[0]) * 60 + parseInt(time_booking[1]);
+					var setAMPM = 'AM';
+					if (total_minutes > (12 * 60)) {
+						setAMPM = 'PM';
+					}
 					html += '<tr>';
 					html += '<td width="30%">' + item.user_service_name.toUpperCase() + ' - <b>' + item.user_business_name + '</b></td>';
-					html += '<td width="20%">' + item.booking_detail_date + ' - ' + item.booking_detail_time + '</td>';
+					html += '<td width="20%">' + formatDate(item.booking_detail_date) + ' - ' + item.booking_detail_time + setAMPM + '</td>';
 					html += '<td width="19%">' + item.choosen_price + ' VNĐ</td>';
 					html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control appointment_quantity" value="' + item.booking_quantity + '"/></td>';
 					html += '<td width="19%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
@@ -1419,7 +1425,7 @@ function shoppingCartDetail() {
 				$.each(response.eVoucher, function(index, item) {
 					html += '<tr>';
 					html += '<td width="30%">' + item.user_service_name.toUpperCase() + ' - <b>' + item.user_business_name + '</b></td>';
-					html += '<td width="20%"><i class="text-success">e-Voucher</i> - Ngày hết hạn : ' + item.eVoucher_due_date + '</td>';
+					html += '<td width="20%"><i class="text-success">e-Voucher</i> - Ngày hết hạn : ' + formatDate(item.eVoucher_due_date) + '</td>';
 					html += '<td width="19%">' + item.choosen_price + ' VNĐ</td>';
 					html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control eVoucher_quantity" value="' + item.booking_quantity + '"/></td>';
 					html += '<td width="19%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
@@ -1502,6 +1508,25 @@ function saveQuantityNumber() {
 
 /*END SAVE QUANTITY*/
 /*-----------------------*/
+
+/*CHECK LOGIN PROCESSING PAYMENT*/
+function checkIsLoginPayment() {
+	$.ajax({
+		url : URL + 'payment/checkIsLoginPayment',
+		type : 'post',
+		success : function(response) {
+			if(response == 200){
+				jumpToOtherPage(URL + 'payment');
+			}else{
+				$('#login_modal').modal('show');
+			}
+		}
+	});
+
+}
+
+/*END CHECK LOGIN PROCESSING PAYMENT*/
+/*----------------------------------*/
 
 /*SET TIME IDLE*/
 function setTimeIdle() {

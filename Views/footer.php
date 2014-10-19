@@ -510,7 +510,7 @@
 		</div>
 		<!-- END SERVICE DETAIL MODAL -->
 		<!-- Modal Login -->
-        <div id="login_modal" onkeydown="enterEvent(event)" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-max-height="440">
+        <div id="login_modal" style="z-index: 1051;" onkeydown="enterEvent(event)" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-max-height="440">
     	  <div class="modal-dialog">
 		    <div class="modal-content" style="border-radius: 6px">
 		      <div class="modal-header" style="background-color: #FDBD0E; padding: 6px 10px;">
@@ -556,7 +556,7 @@
 			        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 			        	<h4 class="modal-title" id="myModalLabel">
 			        		<strong><i class="fa fa-shopping-cart"></i> GIỎ HÀNG CỦA BẠN</strong> 
-			        		<span><i>(Bạn đang có <span id="cart_amount">10</span> cuộc hẹn)</i></span>
+			        		<span><i>(Bạn đang có <span id="cart_amount">10</span> cuộc hẹn/E-voucher)</i></span>
 			        	</h4>
 			      	</div>
 			      	<div class="modal-body">
@@ -595,7 +595,7 @@
 			      		</div>
 			      	</div>
 			      	<div class="modal-footer">
-			      		<button type="button" id="confirm_cart" class="btn btn-danger">Thanh toán</button>
+			      		<button onclick="checkIsLoginPayment()" type="button" id="confirm_cart" class="btn btn-danger">Thực hiện thanh toán</button>
 			      		<button type="button" class="btn btn-default" data-dismiss="modal">Trở về</button>
 			      	</div>
         		</div>
@@ -765,6 +765,5 @@
 
     <!-- Slide JS -->
     <script type="text/javascript" src="<?php echo ASSETS ?>plugins/sliderengine/amazingslider.js"></script>
-
     <script type="text/javascript" src="<?php echo ASSETS ?>plugins/sliderengine/initslider-1.js"></script>
 </html>
