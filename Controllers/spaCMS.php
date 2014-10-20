@@ -139,9 +139,14 @@
 					$this->model->get_booking();
 					break;
 
+				case 'xhrGet_user_service':
+					$this->model->get_user_service();
+					break;
+
 				default:
 					$this->view->style = array(
 						ASSETS . 'plugins/fullcalendar-2.1.0-beta2/fullcalendar.css',
+						ASSETS . 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.css',
 						URL . 'Views/spaCMS/calendar/css/spaCMS_calendar.css'
 						// URL . 'public/assets/plugins/fullcalendar-2.1.0-beta2/fullcalendar.print.css'
 					);
@@ -149,6 +154,8 @@
 					$this->view->script = array(
 						ASSETS . 'plugins/fullcalendar-2.1.0-beta2/lib/moment.min.js',
 						ASSETS . 'plugins/fullcalendar-2.1.0-beta2/fullcalendar.min.js',
+						ASSETS . 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.js',
+						ASSETS . 'js/core/app.js',
 						URL . 'Views/spaCMS/calendar/js/spaCMS_calendar.js'
 					);
 

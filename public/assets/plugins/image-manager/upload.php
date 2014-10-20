@@ -129,7 +129,7 @@ if(isset($_POST['user_id'])){
 
     $path = "upload/";
     $upload_path_image      = $path . $user_id . "/";
-    $upload_path_thumbnail  = $upload_path_image . "/thumbnails/" . $user_id . "/";
+    $upload_path_thumbnail  = $upload_path_image . "thumbnails/" . $user_id . "/";
 
     if(!is_dir($upload_path_image)) {
       mkdir($upload_path_image, 0775, true);

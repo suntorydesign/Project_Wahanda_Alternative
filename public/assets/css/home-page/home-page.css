@@ -17,7 +17,7 @@ a{
 	text-decoration: none !important;
 }
 .container {
-	width: 1054px;
+	/*width: 1054px;*/
 }
 
 img{
@@ -113,8 +113,22 @@ img{
 
 }
 
+#top-header-right .login-face-btn{
+	/*background-color: blue;*/
+}
+
+/*#top-header-right .login-face-btn:hover{
+	cursor: pointer;
+}*/
+
 #navigation {
 	margin-bottom: 10px;
+}
+
+#navigation nav {
+	background-color: transparent !important;
+	border-color: transparent !important;
+	margin-bottom: 0px !important;
 }
 
 #navigation .navbar-nav > li {
@@ -181,8 +195,8 @@ img{
 
 #header-2 {
 	/*min-height: 236px;
-	 border: 1px solid #CCC;
-	 margin-bottom: 20px;*/
+	 border: 1px solid #CCC;*/
+	margin-bottom: 20px;
 }
 
 #slide {
@@ -404,7 +418,7 @@ img{
 }
 
 #footer-info {
-	background: url('/Project_Wahanda_Alternative/public/assets/img/Trang-chu-footer.png') top left;
+	background: url('../public/assets/img/Trang-chu-footer.png') top left;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }

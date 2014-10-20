@@ -115,7 +115,7 @@ SQL;
 
 		$aQuery = <<<SQL
 		SELECT 
-			bd.booking_detail_id as 'data-id', 
+			bd.booking_detail_id as 'data_id', 
 			bd.booking_detail_date as 'data_date', 
 			bd.booking_detail_time_start as 'data_time_start', 
 			bd.booking_detail_time_end as 'data_time_end',
@@ -138,6 +138,28 @@ SQL;
 SQL;
 		$data = $this->db->select($aQuery);
 
+		echo json_encode($data);
+	}
+
+	public function get_client( $appointment_id ){
+		
+	}
+
+	// Get detail user service
+	public function get_user_service() {
+		// $user_id = Session::get('user_id');
+		$us_id = $_GET['user_service_id'];
+
+		$aQuery = <<<SQL
+		SELECT 
+			user_service_id,
+			user_service_name,
+			user_service_duration
+		FROM user_service
+		WHERE user_service_id = {$us_id}
+SQL;
+
+		$data = $this->db->select($aQuery);
 		echo json_encode($data);
 	}
 

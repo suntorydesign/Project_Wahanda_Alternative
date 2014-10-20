@@ -763,7 +763,18 @@
         }
     ?>
 
-    <!-- Slide JS -->
-    <script type="text/javascript" src="<?php echo ASSETS ?>plugins/sliderengine/amazingslider.js"></script>
-    <script type="text/javascript" src="<?php echo ASSETS ?>plugins/sliderengine/initslider-1.js"></script>
+    <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+    <script type="text/javascript" src="<?php echo ASSETS ?>plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="<?php echo ASSETS ?>plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript">
+		jQuery(document).ready(function() {
+		    jQuery('.tp-banner').revolution(
+			{
+				delay:9000,
+				startwidth:1170,
+				startheight:400,
+				hideThumbs:10
+			});
+		});
+	</script>
 </html>

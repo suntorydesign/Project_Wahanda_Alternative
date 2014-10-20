@@ -28,6 +28,14 @@
 
         <link rel="stylesheet" href="<?php echo ASSETS ?>css/home-page/home-page.css" type="text/css"  />
 
+
+        <!-- CSS STYLE-->
+        <link rel="stylesheet" type="text/css" href="<?php echo ASSETS ?>plugins/rs-plugin/css/style.css" media="screen" />
+
+        <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
+        <link rel="stylesheet" type="text/css" href="<?php echo ASSETS ?>plugins/rs-plugin/css/settings.css" media="screen" />
+
+
         <?php
             if(isset($this->style)){
                 foreach ($this->style as $style) {
@@ -60,7 +68,8 @@
 	                        </div>
 	                        <div class="col-sm-2"></div>
 	                        <div class="col-sm-5 remove-padding">
-	                            <button class="btn btn-block login-face-btn" type="button">Login Face</button>
+	                            <button class="btn btn-block login-face-btn" type="button" onclick="loginFB()">Login Face</button>
+                                <!-- <img class='login-face-btn' src="<?php echo ASSETS; ?>img/fbloginbtn.png" onclick="loginFB()"/> -->
 	                        </div>
                         <?php }else{ ?>
                         	<div class="col-sm-12 remove-padding" style="margin-bottom: 10px;">

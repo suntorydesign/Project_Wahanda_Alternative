@@ -204,23 +204,23 @@
                                 <table class="default-data-table" cellpadding="0" cellspacing="0">
                                     <tbody>
                                     <tr>
-                                        <th>Thời gian phục vụ</th>
+                                        <th>Thời gian</th>
                                         <td><span class="user_service_duration">80 phút </span></td>
                                     </tr>
                                     <tr class="b-price">
                                         <th class="price">Giá</th>
                                         <td>
                                             <span class="v-price user_service_price">200,000 đ</span>
-                                            <span class="status-prepaid label label-confirmed">Prepaid</span>
-                                            <span class="status status-unpaid">Unpaid</span>
-                                            <span class="status-paid label label-confirmed">Paid at venue</span>
-                                            <span class="b-status status status-discounted">status discounted</span>
+                                            <span class="status-prepaid label label-confirmed">Đã thanh toán</span>
+                                            <span class="status status-unpaid">Chưa thanh toán</span>
+                                            <span class="status-paid label label-confirmed">Thanh toán tại spa</span>
+                                            <span class="b-status status status-discounted hidden">status discounted</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Status</th>
-                                        <td><span class="status-paid label label-confirmed">Complete</span>
-                                        	<span class="b-status status payment-status">payment status</span>
+                                        <td><span class="status-paid label label-confirmed">Hoàn thành</span>
+                                        	<span class="status status-unpaid">Chưa hoàn thành</span>
                                         </td>
                                     </tr>
                                 </tbody></table>
@@ -279,7 +279,7 @@
                                 </div>
                             </div>
                             <div class="appointment-meta">
-                                Booked at: <span class="full-date">19/08/2014, 13:40</span>
+                                Đặt lúc: <span class="full-date">19/08/2014, 13:40</span>
                                 
                                 <div class="hidden">
                                 	<span class="separator">|</span>
@@ -301,10 +301,10 @@
 	                            	OK
 	                            </div>
                             </button>
-                            <button type="button" class="button button-edit change-only-this edit-appointment" data-toggle="modal" data-target="#editConfirmedAppointment_modal" data-id="">
+                            <button type="button" class="button button-edit change-only-this edit-appointment">
                                 <div class="button-inner">
                                 	<div class="button-icon icons-edit2"></div>
-                                	Edit / Reschedule
+                                	Sửa / Xếp lại lịch
                                 </div>
                             </button>
                             <button type="button" class="button a-no-show button-secondary delete-action hidden">
@@ -316,13 +316,13 @@
                             <button type="button" class="button action action-default a-delete button-secondary delete-action">
                             	<div class="button-inner">
                             		<div class="button-icon icons-delete"></div>
-                            		<span class="msg msg-action-default">Delete</span>
+                            		<span class="msg msg-action-default">Hủy lịch hẹn</span>
                             	</div>
                             </button>
                             <button type="button" class="button button-other a-checkout">
                             	<div class="button-inner">
                             		<div class="button-icon icons-tick"></div>
-                            		Complete
+                            		Đã hoàn thành
                             	</div>
                             </button>
                             <div class="sub-actions">
@@ -669,3 +669,216 @@
         </div>
     </div>
 </div><!-- END editClient_modal-->
+
+
+<!-- Modal editConfirmedAppointment_modal-->
+<div id="addAppointment_modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ui-dialog-title-appointment-dialog">
+    <div class="modal-dialog" style="width: 615px;">
+        <div class="modal-content">
+            <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable">
+                <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+                    <span id="ui-dialog-title-appointment-dialog" class="ui-dialog-title">Appointment</span>
+                    <a role="button" class="ui-dialog-titlebar-close ui-corner-all" href="#">
+                        <span class="ui-icon ui-icon-closethick">close</span>
+                    </a>
+                </div>
+                <div scrollleft="0" scrolltop="0" class="ui-dialog-content ui-widget-content" id="appointment-dialog">
+                <form id="addAppointment_form" action="#" method="POST">
+                    <div class="dialog-content clearfix">
+                        <table class="default-form part-one" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr class="form-row client-select">
+                                    <td class="label-part">
+                                        <label for="">Khách hàng</label>
+                                    </td>
+                                    <td class="input-part b-consumer">
+                                        <!-- search -->
+                                        <div class="txt-input b-consumer-autocomplete hidden">
+                                            <input aria-haspopup="true" aria-autocomplete="list" role="textbox" autocomplete="off" id="consumer-block-search" name="consumer-block-search" class="ui-autocomplete-input" placeholder="Search by phone number or name" type="text">
+                                            <input id="consumer-block-anonymous-comment" class="hidden" placeholder="Walk-in comment" type="text">
+                                        </div>
+                                        <!-- end search -->
+                                        <!-- client -->
+                                        <div class="col-md-6" style="padding:0;">
+                                        	<input type="text" name="appointment_client_name" placeHolder="Tên khách hàng">
+                                        	<div class="icon icons-phone"></div>
+                                        	<input type="text" name="appointment_client_phone" placeHolder="Số điện thoại">
+                                        	<div class="icon icons-email"></div>
+                                        	<input type="text" name="appointment_client_email" placeHolder="Email khách hàng">
+                                        </div>
+                                        <div class="col-md-6" style="padding:0;">
+                                        	<div class="client-note">
+                                                <textarea name="appointment_client_note" class="form_control" placeHolder="Ghi chú" rows="4" cols="28"></textarea>
+                                            </div>
+                                        </div>
+                                        <!-- end client -->
+                                        <!-- buttons -->
+                                        <div class="client-buttons b-consumer-buttons hidden">
+                                            <button type="button" class="button button-basic button-mini a-new-consumer"><div class="button-inner"><div class="button-icon icons-plus4"></div>Create new</div></button>
+                                            <button type="button" class="button button-basic button-mini a-walk-in"><div class="button-inner"><div class="button-icon icons-walkin"></div>Walk-in</div></button>
+                                        </div>
+                                        <!-- end buttons -->
+                                        <!-- walkin -->
+                                        <div class="client-walkin b-walkin hidden">
+                                            <a href="javascript:;" class="edit-link a-change-consumer">Change client</a>
+                                            <span class="walkin-status"><span class="icon icons-walkin2"></span> Walk-in</span>
+                                        </div>
+                                        <!-- end walkin -->
+                                    </td>
+                                </tr>
+
+                                <tr class="form-row b-service-not-exist form-element-wrapper hidden">
+                                    <td class="label-part"></td>
+                                    <td class="input-part">
+                                        <div class="form-note">
+                                            <span class="icon icons-attention-small2"></span>
+                                            <span class="notes">Service on eVoucher is no longer available. Select another service.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="form-row appointment-service form-element-wrapper">
+                                    <td class="label-part">
+                                        <label for="appointment-offerId">Dịch vụ</label>
+                                    </td>
+                                    <td class="input-part">
+                                        <select id="list_gus" class="v-appointment-service required select2" name="user_service_service_id">
+                                        	<option value="">Chọn dịch vụ</option>
+											<!-- List service system -->
+
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="form-row appointment-sku form-element-wrapper hidden">
+                                    <td class="label-part">
+                                        <label for="appointment-skuId">SKU</label>
+                                    </td>
+                                    <td class="input-part">
+                                        <select id="appointment-skuId" class="v-appointment-sku" name="appointment-skuId"><option value="">Not set</option></select>
+                                    </td>
+                                </tr>
+                                <tr class="form-row form-element-wrapper">
+                                    <td class="label-part">
+                                        <label for="cv-appointment-appointmentDate">Ngày</label>
+                                    </td>
+                                    <td class="input-part">
+                                        <input date-format="dd/mm/yy" type="text" name="appointment_created" readonly="true" style="width:90px; padding:0 5px;">
+                                        <select name="appointment-startTime" id="appointment-startTime" class="required">
+                                            <option value="07:00">07:00</option>
+                                            <option value="08:00">08:00</option>
+                                            <option value="09:00">09:00</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="13:00">13:00</option>
+                                            <option value="14:00">14:00</option>
+                                            <option value="15:00">15:00</option>
+                                            <option value="16:00">16:00</option>
+                                            <option value="17:00">17:00</option>
+                                            <option value="18:00">18:00</option>
+                                            <option value="19:00">19:00</option>
+                                            <option value="20:00">20:00</option>
+                                            <option value="21:00">21:00</option>
+                                            <option value="22:00">22:00</option>
+                                        </select>
+                                        <span class="block-note b-rescheduled hidden">
+                                            <input class="" id="rescheduled-block-old-time" type="checkbox">
+                                            <label for="rescheduled-block-old-time">Block out original appointment time</label>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="form-row">
+                                    <td class="label-part">
+                                        <label for="cv-appointment-duration">Thời gian</label>
+                                    </td>
+                                    <td class="input-part">
+                                        <!-- <select name="cv-appointment-duration" id="cv-appointment-duration" class="required">
+                                            <option value="10">10 min</option>
+                                            <option value="15">15 min</option>
+                                            <option value="20">20 min</option>
+                                            <option value="25">25 min</option>
+                                            <option value="30">30 min</option>
+                                            <option value="35">35 min</option>
+                                            <option value="40">40 min</option>
+                                            <option value="45">45 min</option>
+                                            <option value="50">50 min</option>
+                                            <option value="55">55 min</option>
+                                            <option value="60">1 h </option>
+                                            <option value="65">1 h 05 min</option>
+                                            <option value="70">1 h 10 min</option>
+                                            <option value="75">1 h 15 min</option>
+                                            <option value="80">1 h 20 min</option>
+                                            <option value="85">1 h 25 min</option>
+                                            <option value="90">1 h 30 min</option>
+                                            <option value="95">1 h 35 min</option>
+                                            <option value="100">1 h 40 min</option>
+                                            <option value="105">1 h 45 min</option>
+                                            <option value="110">1 h 50 min</option>
+                                            <option value="115">1 h 55 min</option>
+                                            <option value="120">2 h </option>
+                                            <option value="135">2 h 15 min</option>
+                                            <option value="150">2 h 30 min</option>
+                                            <option value="165">2 h 45 min</option>
+                                            <option value="180">3 h </option>
+                                            <option value="195">3 h 15 min</option>
+                                            <option value="210">3 h 30 min</option>
+                                            <option value="225">3 h 45 min</option>
+                                            <option value="240">4 h </option>
+                                            <option value="270">4 h 30 min</option>
+                                            <option value="300">5 h </option>
+                                            <option value="330">5 h 30 min</option>
+                                            <option value="360">6 h </option>
+                                            <option value="390">6 h 30 min</option>
+                                            <option value="420">7 h </option>
+                                            <option value="450">7 h 30 min</option>
+                                            <option value="480">8 h </option>
+                                            <option value="540">9 h </option>
+                                            <option value="600">10 h </option>
+                                            <option disabled="" value="660">11 h </option>
+                                            <option disabled="" value="720">12 h </option>
+                                        </select> -->
+                                        <span class="user_service_duration">00</span> phút.
+                                        <span class="help-txt">Kết thúc lúc <span class="cv-end-time">00:00</span></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="default-form part-two" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr class="form-row">
+                                    <td class="label-part">
+                                        <label class="optional" for="appointment-notes">Ghi chú </label>
+                                    </td>
+                                    <td class="input-part">
+                                        <textarea rows="6" cols="5" class="full" id="appointment-notes" name="appointment-notes"></textarea>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="b-evoucher-redemption-note hidden">
+                            <div class="form-note">
+                                <span class="icon icons-attention-small2"></span>
+                                <span class="notes">Creating this appointment will lock the eVoucher. Make sure the customer understands that they will not be able to redeem it again.</span>
+                            </div>
+                        </div>
+                        <div class="b-reschedule-note hidden">
+                            <div class="form-note">
+                                <span class="icon icons-attention-small2"></span>
+                                <span class="notes">Please ensure that you have contacted the customer and confirmed that they are happy with the rescheduled time slot.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dialog-actions">
+                        <button type="submit" class="button action action-default button-primary save-action">
+                            <div class="button-inner">
+                                <div class="button-icon icons-tick"></div>
+                                <span class="msg msg-action-default">Thêm lịch hẹn</span>
+                            </div>
+                        </button>
+                        <a href="javascript:;" class="button-cancel" data-dismiss="modal">Hủy</a>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div><!-- END editConfirmedAppointment_modal-->
