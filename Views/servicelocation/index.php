@@ -179,7 +179,13 @@
 
 				<div class="filter-6">
 					<p class="filter-name">KHOẢNG GIÁ</p>
+					<div class="row">
+						<div class="col-md-12 text-center"><span class="sv_loc_text">50.000 - 5.000.000 vnđ<span></div>
+						<div class="col-md-12"><input type="range" value="0" name="price_range" id="price_range" /></div>
+					</div>
 				</div>
+				<br />
+				<br />
 			</div>
 			
 			<div class="sidebar-image" align="center" class="clearfix">

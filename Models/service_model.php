@@ -20,6 +20,8 @@ user_business_name
 ,user_phone
 ,user_email
 ,user_description
+,user_logo
+,user_slide
 FROM user
 WHERE user_id = {$user_id}
 AND user_delete_flg = 0

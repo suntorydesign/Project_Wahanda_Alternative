@@ -30,13 +30,13 @@
 }
 
 #tab-services .one-service {
-	border: 1px solid #CCC;
+	border: 2px solid #CCC;
 	padding: 10px;
 }
 
 #tab-services .one-service .item .item-info-1 {
-	color: #FC0;
-	font-weight: 700;
+	/*color: #FC0;*/
+	/*font-weight: 700;*/
 }
 
 #tab-services .one-service .item .item-info-1, #tab-services .one-service .item .item-info-2, #tab-services .one-service .item .item-info-3 {
@@ -104,7 +104,7 @@
 }
 
 #side-bar {
-	border: 1px solid #CCC;
+	border: 2px solid #CCC;
 	padding-left: 10px;
 	padding-right: 10px;
 }
@@ -194,5 +194,5 @@ span.rating:hover{
 	z-index: 1000;
 }
 #user_service_review, #user_review_properties{
-	min-height: 100px;
+	min-height: 146px;
 }
