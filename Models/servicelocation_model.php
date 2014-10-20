@@ -16,14 +16,23 @@ class servicelocation_model extends Model {
 		$page = ($data['page'] - 1) * MAX_PAGINATION_ITEM;
 		$item_per_page = MAX_PAGINATION_ITEM;
 		$return = array();
-		$where = '';
-		if($data['service_name'] == ''){
-			$where = "WHERE (service.service_name LIKE '%{$data["service_name"]}%'";
-			$where .= "OR user_service.user_service_name LIKE '%{$data["service_name"]}%')";
-		}else{
-			$where = "WHERE (MATCH (service.service_name) AGAINST ('{$data["service_name"]}')";
-			$where .= "OR MATCH (user_service.user_service_name) AGAINST ('{$data["service_name"]}'))";
+		$service_name = explode(' ', $data["service_name"]);
+		$where = 'WHERE (';
+		foreach ($service_name as $key => $value) {
+			$where .= "service.service_name LIKE '%{$value}%' OR ";
 		}
+		foreach ($service_name as $i => $item) {
+			$where .= "user_service.user_service_name LIKE '%{$value}%' OR ";
+		}
+		$where = substr($where, 0, strlen($where) - 4);
+		$where .= ')';
+		// if($data['service_name'] == ''){
+			// $where = "WHERE (service.service_name LIKE '%{$data["service_name"]}%'";
+			// $where .= "OR user_service.user_service_name LIKE '%{$data["service_name"]}%')";
+		// }else{
+			// $where = "WHERE (MATCH (service.service_name) AGAINST ('{$data["service_name"]}')";
+			// $where .= "OR MATCH (user_service.user_service_name) AGAINST ('{$data["service_name"]}'))";
+		// }
 		$order = '';
 		if($data['sort_by'] == '1'){
 			$order = 'ORDER BY user.user_id DESC';
@@ -136,14 +145,23 @@ SQL;
 
 	public function loadAdvantageSearch($data){
 		$return = array();
-		$where = '';
-		if($data['service_name'] == ''){
-			$where = "WHERE (service.service_name LIKE '%{$data["service_name"]}%'";
-			$where .= "OR user_service.user_service_name LIKE '%{$data["service_name"]}%')";
-		}else{
-			$where = "WHERE (MATCH (service.service_name) AGAINST ('{$data["service_name"]}')";
-			$where .= "OR MATCH (user_service.user_service_name) AGAINST ('{$data["service_name"]}'))";
+		$service_name = explode(' ', $data["service_name"]);
+		$where = 'WHERE (';
+		foreach ($service_name as $key => $value) {
+			$where .= "service.service_name LIKE '%{$value}%' OR ";
 		}
+		foreach ($service_name as $i => $item) {
+			$where .= "user_service.user_service_name LIKE '%{$value}%' OR ";
+		}
+		$where = substr($where, 0, strlen($where) - 4);
+		$where .= ')';
+		// if($data['service_name'] == ''){
+			// $where = "WHERE (service.service_name LIKE '%{$data["service_name"]}%'";
+			// $where .= "OR user_service.user_service_name LIKE '%{$data["service_name"]}%')";
+		// }else{
+			// $where = "WHERE (MATCH (service.service_name) AGAINST ('{$data["service_name"]}')";
+			// $where .= "OR MATCH (user_service.user_service_name) AGAINST ('{$data["service_name"]}'))";
+		// }
 		$sql = <<<SQL
 SELECT service_type.service_type_id
 , service_type.service_type_name
