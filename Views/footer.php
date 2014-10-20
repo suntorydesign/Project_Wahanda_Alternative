@@ -772,7 +772,7 @@
 			{
 				delay:9000,
 				startwidth:1170,
-				startheight:400,
+				startheight:250,
 				hideThumbs:10
 			});
 		});

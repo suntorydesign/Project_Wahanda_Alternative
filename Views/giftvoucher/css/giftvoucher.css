@@ -1,9 +1,21 @@
 
 
-
 #header-2 {
   min-height: 236px;
-  background-color: #CCC;
+  width: 100%;
+
+  background: transparent url('http://localhost:81/project_wahanda_alternative/Views/giftvoucher/css/giftvoucher-background.png') top center no-repeat;
+}
+
+.btn-xeng {
+  width: 15px;
+  position: relative;
+  top: -2px;
+  left: -5px;
+}
+
+.gift-title {
+  padding: 25px;
 }
 
 .gift-action-btn {
@@ -33,6 +45,11 @@
 #gift-voucher-1 .attr-voucher .attr-voucher-1 {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+#gift-voucher-1 .attr-voucher .attr-voucher-1 .image {
+  /*height: 100px;*/
+  margin-bottom: 10px;
 }
 
 #gift-voucher-1 .attr-voucher .description {
@@ -92,6 +109,6 @@
 }
 
 #gift-voucher-3 .list-aq {
-  font-size: 16px;
+  font-size: 15px;
   padding-bottom: 20px;
 }
