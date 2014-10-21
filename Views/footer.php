@@ -551,17 +551,17 @@
         <!-- Modal Shopping Cart -->
         <div id="Shopping_cart_info" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
         	<div class="modal-dialog modal-lg">
-        		<div class="modal-content">
-        			<div class="modal-header" >
+        		<div class="modal-content" style="border-radius:0;">
+        			<div class="modal-header" style="background-color: #FDBD0E; padding: 6px 10px;">
 			        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 			        	<h4 class="modal-title" id="myModalLabel">
-			        		<strong><i class="fa fa-shopping-cart"></i> GIỎ HÀNG CỦA BẠN</strong> 
+			        		<strong><i class="fa fa-shopping-cart" style="font-size:16px;"></i> GIỎ HÀNG CỦA BẠN</strong> 
 			        		<span><i>(Bạn đang có <span id="cart_amount">10</span> cuộc hẹn/E-voucher)</i></span>
 			        	</h4>
 			      	</div>
 			      	<div class="modal-body">
 			      		<div class="table-responsive" style="height: 300px;overflow: auto;">
-				      		<table id="table_shopping_cart" class="table table-responsive table-hover">
+				      		<table id="table_shopping_cart" class="table table-responsive table-hover" style="font-size:14px;">
 				      			<tr>
 				      				<th  style="border: none">DỊCH VỤ</th>
 				      				<th  style="border: none">NGÀY - GIỜ</th>
@@ -580,7 +580,7 @@
 			      		</div>
 			      		<div class="row">
 				      		<div class="col-md-12">
-				      			<button onclick="saveQuantityNumber()" id="update_cart" class="btn btn-success pull-right">
+				      			<button onclick="saveQuantityNumber()" id="update_cart" class="btn btn-default pull-right">
 				      				<i id="waiting_for_update_cart" class="fa fa-refresh text-success fa-spin" style="display: none;"></i>
 				      				<span>Cập nhật giỏ hàng</span>
 				      			</button>
@@ -595,7 +595,7 @@
 			      		</div>
 			      	</div>
 			      	<div class="modal-footer">
-			      		<button onclick="checkIsLoginPayment()" type="button" id="confirm_cart" class="btn btn-danger">Thực hiện thanh toán</button>
+			      		<button onclick="checkIsLoginPayment()" type="button" id="confirm_cart" class="btn btn-orange">Thực hiện thanh toán</button>
 			      		<button type="button" class="btn btn-default" data-dismiss="modal">Trở về</button>
 			      	</div>
         		</div>

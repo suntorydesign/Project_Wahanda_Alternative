@@ -1445,7 +1445,7 @@ function shoppingCartDetail() {
 				html += '<th  style="border: none">SỐ LƯỢNG</th>';
 				html += '<th  style="border: none">TỔNG TIỀN</th>';
 				html += '</tr>';
-				html += '<tr><td class="text-center" colspan="5"><h3><i class="fa fa-exclamation-circle"></i> Giỏ hàng của bạn đang rỗng! <i class="fa fa-frown-o"></i></h3></td></tr>';
+				html += '<tr><td class="text-center" colspan="5"><h4><i class="fa fa-exclamation-circle"></i> Giỏ hàng của bạn đang rỗng! <i class="fa fa-frown-o"></i></h4></td></tr>';
 			}
 			$('table#table_shopping_cart').html(html);
 		},
