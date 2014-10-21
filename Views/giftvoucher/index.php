@@ -2,7 +2,7 @@
 
 <div id="header-2" class="clearfix">
 	<div class="gift-title" align="center">
-		<img src="<?php echo URL;?>Views/giftvoucher/css/title.png"/>
+		<img src="<?php echo ASSETS;?>img/title.png"/>
 	</div>	
 	<div class="gift-action" align="center">
 		<button class="btn btn-sm btn-orange buy-giftvc-btn">MUA GIFT VOUCHER</button>
@@ -17,19 +17,19 @@
 		<div class="attr-voucher clearfix">
 			<div class="attr-voucher-1 col-sm-4">
 				<div class="image" align="center">
-					<img class="img-responsive" src="<?php echo URL;?>Views/giftvoucher/css/map-point-o.png" />
+					<img class="img-responsive" src="<?php echo ASSETS;?>img/map-point-o.png" />
 				</div>
 				<div class="description text-brown" align="center">ĐƯỢC CHẤP NHẬN TRÊN HƠN 3000 ĐỊA ĐIỂM TẠI TP HCM</div>
 			</div>
 			<div class="attr-voucher-1 col-sm-4">
 				<div class="image" align="center">
-					<img class="img-responsive" src="<?php echo URL;?>Views/giftvoucher/css/gift-o.png"/>
+					<img class="img-responsive" src="<?php echo ASSETS;?>img/gift-o.png"/>
 				</div>
 				<div class="description text-brown" align="center">MÓN QUÀ Ý NGHĨA CHO NHỮNG DỊP VUI</div>
 			</div>
 			<div class="attr-voucher-1 col-sm-4">
 				<div class="image" align="center">
-					<img class="img-responsive" src="<?php echo URL;?>Views/giftvoucher/css/truck-o.png"/>
+					<img class="img-responsive" src="<?php echo ASSETS;?>img/truck-o.png"/>
 				</div>
 				<div class="description text-brown" align="center">ĐƯỢC GỬI THƯ ĐẢM BẢO MIỄN PHÍ</div>
 			</div>
@@ -42,31 +42,31 @@
 					<ul class="list-inline" align="center">
 						<li>	
 							<button class="btn btn-default voucher-card-btn">
-								<img class="btn-xeng" src="<?php echo URL?>Views/giftvoucher/css/xeng.png" />
+								<img class="btn-xeng" src="<?php echo ASSETS;?>img/xeng.png" />
 								 200.000đ
 							</button>
 						</li>
 						<li>	
 							<button class="btn btn-default voucher-card-btn xeng">
-								<img class="btn-xeng" src="<?php echo URL?>Views/giftvoucher/css/xeng.png" />
+								<img class="btn-xeng" src="<?php echo ASSETS;?>img/xeng.png" />
 								500.000đ
 							</button>
 						</li>
 						<li>	
 							<button class="btn btn-default voucher-card-btn">
-								<img class="btn-xeng" src="<?php echo URL?>Views/giftvoucher/css/xeng.png" />
+								<img class="btn-xeng" src="<?php echo ASSETS;?>img/xeng.png" />
 								1.000.000đ
 							</button>
 						</li>
 						<li>	
 							<button class="btn btn-default voucher-card-btn">
-								<img class="btn-xeng" src="<?php echo URL?>Views/giftvoucher/css/xeng.png" />
+								<img class="btn-xeng" src="<?php echo ASSETS;?>img/xeng.png" />
 								5.000.000đ
 							</button>
 						</li>
 						<li>	
 							<button class="btn btn-default voucher-card-btn">
-								<img class="btn-xeng" src="<?php echo URL?>Views/giftvoucher/css/xeng.png" />
+								<img class="btn-xeng" src="<?php echo ASSETS;?>img/xeng.png" />
 								8.000.000đ
 							</button>
 						</li>

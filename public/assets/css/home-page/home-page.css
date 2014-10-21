@@ -418,7 +418,7 @@ img{
 }
 
 #footer-info {
-	background: url('../public/assets/img/Trang-chu-footer.png') top left;
+	background: url('Trang-chu-footer.png') top left;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
@@ -720,4 +720,8 @@ button.btn-close:hover, button.btn-close:focus, button.btn-close:active{
 #see_more_review_all_detail:hover{
 	background-color: #777;
 	color: #e7e7e7;
+}
+
+#login_modal .modal-content {
+	border-radius: 0 !important;
 }

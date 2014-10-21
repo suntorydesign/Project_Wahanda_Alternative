@@ -512,7 +512,7 @@
 		<!-- Modal Login -->
         <div id="login_modal" style="z-index: 1051;" onkeydown="enterEvent(event)" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-max-height="440">
     	  <div class="modal-dialog">
-		    <div class="modal-content" style="border-radius: 6px">
+		    <div class="modal-content">
 		      <div class="modal-header" style="background-color: #FDBD0E; padding: 6px 10px;">
 		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 		        <h5 class="modal-title" id="myModalLabel" style="text-align:center; font-weight:bold;">ĐĂNG NHẬP</h5>
@@ -520,13 +520,13 @@
 		      <div class="modal-body" style="padding: 30px 20px 0px;">
 		        <form class="form-horizontal">
 		        	<div class="form-group">
-		        		<label class="control-label col-sm-2">Email</label>
+		        		<label class="control-label col-sm-3">Email</label>
 		        		<div class="col-sm-8">
 		        			<input autocomplete="off" class="form-control" type="text" id="email_login" name="email_login" placeholder="Nhập email...VD:abc@example.com" />
 		        		</div>
 		        	</div>	
 		        	<div class="form-group">
-		        		<label class="control-label col-sm-2">Mật Khẩu</label>
+		        		<label class="control-label col-sm-3">Mật Khẩu</label>
 		        		<div class="col-sm-8">
 		        			<input autocomplete="off" class="form-control" type="password" id="pass_login" name="pass_login" placeholder="Nhập mật khẩu..." />
 		        			<div style="padding-top:10px">

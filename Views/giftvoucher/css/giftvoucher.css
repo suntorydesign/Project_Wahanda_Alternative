@@ -4,7 +4,7 @@
   min-height: 236px;
   width: 100%;
 
-  background: transparent url('http://localhost:81/project_wahanda_alternative/Views/giftvoucher/css/giftvoucher-background.png') top center no-repeat;
+  background: transparent url('giftvoucher-background.png') top center no-repeat;
 }
 
 .btn-xeng {
