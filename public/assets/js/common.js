@@ -2,7 +2,6 @@
 function jumpToOtherPage(page) {
 	window.location = page;
 }
-
 /*JUMP TO OTHER PAGE*/
 /*-----------------------*/
 
@@ -16,7 +15,6 @@ function inputNumbers(evt) {
 		e.preventDefault();
 	}
 }
-
 /*END CAN ONLY INPUT NUMBER*/
 /*-----------------------*/
 
@@ -28,7 +26,6 @@ function shorten(text, maxLength) {
 	}
 	return ret;
 }
-
 /*END SHORTEN THE TEXT WITH ...*/
 /*-----------------------*/
 
@@ -46,7 +43,6 @@ function formatDate(date) {
 	re_year = date_format.getFullYear();
 	return re_date + '/' + re_month + '/' + re_year;
 }
-
 /*END FORMAT DATE*/
 /*-----------------------*/
 
@@ -71,7 +67,6 @@ function checkSessionIdle() {
 		}
 	});
 }
-
 /*END CHECK SESSION IDLE*/
 /*-----------------------*/
 
@@ -85,6 +80,5 @@ function showMore(cls, txt) {
 		}
 	});
 }
-
 /*END SHOW MORE*/
 /*-----------------------*/

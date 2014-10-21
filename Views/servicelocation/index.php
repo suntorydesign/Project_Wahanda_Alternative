@@ -136,6 +136,7 @@
 						</div>
 					</div> -->
 				</div>
+				
 			</div>
 			<div id="result-pagination" align="center">
 				<ul class="pagination pagination-sm">
@@ -148,6 +149,7 @@
 				  	<li><a href="#">&raquo;</a></li> -->
 				</ul>
 			</div>
+			<div style="border-bottom: 2px solid #ccc;" class="divider"></div>
 		</div>
 
 		<div class="col-md-4">
@@ -246,10 +248,10 @@
 			</div>
 			
 			<div class="sidebar-image" align="center" class="clearfix">
-				<img class="img-responsive" alt="Responsive image" src="http://webdesignledger.com/wp-content/uploads/2014/08/1-ipad-apps-for-web-designers.jpg">
+				<img width="100%" style="min-height: 350px" class="img-responsive" alt="Responsive image" src="<?php echo ASSETS; ?>img/Trang cac dia diem cho 1 dv_banner doc 1.jpg">
 			</div>
 			<div class="sidebar-image" align="center">
-				<img class="img-responsive" alt="Responsive image" src="http://webdesignledger.com/wp-content/uploads/2014/08/1-ipad-apps-for-web-designers.jpg">
+				<img width="100%" style="min-height: 350px" class="img-responsive" alt="Responsive image" src="<?php echo ASSETS; ?>img/Trang cac dia diem cho 1 dv_banner doc 2.jpg">
 			</div>
 		</div>
 
@@ -258,8 +260,9 @@
 	<div id="public" class="clearfix">
 		<p class="title">- CỘNG ĐỒNG -</p>
 		<div class="col-md-2"></div>
-		<div class="col-sm-4 col-md-2 public-item-1">
-			<img class="image img-responsive" src="http://webdesignledger.com/wp-content/uploads/2014/08/1-ipad-apps-for-web-designers.jpg">
+		<div class="col-sm-4 col-md-2 public-item-1" style="position: relative">
+			<img width="100%" class="image img-responsive" src="<?php echo ASSETS; ?>img/Trang cac dia diem cho 1 dv_bai viet.jpg">
+			<h4 style="position: absolute; right: 15%;bottom: 32%" class="text-orange"><b>BÀI VIẾT</b></h4>
 			<div class="description">
 				Công nghệ hại điện tại salon Mỹ Nhệ và các dịch vụ tâm điểm...
 			</div>
@@ -268,8 +271,9 @@
 			</div>
 		</div>
 		<div class="col-md-1"></div>
-		<div class="col-sm-4 col-md-2 public-item-2">
-			<img class="image img-responsive" src="http://webdesignledger.com/wp-content/uploads/2014/08/1-ipad-apps-for-web-designers.jpg">
+		<div class="col-sm-4 col-md-2 public-item-3" style="position: relative">
+			<img width="100%" class="img-responsive" src="<?php echo ASSETS; ?>img/Trang cac dia diem cho 1 dv_cau hoi.jpg">
+			<h4 style="position: absolute; right: 15%;bottom: 32%" class=""><b>CÂU HỎI</b></h4>
 			<div class="description">
 				Công nghệ hại điện tại salon Mỹ Nhệ và các dịch vụ tâm điểm...
 			</div>
@@ -278,13 +282,18 @@
 			</div>
 		</div>
 		<div class="col-md-1"></div>
-		<div class="col-sm-4 col-md-2 public-item-3">
-			<img class="image img-responsive" src="http://webdesignledger.com/wp-content/uploads/2014/08/1-ipad-apps-for-web-designers.jpg">
+		<div class="col-sm-4 col-md-2 public-item-3 text-center" style="position: relative">
+			<img width="100%" class="img-responsive" src="<?php echo ASSETS; ?>img/Trang cac dia diem cho 1 dv_danh gia.jpg">
+			<h4 style="position: absolute; right: 15%;bottom: 20%" class="text-white"><b>ĐÁNH GIÁ</b></h4>
 			<div class="description">
-				Công nghệ hại điện tại salon Mỹ Nhệ và các dịch vụ tâm điểm...
+				<i class="fa fa-lg fa-star text-white"></i>
+				<i class="fa fa-lg fa-star text-white"></i>
+				<i class="fa fa-lg fa-star text-white"></i>
+				<i class="fa fa-lg fa-star text-white"></i>
+				<i class="fa fa-lg fa-star text-white"></i>
 			</div>
 			<div class="clearfix">
-				<a class="pull-right read-more" href="#">XEM THÊM >>></a>
+				<a class="pull-right read-more" href="#">XEM ĐÁNH GIÁ >>></a>
 			</div>
 		</div>
 		<div class="col-md-2"></div>

@@ -607,29 +607,29 @@
                 <div class="container">
                     <div id="footer-1" class="col-md-2">
                         <h4><b>THÔNG TIN</b></h4>
-                        <p>Liên hệ</p>
-                        <p>Về chúng tôi</p>
-                        <p>Góc báo chí</p>
-                        <p>Tuyển dụng</p>
+                        <p id="contact_link" class="text-orange-black pointer">Liên hệ</p>
+                        <p id="about_us" class="text-orange-black pointer">Về chúng tôi</p>
+                        <p class="text-orange-black pointer">Góc báo chí</p>
+                        <p class="text-orange-black pointer">Tuyển dụng</p>
                     </div>
 
                     <div id="footer-2" class="col-md-6">
-                        <h2 class="logo-text"> COMPANY NAME <h1>
+                        <img width="40%" class="img-responsive" src="<?php echo ASSETS; ?>img/Beleza_logo_Final.png" />
                     </div>
 
                     <div id="footer-3" class="col-md-2">
-                        <h4><b>THÔNG TIN</b></h4>
-                        <p>Liên hệ</p>
-                        <p>Về chúng tôi</p>
-                        <p>Góc báo chí</p>
-                        <p>Tải ứng dụng</p>
+                        <h4><b>LINK NHANH</b></h4>
+                        <p id="gift_voucher_link" class="text-orange-black pointer">Thẻ tặng quà</p>
+                        <p class="text-orange-black pointer">Góc chuyên gia</p>
+                        <p class="text-orange-black pointer">Chăm sóc toàn diện</p>
+                        <p class="text-orange-black pointer">Tải ứng dụng</p>
                     </div>
 
                     <div id="footer-4" class="col-md-2">
                         <h4><b>THÔNG TIN</b></h4>
-                        <p>Liên hệ</p>
-                        <p>Về chúng tôi</p>
-                        <p>Góc báo chí</p>
+                        <p class="text-orange-black pointer">Xác thực voucher</p>
+                        <p id="regist_venue" class="text-orange-black pointer">Đăng ký gian hàng</p>
+                        <p id="" class="text-orange-black pointer">Trang tin</p>
                     </div>
                 </div>
             </div>
@@ -637,46 +637,46 @@
             <div id="footer-last">
                 <div class="container" align="center">
                     <ul class="list-inline">
-                        <li>
+                        <li class="pointer">
                             <span class="fa-stack">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-tumblr fa-stack-1x fa-inverse"></i>
+                                <i class="fa fa-circle fa-stack-2x text-white"></i>
+                                <i class="fa fa-tumblr fa-stack-1x fa-inverse text-orange"></i>
                             </span> 
                         </li>
-                        <li>
+                        <li class="pointer">
                             <span class="fa-stack">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                <i class="fa fa-circle fa-stack-2x text-white"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse text-orange"></i>
                             </span> 
                         </li>
-                        <li>
+                        <li class="pointer">
                             <span class="fa-stack">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-tencent-weibo fa-stack-1x fa-inverse"></i>
+                                <i class="fa fa-circle fa-stack-2x text-white"></i>
+                                <i class="fa fa-tencent-weibo fa-stack-1x fa-inverse text-orange"></i>
                             </span> 
                         </li>
-                        <li>
+                        <li class="pointer">
                             <span class="fa-stack">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                                <i class="fa fa-circle fa-stack-2x text-white"></i>
+                                <i class="fa fa-google-plus fa-stack-1x fa-inverse text-orange"></i>
                             </span> 
                         </li>
-                        <li>
+                        <li class="pointer">
                             <span class="fa-stack">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-youtube fa-stack-1x fa-inverse"></i>
+                                <i class="fa fa-circle fa-stack-2x text-white"></i>
+                                <i class="fa fa-youtube fa-stack-1x fa-inverse text-orange"></i>
                             </span> 
                         </li>
-                        <li>
+                        <li class="pointer">
                             <span class="fa-stack">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                <i class="fa fa-circle fa-stack-2x text-white"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse text-orange"></i>
                             </span> 
                         </li>
-                        <li>
+                        <li class="pointer">
                             <span class="fa-stack">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                                <i class="fa fa-circle fa-stack-2x text-white"></i>
+                                <i class="fa fa-instagram fa-stack-1x fa-inverse text-orange"></i>
                             </span> 
                         </li>
                     </ul>

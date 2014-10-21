@@ -18,6 +18,24 @@ $(document).ready(function() {
 		});
 		$('#user_description_see_more').show();
 	});
+	/*LINK TO OTHER PAGE*/
+	$('#contact_link').click(function(){
+		jumpToOtherPage(URL + 'contact');
+	});
+	$('#about_us').click(function(){
+		jumpToOtherPage(URL + 'introbusiness');
+	});
+	$('#gift_voucher_link').click(function(){
+		jumpToOtherPage(URL + 'giftvoucher');
+	});
+	$('#').click(function(){
+		
+	});
+	$('#regist_venue').click(function(){
+		jumpToOtherPage(URL + 'contact');
+	});
+	
+	/*END LINK TO OTHER PAGE*/
 });
 /*LOAD DISTRICT*/
 function loadDistrict() {
@@ -98,7 +116,7 @@ function loadTopServiceList() {
 				html += '<span class="price pull-left">' + value.user_service_sale_price + ' VNĐ</span>';
 				html += '<span class="sale-percent pull-right"> <i class="fa fa-arrow-down"></i>' + ' GIẢM ' + Math.floor((value.user_service_full_price - value.user_service_sale_price) / value.user_service_full_price * 100) + '%</span>';
 				html += '</div>';
-				html += '<p title="' + value.user_service_description + '" class="description">' + value.user_service_description;
+				html += '<p title="' + value.user_service_description + '" class="">' + shorten(value.user_service_description, 85);
 				html += '</p>';
 				html += '<div class="clearfix">';
 				html += '<button class="btn btn-sm btn-orange pull-right book-now-btn">';
@@ -196,7 +214,7 @@ function loadNewServiceList() {
 				html += '</div>';
 				html += '<div class="clearfix"></div>';
 				html += '<p align="center" class="name">' + value.user_service_name.toUpperCase() + '</p>';
-				html += '<p title="' + value.user_service_description + '" class="description">' + value.user_service_description + '</p>';
+				html += '<p title="' + value.user_service_description + '" class="">' + shorten(value.user_service_description, 60) + '</p>';
 				html += '<div class="clearfix">';
 				html += '<button class="btn btn-xs btn-brown pull-right">';
 				html += '<i style="display:none;" class="waiting_booking_detail fa fa-refresh fa-spin"></i> BOOK NOW</button>';
@@ -252,8 +270,8 @@ function loadLocation() {
 					html += '<div class="info-content clearfix">';
 					html += '<div class="name">';
 					html += value.user_business_name + '</div>';
-					html += '<div><p class="description">';
-					html += value.user_description + '</p></div>';
+					html += '<div><p class="">';
+					html += shorten(value.user_description, 85) + '</p></div>';
 					html += '<a class="readmore pull-right" href="' + URL + 'service/servicePlace/' + value.user_id + '">Xem thêm chi tiết >></a>';
 					html += '</div>';
 					html += '</div>';

@@ -743,3 +743,6 @@ button.btn-close:hover, button.btn-close:focus, button.btn-close:active{
 .text-black{
 	color: #373538;
 }
+.pointer{
+	cursor: pointer;
+}
