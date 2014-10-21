@@ -78,11 +78,16 @@ function loadResultSearch(page) {
 					}
 					html += '</div>';
 					html += '<div class="address clearfix">';
-					html += '<span class="pull-left">' + value.user_address + '</span>';
+					html += '<span style="cursor: help" title="' + value.user_address + '" class="pull-left">' + shorten(value.user_address,38) + '</span>';
 					html += '<a class="pull-right" href="#">Show map >>></a>';
 					html += '</div>';
 					html += '<div class="description clearfix">' + shorten(value.user_description, 250) + '</div>';
-					html += '<div class="services">HAIR	NAIL FACE</div>';
+					html += '<div class="services row">';
+					html += '<div class="col-md-2"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-smile-o fa-stack-1x text-white"></i></span><p class="sv_loc_text">MẶT</p></div>';
+					html += '<div class="col-md-2"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-child fa-stack-1x text-white"></i></span><p class="sv_loc_text">BODY</p></div>';
+					html += '<div class="col-md-2"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-cut fa-stack-1x text-white"></i></span><p class="sv_loc_text">TÓC</p></div>';
+					html += '<div class="col-md-2"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-hand-o-up fa-stack-1x text-white"></i></span><p class="sv_loc_text">MÓNG</p></div>';
+					html += '</div>';
 					//can not imagine
 					html += '</div>';
 					html += '<div class="col-md-6 clearfix image">';
@@ -90,7 +95,7 @@ function loadResultSearch(page) {
 					html += '<i class="fa fa-circle fa-stack-2x text-orange"></i>';
 					html += '<i class="fa fa-stack-1x fa-inverse"><b>new</b></i>';
 					html += '</span>';
-					html += '<a href="' + URL + 'service/servicePlace/' + value.user_id + '"><img href="' + URL + 'service/servicePlace/' + value.user_id + '" width="100%" height="auto" class="img-responsive" src="' + value.user_logo + '"></a>';
+					html += '<a href="' + URL + 'service/servicePlace/' + value.user_id + '"><img href="' + URL + 'service/servicePlace/' + value.user_id + '" width="100%" class="img-responsive" src="' + value.user_logo + '"></a>';
 					html += '</div>';
 
 					$.each(value.user_service, function(key, item) {
@@ -100,15 +105,15 @@ function loadResultSearch(page) {
 						html += '<strong>' + shorten(item.user_service_name, 30) + '</strong>';
 						html += '</div>';
 						html += '<div class="col-sm-2 price-info-2">';
-						html += '<i class="fa fa-clock-o text-orange"></i> ' + item.user_service_duration + 'phút';
+						html += '<span class="fa-stack"><i></i><i class="fa fa-stack-2x fa-clock-o text-orange"></i></span> ' + item.user_service_duration + 'phút';
 						html += '</div>';
 						html += '<div class="col-sm-3 price-info-3">';
-						html += '<i class="fa fa-arrow-down text-orange"></i> Giảm ' + Math.floor((item.user_service_full_price - item.user_service_sale_price) / item.user_service_full_price * 100) + '%';
+						html += '<span class="fa-stack"><i class="fa fa-certificate fa-stack-2x text-orange"></i><i class="fa fa-stack-1x text-white"><b>%</b></i></span> Giảm ' + Math.floor((item.user_service_full_price - item.user_service_sale_price) / item.user_service_full_price * 100) + '%';
 						html += '</div>';
 						html += '<div class="col-sm-2 price-info-4" >';
 						html += '<button data-user-service="' + item.user_service_id + '" type="button" class="btn btn-sm btn-orange pull-right btn_location_booking">';
 						html += '<i style="display : none;" class="fa fa-refresh fa-spin waiting_booking_detail"></i>';
-						html += ' <i class="fa fa-dollar text-white"></i> ' + item.user_service_sale_price + ' đ';
+						html += ' <i class="fa fa-lg fa-dollar text-white"></i> <span class="text-white">' + item.user_service_sale_price + ' đ</span>';
 						html += '</button>';
 						html += '</div>';
 						html += '</div>';

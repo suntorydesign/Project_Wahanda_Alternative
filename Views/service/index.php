@@ -1,10 +1,63 @@
-
-
 <div id="header-2" class="clearfix">
+	<!--
+	#################################
+		- THEMEPUNCH BANNER -
+	#################################
+	-->
+	<div class="tp-banner-container">
+		<div class="tp-banner" >
+			<ul>
+				<!-- SLIDE  -->
+				<li data-transition="fade" data-slotamount="7" data-masterspeed="1500" >
+					<!-- MAIN IMAGE -->
+					<img src="<?php echo ASSETS;?>img/slider-image-01.jpg"  alt="Spa Hồng Vân"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+					<!-- LAYERS -->
+					<!-- LAYER NR. 1 -->
+					<div class="tp-caption lightgrey_divider skewfromrightshort fadeout"
+						data-x="85"
+						data-y="224"
+						data-speed="500"
+						data-start="1200"
+						data-easing="Power4.easeOut">Spa Hồng Vân
+					</div>
+					Địa điểm 245 Trường Chinh, Tp.HCM
 
+				</li>
+				<!-- SLIDE  -->
+				<li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000" >
+					<!-- MAIN IMAGE -->
+					<img src="<?php echo ASSETS;?>img/slider-image-02.jpg"  alt="Spa Ngọc Trinh"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+					<!-- LAYERS -->
+					<!-- LAYER NR. 1 -->
+					<div class="tp-caption lightgrey_divider skewfromrightshort fadeout"
+						data-x="85"
+						data-y="224"
+						data-speed="500"
+						data-start="1200"
+						data-easing="Power4.easeOut">My Caption
+					</div>
+					...
+				</li>
+				<!-- SLIDE  -->
+				<li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000" >
+					<!-- MAIN IMAGE -->
+					<img src="<?php echo ASSETS;?>img/slider-image-03.png"  alt="Người mẫu"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+					<!-- LAYERS -->
+					<!-- LAYER NR. 1 -->
+					<div class="tp-caption lightgrey_divider skewfromrightshort fadeout"
+						data-x="85"
+						data-y="224"
+						data-speed="500"
+						data-start="1200"
+						data-easing="Power4.easeOut">My Caption
+					</div>
+					...
+				</li>
+				....
+			</ul>
+		</div>
+	</div>
 </div>
-
-
 
 <div id="content-wrap">
 	<div class="container">
@@ -84,7 +137,7 @@
 				</div>
 				<div id="tab-ratings">
 					<div id="tab-banner">
-						<!-- <img class="img-responsive" src=""> -->
+						<img style="width: 100%; height: auto" id="user_logo" class="img-responsive" src="">
 					</div>
 		
 					<div id="tab-ratings" class="clearfix">
@@ -484,14 +537,22 @@
 		<div class="col-md-4">
 			<div id="side-bar">
 				<div class="map">
-					<!-- <img class="img-responsive" src=""> -->
-					<!-- <div class="zoom-tool">
-						<i class="fa fa-search-plus"></i>
-					</div> -->
-					<div class="">
-						<p id="user_address" class="text-center"></p>
-						<p class="text-center">SĐT: <span id="user_phone"></span></p>
-						<p class="text-center">Email: <span id="user_email"></span></p>
+					<img style="margin-top: 10px; width: 100%; height: auto; box-shadow: 0.5px 1px 2.6px" class="img-responsive" src="https://maps.googleapis.com/maps/api/staticmap?sensor=false&zoom=15&size=397x327&maptype=roadmap&markers=icon%3Ahttps%3A%2F%2Fconnect.wahanda.com%2Fassets%2Fmap-marker.png|54.54516881%2C-1.27919913">
+					<div class="zoom-tool" style="margin: 10px 0 0 24px;">
+						<span class="fa fa-lg fa-stack">
+							<i class="fa fa-square fa-stack-2x text-white"></i>
+							<i class="fa fa-search-plus fa-stack-1x"></i>
+						</span>
+					</div>
+					<div class="text-center">
+						<br />
+						<span id="user_address" class="text-center"></span>
+						<br />
+						<span class="text-center">SĐT: <span id="user_phone"></span></span>
+						<br />
+						<span class="text-center">Email: <span id="user_email"></span></span>
+						<br />
+						<br />
 					</div>
 				</div>
 				<div class="divider"></div>
@@ -503,7 +564,7 @@
 							<span>Thứ 2 - Thứ 6</span>
 						</div>
 						<div class="col-sm-6">
-							<span>07am - 20pm</span>
+							<span>... - ...</span>
 						</div>
 					</div>	
 	
@@ -512,16 +573,65 @@
 							<span>Thứ 7 - Chủ nhật</span>
 						</div>
 						<div class="col-sm-6">
-							<span>16pm - 24pm</span>
+							<span>... - ...</span>
 						</div>
 					</div>
 				</div>	
 				<div class="divider"></div>
 
-				<div class="pay-with"></div>
+				<div class="pay-with">
+					<div class="row">
+						<div class="col-md-4 text-center">
+							<div class="row">
+								<div class="col-md-12">
+									<span class="fa-stack fa-3x">
+										<i class="fa fa-certificate fa-stack-2x text-orange"></i>
+										<i style="font-size: 30px;" class="fa fa-calendar text-white fa-stack-1x"></i>
+									</span>
+								</div>
+								<div class="col-md-12">
+									<span>Chấp nhận đặt online</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 text-center">
+							<div class="row">
+								<div class="col-md-12">
+									<span class="fa-stack fa-3x">
+										<i class="fa fa-certificate fa-stack-2x text-orange"></i>
+										<i style="font-size: 30px;" class="fa fa-credit-card text-white fa-stack-1x"></i>
+									</span>
+								</div>
+								<div class="col-md-12">
+									<span>Chấp nhận Evoucher</span>
+								</div>
+							</div>			
+						</div>
+						<div class="col-md-4 text-center">
+							<div class="row">
+								<div class="col-md-12">
+									<span class="fa-stack fa-3x">
+										<i class="fa fa-certificate fa-stack-2x text-orange"></i>
+										<i style="font-size: 40px;" class="fa fa-gift text-white fa-stack-1x"></i>
+										<!-- <i class="fa fa-ban fa-stack-2x text-danger"></i> -->
+									</span>
+								</div>
+								<div class="col-md-12">
+									<span>Chấp nhận Gift voucher</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br />
+					<br />
+				</div>
+			</div>
+			<div style="margin-top: 15px;" class="row">
+				<div class="col-md-12">
+					<img style="width: 100%; height: 500px" id="user_slide" src="" alt="" class="img-responsive" />
+				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
 <script>

@@ -40,8 +40,8 @@
 	font-size: 18px;
 }
 
-#result-list .fa-star, #result-list .fa-star-half-empty, #result-list .fa-star-empty {
-	padding-right: 8px;
+#result-list .fa-star, #result-list .fa-star-half-empty, #result-list .fa-star-empty, #result-list .fa-star-o {
+	padding-right: 4px;
 }
 
 #result-list .address {
@@ -90,8 +90,8 @@
 
 #result-list div.image, #result-list div.image img{
 	max-width: 400px;
-	max-height: 250px;
-	min-height: 200px;
+	max-height: 300px;
+	min-height: 240px;
 }
 
 #side-bar {
@@ -168,7 +168,11 @@
 	color: #F2F2F2;
 	font-weight: 700;
 }
-
-
-
-
+p.sv_loc_text, span.sv_loc_text{
+	color: #646463;
+    display: block;
+    font-size: 0.8975em;
+    line-height: 1em;
+    margin-bottom: 0.45455em;
+    text-transform: uppercase;
+}

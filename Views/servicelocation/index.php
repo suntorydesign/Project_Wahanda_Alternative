@@ -1,5 +1,62 @@
 <div id="header-2" class="clearfix">
+	<!--
+	#################################
+		- THEMEPUNCH BANNER -
+	#################################
+	-->
+	<div class="tp-banner-container">
+		<div class="tp-banner" >
+			<ul>
+				<!-- SLIDE  -->
+				<li data-transition="fade" data-slotamount="7" data-masterspeed="1500" >
+					<!-- MAIN IMAGE -->
+					<img src="<?php echo ASSETS;?>img/slider-image-01.jpg"  alt="Spa Hồng Vân"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+					<!-- LAYERS -->
+					<!-- LAYER NR. 1 -->
+					<div class="tp-caption lightgrey_divider skewfromrightshort fadeout"
+						data-x="85"
+						data-y="224"
+						data-speed="500"
+						data-start="1200"
+						data-easing="Power4.easeOut">Spa Hồng Vân
+					</div>
+					Địa điểm 245 Trường Chinh, Tp.HCM
 
+				</li>
+				<!-- SLIDE  -->
+				<li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000" >
+					<!-- MAIN IMAGE -->
+					<img src="<?php echo ASSETS;?>img/slider-image-02.jpg"  alt="Spa Ngọc Trinh"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+					<!-- LAYERS -->
+					<!-- LAYER NR. 1 -->
+					<div class="tp-caption lightgrey_divider skewfromrightshort fadeout"
+						data-x="85"
+						data-y="224"
+						data-speed="500"
+						data-start="1200"
+						data-easing="Power4.easeOut">My Caption
+					</div>
+					...
+				</li>
+				<!-- SLIDE  -->
+				<li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000" >
+					<!-- MAIN IMAGE -->
+					<img src="<?php echo ASSETS;?>img/slider-image-03.png"  alt="Người mẫu"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+					<!-- LAYERS -->
+					<!-- LAYER NR. 1 -->
+					<div class="tp-caption lightgrey_divider skewfromrightshort fadeout"
+						data-x="85"
+						data-y="224"
+						data-speed="500"
+						data-start="1200"
+						data-easing="Power4.easeOut">My Caption
+					</div>
+					...
+				</li>
+				....
+			</ul>
+		</div>
+	</div>
 </div>
 
 <div id="content-wrap">
@@ -179,7 +236,13 @@
 
 				<div class="filter-6">
 					<p class="filter-name">KHOẢNG GIÁ</p>
+					<div class="row">
+						<div class="col-md-12 text-center"><span class="sv_loc_text">50.000 - 5.000.000 vnđ<span></div>
+						<div class="col-md-12"><input type="range" value="0" name="price_range" id="price_range" /></div>
+					</div>
 				</div>
+				<br />
+				<br />
 			</div>
 			
 			<div class="sidebar-image" align="center" class="clearfix">

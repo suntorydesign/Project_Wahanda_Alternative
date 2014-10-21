@@ -42,6 +42,12 @@ function loadLocationDetail() {
 					if (key == 'user_description') {
 						$('#user_location_description').html(value);
 					}
+					if(key == 'user_slide'){
+						$('#' + key).attr('src', value);
+					}
+					if(key == 'user_logo'){
+						$('#' + key).attr('src', value);
+					}
 					if (key == 'user_open_hour') {
 						json_user_open_hour = jQuery.parseJSON(value);
 						// console.log(json_user_open_hour);
@@ -72,18 +78,36 @@ function loadLocationDetail() {
 							}
 							user_open_hour += '<div class="clearfix" style="padding-top: 10px;">';
 							user_open_hour += '<div class="col-sm-offset-1 col-sm-6">';
-							user_open_hour += '<span><i>' + day + ' :</i></span>';
+							user_open_hour += '<span>' + day + ' :</span>';
 							user_open_hour += '</div>';
 							// user_open_hour += '<div class="col-sm-1">';
 							// user_open_hour += '<span><i>:</i></span>';
 							// user_open_hour += '</div>';
 							if (hour[0] == 1) {
-								user_open_hour += '<div class="col-sm-4">';
-								user_open_hour += '<span><i>' + hour[1] + 'h - ' + hour[2] + 'h</i></span>';
+								user_open_hour += '<div class="col-sm-5">';
+								if(hour[1] <= 12){
+									if(hour[1] <= 9){
+										hours_1 = '0' + hour[1]+'am';
+									}else{
+										hours_1 = hour[1]+'am';
+									}
+								}else{
+									hours_1 = hour[1]+'pm';
+								}
+								if(hour[2] <= 12){
+									if(hour[2] <= 9){
+										hours_2 = '0' + hour[2]+'am';
+									}else{
+										hours_2 = hour[2]+'am';
+									}
+								}else{
+									hours_2 = hour[2]+'pm';
+								}
+								user_open_hour += '<span>' + hours_1 + ' - ' + hours_2 + '</span>';
 								user_open_hour += '</div>';
 							} else if (hour[0] == 0) {
-								user_open_hour += '<div class="col-sm-4">';
-								user_open_hour += '<span><i>Nghỉ</i></span>';
+								user_open_hour += '<div class="col-sm-5">';
+								user_open_hour += '<span><b>Nghỉ</b></span>';
 								user_open_hour += '</div>';
 							}
 							user_open_hour += '</div>';
@@ -100,15 +124,15 @@ function loadLocationDetail() {
 							key = 'DỊCH VỤ NỔI BẬT';
 						}
 						html += '<div class="one-service" style="margin-bottom: 20px;">';
-						html += '<div class="title">' + key + '</div>';
+						html += '<div style="font-size: 16px;" class="title">' + key + '</div>';
 						$.each(value, function(key, item) {
 							html += '<div class="divider"></div>';
 							html += '<div class="item clearfix">';
-							html += '<div title="' + item.user_service_name + '" style="cursor: help;" class="col-sm-5 item-info-1">' + shorten(item.user_service_name, 30) + '</div>';
-							html += '<div class="col-sm-2 item-info-2"><i class="fa fa-clock-o text-orange"></i> ' + item.user_service_duration + ' phút</div>';
-							html += '<div class="col-sm-2 item-info-3"><i class="fa fa-arrow-down text-orange"></i> ' + Math.floor((item.user_service_full_price - item.user_service_sale_price) / item.user_service_full_price * 100) + '%</div>';
+							html += '<div title="' + item.user_service_name + '" style="cursor: help;" class="col-sm-5 item-info-1">' + shorten(item.user_service_name, 36) + '</div>';
+							html += '<div class="col-sm-2 item-info-2"><span class="fa-stack"><i></i><i class="fa fa-stack-2x fa-clock-o text-orange"></i></span> ' + item.user_service_duration + ' phút</div>';
+							html += '<div class="col-sm-2 item-info-3"><span class="fa-stack"><i class="fa fa-certificate fa-stack-2x text-orange"></i><i class="fa fa-stack-1x text-white"><b>%</b></i></span> ' + Math.floor((item.user_service_full_price - item.user_service_sale_price) / item.user_service_full_price * 100) + '%</div>';
 							html += '<div class="col-sm-3 item-info-4">';
-							html += '<button data-user-service="' + item.user_service_id + '" type="button" class="btn btn-sm btn-orange btn_location_booking pull-right"><i style="display:none;" class="waiting_booking_detail fa fa-refresh fa-spin"></i> <i class="fa fa-dollar text-white"></i> ' + item.user_service_sale_price + ' đ</button>';
+							html += '<button data-user-service="' + item.user_service_id + '" type="button" class="btn btn-sm btn-orange btn_location_booking pull-right"><i style="display:none;" class="waiting_booking_detail fa fa-refresh fa-spin"></i> <i class="fa fa-lg fa-dollar text-white"></i> <span style="font-weight: bold;" class="text-white">' + item.user_service_sale_price + ' đ</span></button>';
 							html += '</div>';
 							html += '</div>';
 						});
@@ -197,7 +221,7 @@ function loadLocationStarRating() {
 					var tail = rating_value - head;
 					tail = Math.round(tail * 100) / 100;
 					// console.log(value.star_review);
-					html_2 += '<div class="col-xs-6">';
+					html_2 += '<div class="col-xs-6" style="margin-bottom: 10px">';
 					html_2 += '<small class="pull-right">' + value.review_name + '</small></div>';
 					html_2 += '<div class="col-xs-6">';
 					html_2 += '<div class="rating pull-left">';
@@ -261,9 +285,9 @@ function loadServiceStarRating() {
 					tail = Math.round(tail * 100) / 100;
 					// console.log(value.star_review);
 					if (index > 4) {
-						html += '<div style="display: none;" class="col-xs-6 see_more_rating_service">';
+						html += '<div style="display: none;margin-bottom: 10px;" class="col-xs-6 see_more_rating_service">';
 					} else {
-						html += '<div class="col-xs-6">';
+						html += '<div class="col-xs-6"  style="margin-bottom: 10px">';
 					}
 					html += '<small style="cursor: help;" title="' + value.user_service_name + '" class="pull-right">' + shorten(value.user_service_name, 18) + '</small></div>';
 					if (index > 4) {
@@ -296,7 +320,7 @@ function loadServiceStarRating() {
 					html += '<div class="clearfix"></div>';
 				});
 				if (index > 4) {
-					html += '<div class="col-xs-12 text-center"><a onclick=showMore("see_more_rating_service","see_more_text") style="cursor: pointer;"><small><span class="see_more_text">Xem thêm</span> ' + (index - 4) + ' dịch vụ</small><a></div>';
+					html += '<div  style="margin-bottom: 8px" class="col-xs-12 text-center"><a onclick=showMore("see_more_rating_service","see_more_text") style="cursor: pointer;"><small><span class="see_more_text">Xem thêm</span> ' + (index - 4) + ' dịch vụ</small><a></div>';
 				}
 			}
 			// console.log(html);
