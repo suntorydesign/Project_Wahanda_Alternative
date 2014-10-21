@@ -26,7 +26,7 @@ $(document).ready(function() {
 		e.preventDefault();
 	};
 	// $("button").bind('click', eventhandler);
-	$('#client_email').focusout(function() {
+	$('#client_email').blur(function() {
 		var client_email = ($(this).val());
 		var e_mail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		var check = e_mail.test(client_email);
@@ -66,7 +66,7 @@ $(document).ready(function() {
 			$("#submit_reg").bind('click', eventhandler);
 		}
 	});
-	$('#client_username').focusout(function() {
+	$('#client_username').blur(function() {
 		var client_username = ($(this).val());
 		if ($('#client_username').val() !== '') {
 			$('#username_check').children('span').remove();

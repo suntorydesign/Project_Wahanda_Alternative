@@ -74,9 +74,9 @@ function loadUserDetail() {
 			});
 		},
 		complete : function() {
-			// setTimeout(function(){
-			$('#gear').removeClass('fa-spin');
-			//},1000);
+			setTimeout(function(){
+				$('#gear').removeClass('fa-spin');
+			},1000);
 		}
 	});
 }

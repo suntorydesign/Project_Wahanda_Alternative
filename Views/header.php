@@ -74,7 +74,7 @@
                         <?php }else{ ?>
                         	<div class="col-sm-12 remove-padding" style="margin-bottom: 10px;">
 								<div class="dropdown"> 
-                        			<a id="dropdown_profile" data-toggle="dropdown" class="btn btn-warning btn-block dropdown-toggle"> 
+                        			<a id="dropdown_profile" data-toggle="dropdown" class="btn btn-orange-black btn-block dropdown-toggle"> 
                         				Xin chào bạn: <i class="fa fa-user"></i> <?php echo $_SESSION['client_username']; ?> <span class="caret"></span>
                         			</a>
                         			<ul style="border-radius: 0px;" class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdown_profile">
@@ -145,27 +145,39 @@
 
                             <div class="navbar-form navbar-right">
                             	<i id="waiting_cart_detail" class="fa fa-refresh fa-spin" style="display: none;"></i>
-                                <button onclick="shoppingCartDetail()" type="submit" class="btn btn-sm btn-default btn-cart-shop">    
-                                    <i class="fa fa-shopping-cart"></i> 
-                                	<span>
-                                		GIỎ HÀNG 
+                                <button style="padding: 1px 4px;" onclick="shoppingCartDetail()" type="submit" class="btn btn-sm btn-default btn-cart-shop">    
+                                    <i class="fa fa-lg fa-shopping-cart text-orange"></i> 
+                                	<span style="font-size: 13px; width: 60px;" class="fa fa-stack">
+                                		<i class="fa-stack-2x"></i>
+                                		<span class="fa-stack-1x">GIỎ HÀNG</span>
                                 	</span>
-                                	<span id="booking_amount">
-                                		<?php Session::init(); 
-											$eVoucher_count = 0;
-											$booking_count = 0;
-											if(isset($_SESSION['booking_detail'])){
-												$booking_count = count($_SESSION['booking_detail']);
-											}
-											if(isset($_SESSION['eVoucher_detail'])){
-												$eVoucher_count = count($_SESSION['eVoucher_detail']);
-											}
-                                			echo $booking_count + $eVoucher_count;
-                                		?>
+                                	<span id="booking_amount" class="fa fa-stack">
+                                		<i class="fa fa-circle fa-stack-2x text-orange"></i>
+                                		<b class="fa-stack-1x text-white" style="font-size: 15px;">
+	                                		<?php Session::init(); 
+												$eVoucher_count = 0;
+												$booking_count = 0;
+												if(isset($_SESSION['booking_detail'])){
+													$booking_count = count($_SESSION['booking_detail']);
+												}
+												if(isset($_SESSION['eVoucher_detail'])){
+													$eVoucher_count = count($_SESSION['eVoucher_detail']);
+												}
+	                                			echo $booking_count + $eVoucher_count;
+	                                		?>
+                                		</b>
                                 	</span>
                                 </button>
-                                <button type="submit" class="btn btn-sm btn-default btn-languages">VI</button>
-                                <button type="submit" class="btn btn-sm btn-default btn-languages">EN</button>
+                                <span class="fa fa-lg fa-stack btn-languages">
+                                	<i class="fa fa-circle fa-stack-2x text-orange"></i>
+                                	<span style="font-size: 14px" class="fa-stack-1x">VN</span>
+                                </span>
+                                <span class="fa fa-lg fa-stack btn-languages">
+                                	<i class="fa fa-circle fa-stack-2x text-orange"></i>
+                                	<span style="font-size: 14px" class="fa-stack-1x">EN</span>
+                                </span>
+                                <!-- <button type="submit" class="btn btn-sm btn-default btn-languages">VI</button>
+                                <button type="submit" class="btn btn-sm btn-default btn-languages">EN</button> -->
                             </div>
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->

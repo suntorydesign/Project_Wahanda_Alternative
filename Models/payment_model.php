@@ -11,12 +11,12 @@ class payment_model extends Model {
 
 	public function processVenuePayment() {
 		/*
-		 * status = 0 incompleted
+		 * status = 0 venue payment
 		 * status = 1 completed
-		 * status = 2 venue payment
+		 * status = 2 online paid but not do the appointment
 		 */
 		Session::initIdle();
-		$status = 2;
+		$status = 0;
 		$client_id = $_SESSION['client_id'];
 		$total_money = 0;
 		foreach ($_SESSION['booking_detail'] as $key => $value) {
@@ -53,7 +53,9 @@ SQL;
 			$update = $this -> db -> prepare($sql);
 			$update -> execute();
 			if ($update -> rowCount() > 0) {
-				// insert booking detail code mai làm
+				// insert booking detail
+				$query = <<<SQL
+SQL;
 			} else {
 				echo 0;
 				exit;

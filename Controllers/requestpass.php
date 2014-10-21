@@ -10,8 +10,12 @@ class requestpass extends Controller {
 
 	public function index() {
 		Session::initIdle();
-		$this -> view -> script = array(URL . 'Views/requestpass/js/default.js');
-		$this -> view -> render('requestpass/index');
+		if (empty($_SESSION['client_id'])) {
+			$this -> view -> script = array(URL . 'Views/requestpass/js/default.js');
+			$this -> view -> render('requestpass/index');
+		}else{
+			header('Location:' . URL);
+		}
 	}
 
 	public function checkEmailExistPassRequest() {

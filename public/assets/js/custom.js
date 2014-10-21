@@ -1271,7 +1271,7 @@ function logout() {
 	$.ajax({
 		url : URL + 'clientlogin/clientLogout',
 		complete : function() {
-			$('#booking_amount').text('0');
+			$('#booking_amount b').text('0');
 			$('#login_group').children().remove();
 			$('#login_group').append('<div class="col-sm-5 remove-padding">' + '<button id="login_btn" class="btn btn-block login-btn" data-toggle="modal" data-target="#login_modal" type="button">Đăng nhập</button>' + '</div>' + '<div class="col-sm-2"></div>' + '<div class="col-sm-5 remove-padding">' + '<button class="btn btn-block login-face-btn" type="button">Login Face</button>' + '</div>');
 			// var http_path = window.location.href.replace('http:', '');
@@ -1336,7 +1336,7 @@ function getBookingInfo() {
 			},
 			success : function(response) {
 				//console.log(response);
-				$('#booking_amount').text(response);
+				$('#booking_amount b').text(response);
 			},
 			complete : function() {
 				$('#waiting_for_booking_save_b').fadeOut(function() {
@@ -1370,7 +1370,7 @@ function geteVoucherInfo() {
 			},
 			success : function(response) {
 				//console.log(response);
-				$('#booking_amount').text(response);
+				$('#booking_amount b').text(response);
 			},
 			complete : function() {
 				$('#waiting_for_booking_save_e').fadeOut(function() {
@@ -1495,7 +1495,7 @@ function saveQuantityNumber() {
 			},
 			success : function(response) {
 				//console.log(response);
-				$('#booking_amount').text(response);
+				$('#booking_amount b').text(response);
 			},
 			complete : function() {
 				$('#waiting_for_update_cart').fadeOut(function() {

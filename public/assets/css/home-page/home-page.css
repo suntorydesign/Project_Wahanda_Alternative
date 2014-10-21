@@ -183,9 +183,14 @@ img{
 	text-decoration: none;
 }
 
-.btn-languages, .btn-cart-shop {
-	border-radius: 15px !important;
+.btn-languages{
+	margin-left: 10px;
+	cursor: pointer
 }
+
+.btn-cart-shop{
+	border: 2px solid #ccc;
+} 
 
 #navigation .navbar-nav > li.active a {
 	background-color: #FDBD0E;
@@ -487,6 +492,7 @@ img{
 .btn-orange-black:active, .btn-orange-black.active, .open .dropdown-toggle.btn-orange-black {
 	background-image: none;
 }
+
 .btn-orange-black.disabled, .btn-orange-black[disabled], fieldset[disabled] .btn-orange-black, .btn-orange-black.disabled:hover, .btn-orange-black[disabled]:hover, fieldset[disabled] .btn-orange-black:hover, .btn-orange-black.disabled:focus, .btn-orange-black[disabled]:focus, fieldset[disabled] .btn-orange-black:focus, .btn-orange-black.disabled:active, .btn-orange-black[disabled]:active, fieldset[disabled] .btn-orange-black:active, .btn-orange-black.disabled.active, .btn-orange-black[disabled].active, fieldset[disabled] .btn-orange-black.active {
 	background-color: #FFDB4A;
 	border-color: #FFCC00;
@@ -655,12 +661,12 @@ p#user_description {
 	color: #FFFFFF;
 }
 #booking_amount{
-	border-radius: 50%;
+	/*border-radius: 50%;
 	background-color: #A60000;
 	font-weight: bold;
 	color: #FFFFFF;
 	padding: 1px 5px 1px 5px;
-	margin: 0 0 0 5px;
+	margin: 0 0 0 5px;*/
 }
 
 button.btn-close {
@@ -724,4 +730,14 @@ button.btn-close:hover, button.btn-close:focus, button.btn-close:active{
 
 #login_modal .modal-content {
 	border-radius: 0 !important;
+}
+
+.text-orange-black {
+	color: #373538;
+}
+.text-orange-black:hover, .text-orange-black:focus, .text-orange-black:active {
+	color: #FDBD0E !important;
+}
+.text-black{
+	color: #373538;
 }

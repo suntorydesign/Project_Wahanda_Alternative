@@ -1,3 +1,64 @@
+<div id="header-2" class="clearfix">
+	<!--
+	#################################
+		- THEMEPUNCH BANNER -
+	#################################
+	-->
+	<div class="tp-banner-container">
+		<div class="tp-banner" >
+			<ul>
+				<!-- SLIDE  -->
+				<li data-transition="fade" data-slotamount="7" data-masterspeed="1500" >
+					<!-- MAIN IMAGE -->
+					<img src="<?php echo ASSETS;?>img/slider-image-01.jpg"  alt="Spa Hồng Vân"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+					<!-- LAYERS -->
+					<!-- LAYER NR. 1 -->
+					<div class="tp-caption lightgrey_divider skewfromrightshort fadeout"
+						data-x="85"
+						data-y="224"
+						data-speed="500"
+						data-start="1200"
+						data-easing="Power4.easeOut">Spa Hồng Vân
+					</div>
+					Địa điểm 245 Trường Chinh, Tp.HCM
+
+				</li>
+				<!-- SLIDE  -->
+				<li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000" >
+					<!-- MAIN IMAGE -->
+					<img src="<?php echo ASSETS;?>img/slider-image-02.jpg"  alt="Spa Ngọc Trinh"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+					<!-- LAYERS -->
+					<!-- LAYER NR. 1 -->
+					<div class="tp-caption lightgrey_divider skewfromrightshort fadeout"
+						data-x="85"
+						data-y="224"
+						data-speed="500"
+						data-start="1200"
+						data-easing="Power4.easeOut">My Caption
+					</div>
+					...
+				</li>
+				<!-- SLIDE  -->
+				<li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000" >
+					<!-- MAIN IMAGE -->
+					<img src="<?php echo ASSETS;?>img/slider-image-03.png"  alt="Người mẫu"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+					<!-- LAYERS -->
+					<!-- LAYER NR. 1 -->
+					<div class="tp-caption lightgrey_divider skewfromrightshort fadeout"
+						data-x="85"
+						data-y="224"
+						data-speed="500"
+						data-start="1200"
+						data-easing="Power4.easeOut">My Caption
+					</div>
+					...
+				</li>
+				....
+			</ul>
+		</div>
+	</div>
+</div>
+
 <div id="site_container" class="container">
 	<div class="row">
 		<?php
@@ -23,7 +84,8 @@
 	</div>
 	<div class="row well">
 		<div class="col-sm-offset-1 col-sm-8" id="content">
-			<h4 class="page-header"><strong>Yêu cầu mật khẩu</strong></h4>
+			<h3>- YÊU CẦU MẬT KHẨU -</h3>
+			<div class="divider"></div>
 			<form class="form-horizontal" id="password_request_form" name="password_request_form" action="<?php echo URL; ?>requestpass/sendRequestPassword" method="post">
 				<div class="form-group">
 					<p class="col-sm-12">
@@ -33,7 +95,7 @@
 					</p>
 				</div>
 				<div class="form-group">
-					<p class="col-sm-12" id="email_check">E-mail của bạn</p>
+					<p class="col-sm-12" id="email_check" style="font-weight: bold;">E-mail của bạn</p>
 					<div class="col-sm-6">
 						<input class="form-control required email" type="text" name="email_address" id="email_address">
 					</div>
@@ -41,18 +103,18 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-12">
-						<button class="btn btn-danger pull-right" id="re_submit" type="submit">
+						<button class="btn btn-orange-black pull-right" id="re_submit" type="submit">
 							<span>Gửi yêu cầu đổi mật khẩu</span>
 						</button>
 					</div>
 				</div>
 			</form>
-			<p id="login_message_authentication_error" class="error" style="display:none">
+			<!-- <p id="login_message_authentication_error" class="error" style="display:none">
 				Sorry, we couldn't log you in.
 			</p>
 			<p id="login_message_external_authentication_required" class="error" style="display:none">
 				Sorry. This account is accessed using facebook connect
-			</p>
+			</p> -->
 		</div>
 	</div>
 </div>
