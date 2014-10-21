@@ -65,7 +65,7 @@ img{
 }
 
 .divider {
-	border-bottom: 1px solid #ffc212;
+	border-bottom: 2px solid #ccc;
 	width: 100%;
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -88,6 +88,7 @@ img{
 #top-header-center .logo {
 	margin: 0 auto;
 	max-width: 430px;
+	margin-bottom: 10px;
 }
 
 .logo-text {
@@ -139,7 +140,7 @@ img{
 
 #navigation .navbar-nav > li div.dropdown-menu {
 	padding: 20px;
-	width: 500px;
+	width: 540px;
 	top: 110%;
 }
 
@@ -150,18 +151,25 @@ img{
 	color: #FDBD0E;
 }
 
-#navigation .navbar-nav > li div.dropdown-menu-background {
-	background: #fff url('http://media6.tiin.vn/media01/4f7a58b257985/2014/03/30/339045df-ac6f-4368-9c6c-90da8b049d1d.jpg') right bottom no-repeat;
+#navigation .navbar-nav > li div.dropdown-menu-hair-background {
+	background: #fff url('megamenu-hair.png') right bottom no-repeat;
 }
 
 #navigation .navbar-nav > li div.dropdown-menu ul {
 	padding-left: 10px;
 	padding-right: 10px;
+	width: 169px;
 }
 
 #navigation .navbar-nav > li div.dropdown-menu ul a {
 	padding-left: 15px;
 	padding-right: 15px;
+	color: #000000;
+	font-size: 14px;
+}
+
+#navigation .navbar-nav > li div.dropdown-menu ul .divider {
+	border-bottom: 1px solid #ffc212 !important;
 }
 
 #navigation .navbar-nav > li div.dropdown-menu ul li.group-name span {

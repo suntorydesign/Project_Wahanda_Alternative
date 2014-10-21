@@ -52,9 +52,9 @@
                     <button class="btn create-location-btn" type="button"><i class="fa fa-plus"></i> Tạo địa điểm</button>
                 </div>
                 <div id="top-header-center" class="col-md-6">
-                    <div class="logo">
-                        <h1 class="logo-text text-center"><a href="<?php echo URL; ?>">COMPANY NAME</a></h1>
-                        <!-- <img class="logo-image" src=""/> -->
+                    <div class="logo" align="center">
+                        <!-- <h1 class="logo-text text-center"><a href="<?php echo URL; ?>">COMPANY NAME</a></h1> -->
+                        <img class="image-responsive logo-image" src="<?php echo ASSETS?>img/Beleza_logo_Final.png" />
                     </div>
                 </div>         
                 <div id="top-header-right" class="col-md-3">
@@ -116,27 +116,33 @@
                                 <li><a href="#">&#149; BODY</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">&#149; TÓC <span class="caret"></span></a>
-                                    <div class="dropdown-menu clearfix dropdown-menu-background" role="menu">
+                                    <div class="dropdown-menu clearfix dropdown-menu-hair-background" role="menu">
                                         <span class="caret"></span>
                                         <ul class="list-unstyled pull-left">
-                                            <li class="group-name"><i class="fa fa-user"></i> <span>GOI</span></li>
-                                            <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
+                                            <li class="group-name"><i class="fa fa-user"></i> <span>GỘI</span></li>
+                                            <li><a href="#">Gội sấy</a></li>
+                                            <li><a href="#">Gội sấy tạo kiểu</a></li>
                                             <li class="divider"></li>
 
-                                            <li class="group-name"><i class="fa fa-user"></i> <span>SAY</span></li>
-                                            <li><a href="#">Separated link</a></li>
+                                            <li class="group-name"><i class="fa fa-user"></i> <span>SẤY</span></li>
+                                            <li><a href="#">One more</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="#">One more separated link</a></li>
+
+                                            <li class="group-name"><i class="fa fa-user"></i> <span>GỘI</span></li>
+                                            <li><a href="#">One more</a></li>
                                         </ul>
                                         <ul class="list-unstyled pull-left" tyle="padding-left: 10px; padding-right:10px">
+                                            <li class="group-name"><i class="fa fa-user"></i> <span>GỘI</span></li>
                                             <li><a href="#">Action</a></li>
                                             <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="#">Separated link</a></li>
+
+                                            <li class="group-name"><i class="fa fa-user"></i> <span>GỘI</span></li>
+                                            <li><a href="#">One more</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="#">One more separated link</a></li>
+                                            
+                                            <li class="group-name"><i class="fa fa-user"></i> <span>GỘI</span></li>
+                                            <li><a href="#">One more</a></li>
                                         </ul>
                                     </div>
                                     
