@@ -54,7 +54,9 @@
                 <div id="top-header-center" class="col-md-6">
                     <div class="logo" align="center">
                         <!-- <h1 class="logo-text text-center"><a href="<?php echo URL; ?>">COMPANY NAME</a></h1> -->
-                        <img class="image-responsive logo-image" src="<?php echo ASSETS?>img/Beleza_logo_Final.png" />
+                        <a href="<?php echo URL; ?>">
+                            <img class="image-responsive logo-image" src="<?php echo ASSETS?>img/Beleza_logo_Final.png" />
+                        </a>
                     </div>
                 </div>         
                 <div id="top-header-right" class="col-md-3">
