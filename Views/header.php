@@ -68,7 +68,10 @@
 	                        </div>
 	                        <div class="col-sm-2"></div>
 	                        <div class="col-sm-5 remove-padding">
-	                            <button class="btn btn-block login-face-btn" type="button" onclick="loginFB()">Login Face</button>
+	                            <button class="btn btn-block login-face-btn" type="button" onclick="loginFB()">
+                                    <i class="fa fa-facebook"></i> | 
+                                    Login Face
+                                </button>
                                 <!-- <img class='login-face-btn' src="<?php echo ASSETS; ?>img/fbloginbtn.png" onclick="loginFB()"/> -->
 	                        </div>
                         <?php }else{ ?>
@@ -146,14 +149,16 @@
                             <div class="navbar-form navbar-right">
                             	<i id="waiting_cart_detail" class="fa fa-refresh fa-spin" style="display: none;"></i>
                                 <button style="padding: 1px 4px;" onclick="shoppingCartDetail()" type="submit" class="btn btn-sm btn-default btn-cart-shop">    
-                                    <i class="fa fa-lg fa-shopping-cart text-orange"></i> 
+                                    <!-- <i class="fa fa-lg fa-shopping-cart text-orange"></i> -->
+                                    <img class="image-reponsive" src="<?php echo ASSETS?>img/cart-shop.png" /> 
                                 	<span style="font-size: 13px; width: 60px;" class="fa fa-stack">
                                 		<i class="fa-stack-2x"></i>
-                                		<span class="fa-stack-1x">GIỎ HÀNG</span>
+                                		<span class="fa-stack-1x">GIỎ HÀNG </span>
                                 	</span>
+
                                 	<span id="booking_amount" class="fa fa-stack">
                                 		<i class="fa fa-circle fa-stack-2x text-orange"></i>
-                                		<b class="fa-stack-1x text-white" style="font-size: 15px;">
+                                		<b class="fa-stack-1x text-white" style="font-size: 11px;">
 	                                		<?php Session::init(); 
 												$eVoucher_count = 0;
 												$booking_count = 0;
@@ -168,14 +173,9 @@
                                 		</b>
                                 	</span>
                                 </button>
-                                <span class="fa fa-lg fa-stack btn-languages">
-                                	<i class="fa fa-circle fa-stack-2x text-orange"></i>
-                                	<span style="font-size: 14px" class="fa-stack-1x">VN</span>
-                                </span>
-                                <span class="fa fa-lg fa-stack btn-languages">
-                                	<i class="fa fa-circle fa-stack-2x text-orange"></i>
-                                	<span style="font-size: 14px" class="fa-stack-1x">EN</span>
-                                </span>
+                                <img class="image-reponsive btn-languages" src="<?php echo ASSETS?>img/flag-vi.png" /> 
+                                <img class="image-reponsive btn-languages " src="<?php echo ASSETS?>img/flag-en.png" /> 
+                                
                                 <!-- <button type="submit" class="btn btn-sm btn-default btn-languages">VI</button>
                                 <button type="submit" class="btn btn-sm btn-default btn-languages">EN</button> -->
                             </div>

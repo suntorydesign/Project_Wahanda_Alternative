@@ -65,7 +65,7 @@ img{
 }
 
 .divider {
-	border-bottom: 2px solid #E7E7E7;
+	border-bottom: 1px solid #ffc212;
 	width: 100%;
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -114,7 +114,8 @@ img{
 }
 
 #top-header-right .login-face-btn{
-	/*background-color: blue;*/
+	background-color: #6d85b4;
+	color: #fff;
 }
 
 /*#top-header-right .login-face-btn:hover{
@@ -667,6 +668,7 @@ p#user_description {
 	color: #FFFFFF;
 	padding: 1px 5px 1px 5px;
 	margin: 0 0 0 5px;*/
+	font-size: 10px;
 }
 
 button.btn-close {
