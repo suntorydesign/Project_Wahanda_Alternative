@@ -1435,7 +1435,11 @@ function shoppingCartDetail() {
 					html += '<td width="30%">' + item.user_service_name.toUpperCase() + ' - <b>' + item.user_business_name + '</b></td>';
 					html += '<td width="20%">' + formatDate(item.booking_detail_date) + ' - ' + item.booking_detail_time + setAMPM + '</td>';
 					html += '<td width="19%">' + item.choosen_price + ' VNĐ</td>';
-					html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control appointment_quantity" value="' + item.booking_quantity + '"/></td>';
+					if(IS_PAYMENT_PAGE == '1'){
+						html += '<td class="" width="12%">' + item.booking_quantity + '</td>';
+					}else{
+						html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control appointment_quantity" value="' + item.booking_quantity + '"/></td>';
+					}
 					html += '<td width="19%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
 					html += '</tr>';
 					total_money = total_money + parseInt(item.choosen_price) * parseInt(item.booking_quantity);
@@ -1443,9 +1447,13 @@ function shoppingCartDetail() {
 				$.each(response.eVoucher, function(index, item) {
 					html += '<tr>';
 					html += '<td width="30%">' + item.user_service_name.toUpperCase() + ' - <b>' + item.user_business_name + '</b></td>';
-					html += '<td width="20%"><i class="text-success">e-Voucher</i> - Ngày hết hạn : ' + formatDate(item.eVoucher_due_date) + '</td>';
+					html += '<td width="20%"><i class="text-success"><b>e-Voucher</b></i> - Ngày hết hạn : ' + formatDate(item.eVoucher_due_date) + '</td>';
 					html += '<td width="19%">' + item.choosen_price + ' VNĐ</td>';
-					html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control eVoucher_quantity" value="' + item.booking_quantity + '"/></td>';
+					if(IS_PAYMENT_PAGE == '1'){
+						html += '<td class="" width="12%">' + item.booking_quantity + '</td>';
+					}else{
+						html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control eVoucher_quantity" value="' + item.booking_quantity + '"/></td>';
+					}
 					html += '<td width="19%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
 					html += '</tr>';
 					total_money = total_money + parseInt(item.choosen_price) * parseInt(item.booking_quantity);
