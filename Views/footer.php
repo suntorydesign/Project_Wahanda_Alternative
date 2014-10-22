@@ -541,7 +541,7 @@
 		        </form>
 		      </div>
 		      <div class="modal-footer" id="footer_login" style="padding: 15px 20px 15px;">
-		        <button type="button" id="check_login_btn" onclick="login()" class="btn btn-sm btn-warning">Đăng Nhập</button>
+		        <button type="button" id="check_login_btn" onclick="login()" class="btn btn-sm btn-orange-black">Đăng Nhập</button>
 		      	<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Hủy</button>
 		      </div>
 		    </div>
@@ -589,7 +589,7 @@
 			      		<div class="row">
 				      		<div class="col-md-12">
 				      			<h4 class="pull-right"><strong>Thành Tiền</strong> : 
-				      				<span id="total_cart" class="text-success">900000</span> <span class="text-success">VNĐ</span>
+				      				<b><span id="total_cart" class="text-success">900000</span> <span class="text-success">VNĐ</span></b>
 				      			</h4>
 				      		</div>
 			      		</div>
@@ -614,7 +614,9 @@
                     </div>
 
                     <div id="footer-2" class="col-md-6">
-                        <img width="40%" class="img-responsive" src="<?php echo ASSETS; ?>img/Beleza_logo_Final.png" />
+                        <a href="<?php echo URL; ?>">
+                        	<img width="35%" class="img-responsive" src="<?php echo ASSETS; ?>img/Beleza_logo_Final.png" />
+                   		</a>
                     </div>
 
                     <div id="footer-3" class="col-md-2">
@@ -750,6 +752,13 @@
 		var MAX_PAGINATION_ITEM = "<?php echo MAX_PAGINATION_ITEM; ?>";
 		var IDLE_TIME = "<?php echo IDLE_TIME; ?>";
 		var IDLE_CHECK = "<?php echo IDLE_CHECK; ?>";
+		var IS_PAYMENT_PAGE = '<?php 
+							      if(isset($this -> is_payment_page)){
+								      echo $this -> is_payment_page; 
+								  }else{
+								  	  echo ''; 
+								  }
+							  ?>'
 		$(document).ready(function(){
 			checkSessionIdle();
 		});
@@ -762,6 +771,9 @@
                 echo '<script type="text/javascript" src="'. $script .'" ></script>';
             }
         }
+		if(isset($this -> is_payment_page)){
+			
+		}
     ?>
 
     <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->

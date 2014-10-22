@@ -10,11 +10,20 @@ class payment extends Controller {
 	function index() {
 		Session::initIdle();
 		Auth::handleClientLogin();
+		if (!isset($_SESSION['booking_detail']) && !isset($_SESSION['eVoucher_detail'])) {
+			header('Location:' . URL);
+		}
 		$this -> view -> style = array(URL . 'Views/payment/css/payment.css');
 		$this -> view -> script = array(URL . 'Views/payment/js/payment.js');
+		$this -> view -> is_payment_page = 1;
 		$this -> view -> render('payment/index');
 	}
-
+	
+	public function processPaypalPayment()
+	{
+		
+	}
+	
 	function processVenuePayment() {
 		Session::initIdle();
 		if (isset($_SESSION['client_id'])) {

@@ -154,7 +154,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12">
-									<button onclick="processPayment()" class="btn btn-orange-black pull-right">
+									<button onclick="processPaypalPayment()" class="btn btn-orange-black pull-right">
 										Thanh toán
 									</button>
 								</div>
@@ -274,3 +274,6 @@
 		<!--End payer detail-->
 	</div>
 </div>
+<!-- <script>
+	var IS_PAYMENT_PAGE = '<?php echo $this -> is_payment_page; ?>'
+</script> -->
