@@ -156,10 +156,10 @@
 
                             <div class="navbar-form navbar-right">
                             	<i id="waiting_cart_detail" class="fa fa-refresh fa-spin" style="display: none;"></i>
-                                <button style="padding: 1px 4px;" onclick="shoppingCartDetail()" type="submit" class="btn btn-sm btn-default btn-cart-shop">    
+                                <button style="padding: 0 4px;" onclick="shoppingCartDetail()" type="submit" class="btn btn-sm btn-default btn-cart-shop">    
                                     <!-- <i class="fa fa-lg fa-shopping-cart text-orange"></i> -->
-                                    <img class="image-reponsive" src="<?php echo ASSETS?>img/cart-shop.png" /> 
-                                	<span style="font-size: 13px; width: 60px;" class="fa fa-stack">
+                                    <img height="16" class="image-reponsive" src="<?php echo ASSETS?>img/cart-shop.png" /> 
+                                	<span style="font-size: 13px; width: 62px;" class="fa fa-stack">
                                 		<i class="fa-stack-2x"></i>
                                 		<span class="fa-stack-1x">GIỎ HÀNG </span>
                                 	</span>
