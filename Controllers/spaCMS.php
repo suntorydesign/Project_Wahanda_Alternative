@@ -218,6 +218,9 @@
 					$this->model->get_country();
 					break;
 
+				case 'xhrGet_district':
+					$this->model->get_district();
+
 				case 'xhrGet_type_business':
 					$this->model->get_type_business();
 					break;

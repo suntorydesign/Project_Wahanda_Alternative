@@ -96,9 +96,9 @@
 													</td>
 												</tr>
 												<tr class="form-row">
-													<td class="label-part"><label for="venue-details-addressCountryCode">Quốc gia</label></td>
+													<td class="label-part"><label for="user_district_id">Quận</label></td>
 													<td class="input-part">
-													<select id="user_country_id" name="user_country_id" class="required">
+													<select id="user_district_id" name="user_district_id" class="required">
 														<option value="">Chưa chọn</option>
 													</select></td>
 												</tr>

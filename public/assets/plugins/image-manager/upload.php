@@ -117,7 +117,7 @@ if(isset($_POST['user_id'])){
     $user_id = $_POST['user_id'];
 
     // file_name = name + extension
-    $file_name = $_FILES["file"]["name"];
+    $file_name = str_replace(" ", "", $_FILES["file"]["name"]);
     $name      = getName($file_name); // name
     $extension = getExtension($file_name); // extension
 

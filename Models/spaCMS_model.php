@@ -126,6 +126,10 @@ class SpaCMS_Model extends Model {
 		SpaCMS_Settings_Model::get_country();
 	}
 
+	function get_district() {
+		SpaCMS_Settings_Model::get_district();
+	}
+
 	function get_user_detail() {
 		SpaCMS_Settings_Model::get_user_detail();
 	}

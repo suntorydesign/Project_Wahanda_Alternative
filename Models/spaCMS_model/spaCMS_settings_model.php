@@ -13,6 +13,12 @@ class SpaCMS_Settings_Model {
 		echo json_encode($result);
 	}
 
+	function get_district() {
+		$query = "SELECT * FROM district";	
+		$result = $this->db->select($query);
+		echo json_encode($result);
+	}
+
 	function get_user_detail() {
 		$user_id = Session::get('user_id');
 		$query = "SELECT * FROM user WHERE user_id = $user_id";
@@ -34,6 +40,10 @@ class SpaCMS_Settings_Model {
 			$data["$key"] = $value;
 		}
 		$sth = $this->db->update('user', $data, "user_id = $user_id");
+
+		echo '<pre/>';
+		print_r($data);
+		exit();
 
 		if($sth){
 			echo json_encode(array(

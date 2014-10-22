@@ -103,10 +103,25 @@ var GetMoreInfo = function () {
         }, 'json');
     }
 
+    var xhrGet_district = function() {
+        var url = URL + 'spaCMS/settings/xhrGet_district';
+        var options_district = '';
+        $.get(url, function(data){
+            $.each(data, function(index, value){
+                console.log(value['district_name']);
+                options_district = '<option value="' + value['district_id'] + '">' + value['district_name'] + '</option>';
+                $('#user_district_id').html(options_district);
+            });
+            //
+            
+        }, 'json');
+    }
+
     return {
         init: function() {
             xhrGet_type_business();
-            xhrGet_country();
+            // xhrGet_country();
+            xhrGet_district();
         }
     }
 }();
