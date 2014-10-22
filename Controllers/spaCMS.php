@@ -220,6 +220,7 @@
 
 				case 'xhrGet_district':
 					$this->model->get_district();
+					break;
 
 				case 'xhrGet_type_business':
 					$this->model->get_type_business();

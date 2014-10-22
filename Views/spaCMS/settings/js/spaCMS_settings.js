@@ -108,12 +108,10 @@ var GetMoreInfo = function () {
         var options_district = '';
         $.get(url, function(data){
             $.each(data, function(index, value){
-                console.log(value['district_name']);
-                options_district = '<option value="' + value['district_id'] + '">' + value['district_name'] + '</option>';
-                $('#user_district_id').html(options_district);
+                options_district += '<option value="' + value['district_id'] + '">' + value['district_name'] + '</option>';
             });
             //
-            
+            $('#user_district_id').append(options_district);
         }, 'json');
     }
 
@@ -146,7 +144,8 @@ var UserDetail = function (){
             $('input[name=user_googleplus]').val(data[0]['user_googleplus']);
             $('input[name=user_email]').val(data[0]['user_email']);
             $('textarea[name=user_description]').val(data[0]['user_description']);
-            $('select[name=user_country_id]').val(data[0]['user_country_id']);
+            // $('select[name=user_country_id]').val(data[0]['user_country_id']);
+            $('select[name=user_district_id]').val(data[0]['user_district_id']);
             $('select[name=user_type_business_id]').val(data[0]['user_type_business_id']);
         }, 'json');
     }
@@ -380,15 +379,17 @@ var UserFinance = function (){
     var xhrGet_user_company = function () {
         var url = URL + 'spaCMS/settings/xhrGet_user_company';
         $.get(url, function(data){
-            $('input[name=user_company_name]').val(data[0]['user_company_name']);
-            $('input[name=user_company_delegate]').val(data[0]['user_company_delegate']);
-            $('textarea[name=user_company_address]').val(data[0]['user_company_address']);
-            $('input[name=user_company_tax_code]').val(data[0]['user_company_tax_code']);
-            $('select[name=user_company_country_id]').val(data[0]['user_company_country_id']);
-            $('input[name=user_contact_name]').val(data[0]['user_contact_name']);
-            $('input[name=user_contact_email]').val(data[0]['user_contact_email']);
-            $('input[name=user_contact_phone]').val(data[0]['user_contact_phone']);
-            $('input[name=user_contact_role]').val(data[0]['user_contact_role']);
+            if(data.length > 0) {
+                $('input[name=user_company_name]').val(data[0]['user_company_name']);
+                $('input[name=user_company_delegate]').val(data[0]['user_company_delegate']);
+                $('textarea[name=user_company_address]').val(data[0]['user_company_address']);
+                $('input[name=user_company_tax_code]').val(data[0]['user_company_tax_code']);
+                $('select[name=user_company_country_id]').val(data[0]['user_company_country_id']);
+                $('input[name=user_contact_name]').val(data[0]['user_contact_name']);
+                $('input[name=user_contact_email]').val(data[0]['user_contact_email']);
+                $('input[name=user_contact_phone]').val(data[0]['user_contact_phone']);
+                $('input[name=user_contact_role]').val(data[0]['user_contact_role']);
+            }
         }, 'json');
     }
 

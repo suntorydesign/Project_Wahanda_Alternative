@@ -563,7 +563,7 @@
 											<td class="label-part"><label for="user_company_name">Tên công ty</label></td>
 											<td class="input-part">
 											<div class="txt-input">
-												<input type="text" id="user_company_name" name="user_company_name" class="required">
+												<input type="text" id="user_company_name" name="user_company_name" >
 											</div></td>
 										</tr>
 										<tr class="form-row">

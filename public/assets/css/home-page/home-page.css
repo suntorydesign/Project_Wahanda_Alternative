@@ -42,7 +42,7 @@ img{
 }
 
 .separate {
-	width: 76%;
+	width: 86%;
 	margin: 15px auto;
 	border-bottom: 1px solid #CCC;
 	clear: both;
@@ -91,6 +91,15 @@ img{
 	margin-bottom: 10px;
 }
 
+.login-btn:hover, .create-location-btn:hover {
+	color: #fff;
+	background-color: #373538;
+}
+
+.login-face-btn:hover {
+	background-color: #1547A6;
+}
+
 .logo-text {
 	font-size: 40px;
 	color: #A1A1A1;
@@ -125,6 +134,7 @@ img{
 
 #navigation {
 	margin-bottom: 10px;
+	box-shadow: 0 1px 0 #d6d5d4; 
 }
 
 #navigation nav {
@@ -269,7 +279,8 @@ img{
 #service-list .item:hover, #service-new .item:hover {
 	cursor: pointer;
 	background-color: #fcfcfc;
-	box-shadow: 1px 1px 1px #888888;
+	box-shadow: 0px 1px 5px #BEBEBE;
+	/*box-shadow: 1px 1px 1px #888888;*/
 }
 
 #service-list .title, #service-new .title, #location-new .title {
@@ -383,7 +394,8 @@ img{
 #service-new .item .sale-percent {
 	font-size: 12px !important;
 	text-align: right;
-	color: #594AFF;
+	border-left: 1px solid #CCC;
+	/*color: #594AFF;*/
 }
 
 #service-new .service-similar:hover {
@@ -402,7 +414,7 @@ img{
 }
 
 #location-new .info .info-content {
-	background-color: rgba(192, 192, 192, 0.8);
+	background-color: rgba(192, 192, 192, 0.5);
 	padding: 10px;
 }
 
@@ -427,6 +439,10 @@ img{
 	color: #ffffff;
 }
 
+#location-new .info a.readmore:hover {
+	color: #FFCC00;
+}
+
 #footer {
 
 }
@@ -442,6 +458,10 @@ img{
 	box-shadow: 0px -1px 15px #9F9F9F;
 	padding-top: 20px;
 	padding-bottom: 20px;
+}
+
+#footer-last ul li {
+	font-size: 18px;
 }
 
 /*EDIT BOOTSTRAP*/

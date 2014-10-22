@@ -113,7 +113,7 @@
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav navbar-left">
+                            <ul class="nav navbar-nav navbar-left" style="font-weight: 600;">
                                 <li class="first "><a href="#">&#149; FACE</a></li>
                                 <li><a href="#">&#149; BODY</a></li>
                                 <li class="dropdown">

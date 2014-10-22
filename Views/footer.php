@@ -635,6 +635,7 @@
             </div>
             
             <div id="footer-last">
+            	<img class="image-responsive" src="<?php echo ASSETS?>img/arrow-top.png" style="position: relative;top: -39px;left: 49%;"/>
                 <div class="container" align="center">
                     <ul class="list-inline">
                         <li class="pointer">

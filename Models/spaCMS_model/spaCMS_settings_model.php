@@ -41,10 +41,6 @@ class SpaCMS_Settings_Model {
 		}
 		$sth = $this->db->update('user', $data, "user_id = $user_id");
 
-		echo '<pre/>';
-		print_r($data);
-		exit();
-
 		if($sth){
 			echo json_encode(array(
 				'success' 	=> true,
