@@ -615,7 +615,7 @@
 
                     <div id="footer-2" class="col-md-6">
                         <a href="<?php echo URL; ?>">
-                        	<img width="35%" class="img-responsive" src="<?php echo ASSETS; ?>img/Beleza_logo_Final.png" />
+                        	<img src="<?php echo ASSETS; ?>img/Beleza_logo_Final.png" />
                    		</a>
                     </div>
 

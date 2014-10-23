@@ -8,11 +8,18 @@ class payment_model extends Model {
 	function __construct() {
 		parent::__construct();
 	}
-	
+
 	public function processPaypalPayment() {
-		
+		/*
+		 * status = 0 venue payment
+		 * status = 1 completed
+		 * status = 2 online paid but not do the appointment
+		 */
+		Session::initIdle();
+		$status = 2;
+		$client_id = $_SESSION['client_id'];
 	}
-	
+
 	public function processVenuePayment() {
 		/*
 		 * status = 0 venue payment

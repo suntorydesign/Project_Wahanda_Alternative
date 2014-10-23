@@ -104,9 +104,9 @@
 									<i class="fa fa-2x fa-paypal"></i><b>CHUYỂN KHOẢN ĐẾN PAYPAL</b>
 								</div>
 								<div class="col-lg-6 text-right">
-									<i class="fa fa-3x fa-cc-mastercard"></i>
-									<i class="fa fa-3x fa-cc-visa"></i>
-									<i class="fa fa-3x fa-cc-discover"></i>
+									<i id="mastercard" class="fa fa-3x fa-cc-mastercard pointer text-orange-black"></i>
+									<i id="visa" class="fa fa-3x fa-cc-visa pointer text-orange-black"></i>
+									<i id="discover" class="fa fa-3x fa-cc-discover pointer text-orange-black"></i>
 								</div>
 							</div>
 							<br />
@@ -154,8 +154,8 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12">
-									<button onclick="processPaypalPayment()" class="btn btn-orange-black pull-right">
-										Thanh toán
+									<button id="btn_online_process_payment" onclick="processPaypalPayment()" class="btn btn-orange-black pull-right">
+										<i id="waiting_for_online_payment" class="fa fa-refresh fa-spin" style="display: none;"></i> Thanh toán
 									</button>
 								</div>
 							</div>

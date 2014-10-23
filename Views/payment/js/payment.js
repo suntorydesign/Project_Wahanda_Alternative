@@ -1,8 +1,34 @@
 $(document).ready(function() {
 	loadPaymentDetail();
+	$('#mastercard, #visa, #discover').on('click', function(){
+		$(this).siblings().removeClass('payment_type_choosen');
+		$(this).addClass('payment_type_choosen');
+	});
 });
+/*PROCESSING ONLINE PAYMENT*/
+function processPaypalPayment() {
+	$('#btn_online_process_payment').attr('disabled', true);
+	$('#waiting_for_online_payment').fadeIn(function() {
+		$.ajax({
+			url : URL + 'payment/processPaypalPayment',
+			type : 'post',
+			success : function(response) {
+				
+			},
+			complete : function() {
+				$('#waiting_for_online_payment').fadeOut(function(){
+					alert('Cám ơn bạn đã thanh toán thành công');
+					jumpToOtherPage(URL);
+				});
+			}
+		});
+	});
+}
 
-/*CHECK LOGIN PROCESSING PAYMENT*/
+/*END PROCESSING ONLINE PAYMENT*/
+/*----------------------------------*/
+
+/*PROCESSING VENUE PAYMENT*/
 function processVenuePayment() {
 	$('#btn_venue_process_payment').attr('disabled', true);
 	$('#waiting_for_venue_payment').fadeIn(function() {
@@ -22,7 +48,7 @@ function processVenuePayment() {
 	});
 }
 
-/*END CHECK LOGIN PROCESSING PAYMENT*/
+/*END PROCESSING VENUE PAYMENT*/
 /*----------------------------------*/
 
 /*LOAD PAYMENT DETAIL*/
@@ -88,6 +114,7 @@ function loadPaymentDetail() {
 
 /*JUMP TO PAYMENT TAB*/
 function jumbToPaymentTab(tab) {
+	checkSessionIdle();
 	$('#' + tab).siblings().hide();
 	$('#' + tab).fadeIn();
 	$('#btn_' + tab).addClass('btn-choose').removeClass('btn-orange');

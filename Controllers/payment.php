@@ -18,12 +18,16 @@ class payment extends Controller {
 		$this -> view -> is_payment_page = 1;
 		$this -> view -> render('payment/index');
 	}
-	
-	public function processPaypalPayment()
-	{
-		
+
+	public function processPaypalPayment() {
+		Session::initIdle();
+		if (isset($_SESSION['client_id'])) {
+			$this -> model -> processPaypalPayment();
+		} else {
+			echo 0;
+		}
 	}
-	
+
 	function processVenuePayment() {
 		Session::initIdle();
 		if (isset($_SESSION['client_id'])) {
