@@ -9,7 +9,7 @@ class payment_model extends Model {
 		parent::__construct();
 	}
 
-	public function processPaypalPayment() {
+	public function processPaypalPayment($data) {
 		/*
 		 * status = 0 venue payment
 		 * status = 1 completed
@@ -18,6 +18,68 @@ class payment_model extends Model {
 		Session::initIdle();
 		$status = 2;
 		$client_id = $_SESSION['client_id'];
+		$payment_type = $data['payment_type'];
+		$card_number = $data['card_number'];
+		$secure_code = $data['secure_code'];
+		$date_expire = $data['date_expire'];
+		$first_name = $data['first_name'];
+		$last_name = $data['last_name'];
+		$total_money = 0;
+		if (isset($_SESSION['booking_detail'])) {
+			foreach ($_SESSION['booking_detail'] as $key => $value) {
+				$total_money += $value['choosen_price'] * $value['booking_quantity'];
+			}
+		}
+		if (isset($_SESSION['eVoucher_detail'])) {
+			foreach ($_SESSION['eVoucher_detail'] as $key => $value) {
+				$total_money += $value['choosen_price'] * $value['booking_quantity'];
+			}
+		}
+		//transfer to dollar
+		$total_money = round($total_money/21000);
+		$request_params = array('METHOD' => 'DoDirectPayment', 
+								'USER' => API_USERNAME, 
+								'PWD' => API_PASSWORD, 
+								'SIGNATURE' => API_SIGNATURE, 
+								'VERSION' => API_VERSION, 
+								'PAYMENTACTION' => 'Sale', 
+								'IPADDRESS' => $_SERVER['REMOTE_ADDR'], 
+								'CREDITCARDTYPE' => $payment_type, 
+								'ACCT' => $card_number, 
+								'EXPDATE' => $date_expire, 
+								'CVV2' => $secure_code, 
+								'FIRSTNAME' => $first_name, 
+								'LASTNAME' => $last_name, 
+								'STREET' => '', 
+								'CITY' => '', 
+								'STATE' => '', 
+								'COUNTRYCODE' => COUNTRYCODE, 
+								'ZIP' => '70000', 
+								'AMT' => $total_money, 
+								'CURRENCYCODE' => CURRENCYCODE, 
+								'DESC' => 'Chuyển tiền thanh toán Beleza'
+								);
+		// Loop through $request_params array to generate the NVP string.
+		$nvp_string = '';
+		foreach ($request_params as $var => $val) {
+			$nvp_string .= '&' . $var . '=' . urlencode($val);
+		}
+		// Send NVP string to PayPal and store response
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_VERBOSE, 1);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+		curl_setopt($curl, CURLOPT_URL, API_END_POINT);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $nvp_string);
+
+		$result = curl_exec($curl);
+		curl_close($curl);
+
+		$parsed = array();
+		parse_str($result, $parsed);
+		echo '<pre/>';
+		print_r($parsed);
 	}
 
 	public function processVenuePayment() {

@@ -1,28 +1,42 @@
 $(document).ready(function() {
 	loadPaymentDetail();
-	$('#mastercard, #visa, #discover').on('click', function(){
+	$('#mastercard, #visa, #discover').on('click', function() {
 		$(this).siblings().removeClass('payment_type_choosen');
 		$(this).addClass('payment_type_choosen');
 	});
 });
 /*PROCESSING ONLINE PAYMENT*/
 function processPaypalPayment() {
-	$('#btn_online_process_payment').attr('disabled', true);
-	$('#waiting_for_online_payment').fadeIn(function() {
-		$.ajax({
-			url : URL + 'payment/processPaypalPayment',
-			type : 'post',
-			success : function(response) {
-				
-			},
-			complete : function() {
-				$('#waiting_for_online_payment').fadeOut(function(){
-					alert('Cám ơn bạn đã thanh toán thành công');
-					jumpToOtherPage(URL);
-				});
-			}
+	if (PAYMENT_TYPE == 'mastercard' || PAYMENT_TYPE == 'visa' || PAYMENT_TYPE == 'discover') {
+		$('#btn_online_process_payment').attr('disabled', true);
+		$('#waiting_for_online_payment').fadeIn(function() {
+			$.ajax({
+				url : URL + 'payment/processPaypalPayment',
+				type : 'post',
+				data : {
+					payment_type : PAYMENT_TYPE,
+					card_number : $('#client_card_number').val(),
+					secure_code : $('#client_security_code').val(),
+					date_expire : $('#month_expire').val() + $('#year_expire').val(),
+					first_name : $('#client_card_holder_first').val(),
+					last_name : $('#client_card_holder_last').val()
+				},
+				success : function(response) {
+
+				},
+				complete : function() {
+					$('#waiting_for_online_payment').fadeOut(function() {
+						alert('Cám ơn bạn đã thanh toán thành công');
+						jumpToOtherPage(URL);
+					});
+				}
+			});
 		});
-	});
+	}else{
+		$('#reminder').fadeIn(function(){
+			$('#reminder').fadeOut();
+		});
+	}
 }
 
 /*END PROCESSING ONLINE PAYMENT*/
@@ -39,7 +53,7 @@ function processVenuePayment() {
 
 			},
 			complete : function() {
-				$('#waiting_for_venue_payment').fadeOut(function(){
+				$('#waiting_for_venue_payment').fadeOut(function() {
 					alert('Cám ơn bạn đã thanh toán thành công');
 					jumpToOtherPage(URL);
 				});
@@ -122,3 +136,12 @@ function jumbToPaymentTab(tab) {
 }
 
 /*END JUMP TO PAYMENT TAB*/
+
+/*SELECT PAYMENT TYPE*/
+function selectPaymentType(type) {
+	PAYMENT_TYPE = type;
+	console.log(PAYMENT_TYPE);
+}
+
+/*END SELECT PAYMENT TYPE*/
+/*----------------------------------*/

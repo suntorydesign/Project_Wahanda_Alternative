@@ -41,3 +41,5 @@ define('API_END_POINT', SAND_BOX ? 'https://api-3t.sandbox.paypal.com/nvp' : 'ht
 define('API_USERNAME', SAND_BOX ? 'vietnt134_api1.gmail.com' : 'LIVE_USERNAME_GOES_HERE');
 define('API_PASSWORD', SAND_BOX ? 'SKXHT6CJKQTZZSB7' : 'LIVE_PASSWORD_GOES_HERE');
 define('API_SIGNATURE', SAND_BOX ? 'AxYj8i8Y3XRWBeDYoQRjdYoO6OmOAE-pUEmKpvi2o7uovkdol3uNuFnx' : 'LIVE_SIGNATURE_GOES_HERE');
+define('CURRENCYCODE', 'USD');
+define('COUNTRYCODE', 'US');

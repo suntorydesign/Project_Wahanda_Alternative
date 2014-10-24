@@ -21,8 +21,14 @@ class payment extends Controller {
 
 	public function processPaypalPayment() {
 		Session::initIdle();
-		if (isset($_SESSION['client_id'])) {
-			$this -> model -> processPaypalPayment();
+		if (isset($_SESSION['client_id']) && isset($_POST['payment_type'])) {
+			$data['payment_type'] = $_POST['payment_type'];
+			$data['card_number'] = $_POST['card_number'];
+			$data['secure_code'] = $_POST['secure_code'];
+			$data['date_expire'] = $_POST['date_expire'];
+			$data['first_name'] = $_POST['first_name'];
+			$data['last_name'] = $_POST['last_name'];
+			$this -> model -> processPaypalPayment($data);
 		} else {
 			echo 0;
 		}

@@ -104,9 +104,10 @@
 									<i class="fa fa-2x fa-paypal"></i><b>CHUYỂN KHOẢN ĐẾN PAYPAL</b>
 								</div>
 								<div class="col-lg-6 text-right">
-									<i id="mastercard" class="fa fa-3x fa-cc-mastercard pointer text-orange-black"></i>
-									<i id="visa" class="fa fa-3x fa-cc-visa pointer text-orange-black"></i>
-									<i id="discover" class="fa fa-3x fa-cc-discover pointer text-orange-black"></i>
+									<i id="reminder" style="color: red;display: none;" class="fa fa-3x fa-arrow-right"></i>
+									<i onclick="selectPaymentType('mastercard')" id="mastercard" class="fa fa-3x fa-cc-mastercard pointer text-orange-black"></i>
+									<i onclick="selectPaymentType('visa')" id="visa" class="fa fa-3x fa-cc-visa pointer text-orange-black"></i>
+									<i onclick="selectPaymentType('discover')" id="discover" class="fa fa-3x fa-cc-discover pointer text-orange-black"></i>
 								</div>
 							</div>
 							<br />
@@ -147,7 +148,7 @@
 											<input onkeypress="inputNumbers(event)" maxlength="2" class="form-control" type="text" id="month_expire" name="month_expire" placeholder="MM">
 										</div>
 										<div class="col-sm-6">
-											<input onkeypress="inputNumbers(event)" maxlength="2" class="form-control" type="text" id="year_expire" name="year_expire" placeholder="YY">
+											<input onkeypress="inputNumbers(event)" maxlength="4" class="form-control" type="text" id="year_expire" name="year_expire" placeholder="YYYY">
 										</div>
 									</div>
 								</div>
@@ -274,6 +275,6 @@
 		<!--End payer detail-->
 	</div>
 </div>
-<!-- <script>
-	var IS_PAYMENT_PAGE = '<?php echo $this -> is_payment_page; ?>'
-</script> -->
+<script>
+	var PAYMENT_TYPE = '';
+</script>
