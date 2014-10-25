@@ -19,7 +19,15 @@ class Index extends Controller {
 		Session::init();
 		if (isset($_SESSION['check_idle'])) {
 			if ((time() - $_SESSION['check_idle']) >= IDLE_TIME) {
-				Session::destroy();
+				// Session::destroy();
+				unset($_SESSION['client_id']);
+				unset($_SESSION['client_username']);
+				unset($_SESSION['client_email']);
+				unset($_SESSION['client_name']);
+				unset($_SESSION['client_phone']);
+				unset($_SESSION['client_join_date']);
+				unset($_SESSION['booking_detail']);
+				unset($_SESSION['eVoucher_detail']);
 				echo 200;
 			} else {
 				echo 0;

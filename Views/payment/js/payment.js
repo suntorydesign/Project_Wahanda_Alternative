@@ -7,6 +7,7 @@ $(document).ready(function() {
 });
 /*PROCESSING ONLINE PAYMENT*/
 function processPaypalPayment() {
+	var payment_result = 0;
 	if (PAYMENT_TYPE == 'mastercard' || PAYMENT_TYPE == 'visa' || PAYMENT_TYPE == 'discover') {
 		$('#btn_online_process_payment').attr('disabled', true);
 		$('#waiting_for_online_payment').fadeIn(function() {
@@ -22,13 +23,36 @@ function processPaypalPayment() {
 					last_name : $('#client_card_holder_last').val()
 				},
 				success : function(response) {
-
+					if(response != '0'){
+						var json_encode = JSON.parse(response);
+						if(json_encode[0] != null){
+							alert_desc = 'PAYPAL NÓI RẰNG: \n';
+							// console.log(JSON.parse(response));
+							if(json_encode[0].ACK != 'Failure'){
+								payment_result = 1;
+							}
+							$.each(json_encode[0], function(i, item){
+								alert_desc += i + ': ' + item + '\n';
+							});
+							alert(alert_desc);
+						}
+					}else if(response == '0'){
+						payment_result = 0;
+					}
 				},
 				complete : function() {
-					$('#waiting_for_online_payment').fadeOut(function() {
-						alert('Cám ơn bạn đã thanh toán thành công');
-						jumpToOtherPage(URL);
-					});
+					if(payment_result == 1){
+						$('#waiting_for_online_payment').fadeOut(function() {
+							alert('Cám ơn bạn đã thanh toán thành công');
+							jumpToOtherPage(URL);
+						});
+					}else{
+						$('#waiting_for_online_payment').fadeOut(function() {
+							alert('Thanh toán thất bại, xin vui lòng nhập lại thông tin');
+							//jumpToOtherPage(URL);
+							$('#btn_online_process_payment').attr('disabled', false);
+						});
+					}
 				}
 			});
 		});
@@ -44,19 +68,32 @@ function processPaypalPayment() {
 
 /*PROCESSING VENUE PAYMENT*/
 function processVenuePayment() {
+	var payment_result = 0;
 	$('#btn_venue_process_payment').attr('disabled', true);
 	$('#waiting_for_venue_payment').fadeIn(function() {
 		$.ajax({
 			url : URL + 'payment/processVenuePayment',
 			type : 'post',
 			success : function(response) {
-
+				if(response == '200'){
+					payment_result = 1;
+				}else{
+					payment_result = 0;
+				}
 			},
 			complete : function() {
-				$('#waiting_for_venue_payment').fadeOut(function() {
-					alert('Cám ơn bạn đã thanh toán thành công');
-					jumpToOtherPage(URL);
-				});
+				if(payment_result == 1){
+					$('#waiting_for_venue_payment').fadeOut(function() {
+						alert('Cám ơn bạn đã thanh toán thành công');
+						jumpToOtherPage(URL);
+					});
+				}else{
+					$('#waiting_for_online_payment').fadeOut(function() {
+						alert('Thanh toán thất bại, xin vui lòng nhập lại thông tin');
+						//jumpToOtherPage(URL);
+						$('#btn_online_process_payment').attr('disabled', false);
+					});
+				}
 			}
 		});
 	});
@@ -140,7 +177,7 @@ function jumbToPaymentTab(tab) {
 /*SELECT PAYMENT TYPE*/
 function selectPaymentType(type) {
 	PAYMENT_TYPE = type;
-	console.log(PAYMENT_TYPE);
+	// console.log(PAYMENT_TYPE);
 }
 
 /*END SELECT PAYMENT TYPE*/
