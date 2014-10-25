@@ -62,7 +62,7 @@
 		<div class="modal-content">
 			<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable">
 				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
-					<span class="ui-dialog-title" id="ui-dialog-title-voucher-redemption">eVoucher</span>
+					<span class="ui-dialog-title" id="ui-dialog-title-voucher-redemption">Xác Thực eVoucher</span>
 					<a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button">
 						<span class="ui-icon ui-icon-closethick">close</span>
 					</a>
@@ -82,7 +82,7 @@
 					<div class="voucher-redemption-wrapper">
 						<div class="voucher-note voucher-start" style="position: relative;">
 							<div class="voucher-note-inner vertically-centered" style="position: absolute; height: 101px; top: 50%; margin-top: -50.5px;">
-								<p class="main-title">Please enter eVoucher number</p>
+								<p class="main-title">Vui lòng nhập mã eVoucher</p>
 								<ul class="simple-list">
 									<li>Look for eVoucher number on the booking confirmation email.</li>
 									<li>Redeem eVoucher bookings only. For appointments, you just need to confirm them to get paid.</li>
@@ -97,7 +97,7 @@
 						</div>
 						<div class="voucher-note voucher-not-found hidden">
 							<div class="voucher-note-inner vertically-centered">
-								Voucher not found.
+								Không tìm thấy Voucher.
 								<span>Please check that you have entered the voucher number correctly.</span>
 							</div>
 						</div>
@@ -174,7 +174,7 @@
         <div class="modal-content">
             <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable">
                 <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix status-scheduled">
-                    <span id="ui-dialog-title-1" class="ui-dialog-title">Confirmed Appointment</span>
+                    <span id="ui-dialog-title-1" class="ui-dialog-title">LỊCH HẸN</span>
                     <a role="button" class="ui-dialog-titlebar-close ui-corner-all" href="#">
                         <span class="ui-icon ui-icon-closethick" data-dismiss="modal">close</span>
                     </a>
@@ -313,13 +313,13 @@
                             		No show
                             	</div>
                             </button>
-                            <button type="button" class="button action action-default a-delete button-secondary delete-action">
+                            <button id="cancelAppointment_action" type="button" class="button action action-default a-delete button-secondary delete-action" >
                             	<div class="button-inner">
                             		<div class="button-icon icons-delete"></div>
                             		<span class="msg msg-action-default">Hủy lịch hẹn</span>
                             	</div>
                             </button>
-                            <button type="button" class="button button-other a-checkout">
+                            <button id="completeApointment_action" type="button" class="button button-other a-checkout">
                             	<div class="button-inner">
                             		<div class="button-icon icons-tick"></div>
                             		Đã hoàn thành
@@ -671,13 +671,13 @@
 </div><!-- END editClient_modal-->
 
 
-<!-- Modal editConfirmedAppointment_modal-->
+<!-- Modal addConfirmedAppointment_modal-->
 <div id="addAppointment_modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ui-dialog-title-appointment-dialog">
     <div class="modal-dialog" style="width: 615px;">
         <div class="modal-content">
             <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable">
                 <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
-                    <span id="ui-dialog-title-appointment-dialog" class="ui-dialog-title">Appointment</span>
+                    <span id="ui-dialog-title-appointment-dialog" class="ui-dialog-title">LÊN LỊCH HẸN</span>
                     <a role="button" class="ui-dialog-titlebar-close ui-corner-all" href="#">
                         <span class="ui-icon ui-icon-closethick">close</span>
                     </a>
@@ -692,12 +692,6 @@
                                         <label for="">Khách hàng</label>
                                     </td>
                                     <td class="input-part b-consumer">
-                                        <!-- search -->
-                                        <div class="txt-input b-consumer-autocomplete hidden">
-                                            <input aria-haspopup="true" aria-autocomplete="list" role="textbox" autocomplete="off" id="consumer-block-search" name="consumer-block-search" class="ui-autocomplete-input" placeholder="Search by phone number or name" type="text">
-                                            <input id="consumer-block-anonymous-comment" class="hidden" placeholder="Walk-in comment" type="text">
-                                        </div>
-                                        <!-- end search -->
                                         <!-- client -->
                                         <div class="col-md-6" style="padding:0;">
                                         	<input type="text" name="appointment_client_name" placeHolder="Tên khách hàng">
@@ -748,21 +742,14 @@
                                         </select>
                                     </td>
                                 </tr>
-                                <tr class="form-row appointment-sku form-element-wrapper hidden">
-                                    <td class="label-part">
-                                        <label for="appointment-skuId">SKU</label>
-                                    </td>
-                                    <td class="input-part">
-                                        <select id="appointment-skuId" class="v-appointment-sku" name="appointment-skuId"><option value="">Not set</option></select>
-                                    </td>
-                                </tr>
                                 <tr class="form-row form-element-wrapper">
                                     <td class="label-part">
-                                        <label for="cv-appointment-appointmentDate">Ngày</label>
+                                        <label for="appointment_date">Ngày</label>
                                     </td>
                                     <td class="input-part">
-                                        <input date-format="dd/mm/yy" type="text" name="appointment_created" readonly="true" style="width:90px; padding:0 5px;">
-                                        <select name="appointment-startTime" id="appointment-startTime" class="required">
+                                        <input id="appointment_date" date-format="dd/mm/yy" type="text" name="appointment_date" readonly="true" style="width:90px; padding:0 5px;">
+                                        Bắt đầu lúc: 
+                                        <select name="appointment_time_start" id="appointment_time_start" class="required">
                                             <option value="07:00">07:00</option>
                                             <option value="08:00">08:00</option>
                                             <option value="09:00">09:00</option>
@@ -838,6 +825,7 @@
                                         </select> -->
                                         <span class="user_service_duration">00</span> phút.
                                         <span class="help-txt">Kết thúc lúc <span class="cv-end-time">00:00</span></span>
+                                        <input type="hidden" name="appointment_time_end"> 
                                     </td>
                                 </tr>
                             </tbody>
@@ -846,10 +834,10 @@
                             <tbody>
                                 <tr class="form-row">
                                     <td class="label-part">
-                                        <label class="optional" for="appointment-notes">Ghi chú </label>
+                                        <label class="optional" for="appointment_note">Ghi chú </label>
                                     </td>
                                     <td class="input-part">
-                                        <textarea rows="6" cols="5" class="full" id="appointment-notes" name="appointment-notes"></textarea>
+                                        <textarea rows="6" cols="5" class="full" id="appointment_note" name="appointment_note"></textarea>
                                     </td>
                                 </tr>
                             </tbody>
@@ -870,7 +858,8 @@
                     <div class="dialog-actions">
                         <button type="submit" class="button action action-default button-primary save-action">
                             <div class="button-inner">
-                                <div class="button-icon icons-tick"></div>
+                                <div class="button-icon icons-tick done"></div>
+                                <div class="button-icon fa fa-spin fa-refresh loading"></div>
                                 <span class="msg msg-action-default">Thêm lịch hẹn</span>
                             </div>
                         </button>

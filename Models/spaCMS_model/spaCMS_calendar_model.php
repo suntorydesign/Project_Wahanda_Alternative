@@ -37,12 +37,7 @@ class SpaCMS_Calendar_Model {
 			);
 		}
 
-		// echo '<pre/>';
-		// print_r($data);
 		echo json_encode($data); 
-		// exit();
-
-
 	}
 
 	public function get_appointments($user_id, $start_date, $end_date) {
@@ -76,7 +71,7 @@ SQL;
 		return $data;
 	}
 
-
+	///////////////////////////////////// 
 	public function get_appointment() {
 		$user_id = Session::get('user_id');
 		$appointment_id = $_GET['data_id'];
@@ -169,5 +164,48 @@ SQL;
 
 // SQL;
 // 	}
+
+
+	public function insert_appointment() {
+		$user_id = Session::get('user_id');
+
+		$data = array();
+		$data["appointment_user_id"] = $user_id;
+
+		foreach ($_POST as $key => $value) {
+			if($key == "url") {
+				continue;
+			}
+			if($key == "user_service_service_id"){
+				$data["appointment_user_service_id"] = $value ;
+				continue;
+			}
+			$data["$key"] = $value;
+		}
+
+		if( $this->db->insert('appointment', $data) ){
+			echo 'success';
+		} else {
+			echo 'error';
+		}
+	}
+
+	function get_user_open_hour() {
+		$user_id = Session::get('user_id');
+		$query = "SELECT user_open_hour FROM user WHERE user_id = $user_id";
+		$result = $this->db->select($query);
+		echo $result[0]['user_open_hour'];
+	}
+	
+	// Convert Minute to Hours
+	function convertToHoursMins($time, $format = '%d:%d') {
+	    settype($time, 'integer');
+	    if ($time < 1) {
+	        return;
+	    }
+	    $hours = floor($time / 60);
+	    $minutes = ($time % 60);
+	    return sprintf($format, $hours, $minutes);
+	}
 
 }

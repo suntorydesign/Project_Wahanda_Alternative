@@ -29,7 +29,7 @@ table {
      border-spacing: 0px;
 }
 
-.s-loading, .d-loading, .e-loading {
+.loading, .s-loading, .d-loading, .e-loading, .i-loading {
      display: none;
 }
 

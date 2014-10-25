@@ -143,6 +143,14 @@
 					$this->model->get_user_service();
 					break;
 
+				case 'xhrInsert_appointment':
+					$this->model->insert_appointment();
+					break;
+
+				case 'xhrGet_user_open_hour':
+					$this->model->get_user_open_hour();
+					break;
+
 				default:
 					$this->view->style = array(
 						ASSETS . 'plugins/fullcalendar-2.1.0-beta2/fullcalendar.css',
@@ -154,6 +162,7 @@
 					$this->view->script = array(
 						ASSETS . 'plugins/fullcalendar-2.1.0-beta2/lib/moment.min.js',
 						ASSETS . 'plugins/fullcalendar-2.1.0-beta2/fullcalendar.min.js',
+						// ASSETS . 'plugins/fullcalendar-2.1.0-beta2/lang/vi.js',
 						ASSETS . 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.js',
 						ASSETS . 'js/core/app.js',
 						URL . 'Views/spaCMS/calendar/js/spaCMS_calendar.js'
