@@ -80,7 +80,7 @@
                         	<div class="col-sm-12 remove-padding" style="margin-bottom: 10px;">
 								<div class="dropdown"> 
                         			<a id="dropdown_profile" data-toggle="dropdown" class="btn btn-orange-black btn-block dropdown-toggle"> 
-                        				Xin chào bạn: <i class="fa fa-user"></i> <?php echo $_SESSION['client_username']; ?> <span class="caret"></span>
+                        				Xin chào: <i class="fa fa-user"></i> <?php echo $_SESSION['client_username']; ?> <span class="caret"></span>
                         			</a>
                         			<ul style="border-radius: 0px;" class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdown_profile">
 									    <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo URL . 'clientsetting'; ?>"><i class="fa fa-wrench"></i> Quản lý tài khoản</a></li>

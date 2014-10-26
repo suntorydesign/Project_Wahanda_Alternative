@@ -37,6 +37,23 @@ $(document).ready(function() {
 	
 	/*END LINK TO OTHER PAGE*/
 });
+
+/*FB LOGIN*/
+function loginFB(){
+	$.ajax({
+		url : URL + 'fblogin/loginFB',
+		type : 'post',
+		success : function(response) {
+			window.location.assign(response);
+		},
+		complete : function(){
+			
+		}
+	});
+}
+/*END FB LOGIN*/
+/*-----------------------*/
+
 /*LOAD DISTRICT*/
 function loadDistrict() {
 	$.ajax({
