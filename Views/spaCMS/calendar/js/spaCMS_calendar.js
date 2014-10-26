@@ -61,7 +61,8 @@ var Calendar = function(){
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay',
             },
-            hiddenDays: [0, 6], // [2, 4] hide Tuesdays and Thursdays
+            disableDragging: true,
+            // hiddenDays: [0, 6], // [2, 4] hide Tuesdays and Thursdays
             defaultDate: moment(),
             editable: true,
             eventLimit: true, // allow "more" link when too many events
@@ -79,7 +80,7 @@ var Calendar = function(){
             dayClick: function(date, jsEvent, view) {
                 var aA_modal = $('#addAppointment_modal');
                 // Kiểm tra ngày này spa có mở cửa hay không?
-                var weekly = convert_num2day(date.format('d'));
+                var weekly = convert_num2dayval(date.format('d'));
                 var url = URL + 'spaCMS/calendar/xhrGet_user_open_hour';
                 $.get(url, function(data){
                     console.log(data);
@@ -98,17 +99,26 @@ var Calendar = function(){
                     // và thông báo giờ kết thúc
                     $('#list_gus').change(function(){
                         var self = $(this);
-                        var us_id = self.val(); // user_service_id
                         var select_app_start = $('#appointment_time_start'); // DOM của appointment_time_start 
+
+                        var us_id           = self.val(); // user_service_id
+                        var us_duration     = null; // user_service_duration
+                        var app_time_end    = null; // appointment_time_end
+                        var app_time_start  = null; // appointment_time_start
 
                         // html cho option chọn thời gian bắt đầu
                         var op_app_start = '<option value=":appointment_time_start">:appointment_time_start</option>';
+                        var out_op_app_start = '';
 
-                        // Lấy thời gian thực hiện dịch vụ được chọn
+                        // Lấy thời gian thực hiện của dịch vụ được chọn
+                            // Nếu không có dịch vụ được chọn thì dừng
+                        if(us_id === '') 
+                            return false;
                         var url = URL + 'spaCMS/calendar/xhrGet_user_service';
                         $.get(url, {'user_service_id':us_id}, function(data){
-                            console.log(data);
-                            var us_duration = data[0]['user_service_duration']; // Thời gian thực hiện dịch vụ
+
+                            us_duration = data[0]['user_service_duration']; // Thời gian thực hiện dịch vụ
+                            us_duration = parseInt(us_duration);
 
                             // Tính các khoảng thời gian phù hợp để bắt đầu dịch vụ
                             // openHour <= openHour + duration <= closeHour
@@ -119,35 +129,49 @@ var Calendar = function(){
                             var timeStart_end   = closeHour*60;
                             var timeStart_value = timeStart_begin;
 
-                            while( timeStart_value <= timeStart_end){
-                                timeStart_value += us_duration;
+                            while( timeStart_value < timeStart_end )
+                            {
+                                // Chuyển từ phút sang kiểu hour:minute
+                                timeStart_hourValue = convert_Min2Hour(timeStart_value);
+                                out_op_app_start += op_app_start.replace(/:appointment_time_start/g, timeStart_hourValue);
 
-                                timeStart_hourValue = convertToHoursMins(timeStart_value);
-                                select_app_start.append(op_app_start.replace(/:appointment_time_start/g, timeStart_hourValue));
+                                timeStart_value += us_duration; // Thời gian tiếp theo
                             }
-                            
 
-                            $('.user_service_duration', aA_modal).text(us_duration);
+                            // Khởi tạo thời gian kết thúc dịch vụ
+                                // thời gian bắt đầu (timeStart_begin) + duration 
+                            app_time_start  = timeStart_begin;
+                            app_time_end    = convert_Min2Hour(app_time_start + us_duration);
+
                         },'json')
                         .done(function(){
-                            alert('Xong rồi!');
+                            // Hiển thị danh sách thời gian bắt đầu phù hợp với ngày và dịch vụ này
+                            select_app_start.html(out_op_app_start);
+                            // Thông báo thời gian phục vụ của dịch vụ này
+                            $('.user_service_duration', aA_modal).text(us_duration);
+                            // Thông báo khởi tạo thời gian kết thúc dịch vụ
+                            $('#appointment_time_end', aA_modal).text(app_time_end);
+                            $('input[name=appointment_time_end]').val(app_time_end);
                         });
                     });
 
-                }, 'json');
+                }, 'json')
+                .done(function(){
+                    // Thông báo ngày đặt hẹn (appointment_date)
+                    $('input[name=appointment_date]', aA_modal).val(date.format());
+                    $('input[name=appointment_created]', aA_modal).val(date.format());
+                    $('#appointment_date', aA_modal).val(date.format('DD/MM/YYYY'));
 
-                
-                $('input[name=appointment_date]', aA_modal).val(date.format('DD-MM-YYYY'));
+                    // Hiển thị modal
+                    $('#addAppointment_modal').modal('show');
+                });
+
                 // alert('Clicked on: ' + (date.format('d')));
 
                 // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
 
                 // alert('Current view: ' + view.name);
-
-
-
-                $('#addAppointment_modal').modal('show');
-
+                
                 // change the day's background color just for fun
                 // $(this).css('background-color', 'red');
           
@@ -170,7 +194,6 @@ var Calendar = function(){
                 var client_note   = cA_modal.find('.client_note');
 
                 var btn_edit_appointment = cA_modal.find('.edit-appointment');
-                // var us_duration = cA_modal.find('.user_service_duration');
                 // var us_duration = cA_modal.find('.user_service_duration');
 
                 var url     = null;
@@ -222,6 +245,8 @@ var Calendar = function(){
     var xhrInsert_appointment = function() {
         $('#addAppointment_form').on('submit', function(){
             var aA_form = $(this);
+            var aA_modal = $("#addAppointment_modal");
+
             var data = aA_form.serialize();
             // console.log(data);
             var loading = aA_form.find('.loading');
@@ -233,10 +258,12 @@ var Calendar = function(){
             $.post(url, data, function(result){
                 loading.fadeOut();
                 done.fadeIn();
-                console.log(result);
+
+                // re-draw calendar
+                $('#calendar').fullCalendar('refetchEvents');
             })
             .done(function(){
-                aA_form.modal("hide");
+                aA_modal.modal("hide");
             })
             return false;
         });
@@ -260,7 +287,7 @@ var Calendar = function(){
 }();
 
 
-function convert_num2day(num) {
+function convert_num2dayval(num) {
     switch(num) {
         case '1': return 2;
         case '2': return 3;
@@ -274,21 +301,55 @@ function convert_num2day(num) {
 }
 
 // Convert Minute to Hours
-function convertToHoursMins(time, format) {
-    if(typeof format == 'undefined') {
-        format = "{0}:{1}";
-    }
+function convert_Min2Hour(time) {
     time = parseInt(time);
     if (time < 1) {
         return;
     }
-    hours = Math.floor(time / 60);
-    minutes = (time % 60);
-    return format.format(hours, minutes);
+    var hours = Math.floor(time / 60);
+    var minutes = (time % 60);
+
+    if(hours < 10)
+        hours = "0" + hours;
+    if(minutes < 10)
+        minutes = "0" + minutes;
+
+    var format = hours +":"+minutes;
+    return format;
 }
 
+// Convert Time to Minutes
+function convert_Hour2Min(time) {
+    var data    = null;
+    var hour    = null;
+    var minute  = null;
+    var minutes = null;
+
+    data = time.split(":");
+    hour = parseInt(data[0]);
+    minute = parseInt(data[1]);
+
+    minutes = hour*60 + minute;
+    return minutes;
+}
+
+
 $(document).ready(function(){
-    
+    // 
+    $('#appointment_time_start').change(function(){
+        var self = $(this);
+        var app_time_start_choice   = self.val();
+        var app_time_end_choice     = null;
+        var us_duration = $('#addAppointment_form .user_service_duration').text();
+        us_duration = parseInt(us_duration);
+        
+        app_time_start_choice   = convert_Hour2Min(app_time_start_choice);
+        app_time_end_choice     = app_time_start_choice + us_duration;
+        app_time_end_choice     = convert_Min2Hour(app_time_end_choice);
+
+        $('#appointment_time_end').text(app_time_end_choice);
+        $('input[name=appointment_time_end]').val(app_time_end_choice);
+    });
 });
 
 LoadMoreInfo.init();

@@ -171,6 +171,7 @@ SQL;
 
 		$data = array();
 		$data["appointment_user_id"] = $user_id;
+		$data["appointment_title"] = $_POST["appointment_client_name"];
 
 		foreach ($_POST as $key => $value) {
 			if($key == "url") {
@@ -197,15 +198,5 @@ SQL;
 		echo $result[0]['user_open_hour'];
 	}
 	
-	// Convert Minute to Hours
-	function convertToHoursMins($time, $format = '%d:%d') {
-	    settype($time, 'integer');
-	    if ($time < 1) {
-	        return;
-	    }
-	    $hours = floor($time / 60);
-	    $minutes = ($time % 60);
-	    return sprintf($format, $hours, $minutes);
-	}
 
 }

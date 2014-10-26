@@ -747,7 +747,11 @@
                                         <label for="appointment_date">Ngày</label>
                                     </td>
                                     <td class="input-part">
-                                        <input id="appointment_date" date-format="dd/mm/yy" type="text" name="appointment_date" readonly="true" style="width:90px; padding:0 5px;">
+                                        <input id="appointment_date" type="text" readonly="true" style="width:90px; padding:0 5px;">
+                                        <input type="hidden" name="appointment_date" />
+                                        <input type="hidden" name="appointment_created" />
+                                        <input type="hidden" name="appointment_updated" />
+
                                         Bắt đầu lúc: 
                                         <select name="appointment_time_start" id="appointment_time_start" class="required">
                                             <option value="07:00">07:00</option>
@@ -778,53 +782,8 @@
                                         <label for="cv-appointment-duration">Thời gian</label>
                                     </td>
                                     <td class="input-part">
-                                        <!-- <select name="cv-appointment-duration" id="cv-appointment-duration" class="required">
-                                            <option value="10">10 min</option>
-                                            <option value="15">15 min</option>
-                                            <option value="20">20 min</option>
-                                            <option value="25">25 min</option>
-                                            <option value="30">30 min</option>
-                                            <option value="35">35 min</option>
-                                            <option value="40">40 min</option>
-                                            <option value="45">45 min</option>
-                                            <option value="50">50 min</option>
-                                            <option value="55">55 min</option>
-                                            <option value="60">1 h </option>
-                                            <option value="65">1 h 05 min</option>
-                                            <option value="70">1 h 10 min</option>
-                                            <option value="75">1 h 15 min</option>
-                                            <option value="80">1 h 20 min</option>
-                                            <option value="85">1 h 25 min</option>
-                                            <option value="90">1 h 30 min</option>
-                                            <option value="95">1 h 35 min</option>
-                                            <option value="100">1 h 40 min</option>
-                                            <option value="105">1 h 45 min</option>
-                                            <option value="110">1 h 50 min</option>
-                                            <option value="115">1 h 55 min</option>
-                                            <option value="120">2 h </option>
-                                            <option value="135">2 h 15 min</option>
-                                            <option value="150">2 h 30 min</option>
-                                            <option value="165">2 h 45 min</option>
-                                            <option value="180">3 h </option>
-                                            <option value="195">3 h 15 min</option>
-                                            <option value="210">3 h 30 min</option>
-                                            <option value="225">3 h 45 min</option>
-                                            <option value="240">4 h </option>
-                                            <option value="270">4 h 30 min</option>
-                                            <option value="300">5 h </option>
-                                            <option value="330">5 h 30 min</option>
-                                            <option value="360">6 h </option>
-                                            <option value="390">6 h 30 min</option>
-                                            <option value="420">7 h </option>
-                                            <option value="450">7 h 30 min</option>
-                                            <option value="480">8 h </option>
-                                            <option value="540">9 h </option>
-                                            <option value="600">10 h </option>
-                                            <option disabled="" value="660">11 h </option>
-                                            <option disabled="" value="720">12 h </option>
-                                        </select> -->
                                         <span class="user_service_duration">00</span> phút.
-                                        <span class="help-txt">Kết thúc lúc <span class="cv-end-time">00:00</span></span>
+                                        <span class="help-txt">Kết thúc lúc <span id="appointment_time_end">00:00</span></span>
                                         <input type="hidden" name="appointment_time_end"> 
                                     </td>
                                 </tr>
