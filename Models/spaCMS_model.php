@@ -71,6 +71,18 @@ class SpaCMS_Model extends Model {
 		SpaCMS_Calendar_Model::get_appointment_confirmed();
 	}
 
+	function get_appointment_for_edit() {
+		SpaCMS_Calendar_Model::get_appointment_for_edit();
+	}
+
+	function delete_appointment() {
+		SpaCMS_Calendar_Model::delete_appointment();
+	}
+
+	function update_appointment_status() {
+		SpaCMS_Calendar_Model::update_appointment_status();
+	}
+
 	///////////////////////////// MENU //////////////////////////
 	function get_group_user_service() {
 		SpaCMS_Menu_Model::get_group_user_service();

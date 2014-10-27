@@ -154,7 +154,19 @@
 				case 'xhrGet_appointment_confirmed':
 					$this->model->get_appointment_confirmed();
 					break;
-					
+
+				case 'xhrGet_appointment_for_edit':
+					$this->model->get_appointment_for_edit();
+					break;
+
+				case 'xhrDelete_appointment':
+					$this->model->delete_appointment();
+					break;
+
+				case 'xhrUpdate_appointment_status':
+					$this->model->update_appointment_status();
+					break;
+
 				default:
 					$this->view->style = array(
 						ASSETS . 'plugins/fullcalendar-2.1.0-beta2/fullcalendar.css',

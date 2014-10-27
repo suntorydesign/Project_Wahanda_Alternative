@@ -38,6 +38,10 @@ table {
      z-index: 9999;
 }
 
+.display_none {
+     display: none;
+}
+
 .ui-tooltip, .qtip {
      display: none;
      font-size: 10.5px;

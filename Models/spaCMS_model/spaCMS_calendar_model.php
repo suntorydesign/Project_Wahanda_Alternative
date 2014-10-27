@@ -3,7 +3,7 @@
 class SpaCMS_Calendar_Model {
 
 	/**
-	 * Lịch hẹn appointment & booking_detail
+	 * Get lịch hẹn (appointment & booking_detail) từ ngày start -> end
 	 * @param user_id
 	 * @param $_GET['start'] : 
 	 * @param $_GET['end'] : Ngày kết thúc
@@ -106,7 +106,7 @@ SQL;
 		 	a.appointment_date as 'data_date', 
 			a.appointment_time_start as 'data_time_start', 
 			a.appointment_time_end as 'data_time_end',
-			'' as 'data_price',
+			a.appointment_price as 'data_price',
 			us.user_service_name as 'data_us_name', 
 			us.user_service_duration as 'data_us_duration', 
 			a.appointment_client_name as 'data_client_name',
@@ -114,9 +114,12 @@ SQL;
 			a.appointment_client_gender as 'data_client_gender', 
 			a.appointment_client_email as 'data_client_email', 
 			a.appointment_client_birth as 'data_client_birth',
+			a.appointment_client_note as 'data_client_note',
+			a.appointment_status as 'data_status',
 			us.user_service_full_price as 'data_us_full_price', 
 			us.user_service_sale_price as 'data_us_sale_price',
-			a.appointment_created as 'data_created'
+			a.appointment_created as 'data_created',
+			a.appointment_updated as 'data_update'
 		FROM 
 			appointment a, 
 			user_service us
@@ -154,9 +157,12 @@ SQL;
 			c.client_sex as 'data_client_gender', 
 			c.client_email as 'data_client_email', 
 			c.client_birth as 'data_client_birth',
+			c.client_note as 'data_client_note',
+			b.booking_status as 'data_status',
 			us.user_service_full_price as 'data_us_full_price', 
 			us.user_service_sale_price as 'data_us_sale_price',
 			b.booking_date as 'data_created'
+			-- b.booking_updated as 'data_updated'
 		FROM 
 			booking b, 
 			booking_detail bd, 
@@ -190,7 +196,9 @@ SQL;
 		SELECT 
 			user_service_id,
 			user_service_name,
-			user_service_duration
+			user_service_duration,
+			user_service_sale_price,
+			user_service_full_price
 		FROM user_service
 		WHERE user_service_id = {$us_id}
 SQL;
@@ -202,7 +210,6 @@ SQL;
 // 	public function max_slot_each_service($user_id) {
 // 		$aQuery = <<<SQL
 // 		SELECT user_serv
-
 // SQL;
 // 	}
 
@@ -309,4 +316,81 @@ SQL;
 		// Xuất dữ liệu
 		echo json_encode($data_schedule);
 	}
+
+
+	/**
+	 * Hủy một lịch hẹn
+	 * @param $_POST['data_id'] : id lịch hẹn
+	 * @param $_POST['data_type'] : lịch hẹn là appointment hay booking_detail
+	 * @return success/error
+	 */
+	public function delete_appointment() {
+		$user_id = Session::get('user_id');
+		$data_id = $_POST['data_id'];
+		$data_type = $_POST['data_type'];
+
+		if($data_type == "appointment") {
+			$rs = $this->db->delete("appointment", "appointment_id = $data_id");
+		}
+
+		if($data_type == "booking_detail") {
+			$rs = $this->db->delete("booking_detail", "booking_detail_id = $data_id");	
+		}
+
+		if($rs) {
+			echo "success";
+		} else {
+			echo "error";
+		}
+
+	}
+
+
+	/**
+	 * Lấy thông tin một lịch hẹn nhằm để sửa lịch hẹn đó
+	 * @param $_POST['data_id'] : id lịch hẹn
+	 * @param $_POST['data_type'] : lịch hẹn là appointment hay booking_detail
+	 * @return json
+	 */
+	public function get_appointment_for_edit() {
+		
+	}
+
+	/**
+	 * Update trạng thái hoàn thành lịch hẹn
+	 * @param $_POST['data_id'] : id lịch hẹn
+	 * @param $_POST['data_type'] : lịch hẹn là appointment hay booking_detail
+	 * @return success/error
+	 */
+	public function update_appointment_status() {
+		$user_id = Session::get('user_id');
+		$data_id = $_POST['data_id'];
+		$data_type = $_POST['data_type'];
+
+		// Trạng thái hoàn thành
+		$data = array(
+			"appointment_status" => 1
+		);
+		// foreach ($_POST as $key => $value) {
+		// 	if($key == "url") {
+		// 		continue;
+		// 	}
+		// 	$data["$key"] = $value;
+		// }
+
+		if($data_type == "appointment") {
+			$rs = $this->db->update("appointment", $data, "appointment_id = $data_id");
+		}
+
+		if($data_type == "booking_detail") {
+			$rs = $this->db->update("booking_detail", $data, "booking_detail_id = $data_id");	
+		}
+
+		if($rs) {
+			echo "success";
+		} else {
+			echo "error";
+		}
+	}
+
 }

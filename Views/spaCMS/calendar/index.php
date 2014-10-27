@@ -211,16 +211,16 @@
                                         <th class="price">Giá</th>
                                         <td>
                                             <span class="v-price user_service_price">200,000 đ</span>
-                                            <span class="status-prepaid label label-confirmed">Đã thanh toán</span>
-                                            <span class="status status-unpaid">Chưa thanh toán</span>
-                                            <span class="status-paid label label-confirmed">Thanh toán tại spa</span>
+                                            <span class="status-prepaid label label-confirmed display_none" style="display: none;">Đã thanh toán</span>
+                                            <span class="status status-unpaid display_none" style="display: none;">Chưa thanh toán</span>
+                                            <span class="status-paid label label-confirmed display_none" style="display: none;">Thanh toán tại spa</span>
                                             <span class="b-status status status-discounted hidden">status discounted</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Status</th>
-                                        <td><span class="status-paid label label-confirmed">Hoàn thành</span>
-                                        	<span class="status status-unpaid">Chưa hoàn thành</span>
+                                        <td><span class="status-complete label label-confirmed display_none" style="display: none;">Hoàn thành</span>
+                                        	<span class="status status-uncomplete display_none" style="display: none;">Chưa hoàn thành</span>
                                         </td>
                                     </tr>
                                 </tbody></table>
@@ -274,13 +274,14 @@
                                 </ul>
 
                                 <div class="client-note">
-                                    <span class="note-wrapper v-note client_note">Day la khach hang vip</span>
+                                    <span class="note-wrapper v-note client_note"></span>
                                     <div class="icons-note-tip2"></div>
                                 </div>
                             </div>
                             <div class="appointment-meta">
-                                Đặt lúc: <span class="full-date">19/08/2014, 13:40</span>
-                                
+                                Đặt lúc: <span class="full-date appointment_created">19/08/2014, 13:40</span>
+                                <!-- - -->
+                                <!-- Sửa đổi lúc: <span class="full-date appointment_updated">19/08/2014, 13:40</span> -->
                                 <div class="hidden">
                                 	<span class="separator">|</span>
                                 	Source:<span class="source">Added in Connect by minhnhat</span>
@@ -296,14 +297,16 @@
                             </div>
                         </div>
                         <div class="dialog-actions b-standard-actions">
-                            <button type="button" class="button button-primary a-ok">
-                            	<div class="button-inner"><div class="button-icon icons-tick"></div>
+                            <button type="button" class="button button-primary a-ok" data-dismiss="modal">
+                            	<div class="button-inner">
+                            		<div class="button-icon icons-tick"></div>
 	                            	OK
 	                            </div>
                             </button>
-                            <button type="button" class="button button-edit change-only-this edit-appointment">
+                            <button type="button" class="button button-edit change-only-this edit_appointment_action">
                                 <div class="button-inner">
-                                	<div class="button-icon icons-edit2"></div>
+                                	<div class="button-icon icons-edit2 done"></div>
+                                	<div class="button-icon fa fa-spin fa-refresh loading"></div>
                                 	Sửa / Xếp lại lịch
                                 </div>
                             </button>
@@ -313,15 +316,17 @@
                             		No show
                             	</div>
                             </button>
-                            <button id="cancelAppointment_action" type="button" class="button action action-default a-delete button-secondary delete-action" >
+                            <button type="button" class="button action action-default a-delete button-secondary delete_appointment_action" >
                             	<div class="button-inner">
-                            		<div class="button-icon icons-delete"></div>
+                            		<div class="button-icon icons-delete done"></div>
+                            		<div class="button-icon fa fa-spin fa-refresh loading"></div>
                             		<span class="msg msg-action-default">Hủy lịch hẹn</span>
                             	</div>
                             </button>
-                            <button id="completeApointment_action" type="button" class="button button-other a-checkout">
+                            <button type="button" class="button button-other a-checkout complete_appointment_action">
                             	<div class="button-inner">
-                            		<div class="button-icon icons-tick"></div>
+                            		<div class="button-icon icons-tick done"></div>
+                            		<div class="button-icon fa fa-spin fa-refresh loading"></div>
                             		Đã hoàn thành
                             	</div>
                             </button>
@@ -424,10 +429,10 @@
                                 </tr>
                                 <tr class="form-row appointment-sku form-element-wrapper hidden">
                                     <td class="label-part">
-                                        <label for="appointment-skuId">SKU</label>
+                                        <label for="appointment-skuId">Giá </label>
                                     </td>
                                     <td class="input-part">
-                                        <select id="appointment-skuId" class="v-appointment-sku" name="appointment-skuId"><option value="">Not set</option></select>
+                                        
                                     </td>
                                 </tr>
                                 <tr class="form-row form-element-wrapper">
@@ -740,6 +745,14 @@
 											<!-- List service system -->
 
                                         </select>
+                                    </td>
+                                </tr>
+                                <tr class="hidden">
+                                    <td class="label-part">
+                                        <label for="appointment-offerId">Giá</label>
+                                    </td>
+                                    <td class="input-part">
+                                        <input type="hidden" name="appointment_price">
                                     </td>
                                 </tr>
                                 <tr class="form-row form-element-wrapper">
