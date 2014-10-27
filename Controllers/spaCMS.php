@@ -151,6 +151,10 @@
 					$this->model->get_user_open_hour();
 					break;
 
+				case 'xhrGet_appointment_confirmed':
+					$this->model->get_appointment_confirmed();
+					break;
+					
 				default:
 					$this->view->style = array(
 						ASSETS . 'plugins/fullcalendar-2.1.0-beta2/fullcalendar.css',

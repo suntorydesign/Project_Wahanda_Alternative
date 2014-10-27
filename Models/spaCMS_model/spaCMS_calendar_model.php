@@ -2,6 +2,13 @@
 
 class SpaCMS_Calendar_Model {
 
+	/**
+	 * Lịch hẹn appointment & booking_detail
+	 * @param user_id
+	 * @param $_GET['start'] : 
+	 * @param $_GET['end'] : Ngày kết thúc
+	 * @return json
+	 */
 	public function get_calendar() {
 		$user_id 	= Session::get('user_id');
 		$start_date = $_GET['start'];
@@ -42,11 +49,16 @@ class SpaCMS_Calendar_Model {
 
 	public function get_appointments($user_id, $start_date, $end_date) {
 		$aQuery = <<<SQL
-		SELECT a.appointment_id, a.appointment_title,
-			a.appointment_date, a.appointment_time_start, a.appointment_time_end,
+		SELECT 
+			a.appointment_id, 
+			a.appointment_title,
+			a.appointment_date, 
+			a.appointment_time_start, 
+			a.appointment_time_end,
 			a.appointment_client_name 
 		FROM appointment a
-		WHERE a.appointment_user_id = {$user_id}
+		WHERE 
+				a.appointment_user_id = {$user_id}
 			AND a.appointment_date BETWEEN '{$start_date}' AND '{$end_date}'
 SQL;
 		$data = $this->db->select($aQuery);
@@ -54,14 +66,21 @@ SQL;
 		return $data;
 	}
 
-
 	public function get_bookings($user_id, $start_date, $end_date) {
 		$aQuery = <<<SQL
-		SELECT bd.booking_detail_id, c.client_name,
-			bd.booking_detail_date, bd.booking_detail_time_start, bd.booking_detail_time_end,
+		SELECT 
+			bd.booking_detail_id, 
+			c.client_name,
+			bd.booking_detail_date, 
+			bd.booking_detail_time_start, 
+			bd.booking_detail_time_end,
 			b.booking_status
-		FROM booking b, booking_detail bd, client c
-		WHERE bd.booking_detail_user_id = {$user_id}
+		FROM 
+			booking b, 
+			booking_detail bd, 
+			client c
+		WHERE 
+				bd.booking_detail_user_id = {$user_id}
 			AND bd.booking_detail_date BETWEEN '{$start_date}' AND '{$end_date}'
 			AND bd.booking_detail_booking_id = b.booking_id
 			AND c.client_id = b.booking_client_id
@@ -71,7 +90,12 @@ SQL;
 		return $data;
 	}
 
-	///////////////////////////////////// 
+	/**
+	 * Thông tin chi tiết lịch hẹn (appointment)
+	 * @param user_id
+	 * @param $_GET['data_id'] : appointment_id
+	 * @return json
+	 */
 	public function get_appointment() {
 		$user_id = Session::get('user_id');
 		$appointment_id = $_GET['data_id'];
@@ -93,8 +117,11 @@ SQL;
 			us.user_service_full_price as 'data_us_full_price', 
 			us.user_service_sale_price as 'data_us_sale_price',
 			a.appointment_created as 'data_created'
-		FROM appointment a, user_service us
-		WHERE a.appointment_user_id = {$user_id}
+		FROM 
+			appointment a, 
+			user_service us
+		WHERE 
+				a.appointment_user_id = {$user_id}
 			AND a.appointment_id = {$appointment_id}
 			AND a.appointment_user_service_id = us.user_service_id
 SQL;
@@ -103,7 +130,12 @@ SQL;
 		echo json_encode($data);
 	}
 
-
+	/**
+	 * Thông tin chi tiết lịch hẹn (booking_detail)
+	 * @param user_id
+	 * @param $_GET['data_id'] : booking_detail_id
+	 * @return json
+	 */
 	public function get_booking() {
 		$user_id = Session::get('user_id');
 		$booking_detail_id = $_GET['data_id'];
@@ -125,8 +157,13 @@ SQL;
 			us.user_service_full_price as 'data_us_full_price', 
 			us.user_service_sale_price as 'data_us_sale_price',
 			b.booking_date as 'data_created'
-		FROM booking b, booking_detail bd, client c, user_service us
-		WHERE bd.booking_detail_user_id = {$user_id}
+		FROM 
+			booking b, 
+			booking_detail bd, 
+			client c, 
+			user_service us
+		WHERE 
+				bd.booking_detail_user_id = {$user_id}
 			AND bd.booking_detail_id = {$booking_detail_id}
 			AND bd.booking_detail_booking_id = b.booking_id
 			AND us.user_service_id = bd.booking_detail_user_service_id
@@ -140,7 +177,11 @@ SQL;
 		
 	}
 
-	// Get detail user service
+	/**
+	 * Lấy thông tin dịch vụ (user_service)
+	 * @param $_GET['user_service_id'] : id của dịch vụ đó
+	 * @return json
+	 */
 	public function get_user_service() {
 		// $user_id = Session::get('user_id');
 		$us_id = $_GET['user_service_id'];
@@ -165,7 +206,10 @@ SQL;
 // SQL;
 // 	}
 
-
+	/**
+	 * Thêm lịch hẹn (appointment)
+	 * @return String success/error
+	 */
 	public function insert_appointment() {
 		$user_id = Session::get('user_id');
 
@@ -191,12 +235,78 @@ SQL;
 		}
 	}
 
+	/**
+	 * Danh sách giờ mở cửa của địa điểm spa
+	 * @param Session::get('user_id') : user_id 
+	 * @return json
+	 */
 	function get_user_open_hour() {
 		$user_id = Session::get('user_id');
 		$query = "SELECT user_open_hour FROM user WHERE user_id = $user_id";
 		$result = $this->db->select($query);
-		echo $result[0]['user_open_hour'];
+		echo $result[0]['user_open_hour']; // Its json
 	}
 	
+	/**
+	 * Danh sách những lịch hẹn đã được đặt từ appointment & booking_detail
+	 * @param $_GET['us_id'] : user_service_id dịch vụ được đặt
+	 * @param $_GET['date']	 : ngày đặt hẹn
+	 * @return json
+	 */
+	function get_appointment_confirmed() {
+		$user_id = Session::get('user_id');
+		$us_id 	= $_GET['us_id']; // user_service_id
+		$date 	= $_GET['date']; // ngày đặt hẹn
 
+		// Lấy danh sách lịch hẹn từ appointment
+		$aQuery_app = <<<SQL
+		SELECT 
+			appointment_date,
+			appointment_time_start,
+			appointment_time_end
+		FROM
+			appointment
+		WHERE 
+				appointment_user_id = {$user_id}
+			AND appointment_user_service_id = {$us_id}
+			AND appointment_date = '{$date}'
+SQL;
+		$data_app = $this->db->select($aQuery_app);
+
+		// Lấy danh sách lịch hẹn từ booking_detail
+		$aQuery_bkdetail = <<<SQL
+		SELECT
+			booking_detail_date,
+			booking_detail_time_start,
+			booking_detail_time_end
+		FROM
+			booking_detail
+		WHERE
+				booking_detail_user_id = {$user_id}
+			AND booking_detail_user_service_id = {$us_id}
+			AND booking_detail_date = '{$date}'
+SQL;
+		$data_bkdetail = $this->db->select($aQuery_bkdetail);
+
+		// Chèn dữ liệu vào mảng data_schedule 
+		$data_schedule = array();
+		foreach ($data_app as $app) {
+			$data_schedule[] = array(
+				"schedule_date"			=> $app["appointment_date"],
+				"schedule_time_start"	=> $app["appointment_time_start"],
+				"schedule_time_end"		=> $app["appointment_time_end"]
+			);
+		}
+
+		foreach ($data_bkdetail as $bkdetail) {
+			$data_schedule[] = array(
+				"schedule_date"			=> $bkdetail["booking_detail_date"],
+				"schedule_time_start"	=> $bkdetail["booking_detail_time_start"],
+				"schedule_time_end"		=> $bkdetail["booking_detail_time_end"]
+			);
+		}
+
+		// Xuất dữ liệu
+		echo json_encode($data_schedule);
+	}
 }

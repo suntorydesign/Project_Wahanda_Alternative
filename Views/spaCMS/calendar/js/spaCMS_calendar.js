@@ -107,7 +107,7 @@ var Calendar = function(){
                         var app_time_start  = null; // appointment_time_start
 
                         // html cho option chọn thời gian bắt đầu
-                        var op_app_start = '<option value=":appointment_time_start">:appointment_time_start</option>';
+                        var op_app_start = '<option value=":appointment_time_start" :isScheduled>:appointment_time_start</option>';
                         var out_op_app_start = '';
 
                         // Lấy thời gian thực hiện của dịch vụ được chọn
@@ -129,24 +129,53 @@ var Calendar = function(){
                             var timeStart_end   = closeHour*60;
                             var timeStart_value = timeStart_begin;
 
-                            while( timeStart_value < timeStart_end )
-                            {
-                                // Chuyển từ phút sang kiểu hour:minute
-                                timeStart_hourValue = convert_Min2Hour(timeStart_value);
-                                out_op_app_start += op_app_start.replace(/:appointment_time_start/g, timeStart_hourValue);
+                            // ??? Tìm trong Appointment và Booking_detail
+                            //// Dịch vụ này (us_id), ngày này (date) có danh sách thời gian đã đặt chỗ
+                            var url = URL + "spaCMS/calendar/xhrGet_appointment_confirmed";
+                            $.get(url, {'us_id':us_id, 'date':date.format()}, function(data_schedule){
+                                console.log(data_schedule);
+                                while( timeStart_value < timeStart_end )
+                                {   
+                                    // Kiểm tra: thời gian này đã được đặt trước đó chưa?
+                                    var isScheduled = false;
+                                    $.each(data_schedule, function(key, value){
+                                        // Chuyển sang kiểu phút trước khi so sánh:
+                                        var schedule_time_start = convert_Hour2Min(value["schedule_time_start"]);
+                                        var schedule_time_end   = convert_Hour2Min(value["schedule_time_end"]);
 
-                                timeStart_value += us_duration; // Thời gian tiếp theo
-                            }
+                                        // schedule_time_start <= timeStart_value < schedule_time_end
+                                        if( timeStart_value >= schedule_time_start && timeStart_value < schedule_time_end ) {
+                                            isScheduled = true;
+                                        }
+                                    });
+
+                                    // Chuyển từ phút sang kiểu hour:minute
+                                    timeStart_hourValue = convert_Min2Hour(timeStart_value);
+                                    out_op_app_start += op_app_start.replace(/:appointment_time_start/g, timeStart_hourValue);
+
+                                    // Nếu khoảng thời gian này đã được đắt trước đó thì disable thời gian này lại, để không cho người khác đặt trùng
+                                    if(isScheduled) {
+                                        out_op_app_start = out_op_app_start.replace(':isScheduled', 'disabled="disabled"');
+                                    } else {
+                                        out_op_app_start = out_op_app_start.replace(':isScheduled', '');
+                                    }
+
+                                    timeStart_value += us_duration; // Thời gian tiếp theo
+                                }
+                            },'json')
+                            .done(function(){
+                                // Hiển thị danh sách thời gian bắt đầu phù hợp với ngày và dịch vụ này
+                                select_app_start.html(out_op_app_start);
+                            });
 
                             // Khởi tạo thời gian kết thúc dịch vụ
-                                // thời gian bắt đầu (timeStart_begin) + duration 
+                                // = thời gian bắt đầu (timeStart_begin) + duration 
                             app_time_start  = timeStart_begin;
                             app_time_end    = convert_Min2Hour(app_time_start + us_duration);
 
                         },'json')
                         .done(function(){
-                            // Hiển thị danh sách thời gian bắt đầu phù hợp với ngày và dịch vụ này
-                            select_app_start.html(out_op_app_start);
+                            
                             // Thông báo thời gian phục vụ của dịch vụ này
                             $('.user_service_duration', aA_modal).text(us_duration);
                             // Thông báo khởi tạo thời gian kết thúc dịch vụ
@@ -209,7 +238,10 @@ var Calendar = function(){
                 }
 
                 $.get(url, {'data_id':data_id}, function(data) {
-                    console.log(data);
+                    if(typeof data[0] == 'undefined') {
+                        console.log("Không có data, có lẽ dữ liệu vào khiến sql gặp vấn đề");
+                    }
+                    
                     var date = new Date(data[0]['data_date']);
 
                     weekday.text("Thứ " + (date.getDay() + 1) );
@@ -224,7 +256,7 @@ var Calendar = function(){
                     if(data[0]['data_client_phone'] !== '') {
                         client_phone.text(data[0]['data_client_phone']);
                     } else {
-                        client_phone.html('<i>Chưa có số điện thoại</i>');
+                        client_phone.text('Chưa có số điện thoại');
                     }
                     client_name.text(data[0]['data_client_name']);
                     client_phone.text(data[0]['data_client_phone']);
