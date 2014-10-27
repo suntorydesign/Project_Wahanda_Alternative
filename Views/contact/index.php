@@ -60,7 +60,7 @@
 		<div class="panel panel-orange">
 		  	<div class="panel-heading">Quảng Bá Dịch Vụ</div>
 		  	<div class="panel-body">
-		    	<p>Nếu bạn đang kinh doanh spa, hair salon hay beauty center, bạn có thể đăng bạ và quảng bá dịch vụ của bạn trên website của chings tôi.
+		    	<p>Nếu bạn đang kinh doanh spa, hair salon hay beauty center, bạn có thể đăng bạ và quảng bá dịch vụ của bạn trên website của chúng tôi.
 		    		Việc đăng ký hoàn toàn đơn giản tại <a href="./business/signup">Trang đăng bạ</a>, chúng tôi luôn sát cánh để hỗ trợ bạn.</p>
 		  	</div>
 		</div>
@@ -100,19 +100,19 @@
 				<div class="col-md-4">
 					<div class="form-group">
 						<label>Tên của bạn *</label>
-						<input class="form-control" name="name">
+						<input placeholder="Tên của bạn *" class="form-control" name="name">
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
 						<label>Email của bạn *</label>
-						<input class="form-control">
+						<input placeholder="Email của bạn *" class="form-control">
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
 						<label>Tóm tắt nội dung</label>
-						<input class="form-control">
+						<input placeholder="Tóm tắt nội dung" class="form-control">
 					</div>
 				</div>
 			</div>
@@ -120,9 +120,7 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						<label>Chi tiết thông điệp</label>
-						<textarea rows="5" class="form-control">
-
-						</textarea>
+						<textarea placeholder="Chi tiết thông điệp" rows="5" class="form-control" style="max-width: 100%;min-width: 100%;min-height: 150px;"></textarea>
 					</div>
 					<button type="button" class="btn btn-orange pull-right" >Gửi</button>
 				</div>

@@ -87,6 +87,8 @@ function loadResultSearch(page) {
 					html += '<div class="col-md-2"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-child fa-stack-1x text-white"></i></span><p class="sv_loc_text">BODY</p></div>';
 					html += '<div class="col-md-2"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-cut fa-stack-1x text-white"></i></span><p class="sv_loc_text">TÓC</p></div>';
 					html += '<div class="col-md-2"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-hand-o-up fa-stack-1x text-white"></i></span><p class="sv_loc_text">MÓNG</p></div>';
+					html += '<div class="col-md-2"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-heart fa-stack-1x text-white"></i></span><p class="sv_loc_text">FITNESS</p></div>';
+					html += '<div class="col-md-2 pointer"><span class="fa-stack">>>></span><p class="sv_loc_text">Khác</p></div>';
 					html += '</div>';
 					//can not imagine
 					html += '</div>';

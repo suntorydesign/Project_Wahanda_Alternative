@@ -1,5 +1,9 @@
 $(document).ready(function() {
 	loadAdvantageSearch();
+	$('#price_range').on('input change', function(){
+		// console.log($(this).val());
+		$('#price_change').text($(this).val()*50000);
+	});
 });
 /*LOAD ADVANTAGE SEARCH*/
 function loadAdvantageSearch() {

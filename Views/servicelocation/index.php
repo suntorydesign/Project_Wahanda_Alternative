@@ -197,12 +197,12 @@
 				<div class="filter-4">
 					<p class="filter-name">LOẠI DỊCH VỤ</p>
 					<div id="service_type">
-						<div>
+						<!-- <div>
 							<input id="filter-4-1" type="radio" name="service_type"> 
 							<label for="filter-4-1">Vệ sinh móng</label>
 							<span class="pull-right badge">24</span>
 						</div>
-						<a href="#">>>> Xem thêm loại dịch vụ khác (7)</a>
+						<a href="#">>>> Xem thêm loại dịch vụ khác (7)</a> -->
 					</div>
 				</div>
 				<div class="divider"></div>
@@ -210,17 +210,17 @@
 				<div class="filter-4">
 					<p class="filter-name">DỊCH VỤ</p>
 					<div id="service">
-						<div>
+						<!-- <div>
 							<input id="filter-4-1" type="checkbox" name="service"> 
 							<label for="filter-4-1">Vệ sinh móng</label>
 							<span class="pull-right badge">24</span>
 						</div>
-						<a href="#">>>>Xem thêm dịch vụ khác (7)</a>
+						<a href="#">>>>Xem thêm dịch vụ khác (7)</a> -->
 					</div>
 				</div>
 				<div class="divider"></div>
 				
-				<div class="filter-5">
+				<!-- <div class="filter-5">
 					<p class="filter-name">SẢN PHẨM</p>
 					<div>
 						<input id="filter-5-1" type="checkbox" name=""> 
@@ -234,12 +234,12 @@
 					</div>
 					<a href="#">>>> Thêm sản phẩm khác (7)</a>
 				</div>
-				<div class="divider"></div>
+				<div class="divider"></div> -->
 
 				<div class="filter-6">
 					<p class="filter-name">KHOẢNG GIÁ</p>
 					<div class="row">
-						<div class="col-md-12 text-center"><span class="sv_loc_text">50.000 - 5.000.000 vnđ<span></div>
+						<div class="col-md-12 text-center"><span class="sv_loc_text"><span id="price_change">0</span> - 5000000 vnđ<span></div>
 						<div class="col-md-12"><input type="range" value="0" name="price_range" id="price_range" /></div>
 					</div>
 				</div>
