@@ -196,6 +196,15 @@ GROUP BY service.service_id
 SQL;
 		$select = $this -> db -> select($sql);
 		$return['service'] = $select;
+		$sql = <<<SQL
+SELECT user_service_use_evoucher,
+COUNT(*) AS user_evoucher
+FROM user_service
+WHERE user_service_delete_flg = 0
+GROUP BY user_service_use_evoucher
+SQL;
+		$select = $this -> db -> select($sql);
+		$return['evoucher'] = $select;
 		echo json_encode($return);
 	}
 

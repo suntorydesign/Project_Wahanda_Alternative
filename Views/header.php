@@ -25,6 +25,8 @@
         <link rel="stylesheet" href="<?php echo ASSETS ?>plugins/font-awesome/css/font-awesome.min.css" type="text/css"  />
         
         <link rel="stylesheet" href="<?php echo ASSETS ?>plugins/wysibb/theme/default/wbbtheme.css" type="text/css"  />
+        
+        <link rel="stylesheet" href="<?php echo ASSETS ?>plugins/bootstrap-datepicker/css/datepicker.css" type="text/css"  />
 
         <link rel="stylesheet" href="<?php echo ASSETS ?>css/home-page/home-page.css" type="text/css"  />
 
