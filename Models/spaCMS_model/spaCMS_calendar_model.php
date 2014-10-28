@@ -107,6 +107,8 @@ SQL;
 			a.appointment_time_start as 'data_time_start', 
 			a.appointment_time_end as 'data_time_end',
 			a.appointment_price as 'data_price',
+			a.appointment_note as 'data_note',
+			us.user_service_id as 'data_us_id', 
 			us.user_service_name as 'data_us_name', 
 			us.user_service_duration as 'data_us_duration', 
 			a.appointment_client_name as 'data_client_name',
@@ -150,6 +152,8 @@ SQL;
 			bd.booking_detail_time_start as 'data_time_start', 
 			bd.booking_detail_time_end as 'data_time_end',
 			bd.booking_detail_price as 'data_price', 
+			bd.booking_detail_note as 'data_note', 
+			us.user_service_id as 'data_us_id', 
 			us.user_service_name as 'data_us_name', 
 			us.user_service_duration as 'data_us_duration', 
 			c.client_name as 'data_client_name', 
@@ -234,7 +238,7 @@ SQL;
 			}
 			$data["$key"] = $value;
 		}
-
+		
 		if( $this->db->insert('appointment', $data) ){
 			echo 'success';
 		} else {
@@ -367,22 +371,19 @@ SQL;
 		$data_id = $_POST['data_id'];
 		$data_type = $_POST['data_type'];
 
-		// Trạng thái hoàn thành
-		$data = array(
-			"appointment_status" => 1
-		);
-		// foreach ($_POST as $key => $value) {
-		// 	if($key == "url") {
-		// 		continue;
-		// 	}
-		// 	$data["$key"] = $value;
-		// }
-
 		if($data_type == "appointment") {
+			// Trạng thái hoàn thành
+			$data = array(
+				"appointment_status" => 1
+			);
 			$rs = $this->db->update("appointment", $data, "appointment_id = $data_id");
 		}
 
 		if($data_type == "booking_detail") {
+			// Trạng thái hoàn thành
+			$data = array(
+				"booking_detail_status" => 1
+			);
 			$rs = $this->db->update("booking_detail", $data, "booking_detail_id = $data_id");	
 		}
 

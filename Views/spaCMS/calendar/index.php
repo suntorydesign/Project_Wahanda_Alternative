@@ -424,7 +424,7 @@
                                         <label for="appointment-offerId">Dịch vụ</label>
                                     </td>
                                     <td class="input-part">
-                                        <select id="list_gus" class="v-appointment-service required select2 list_gus" name="user_service_service_id">
+                                        <select id="list_gus" class="v-appointment-service required select2 list_gus" name="user_service_service_id" required title="Trước tiên, bạn hãy chọn loại dịch vụ.">
                                         	<option value="">Chọn dịch vụ</option>
 											<!-- List service system -->
 
@@ -433,7 +433,7 @@
                                 </tr>
                                 <tr class="hidden">
                                     <td class="label-part">
-                                        <label for="appointment-offerId">Giá</label>
+                                        <label>Giá</label>
                                     </td>
                                     <td class="input-part">
                                         <input type="hidden" name="appointment_price">
@@ -480,7 +480,7 @@
                                     </td>
                                     <td class="input-part">
                                         <span class="user_service_duration">00</span> phút.
-                                        <span class="help-txt">Kết thúc lúc <span id="appointment_time_end" class="appointment_time_end">00:00</span></span>
+                                        <span class="help-txt">Kết thúc lúc <span class="appointment_time_end">00:00</span></span>
                                         <input type="hidden" name="appointment_time_end"> 
                                     </td>
                                 </tr>
@@ -493,7 +493,7 @@
                                         <label class="optional" for="appointment-notes">Ghi chú </label>
                                     </td>
                                     <td class="input-part">
-                                        <textarea rows="6" cols="5" class="full" id="appointment-notes" name="appointment-notes"></textarea>
+                                        <textarea rows="6" cols="5" class="full" id="appointment-notes" name="appointment_note"></textarea>
                                     </td>
                                 </tr>
                             </tbody>
@@ -704,8 +704,8 @@
                                         <label for="appointment-offerId">Dịch vụ</label>
                                     </td>
                                     <td class="input-part">
-                                        <select id="list_gus" class="v-appointment-service required select2 list_gus" name="user_service_service_id">
-                                        	<option value="">Chọn dịch vụ</option>
+                                        <select id="list_gus" class="v-appointment-service required select2 list_gus" name="user_service_service_id" data-placeholder="Vui lòng chọn loại dịch vụ" required title="Trước tiên, bạn hãy chọn loại dịch vụ.">
+                                        	<option value="">Chọn loại dịch vụ</option>
 											<!-- List service system -->
 
                                         </select>
@@ -724,10 +724,10 @@
                                         <label for="appointment_date">Ngày</label>
                                     </td>
                                     <td class="input-part">
-                                        <input id="appointment_date" type="text" readonly="true" style="width:90px; padding:0 5px;">
+                                        <input class="appointment_date" type="text" readonly="true" style="width:90px; padding:0 5px;">
                                         <input type="hidden" name="appointment_date" />
-                                        <input type="hidden" name="appointment_created" />
-                                        <input type="hidden" name="appointment_updated" />
+                                        <!-- <input type="hidden" name="appointment_created" />
+                                        <input type="hidden" name="appointment_updated" /> -->
 
                                         Bắt đầu lúc: 
                                         <select name="appointment_time_start" class="required appointment_time_start">
@@ -760,7 +760,7 @@
                                     </td>
                                     <td class="input-part">
                                         <span class="user_service_duration">00</span> phút.
-                                        <span class="help-txt">Kết thúc lúc <span id="appointment_time_end" class="appointment_time_end">00:00</span></span>
+                                        <span class="help-txt">Kết thúc lúc <span class="appointment_time_end">00:00</span></span>
                                         <input type="hidden" name="appointment_time_end"> 
                                     </td>
                                 </tr>

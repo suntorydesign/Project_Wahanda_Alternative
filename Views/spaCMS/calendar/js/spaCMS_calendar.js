@@ -57,7 +57,14 @@ var LoadMoreInfo = function() {
 
 var Calendar = function(){
     /////////// DANH SÁCH CÁC ĐỐI TƯỢNG CỦA VIEW SẼ GÂY RA ACTION CONTROLLER ///////
+    // confirmedAppointment
+    var cA_modal = $("#confirmedAppointment_modal");
+    // DOM button action
+    var edit_appointment_action = cA_modal.find('.edit_appointment_action');
+    var delete_appointment_action = cA_modal.find('.delete_appointment_action');
+    var complete_appointment_action = cA_modal.find('.complete_appointment_action');
 
+    var eCA_modal = $("#editConfirmedAppointment_modal");
     ////////////////////// DANH SÁCH CONTROLLER ĐƯỢC GỌI ///////////////////////////
 
     var xhrGet_calendar = function() {
@@ -88,14 +95,14 @@ var Calendar = function(){
                 var aA_modal            = $('#addAppointment_modal');
                 var select_list_us      = $('.list_gus'); // Selectbox user_service
                 var select_app_start    = aA_modal.find('.appointment_time_start'); // DOM của appointment_time_start 
-                var us_duration         = aA_modal.find('.user_service_duration'); // user_service_duration
+                var user_service_duration = aA_modal.find('.user_service_duration'); // user_service_duration
 
                 var app_date    = $('input[name=appointment_date]', aA_modal);
                 var app_date_2  = aA_modal.find('.appointment_date');
                 var app_created = $('input[name=appointment_created]', aA_modal);
-                var app_time_end_2 = aA_modal.find('.appointment_time_end');
-                var app_time_end = ('input[name=appointment_time_end]', aA_modal);
-                var app_price = $('input[name=appointment_price]', aA_modal);
+                var appointment_time_end_2  = aA_modal.find('.appointment_time_end');
+                var appointment_time_end    = $('input[name=appointment_time_end]', aA_modal);
+                var appointment_price       = $('input[name=appointment_price]', aA_modal);
 
                 // Kiểm tra ngày này spa có mở cửa hay không?
                 var weekly = convert_num2dayval(date.format('d'));
@@ -157,7 +164,7 @@ var Calendar = function(){
                             //// Dịch vụ này (us_id), ngày này (date) có danh sách thời gian đã đặt chỗ
                             var url = URL + "spaCMS/calendar/xhrGet_appointment_confirmed";
                             $.get(url, {'us_id':us_id, 'date':date.format()}, function(data_schedule){
-                                console.log(data_schedule);
+                                // console.log(data_schedule);
                                 while( timeStart_value < timeStart_end )
                                 {   
                                     // Kiểm tra: thời gian này đã được đặt trước đó chưa?
@@ -200,12 +207,12 @@ var Calendar = function(){
                         },'json')
                         .done(function(){
                             // Thông báo thời gian phục vụ của dịch vụ này
-                            us_duration.text(us_duration);
+                            user_service_duration.text(us_duration);
                             // Thông báo khởi tạo thời gian kết thúc dịch vụ
-                            app_time_end_2.text(app_time_end);
-                            app_time_end.val(app_time_end);
+                            appointment_time_end_2.text(app_time_end);
+                            appointment_time_end.val(app_time_end);
                             // Thông báo ngầm giá tiền dịch vụ
-                            app_price.val(us_price);
+                            appointment_price.val(us_price);
                         });
                     });
 
@@ -231,13 +238,13 @@ var Calendar = function(){
           
             },
             eventClick: function(e) {
-                // confirmedAppointment
-                var cA_modal = $("#confirmedAppointment_modal");
-                // DOM button action
-                var edit_appointment_action = cA_modal.find('.edit_appointment_action');
-                var delete_appointment_action = cA_modal.find('.delete_appointment_action');
-                var complete_appointment_action = cA_modal.find('.complete_appointment_action');
-
+                // // confirmedAppointment
+                // var cA_modal = $("#confirmedAppointment_modal");
+                // // DOM button action
+                // var edit_appointment_action = cA_modal.find('.edit_appointment_action');
+                // var delete_appointment_action = cA_modal.find('.delete_appointment_action');
+                // var complete_appointment_action = cA_modal.find('.complete_appointment_action');
+                
 
                 // DOM thời gian
                 var weekday = cA_modal.find('.weekday');
@@ -393,10 +400,32 @@ var Calendar = function(){
             var done = self.find('.done');
             loading.fadeIn();
             done.hide();
-
-            var url = URL + "spaCMS/calendar/xhrGet_appointment_for_edit";
-            $.get(url, {"data_id":data_id, "data_type":data_type}, function(data){
+            
+            var url = null;
+            if(data_type == "appointment"){
+            	url = URL + "spaCMS/calendar/xhrGet_appointment";
+            }
+            else if(data_type == "booking_detail") {
+            	url = URL + "spaCMS/calendar/xhrGet_booking";
+            }
+            $.get(url, {"data_id":data_id}, function(data){
                 console.log(data);
+                // DOM 
+                var data_client_name    = eCA_modal.find('.client_name');
+                var data_client_phone   = eCA_modal.find('.client_phone');
+                var data_client_note    = eCA_modal.find('.client_note');
+
+                var data_us_id      = $('select[name=user_service_service_id]', eCA_modal);
+                var data_price      = $('input[name=appointment_price]', eCA_modal);
+                var data_date       = $('input[name=appointment_date]', eCA_modal);
+                var data_date_2     = eCA_modal.find('.appointment_date');
+                var data_time_start = $('select[name=appointment_time_start]', eCA_modal);
+                var data_time_end   = $('input[name=appointment_time_end]', eCA_modal);
+                var data_time_end_2 = eCA_modal.find('.appointment_time_end');
+                var data_us_duration= eCA_modal.find('.user_service_duration');
+                var data_note       = eCA_modal.find('.appointment_note');
+
+                
             })
             .done(function(){
                 loading.hide();
@@ -533,9 +562,11 @@ $(document).ready(function(){
         app_time_start_choice   = convert_Hour2Min(app_time_start_choice);
         app_time_end_choice     = app_time_start_choice + us_duration;
         app_time_end_choice     = convert_Min2Hour(app_time_end_choice);
-
-        $('.appointment_time_end').text(app_time_end_choice);
-        $('input[name=appointment_time_end]').val(app_time_end_choice);
+        
+        var aA_modal = $('#addAppointment_modal');
+        var appointment_time_end = aA_modal.find('.appointment_time_end');
+        appointment_time_end.text(app_time_end_choice);
+        $('input[name=appointment_time_end]', aA_modal).val(app_time_end_choice);
     });
 });
 
