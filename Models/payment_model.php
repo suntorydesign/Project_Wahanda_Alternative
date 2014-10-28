@@ -118,7 +118,6 @@ INSERT INTO booking
 VALUES(
 '{$booking_id}'
 , CURRENT_DATE()
-, {$status}
 , {$total_money}
 , {$client_id}
 )
@@ -139,6 +138,7 @@ INSERT INTO booking_detail(
 ,`booking_detail_user_id`
 ,`booking_detail_user_service_id`
 ,`booking_detail_booking_id`
+,`booking_detail_status`
 )
 VALUES(
 '{$value['choosen_price']}'
@@ -149,6 +149,7 @@ VALUES(
 , '{$value['user_id']}'
 , '{$value['user_service_id']}'
 , '{$booking_id}'
+, {$status}
 )
 SQL;
 								$insert_2 = $this -> db -> prepare($query);
@@ -179,6 +180,7 @@ INSERT INTO e_voucher(
 ,`e_voucher_user_service_id`
 ,`e_voucher_booking_id`
 ,`e_voucher_user_id`
+,`e_voucher_status`
 )
 VALUES(
 '{$e_voucher_id}'
@@ -188,6 +190,7 @@ VALUES(
 , '{$value['user_service_id']}'
 , '{$booking_id}'
 , '{$value['user_id']}'
+, {$status}
 )
 SQL;
 								$insert_3 = $this -> db -> prepare($query);
@@ -251,7 +254,6 @@ INSERT INTO booking
 VALUES(
 '{$booking_id}'
 , CURRENT_DATE()
-, {$status}
 , {$total_money}
 , {$client_id}
 )
@@ -272,6 +274,7 @@ INSERT INTO booking_detail(
 ,`booking_detail_user_id`
 ,`booking_detail_user_service_id`
 ,`booking_detail_booking_id`
+,`booking_detail_status`
 )
 VALUES(
 '{$value['choosen_price']}'
@@ -282,6 +285,7 @@ VALUES(
 , '{$value['user_id']}'
 , '{$value['user_service_id']}'
 , '{$booking_id}'
+, {$status}
 )
 SQL;
 						$insert_2 = $this -> db -> prepare($query);
@@ -312,6 +316,7 @@ INSERT INTO e_voucher(
 ,`e_voucher_user_service_id`
 ,`e_voucher_booking_id`
 ,`e_voucher_user_id`
+,`e_voucher_status`
 )
 VALUES(
 '{$e_voucher_id}'
@@ -321,6 +326,7 @@ VALUES(
 , '{$value['user_service_id']}'
 , '{$booking_id}'
 , '{$value['user_id']}'
+, {$status}
 )
 SQL;
 						$insert_3 = $this -> db -> prepare($query);
