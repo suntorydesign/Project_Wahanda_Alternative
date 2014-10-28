@@ -1,63 +1,4 @@
-<div id="header-2" class="clearfix">
-	<!--
-	#################################
-		- THEMEPUNCH BANNER -
-	#################################
-	-->
-	<div class="tp-banner-container">
-		<div class="tp-banner" >
-			<ul>
-				<!-- SLIDE  -->
-				<li data-transition="fade" data-slotamount="7" data-masterspeed="1500" >
-					<!-- MAIN IMAGE -->
-					<img src="<?php echo ASSETS;?>img/slider-image-01.jpg"  alt="Spa Hồng Vân"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-					<!-- LAYERS -->
-					<!-- LAYER NR. 1 -->
-					<div class="tp-caption lightgrey_divider skewfromrightshort fadeout"
-						data-x="85"
-						data-y="224"
-						data-speed="500"
-						data-start="1200"
-						data-easing="Power4.easeOut">Spa Hồng Vân
-					</div>
-					Địa điểm 245 Trường Chinh, Tp.HCM
 
-				</li>
-				<!-- SLIDE  -->
-				<li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000" >
-					<!-- MAIN IMAGE -->
-					<img src="<?php echo ASSETS;?>img/slider-image-02.jpg"  alt="Spa Ngọc Trinh"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-					<!-- LAYERS -->
-					<!-- LAYER NR. 1 -->
-					<div class="tp-caption lightgrey_divider skewfromrightshort fadeout"
-						data-x="85"
-						data-y="224"
-						data-speed="500"
-						data-start="1200"
-						data-easing="Power4.easeOut">My Caption
-					</div>
-					...
-				</li>
-				<!-- SLIDE  -->
-				<li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000" >
-					<!-- MAIN IMAGE -->
-					<img src="<?php echo ASSETS;?>img/slider-image-03.png"  alt="Người mẫu"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-					<!-- LAYERS -->
-					<!-- LAYER NR. 1 -->
-					<div class="tp-caption lightgrey_divider skewfromrightshort fadeout"
-						data-x="85"
-						data-y="224"
-						data-speed="500"
-						data-start="1200"
-						data-easing="Power4.easeOut">My Caption
-					</div>
-					...
-				</li>
-				....
-			</ul>
-		</div>
-	</div>
-</div>
 
 <div class="container">
 	<!-- Booking detail -->
@@ -87,9 +28,9 @@
 					<button id="btn_online_payment" onclick="jumbToPaymentTab('online_payment')" class="btn btn-choose">
 						Thanh toán online
 					</button>
-					<button id="btn_venue_payment" onclick="jumbToPaymentTab('venue_payment')" class="btn btn-orange">
+					<!-- <button id="btn_venue_payment" onclick="jumbToPaymentTab('venue_payment')" class="btn btn-orange">
 						Thanh toán tại địa điểm
-					</button>
+					</button> -->
 				</div>
 			</div>
 			<br />
@@ -165,7 +106,7 @@
 				</div>
 				<!-- END PAYPAL -->
 				<!-- VENUE PAYMENT -->
-				<div id="venue_payment" style="display: none;" class="col-md-12">
+				<!-- <div id="venue_payment" style="display: none;" class="col-md-12">
 					<div class="row">
 						<div class="col-md-12">
 							<small style="font-size: 13px;">Bạn sẽ được tính tiền ở các địa điểm sau khi thực hiện cuộc hẹn. </small>
@@ -190,7 +131,7 @@
 							</button>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- END VENUE PAYMENT -->
 			</div>
 			<br />
