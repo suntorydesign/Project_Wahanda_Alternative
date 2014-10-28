@@ -353,7 +353,7 @@
                     </a>
                 </div>
                 <div scrollleft="0" scrolltop="0" class="ui-dialog-content ui-widget-content" id="appointment-dialog">
-                <form novalidate="novalidate">
+                <form id="editConfirmedAppointment_form" action="#" method="POST">
                     <div class="dialog-content clearfix">
                         <table class="default-form part-one" cellpadding="0" cellspacing="0">
                             <tbody>
@@ -372,23 +372,23 @@
                                         <ul class="person-info b-person-info">
                                             <li class="person-name">
                                                 <span class="b-consumer-name">
-                                                    <a href="javascript:;" class="f-consumer-name a-show-customer">0903676222</a>
+                                                    <a href="javascript:;" class="f-consumer-name a-show-customer client_name">0903676222</a>
                                                 </span>
-                                                <a href="javascript:;" class="edit-link a-consumer-edit" data-toggle="modal" data-target="#editClient_modal">Sửa</a>
+                                                <a href="javascript:;" class="edit-link a-consumer-edit edit_client_action" data-toggle="modal" data-target="#editClient_modal">Sửa</a>
                                                 <a style="display: none;" href="javascript:;" class="edit-link a-change-consumer">Change client</a>
                                             </li>
                                             <li class="consumer-phoneNumber-row b-consumer-phone">
                                                 <div class="icon icons-phone"></div>
-                                                <span class="v-consumer-phone">+84 90 367 62 22</span>
+                                                <span class="v-consumer-phone client_phone">+84 90 367 62 22</span>
                                             </li>
                                             <li style="display: list-item;" class="consumer-email-row b-consumer-email hidden">
                                                 <div class="icon icons-email"></div>
-                                                <span class=""><a href="mailto:" class="v-consumer-email">vietnt134@gmail.com</a></span>
+                                                <span class=""><a href="mailto:" class="v-consumer-email client_mail">vietnt134@gmail.com</a></span>
                                             </li>
                                             <li class="consumer-note-row b-customer-note">
                                                 <div class="client-note">
 
-                                                    <span class="note-wrapper v-customer-note">hello</span>
+                                                    <span class="note-wrapper v-customer-note client_note">hello</span>
 
                                                     <div class="icons-note-tip2"></div>
                                                 </div>
@@ -424,26 +424,33 @@
                                         <label for="appointment-offerId">Dịch vụ</label>
                                     </td>
                                     <td class="input-part">
-                                        <select id="appointment-offerId" class="v-appointment-service required" name="appointment-offerId"><option value="">Not set</option><optgroup label="aaa" data-group-id="24287"><option value="offer:601975" class="offer" data-sku-id="341263" data-duration="60">A kas su ki (1 h )</option></optgroup><optgroup label="fgfhg" data-group-id="23664"><option value="offer:598645" class="offer" data-sku-id="335484" data-duration="60">ghgfhgfh (1 h )</option></optgroup><optgroup label="Body" data-group-id="22810"><option value="offer:593322" class="offer" data-sku-id="325832" data-duration="60">abcxyz (1 h )</option><option value="offer:598354" class="offer" data-duration="60">Acoustic Wave Therapy</option><option value="offer:598353" class="offer" data-duration="60">Acupuncture</option><option value="offer:598349" class="offer" data-duration="60">Body Exfoliation Treatments</option><option value="offer:598350" class="offer" data-duration="60">Heat Treatments</option><option value="offer:593319" class="offer" data-sku-id="325829" data-duration="60">Body Exfoliation Treatments (1 h )</option></optgroup><optgroup label="Spa" data-group-id="22811"><option value="offer:597142" class="offer" data-sku-id="333239" data-duration="60">dfdfdsfdf (1 h )</option></optgroup><optgroup label="Counselling &amp; Holistic" data-group-id="23622"><option value="offer:598351" class="offer" data-duration="60">Reiki</option><option value="offer:598352" class="offer" data-duration="60">Aromatherapy</option><option value="offer:598955" class="offer" data-duration="60">Addictions Counselling</option></optgroup><optgroup label="Dance" data-group-id="23662"><option value="offer:598488" class="offer" data-duration="60">Ballet</option><option value="offer:598644" class="offer" data-duration="60">Ballroom Dancing</option></optgroup><optgroup label="Fitness" data-group-id="24286"><option value="offer:598355" class="offer" data-duration="60">Acrobatics</option></optgroup></select>
+                                        <select id="list_gus" class="v-appointment-service required select2 list_gus" name="user_service_service_id">
+                                        	<option value="">Chọn dịch vụ</option>
+											<!-- List service system -->
+
+                                        </select>
                                     </td>
                                 </tr>
-                                <tr class="form-row appointment-sku form-element-wrapper hidden">
+                                <tr class="hidden">
                                     <td class="label-part">
-                                        <label for="appointment-skuId">Giá </label>
+                                        <label for="appointment-offerId">Giá</label>
                                     </td>
                                     <td class="input-part">
-                                        
+                                        <input type="hidden" name="appointment_price">
                                     </td>
                                 </tr>
                                 <tr class="form-row form-element-wrapper">
                                     <td class="label-part">
-                                        <label for="cv-appointment-appointmentDate">Ngày</label>
+                                        <label for="appointment_date">Ngày</label>
                                     </td>
                                     <td class="input-part">
-                                        <div class="txt-input date-input">
-                                            <input date-format="dd/mm/yy" class="datepicker required hasDatepicker" name="cv-appointment-appointmentDate" id="cv-appointment-appointmentDate" type="text">
-                                        </div>
-                                        <select name="appointment-startTime" id="appointment-startTime" class="required">
+                                        <input class="appointment_date" type="text" readonly="true" style="width:90px; padding:0 5px;">
+                                        <input type="hidden" name="appointment_date" />
+                                        <input type="hidden" name="appointment_created" />
+                                        <input type="hidden" name="appointment_updated" />
+
+                                        Bắt đầu lúc: 
+                                        <select name="appointment_time_start" class="required appointment_time_start">
                                             <option value="07:00">07:00</option>
                                             <option value="08:00">08:00</option>
                                             <option value="09:00">09:00</option>
@@ -472,52 +479,9 @@
                                         <label for="cv-appointment-duration">Thời gian</label>
                                     </td>
                                     <td class="input-part">
-                                        <select name="cv-appointment-duration" id="cv-appointment-duration" class="required">
-                                            <option value="10">10 min</option>
-                                            <option value="15">15 min</option>
-                                            <option value="20">20 min</option>
-                                            <option value="25">25 min</option>
-                                            <option value="30">30 min</option>
-                                            <option value="35">35 min</option>
-                                            <option value="40">40 min</option>
-                                            <option value="45">45 min</option>
-                                            <option value="50">50 min</option>
-                                            <option value="55">55 min</option>
-                                            <option value="60">1 h </option>
-                                            <option value="65">1 h 05 min</option>
-                                            <option value="70">1 h 10 min</option>
-                                            <option value="75">1 h 15 min</option>
-                                            <option value="80">1 h 20 min</option>
-                                            <option value="85">1 h 25 min</option>
-                                            <option value="90">1 h 30 min</option>
-                                            <option value="95">1 h 35 min</option>
-                                            <option value="100">1 h 40 min</option>
-                                            <option value="105">1 h 45 min</option>
-                                            <option value="110">1 h 50 min</option>
-                                            <option value="115">1 h 55 min</option>
-                                            <option value="120">2 h </option>
-                                            <option value="135">2 h 15 min</option>
-                                            <option value="150">2 h 30 min</option>
-                                            <option value="165">2 h 45 min</option>
-                                            <option value="180">3 h </option>
-                                            <option value="195">3 h 15 min</option>
-                                            <option value="210">3 h 30 min</option>
-                                            <option value="225">3 h 45 min</option>
-                                            <option value="240">4 h </option>
-                                            <option value="270">4 h 30 min</option>
-                                            <option value="300">5 h </option>
-                                            <option value="330">5 h 30 min</option>
-                                            <option value="360">6 h </option>
-                                            <option value="390">6 h 30 min</option>
-                                            <option value="420">7 h </option>
-                                            <option value="450">7 h 30 min</option>
-                                            <option value="480">8 h </option>
-                                            <option value="540">9 h </option>
-                                            <option value="600">10 h </option>
-                                            <option disabled="" value="660">11 h </option>
-                                            <option disabled="" value="720">12 h </option>
-                                        </select>
-                                        <span class="help-txt">Kết thúc lúc <span class="cv-end-time">14:00</span></span>
+                                        <span class="user_service_duration">00</span> phút.
+                                        <span class="help-txt">Kết thúc lúc <span id="appointment_time_end" class="appointment_time_end">00:00</span></span>
+                                        <input type="hidden" name="appointment_time_end"> 
                                     </td>
                                 </tr>
                             </tbody>
@@ -740,7 +704,7 @@
                                         <label for="appointment-offerId">Dịch vụ</label>
                                     </td>
                                     <td class="input-part">
-                                        <select id="list_gus" class="v-appointment-service required select2" name="user_service_service_id">
+                                        <select id="list_gus" class="v-appointment-service required select2 list_gus" name="user_service_service_id">
                                         	<option value="">Chọn dịch vụ</option>
 											<!-- List service system -->
 
@@ -766,7 +730,7 @@
                                         <input type="hidden" name="appointment_updated" />
 
                                         Bắt đầu lúc: 
-                                        <select name="appointment_time_start" id="appointment_time_start" class="required">
+                                        <select name="appointment_time_start" class="required appointment_time_start">
                                             <option value="07:00">07:00</option>
                                             <option value="08:00">08:00</option>
                                             <option value="09:00">09:00</option>
@@ -796,7 +760,7 @@
                                     </td>
                                     <td class="input-part">
                                         <span class="user_service_duration">00</span> phút.
-                                        <span class="help-txt">Kết thúc lúc <span id="appointment_time_end">00:00</span></span>
+                                        <span class="help-txt">Kết thúc lúc <span id="appointment_time_end" class="appointment_time_end">00:00</span></span>
                                         <input type="hidden" name="appointment_time_end"> 
                                     </td>
                                 </tr>
