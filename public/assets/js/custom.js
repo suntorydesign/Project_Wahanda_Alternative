@@ -1375,7 +1375,7 @@ function getBookingInfo() {
 			},
 			complete : function() {
 				$('#waiting_for_booking_save_b').fadeOut(function() {
-					cfirm = confirm('Đặt hẹn thành công!\nBạn có muốn tiếp tục mua voucher');
+					cfirm = confirm('Đặt hẹn thành công!\nBạn có muốn tiếp tục đặt hẹn');
 					if(cfirm == true){
 						
 					}else{

@@ -82,7 +82,7 @@
 				<div class="item col-md-7">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-search"></i></span>
-						<input type="text" name="s" class="form-control" placeHolder="Loại hình dịch vụ...">
+						<input type="text" name="s" class="form-control" placeHolder="Địa điểm, Loại hình dịch vụ...">
 					</div>
 				</div>
 				<div class="item col-md-3">

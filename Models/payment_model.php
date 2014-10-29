@@ -11,12 +11,10 @@ class payment_model extends Model {
 
 	public function processPaypalPayment($data) {
 		/*
-		 * status = 0 venue payment
-		 * status = 1 completed
-		 * status = 2 online paid but not do the appointment
+		 * status = 0 pending
 		 */
 		Session::initIdle();
-		$status = 2;
+		$status = 0;
 		$client_id = $_SESSION['client_id'];
 		$payment_type = $data['payment_type'];
 		$card_number = $data['card_number'];
@@ -158,25 +156,25 @@ SQL;
 						}
 						if (isset($_SESSION['eVoucher_detail'])) {
 							foreach ($_SESSION['eVoucher_detail'] as $key => $value) {
-								$bytes = openssl_random_pseudo_bytes(8);
-								$hex = bin2hex($bytes);
-								$e_voucher_id = 'E-' . $hex;
-								for ($i = 0; ; $i++) {
-									$check_e_voucher_id = $this -> checkExisteVoucherId($e_voucher_id);
-									if ($check_e_voucher_id == 0) {
-										break;
-									} else {
-										$bytes = openssl_random_pseudo_bytes(8);
-										$hex = bin2hex($bytes);
-										$e_voucher_id = 'E-' . $hex;
+								for($i = 0;$i<$value['booking_quantity'];$i++){		
+									$bytes = openssl_random_pseudo_bytes(8);
+									$hex = bin2hex($bytes);
+									$e_voucher_id = 'E-' . $hex;
+									for ($i = 0; ; $i++) {
+										$check_e_voucher_id = $this -> checkExisteVoucherId($e_voucher_id);
+										if ($check_e_voucher_id == 0) {
+											break;
+										} else {
+											$bytes = openssl_random_pseudo_bytes(8);
+											$hex = bin2hex($bytes);
+											$e_voucher_id = 'E-' . $hex;
+										}
 									}
-								}
-								$query = <<<SQL
+									$query = <<<SQL
 INSERT INTO e_voucher(
 `e_voucher_id`
 ,`e_voucher_due_date`
 ,`e_voucher_price`
-,`e_voucher_quantity`
 ,`e_voucher_user_service_id`
 ,`e_voucher_booking_id`
 ,`e_voucher_user_id`
@@ -186,15 +184,15 @@ VALUES(
 '{$e_voucher_id}'
 ,'{$value['eVoucher_due_date']}'
 , '{$value['choosen_price']}'
-, '{$value['booking_quantity']}'
 , '{$value['user_service_id']}'
 , '{$booking_id}'
 , '{$value['user_id']}'
 , {$status}
 )
 SQL;
-								$insert_3 = $this -> db -> prepare($query);
-								$insert_3 -> execute();
+									$insert_3 = $this -> db -> prepare($query);
+									$insert_3 -> execute();
+								}
 							}
 						}
 					} else {

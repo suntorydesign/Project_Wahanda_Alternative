@@ -24,6 +24,9 @@ class servicelocation_model extends Model {
 		foreach ($service_name as $i => $item) {
 			$where .= "user_service.user_service_name LIKE '%{$value}%' OR ";
 		}
+		foreach ($service_name as $i => $item) {
+			$where .= "user.user_business_name LIKE '%{$value}%' OR ";
+		}
 		$where = substr($where, 0, strlen($where) - 4);
 		$where .= ')';
 		// if($data['service_name'] == ''){
@@ -152,6 +155,9 @@ SQL;
 		}
 		foreach ($service_name as $i => $item) {
 			$where .= "user_service.user_service_name LIKE '%{$value}%' OR ";
+		}
+		foreach ($service_name as $i => $item) {
+			$where .= "user.user_business_name LIKE '%{$value}%' OR ";
 		}
 		$where = substr($where, 0, strlen($where) - 4);
 		$where .= ')';
