@@ -1375,7 +1375,13 @@ function getBookingInfo() {
 			},
 			complete : function() {
 				$('#waiting_for_booking_save_b').fadeOut(function() {
-					$('#service_detail').modal('hide');
+					cfirm = confirm('Đặt hẹn thành công!\nBạn có muốn tiếp tục mua voucher');
+					if(cfirm == true){
+						
+					}else{
+						$('#service_detail').modal('hide');
+						shoppingCartDetail();
+					}	
 					$('button.booking_button').attr('disabled', false);
 				});
 			}
@@ -1409,7 +1415,13 @@ function geteVoucherInfo() {
 			},
 			complete : function() {
 				$('#waiting_for_booking_save_e').fadeOut(function() {
-					$('#service_detail').modal('hide');
+					cfirm = confirm('Đặt hẹn thành công!\nBạn có muốn tiếp tục đặt hẹn');
+					if(cfirm == true){
+						
+					}else{
+						$('#service_detail').modal('hide');
+						shoppingCartDetail();
+					}	
 					$('button.booking_button').attr('disabled', false);
 				});
 			}

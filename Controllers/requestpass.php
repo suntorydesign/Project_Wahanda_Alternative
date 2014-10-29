@@ -57,7 +57,7 @@ class requestpass extends Controller {
 				// or 587
 				$mail -> IsHTML(true);
 				$mail -> Username = "vietnt134@gmail.com";
-				$mail -> Password = "whatdidyoudo1341996";
+				$mail -> Password = "whathaveyoudone1341996";
 				$mail -> SetFrom("wahanda@gmail.com");
 				$mail -> Subject = "Xác nhận yêu cầu đổi password từ Wahanda!";
 				$mail -> Body = $body;

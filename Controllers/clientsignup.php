@@ -76,12 +76,13 @@ class clientsignup extends Controller {
 		// or 587
 		$mail -> IsHTML(true);
 		$mail -> Username = "vietnt134@gmail.com";
-		$mail -> Password = "whatdidyoudo1341996";
+		$mail -> Password = "whathaveyoudone1341996";
 		$mail -> SetFrom("wahanda@gmail.com");
 		$mail -> Subject = "Xác nhận thông tin đăng ký từ Wahanda!";
 		$mail -> Body = $body;
 		$mail -> AddAddress($data['client_email']);
 		if (!$mail -> Send()) {
+			
 			echo "Mailer Error: " . $mail -> ErrorInfo;
 		} else {
 			$this -> model -> signup($data);
