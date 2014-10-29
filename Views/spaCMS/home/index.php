@@ -36,7 +36,7 @@
 				<a class="home-listing-block-enhanced-wrapper" href="javascript:;"> <div class="icon icons-review-request"></div> <span class="part-title">Want more reviews?</span> <span class="link-txt">Ask your customers</span> <span class="txt"></span> </a>
 			</div>
 
-			<button class="button button-primary redeem" type="button" data-toggle="modal" data-target="#redeemVoucher_modal">
+			<button id="redeem" class="button button-primary redeem" type="button">
 				<div class="button-inner">
 					<div class="button-icon icons-voucher"></div>
 					Xác thực eVoucher
@@ -395,32 +395,40 @@
 						</div>
 
 						<div class="voucher-info display_none">
-							<ul class="voucher-container">
-								<li class="price-wrapper hidden">
-									<span class="evoucher-price"></span>
-								</li>
-								<li class="title-wrapper hidden">
-									<span class="title"></span>
-								</li>
-								<li class="status-wrapper status-active">
-									Status:
-									<span class="evoucher-status status-txt"></span>
-								</li>
-								<li class="expiration-wrapper">
-									<span class="label-wrapper">Expires on</span>
-									<span class="evoucher-expiry"></span>
-								</li>
-								<li class="recipient-wrapper">
-									<span class="label-wrapper">Quantity</span>
-									<span class="evoucher-recipient"></span>
-								</li>
-							</ul>
-							<div class="meta-wrapper">
-								Booking ID:
-								<span class="e_voucher_booking_id"></span>
+							<table class="table table-bordered">
+								<tbody>
+									<tr>
+										<th class="active">Tên KH</th>
+										<td class="client_name"></td>
+									</tr>
+									<tr>
+										<td class="active">Sđt KH</td>
+										<td class="client_phone"></td>
+									</tr>
+									<tr>
+										<td class="active">Booking ID</td>
+										<td class="booking_id"></td>
+									</tr>
+									<tr>
+										<td class="active">Dịch vụ</td>
+										<td class="user_service_name"></td>
+									</tr>
+									<tr>
+										<td class="active">Mệnh giá</td>
+										<td class="e_voucher_price"></td>
+									</tr>
+									<tr>
+										<td class="active">Ngày hết hạn</td>
+										<td class="e_voucher_due_date"></td>
+									</tr>
 
-								<!-- <span class="b-booking-link "> <span class="separator">|</span>  -->
-								<!-- Booking ID: <a class="evoucher-booking-id" href="javascript:;"></a> </span> -->
+								</tbody>
+							</table>
+							<div class="meta-wrapper">
+								Status:
+								<!-- <span class="evoucher-order-ref "></span> -->
+								<span class="status status-unpaid e_voucher_status_1 display_none">Đã được sử dụng</span>
+								<span class="status-prepaid label label-confirmed e_voucher_status_0 display_none">Chưa sử dụng</span>
 							</div>
 							<div class="venue-wrapper hidden">
 								<form novalidate="novalidate">
@@ -434,14 +442,15 @@
 									</table>
 								</form>
 							</div>
-							<div class="message-wrapper message-valid hidden">
-								<div class="message">
-									<span class="v-message-title">Voucher redeemed</span>
-									<span class="payment-date b-payment-date v-payment-date"></span>
-								</div>
-							</div>
+						</div>
+						<div class="message-wrapper message-valid voucher-redeem-success display_none">
+						<div class="message">
+							<span class="v-message-title">Xác nhận Voucher thành công!</span>
+							<span class="payment-date b-payment-date v-payment-date"></span>
 						</div>
 					</div>
+					</div>
+					
 					<div class="dialog-actions">
 						<!-- <button class="button action action-default button-primary redeem-another " type="button">
 							<div class="button-inner">
@@ -449,11 +458,11 @@
 								Redeem another
 							</div>
 						</button> -->
-						<button class="button action action-default button-primary redeem-action" type="button" style="display:none;">
+						<button class="button action-default button-primary redeem-action" type="button" style="display:none;">
 							<div class="button-inner">
 								<div class="button-icon icons-voucher done"></div>
-								<div class="button-icon icons-voucher fa fa-spin fa-refresh loading"></div>
-								Redeem
+								<div class="button-icon fa fa-spin fa-refresh loading"></div>
+								Sử dụng eVoucher
 							</div>
 						</button>
 						<!-- <button class="button button-primary a-create-appointment " type="button">

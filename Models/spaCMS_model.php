@@ -51,6 +51,10 @@ class SpaCMS_Model extends Model {
 		SpaCMS_Home_Model::get_redeem_voucher();
 	}
 
+	function update_e_voucher() {
+		SpaCMS_Home_Model::update_e_voucher();
+	}
+
 	///////////////////////////// CALENDAR //////////////////////////
 	function get_calendar() {
 		SpaCMS_Calendar_Model::get_calendar();
@@ -99,6 +103,10 @@ class SpaCMS_Model extends Model {
 	///////////////////////////// MENU //////////////////////////
 	function get_group_user_service() {
 		SpaCMS_Menu_Model::get_group_user_service();
+	}
+
+	function getOM_add_group() {
+		SpaCMS_Menu_Model::getOM_add_group();
 	}
 
 	function insert_user_service() {

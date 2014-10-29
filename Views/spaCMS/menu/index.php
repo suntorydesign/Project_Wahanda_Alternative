@@ -11,9 +11,10 @@
 
 		<div class="data-actions b-menu-edit-actions">
 			<div id="menu_group" title='<strong>Add a group</strong> - Menu groups allow you to arrange your services in the way you prefer our customers to see them. Using generic treatment types like "Hair", "Nails" or "Spa days" works best.' class="tooltips tooltips-top button-wrapper b-action">
-				<button class="button button-primary add-group" type="button" data-toggle="modal" data-target="#addGroupName_modal">
+				<button class="button button-primary add-group" type="button">
 					<div class="button-inner">
-						<div class="button-icon icons-plus"></div>
+						<div class="button-icon icons-plus done"></div>
+						<div class="button-icon fa fa-spin fa-refresh loading"></div>
 						Thêm nhóm dịch vụ
 					</div>
 				</button>
@@ -116,9 +117,10 @@
 										<tr class="form-row">
 											<td class="label-part"><label for="cat-name" style="padding-top: 3px;">Tên nhóm dịch vụ</label></td>
 											<td class="input-part">
-											<div class="txt-input form-element-wrapper">
-												<input type="text" maxlength="100" name="group_service_name" id="cat-name" required pattern=".{6,}" title="ít nhất 6 ký tự">
-											</div></td>
+												<select id="group_service_name" style="width:350px" required title="Vui lòng chọn">
+													<option></option>
+									            </select>
+											</td>
 										</tr>
 									</tbody>
 								</table>

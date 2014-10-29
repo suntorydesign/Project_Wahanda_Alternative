@@ -32,6 +32,10 @@
 				case 'xhrGet_redeem_voucher':
 					$this->model->get_redeem_voucher();
 					break;
+
+				case 'xhrUpdate_e_voucher':
+					$this->model->update_e_voucher();
+					break;
 					
 				default:
 					$this->view->style = array(
@@ -55,6 +59,10 @@
 			switch ($xhr) {
 				case 'xhrGet_service_system':
 					$this->model->get_service_system();
+					break;
+
+				case 'xhrGetOM_add_group':
+					$this->model->getOM_add_group();
 					break;
 
 				case 'xhrGet_group_user_service':

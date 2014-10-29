@@ -361,4 +361,20 @@ SQL;
 	}
 
 
+	/**
+	 * Danh sách tất cả nhóm loại dịch vụ cho xhrGetOM_add_group
+	 * @return json
+	 */
+	public function getOM_add_group() {
+		$aQuery = <<<SQL
+		SELECT 
+			service_type_id,
+			service_type_name,
+			service_type_icon
+		FROM 
+			service_type
+SQL;
+		$data = $this->db->select($aQuery);
+		echo json_encode($data);
+	}
 }

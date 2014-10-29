@@ -148,6 +148,43 @@ var MenuGroupService = function () {
         $('#addUserService_form').find('.warning').hide();
     }
 
+    // Khai báo DOM
+    var aGN_modal = $('#addGroupName_modal'); // Add group modal
+    var btn_add_group = $('.add-group'); // button open Add group modal
+    var select_gsn = $('#group_service_name'); // Select box at Add group modal
+    var xhrGetOM_add_group = function () {
+        btn_add_group.on("click", function(){
+            var self = $(this);
+            var url = URL + "spaCMS/menu/xhrGetOM_add_group";
+            var opt = '<option value=":service_type_id">:service_type_name</option>';
+            var out = null;
+
+            var loading = self.find('.loading');
+            var done = self.find('.done');
+            loading.fadeIn();
+            done.hide();
+
+            $.get(url, function(data){
+                $.each(data, function(key, value){
+                    out = opt.replace(':service_type_id', value['service_type_id']);
+                    out = out.replace(':service_type_name', value['service_type_name']);
+                    select_gsn.append(out);
+                });
+
+                select_gsn.select2({
+                    placeholder: "Chọn nhóm dịch vụ",
+                    allowClear: true
+                });
+            }, 'json')
+            .done(function(){
+                loading.hide();
+                done.show();
+                aGN_modal.modal("show");
+            });
+            
+        });
+    }
+
     var xhrGet_group_user_service = function() {
         var html = '<div class="offer-group">';
             html += '<div class="icon icons-drag"></div>';
@@ -337,25 +374,35 @@ var MenuGroupService = function () {
         }, 'json');
     }
 
+    // Khai báo DOM
+    var aGN_form = $("#addGroupName_form");
     var xhrInsert_group_service = function() {
-        $("#addGroupName_form").on('submit', function() {
-            var data = $(this).serialize();
-            var loading = $(this).find('.s-loading');
-            var done = $(this).find('.done');
+        aGN_form.on('submit', function() {
+            var self = $(this);
+            var data = self.serialize();
+            var isSuccess = false;
+            var loading = self.find('.s-loading');
+            var done = self.find('.done');
             loading.fadeIn();
             done.hide();
 
             var url = URL + 'spaCMS/menu/xhrInsert_group_service';
             $.post(url, data, function(result) {
                 if(result === 'success') {
-                    loading.fadeOut();
-                    done.fadeIn();
-                    $("#addGroupName_form")[0].reset();
                     // Refresh list
                     xhrGet_group_user_service();
-                    alert('Thêm thành công!')
+                    alert('Thêm thành công!')                    
+                    aGN_form[0].reset();
+                    isSuccess = true;
                 } else {
                     alert('Can not create menu group! :(');
+                }
+            })
+            .done(function(){
+                loading.fadeOut();
+                done.fadeIn();
+                if(isSuccess){
+                    aGN_modal.modal("hide");
                 }
             });
             return false;
@@ -583,7 +630,7 @@ var MenuGroupService = function () {
             xhrInsert_group_service();
             xhrUpdate_group_service();
             xhrDelete_group_service();
-
+            xhrGetOM_add_group();
             /////////////// User Service
             xhrInsert_user_service();
             xhrUpdate_user_service();
