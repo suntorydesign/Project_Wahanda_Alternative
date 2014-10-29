@@ -354,6 +354,8 @@
                 </div>
                 <div scrollleft="0" scrolltop="0" class="ui-dialog-content ui-widget-content" id="appointment-dialog">
                 <form id="editConfirmedAppointment_form" action="#" method="POST">
+                	<input type="hidden" name="data_id" />
+                	<input type="hidden" name="data_type" />
                     <div class="dialog-content clearfix">
                         <table class="default-form part-one" cellpadding="0" cellspacing="0">
                             <tbody>
@@ -374,7 +376,7 @@
                                                 <span class="b-consumer-name">
                                                     <a href="javascript:;" class="f-consumer-name a-show-customer client_name">0903676222</a>
                                                 </span>
-                                                <a href="javascript:;" class="edit-link a-consumer-edit edit_client_action" data-toggle="modal" data-target="#editClient_modal">Sửa</a>
+                                                <a href="javascript:;" class="edit-link a-consumer-edit edit_client_action">Sửa</a><i class="fa fa-spin fa-refresh e-loading"></i>
                                                 <a style="display: none;" href="javascript:;" class="edit-link a-change-consumer">Change client</a>
                                             </li>
                                             <li class="consumer-phoneNumber-row b-consumer-phone">
@@ -410,12 +412,12 @@
                                     </td>
                                 </tr>
 
-                                <tr class="form-row b-service-not-exist form-element-wrapper hidden">
+                                <tr class="form-row b-service-not-exist form-element-wrapper display_none">
                                     <td class="label-part"></td>
                                     <td class="input-part">
                                         <div class="form-note">
                                             <span class="icon icons-attention-small2"></span>
-                                            <span class="notes">Service on eVoucher is no longer available. Select another service.</span>
+                                            <span class="notes">Spa không làm việc vào ngày này, hãy chọn ngày khác.</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -444,7 +446,7 @@
                                         <label for="appointment_date">Ngày</label>
                                     </td>
                                     <td class="input-part">
-                                        <input class="appointment_date" type="text" readonly="true" style="width:90px; padding:0 5px;">
+                                        <input class="appointment_date" type="text" readonly="true" style="width:90px; padding:0 5px;" />
                                         <input type="hidden" name="appointment_date" />
                                         <input type="hidden" name="appointment_created" />
                                         <input type="hidden" name="appointment_updated" />
@@ -539,7 +541,9 @@
                     </a>
                 </div>
                 <div scrollleft="0" scrolltop="0" class="client-info-dialog ui-dialog-content ui-widget-content">
-                <form novalidate="novalidate" class="edit-mode">
+                <form id="editClient_form" action="#" method="POST" class="edit-mode">
+                	<input type="hidden" name="data_id" />
+                	<input type="hidden" name="data_type" />
                     <div class="dialog-content clearfix">
                         <table class="default-form part-one" cellpadding="0" cellspacing="0">
                             <tbody><tr class="form-row client-name-row">
@@ -572,7 +576,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="form-row">
+                            <tr class="form-row hidden">
                                 <td class="label-part"></td>
                                 <td class="input-part">
                                     <input class="" name="client_sendMassEmails" id="client_sendMassEmails" type="checkbox">
@@ -585,15 +589,15 @@
                                 </td>
                                 <td class="input-part">
                                     <div class="several">
-                                        <input class="" name="client_sex" id="client_sex-female" value="F" type="radio">
+                                        <input class="" name="client_sex" id="client_sex-female" value="0" type="radio">
                                         <label for="client_sex-female">Nữ</label>
 
-                                        <input class="" name="client_sex" id="client_sex-male" value="M" type="radio">
+                                        <input class="" name="client_sex" id="client_sex-male" value="1" type="radio">
                                         <label for="client_sex-male">Nam</label>
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="form-row">
+                            <tr class="form-row hidden">
                                 <td class="label-part">
                                     <label class="optional" for="client_birth">Ngày sinh</label>
                                 </td>
@@ -610,6 +614,16 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr class="form-row">
+                                <td class="label-part">
+                                    <label class="optional" for="client_birth">Ngày sinh</label>
+                                </td>
+                                <td class="input-part">
+                                    <div class="txt-input">
+                                        <input id="client_birth" type="date" name="client_birth" placeholder="Ngày tháng năm sinh">
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody></table>
                         <table class="default-form part-two" cellpadding="0" cellspacing="0">
                             <tbody><tr class="form-row">
@@ -617,7 +631,7 @@
                                     <label class="optional" for="client_notes">Ghi chú</label>
                                 </td>
                                 <td class="input-part">
-                                    <textarea rows="6" cols="5" class="full" id="client_notes" name="client_notes"></textarea>
+                                    <textarea rows="6" cols="5" class="full" id="client_notes" name="client_note"></textarea>
                                 </td>
                             </tr>
 
@@ -626,8 +640,8 @@
                     <div class="dialog-actions">
                         <button type="submit" class="button action action-default button-primary save-action">
                             <div class="button-inner">
-                                <div class="button-icon icons-tick"></div>
-                                <span class="msg msg-action-default">Lưu</span>
+                                <div class="button-icon icons-tick done"></div>
+                                <span class="msg msg-action-default loading">Lưu</span>
                             </div>
                         </button>
                         <a href="javascript:;" class="button-cancel" data-dismiss="modal">Hủy</a>

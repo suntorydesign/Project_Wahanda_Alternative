@@ -46,6 +46,11 @@ class SpaCMS_Model extends Model {
 		exit;
 	}
 
+	///////////////////////////// HOME //////////////////////////
+	function get_redeem_voucher() {
+		SpaCMS_Home_Model::get_redeem_voucher();
+	}
+
 	///////////////////////////// CALENDAR //////////////////////////
 	function get_calendar() {
 		SpaCMS_Calendar_Model::get_calendar();
@@ -81,6 +86,14 @@ class SpaCMS_Model extends Model {
 
 	function update_appointment_status() {
 		SpaCMS_Calendar_Model::update_appointment_status();
+	}
+
+	function update_appointment_client() {
+		SpaCMS_Calendar_Model::update_appointment_client();
+	}
+
+	function update_appointment() {
+		SpaCMS_Calendar_Model::update_appointment();
 	}
 
 	///////////////////////////// MENU //////////////////////////

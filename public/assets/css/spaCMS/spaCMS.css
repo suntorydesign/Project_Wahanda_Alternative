@@ -4278,7 +4278,7 @@ table.wc-time-slots {
      background: none repeat scroll 0% 0% #ffffff;
      border-color: #c9cac5 #c9cac5 -moz-use-text-color;
      border-image: none;
-     border-style: solid solid none;
+     /*border-style: solid solid none;*/
      border-width: 2px 2px 0px;
      margin: 0px 17px;
      min-height: 187px;
@@ -4300,7 +4300,7 @@ table.wc-time-slots {
 }
 
 #voucher-redemption .voucher-container .status-wrapper {
-     border-top: 1px solid #c3c4bd;
+     /*border-top: 1px solid #c3c4bd;*/
      clear: left;
      font-size: 16px;
      font-weight: bold;
@@ -4353,7 +4353,7 @@ table.wc-time-slots {
 
 #voucher-redemption .voucher-container .expiration-wrapper {
      border-right: 1px solid #afb0ad;
-     width: 231px;
+     width: 230px;
 }
 
 #voucher-redemption .voucher-container .recipient-wrapper {
@@ -7070,7 +7070,7 @@ table.wc-time-slots {
 }
 
 .venue-info {
-     padding: 0px 20px 20px;
+     padding: 10px 20px 20px;
 }
 
 .venue-info .pic {

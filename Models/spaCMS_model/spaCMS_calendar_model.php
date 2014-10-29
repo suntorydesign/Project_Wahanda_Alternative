@@ -73,8 +73,8 @@ SQL;
 			c.client_name,
 			bd.booking_detail_date, 
 			bd.booking_detail_time_start, 
-			bd.booking_detail_time_end,
-			b.booking_status
+			bd.booking_detail_time_end
+			-- b.booking_status
 		FROM 
 			booking b, 
 			booking_detail bd, 
@@ -110,10 +110,11 @@ SQL;
 			a.appointment_note as 'data_note',
 			us.user_service_id as 'data_us_id', 
 			us.user_service_name as 'data_us_name', 
-			us.user_service_duration as 'data_us_duration', 
+			us.user_service_duration as 'data_us_duration',
+			'' as 'data_client_id',  
 			a.appointment_client_name as 'data_client_name',
 			a.appointment_client_phone as 'data_client_phone', 
-			a.appointment_client_gender as 'data_client_gender', 
+			a.appointment_client_sex as 'data_client_sex', 
 			a.appointment_client_email as 'data_client_email', 
 			a.appointment_client_birth as 'data_client_birth',
 			a.appointment_client_note as 'data_client_note',
@@ -156,13 +157,14 @@ SQL;
 			us.user_service_id as 'data_us_id', 
 			us.user_service_name as 'data_us_name', 
 			us.user_service_duration as 'data_us_duration', 
+			c.client_id as 'data_client_id', 
 			c.client_name as 'data_client_name', 
 			c.client_phone as 'data_client_phone',
-			c.client_sex as 'data_client_gender', 
+			c.client_sex as 'data_client_sex', 
 			c.client_email as 'data_client_email', 
 			c.client_birth as 'data_client_birth',
 			c.client_note as 'data_client_note',
-			b.booking_status as 'data_status',
+			bd.booking_detail_status as 'data_status',
 			us.user_service_full_price as 'data_us_full_price', 
 			us.user_service_sale_price as 'data_us_sale_price',
 			b.booking_date as 'data_created'
@@ -393,5 +395,101 @@ SQL;
 			echo "error";
 		}
 	}
+
+
+	/**
+	 * Update thông tin client của lịch hẹn
+	 * @param $_POST['data_id'] : id lịch hẹn
+	 * @param $_POST['data_type'] : lịch hẹn là appointment hay booking_detail
+	 * @param data update
+	 * @return success/error
+	 */
+	public function update_appointment_client() {
+		$user_id = Session::get('user_id');
+		$data_id = $_POST['data_id'];
+		$data_type = $_POST['data_type'];
+
+		if($data_type == "appointment") {
+			// Trạng thái hoàn thành
+			$data = array(
+				"appointment_client_name" 	=> $_POST['client_name'],
+				"appointment_client_phone" 	=> $_POST['client_phone'],
+				"appointment_client_email" 	=> $_POST['client_email'],
+				"appointment_client_sex" 	=> $_POST['client_sex'],
+				"appointment_client_birth" 	=> $_POST['client_birth'],
+				"appointment_client_note" 	=> $_POST['client_note']
+			);
+			$rs = $this->db->update("appointment", $data, "appointment_id = $data_id");
+		}
+
+		if($data_type == "booking_detail") {
+			// Trạng thái hoàn thành
+			$data = array(
+				"client_name" 	=> $_POST['client_name'],
+				"client_phone" 	=> $_POST['client_phone'],
+				"client_email" 	=> $_POST['client_email'],
+				"client_sex" 	=> $_POST['client_sex'],
+				"client_birth" 	=> $_POST['client_birth'],
+				"client_note" 	=> $_POST['client_note']
+			);
+			$rs = $this->db->update("client", $data, "client_id = $data_id");	
+		}
+
+		if($rs) {
+			echo "success";
+		} else {
+			echo "error";
+		}
+	}
+
+
+	/**
+	 * Update thông tin lịch hẹn
+	 * @param $_POST['data_id'] : id lịch hẹn
+	 * @param $_POST['data_type'] : lịch hẹn là appointment hay booking_detail
+	 * @param data update
+	 * @return success/error
+	 */
+	public function update_appointment() {
+		$user_id = Session::get('user_id');
+		$data_id = $_POST['data_id'];
+		$data_type = $_POST['data_type'];
+
+		// echo $data_id; exit();
+
+		if($data_type == "appointment") {
+			// Trạng thái hoàn thành
+			$data = array(
+				"appointment_user_service_id" 	=> $_POST['user_service_service_id'],
+				"appointment_date" 			=> $_POST['appointment_date'],
+				"appointment_time_start" 	=> $_POST['appointment_time_start'],
+				"appointment_time_end" 		=> $_POST['appointment_time_start'],
+				"appointment_price" 		=> $_POST['appointment_price'],
+				"appointment_note" 			=> $_POST['appointment_note']
+			);
+			$rs = $this->db->update("appointment", $data, "appointment_id = $data_id");
+		}
+
+		if($data_type == "booking_detail") {
+			// Trạng thái hoàn thành
+			$data = array(
+				"booking_detail_user_service_id" 	=> $_POST['user_service_service_id'],
+				"booking_detail_date" 			=> $_POST['appointment_date'],
+				"booking_detail_time_start" 	=> $_POST['appointment_time_start'],
+				"booking_detail_time_end" 		=> $_POST['appointment_time_start'],
+				"booking_detail_price" 			=> $_POST['appointment_price'],
+				"booking_detail_note" 			=> $_POST['appointment_note']
+			);
+			$rs = $this->db->update("booking_detail", $data, "booking_detail_id = $data_id");	
+		}
+
+		if($rs) {
+			echo "success";
+		} else {
+			echo "error";
+		}
+	}
+
+
 
 }

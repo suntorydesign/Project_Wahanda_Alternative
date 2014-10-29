@@ -1,7 +1,7 @@
 <div id="home-holder" class="content-holder pending">
 	<div class="sidebar">
 		<div class="venue-info">
-			<div class="pending-status">
+			<div class="pending-status hidden">
 				<h2 class="title"><span class="icon icons-status-pending"></span> Đang chờ xác thực </h2>
 				<p class="text">
 					Địa điểm và dịch vụ của bạn đang được đánh giá tổng quan bởi nhân viên của W.A trước khi được công khai và cho phép người dùng sử dụng dịch vụ.
@@ -23,7 +23,7 @@
 			<h1 class="venue-title v-venue-title"><?php echo Session::get('user_business_name'); ?></h1>
 
 			<span>Loại tài khoản: </span><strong>Miễn phí</strong></br>
-			<p><a href="#">Premium</a></p></br>
+			<p><a href="#"><!-- Premium --></a></p></br>
 
 			<div class="listing-type b-listing-type hidden" style="display: block;">
 				<span class="type">Listing type: <strong class="v-listing-type">Enhanced</strong></span>
@@ -108,7 +108,7 @@
 	</div>
 	<div class="main-content">
 		<div class="dashboard-actions clearfix">
-			<div class="top-search home-search">
+			<div class="top-search home-search hidden">
 				<div class="txt-input">
 					<input type="text" placeholder="Tìm kiếm: client, phone#, order#..." id="top-search" name="top-search" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
 					<a class="clear-search" href="#" style="display: none;"><div class="icons-clear-search-mini"></div></a>
@@ -337,63 +337,69 @@
 					<a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"> <span class="ui-icon ui-icon-closethick">close</span> </a>
 				</div>
 				<div id="voucher-redemption" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+					
 					<div class="voucher-search">
-						<form novalidate="novalidate">
+						<form id="redeemVoucher_form" action="#" method="POST">
 							<div class="icon icons-logo-vouchers"></div>
 
 							<div class="reference-container txt-input txt-input-big">
-								<input type="tel" class="required evoucher-code valid" name="voucher-reference">
+								<input id="e_voucher_id" name="e_voucher_id" class="required evoucher-code valid"  type="text" />
 								<div class="clear-search">
 									<div class="icons-delete3"></div>
 								</div>
 							</div>
 							<button class="button action action-default button-primary find-action" type="submit">
 								<div class="button-inner">
-									<span class="msg msg-action-default">Find</span><span class="msg msg-action-doing">Searching...</span>
+									<span class="msg msg-action-default">Find</span>
+									<span class="msg msg-action-doing">Searching...</span>
 								</div>
 							</button>
 						</form>
 					</div>
+					
 					<div class="voucher-redemption-wrapper">
 						<div class="voucher-note voucher-start" style="position: relative;">
 							<div class="voucher-note-inner vertically-centered" style="position: absolute; height: 101px; top: 50%; margin-top: -50.5px;">
 								<p class="main-title">
-									Please enter eVoucher number
+									Vui lòng nhập mã eVoucher 
 								</p>
 								<ul class="simple-list">
 									<li>
-										Look for eVoucher number on the booking confirmation email.
+										Mã eVoucher sẽ được gửi tới email sau khi booking thành công.
 									</li>
 									<li>
-										Redeem eVoucher bookings only. For appointments, you just need to confirm them to get paid.
+										Chỉ kiểm tra việc xác thực eVoucher.
 									</li>
 								</ul>
 							</div>
 						</div>
-						<div class="voucher-note voucher-searching hidden">
-							<div class="voucher-note-inner vertically-centered">
-								<div class="icon"></div>
+						<!-- Seaching... -->
+						<div class="voucher-note voucher-searching display_none">
+							<div align="center" class="voucher-note-inner vertically-centered">
+								<div class="fa fa-spin fa-3x fa-cog"></div>
 								Searching...
 							</div>
-						</div>
-						<div class="voucher-note voucher-not-found hidden">
+						</div><!-- end Seaching... -->
+
+						<div class="voucher-note voucher-not-found display_none">
 							<div class="voucher-note-inner vertically-centered">
 								Voucher not found.
 								<span>Please check that you have entered the voucher number correctly.</span>
 							</div>
 						</div>
-						<div class="voucher-note voucher-belongs hidden">
+						<div class="voucher-note voucher-belongs display_none">
 							<div class="voucher-note-inner vertically-centered">
 								Voucher belongs to another venue
 								<span><a class="login-link" target="_blank" href="/login?route=%2Fhome">Do you want to login as different user?</a></span>
 							</div>
 						</div>
-						<div class="voucher-info hidden">
+
+						<div class="voucher-info display_none">
 							<ul class="voucher-container">
-								<li class="price-wrapper">
+								<li class="price-wrapper hidden">
 									<span class="evoucher-price"></span>
 								</li>
-								<li class="title-wrapper">
+								<li class="title-wrapper hidden">
 									<span class="title"></span>
 								</li>
 								<li class="status-wrapper status-active">
@@ -405,15 +411,16 @@
 									<span class="evoucher-expiry"></span>
 								</li>
 								<li class="recipient-wrapper">
-									<span class="label-wrapper">Recipient</span>
+									<span class="label-wrapper">Quantity</span>
 									<span class="evoucher-recipient"></span>
 								</li>
 							</ul>
 							<div class="meta-wrapper">
-								Order ref#:
-								<span class="evoucher-order-ref"></span>
+								Booking ID:
+								<span class="e_voucher_booking_id"></span>
 
-								<span class="b-booking-link hidden"> <span class="separator">|</span> Booking ID: <a class="evoucher-booking-id" href="javascript:;"></a> </span>
+								<!-- <span class="b-booking-link "> <span class="separator">|</span>  -->
+								<!-- Booking ID: <a class="evoucher-booking-id" href="javascript:;"></a> </span> -->
 							</div>
 							<div class="venue-wrapper hidden">
 								<form novalidate="novalidate">
@@ -436,23 +443,25 @@
 						</div>
 					</div>
 					<div class="dialog-actions">
-						<button class="button action action-default button-primary redeem-another hidden" type="button">
+						<!-- <button class="button action action-default button-primary redeem-another " type="button">
 							<div class="button-inner">
 								<div class="button-icon icons-voucher"></div>
 								Redeem another
 							</div>
-						</button>
-						<button class="button action action-default button-primary redeem-action hidden" type="button">
+						</button> -->
+						<button class="button action action-default button-primary redeem-action" type="button" style="display:none;">
 							<div class="button-inner">
-								<div class="button-icon icons-voucher"></div><span class="msg msg-action-default">Redeem</span><span class="msg msg-action-doing">Working...</span>
+								<div class="button-icon icons-voucher done"></div>
+								<div class="button-icon icons-voucher fa fa-spin fa-refresh loading"></div>
+								Redeem
 							</div>
 						</button>
-						<button class="button button-primary a-create-appointment hidden" type="button">
+						<!-- <button class="button button-primary a-create-appointment " type="button">
 							<div class="button-inner">
 								<div class="button-icon icons-plus"></div>
 								Book an appointment
 							</div>
-						</button>
+						</button> -->
 						<a class="button-cancel a-cancel" data-dismiss="modal" href="javascript:;">Cancel</a>
 					</div>
 				</div>
@@ -460,22 +469,3 @@
 		</div>
 	</div>
 </div>
-<!-- le javascript -->
-<script src="<?php echo URL ?>public/assets/js/jquery.min.js" type="text/javascript"></script>
-<script src="<?php echo URL ?>public/assets/js/bootstrap.min.js" type="text/javascript"></script>
-<!-- transition -->
-<style>
-	.tooltip{
-		font-size: 11.5px;
-	}
-</style>
-<script>
-	$(document).ready(function() {
-		$("#bookings, #venue, #phone , #sale").tooltip({
-			placement : 'top',
-			html : true,
-			container : 'body',
-			delay : 0
-		});
-	}); 
-</script>

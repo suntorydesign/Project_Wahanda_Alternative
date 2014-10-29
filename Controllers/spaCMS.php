@@ -29,17 +29,18 @@
 		function home($xhr = false) {
 			Auth::handleSpaCMSLogin();
 			switch ($xhr) {
-				case 'xhrGet_service_system':
-					$this->model->get_service_system();
+				case 'xhrGet_redeem_voucher':
+					$this->model->get_redeem_voucher();
 					break;
 					
 				default:
 					$this->view->style = array(
 						// ASSETS . 'plugins/bootstrap-select/bootstrap-select.min.css',
-						URL . 'Views/spaCMS/menu/css/spaCMS_home.css'
+						URL . 'Views/spaCMS/home/css/spaCMS_home.css'
 					);
 
 					$this->view->script = array(
+						ASSETS . 'plugins/jquery-inputmask/jquery.inputmask.bundle.min.js',
 						URL . 'Views/spaCMS/home/js/spaCMS_home.js'
 					);
 
@@ -165,6 +166,14 @@
 
 				case 'xhrUpdate_appointment_status':
 					$this->model->update_appointment_status();
+					break;
+
+				case 'xhrUpdate_appointment_client':
+					$this->model->update_appointment_client();
+					break;
+
+				case 'xhrUpdate_appointment':
+					$this->model->update_appointment();
 					break;
 
 				default:
