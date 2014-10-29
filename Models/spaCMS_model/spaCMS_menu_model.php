@@ -203,7 +203,11 @@ SQL;
 	}
 
 
-	/////////// User service
+	/**
+	 * Thêm mới 1 dịch vụ
+	 * @param data
+	 * @return status
+	 */
 	function insert_user_service() {
 		$user_id = Session::get('user_id');
 
@@ -237,14 +241,19 @@ SQL;
 		}
 	}
 
-	function update_user_service() {
+	/**
+	 * Sửa chi tiết dịch vụ
+	 * @param data
+	 * @return json
+	 */
+	public function update_user_service() {
 		$user_id = Session::get('user_id');
-
+		$user_service_id = $_POST['user_service_id'];
 		$data = array();
 		if(!isset($_POST['user_service_is_featured'])) {
 			$data['user_service_is_featured'] = 0;
 		} else {
-			$max_usf = self::max_user_service_is_featured(); // Kiểm tra số lượng user featured
+			$max_usf = self::max_user_service_is_featured($user_service_id); // Kiểm tra số lượng user featured
 			if($max_usf >= 5) {
 				echo 'max_us_featured';
 				return;
@@ -265,9 +274,7 @@ SQL;
 		}
 
 		// print_r($data); exit();
-		$user_service_id = $_POST['user_service_id'];
 		$where = "user_service_id = $user_service_id";
-
 		$result = $this->db->update('user_service', $data, $where);
 
 		if($result) {
@@ -277,7 +284,7 @@ SQL;
 		}
 	}
 
-	function delete_user_service() {
+	public function delete_user_service() {
 		$user_id = Session::get('user_id');
 		$user_service_id = $_POST['user_service_id'];
 		$data = array(
@@ -295,15 +302,50 @@ SQL;
 		}
 	}
 
-	function max_user_service_is_featured() {
+	/**
+	 * Kiểm tra số lượng dịch vụ nổi bật 
+	 * và dịch vụ (user_service_id) nếu là dv nổi bật rồi thì không tính
+	 * @param data
+	 * @return json
+	 */
+	function max_user_service_is_featured($user_service_id = false) {
 		$user_id = Session::get('user_id');
+		$decrease_where = "";
+
+		// Kiểm tra user_service_id này có phải 
+		if($user_service_id) {
+			$aQuery_ck = <<<SQL
+			SELECT 
+				count(*) as 'isFeatured'
+			FROM 
+				user_service us, 
+				group_service gs
+			WHERE
+					gs.group_service_user_id = {$user_id}
+				AND us.user_service_delete_flg = 1
+				AND us.user_service_group_id = gs.group_service_id
+				AND us.user_service_id = {$user_service_id}
+SQL;
+			
+			$isFeatured = $this->db->select($aQuery_ck);
+			if($isFeatured > 0){
+				$decrease_where = " AND NOT us.user_service_id = {$user_service_id} ";
+			}
+		}
+		
+
 		$aQuery = <<<SQL
-		SELECT count(*) as 'max_usf'
-		FROM user_service us, group_service gs
-		WHERE user_service_is_featured = 1
+		SELECT 
+			count(*) as 'max_usf'
+		FROM 
+			user_service us, 
+			group_service gs
+		WHERE 
+				us.user_service_is_featured = 1
 			AND us.user_service_group_id = gs.group_service_id
 			AND gs.group_service_user_id = {$user_id}
 			AND us.user_service_delete_flg = 0
+			{$decrease_where}
 SQL;
 		$data = $this->db->select($aQuery);
 

@@ -66,7 +66,7 @@
 											<td class="label-part"><label for="cat-name" style="padding-top: 3px;">Tên nhóm dịch vụ</label></td>
 											<td class="input-part">
 											<div class="txt-input form-element-wrapper">
-												<input type="text" maxlength="100" name="group_service_name" id="cat-name" required pattern=".{6,}" title="ít nhất 6 ký tự">
+												<input type="text" maxlength="100" name="group_service_name" id="cat-name" required pattern=".{3,}" title="ít nhất 3 ký tự">
 												<input type="hidden" name="group_service_id">
 											</div></td>
 										</tr>
@@ -85,8 +85,8 @@
 							</button>
 							<button class="button action action-default button-secondary delete-action aDeleteGroup" type="button">
 								<div class="button-inner">
-									<div class="button-icon icons-delete d-done"></div>
-									<div class="button-icon fa fa-spin fa-refresh d-loading"></div>
+									<div class="button-icon icons-delete done"></div>
+									<div class="button-icon fa fa-spin fa-refresh loading"></div>
 									<span class="msg msg-action-default">Xóa</span>
 								</div>
 							</button>
@@ -117,7 +117,7 @@
 										<tr class="form-row">
 											<td class="label-part"><label for="cat-name" style="padding-top: 3px;">Tên nhóm dịch vụ</label></td>
 											<td class="input-part">
-												<select id="group_service_name" style="width:350px" required title="Vui lòng chọn">
+												<select id="group_service_name" name="group_service_name" style="width:350px" required title="Vui lòng chọn">
 													<option></option>
 									            </select>
 											</td>

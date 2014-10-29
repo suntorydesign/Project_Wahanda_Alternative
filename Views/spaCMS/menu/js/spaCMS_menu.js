@@ -154,9 +154,11 @@ var MenuGroupService = function () {
     var select_gsn = $('#group_service_name'); // Select box at Add group modal
     var xhrGetOM_add_group = function () {
         btn_add_group.on("click", function(){
+            // Refresh
+            select_gsn.html('<option></option>');
             var self = $(this);
             var url = URL + "spaCMS/menu/xhrGetOM_add_group";
-            var opt = '<option value=":service_type_id">:service_type_name</option>';
+            var opt = '<option value=":service_type_name">:service_type_name</option>';
             var out = null;
 
             var loading = self.find('.loading');
@@ -166,8 +168,8 @@ var MenuGroupService = function () {
 
             $.get(url, function(data){
                 $.each(data, function(key, value){
-                    out = opt.replace(':service_type_id', value['service_type_id']);
-                    out = out.replace(':service_type_name', value['service_type_name']);
+                    out = opt.replace(/:service_type_name/g, value['service_type_name']);
+                    // out = out.replace(':service_type_name', value['service_type_name']);
                     select_gsn.append(out);
                 });
 
@@ -181,7 +183,7 @@ var MenuGroupService = function () {
                 done.show();
                 aGN_modal.modal("show");
             });
-            
+
         });
     }
 
@@ -390,12 +392,11 @@ var MenuGroupService = function () {
             $.post(url, data, function(result) {
                 if(result === 'success') {
                     // Refresh list
-                    xhrGet_group_user_service();
-                    alert('Thêm thành công!')                    
+                    xhrGet_group_user_service(); 
                     aGN_form[0].reset();
                     isSuccess = true;
                 } else {
-                    alert('Can not create menu group! :(');
+                    
                 }
             })
             .done(function(){
@@ -403,60 +404,80 @@ var MenuGroupService = function () {
                 done.fadeIn();
                 if(isSuccess){
                     aGN_modal.modal("hide");
+                    alert('Thêm thành công!'); 
+                } else {
+                    alert('Can not create menu group! :(');
                 }
             });
             return false;
         });
     }
 
+    var eGN_modal = $('#editGroupName_modal');
+    var eGN_form = $('#editGroupName_form');
+    var btnAct_dGN = eGN_form.find('.aDeleteGroup');
     var xhrDelete_group_service = function() {
-        $('#editGroupName_form .aDeleteGroup').on('click', function(){
-            var self    = $('#editGroupName_form');
-            var loading = self.find('.d-loading');
-            var done    = self.find('.d-done');
-            
-            var group_service_id = $('input[name=group_service_id]', self).val();
-            var url = URL + 'spaCMS/menu/xhrDelete_group_service';
+        btnAct_dGN.on('click', function(){
+            var self    = $(this);
+
+            var isSuccess = false;
+            var loading = self.find('.loading');
+            var done    = self.find('.done');
             loading.fadeIn();
             done.hide();
+
+            var group_service_id = $('input[name=group_service_id]', eGN_form).val();
+            var url = URL + 'spaCMS/menu/xhrDelete_group_service';
+            
             $.post(url, {'group_service_id':group_service_id}, function(result) {
                 if(result === 'success') {
-                    $('.button-cancel', self).click();
                     // Refresh list
                     xhrGet_group_user_service();
+                    isSuccess = true;
+                }
+            })
+            .done(function(){
+                loading.hide();
+                done.show();
+                if(isSuccess) {
+                    eGN_modal.modal("hide");
                     alert('Xóa thành công!');
-                } else {
+                }
+                else {
                     alert('Can not delete menu group! :(');
                 }
-                loading.fadeIn();
-                done.hide();
             });
         });
     }
 
     var xhrUpdate_group_service = function() {
-        $('#editGroupName_form').on('submit', function() {
+        eGN_form.on('submit', function() {
             var data = $(this).serialize();
+
+            var isSuccess = false;
             var loading = $(this).find('.e-loading');
             var done = $(this).find('.e-done');
+
             loading.fadeIn();
             done.hide();
+
             var url = URL + 'spaCMS/menu/xhrUpdate_group_service';
             $.post(url, data, function(result) {
                 if(result === 'success') {
-                    loading.fadeOut();
-                    done.fadeIn();
                     // Refresh list
                     xhrGet_group_user_service();
-                    // Hide Modal
-                    $('.button-cancel',$('#editGroupName_form')).click();
+                    isSuccess = true;
+                } 
+            })
+            .done(function(){
+                loading.hide();
+                done.show();
+                if(isSuccess){
+                    eGN_modal.modal('hide');
                     alert('Sửa thành công!');
                 } else {
-                    loading.fadeOut();
-                    done.fadeIn();
                     alert('Can not edit menu group! :(');
                 }
-                
             });
             return false;        
         });
