@@ -51,13 +51,13 @@ class clientsignup extends Controller {
 			}
 		}
 		//Nội dung email
-		$body = '<h1>Chào mừng đến với WAHANDA</h1>';
+		$body = '<h1>Chào mừng đến với BELEZA</h1>';
 		$body .= '<p>Xin chào bạn: <strong>' . $data['client_name'] . '</strong></p>';
 		$body .= '<p>Để có thể sử dụng tài khoản click vào link dưới để active : </p>  
 				  <a href="http:' . URL . 'clientsignup/VrcFl/' . $data['client_verify'] . '" >' . $data['client_verify'] . '</a>';
 		$body .= '<p>Mật khẩu đăng nhập WAHANDA của bạn là: <strong>' . $_POST['client_pass'] . '</strong></p>';
 		$body .= '<p>Chúc một ngày mới tốt lành</p>';
-		$body .= '<div align="right"><small><i><b>Ban quản trị Wahanda</b></i></small></div>';
+		$body .= '<div align="right"><small><i><b>Ban quản trị BELEZA</b></i></small></div>';
 
 		//Gửi mail local
 		$mail = new PHPMailer(TRUE);
@@ -78,7 +78,7 @@ class clientsignup extends Controller {
 		$mail -> Username = "vietnt134@gmail.com";
 		$mail -> Password = "whathaveyoudone1341996";
 		$mail -> SetFrom("wahanda@gmail.com");
-		$mail -> Subject = "Xác nhận thông tin đăng ký từ Wahanda!";
+		$mail -> Subject = "Xác nhận thông tin đăng ký từ BELEZA!";
 		$mail -> Body = $body;
 		$mail -> AddAddress($data['client_email']);
 		if (!$mail -> Send()) {

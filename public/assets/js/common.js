@@ -18,6 +18,14 @@ function inputNumbers(evt) {
 /*END CAN ONLY INPUT NUMBER*/
 /*-----------------------*/
 
+/*INPUT NOTHING*/
+function inputNothing(evt) {
+	var e = evt || window.event;
+	e.preventDefault();
+}
+/*END INPUT NOTHING*/
+/*-----------------------*/
+
 /*SHORTEN THE TEXT WITH ...*/
 function shorten(text, maxLength) {
 	var ret = text;

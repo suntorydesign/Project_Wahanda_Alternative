@@ -161,7 +161,7 @@
 					<p class="filter-name">SẴN SÀNG CHO BẠN</p>
 					<div style="position: relative;">
 						<i style="position: absolute;z-index: 1000; top: 30%;left: 12px;color: #777;" class="fa fa-calendar"></i>
-						<input style="padding-left: 30px" maxlength="10" type="text" id="date_to_appointment" class="form-control date" placeHolder="Theo ngày">
+						<input onkeypress="inputNothing(event)" style="padding-left: 30px" maxlength="10" type="text" id="date_to_appointment" class="form-control date" placeHolder="Theo ngày">
 					</div>
 					<p></p>
 					<select class="form-control">
