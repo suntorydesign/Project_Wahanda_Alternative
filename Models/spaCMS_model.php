@@ -100,6 +100,10 @@ class SpaCMS_Model extends Model {
 		SpaCMS_Calendar_Model::update_appointment();
 	}
 
+	function update_appointment_is_confirm() {
+		SpaCMS_Calendar_Model::update_appointment_is_confirm();
+	}
+
 	///////////////////////////// MENU //////////////////////////
 	function get_group_user_service() {
 		SpaCMS_Menu_Model::get_group_user_service();

@@ -402,7 +402,7 @@
 										<td class="client_name"></td>
 									</tr>
 									<tr>
-										<td class="active">Sđt KH</td>
+										<th class="active">Sđt KH</th>
 										<td class="client_phone"></td>
 									</tr>
 									<tr>

@@ -184,10 +184,14 @@
 					$this->model->update_appointment();
 					break;
 
+				case 'xhrUpdate_appointment_is_confirm':
+					$this->model->update_appointment_is_confirm();
+					break;
+
 				default:
 					$this->view->style = array(
 						ASSETS . 'plugins/fullcalendar-2.1.0-beta2/fullcalendar.css',
-						ASSETS . 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.css',
+						ASSETS . 'plugins/bootstrap-datepicker/css/datepicker.css',
 						URL . 'Views/spaCMS/calendar/css/spaCMS_calendar.css'
 						// URL . 'public/assets/plugins/fullcalendar-2.1.0-beta2/fullcalendar.print.css'
 					);

@@ -223,6 +223,13 @@
                                         	<span class="status status-uncomplete display_none" style="display: none;">Chưa hoàn thành</span>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <th>Xác thực</th>
+                                        <td>
+                                        	<span class="label label-confirmed is_confirm_1">Đã xác thực</span>
+                                        	<span class="label label-critical is_confirm_0">Chưa xác thực</span>
+                                        </td>
+                                    </tr>
                                 </tbody></table>
                                 <div class="appointment-actions">
                                     <button type="button" class="button button-primary accept-action">
@@ -297,10 +304,11 @@
                             </div>
                         </div>
                         <div class="dialog-actions b-standard-actions">
-                            <button type="button" class="button button-primary a-ok" data-dismiss="modal">
+                            <button type="button" class="button button-primary btnAct_confirm_appointment">
                             	<div class="button-inner">
-                            		<div class="button-icon icons-tick"></div>
-	                            	OK
+                            		<div class="button-icon icons-tick done"></div>
+                            		<div class="button-icon fa fa-spin fa-refresh loading"></div>
+	                            	Confirmed
 	                            </div>
                             </button>
                             <button type="button" class="button button-edit change-only-this edit_appointment_action">
@@ -447,6 +455,14 @@
                                     </td>
                                     <td class="input-part">
                                         <input class="appointment_date" type="text" readonly="true" style="width:90px; padding:0 5px;" />
+                                        
+                                        <!-- <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+											<input type="text" class="form-control" readonly>
+											<span class="input-group-btn">
+												<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+											</span>
+										</div> -->
+
                                         <input type="hidden" name="appointment_date" />
                                         <input type="hidden" name="appointment_created" />
                                         <input type="hidden" name="appointment_updated" />
@@ -516,7 +532,8 @@
                     <div class="dialog-actions">
                         <button type="submit" class="button action action-default button-primary save-action">
                             <div class="button-inner">
-                                <div class="button-icon icons-tick"></div>
+                                <div class="button-icon icons-tick done"></div>
+                                <div class="button-icon fa fa-spin fa-refresh loading"></div>
                                 <span class="msg msg-action-default">Lưu</span>
                             </div>
                         </button>
@@ -641,7 +658,8 @@
                         <button type="submit" class="button action action-default button-primary save-action">
                             <div class="button-inner">
                                 <div class="button-icon icons-tick done"></div>
-                                <span class="msg msg-action-default loading">Lưu</span>
+                                <div class="button-icon fa fa-spin fa-refresh loading"></div>
+                                <span class="msg msg-action-default">Lưu</span>
                             </div>
                         </button>
                         <a href="javascript:;" class="button-cancel" data-dismiss="modal">Hủy</a>

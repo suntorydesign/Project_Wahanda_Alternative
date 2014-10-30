@@ -1,73 +1,23 @@
 
-var LoadMoreInfo = function() {
-    var xhrGet_group_user_service = function() {
-        // 
-        var list_gus = $('.list_gus'); //
-
-        var optgroup = '<optgroup data-id=":group_service_id" label=":group_service_name">';
-            optgroup += ':list_user_service';
-            optgroup += '</optgroup>';
-
-        var option_s = '<option value=":user_service_id">:user_service_name</option>';
-            option_s += ':list_user_service';
-
-        var url = URL + 'spaCMS/menu/xhrGet_group_user_service';
-        var out = '';
-        $.get(url, function(data){
-            // console.log(data);
-            $.each(data, function(index, group_us){
-                out = optgroup.replace(':group_service_id', group_us['group_service_id']);
-                out = out.replace(':group_service_name', group_us['group_service_name']);
-
-                if( typeof group_us['list_user_service'] !== 'undefined' ){
-                    $.each(group_us['list_user_service'], function(index, us){
-                        out = out.replace(':list_user_service', option_s);
-                        out = out.replace(':user_service_id', us['user_service_id']);
-                        out = out.replace(':user_service_name', us['user_service_name']);
-                    });
-                }
-
-                // remove final element 
-                out = out.replace(':list_user_service', '');
-
-                list_gus.append(out);
-            });
-        }, 'json');
-    }
-
-    // Thời gian mở cửa của Spa
-    var xhrGet_user_open_hour = function() {
-        var url = URL + 'spaCMS/settings/xhrGet_user_open_hour';
-
-        $.get(url, function(data){
-            // console.log(data);
-        }, 'json')
-        .done(function() {
-        });
-    }
-
-    return {
-        init: function(){
-            xhrGet_group_user_service();
-            // xhrGet_user_open_hour();
-        }
-    }
-}();
-
-
 var Calendar = function(){
     /////////// DANH SÁCH CÁC ĐỐI TƯỢNG CỦA VIEW SẼ GÂY RA ACTION CONTROLLER ///////
     // confirmedAppointment
     var cA_modal = $("#confirmedAppointment_modal");
+    var cA_form = $("#confirmedAppointment_form");
     // DOM button action
     var edit_appointment_action = cA_modal.find('.edit_appointment_action');
     var delete_appointment_action = cA_modal.find('.delete_appointment_action');
     var complete_appointment_action = cA_modal.find('.complete_appointment_action');
 
     var eCA_modal = $("#editConfirmedAppointment_modal");
+    var eCA_form = $('#editConfirmedAppointment_form');
+    var aA_modal  = $('#addAppointment_modal');
+    var aA_form   = $('#addAppointment_form');
     ////////////////////// DANH SÁCH CONTROLLER ĐƯỢC GỌI ///////////////////////////
 
     var xhrGet_calendar = function() {
+        var now = new Date();
+        now.setDate(now.getDate() - 1);
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
@@ -91,140 +41,152 @@ var Calendar = function(){
                 $('#loading').toggle(bool);
             },
             dayClick: function(date, jsEvent, view) {
-
-                var aA_modal            = $('#addAppointment_modal');
-                var select_list_us      = $('.list_gus'); // Selectbox user_service
-                var select_app_start    = aA_modal.find('.appointment_time_start'); // DOM của appointment_time_start 
-                var user_service_duration = aA_modal.find('.user_service_duration'); // user_service_duration
-
+                aA_form[0].reset();
+                // Khai báo DOM
                 var app_date    = $('input[name=appointment_date]', aA_modal);
                 var app_date_2  = aA_modal.find('.appointment_date');
                 var app_created = $('input[name=appointment_created]', aA_modal);
-                var appointment_time_end_2  = aA_modal.find('.appointment_time_end');
-                var appointment_time_end    = $('input[name=appointment_time_end]', aA_modal);
-                var appointment_price       = $('input[name=appointment_price]', aA_modal);
 
                 // Kiểm tra ngày này spa có mở cửa hay không?
                 var weekly = convert_num2dayval(date.format('d'));
+                var isOpen = null;
+                var openHour = null; // Giờ mở cửa
+                var closeHour = null; // Giờ đóng cửa
+                
                 var url = URL + 'spaCMS/calendar/xhrGet_user_open_hour';
                 $.get(url, function(data){
                     // console.log(data);
 
-                    var isOpen = data[weekly][0];
-                    var openHour = data[weekly][1]; // Giờ mở cửa
-                    var closeHour = data[weekly][2]; // Giờ đóng cửa
+                    isOpen = data[weekly][0];
+                    openHour = data[weekly][1]; // Giờ mở cửa
+                    closeHour = data[weekly][2]; // Giờ đóng cửa
 
                     // Không đặt lịch hẹn nếu ngày này spa không có lịch mở cửa
                     if(!isOpen) {
                         alert("Không có lịch làm việc vào ngày này!");
                         return false;
-                    } 
+                    }
 
-                    // Điều chỉnh giờ bắt đầu phù hợp với dịch vụ được chọn,
-                    // và thông báo giờ kết thúc
-                    select_list_us.change(function(){
-                        var self = $(this);
-
-                        var us_id           = self.val(); // user_service_id
-                        var us_duration     = null; // user_service_duration
-                        var us_price        = null; // user_service_sale_price
-                        var app_time_end    = null; // appointment_time_end
-                        var app_time_start  = null; // appointment_time_start
-
-                        // html cho option chọn thời gian bắt đầu
-                        var op_app_start = '<option value=":appointment_time_start" :isScheduled>:appointment_time_start</option>';
-                        var out_op_app_start = '';
-
-                        // Lấy thời gian thực hiện của dịch vụ được chọn
-                            // Nếu không có dịch vụ được chọn thì dừng
-                        if(us_id === '') 
-                            return false;
-                        var url = URL + 'spaCMS/calendar/xhrGet_user_service';
-                        $.get(url, {'user_service_id':us_id}, function(data){
-
-                            if(data[0]['user_service_sale_price'] !== '') {
-                                us_price = data[0]['user_service_sale_price'];
-                            } else {
-                                us_price = data[0]['user_service_full_price'];
-                            }
-
-                            us_duration = data[0]['user_service_duration']; // Thời gian thực hiện dịch vụ
-                            us_duration = parseInt(us_duration);
-
-                            // Tính các khoảng thời gian phù hợp để bắt đầu dịch vụ
-                            // openHour <= openHour + duration <= closeHour
-                            select_app_start.html(''); // Clear danh sách giờ bắt đầu mặc định
-
-                            // Tạo danh sách giờ bắt đầu mới phù hợp với giờ mở cửa của spa và thời gian thực hiện dịch vụ
-                            var timeStart_begin = openHour*60; // Chuyển giờ sang phút để so sánh
-                            var timeStart_end   = closeHour*60;
-                            var timeStart_value = timeStart_begin;
-
-                            // ??? Tìm trong Appointment và Booking_detail
-                            //// Dịch vụ này (us_id), ngày này (date) có danh sách thời gian đã đặt chỗ
-                            var url = URL + "spaCMS/calendar/xhrGet_appointment_confirmed";
-                            $.get(url, {'us_id':us_id, 'date':date.format()}, function(data_schedule){
-                                // console.log(data_schedule);
-                                while( timeStart_value < timeStart_end )
-                                {   
-                                    // Kiểm tra: thời gian này đã được đặt trước đó chưa?
-                                    var isScheduled = false;
-                                    $.each(data_schedule, function(key, value){
-                                        // Chuyển sang kiểu phút trước khi so sánh:
-                                        var schedule_time_start = convert_Hour2Min(value["schedule_time_start"]);
-                                        var schedule_time_end   = convert_Hour2Min(value["schedule_time_end"]);
-
-                                        // schedule_time_start <= timeStart_value < schedule_time_end
-                                        if( timeStart_value >= schedule_time_start && timeStart_value < schedule_time_end ) {
-                                            isScheduled = true;
-                                        }
-                                    });
-
-                                    // Chuyển từ phút sang kiểu hour:minute
-                                    timeStart_hourValue = convert_Min2Hour(timeStart_value);
-                                    out_op_app_start += op_app_start.replace(/:appointment_time_start/g, timeStart_hourValue);
-
-                                    // Nếu khoảng thời gian này đã được đặt trước đó thì disable thời gian này lại, để không cho người khác đặt trùng
-                                    if(isScheduled) {
-                                        out_op_app_start = out_op_app_start.replace(':isScheduled', 'disabled="disabled"');
-                                    } else {
-                                        out_op_app_start = out_op_app_start.replace(':isScheduled', '');
-                                    }
-
-                                    timeStart_value += us_duration; // Thời gian tiếp theo
-                                }
-                            },'json')
-                            .done(function(){
-                                // Hiển thị danh sách thời gian bắt đầu phù hợp với ngày và dịch vụ này
-                                select_app_start.html(out_op_app_start);
-                            });
-
-                            // Khởi tạo thời gian kết thúc dịch vụ
-                                // = thời gian bắt đầu (timeStart_begin) + duration 
-                            app_time_start  = timeStart_begin;
-                            app_time_end    = convert_Min2Hour(app_time_start + us_duration);
-
-                        },'json')
-                        .done(function(){
-                            // Thông báo thời gian phục vụ của dịch vụ này
-                            user_service_duration.text(us_duration);
-                            // Thông báo khởi tạo thời gian kết thúc dịch vụ
-                            appointment_time_end_2.text(app_time_end);
-                            appointment_time_end.val(app_time_end);
-                            // Thông báo ngầm giá tiền dịch vụ
-                            appointment_price.val(us_price);
-                        });
-                    });
-
-                }, 'json')
-                .done(function(){
+                    // Load danh sách dịch vụ
+                    xhrGet_group_user_service();
                     // Thông báo ngày đặt hẹn (appointment_date)
                     app_date.val(date.format());
                     app_date_2.val(date.format('DD/MM/YYYY'));
                     app_created.val(date.format());
 
-                    // Hiển thị modal
-                    $('#addAppointment_modal').modal('show');
+                }, 'json')
+                .done(function(){
+                    if(isOpen) {
+                        // Hiển thị modal
+                        aA_modal.modal('show');
+                    }
+                });
+
+
+                ///////////// Nếu ngày này spa mở cửa /////////////// 
+                // Điều chỉnh giờ bắt đầu phù hợp với dịch vụ được chọn,
+                // và thông báo giờ kết thúc
+                var select_list_us      = aA_modal.find('.list_gus'); // Selectbox user_service
+                var select_app_start    = aA_modal.find('.appointment_time_start'); // DOM của appointment_time_start 
+                var user_service_duration = aA_modal.find('.user_service_duration'); // user_service_duration
+
+                var appointment_price       = $('input[name=appointment_price]', aA_modal);
+                var appointment_time_end    = $('input[name=appointment_time_end]', aA_modal);
+                var appointment_time_end_2  = aA_modal.find('.appointment_time_end');
+
+                select_list_us.change(function(){
+                    var self = $(this);
+
+                    var us_id           = self.val(); // user_service_id
+                    var us_duration     = null; // user_service_duration
+                    var us_price        = null; // user_service_sale_price
+                    var app_time_end    = null; // appointment_time_end
+                    var app_time_start  = null; // appointment_time_start
+
+                    // html cho option chọn thời gian bắt đầu
+                    var op_app_start = '<option value=":appointment_time_start" :isScheduled>:appointment_time_start</option>';
+                    var out_op_app_start = '';
+
+                    // Lấy thời gian thực hiện của dịch vụ được chọn
+                        // Nếu không có dịch vụ được chọn thì dừng
+                    if(us_id === '') 
+                        return false;
+                    //
+                    var url = URL + 'spaCMS/calendar/xhrGet_user_service';
+                    $.get(url, {'user_service_id':us_id}, function(data){
+
+                        if(data[0]['user_service_sale_price'] !== '') {
+                            us_price = data[0]['user_service_sale_price'];
+                        } else {
+                            us_price = data[0]['user_service_full_price'];
+                        }
+
+                        us_duration = data[0]['user_service_duration']; // Thời gian thực hiện dịch vụ
+                        us_duration = parseInt(us_duration);
+
+                        // Tính các khoảng thời gian phù hợp để bắt đầu dịch vụ
+                        // openHour <= openHour + duration <= closeHour
+                        select_app_start.html(''); // Clear danh sách giờ bắt đầu mặc định
+
+                        // Tạo danh sách giờ bắt đầu mới phù hợp với giờ mở cửa của spa và thời gian thực hiện dịch vụ
+                        var timeStart_begin = openHour*60; // Chuyển giờ sang phút để so sánh
+                        var timeStart_end   = closeHour*60;
+                        var timeStart_value = timeStart_begin;
+
+                        // ??? Tìm trong Appointment và Booking_detail
+                        //// Dịch vụ này (us_id), ngày này (date) có danh sách thời gian đã đặt chỗ
+                        var url = URL + "spaCMS/calendar/xhrGet_appointment_confirmed";
+                        $.get(url, {'us_id':us_id, 'date':date.format()}, function(data_schedule){
+                            // console.log(data_schedule);
+                            while( timeStart_value < timeStart_end )
+                            {   
+                                // Kiểm tra: thời gian này đã được đặt trước đó chưa?
+                                var isScheduled = false;
+                                $.each(data_schedule, function(key, value){
+                                    // Chuyển sang kiểu phút trước khi so sánh:
+                                    var schedule_time_start = convert_Hour2Min(value["schedule_time_start"]);
+                                    var schedule_time_end   = convert_Hour2Min(value["schedule_time_end"]);
+
+                                    // schedule_time_start <= timeStart_value < schedule_time_end
+                                    if( timeStart_value >= schedule_time_start && timeStart_value < schedule_time_end ) {
+                                        isScheduled = true;
+                                    }
+                                });
+
+                                // Chuyển từ phút sang kiểu hour:minute
+                                timeStart_hourValue = convert_Min2Hour(timeStart_value);
+                                out_op_app_start += op_app_start.replace(/:appointment_time_start/g, timeStart_hourValue);
+
+                                // Nếu khoảng thời gian này đã được đặt trước đó thì disable thời gian này lại, để không cho người khác đặt trùng
+                                if(isScheduled) {
+                                    out_op_app_start = out_op_app_start.replace(':isScheduled', 'disabled="disabled"');
+                                } else {
+                                    out_op_app_start = out_op_app_start.replace(':isScheduled', '');
+                                }
+
+                                timeStart_value += us_duration; // Thời gian tiếp theo
+                            }
+                        },'json')
+                        .done(function(){
+                            // Hiển thị danh sách thời gian bắt đầu phù hợp với ngày và dịch vụ này
+                            select_app_start.html(out_op_app_start);
+                        });
+
+                        // Khởi tạo thời gian kết thúc dịch vụ
+                            // = thời gian bắt đầu (timeStart_begin) + duration 
+                        app_time_start  = timeStart_begin;
+                        app_time_end    = convert_Min2Hour(app_time_start + us_duration);
+
+                    },'json')
+                    .done(function(){
+                        // Thông báo thời gian phục vụ của dịch vụ này
+                        user_service_duration.text(us_duration);
+                        // Thông báo khởi tạo thời gian kết thúc dịch vụ
+                        appointment_time_end_2.text(app_time_end);
+                        appointment_time_end.val(app_time_end);
+                        // Thông báo ngầm giá tiền dịch vụ
+                        appointment_price.val(us_price);
+                    });
                 });
 
                 // alert('Clicked on: ' + (date.format('d')));
@@ -335,6 +297,14 @@ var Calendar = function(){
                         us_price_st_2.hide();
                     }
 
+                    // Thông báo trạng thái đã xác thực
+                    var btnAct_cA = cA_modal.find('.btnAct_confirm_appointment');
+                    if(data[0]['data_is_confirm'] == 1) {
+                        btnAct_cA.hide();
+                    } else {
+                        btnAct_cA.show();
+                    }
+
                     //
                     app_created.text(data[0]['data_created']);
                     // app_updated.text(data[0]['data_update']);
@@ -352,6 +322,9 @@ var Calendar = function(){
                     complete_appointment_action.attr("data_id", data[0]['data_id']);
                     complete_appointment_action.attr("data_type", data_type);
 
+                    // Xác định id lịch hẹn và appointment hay booking_detail cho việc xác thực lịch hẹn
+                    btnAct_cA.attr("data_id", data[0]['data_id']);
+                    btnAct_cA.attr("data_type", data_type);
                     /////////// EVENT 
 
                 }, 'json').done(function() {
@@ -359,14 +332,21 @@ var Calendar = function(){
                 });
 
                 return false;
+            },
+            dayRender: function(date, cell){
+                // alert(now);
+                if (date < now){
+                    cell.css("background-color", "#F0F0F0");
+                }
             }
         });
+
+        
     }
 
     var xhrInsert_appointment = function() {
-        $('#addAppointment_form').on('submit', function(){
+        aA_form.on('submit', function(){
             var aA_form = $(this);
-            var aA_modal = $("#addAppointment_modal");
 
             var data = aA_form.serialize();
             // console.log(data);
@@ -391,12 +371,12 @@ var Calendar = function(){
     }
 
     var xhrGetOF_appointment_for_edit = function() {
-        var eCA_form = $('#editConfirmedAppointment_form');
         edit_appointment_action.on("click", function() {
             var self = $(this);
             var data_id = self.attr("data_id");
             var data_type = self.attr("data_type");
 
+            var isSuccess = false;
             var loading = self.find('.loading');
             var done = self.find('.done');
             loading.fadeIn();
@@ -410,6 +390,9 @@ var Calendar = function(){
             	url = URL + "spaCMS/calendar/xhrGet_booking";
             }
             $.get(url, {"data_id":data_id}, function(data){
+                if(data.length == 0) return false;
+                isSuccess = true;
+
                 // Action Btn sửa khách hàng
                 var edit_client_action  = $('.edit_client_action');
                 var client_id = null;
@@ -444,24 +427,156 @@ var Calendar = function(){
 
                 // Xác định client_id để sửa khách hàng
                 //// Nếu là appointment thì thông tin client nằm trên bảng appointment => appointment_id
-                //// Nếu là booking_detail thì thông tin client nằm trên bảng client => client_id
+                //// Nếu là booking_detail thì spaCMS ko được chỉnh sửa thông tin client
                 if(data_type == "appointment") {
                     client_id = data[0]['data_id'];
+                    edit_client_action.attr('data_id', client_id);
+                    edit_client_action.attr('data_type', data_type);
                 } else {
-                    client_id = data[0]['data_client_id'];
+                    // client_id = data[0]['data_client_id'];
+                    edit_client_action.hide();
                 }
-                edit_client_action.attr('data_id', client_id);
-                edit_client_action.attr('data_type', data_type);
 
                 //Xác định appointment id để cập nhật appointment
                 $('input[name=data_id]', eCA_form).val(data_id);
                 $('input[name=data_type]', eCA_form).val(data_type);
 
+                // Load danh sach dich vu
+                xhrGet_group_user_service();
+
+                // Thêm sự kiện chọn dịch vụ
+                // Điều chỉnh giờ bắt đầu phù hợp với dịch vụ được chọn,
+                // và thông báo giờ kết thúc
+                var select_list_us      = eCA_modal.find('.list_gus'); // Selectbox user_service
+                var select_app_start    = eCA_modal.find('.appointment_time_start'); // DOM của appointment_time_start 
+                var user_service_duration = eCA_modal.find('.user_service_duration'); // user_service_duration
+
+                var appointment_price       = $('input[name=appointment_price]', eCA_modal);
+                var appointment_time_end    = $('input[name=appointment_time_end]', eCA_modal);
+                var appointment_time_end_2  = eCA_modal.find('.appointment_time_end');
+
+                var appointment_date = $('input[name=appointment_date]', eCA_modal).val();
+                var date = moment(appointment_date, "YYYY-MM-DD");
+                var weekly = convert_num2dayval(date.format('d'));
+
+                var isOpen = null;
+                var openHour = null; // Giờ mở cửa
+                var closeHour = null; // Giờ đóng cửa
+                
+                var url = URL + 'spaCMS/calendar/xhrGet_user_open_hour';
+                $.get(url, function(data){
+                    // console.log(data);
+
+                    isOpen = data[weekly][0];
+                    openHour = data[weekly][1]; // Giờ mở cửa
+                    closeHour = data[weekly][2]; // Giờ đóng cửa
+
+                }, 'json');
+
+                select_list_us.change(function(){
+                    var self = $(this);
+
+                    var us_id           = self.val(); // user_service_id
+                    var us_duration     = null; // user_service_duration
+                    var us_price        = null; // user_service_sale_price
+                    var app_time_end    = null; // appointment_time_end
+                    var app_time_start  = null; // appointment_time_start
+
+                    // html cho option chọn thời gian bắt đầu
+                    var op_app_start = '<option value=":appointment_time_start" :isScheduled>:appointment_time_start</option>';
+                    var out_op_app_start = '';
+
+                    // Lấy thời gian thực hiện của dịch vụ được chọn
+                        // Nếu không có dịch vụ được chọn thì dừng
+                    if(us_id === '') 
+                        return false;
+                    //
+                    var url = URL + 'spaCMS/calendar/xhrGet_user_service';
+                    $.get(url, {'user_service_id':us_id}, function(data){
+
+                        if(data[0]['user_service_sale_price'] !== '') {
+                            us_price = data[0]['user_service_sale_price'];
+                        } else {
+                            us_price = data[0]['user_service_full_price'];
+                        }
+
+                        us_duration = data[0]['user_service_duration']; // Thời gian thực hiện dịch vụ
+                        us_duration = parseInt(us_duration);
+
+                        // Tính các khoảng thời gian phù hợp để bắt đầu dịch vụ
+                        // openHour <= openHour + duration <= closeHour
+                        select_app_start.html(''); // Clear danh sách giờ bắt đầu mặc định
+
+                        // Tạo danh sách giờ bắt đầu mới phù hợp với giờ mở cửa của spa và thời gian thực hiện dịch vụ
+                        var timeStart_begin = openHour*60; // Chuyển giờ sang phút để so sánh
+                        var timeStart_end   = closeHour*60;
+                        var timeStart_value = timeStart_begin;
+
+                        // ??? Tìm trong Appointment và Booking_detail
+                        //// Dịch vụ này (us_id), ngày này (date) có danh sách thời gian đã đặt chỗ và đã confirm
+                        var url = URL + "spaCMS/calendar/xhrGet_appointment_confirmed";
+                        $.get(url, {'us_id':us_id, 'date':date.format()}, function(data_schedule){
+                            console.log(data_schedule);
+                            while( timeStart_value < timeStart_end )
+                            {   
+                                // Kiểm tra: thời gian này đã được đặt trước đó chưa?
+                                var isScheduled = false;
+                                $.each(data_schedule, function(key, value){
+                                    // Chuyển sang kiểu phút trước khi so sánh:
+                                    var schedule_time_start = convert_Hour2Min(value["schedule_time_start"]);
+                                    var schedule_time_end   = convert_Hour2Min(value["schedule_time_end"]);
+
+                                    // schedule_time_start <= timeStart_value < schedule_time_end
+                                    if( timeStart_value >= schedule_time_start && timeStart_value < schedule_time_end ) {
+                                        isScheduled = true;
+                                    }
+                                });
+
+                                // Chuyển từ phút sang kiểu hour:minute
+                                timeStart_hourValue = convert_Min2Hour(timeStart_value);
+                                out_op_app_start += op_app_start.replace(/:appointment_time_start/g, timeStart_hourValue);
+
+                                // Nếu khoảng thời gian này đã được đặt trước đó thì disable thời gian này lại, để không cho người khác đặt trùng
+                                if(isScheduled) {
+                                    out_op_app_start = out_op_app_start.replace(':isScheduled', 'disabled="disabled"');
+                                } else {
+                                    out_op_app_start = out_op_app_start.replace(':isScheduled', '');
+                                }
+
+                                timeStart_value += us_duration; // Thời gian tiếp theo
+                            }
+                        },'json')
+                        .done(function(){
+                            // Hiển thị danh sách thời gian bắt đầu phù hợp với ngày và dịch vụ này
+                            select_app_start.html(out_op_app_start);
+                        });
+
+                        // Khởi tạo thời gian kết thúc dịch vụ
+                            // = thời gian bắt đầu (timeStart_begin) + duration 
+                        app_time_start  = timeStart_begin;
+                        app_time_end    = convert_Min2Hour(app_time_start + us_duration);
+
+                    },'json')
+                    .done(function(){
+                        // Thông báo thời gian phục vụ của dịch vụ này
+                        user_service_duration.text(us_duration);
+                        // Thông báo khởi tạo thời gian kết thúc dịch vụ
+                        appointment_time_end_2.text(app_time_end);
+                        appointment_time_end.val(app_time_end);
+                        // Thông báo ngầm giá tiền dịch vụ
+                        appointment_price.val(us_price);
+                    });
+                });
+
             }, 'json')
             .done(function(){
                 loading.hide();
                 done.fadeIn();
-                eCA_modal.modal("show");
+                if(isSuccess){
+                    eCA_modal.modal("show");
+                } else {
+                    alert("Open editConfirmedAppointment popup error!");
+                }
             });
 
             return false;
@@ -469,12 +584,12 @@ var Calendar = function(){
     }
 
     var xhrUpdate_appointment = function() {
-        var eCA_form = $('#editConfirmedAppointment_form');
         eCA_form.on('submit', function(){
             var self = $(this);
             var data = self.serialize();
 
             var warning_1 = self.find('.b-service-not-exist');
+            var isSuccess = false;
             var loading = self.find('.loading');
             var done = self.find('.done');
             loading.fadeIn();
@@ -482,17 +597,66 @@ var Calendar = function(){
 
             var url = URL + "spaCMS/calendar/xhrUpdate_appointment";
             $.post(url, data, function(result){
-                console.log(result);
+                // console.log(result);
+                if(result == 'success'){
+                    $('#calendar').fullCalendar('refetchEvents');
+                    isSuccess = true;
+                }
             })
             .done(function(){
                 loading.hide();
-                done.fadeIn();
-                // re-draw calendar
-                $('#calendar').fullCalendar('refetchEvents');
-                eCA_form.modal("hide");
+                done.show();
+
+                if(isSuccess){
+                    eCA_modal.modal("hide");
+                    cA_modal.modal("hide");
+                    alert("Cập nhật lịch hẹn thành công!");
+                } else {
+                    alert("Update appointment error!");
+                }
             });
 
             return false;
+        });
+        
+        // Confirm appointment
+        var btnAct_cA = cA_modal.find('.btnAct_confirm_appointment');
+        btnAct_cA.on("click", function(){
+            if (confirm('Xác thực lịch hẹn này?')) {
+                var self = $(this);
+                var is_confirm_0 = cA_modal.find('.is_confirm_0');
+                var is_confirm_1 = cA_modal.find('.is_confirm_1');
+
+                var isSuccess = false;
+                var loading = self.find('.loading');
+                var done = self.find('.done');
+
+                loading.fadeIn();
+                done.hide();
+
+                var data_id = self.attr('data_id');
+                var data_type = self.attr('data_type');
+                var url = URL + "spaCMS/calendar/xhrUpdate_appointment_is_confirm";
+                $.post(url, {'data_id':data_id, 'data_type':data_type}, function(result){
+                    if (result == 'success') {
+                        isSuccess = true;
+                    }
+                })
+                .done(function(){
+                    loading.hide();
+                    done.show();
+                    if(isSuccess){
+                        is_confirm_0.hide();
+                        is_confirm_1.hide();
+                        is_confirm_1.fadeIn(); // Thay đổi trạng thái
+                        btnAct_cA.fadeOut(); // Ẩn nút xác thực
+                    } else {
+                        alert("Confirmed appointment error!");
+                    }
+                }); 
+            } else {
+                // Do nothing!
+            }
         });
     }
 
@@ -605,10 +769,15 @@ var Calendar = function(){
 
     var xhrUpdate_appointment_client = function() {
         var eC_modal = $('#editClient_modal');
+        var eCA_form = $('#editConfirmedAppointment_form');
+        var client_name = eCA_form.find('.client_name');
+        var client_phone = eCA_form.find('.client_phone');
+        var client_note = eCA_form.find('.client_note');
     	$('#editClient_form').on("submit", function(){
     		var self = $(this);
     		var data = self.serialize();
     		
+            var isSuccess = false;
     		var loading = self.find('.loading');
             var done = self.find('.done');
             loading.fadeIn();
@@ -616,18 +785,72 @@ var Calendar = function(){
     		
             var url = URL + "spaCMS/calendar/xhrUpdate_appointment_client";
             $.post(url, data, function(result){
-                console.log(result);
+                // console.log(result);
+
+                if(result == 'success'){
+                    // re-draw calendar
+                    $('#calendar').fullCalendar('refetchEvents');
+                    client_name.hide();
+                    client_phone.hide();
+                    client_note.hide();
+                    client_name.text($('input[name=client_name]', eC_modal).val());
+                    client_phone.text($('input[name=client_phone]', eC_modal).val());
+                    client_note.text($('textarea[name=client_note]', eC_modal).val());
+                    client_name.fadeIn();
+                    client_phone.fadeIn();
+                    client_note.fadeIn();
+                    isSuccess = true;
+                }
             })
             .done(function(){
                 loading.hide();
-                done.fadeIn();
-                // re-draw calendar
-                $('#calendar').fullCalendar('refetchEvents');
-                eC_modal.modal("hide");
+                done.show();
+                
+                if(isSuccess){
+                    eC_modal.modal("hide");
+                } else {
+                    alert("Update client error!");
+                }
             });
             
     		return false;
     	}) 
+    }
+
+    var xhrGet_group_user_service = function() {
+        // 
+        var list_gus = $('.list_gus'); //
+        list_gus.html('<option value="">Chọn dịch vụ</option>');
+
+        var optgroup = '<optgroup data-id=":group_service_id" label=":group_service_name">';
+            optgroup += ':list_user_service';
+            optgroup += '</optgroup>';
+
+        var option_s = '<option value=":user_service_id">:user_service_name</option>';
+            option_s += ':list_user_service';
+
+        var url = URL + 'spaCMS/menu/xhrGet_group_user_service';
+        var out = '';
+        $.get(url, function(data){
+            // console.log(data);
+            $.each(data, function(index, group_us){
+                out = optgroup.replace(':group_service_id', group_us['group_service_id']);
+                out = out.replace(':group_service_name', group_us['group_service_name']);
+
+                if( typeof group_us['list_user_service'] !== 'undefined' ){
+                    $.each(group_us['list_user_service'], function(index, us){
+                        out = out.replace(':list_user_service', option_s);
+                        out = out.replace(':user_service_id', us['user_service_id']);
+                        out = out.replace(':user_service_name', us['user_service_name']);
+                    });
+                }
+
+                // remove final element 
+                out = out.replace(':list_user_service', '');
+
+                list_gus.append(out);
+            });
+        }, 'json');
     }
 
     return {
@@ -640,7 +863,6 @@ var Calendar = function(){
             xhrUpdate_appointment();
             xhrGetOF_client_for_edit();
             xhrUpdate_appointment_client();
-            
         }
     }
 }();
@@ -711,7 +933,8 @@ $(document).ready(function(){
         appointment_time_end.text(app_time_end_choice);
         $('input[name=appointment_time_end]', aA_modal).val(app_time_end_choice);
     });
+
 });
 
-LoadMoreInfo.init();
+// LoadMoreInfo.init();
 Calendar.init();
