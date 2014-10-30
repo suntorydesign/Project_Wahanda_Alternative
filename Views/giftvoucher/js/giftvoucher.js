@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$('button.voucher-card-btn').on('click', function() {
+		setTimeIdle();
 		// console.log($(this).attr('gift-price-data'));
 		$('#gift_email').val('');
 		$('#gift_message').val('');

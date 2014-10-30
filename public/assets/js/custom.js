@@ -1647,6 +1647,7 @@ function sendCreatePlaceMail() {
 }
 
 function clearCreatePlaceModal() {
+	setTimeIdle();
 	$('#create_place_email').val('');
 	$('#create_place_name').val('');
 	$('#create_place_phone').val('');

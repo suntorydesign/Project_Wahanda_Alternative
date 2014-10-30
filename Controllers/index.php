@@ -210,13 +210,13 @@ class Index extends Controller {
 		// authentication enabled
 		$mail -> SMTPSecure = 'ssl';
 		// secure transfer enabled REQUIRED for GMail
-		$mail -> Host = "smtp.gmail.com";
+		$mail -> Host = "smtp.zoho.com";
 		$mail -> Port = 465;
 		// or 587
 		$mail -> IsHTML(true);
-		$mail -> Username = "vietnt134@gmail.com";
-		$mail -> Password = "whathaveyoudone1341996";
-		$mail -> SetFrom($_POST['create_place_email']);
+		$mail -> Username = INFO_MAIL;
+		$mail -> Password = PASS_MAIL;
+		$mail -> SetFrom(INFO_MAIL, 'BELEZA VIETNAM');
 		$mail -> Subject = "Thông tin tạo địa điểm từ Beleza!";
 		$mail -> Body = $body;
 		$mail -> AddAddress(ADMIN_MAIL);

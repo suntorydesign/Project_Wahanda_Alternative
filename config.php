@@ -46,3 +46,7 @@ define('COUNTRYCODE', 'US');
 
 // Admin email
 define('ADMIN_MAIL', 'vietnt134@gmail.com');
+
+// Mail server info
+define('INFO_MAIL', 'info@beleza.vn');
+define('PASS_MAIL', '12345678');
