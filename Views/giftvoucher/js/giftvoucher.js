@@ -3,6 +3,7 @@ $(document).ready(function() {
 		// console.log($(this).attr('gift-price-data'));
 		$('#gift_email').val('');
 		$('#gift_message').val('');
+		$('#error_message_gift').hide();
 		GIFT_PRICE = $(this).attr('gift-price-data');
 		if (GIFT_PRICE != '') {
 			$('#gift_value').text(GIFT_PRICE + ' VNĐ');

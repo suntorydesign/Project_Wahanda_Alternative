@@ -43,3 +43,6 @@ define('API_PASSWORD', SAND_BOX ? 'SKXHT6CJKQTZZSB7' : 'LIVE_PASSWORD_GOES_HERE'
 define('API_SIGNATURE', SAND_BOX ? 'AxYj8i8Y3XRWBeDYoQRjdYoO6OmOAE-pUEmKpvi2o7uovkdol3uNuFnx' : 'LIVE_SIGNATURE_GOES_HERE');
 define('CURRENCYCODE', 'USD');
 define('COUNTRYCODE', 'US');
+
+// Admin email
+define('ADMIN_MAIL', 'vietnt134@gmail.com');

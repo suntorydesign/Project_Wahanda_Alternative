@@ -187,5 +187,45 @@ class Index extends Controller {
 		Session::initIdle();
 	}
 
+	public function sendCreatePlaceMail() {
+		Session::initIdle();
+		//Nội dung email
+		$body = '<h1>Thông báo từ BELEZA</h1>';
+		$body .= '<p>Xin chào Admin BELEZA tôi là: <strong>' . $_POST['create_place_name'] . '</strong></p>';
+		$body .= '<p>Tôi muốn tạo địa điểm trên BELEZA với tên là: ' . $_POST['create_place_com_name'] . '</p>';
+		$body .= '<p>Có thể liên lạc với tôi qua địa chỉ: ' . $_POST['create_place_address'] . '</p>';
+		$body .= '<p>Hoặc SĐT: ' . $_POST['create_place_phone'] . '</p>';
+		$body .= '<p>Hoặc Email: ' . $_POST['create_place_email'] . '</p>';
+		$body .= '<div align="right"><small><i><b>Khách hàng từ BELEZA</b></i></small></div>';
+
+		//Gửi mail local
+		$mail = new PHPMailer(TRUE);
+		$mail -> CharSet = "UTF-8";
+		// create a new object
+		$mail -> IsSMTP();
+		// enable SMTP
+		$mail -> SMTPDebug = 1;
+		// debugging: 1 = errors and messages, 2 = messages only
+		$mail -> SMTPAuth = true;
+		// authentication enabled
+		$mail -> SMTPSecure = 'ssl';
+		// secure transfer enabled REQUIRED for GMail
+		$mail -> Host = "smtp.gmail.com";
+		$mail -> Port = 465;
+		// or 587
+		$mail -> IsHTML(true);
+		$mail -> Username = "vietnt134@gmail.com";
+		$mail -> Password = "whathaveyoudone1341996";
+		$mail -> SetFrom($_POST['create_place_email']);
+		$mail -> Subject = "Thông tin tạo địa điểm từ Beleza!";
+		$mail -> Body = $body;
+		$mail -> AddAddress(ADMIN_MAIL);
+		if (!$mail -> Send()) {
+			echo "Mailer Error: " . $mail -> ErrorInfo;
+		} else {
+			echo 200;
+		}
+	}
+
 }
 ?>
