@@ -19,38 +19,39 @@ $(document).ready(function() {
 		$('#user_description_see_more').show();
 	});
 	/*LINK TO OTHER PAGE*/
-	$('#contact_link').click(function(){
+	$('#contact_link').click(function() {
 		jumpToOtherPage(URL + 'contact');
 	});
-	$('#about_us').click(function(){
+	$('#about_us').click(function() {
 		jumpToOtherPage(URL + 'introbusiness');
 	});
-	$('#gift_voucher_link').click(function(){
+	$('#gift_voucher_link').click(function() {
 		jumpToOtherPage(URL + 'giftvoucher');
 	});
-	$('#').click(function(){
-		
+	$('#').click(function() {
+
 	});
-	$('#regist_venue').click(function(){
+	$('#regist_venue').click(function() {
 		jumpToOtherPage(URL + 'contact');
 	});
-	
+
 	/*END LINK TO OTHER PAGE*/
 });
 
 /*FB LOGIN*/
-function loginFB(){
+function loginFB() {
 	$.ajax({
 		url : URL + 'fblogin/loginFB',
 		type : 'post',
 		success : function(response) {
 			window.location.assign(response);
 		},
-		complete : function(){
-			
+		complete : function() {
+
 		}
 	});
 }
+
 /*END FB LOGIN*/
 /*-----------------------*/
 
@@ -1376,12 +1377,12 @@ function getBookingInfo() {
 			complete : function() {
 				$('#waiting_for_booking_save_b').fadeOut(function() {
 					cfirm = confirm('Đặt hẹn thành công!\nBạn có muốn tiếp tục đặt hẹn');
-					if(cfirm == true){
-						
-					}else{
+					if (cfirm == true) {
+
+					} else {
 						$('#service_detail').modal('hide');
 						shoppingCartDetail();
-					}	
+					}
 					$('button.booking_button').attr('disabled', false);
 				});
 			}
@@ -1416,12 +1417,12 @@ function geteVoucherInfo() {
 			complete : function() {
 				$('#waiting_for_booking_save_e').fadeOut(function() {
 					cfirm = confirm('Đặt hẹn thành công!\nBạn có muốn tiếp tục đặt hẹn');
-					if(cfirm == true){
-						
-					}else{
+					if (cfirm == true) {
+
+					} else {
 						$('#service_detail').modal('hide');
 						shoppingCartDetail();
-					}	
+					}
 					$('button.booking_button').attr('disabled', false);
 				});
 			}
@@ -1464,9 +1465,9 @@ function shoppingCartDetail() {
 					html += '<td width="30%">' + item.user_service_name.toUpperCase() + ' - <b>' + item.user_business_name + '</b></td>';
 					html += '<td width="20%">' + formatDate(item.booking_detail_date) + ' - ' + item.booking_detail_time + setAMPM + '</td>';
 					html += '<td width="19%">' + item.choosen_price + ' VNĐ</td>';
-					if(IS_PAYMENT_PAGE == '1'){
+					if (IS_PAYMENT_PAGE == '1') {
 						html += '<td class="" width="12%">' + item.booking_quantity + '</td>';
-					}else{
+					} else {
 						html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control appointment_quantity" value="' + item.booking_quantity + '"/></td>';
 					}
 					html += '<td width="19%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
@@ -1478,9 +1479,9 @@ function shoppingCartDetail() {
 					html += '<td width="30%">' + item.user_service_name.toUpperCase() + ' - <b>' + item.user_business_name + '</b></td>';
 					html += '<td width="20%"><i class="text-success"><b>e-Voucher</b></i> - Ngày hết hạn : ' + formatDate(item.eVoucher_due_date) + '</td>';
 					html += '<td width="19%">' + item.choosen_price + ' VNĐ</td>';
-					if(IS_PAYMENT_PAGE == '1'){
+					if (IS_PAYMENT_PAGE == '1') {
 						html += '<td class="" width="12%">' + item.booking_quantity + '</td>';
-					}else{
+					} else {
 						html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control eVoucher_quantity" value="' + item.booking_quantity + '"/></td>';
 					}
 					html += '<td width="19%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
@@ -1570,9 +1571,9 @@ function checkIsLoginPayment() {
 		url : URL + 'payment/checkIsLoginPayment',
 		type : 'post',
 		success : function(response) {
-			if(response == 200){
+			if (response == 200) {
 				jumpToOtherPage(URL + 'payment');
-			}else{
+			} else {
 				$('#login_modal').modal('show');
 			}
 		}
@@ -1592,4 +1593,67 @@ function setTimeIdle() {
 }
 
 /*END SET TIME IDLE*/
-/*-----------------------*/
+/*----------------------------------*/
+
+/*SEND CREATE PLACE MAIL*/
+function sendCreatePlaceMail() {
+	$('#error_message_create_place').hide();
+	$('#waiting_for_create_place').fadeIn(function() {
+		var e_mail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		var create_place_email = $('#create_place_email').val();
+		var check = e_mail.test(create_place_email);
+		var create_place_name = $('#create_place_name').val();
+		var create_place_phone = $('#create_place_phone').val();
+		var create_place_address = $('#create_place_address').val();
+		var create_place_com_name = $('#create_place_com_name').val();
+		if (create_place_name == '' || create_place_email == '' || create_place_phone == '' || create_place_address == '' || create_place_com_name == '') {
+			$('#error_message_create_place').text('Nhập đầy đủ thông tin ');
+			$('#error_message_create_place').fadeIn(function() {
+				$('#waiting_for_create_place').fadeOut();
+			});
+		} else {
+			if (check == true) {
+				$.ajax({
+					url : URL + 'index/sendCreatePlaceMail',
+					type : 'post',
+					data : {
+						create_place_email : $('#create_place_email').val(),
+						create_place_name : $('#create_place_name').val(),
+						create_place_phone : $('#create_place_phone').val(),
+						create_place_address : $('#create_place_address').val(),
+						create_place_com_name : $('#create_place_com_name').val()
+					},
+					success : function(response) {
+						if(response == 200){
+							$('#waiting_for_create_place').fadeOut(function(){
+								alert('Gửi mail tạo địa điểm thành công!');
+								$('#create_place_modal').modal('hide');
+							});
+						}else{
+							$('#waiting_for_create_place').fadeOut(function(){
+								alert('Gửi mail tạo địa điểm thất bại, thử lại!');
+							});
+						}
+					}
+				});
+			} else {
+				$('#error_message_create_place').text('Email không hợp lệ ');
+				$('#error_message_create_place').fadeIn(function() {
+					$('#waiting_for_create_place').fadeOut();
+				});
+			}
+		}
+	});
+}
+
+function clearCreatePlaceModal() {
+	$('#create_place_email').val('');
+	$('#create_place_name').val('');
+	$('#create_place_phone').val('');
+	$('#create_place_address').val('');
+	$('#create_place_com_name').val('');
+	$('#error_message_create_place').hide();
+}
+
+/*END SEND CREATE PLACE MAIL*/
+/*----------------------------------*/

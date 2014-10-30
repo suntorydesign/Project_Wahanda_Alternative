@@ -51,7 +51,7 @@
         <header id="header" class="container">
             <div id="top-header" class="clearfix">
                 <div id="top-header-left" class="col-md-3">
-                    <button class="btn create-location-btn" type="button"><i class="fa fa-plus"></i> Tạo địa điểm</button>
+                    <button onclick="clearCreatePlaceModal()" class="btn create-location-btn" data-toggle="modal" data-target="#create_place_modal" type="button"><i class="fa fa-plus"></i> Tạo địa điểm</button>
                 </div>
                 <div id="top-header-center" class="col-md-6">
                     <div class="logo" align="center">
@@ -193,5 +193,64 @@
                     </div><!-- /.container-fluid -->
                 </nav>
             </div> <!-- END NAVIGATION -->
-
+			<div id="create_place_modal" style="z-index: 1051;" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-max-height="440">
+				<div class="modal-dialog">
+					<div class="modal-content" style="border-radius: 0px;">
+						<div class="modal-header" style="background-color: #FDBD0E; padding: 6px 10px;">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h5 class="modal-title" id="myModalLabel" style="text-align:center; font-weight:bold;">GỬI YÊU CẦU TẠO ĐỊA ĐIỂM</h5>
+						</div>
+						<div class="modal-body" style="padding: 30px 20px 0px;">
+							<form class="form-horizontal">
+								<div class="form-group">
+									<label class="control-label col-sm-3">Họ tên</label>
+									<div class="col-sm-8">
+										<input autocomplete="off" class="form-control" type="text" id="create_place_name" name="create_place_name" placeholder="Nhập họ tên..." />
+										<small style="color: red;"></small>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-3">Email</label>
+									<div class="col-sm-8">
+										<input autocomplete="off" class="form-control" type="text" id="create_place_email" name="create_place_email" placeholder="Nhập email...VD:abc@example.com" />
+										<small style="color: red;"></small>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-3">SĐT</label>
+									<div class="col-sm-8">
+										<input onkeypress="inputNumbers(event)" autocomplete="off" class="form-control" type="text" id="create_place_phone" name="create_place_phone" placeholder="Nhập SĐT..." />
+										<small style="color: red;"></small>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-3">Địa chỉ</label>
+									<div class="col-sm-8">
+										<input autocomplete="off" class="form-control" type="text" id="create_place_address" name="create_place_address" placeholder="Địa chỉ..." />
+										<small style="color: red;"></small>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-3">Tên công ty</label>
+									<div class="col-sm-8">
+										<input autocomplete="off" class="form-control" type="text" id="create_place_com_name" name="create_place_com_name" placeholder="Nhập tên công ty bạn muốn đặt..." />
+										<small style="color: red;"></small>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer" id="create_place_footer" style="padding: 15px 20px 15px;">
+							<small style="display: none;color: red;" id="error_message_create_place"><i>Email không hợp lệ </i></small>
+							<button type="button" id="create_place_btn" onclick="sendCreatePlaceMail()" class="btn btn-sm btn-orange-black">
+								<i style="display: none" id="waiting_for_create_place" class="fa fa-refresh fa-spin"></i> Gửi mail
+							</button>
+							<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">
+								Hủy
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
         </header>
