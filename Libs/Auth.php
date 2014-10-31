@@ -15,14 +15,25 @@ class Auth
             exit;
         }
     }
-	
-	public static function handleClientLogin()
+    
+    public static function handleClientLogin()
     {
         @session_start();
         $isClientLogin = $_SESSION['client_id'];
         if ($isClientLogin == false) {
             session_destroy();
             header('location:' . URL);
+            exit;
+        }
+    }
+	
+	public static function handleAdminLogin()
+    {
+        @session_start();
+        $isAdminLogin = $_SESSION['admincp'];
+        if ($isAdminLogin == false) {
+            session_destroy();
+            header('location:' . URL . 'admincp');
             exit;
         }
     }

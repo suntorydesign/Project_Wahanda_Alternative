@@ -10,6 +10,10 @@ class SpaCMS_Model extends Model {
 		parent::__construct();
 	}
 
+	function index() {
+		
+	}
+
 	function login(){
 		$user_email 	= $_POST['user_email'];
 		$user_password 	= $_POST['user_password'];

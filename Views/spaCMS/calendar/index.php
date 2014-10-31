@@ -226,8 +226,8 @@
                                     <tr>
                                         <th>Xác thực</th>
                                         <td>
-                                        	<span class="label label-confirmed is_confirm_1">Đã xác thực</span>
-                                        	<span class="label label-critical is_confirm_0">Chưa xác thực</span>
+                                        	<span class="label label-confirmed is_confirm_1 display_none">Đã xác thực</span>
+                                        	<span class="label label-critical is_confirm_0 display_none">Chưa xác thực</span>
                                         </td>
                                     </tr>
                                 </tbody></table>

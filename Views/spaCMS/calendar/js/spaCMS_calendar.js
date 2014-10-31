@@ -299,11 +299,25 @@ var Calendar = function(){
 
                     // Thông báo trạng thái đã xác thực
                     var btnAct_cA = cA_modal.find('.btnAct_confirm_appointment');
+                    var is_confirm_0 = cA_modal.find('.is_confirm_0');
+                    var is_confirm_1 = cA_modal.find('.is_confirm_1');
                     if(data[0]['data_is_confirm'] == 1) {
+                        is_confirm_0.hide();
+                        is_confirm_1.show();
                         btnAct_cA.hide();
                     } else {
+                        is_confirm_0.show();
+                        is_confirm_1.hide();
                         btnAct_cA.show();
                     }
+
+                    // Thông báo trạng thái đã hoàn thành
+                    if(data[0]['data_status'] == 1){
+                        complete_appointment_action.hide();
+                    } else {
+                        complete_appointment_action.show();
+                    }
+                    
 
                     //
                     app_created.text(data[0]['data_created']);
@@ -350,6 +364,7 @@ var Calendar = function(){
 
             var data = aA_form.serialize();
             // console.log(data);
+            var isSuccess = false;
             var loading = aA_form.find('.loading');
             var done = aA_form.find('.done');
             loading.fadeIn();
@@ -357,14 +372,22 @@ var Calendar = function(){
 
             var url = URL + 'spaCMS/calendar/xhrInsert_appointment';
             $.post(url, data, function(result){
-                loading.fadeOut();
-                done.fadeIn();
-
-                // re-draw calendar
-                $('#calendar').fullCalendar('refetchEvents');
+                if(result == 'success') {
+                    isSuccess = true;
+                    // re-draw calendar
+                    $('#calendar').fullCalendar('refetchEvents');
+                }
             })
             .done(function(){
-                aA_modal.modal("hide");
+                loading.hide();
+                done.show();
+
+                if(isSuccess) {
+                    aA_modal.modal("hide");
+                } else {
+                    alert("insert appointment error!");
+                }
+                
             });
             return false;
         });    
@@ -662,26 +685,38 @@ var Calendar = function(){
 
     var xhrDelete_appointment = function() {
         delete_appointment_action.on("click", function() {
-            var self = $(this);
-            var data_id = self.attr("data_id");
-            var data_type = self.attr("data_type");
+            if(confirm("Bạn có chắc sẽ hủy lịch hẹn này?")) {
+                var self = $(this);
+                var data_id = self.attr("data_id");
+                var data_type = self.attr("data_type");
 
-            var loading = self.find('.loading');
-            var done = self.find('.done');
-            loading.fadeIn();
-            done.hide();
+                var isSuccess = false;
+                var loading = self.find('.loading');
+                var done = self.find('.done');
+                loading.fadeIn();
+                done.hide();
 
-            var url = URL + "spaCMS/calendar/xhrDelete_appointment";
-            $.post(url, {"data_id":data_id, "data_type":data_type}, function(result){
-                console.log(result);
-            })
-            .done(function(){
-                loading.hide();
-                done.fadeIn();
-                // re-draw calendar
-                $('#calendar').fullCalendar('refetchEvents');
-                cA_modal.modal("hide");
-            });
+                var url = URL + "spaCMS/calendar/xhrDelete_appointment";
+                $.post(url, {"data_id":data_id, "data_type":data_type}, function(result){
+                    // console.log(result);
+                    if(result == 'success') {
+                        $('#calendar').fullCalendar('refetchEvents');
+                        isSuccess = true;
+                    }
+                })
+                .done(function(){
+                    loading.hide();
+                    done.show();
+
+                    if(isSuccess) {
+                        cA_modal.modal("hide");
+                    } else {
+                        alert("Can not cancel appointment!");
+                    }
+                });
+            } else {
+                // Do nothing
+            }
 
             return false;
         });
@@ -689,27 +724,36 @@ var Calendar = function(){
 
     var xhrUpdate_appointment_status = function() {
         complete_appointment_action.on("click", function() {
-            var self = $(this);
-            var data_id = self.attr("data_id");
-            var data_type = self.attr("data_type");
+            if(confirm("Bạn có chắc đã hoàn thành lịch hẹn này?")) {
+                var self = $(this);
+                var data_id = self.attr("data_id");
+                var data_type = self.attr("data_type");
 
-            var loading = self.find('.loading');
-            var done = self.find('.done');
-            loading.fadeIn();
-            done.hide();
+                var isSuccess = false;
+                var loading = self.find('.loading');
+                var done = self.find('.done');
+                loading.fadeIn();
+                done.hide();
 
-            var url = URL + "spaCMS/calendar/xhrUpdate_appointment_status";
-            $.post(url, {"data_id":data_id, "data_type":data_type}, function(result){
-                console.log(result);
-            })
-            .done(function(){
-                loading.hide();
-                done.fadeIn();
-                // re-draw calendar
-                $('#calendar').fullCalendar('refetchEvents');
-                cA_modal.modal("hide");
-            });
+                var url = URL + "spaCMS/calendar/xhrUpdate_appointment_status";
+                $.post(url, {"data_id":data_id, "data_type":data_type}, function(result){
+                    // console.log(result);
+                    if(result == 'success') {
+                        // re-draw calendar
+                        $('#calendar').fullCalendar('refetchEvents');
+                        isSuccess = true;
+                    }
+                    
+                })
+                .done(function(){
+                    loading.hide();
+                    done.show();
 
+                    if(isSuccess) {
+                        cA_modal.modal("hide");
+                    }
+                });
+            }
             return false;
         });
     }

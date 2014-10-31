@@ -7,7 +7,7 @@
         Remove this if you use the .htaccess -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>Quản lý vé máy bay</title>
+        <title>WA Connect</title>
         <meta name="description" content="" />
         <meta name="author" content="TrongLoi" />
 
@@ -18,20 +18,19 @@
         <link rel="apple-touch-icon" href="../img/ico/Cat-Brown-icon-72px.png" />
 
         <!-- Chèn link CSS -->
-        <link rel="stylesheet" href="<?php echo URL ?>public/css/fontawesome/css/font-awesome.css" />
+        <!-- <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/> -->
+        <style type="text/css">
+            /** {
+                font-family: "Open Sans";
+            }*/
+        </style>
+        <link rel="stylesheet" href="<?php echo ASSETS ?>plugins/bootstrap/css/bootstrap.min.css" type="text/css"  />
 
-        <link rel="stylesheet" href="<?php echo URL ?>public/css/bootstrap.min.css" type="text/css"  />
+        <link rel="stylesheet" href="<?php echo ASSETS ?>plugins/font-awesome/css/font-awesome.min.css" type="text/css"  />
 
-        <link rel="stylesheet" href="<?php echo URL ?>public/plugins/select2/select2.css" type="text/css"  />
-        <link rel="stylesheet" href="<?php echo URL ?>public/plugins/select2/select2-metronic.css" type="text/css"  />
+        <link rel="stylesheet" href="<?php echo ASSETS ?>css/spaCMS/spaCMS.css" type="text/css"  />
 
-        <link rel="stylesheet" href="<?php echo URL ?>public/plugins/data-tables/DT_bootstrap.css" type="text/css"  />
-
-        <link rel="stylesheet" href="<?php echo URL ?>public/css/style-metronic.css"/>
-        <link rel="stylesheet" href="<?php echo URL ?>public/css/plugins.css"/>
-
-        <link rel="stylesheet" href="<?php echo URL ?>public/css/admincp/style.css"/>
-        <link rel="stylesheet" href="<?php echo URL ?>public/css/admincp/customize-bootstrap.css"/>
+        <!-- <link rel="stylesheet" href="<?php echo URL ?>public/assets/css/spaCMS/tooltip.css" type="text/css"  /> -->
 
         <?php
             if(isset($this->style)){
@@ -40,79 +39,69 @@
                 }
             }
         ?>
-
-        <!-- Chèn link JavaScript-->
-        <script src="<?php echo URL ?>public/js/jquery.min.js" type="text/javascript"></script>
-
-        <script src="<?php echo URL ?>public/js/bootstrap.min.js" type="text/javascript"></script>
-
-        <script src="<?php echo URL ?>public/js/jquery.validate.min.js" type="text/javascript" ></script>
-
-        <script src="<?php echo URL ?>public/plugins/select2/select2.min.js" type="text/javascript" ></script>
-
-        <script src="<?php echo URL ?>public/plugins/data-tables/jquery.dataTables.js" type="text/javascript"></script>
-        <script src="<?php echo URL ?>public/plugins/data-tables/DT_bootstrap.js" type="text/javascript" ></script>
-
-        <script src="<?php echo URL ?>public/js/admincp/core/app.js" type="text/javascript"></script>
-        
-        <?php
-            if(isset($this->script)){
-                foreach ($this->script as $script) {
-                    echo '<script type="text/javascript" src="'. $script .'" ></script>';
-                }
-            }
-        ?>
-
-        <script type="text/javascript">
-            var URL = "<?php echo URL ?>";
-        </script>
     </head>
 
-    <body>
-        <header>
-            <!-------------------------------------------------- Navbar -------------------------------------------------->
-            <div class="navbar navbar-inverse navbar-static-top bs-docs-nav" role="navigation">
-                <div class="container" >
-                    <div class="navbar-header">
-                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="nav navbar-brand" href="<?php echo URL ?>">
-                            <i class="glyphicon glyphicon-home"></i> Bay Online
-                        </a>
+    <body id="dashboard-module">
+        <!-------------------------------------------------- Navbar -------------------------------------------------->
+        <div class="clearfix" id="header">
+            <div id="venues">
+                <div class="current">
+                    <div class="icons-arrow-bottom"></div>
+                    <div class="name" style="position: absolute; height: 15px; top: 50%; margin-top: -7.5px;">
+                        <i class="fa fa-spin fa-cog"></i> Admin Control Panel
                     </div>
-                    <nav id="nav-admincp" class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav">
-                            <li>
-                                <a href="<?php echo URL ?>admincp/vemaybay">Vé máy bay</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo URL ?>admincp/datve">Đặt vé</a>
-                            </li>
-                            <li >
-                                <a href="<?php echo URL ?>admincp/hanhly">Hành lý</a>
-                            </li>
-                            <li >
-                                <a href="<?php echo URL ?>admincp/sanbay">Sân bay</a>
-                            </li>
-                            <!-- <li >
-                                <a href="<?php echo URL ?>admincp/thanhtoan">Thanh toán</a>
-                            </li> -->
-                            <li >
-                                <a href="<?php echo URL ?>admincp/yeucau">Yêu Cầu</a>
-                            </li>
-                            <li >
-                                <a href="<?php echo URL ?>admincp/user">User</a>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="nav">
-                                <a href="logout"><i class="glyphicon glyphicon-off"></i> Thoát</a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
-            </div>       
-        </header>
+                <ul class="hidden"></ul>
+            </div>
+            <ul id="nav1">
+                <li id="nav-home">
+                    <a title="Home" href="./admincp_dashboard"> <div class="icons-nav-home"></div>
+                    <div class="title">
+                        Dashboard
+                    </div> </a>
+                </li>
+                <li id="nav-calendar">
+                    <a title="Calendar" href="./admincp_page"> <div class="icons-nav-calendar"></div>
+                    <div class="title">
+                        Nội dung page
+                    </div> </a>
+                </li>
+                <li id="nav-menu">
+                    <a title="Menu" href="./admincp_spa"> <div class="icons-nav-menu"></div>
+                    <div class="title">
+                        DS Spa
+                    </div> </a>
+                </li>
+                <li id="nav-reports">
+                    <a title="Reports" href="./admincp_report"> <div class="icons-nav-reports"></div>
+                    <div class="title">
+                        Báo cáo
+                    </div> </a>
+                </li>
+                <li id="nav-settings">
+                    <a title="Settings" href="./admincp_setting"> <div class="icons-nav-settings"></div>
+                    <div class="title">
+                        Cài đặt
+                    </div> </a>
+                </li>
+            </ul>
+            <div class="ddown-menu" id="user">
+                <div class="user-wrapper">
+                    <a class="current" href="javascript:;" data-toggle="dropdown">
+                    <div class="person-pic-small">
+                    </div> <div class="icons-arrow-bottom"></div>
+                    <div class="name">
+                        <div>
+                            <?php
+                                echo Session::get('admin_username');
+                            ?>
+                        </div>
+                    </div> </a>
+                    <ul id="logout" class="ddown" role="menu" style="display:none;">
+                        <li>
+                            <a href="<?php echo URL . 'admincp/logout' ?>"> <div class="icons-logout"></div> Thoát </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>

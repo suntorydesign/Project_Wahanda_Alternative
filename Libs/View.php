@@ -19,7 +19,7 @@ class View {
 
 	}
 
-	public function render_admin($name, $noInclude = false) {
+	public function render_admincp($name, $noInclude = false) {
 		if ($noInclude == TRUE) {
 			require 'Views/admincp/' . $name . '.php';
 		} else {

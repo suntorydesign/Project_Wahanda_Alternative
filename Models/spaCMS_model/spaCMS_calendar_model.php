@@ -166,7 +166,7 @@ SQL;
 			c.client_birth as 'data_client_birth',
 			c.client_note as 'data_client_note',
 			bd.booking_detail_status as 'data_status',
-			-- bd.booking_detail_is_confirm as 'data_is_confirm',
+			bd.booking_detail_is_confirm as 'data_is_confirm',
 			us.user_service_full_price as 'data_us_full_price', 
 			us.user_service_sale_price as 'data_us_sale_price',
 			b.booking_date as 'data_created'
@@ -302,7 +302,7 @@ SQL;
 				booking_detail_user_id = {$user_id}
 			AND booking_detail_user_service_id = {$us_id}
 			AND booking_detail_date = '{$date}'
-			-- AND booking_detail_is_confirm = 1
+			AND booking_detail_is_confirm = 1
 SQL;
 		$data_bkdetail = $this->db->select($aQuery_bkdetail);
 
