@@ -3,7 +3,7 @@
 /**
  *
  */
-class Admincp_setting extends Controller {
+class admincp_setting extends Controller {
 
 	function __construct() {
 		parent::__construct();

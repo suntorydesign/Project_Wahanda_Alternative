@@ -8,6 +8,12 @@
     <script src="<?php echo ASSETS ?>plugins/image-manager/js/jquery-1.8.3.min.js" type="text/javascript"></script>
 
     <script src="<?php echo ASSETS ?>plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    
+    <script type="text/javascript" src="<?php echo ASSETS; ?>js/common.js"></script>
+    
+    <script src="<?php echo ASSETS ?>plugins/data-tables/jquery.dataTables.js" type="text/javascript"></script>
+    
+    <script src="<?php echo ASSETS ?>plugins/data-tables/DT_bootstrap.js" type="text/javascript"></script>
    
     <script type="text/javascript">
 	  	// Active menu	
@@ -25,7 +31,7 @@
     <script type="text/javascript">
         var URL = "<?php echo URL ?>";
         var URL_IMAGE_MANAGER = "<?php echo ASSETS . 'plugins/image-manager/'; ?>";
-        var user_id = <?php echo Session::get('user_id')?>; // USER ID = GET SESSION['user_id']
+        // var user_id = <?php echo Session::get('user_id')?>; // USER ID = GET SESSION['user_id']
     </script>
 
     <?php

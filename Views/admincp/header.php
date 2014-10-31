@@ -7,7 +7,7 @@
         Remove this if you use the .htaccess -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>WA Connect</title>
+        <title>BELEZA Admin CP</title>
         <meta name="description" content="" />
         <meta name="author" content="TrongLoi" />
 
@@ -27,6 +27,8 @@
         <link rel="stylesheet" href="<?php echo ASSETS ?>plugins/bootstrap/css/bootstrap.min.css" type="text/css"  />
 
         <link rel="stylesheet" href="<?php echo ASSETS ?>plugins/font-awesome/css/font-awesome.min.css" type="text/css"  />
+        
+        <link rel="stylesheet" href="<?php echo ASSETS ?>plugins/data-tables/DT_bootstrap.css" type="text/css"  />
 
         <link rel="stylesheet" href="<?php echo ASSETS ?>css/spaCMS/spaCMS.css" type="text/css"  />
 
@@ -48,38 +50,56 @@
                 <div class="current">
                     <div class="icons-arrow-bottom"></div>
                     <div class="name" style="position: absolute; height: 15px; top: 50%; margin-top: -7.5px;">
-                        <i class="fa fa-spin fa-cog"></i> Admin Control Panel
+                        <i class="fa fa-lg fa-wrench"></i> Admin Control Panel
                     </div>
                 </div>
                 <ul class="hidden"></ul>
             </div>
             <ul id="nav1">
                 <li id="nav-home">
-                    <a title="Home" href="./admincp_dashboard"> <div class="icons-nav-home"></div>
+                    <a title="Home" href="<?php echo URL; ?>admincp_dashboard"> <div class="icons-nav-home"></div>
                     <div class="title">
                         Dashboard
                     </div> </a>
                 </li>
-                <li id="nav-calendar">
-                    <a title="Calendar" href="./admincp_page"> <div class="icons-nav-calendar"></div>
+                <li id="nav-clients">
+                    <a title="Menu" href="<?php echo URL; ?>admincp_spa"> <div class="icons-nav-clients"></div>
                     <div class="title">
-                        Nội dung page
+                        Spa
                     </div> </a>
                 </li>
-                <li id="nav-menu">
-                    <a title="Menu" href="./admincp_spa"> <div class="icons-nav-menu"></div>
+                <li id="nav-settings">
+                    <a title="Menu" href="<?php echo URL; ?>admincp_email"> <div class="icons-nav-settings"></div>
                     <div class="title">
-                        DS Spa
+                        Email
                     </div> </a>
                 </li>
                 <li id="nav-reports">
-                    <a title="Reports" href="./admincp_report"> <div class="icons-nav-reports"></div>
+                    <a title="Reports" href="<?php echo URL; ?>admincp_report"> <div class="icons-nav-reports"></div>
                     <div class="title">
                         Báo cáo
                     </div> </a>
                 </li>
+                <li id="nav-reports">
+                    <a title="Reports" href="<?php echo URL; ?>admincp_promotion"> <div class="icons-nav-reports"></div>
+                    <div class="title">
+                        Promotion
+                    </div> </a>
+                </li>
+                <li id="nav-reports">
+                    <a title="Reports" href="<?php echo URL; ?>admincp_gift"> <div class="icons-nav-reports"></div>
+                    <div class="title">
+                        Gift
+                    </div> </a>
+                </li>
+                <li id="nav-menu">
+                    <a title="Calendar" href="<?php echo URL; ?>admincp_page"> <div class="icons-nav-menu"></div>
+                    <div class="title">
+                        Page
+                    </div> </a>
+                </li>
                 <li id="nav-settings">
-                    <a title="Settings" href="./admincp_setting"> <div class="icons-nav-settings"></div>
+                    <a title="Settings" href="<?php echo URL; ?>admincp_setting"> <div class="icons-nav-settings"></div>
                     <div class="title">
                         Cài đặt
                     </div> </a>

@@ -3,7 +3,7 @@
 /**
  *
  */
-class Admincp_dashboard extends Controller {
+class admincp_dashboard extends Controller {
 
 	function __construct() {
 		parent::__construct();

@@ -3,7 +3,7 @@
 /**
  *
  */
-class Admincp_page extends Controller {
+class admincp_page extends Controller {
 
 	function __construct() {
 		parent::__construct();
