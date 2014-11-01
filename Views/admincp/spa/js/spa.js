@@ -40,7 +40,7 @@ function loadUserDetailDistrict() {
 				$('#user_district_id').append(html);
 			}
 		},
-		complete : function(){
+		complete : function() {
 			loadUserDetail();
 		}
 	});
@@ -85,7 +85,6 @@ function addSaveDetail() {
 			var user_email = $('#user_email').val();
 			var check = e_mail.test(user_email);
 			var user_full_name = $('#user_full_name').val();
-			var user_password = $('#user_password').val();
 			var user_business_name = $('#user_business_name').val();
 			var user_district_id = $('#user_district_id').val();
 			var user_address = $('#user_address').val();
@@ -105,7 +104,6 @@ function addSaveDetail() {
 						data : {
 							user_full_name : user_full_name,
 							user_email : user_email,
-							user_password : user_password,
 							user_business_name : user_business_name,
 							user_address : user_address,
 							user_district_id : user_district_id,
@@ -147,7 +145,7 @@ function loadUserDetail() {
 			user_id : USER_ID
 		},
 		success : function(response) {
-			if (response[0] != null) {				
+			if (response[0] != null) {
 				$.each(response[0], function(i, item) {
 					$('#' + i).val(item);
 				});
@@ -161,7 +159,87 @@ function loadUserDetail() {
 		complete : function() {
 		}
 	});
+}
 
+function saveEditDetail() {
+	cfirm = confirm('Bạn có muốn sửa không?');
+	if (cfirm == true) {
+		$('div.done').fadeOut(function() {
+			$('div#save_loading').fadeIn(function() {
+				var user_full_name = $('#user_full_name').val();
+				var user_district_id = $('#user_district_id').val();
+				var user_address = $('#user_address').val();
+				var user_phone = $('#user_phone').val();
+				$.ajax({
+					url : URL + 'admincp_spa/saveEditDetail',
+					type : 'post',
+					data : {
+						user_id : USER_ID,
+						user_full_name : user_full_name,
+						user_address : user_address,
+						user_district_id : user_district_id,
+						user_phone : user_phone
+					},
+					success : function(response) {
+						if (response == 200) {
+							$('div#save_loading').fadeOut(function() {
+								$('div.done').fadeIn(function() {
+									alert('Sửa thành công !');
+									jumpToOtherPage(URL + 'admincp_spa');
+								});
+							});
+						} else {
+							$('div#save_loading').fadeOut(function() {
+								$('div.done').fadeIn(function() {
+									alert('Sửa thất bại hoặc bạn chưa sửa gì hết !');
+								});
+							});
+						}
+					},
+					complete : function() {
+						// $('div#save_loading').fadeOut(function() {
+						// $('div.done').fadeIn();
+						// });
+					}
+				});
+			});
+		});
+	}
+}
+
+function deleteUser() {
+	cfirm = confirm('Bạn có muốn xóa không?');
+	if (cfirm == true) {
+		$('div.remove').fadeOut(function() {
+			$('div#remove_loading').fadeIn(function() {
+				$.ajax({
+					url : URL + 'admincp_spa/deleteUser',
+					type : 'post',
+					data : {
+						user_id : USER_ID,
+					},
+					success : function(response) {
+						if (response == 200) {
+							$('div#remove_loading').fadeOut(function() {
+								$('div.remove').fadeIn(function() {
+									alert('Xóa thành công !');
+									jumpToOtherPage(URL + 'admincp_spa');
+								});
+							});
+						} else {
+							$('div#remove_loading').fadeOut(function() {
+								$('div.remove').fadeIn(function() {
+									alert('Xóa thất bại !');
+								});
+							});
+						}
+					},
+					complete : function() {
+					}
+				});
+			});
+		});
+	}
 }
 
 function addSpaDetail() {

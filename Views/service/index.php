@@ -585,8 +585,10 @@
 							<div class="row">
 								<div class="col-md-12">
 									<span class="fa-stack fa-3x">
-										<i class="fa fa-certificate fa-stack-2x text-orange"></i>
+										<i id="use_appointment_3" class="fa fa-certificate fa-stack-2x text-orange"></i>
+										<i id="use_appointment_2" style="display: none;" class="fa fa-circle fa-stack-2x text-orange"></i>
 										<i style="font-size: 30px;" class="fa fa-calendar text-white fa-stack-1x"></i>
+										<i id="use_appointment" style="display: none;" class="fa fa-ban fa-stack-2x text-danger"></i>
 									</span>
 								</div>
 								<div class="col-md-12">
@@ -598,8 +600,10 @@
 							<div class="row">
 								<div class="col-md-12">
 									<span class="fa-stack fa-3x">
-										<i class="fa fa-certificate fa-stack-2x text-orange"></i>
+										<i id="use_e_voucher_3" class="fa fa-certificate fa-stack-2x text-orange"></i>
+										<i id="use_e_voucher_2" style="display: none;" class="fa fa-circle fa-stack-2x text-orange"></i>
 										<i style="font-size: 30px;" class="fa fa-credit-card text-white fa-stack-1x"></i>
+										<i id="use_e_voucher" style="display: none;" class="fa fa-ban fa-stack-2x text-danger"></i>
 									</span>
 								</div>
 								<div class="col-md-12">
@@ -611,9 +615,10 @@
 							<div class="row">
 								<div class="col-md-12">
 									<span class="fa-stack fa-3x">
-										<i class="fa fa-certificate fa-stack-2x text-orange"></i>
+										<i id="use_gift_voucher_3" class="fa fa-certificate fa-stack-2x text-orange"></i>
+										<i id="use_gift_voucher_2" style="display: none;" class="fa fa-circle fa-stack-2x text-orange"></i>
 										<i style="font-size: 40px;" class="fa fa-gift text-white fa-stack-1x"></i>
-										<!-- <i class="fa fa-ban fa-stack-2x text-danger"></i> -->
+										<i id="use_gift_voucher" style="display: none;" class="fa fa-ban fa-stack-2x text-danger"></i>
 									</span>
 								</div>
 								<div class="col-md-12">

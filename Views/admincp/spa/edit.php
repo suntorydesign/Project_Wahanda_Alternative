@@ -32,12 +32,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-4">Mật khẩu mới</label>
-						<div class="col-md-8">
-							<input id="user_password" name="user_password" class="form-control" type="password" placeholder="Nhập mật khẩu mới..." />
-						</div>
-					</div>
-					<div class="form-group">
 						<label class="control-label col-md-4">Tên địa điểm (*)</label>
 						<div class="col-md-8">
 							<input disabled="disabled" id="user_business_name" name="user_business_name" class="form-control" type="text" placeholder="Nhập tên địa điểm (thương hiệu *)..." />
@@ -71,17 +65,17 @@
 		<hr />
 		<div class="row">
 			<div class="col-md-12">
-				<button id="btn_edit_spa" onclick="" type="button" class="button action action-default button-primary save-action">
+				<button onclick="saveEditDetail()" id="btn_edit_spa" onclick="" type="button" class="button action action-default button-primary save-action">
 					<div class="button-inner">
 						<div class="button-icon icons-tick done"></div>
-						<div class="button-icon fa fa-spin fa-refresh s-loading"></div>
+						<div id="save_loading" class="button-icon fa fa-spin fa-refresh s-loading"></div>
 						<span class="msg msg-action-default">Lưu</span>
 					</div>
 				</button>
-				<button id="btn_delete_spa" onclick="" type="button" class="button action action-default button-secondary save-action">
+				<button onclick="deleteUser()" id="btn_delete_spa" onclick="" type="button" class="button action action-default button-secondary save-action">
 					<div class="button-inner">
 						<div class="button-icon icons-delete remove"></div>
-						<div class="button-icon fa fa-spin fa-refresh s-loading"></div>
+						<div id="remove_loading" class="button-icon fa fa-spin fa-refresh s-loading"></div>
 						<span class="msg msg-action-default">Xóa</span>
 					</div>
 				</button>

@@ -113,6 +113,22 @@ function loadLocationDetail() {
 							user_open_hour += '</div>';
 						});
 						$('#location_open_hour').html(user_open_hour);
+						if(response.array_voucher.appointment == 0){
+							$('#use_appointment').show();
+							$('#use_appointment_2').show();
+							$('#use_appointment_3').hide();
+						}
+						if(response.array_voucher.evoucher == 0){
+							$('#use_e_voucher').show();
+							$('#use_e_voucher_2').show();
+							$('#use_e_voucher_3').hide();
+						}
+						if(response.array_voucher.gift_voucher == 0){
+							$('#use_gift_voucher').show();
+							$('#use_gift_voucher_2').show();
+							$('#use_gift_voucher_3').hide();
+						}
+						
 					}
 				});
 			}

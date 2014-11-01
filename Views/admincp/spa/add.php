@@ -29,12 +29,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-4">Mật khẩu (*)</label>
-						<div class="col-md-8">
-							<input id="user_password" name="user_password" class="form-control" type="password" placeholder="Nhập mật khẩu (*).." />
-						</div>
-					</div>
-					<div class="form-group">
 						<label class="control-label col-md-4">Tên địa điểm (*)</label>
 						<div class="col-md-8">
 							<input id="user_business_name" name="user_business_name" class="form-control" type="text" placeholder="Nhập tên địa điểm (thương hiệu *)..." />

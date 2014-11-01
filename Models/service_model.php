@@ -75,6 +75,39 @@ SQL;
 			$select_one = $this -> db -> select($sql);
 			$return[$value['service_type_name']] = $select_one;
 		}
+		$sql = <<<SQL
+SELECT 
+user_service_use_evoucher
+, COUNT(*) AS count_check
+FROM user_service
+INNER JOIN group_service ON group_service.group_service_id = user_service.user_service_group_id
+INNER JOIN user ON user.user_id = group_service.group_service_user_id
+WHERE user.user_id = {$user_id}
+AND user_service.user_service_delete_flg = 0
+GROUP BY user_service_use_evoucher
+SQL;
+		$select = $this -> db -> select($sql);
+		$array_voucher = array('evoucher' => 0
+							  ,'appointment' => 0
+							  ,'gift_voucher' => 0);
+		foreach ($select as $key => $value) {
+			if($key == 0 || $key == 2){
+				$array_voucher['appointment'] = 1;
+			}
+			if($key == 1 || $key == 2){
+				$array_voucher['evoucher'] = 1;
+			}
+		}
+		$sql = <<<SQL
+SELECT user_is_use_voucher
+FROM user
+WHERE user_id = {$user_id}
+SQL;
+		$select = $this -> db -> select($sql);
+		if($select[0]['user_is_use_voucher'] == 1){
+			$array_voucher['gift_voucher'] = 1;
+		}
+		$return['array_voucher'] = $array_voucher;
 		echo json_encode($return);
 	}
 

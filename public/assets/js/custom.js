@@ -322,7 +322,7 @@ function loadServiceDetail(user_service_id) {
 	// console.log(CHOOSEN_TIME);
 	// console.log(CHOOSEN_PRICE);
 	// console.log(USER_SERVICE_ID);
-	resetTab('online_booking_zone');
+	// resetTab('online_booking_zone');
 	$.ajax({
 		url : URL + 'index/loadServiceDetail',
 		type : 'post',
@@ -621,19 +621,34 @@ function loadServiceDetail(user_service_id) {
 				});
 				//console.log(evou_html);
 				if (USER_SERVICE_USE_EVOUCHER == 0) {
+					jumbToTab('online_booking_zone');
+					$('#btn_online_booking_zone').attr('disabled', false);
 					$('#btn_evoucher_booking_zone').attr('disabled', true);
-				} else {
+				} else if(USER_SERVICE_USE_EVOUCHER == 1) {
+					jumbToTab('evoucher_booking_zone');
+					$('#btn_online_booking_zone').attr('disabled', true);
 					$('#btn_evoucher_booking_zone').attr('disabled', false);
-					var date = new Date(EVOUCHER_DUE_DATE);
-					var due_month = date.getMonth();
-					var due_date = date.getDate();
-					if (date.getMonth() < 10) {
-						due_month = '0' + date.getMonth();
+					$('#evoucher_expire div #evoucher_due_date').html('<strong>Ngày hết hạn eVoucher : </strong>' + formatDate(EVOUCHER_DUE_DATE));
+					var evoucher_quantity = '';
+					for ( i = 1; i <= parseInt(MAX_QUANTITY_EVOUCHER); i++) {
+						evoucher_quantity += '<option value="' + i + '">' + i + '</option>';
 					}
-					if (date.getDate() < 10) {
-						due_date = '0' + date.getDate();
-					}
-					$('#evoucher_expire div #evoucher_due_date').html('<strong>Ngày hết hạn eVoucher : </strong>' + due_date + '-' + due_month + '-' + date.getFullYear());
+					$('#e_quantity').html(evoucher_quantity);
+					$('#use_eVoucher').children().html(evou_html);
+				}else if(USER_SERVICE_USE_EVOUCHER == 2) {
+					jumbToTab('online_booking_zone');
+					$('#btn_online_booking_zone').attr('disabled', false);
+					$('#btn_evoucher_booking_zone').attr('disabled', false);
+					// var date = new Date(EVOUCHER_DUE_DATE);
+					// var due_month = date.getMonth();
+					// var due_date = date.getDate();
+					// if (date.getMonth() < 10) {
+						// due_month = '0' + date.getMonth();
+					// }
+					// if (date.getDate() < 10) {
+						// due_date = '0' + date.getDate();
+					// }
+					$('#evoucher_expire div #evoucher_due_date').html('<strong>Ngày hết hạn eVoucher : </strong>' + formatDate(EVOUCHER_DUE_DATE));
 					var evoucher_quantity = '';
 					for ( i = 1; i <= parseInt(MAX_QUANTITY_EVOUCHER); i++) {
 						evoucher_quantity += '<option value="' + i + '">' + i + '</option>';
@@ -777,7 +792,7 @@ function loadServiceDetail(user_service_id) {
 					CHOOSEN_DATE = $(this).attr('value');
 					var service_remain_default = false;
 					$(this).addClass('active');
-					$('#btn_online_booking_zone').addClass('btn-choose').removeClass('btn-orange');
+					// $('#btn_online_booking_zone').addClass('btn-choose').removeClass('btn-orange');
 					var time_html = '';
 					if ($(this).attr('day-data') == TODAY_OF_WEEK) {
 						var temp_2_array = [];

@@ -210,7 +210,7 @@ class Index extends Controller {
 		// authentication enabled
 		$mail -> SMTPSecure = 'ssl';
 		// secure transfer enabled REQUIRED for GMail
-		$mail -> Host = "smtp.zoho.com";
+		$mail -> Host = SMTP_MAIL;
 		$mail -> Port = 465;
 		// or 587
 		$mail -> IsHTML(true);

@@ -48,5 +48,6 @@ define('COUNTRYCODE', 'US');
 define('ADMIN_MAIL', 'vietnt134@gmail.com');
 
 // Mail server info
+define('SMTP_MAIL', 'smtp.zoho.com');
 define('INFO_MAIL', 'info@beleza.vn');
 define('PASS_MAIL', '12345678');
