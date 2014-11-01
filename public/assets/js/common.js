@@ -2,6 +2,7 @@
 function jumpToOtherPage(page) {
 	window.location = page;
 }
+
 /*JUMP TO OTHER PAGE*/
 /*-----------------------*/
 
@@ -15,6 +16,7 @@ function inputNumbers(evt) {
 		e.preventDefault();
 	}
 }
+
 /*END CAN ONLY INPUT NUMBER*/
 /*-----------------------*/
 
@@ -23,6 +25,7 @@ function inputNothing(evt) {
 	var e = evt || window.event;
 	e.preventDefault();
 }
+
 /*END INPUT NOTHING*/
 /*-----------------------*/
 
@@ -34,12 +37,24 @@ function shorten(text, maxLength) {
 	}
 	return ret;
 }
+
 /*END SHORTEN THE TEXT WITH ...*/
 /*-----------------------*/
 
 /*FORMAT DATE*/
 function formatDate(date) {
-	var date_format = new Date(date);
+	var date_array = date.split('-');
+	var dt = parseInt(date_array[2]);
+	var mth = parseInt(date_array[1]);
+	if (dt < 10) {
+		dt = '0' + dt;
+	}
+	if (mth < 10) {
+		mth = '0' + mth;
+	}
+	var full_date = date_array[0] + '-' + mth + '-' + dt;
+	// console.log(full_date);
+	var date_format = new Date(full_date);
 	re_date = date_format.getDate();
 	re_month = parseInt(date_format.getMonth()) + 1;
 	if (re_month < 10) {
@@ -51,6 +66,7 @@ function formatDate(date) {
 	re_year = date_format.getFullYear();
 	return re_date + '/' + re_month + '/' + re_year;
 }
+
 /*END FORMAT DATE*/
 /*-----------------------*/
 
@@ -75,6 +91,7 @@ function checkSessionIdle() {
 		}
 	});
 }
+
 /*END CHECK SESSION IDLE*/
 /*-----------------------*/
 
@@ -88,5 +105,6 @@ function showMore(cls, txt) {
 		}
 	});
 }
+
 /*END SHOW MORE*/
 /*-----------------------*/
