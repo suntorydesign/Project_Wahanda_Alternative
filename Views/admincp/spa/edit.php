@@ -11,9 +11,12 @@
 		</div>
 	</div>
 	<div class="main-content">
-		<h3 class="add-place">Thêm một địa điểm</h3>
+		<h3 class="add-place">Sửa/ Xóa một địa điểm</h3>
 		<hr />
-		<div class="row">
+		<div style="display: none;" id="error_edit_place">
+			<p class="alert alert-warning">Địa điểm không tồn tại !</p>
+		</div>
+		<div class="row" id="edit_place">
 			<div class="form-horizontal">
 				<div class="col-md-6">
 					<div class="form-group">
@@ -25,19 +28,19 @@
 					<div class="form-group">
 						<label class="control-label col-md-4">Email (*)</label>
 						<div class="col-md-8">
-							<input id="user_email" name="user_email" class="form-control" type="text" placeholder="Nhập email (*)..." />
+							<input disabled="disabled" id="user_email" name="user_email" class="form-control" type="text" placeholder="Nhập email (*)..." />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-4">Mật khẩu (*)</label>
+						<label class="control-label col-md-4">Mật khẩu mới</label>
 						<div class="col-md-8">
-							<input id="user_password" name="user_password" class="form-control" type="password" placeholder="Nhập mật khẩu (*).." />
+							<input id="user_password" name="user_password" class="form-control" type="password" placeholder="Nhập mật khẩu mới..." />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-4">Tên địa điểm (*)</label>
 						<div class="col-md-8">
-							<input id="user_business_name" name="user_business_name" class="form-control" type="text" placeholder="Nhập tên địa điểm (thương hiệu *)..." />
+							<input disabled="disabled" id="user_business_name" name="user_business_name" class="form-control" type="text" placeholder="Nhập tên địa điểm (thương hiệu *)..." />
 						</div>
 					</div>
 				</div>
@@ -68,11 +71,18 @@
 		<hr />
 		<div class="row">
 			<div class="col-md-12">
-				<button onclick="addSaveDetail()" type="button" class="button action action-default button-primary save-action">
+				<button id="btn_edit_spa" onclick="" type="button" class="button action action-default button-primary save-action">
 					<div class="button-inner">
 						<div class="button-icon icons-tick done"></div>
 						<div class="button-icon fa fa-spin fa-refresh s-loading"></div>
-						<span class="msg msg-action-default">Thêm</span>
+						<span class="msg msg-action-default">Lưu</span>
+					</div>
+				</button>
+				<button id="btn_delete_spa" onclick="" type="button" class="button action action-default button-secondary save-action">
+					<div class="button-inner">
+						<div class="button-icon icons-delete remove"></div>
+						<div class="button-icon fa fa-spin fa-refresh s-loading"></div>
+						<span class="msg msg-action-default">Xóa</span>
 					</div>
 				</button>
 				<small id="error_add_spa" style="color: red; display: none;">Nhập đầy đủ các trường có (*)</small>
@@ -81,6 +91,7 @@
 	</div>
 </div>
 <script>
-	var IS_ADD = 1;
-	var IS_EDIT = 0;
+	var IS_ADD = 0;
+	var IS_EDIT = 1;
+	var USER_ID = "<?php echo $this -> user_id; ?>";
 </script>

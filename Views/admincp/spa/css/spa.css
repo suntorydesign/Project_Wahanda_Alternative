@@ -1,7 +1,17 @@
+b, strong{
+	font-weight: bold;
+}
+
+h3{
+	font-size: 24px;
+}
 .add-place{
 	font-size: 24px;
 }
 .title-admincp{
 	font-size: 20px;
 	margin-bottom: 10px;
+}
+tbody tr td{
+	cursor: pointer;
 }

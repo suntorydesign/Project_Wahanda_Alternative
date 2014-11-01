@@ -14,23 +14,23 @@
 		<table id="spa_list" class="table table-hover" width="100%" cellspacing="0">
 	        <thead>
 	            <tr>
-	                <th>ID</th>
-	                <th>Tên Địa Điểm</th>
-	                <th>Tên Người Đăng Ký</th>
-	                <th>Email</th>
-	                <th>Số ĐT</th>
-	                <th>Địa Chỉ</th>
+	                <th><b>ID</b></th>
+	                <th><b>Tên Địa Điểm</b></th>
+	                <th><b>Tên Người Đăng Ký</b></th>
+	                <th><b>Email</b></th>
+	                <th><b>Số ĐT</b></th>
+	                <th><b>Địa Chỉ</b></th>
 	            </tr>
 	        </thead>
 	 
 	        <tfoot>
 	            <tr>
-	                <th>ID</th>
-	                <th>Tên Địa Điểm</th>
-	                <th>Tên Người Đăng Ký</th>
-	                <th>Email</th>
-	                <th>Số ĐT</th>
-	                <th>Địa Chỉ</th>
+	                <th><b>ID</b></th>
+	                <th><b>Tên Địa Điểm</b></th>
+	                <th><b>Tên Người Đăng Ký</b></th>
+	                <th><b>Email</b></th>
+	                <th><b>Số ĐT</b></th>
+	                <th><b>Địa Chỉ</b></th>
 	            </tr>
 	        </tfoot>
 	 
@@ -40,3 +40,7 @@
 	    </table>
 	</div>
 </div>
+<script>
+	var IS_ADD = 0;
+	var IS_EDIT = 0;
+</script>
