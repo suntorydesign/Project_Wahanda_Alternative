@@ -536,4 +536,47 @@ SQL;
 			echo "error";
 		}
 	}
+
+	/**
+	 * Kiểm tra lịch hẹn đã confirmed chưa?
+	 * @param $_POST['data_id'] : id lịch hẹn
+	 * @param $_POST['data_type'] : lịch hẹn là appointment hay booking_detail
+	 * @param data update
+	 * @return success/error
+	 */
+	public function check_appointment_is_confirmed() {
+		$user_id = Session::get('user_id');
+		$data_id = $_POST['data_id'];
+		$data_type = $_POST['data_type'];
+
+		// echo $data_id; exit();
+		$from = null;
+		$where = null;
+		if($data_type == "appointment") {
+			$from = "appointment";
+			$where = "appointment_user_id = $user_id";
+			$where .= " AND appointment_id = $data_id";
+			$where .= " AND appointment_is_confirm = 1";
+		}
+
+		if($data_type == "booking_detail") {
+			$from = "booking_detail";
+			$where = "booking_detail_user_id = $user_id";
+			$where .= " AND booking_detail_id = $data_id";
+			$where .= " AND booking_detail_is_confirm = 1";
+		}
+
+		$aQuery = <<<SQL
+		SELECT count(*) as 'isConfirmed'
+		FROM {$from}
+		WHERE {$where}
+SQL;
+		$result = $this->db->select($aQuery);
+
+		if($result[0]['isConfirmed'] == 1) {
+			echo "success";
+		} else {
+			echo "error";
+		}
+	}
 }

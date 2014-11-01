@@ -218,18 +218,19 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Status</th>
-                                        <td><span class="status-complete label label-confirmed display_none" style="display: none;">Hoàn thành</span>
-                                        	<span class="status status-uncomplete display_none" style="display: none;">Chưa hoàn thành</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
                                         <th>Xác thực</th>
                                         <td>
                                         	<span class="label label-confirmed is_confirm_1 display_none">Đã xác thực</span>
                                         	<span class="label label-critical is_confirm_0 display_none">Chưa xác thực</span>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <th>Status</th>
+                                        <td><span class="status-complete label label-confirmed display_none" style="display: none;">Hoàn thành</span>
+                                        	<span class="status status-uncomplete display_none" style="display: none;">Chưa hoàn thành</span>
+                                        </td>
+                                    </tr>
+                                    
                                 </tbody></table>
                                 <div class="appointment-actions">
                                     <button type="button" class="button button-primary accept-action">

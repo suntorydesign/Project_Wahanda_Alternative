@@ -108,6 +108,10 @@ class SpaCMS_Model extends Model {
 		SpaCMS_Calendar_Model::update_appointment_is_confirm();
 	}
 
+	function check_appointment_is_confirmed() {
+		SpaCMS_Calendar_Model::check_appointment_is_confirmed();
+	}
+
 	///////////////////////////// MENU //////////////////////////
 	function get_group_user_service() {
 		SpaCMS_Menu_Model::get_group_user_service();
@@ -152,6 +156,8 @@ class SpaCMS_Model extends Model {
 	function delete_group_service() {
 		SpaCMS_Menu_Model::delete_group_service();
 	}
+
+
 
 	///////////////////////////// REPORTS //////////////////////////
 	function get_booking_detail() {

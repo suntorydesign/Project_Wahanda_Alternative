@@ -81,9 +81,10 @@ var GetMoreInfo = function () {
     var xhrGet_type_business = function() {
         var url = URL + 'spaCMS/settings/xhrGet_type_business';
         var options_type_business = '';
+        user_type_business_id
         $.get(url, function(data){
             $.each(data, function(index, value){
-                options_type_business += '<option value="' + value['type_business_id'] + '">' + value['type_business_name'] + '</option>';
+                options_type_business += '<option value="' + value['service_type_id'] + '">' + value['service_type_name'] + '</option>';
             });
             //
             $('#user_type_business_id').html(options_type_business);

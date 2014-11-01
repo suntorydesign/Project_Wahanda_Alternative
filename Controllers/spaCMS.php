@@ -188,6 +188,10 @@
 					$this->model->update_appointment_is_confirm();
 					break;
 
+				case 'xhrCheck_appointment_is_confirmed':
+					$this->model->check_appointment_is_confirmed();
+					break;
+
 				default:
 					$this->view->style = array(
 						ASSETS . 'plugins/fullcalendar-2.1.0-beta2/fullcalendar.css',
