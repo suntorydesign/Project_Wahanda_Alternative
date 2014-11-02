@@ -205,6 +205,7 @@
 						ASSETS . 'plugins/fullcalendar-2.1.0-beta2/fullcalendar.min.js',
 						// ASSETS . 'plugins/fullcalendar-2.1.0-beta2/lang/vi.js',
 						ASSETS . 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.js',
+						ASSETS . 'plugins/drags/drags.js',
 						ASSETS . 'js/core/app.js',
 						URL . 'Views/spaCMS/calendar/js/spaCMS_calendar.js'
 					);

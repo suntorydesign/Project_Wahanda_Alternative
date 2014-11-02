@@ -84,7 +84,7 @@ var GetMoreInfo = function () {
         user_type_business_id
         $.get(url, function(data){
             $.each(data, function(index, value){
-                options_type_business += '<option value="' + value['service_type_id'] + '">' + value['service_type_name'] + '</option>';
+                options_type_business += '<option value="' + value['type_business_id'] + '">' + value['type_business_name'] + '</option>';
             });
             //
             $('#user_type_business_id').html(options_type_business);
@@ -146,8 +146,8 @@ var UserDetail = function (){
             $('input[name=user_email]').val(data[0]['user_email']);
             $('textarea[name=user_description]').val(data[0]['user_description']);
             // $('select[name=user_country_id]').val(data[0]['user_country_id']);
-            $('select[name=user_district_id]').val(data[0]['user_district_id']);
-            $('select[name=user_type_business_id]').val(data[0]['user_type_business_id']);
+            $('select[name=user_district_id]').find('option[value="'+data[0]['user_district_id']+'"]').prop("selected",true);
+            $('select[name=user_type_business_id]').find('option[value="'+data[0]['user_type_business_id']+'"]').prop("selected",true);
         }, 'json');
     }
 

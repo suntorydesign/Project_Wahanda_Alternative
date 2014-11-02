@@ -45,7 +45,7 @@
 		</div>
 
 		<div class="sync-button" id="employee-ext-calendar-sync">
-			<button title="Click to update availabilities from external calendar" class="button button-basic no-txt" type="button">
+			<button title="Click to update availabilities from external calendar" class="button button-basic no-txt btnAct_refresh_calendar" type="button">
 				<div class="button-inner">
 					<div class="button-icon icons-sync"></div>
 				</div>
@@ -455,7 +455,7 @@
                                         <label for="appointment_date">Ngày</label>
                                     </td>
                                     <td class="input-part">
-                                        <input class="appointment_date" type="text" readonly="true" style="width:90px; padding:0 5px;" />
+                                        <input name="appointment_date" class="input appointment_date" type="date" style="line-height: 19px;" />
                                         
                                         <!-- <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 											<input type="text" class="form-control" readonly>
@@ -464,7 +464,7 @@
 											</span>
 										</div> -->
 
-                                        <input type="hidden" name="appointment_date" />
+                                        <!-- <input type="hidden" name="appointment_date" /> -->
                                         <input type="hidden" name="appointment_created" />
                                         <input type="hidden" name="appointment_updated" />
 

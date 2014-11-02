@@ -2,7 +2,7 @@
 
 class SpaCMS_Settings_Model {
 	function get_type_business() {
-		$query = "SELECT * FROM service_type";
+		$query = "SELECT * FROM type_business";
 		$result = $this->db->select($query);
 		echo json_encode($result);
 	}
