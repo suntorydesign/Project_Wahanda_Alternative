@@ -245,7 +245,6 @@ var UserDetail = function (){
     }
 }();
 
-
 var UserOpenHour = function (){
     var xhrGet_user_open_hour = function() {
         var url = URL + 'spaCMS/settings/xhrGet_user_open_hour';
@@ -375,7 +374,6 @@ var UserOpenHour = function (){
     }
 }();
 
-
 var UserFinance = function (){
     var xhrGet_user_company = function () {
         var url = URL + 'spaCMS/settings/xhrGet_user_company';
@@ -449,6 +447,60 @@ var UserFinance = function (){
     }
 }();
 
+var UserNotification = function() {
+    var un_form = $('#user_notification_form');
+    var input_une = $('input[name=user_notification_email]', un_form);
+
+    var xhrGet_user_notification_email = function() {
+        var url = URL + "spaCMS/settings/xhrGet_user_notification_email";
+        $.get(url, function(data){
+            input_une.val(data[0]['user_notification_email']);
+        }, 'json')
+        .done(function(){
+            // input_une.fadeIn();
+        });
+    }
+
+    var xhrUpdate_user_notification = function() {
+        un_form.on('submit', function(e){
+            e.preventDefault();
+            var self = $(this);
+            var data = input_une.val();
+            // var data = $(this).serialize();
+            var isSuccess = false;
+            var loading = self.find('.loading');
+            var done = self.find('.done');
+            loading.fadeIn();
+            done.hide();
+
+            // console.log(data);
+            var url = URL + 'spaCMS/settings/xhrUpdate_user_notification';
+            $.post(url, {'user_notification_email':data}, function(result) {
+                if(result == 'success') {
+                    isSuccess = true;
+                }
+            })
+            .done(function(){
+                loading.hide();
+                done.show();
+                if(isSuccess) {
+                    alert("Cập nhật thành công!");
+                } else {
+                    alert("Update Email notification error!");
+                }
+            });
+
+        });
+    }
+
+    return {
+        init: function() {
+            xhrGet_user_notification_email();
+            // Update email
+            xhrUpdate_user_notification();
+        }
+    }
+}();
 
 // var UserDetail = function (){
 
@@ -464,6 +516,6 @@ GetMoreInfo.init();
 UserDetail.init();
 UserOpenHour.init();
 UserFinance.init();
-
+UserNotification.init();
 
 ImageManager.init();

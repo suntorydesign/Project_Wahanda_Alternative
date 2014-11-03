@@ -321,6 +321,14 @@
 					$this->model->get_user_slide();
 					break;
 
+				case 'xhrUpdate_user_notification':
+					$this->model->update_user_notification();
+					break;
+
+				case 'xhrGet_user_notification_email':
+					$this->model->get_user_notification_email();
+					break;
+
 				default:
 					$this->view->style = array(
 						ASSETS . 'plugins/image-manager/css/image-manager.min.css',

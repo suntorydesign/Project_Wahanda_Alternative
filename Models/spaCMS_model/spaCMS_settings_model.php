@@ -224,4 +224,26 @@ class SpaCMS_Settings_Model {
 		echo json_encode($result);
 	}
 
+	function update_user_notification() {
+		$user_id = Session::get('user_id');
+		$user_notification_email = $_POST['user_notification_email'];
+		$data = array(
+			"user_notification_email" => $user_notification_email
+		);
+		$result = $this->db->update("user", $data, "user_id = $user_id");
+		if($result) {
+			echo 'success';
+		} else {
+			echo 'error';
+		}
+	}
+
+	function get_user_notification_email() {
+		$user_id = Session::get('user_id');
+		$query = "SELECT user_notification_email
+		FROM user 
+		WHERE user_id = $user_id";
+		$data = $this->db->select($query);
+		echo json_encode($data);
+	}
 }

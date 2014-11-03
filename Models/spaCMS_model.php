@@ -232,5 +232,13 @@ class SpaCMS_Model extends Model {
 	function get_user_slide() {
 		SpaCMS_Settings_Model::get_user_slide();
 	}
+	
+	function update_user_notification() {
+		SpaCMS_Settings_Model::update_user_notification();
+	}
+	
+	function get_user_notification_email() {
+		SpaCMS_Settings_Model::get_user_notification_email();
+	}
 
 }

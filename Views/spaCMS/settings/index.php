@@ -724,17 +724,17 @@
 				<div id="notifications-settings-tabs" class="tabs-inner ui-tabs ui-widget ui-widget-content ui-corner-all">
 					<div class="nav3">
 						<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
-							<li class="ui-state-default ui-corner-top active">
+							<li class="ui-state-default ui-corner-top hidden">
 								<a href="#client-notifications" role="tab" data-toggle="tab">Thông báo cho khách hàng</a>
 							</li>
-							<li class="ui-state-default ui-corner-top">
+							<li class="ui-state-default ui-corner-top active">
 								<a href="#fulfillment" role="tab" data-toggle="tab">Thông báo cho bạn</a>
 							</li>
 						</ul>
 					</div>
 
 					<div class="tab-content tab-content-fix">
-						<div id="client-notifications" class="tab-pane active">
+						<div id="client-notifications" class="tab-pane ">
 							<div class="form-content">
 								<div class="content-note">
 									<div class="icon icons-info"></div>
@@ -796,7 +796,8 @@
 							</div>
 						</div><!-- END Client Notifications -->
 
-						<div id="fulfillment" class="tab-pane">
+						<div id="fulfillment" class="tab-pane active">
+							<form id="user_notification_form" action="#" method="POST" >
 							<div class="form-content">
 								<div class="content-note">
 									<div class="icon icons-info"></div>
@@ -812,13 +813,13 @@
 									<table cellspacing="0" cellpadding="0" class="default-form">
 										<tbody>
 											<tr class="form-row for-appointments">
-												<td class="label-part"><label for="notifications-settings-address">Your email address</label></td>
+												<td class="label-part"><label for="notifications-settings-address">Địa chỉ email của bạn</label></td>
 												<td class="input-part">
 												<div class="txt-input">
-													<input type="text" id="notifications-settings-address" name="notifications-settings-address" class="required email">
+													<input type="email" id="notifications-settings-address" name="user_notification_email" required>
 												</div></td>
 											</tr>
-											<tr class="form-row">
+											<tr class="form-row hidden">
 												<td class="label-part"><label for="notifications-settings-method">Email format</label></td>
 												<td class="input-part">
 												<select id="notifications-settings-method" name="notifications-settings-method" class="full">
@@ -830,7 +831,7 @@
 									</table>
 								</div>
 								<div class="separating-line"></div>
-								<div class="text-message-settings">
+								<div class="text-message-settings hidden">
 									<div class="part-title">
 										Text message settings
 									</div>
@@ -862,10 +863,13 @@
 							<div class="form-actions">
 								<button class="button action action-default button-primary save-action" type="submit">
 									<div class="button-inner">
-										<div class="button-icon icons-tick"></div><span class="msg msg-action-default">Save</span><span class="msg msg-action-doing">Saving...</span>
+										<div class="button-icon icons-tick done"></div>
+										<div class="button-icon fa fa-spin fa-refresh loading"></div>
+										<span class="msg msg-action-default">Save</span>
 									</div>
 								</button>
 							</div>
+							</form>
 						</div>
 						<!-- END Contact You -->
 					</div>
