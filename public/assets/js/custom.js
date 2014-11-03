@@ -1479,13 +1479,18 @@ function shoppingCartDetail() {
 					html += '<tr>';
 					html += '<td width="30%">' + item.user_service_name.toUpperCase() + ' - <b>' + item.user_business_name + '</b></td>';
 					html += '<td width="20%">' + formatDate(item.booking_detail_date) + ' - ' + item.booking_detail_time + setAMPM + '</td>';
-					html += '<td width="19%">' + item.choosen_price + ' VNĐ</td>';
+					html += '<td width="18%">' + item.choosen_price + ' VNĐ</td>';
 					if (IS_PAYMENT_PAGE == '1') {
 						html += '<td class="" width="12%">' + item.booking_quantity + '</td>';
 					} else {
-						html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control appointment_quantity" value="' + item.booking_quantity + '"/></td>';
+						html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control quantity appointment_quantity" value="' + item.booking_quantity + '"/></td>';
 					}
-					html += '<td width="19%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
+					html += '<td width="18%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
+					if (IS_PAYMENT_PAGE == '1') {
+						html += '<td width="2%"></td>';
+					}else{
+						html += '<td width="2%"><i class="fa fa-times pointer text-danger remove_cart"></i></td>';
+					}
 					html += '</tr>';
 					total_money = total_money + parseInt(item.choosen_price) * parseInt(item.booking_quantity);
 				});
@@ -1493,13 +1498,18 @@ function shoppingCartDetail() {
 					html += '<tr>';
 					html += '<td width="30%">' + item.user_service_name.toUpperCase() + ' - <b>' + item.user_business_name + '</b></td>';
 					html += '<td width="20%"><i class="text-success"><b>e-Voucher</b></i> - Ngày hết hạn : ' + formatDate(item.eVoucher_due_date) + '</td>';
-					html += '<td width="19%">' + item.choosen_price + ' VNĐ</td>';
+					html += '<td width="18%">' + item.choosen_price + ' VNĐ</td>';
 					if (IS_PAYMENT_PAGE == '1') {
 						html += '<td class="" width="12%">' + item.booking_quantity + '</td>';
 					} else {
-						html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control eVoucher_quantity" value="' + item.booking_quantity + '"/></td>';
+						html += '<td width="12%"><input onkeypress="inputNumbers(event)" maxlength="1" type="text" class="form-control quantity eVoucher_quantity" value="' + item.booking_quantity + '"/></td>';
 					}
-					html += '<td width="19%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
+					html += '<td width="18%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
+					if (IS_PAYMENT_PAGE == '1') {
+						html += '<td width="2%"></td>';
+					}else{
+						html += '<td width="2%"><i class="fa fa-times pointer text-danger remove_cart"></i></td>';
+					}
 					html += '</tr>';
 					total_money = total_money + parseInt(item.choosen_price) * parseInt(item.booking_quantity);
 				});
@@ -1525,6 +1535,10 @@ function shoppingCartDetail() {
 				APPOINTMENT_QUANTITY_LIST_BEFORE = getQuantityNumber('appointment_quantity');
 				EVOUCHER_QUANTITY_LIST_BEFORE = getQuantityNumber('eVoucher_quantity');
 				$('#Shopping_cart_info').modal('show');
+				$('.remove_cart').on('click', function(){
+					$(this).parent().siblings().find('.quantity').val(0);
+					saveQuantityNumber();
+				});
 			});
 		}
 	});
