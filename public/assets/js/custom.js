@@ -1391,12 +1391,12 @@ function getBookingInfo() {
 			},
 			complete : function() {
 				$('#waiting_for_booking_save_b').fadeOut(function() {
-					cfirm = confirm('Đặt hẹn thành công!\nBạn có muốn tiếp tục đặt hẹn');
+					cfirm = confirm('Đặt hẹn thành công!\nBạn có thanh toán luôn?');
 					if (cfirm == true) {
-
-					} else {
 						$('#service_detail').modal('hide');
 						shoppingCartDetail();
+					} else {
+						
 					}
 					$('button.booking_button').attr('disabled', false);
 				});
@@ -1431,12 +1431,12 @@ function geteVoucherInfo() {
 			},
 			complete : function() {
 				$('#waiting_for_booking_save_e').fadeOut(function() {
-					cfirm = confirm('Đặt hẹn thành công!\nBạn có muốn tiếp tục đặt hẹn');
+					cfirm = confirm('Đặt hẹn thành công!\nBạn có muốn thanh toán luôn?');
 					if (cfirm == true) {
-
-					} else {
 						$('#service_detail').modal('hide');
 						shoppingCartDetail();
+					} else {
+						
 					}
 					$('button.booking_button').attr('disabled', false);
 				});

@@ -52,13 +52,13 @@ class requestpass extends Controller {
 				// authentication enabled
 				$mail -> SMTPSecure = 'ssl';
 				// secure transfer enabled REQUIRED for GMail
-				$mail -> Host = "smtp.gmail.com";
+				$mail -> Host = SMTP_MAIL;
 				$mail -> Port = 465;
 				// or 587
 				$mail -> IsHTML(true);
-				$mail -> Username = "vietnt134@gmail.com";
-				$mail -> Password = "whathaveyoudone1341996";
-				$mail -> SetFrom("wahanda@gmail.com");
+				$mail -> Username = INFO_MAILF;
+				$mail -> Password = PASS_MAIL;
+				$mail -> SetFrom(INFO_MAIL, 'BELEZA VIETNAM');
 				$mail -> Subject = "Xác nhận yêu cầu đổi password từ Wahanda!";
 				$mail -> Body = $body;
 				$mail -> AddAddress($data['client_email']);

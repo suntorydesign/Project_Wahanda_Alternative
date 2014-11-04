@@ -133,6 +133,7 @@ function loadLocationDetail() {
 				});
 			}
 			var html = '';
+			var title = 1;
 			$.each(response, function(key, value) {
 				if (key != 'user') {
 					if (value[0] != null) {
@@ -141,7 +142,13 @@ function loadLocationDetail() {
 						}
 						html += '<div class="one-service" style="margin-bottom: 20px;">';
 						html += '<div style="font-size: 16px;" class="title">' + key + '</div>';
-						$.each(value, function(key, item) {
+						var index = 0;
+						var title_class ='show_' + title + '_more';
+						var title_class_text = 'show_' + title + '_more_text';
+						$.each(value, function(i, item) {		
+							if(index == 3){
+								html += '<div style="display: none;" class=' + title_class + '>';
+							}
 							html += '<div class="divider"></div>';
 							html += '<div class="item clearfix">';
 							html += '<div title="' + item.user_service_name + '" style="cursor: help;" class="col-sm-5 item-info-1">' + shorten(item.user_service_name, 36) + '</div>';
@@ -151,9 +158,16 @@ function loadLocationDetail() {
 							html += '<button data-user-service="' + item.user_service_id + '" type="button" class="btn btn-sm btn-orange btn_location_booking pull-right"><i style="display:none;" class="waiting_booking_detail fa fa-refresh fa-spin"></i> <i class="fa fa-lg fa-dollar text-white"></i> <span style="font-weight: bold;" class="text-white">' + item.user_service_sale_price + ' đ</span></button>';
 							html += '</div>';
 							html += '</div>';
+							index++;
 						});
+						if(index > 3){
+							html += '</div>';
+							html += '<div class="divider"></div>';
+							html += '<button class="btn btn-orange" onclick=showMore("' + title_class + '","' + title_class_text + '")><span class=' + title_class_text + '>Xem thêm</span> ' + (index - 3) + ' dịch vụ</button>';
+						}
 						html += '</div>';
 					}
+					title++;
 				}
 			});
 			$('#location_service').html(html);
