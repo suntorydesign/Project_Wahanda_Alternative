@@ -238,6 +238,68 @@ class SpaCMS_Settings_Model {
 		}
 	}
 
+	function update_user_is_use_gvoucher() {
+		$user_id = Session::get('user_id');
+		if(isset($_POST['user_is_use_gvoucher'])) {
+			if($_POST['user_is_use_gvoucher'] == true) {
+				$user_is_use_gvoucher = 1;
+			}
+		} else {
+			$user_is_use_gvoucher = 0;
+		}
+		
+		$data = array(
+			"user_is_use_gift_voucher" => $user_is_use_gvoucher
+		);
+		$result = $this->db->update("user", $data, "user_id = $user_id");
+		if($result) {
+			echo 'success';
+		} else {
+			echo 'error';
+		}
+	}
+
+	function update_user_is_use_evoucher() {
+		$user_id = Session::get('user_id');
+		if(isset($_POST['user_is_use_evoucher'])) {
+			if($_POST['user_is_use_evoucher'] == true) {
+				$user_is_use_evoucher = 1;
+			}
+		} else {
+			$user_is_use_evoucher = 0;
+		}
+		
+		$data = array(
+			"user_is_use_evoucher" => $user_is_use_evoucher
+		);
+		$result = $this->db->update("user", $data, "user_id = $user_id");
+		if($result) {
+			echo 'success';
+		} else {
+			echo 'error';
+		}
+	}
+
+	function update_user_is_use_appointment() {
+		$user_id = Session::get('user_id');
+		if(isset($_POST['user_is_use_appointment'])) {
+			if($_POST['user_is_use_appointment'] == true) {
+				$user_is_use_appointment = 1;
+			}
+		} else {
+			$user_is_use_appointment = 0;
+		}
+		$data = array(
+			"user_is_use_appointment" => $user_is_use_appointment
+		);
+		$result = $this->db->update("user", $data, "user_id = $user_id");
+		if($result) {
+			echo 'success';
+		} else {
+			echo 'error';
+		}
+	}
+
 	function get_user_notification_email() {
 		$user_id = Session::get('user_id');
 		$query = "SELECT user_notification_email

@@ -502,6 +502,117 @@ var UserNotification = function() {
     }
 }();
 
+var OnlineBooking = function() {
+    var uiugv_form = $("#user_is_use_gvoucher_form");
+    var xhrUpdate_user_is_use_gvoucher = function() {
+        uiugv_form.on('submit', function(e){
+            e.preventDefault();
+            var self = $(this);
+            var data = self.serialize();
+
+            var isSuccess = false;
+            var loading = self.find('.loading');
+            var done = self.find('.done');
+            loading.fadeIn();
+            done.hide();
+
+            // console.log(data);
+            var url = URL + 'spaCMS/settings/xhrUpdate_user_is_use_gvoucher';
+            $.post(url, data, function(result) {
+                if(result == 'success') {
+                    isSuccess = true;
+                }
+            })
+            .done(function(){
+                loading.hide();
+                done.show();
+                if(isSuccess) {
+                    alert("Cập nhật thành công!");
+                } else {
+                    alert("Update Email notification error!");
+                }
+            });
+
+        });
+    }
+
+    var uiuev_form = $("#user_is_use_evoucher_form");
+    var xhrUpdate_user_is_use_evoucher = function() {
+        uiuev_form.on('submit', function(e){
+            e.preventDefault();
+            var self = $(this);
+            var data = self.serialize();
+
+            var isSuccess = false;
+            var loading = self.find('.loading');
+            var done = self.find('.done');
+            loading.fadeIn();
+            done.hide();
+
+            // console.log(data);
+            var url = URL + 'spaCMS/settings/xhrUpdate_user_is_use_evoucher';
+            $.post(url, data, function(result) {
+                if(result == 'success') {
+                    isSuccess = true;
+                }
+            })
+            .done(function(){
+                loading.hide();
+                done.show();
+                if(isSuccess) {
+                    alert("Cập nhật thành công!");
+                } else {
+                    alert("Update Email notification error!");
+                }
+            });
+
+        });
+    }
+
+
+
+    var uiua_form = $("#user_is_use_appointment_form");
+    var xhrUpdate_user_is_use_appointment = function() {
+        uiua_form.on('submit', function(e){
+            e.preventDefault();
+            var self = $(this);
+            var data = self.serialize();
+
+            var isSuccess = false;
+            var loading = self.find('.loading');
+            var done = self.find('.done');
+            loading.fadeIn();
+            done.hide();
+
+            // console.log(data);
+            var url = URL + 'spaCMS/settings/xhrUpdate_user_is_use_appointment';
+            $.post(url, data, function(result) {
+                if(result == 'success') {
+                    isSuccess = true;
+                }
+            })
+            .done(function(){
+                loading.hide();
+                done.show();
+                if(isSuccess) {
+                    alert("Cập nhật thành công!");
+                } else {
+                    alert("Update Email notification error!");
+                }
+            });
+
+        });
+    }
+
+    return {
+        init: function(){
+            xhrUpdate_user_is_use_gvoucher();
+            xhrUpdate_user_is_use_evoucher();
+            xhrUpdate_user_is_use_appointment();
+        }
+    }
+}();
+
 // var UserDetail = function (){
 
 //     return {
@@ -517,5 +628,7 @@ UserDetail.init();
 UserOpenHour.init();
 UserFinance.init();
 UserNotification.init();
+OnlineBooking.init();
+
 
 ImageManager.init();

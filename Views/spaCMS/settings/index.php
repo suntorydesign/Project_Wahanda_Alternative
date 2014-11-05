@@ -44,9 +44,6 @@
 							<!-- <li class="ui-state-default ui-corner-top">
 								<a href="#policies" role="tab" data-toggle="tab">Policies</a>
 							</li> -->
-							<li id="venue-vouchers-tab" class="ui-state-default ui-corner-top">
-								<a href="#venue-vouchers" role="tab" data-toggle="tab">Gift Vouchers</a>
-							</li>
 						</ul>
 					</div>
 
@@ -487,54 +484,6 @@
 							</div>
 						</div><!-- END POLICIES -->
 
-						<div id="venue-vouchers" class="tab-pane">
-							<form id="user_is_use_voucher_form" action="#" method="GET">
-							<div class="data-content" style="top: 32px;">
-								<div class="content-note">
-									<div class="icon icons-info"></div>
-									<p class="main-txt">
-										The Wahanda Gift Voucher is the UK’s most widely accepted beauty and wellness voucher
-									</p>
-									<p class="second-txt">
-										It is used as full or part payment for your full price treatments/packages. If a client doesn’t use the full voucher there’s no obligation to offer change, but you can give credit towards a future appointment to encourage repeat business. If they spend over the voucher value, you collect the difference from them direct. To accept our Voucher and enjoy the extra revenue this will bring, tick the box below.
-									</p>
-								</div>
-								<div class="enabler">
-									<input type="checkbox" value="true" name="user_is_use_voucher" id="user_is_use_voucher">
-									<label for="user_is_use_voucher"> Đồng ý sử dụng Gift Vouchers </label>
-								</div>
-								<div class="info smaller b-info-text hidden">
-									<p>
-										When a customer uses a voucher in your venue, simply write your venue name and the date on the back of the voucher and write Void on the front. Return to us by post, keeping a note of the serial number, and you’ll receive payment 15 days after we receive your voucher, minus 15% plus VAT commission from the voucher value.
-									</p>
-									<p>
-										<strong>Our address is:</strong>
-									</p>
-									<p>
-										Finance Dept, Wahanda
-										<br>
-										2nd Floor Threeways House
-										<br>
-										40-44 Clipstone Street
-										<br>
-										London
-										<br>
-										W1W 5DW
-									</p>
-								</div>
-							</div>
-							<div class="form-actions">
-								<button class="button action action-default button-primary save-action" type="submit">
-									<div class="button-inner">
-										<div class="button-icon icons-tick done"></div>
-										<div class="button-icon fa fa-spin fa-refresh loading" style="display:none"></div>
-										<span class="msg msg-action-default">Lưu</span>
-									</div>
-								</button>
-							</div>
-							</form>
-						</div><!-- END VENUE VOUCHERS -->
-
 					</div>
 				</div>
 			</div>
@@ -883,6 +832,15 @@
 							<li class="ui-state-default ui-corner-top active">
 								<a href="#online-booking-settings" role="tab" data-toggle="tab">Cài đặt</a>
 							</li>
+							<li id="#online-booking-gvoucher-tab" class="ui-state-default ui-corner-top">
+								<a href="#online-booking-gvoucher" role="tab" data-toggle="tab">Gift Vouchers</a>
+							</li>
+							<li id="online-booking-evoucher-tab" class="ui-state-default ui-corner-top">
+								<a href="#online-booking-evoucher" role="tab" data-toggle="tab">EVouchers</a>
+							</li>
+							<li id="online-booking-appointment-tab" class="ui-state-default ui-corner-top">
+								<a href="#online-booking-appointment" role="tab" data-toggle="tab">Appointment</a>
+							</li>
 						</ul>
 					</div>
 
@@ -920,12 +878,103 @@
 							<div class="form-actions">
 								<button class="button action action-default button-primary save-action" type="submit">
 									<div class="button-inner">
-										<div class="button-icon icons-tick"></div>
+										<div class="button-icon icons-tick done"></div>
+										<div class="button-icon fa fa-spin fa-refresh loading"></div>
 										<span class="msg msg-action-default">Lưu</span>
 									</div>
 								</button>
 							</div>
 						</div>
+
+						<!-- GIFT VOUCHERS -->
+						<div id="online-booking-gvoucher" class="tab-pane">
+							<form id="user_is_use_gvoucher_form" action="#" method="POST">
+							<div class="data-content" style="top: 32px;">
+								<div class="content-note">
+									<div class="icon icons-info"></div>
+									<p class="main-txt">
+										The Wahanda Gift Voucher is the UK’s most widely accepted beauty and wellness voucher
+									</p>
+									<p class="second-txt">
+										It is used as full or part payment for your full price treatments/packages. If a client doesn’t use the full voucher there’s no obligation to offer change, but you can give credit towards a future appointment to encourage repeat business. If they spend over the voucher value, you collect the difference from them direct. To accept our Voucher and enjoy the extra revenue this will bring, tick the box below.
+									</p>
+								</div>
+								<div class="enabler">
+									<input type="checkbox" value="true" name="user_is_use_gvoucher" id="user_is_use_gvoucher">
+									<label for="user_is_use_gvoucher"> Đồng ý sử dụng Gift Vouchers </label>
+								</div>
+							</div>
+							<div class="form-actions">
+								<button class="button action action-default button-primary save-action" type="submit">
+									<div class="button-inner">
+										<div class="button-icon icons-tick done"></div>
+										<div class="button-icon fa fa-spin fa-refresh loading"></div>
+										<span class="msg msg-action-default">Lưu</span>
+									</div>
+								</button>
+							</div>
+							</form>
+						</div><!-- END GIFT VOUCHERS -->
+
+						<!-- EVOUCHERS -->
+						<div id="online-booking-evoucher" class="tab-pane">
+							<form id="user_is_use_evoucher_form" action="#" method="POST">
+							<div class="data-content" style="top: 32px;">
+								<div class="content-note">
+									<div class="icon icons-info"></div>
+									<p class="main-txt">
+										The Wahanda Gift Voucher is the UK’s most widely accepted beauty and wellness voucher
+									</p>
+									<p class="second-txt">
+										It is used as full or part payment for your full price treatments/packages. If a client doesn’t use the full voucher there’s no obligation to offer change, but you can give credit towards a future appointment to encourage repeat business. If they spend over the voucher value, you collect the difference from them direct. To accept our Voucher and enjoy the extra revenue this will bring, tick the box below.
+									</p>
+								</div>
+								<div class="enabler">
+									<input type="checkbox" value="true" name="user_is_use_evoucher" id="user_is_use_evoucher">
+									<label for="user_is_use_evoucher"> Đồng ý sử dụng eVoucher </label>
+								</div>
+							</div>
+							<div class="form-actions">
+								<button class="button action action-default button-primary save-action" type="submit">
+									<div class="button-inner">
+										<div class="button-icon icons-tick done"></div>
+										<div class="button-icon fa fa-spin fa-refresh loading"></div>
+										<span class="msg msg-action-default">Lưu</span>
+									</div>
+								</button>
+							</div>
+							</form>
+						</div><!-- END EVOUCHERS -->
+
+						<!-- APPOINTMENT -->
+						<div id="online-booking-appointment" class="tab-pane">
+							<form id="user_is_use_appointment_form" action="#" method="POST">
+							<div class="data-content" style="top: 32px;">
+								<div class="content-note">
+									<div class="icon icons-info"></div>
+									<p class="main-txt">
+										The Wahanda Gift Voucher is the UK’s most widely accepted beauty and wellness voucher
+									</p>
+									<p class="second-txt">
+										It is used as full or part payment for your full price treatments/packages. If a client doesn’t use the full voucher there’s no obligation to offer change, but you can give credit towards a future appointment to encourage repeat business. If they spend over the voucher value, you collect the difference from them direct. To accept our Voucher and enjoy the extra revenue this will bring, tick the box below.
+									</p>
+								</div>
+								<div class="enabler">
+									<input type="checkbox" value="true" name="user_is_use_appointment" id="user_is_use_appointment">
+									<label for="user_is_use_appointment"> Đồng ý sử dụng Appointment </label>
+								</div>
+							</div>
+							<div class="form-actions">
+								<button class="button action action-default button-primary save-action" type="submit">
+									<div class="button-inner">
+										<div class="button-icon icons-tick done"></div>
+										<div class="button-icon fa fa-spin fa-refresh loading"></div>
+										<span class="msg msg-action-default">Lưu</span>
+									</div>
+								</button>
+							</div>
+							</form>
+						</div><!-- END APPOINTMENT -->
 					</div>
 				</div>
 			</div><!-- END BOOKING SETTINGS -->

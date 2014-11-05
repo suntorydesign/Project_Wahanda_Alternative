@@ -240,5 +240,17 @@ class SpaCMS_Model extends Model {
 	function get_user_notification_email() {
 		SpaCMS_Settings_Model::get_user_notification_email();
 	}
+	
+	function update_user_is_use_gvoucher() {
+		SpaCMS_Settings_Model::update_user_is_use_gvoucher();
+	}
+	
+	function update_user_is_use_evoucher() {
+		SpaCMS_Settings_Model::update_user_is_use_evoucher();
+	}
+	
+	function update_user_is_use_appointment() {
+		SpaCMS_Settings_Model::update_user_is_use_appointment();
+	}
 
 }

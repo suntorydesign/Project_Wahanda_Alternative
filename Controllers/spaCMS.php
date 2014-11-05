@@ -329,6 +329,18 @@
 					$this->model->get_user_notification_email();
 					break;
 
+				case 'xhrUpdate_user_is_use_gvoucher':
+					$this->model->update_user_is_use_gvoucher();
+					break;
+
+				case 'xhrUpdate_user_is_use_evoucher':
+					$this->model->update_user_is_use_evoucher();
+					break;
+
+				case 'xhrUpdate_user_is_use_appointment':
+					$this->model->update_user_is_use_appointment();
+					break;
+
 				default:
 					$this->view->style = array(
 						ASSETS . 'plugins/image-manager/css/image-manager.min.css',
