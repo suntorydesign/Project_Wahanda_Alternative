@@ -89,7 +89,7 @@ function addSaveDetail() {
 			var user_district_id = $('#user_district_id').val();
 			var user_address = $('#user_address').val();
 			var user_phone = $('#user_phone').val();
-			if (user_email == '' || user_password == '' || user_business_name == '' || user_address == '') {
+			if (user_email == '' || user_business_name == '' || user_address == '') {
 				$('#error_add_spa').text('Nhập đầy đủ các trường có (*)');
 				$('#error_add_spa').fadeIn(function() {
 					$('div.s-loading').fadeOut(function() {
