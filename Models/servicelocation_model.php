@@ -140,7 +140,26 @@ AND user_service.user_service_delete_flg = 0
 SQL;
 			$select_service = $this -> db -> select($query);
 			$array[$key]['user_service'] = $select_service;
-			
+			$query = <<<SQL
+SELECT DISTINCT service_type.service_type_id
+,service_type.service_type_name
+,service_type.service_type_name_short
+,service_type.service_type_icon
+FROM service_type,
+service,
+user_service,
+group_service,
+user
+WHERE
+service_type.service_type_id = service.service_service_type_id
+AND service.service_id = user_service.user_service_service_id
+AND user_service.user_service_group_id = group_service.group_service_id
+AND user.user_id = group_service.group_service_user_id
+AND user.user_id = {$value['user_id']}
+AND user_service.user_service_delete_flg = 0
+SQL;
+			$select_service_type = $this -> db -> select($query);
+			$array[$key]['service_type'] = $select_service_type;
 		}
 		$return['data'] = $array;
 		echo json_encode($return);

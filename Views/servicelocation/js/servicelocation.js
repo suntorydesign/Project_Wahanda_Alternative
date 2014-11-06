@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	loadResultSearch(1);
-	$('#sort_by').on('change', function(){
+	$('#sort_by').on('change', function() {
 		loadResultSearch(1);
 	});
 });
@@ -78,17 +78,29 @@ function loadResultSearch(page) {
 					}
 					html += '</div>';
 					html += '<div class="address clearfix">';
-					html += '<span style="cursor: help" title="' + value.user_address + '" class="pull-left">' + shorten(value.user_address,38) + '</span>';
+					html += '<span style="cursor: help" title="' + value.user_address + '" class="pull-left">' + shorten(value.user_address, 38) + '</span>';
 					html += '<a class="pull-right" href="#">Show map >>></a>';
 					html += '</div>';
 					html += '<div class="description clearfix">' + shorten(value.user_description, 250) + '</div>';
 					html += '<div class="services row">';
-					html += '<div class="col-md-2"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-smile-o fa-stack-1x text-white"></i></span><p class="sv_loc_text">MẶT</p></div>';
-					html += '<div class="col-md-2"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-child fa-stack-1x text-white"></i></span><p class="sv_loc_text">BODY</p></div>';
-					html += '<div class="col-md-2"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-cut fa-stack-1x text-white"></i></span><p class="sv_loc_text">TÓC</p></div>';
-					html += '<div class="col-md-2"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-hand-o-up fa-stack-1x text-white"></i></span><p class="sv_loc_text">MÓNG</p></div>';
-					html += '<div class="col-md-2"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-heart fa-stack-1x text-white"></i></span><p class="sv_loc_text">FITNESS</p></div>';
-					html += '<div class="col-md-2 pointer"><span class="fa-stack">>>></span><p class="sv_loc_text">Khác</p></div>';
+					index_type = 0;
+					html_more = '';
+					$.each(value.service_type, function(i, item) {
+						index_type++;				
+						if (index_type > 5) {
+							if(index_type == 6){
+								html_more += '<span>' + item.service_type_name + '</span>';
+							}else{
+								html_more += '<span>, ' + item.service_type_name + '</span>';
+							}
+						}else{
+							html += '<div title="' + item.service_type_name + '" class="col-md-2 pointer type_tooltip"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa ' + item.service_type_icon + ' fa-stack-1x text-white"></i></span><p class="sv_loc_text">' + item.service_type_name_short + '</p></div>';
+						}
+					});
+					if(index_type > 5){
+						html += '<div title="' + html_more + '" class="col-md-2 pointer type_tooltip"><span class="fa-stack">>>></span><p class="sv_loc_text">Khác</p></div>';
+					}
+					// html += '<div class="col-md-2 pointer"><span class="fa-stack">>>></span><p class="sv_loc_text">Khác</p></div>';
 					html += '</div>';
 					//can not imagine
 					html += '</div>';
@@ -99,8 +111,13 @@ function loadResultSearch(page) {
 					html += '</span>';
 					html += '<a href="' + URL + 'service/servicePlace/' + value.user_id + '"><img href="' + URL + 'service/servicePlace/' + value.user_id + '" width="100%" class="img-responsive" src="' + value.user_logo + '"></a>';
 					html += '</div>';
-
+					
+					var index = 0;
 					$.each(value.user_service, function(key, item) {
+						if(index == 3){
+							html += '<div style="display: none;" class="see_more_service_loc col-md-12">';
+							html += '<div class="row">';
+						}
 						html += '<div class="col-md-12 clearfix">';
 						html += '<div class="price clearfix">';
 						html += '<div class="col-sm-5 text-orange price-info-1">';
@@ -120,7 +137,15 @@ function loadResultSearch(page) {
 						html += '</div>';
 						html += '</div>';
 						html += '</div>';
+						index++;
 					});
+					if(index > 3){
+						html += '</div>';
+						html += '</div>';
+						html += '<div class="col-md-12">';
+						html += '<button class="btn btn-orange" onclick=showMore("see_more_service_loc","see_more_service_loc_text")><span class="see_more_service_loc_text">Xem thêm</span> ' + (index - 3) + ' dịch vụ</button>';
+						html += '</div>';
+					}
 					html += '</div>';
 				});
 				$('#result-list').html(html);
@@ -129,7 +154,7 @@ function loadResultSearch(page) {
 			}
 		},
 		complete : function() {
-			$('#waiting_for_result_list').fadeOut(function(){
+			$('#waiting_for_result_list').fadeOut(function() {
 				$('.processing_loading').hide();
 			});
 			if (CURRENT_PAGE == 1 || CURRENT_PAGE == 2) {
@@ -168,8 +193,15 @@ function loadResultSearch(page) {
 				// console.log(USER_SERVICE_ID);
 				loadServiceDetail(USER_SERVICE_ID);
 			});
+			$(".type_tooltip").tooltip({// Định dạng các id/class hiện tooltip
+				placement : 'top',
+				html : true,
+				container : 'body',
+				delay : 0
+			});
 		}
 	});
 }
+
 /*END LOAD RESULT SEARCH*/
 /*-----------------------*/
