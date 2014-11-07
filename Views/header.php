@@ -233,6 +233,13 @@
 									</div>
 								</div>
 								<div class="form-group">
+									<label class="control-label col-sm-3">Quận</label>
+									<div class="col-sm-8">
+										<select id="create_place_district" class="form-control"></select>
+										<small style="color: red;"></small>
+									</div>
+								</div>
+								<div class="form-group">
 									<label class="control-label col-sm-3">Tên công ty</label>
 									<div class="col-sm-8">
 										<input autocomplete="off" class="form-control" type="text" id="create_place_com_name" name="create_place_com_name" placeholder="Nhập tên công ty bạn muốn đặt..." />
