@@ -23,6 +23,9 @@ class payment_model extends Model {
 		$first_name = $data['first_name'];
 		$last_name = $data['last_name'];
 		$total_money = 0;
+		$booking_content = '';
+		$appointment_content = '';
+		$evoucher_content = '';
 		if (isset($_SESSION['booking_detail'])) {
 			foreach ($_SESSION['booking_detail'] as $key => $value) {
 				$total_money += $value['choosen_price'] * $value['booking_quantity'];
@@ -34,7 +37,8 @@ class payment_model extends Model {
 			}
 		}
 		//transfer to dollar
-		$total_money = round($total_money/21000);
+		$total_money_vnd = $total_money;
+		$total_money = round($total_money/TRAN_CURRENCY);
 		$request_params = array('METHOD' => 'DoDirectPayment', 
 								'USER' => API_USERNAME, 
 								'PWD' => API_PASSWORD, 
@@ -122,6 +126,7 @@ VALUES(
 SQL;
 					$insert_1 = $this -> db -> prepare($sql);
 					$insert_1 -> execute();
+					$booking_content = $booking_id;
 					if ($insert_1 -> rowCount() > 0) {
 						// insert booking detail
 						if (isset($_SESSION['booking_detail'])) {
@@ -152,6 +157,11 @@ VALUES(
 SQL;
 								$insert_2 = $this -> db -> prepare($query);
 								$insert_2 -> execute();
+								$appointment_content .= '<p><span><b>Địa điểm:</b> '.$value['user_business_name'].' </span>
+													   <span><b>Ngày:</b> '.$value['booking_detail_date'].' </span>
+													   <span><b>Giờ:</b> '.$value['booking_detail_time'].' </span>
+													   <span><b>Số lượng:</b> '.$value['booking_quantity'].' </span>
+													   </p><hr/>';
 							}
 						}
 						if (isset($_SESSION['eVoucher_detail'])) {
@@ -160,7 +170,7 @@ SQL;
 									$bytes = openssl_random_pseudo_bytes(8);
 									$hex = bin2hex($bytes);
 									$e_voucher_id = 'E-' . $hex;
-									for ($i = 0; ; $i++) {
+									for ($j = 0; ; $j++) {
 										$check_e_voucher_id = $this -> checkExisteVoucherId($e_voucher_id);
 										if ($check_e_voucher_id == 0) {
 											break;
@@ -192,6 +202,10 @@ VALUES(
 SQL;
 									$insert_3 = $this -> db -> prepare($query);
 									$insert_3 -> execute();
+									$evoucher_content .= '<p><span><b>Địa điểm:</b> '.$value['user_business_name'].' </span>
+													    <span><b>Ngày hết hạn:</b> '.$value['eVoucher_due_date'].' </span>
+													    <span><b>E-voucher code:</b> '.$e_voucher_id.' </span>
+													    </p><hr/>';
 								}
 							}
 						}
@@ -199,11 +213,51 @@ SQL;
 						echo 0;
 						exit ;
 					}
-					echo json_encode($result_array);
-					unset($_SESSION['booking_detail']);
-					unset($_SESSION['eVoucher_detail']);
 					$this -> db -> commit();
+					$body = '<h1>BELEZA Xác Nhận</h1>';
+					$body .= '<p>Bạn đã đặt hẹn trên BELEZA</p>';
+					$body .= '<p>Mã booking của bạn là: ' . $booking_content . '</p>';
+					$body .= '<p>Chi tiết cuộc hẹn</p>';
+					$body .= '<hr/>';
+					$body .= $appointment_content;
+					$body .= '<p>Chi tiết E voucher</p>';
+					$body .= '<hr/>';
+					$body .= $evoucher_content;
+					$body .= '<div align="right"><h3><b>TỔNG CỘNG: </b> '.$total_money_vnd.' VNĐ</h3></div>';
+					$body .= '<p>Chúc một bạn ngày mới tốt lành</p>';
+					$body .= '<div align="right"><small><i><b>Ban quản trị BELEZA</b></i></small></div>';
+		
+					//Gửi mail local
+					$mail = new PHPMailer(TRUE);
+					$mail -> CharSet = "UTF-8";
+					// create a new object
+					$mail -> IsSMTP();
+					// enable SMTP
+					$mail -> SMTPDebug = 1;
+					// debugging: 1 = errors and messages, 2 = messages only
+					$mail -> SMTPAuth = true;
+					// authentication enabled
+					$mail -> SMTPSecure = 'ssl';
+					// secure transfer enabled REQUIRED for GMail
+					$mail -> Host = SMTP_MAIL;
+					$mail -> Port = 465;
+					// or 587
+					$mail -> IsHTML(true);
+					$mail -> Username = INFO_MAIL;
+					$mail -> Password = PASS_MAIL;
+					$mail -> SetFrom(INFO_MAIL, 'BELEZA VIETNAM');
+					$mail -> Subject = "Thông tin đặt hẹn từ Beleza!";
+					$mail -> Body = $body;
+					$mail -> AddAddress($_SESSION['client_email']);
+					if (!$mail -> Send()) {
+						echo 0;
+					} else {
+						echo json_encode($result_array);
+						unset($_SESSION['booking_detail']);
+						unset($_SESSION['eVoucher_detail']);
+					}
 				} catch( Exception $e) {
+					$this -> db -> rollBack();
 					echo 0;
 				}		
 			}
