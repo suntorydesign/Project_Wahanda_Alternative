@@ -14,6 +14,7 @@ user_id
 , user_email
 , user_phone
 , user_address
+, user_status_approve
 FROM user
 WHERE user_delete_flg = 0
 SQL;
@@ -107,6 +108,7 @@ user_id
 , user_phone
 , user_address
 , user_district_id
+, user_status_approve
 FROM user
 WHERE user_delete_flg = 0
 AND user_id = {$data['user_id']}
@@ -137,6 +139,23 @@ SQL;
 		$sql = <<<SQL
 UPDATE user
 SET user_delete_flg = 1
+WHERE user_id = '{$data['user_id']}'
+SQL;
+		$update = $this -> db -> prepare($sql);
+		$update -> execute();
+		if ($update -> rowCount() > 0) {
+			echo 200;
+		} else {
+			echo 0;
+		}
+	}
+	
+	public function approveUser($data){
+		$password = Hash::create('md5', $data['user_password'], HASH_PASSWORD_KEY);
+		$sql = <<<SQL
+UPDATE user
+SET user_status_approve = 1
+, user_password = '{$password}'
 WHERE user_id = '{$data['user_id']}'
 SQL;
 		$update = $this -> db -> prepare($sql);

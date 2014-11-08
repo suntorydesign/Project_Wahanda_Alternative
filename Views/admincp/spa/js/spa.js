@@ -58,7 +58,15 @@ function loadSpaList() {
 					html += '<tr>';
 					$.each(item, function(key, value) {
 						html += '<td>';
-						html += value;
+						if(key == 'user_status_approve'){
+							if(value == '1'){
+								html += '<i class="fa fa-check text-success"></i>';
+							}else if(value == '0'){
+								html += '<i class="fa fa-times text-danger"></i>';
+							}
+						}else{
+							html += value;
+						}
 						html += '</td>';
 					});
 					html += '</tr>';
@@ -148,6 +156,12 @@ function loadUserDetail() {
 			if (response[0] != null) {
 				$.each(response[0], function(i, item) {
 					$('#' + i).val(item);
+					if(i == 'user_status_approve'){
+						if(item == '1'){
+							$('#btn_approve_spa span').text('Đã xác thực');
+							$('#btn_approve_spa').attr('disabled', true);
+						}
+					}
 				});
 			} else {
 				$('#edit_place').hide();
@@ -164,6 +178,9 @@ function loadUserDetail() {
 function saveEditDetail() {
 	cfirm = confirm('Bạn có muốn sửa không?');
 	if (cfirm == true) {
+		$('#btn_edit_spa').attr('disabled', true);
+		$('#btn_delete_spa').attr('disabled', true);
+		$('#btn_approve_spa').attr('disabled', true);
 		$('div.done').fadeOut(function() {
 			$('div#save_loading').fadeIn(function() {
 				var user_full_name = $('#user_full_name').val();
@@ -192,6 +209,9 @@ function saveEditDetail() {
 							$('div#save_loading').fadeOut(function() {
 								$('div.done').fadeIn(function() {
 									alert('Sửa thất bại hoặc bạn chưa sửa gì hết !');
+									$('#btn_edit_spa').attr('disabled', false);
+									$('#btn_delete_spa').attr('disabled', false);
+									$('#btn_approve_spa').attr('disabled', false);
 								});
 							});
 						}
@@ -210,6 +230,9 @@ function saveEditDetail() {
 function deleteUser() {
 	cfirm = confirm('Bạn có muốn xóa không?');
 	if (cfirm == true) {
+		$('#btn_edit_spa').attr('disabled', true);
+		$('#btn_delete_spa').attr('disabled', true);
+		$('#btn_approve_spa').attr('disabled', true);
 		$('div.remove').fadeOut(function() {
 			$('div#remove_loading').fadeIn(function() {
 				$.ajax({
@@ -230,6 +253,52 @@ function deleteUser() {
 							$('div#remove_loading').fadeOut(function() {
 								$('div.remove').fadeIn(function() {
 									alert('Xóa thất bại !');
+									$('#btn_edit_spa').attr('disabled', false);
+									$('#btn_delete_spa').attr('disabled', false);
+									$('#btn_approve_spa').attr('disabled', false);
+								});
+							});
+						}
+					},
+					complete : function() {
+					}
+				});
+			});
+		});
+	}
+}
+
+function approveUser() {
+	cfirm = confirm('Bạn có muốn xác thực spa này không?');
+	if (cfirm == true) {
+		$('#btn_edit_spa').attr('disabled', true);
+		$('#btn_delete_spa').attr('disabled', true);
+		$('#btn_approve_spa').attr('disabled', true);
+		$('div.approve').fadeOut(function() {
+			$('div#approve_loading').fadeIn(function() {
+				var user_email = $('#user_email').val();
+				$.ajax({
+					url : URL + 'admincp_spa/approveUser',
+					type : 'post',
+					data : {
+						user_id : USER_ID,
+						user_email : user_email
+					},
+					success : function(response) {
+						if (response == 200) {
+							$('div#approve_loading').fadeOut(function() {
+								$('div.approve').fadeIn(function() {
+									alert('Xác thực thành công !');
+									jumpToOtherPage(URL + 'admincp_spa');
+								});
+							});
+						} else {
+							$('div#approve_loading').fadeOut(function() {
+								$('div.approve').fadeIn(function() {
+									alert('Xác thực thất bại !');
+									$('#btn_edit_spa').attr('disabled', false);
+									$('#btn_delete_spa').attr('disabled', false);
+									$('#btn_approve_spa').attr('disabled', false);
 								});
 							});
 						}
