@@ -60,9 +60,9 @@ function loadSpaList() {
 						html += '<td>';
 						if(key == 'user_status_approve'){
 							if(value == '1'){
-								html += '<i class="fa fa-check text-success"></i>';
+								html += '<i class="fa fa-check text-success"><span style="display: none">' + value + '</span></i>';
 							}else if(value == '0'){
-								html += '<i class="fa fa-times text-danger"></i>';
+								html += '<i class="fa fa-times text-danger"><span style="display: none">' + value + '</span></i>';
 							}
 						}else{
 							html += value;
