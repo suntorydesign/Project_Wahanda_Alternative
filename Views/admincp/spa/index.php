@@ -16,10 +16,11 @@
 	            <tr>
 	                <th><b>ID</b></th>
 	                <th><b>Tên Địa Điểm</b></th>
-	                <th><b>Tên Người Đăng Ký</b></th>
+	                <th><b>Người Đăng Ký</b></th>
 	                <th><b>Email</b></th>
 	                <th><b>Số ĐT</b></th>
 	                <th><b>Địa Chỉ</b></th>
+	                <th><b>Status</b></th>
 	            </tr>
 	        </thead>
 	 
@@ -27,10 +28,11 @@
 	            <tr>
 	                <th><b>ID</b></th>
 	                <th><b>Tên Địa Điểm</b></th>
-	                <th><b>Tên Người Đăng Ký</b></th>
+	                <th><b>Người Đăng Ký</b></th>
 	                <th><b>Email</b></th>
 	                <th><b>Số ĐT</b></th>
 	                <th><b>Địa Chỉ</b></th>
+	                <th><b>Status</b></th>
 	            </tr>
 	        </tfoot>
 	 

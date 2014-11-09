@@ -26,15 +26,15 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-4">Email (*)</label>
+						<label class="control-label col-md-4">Email</label>
 						<div class="col-md-8">
-							<input disabled="disabled" id="user_email" name="user_email" class="form-control" type="text" placeholder="Nhập email (*)..." />
+							<input readonly="readonly" id="user_email" name="user_email" class="form-control" type="text" placeholder="Nhập email (*)..." />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-4">Tên địa điểm (*)</label>
+						<label class="control-label col-md-4">Tên địa điểm</label>
 						<div class="col-md-8">
-							<input disabled="disabled" id="user_business_name" name="user_business_name" class="form-control" type="text" placeholder="Nhập tên địa điểm (thương hiệu *)..." />
+							<input readonly="readonly" id="user_business_name" name="user_business_name" class="form-control" type="text" placeholder="Nhập tên địa điểm (thương hiệu *)..." />
 						</div>
 					</div>
 				</div>
@@ -65,18 +65,25 @@
 		<hr />
 		<div class="row">
 			<div class="col-md-12">
-				<button onclick="saveEditDetail()" id="btn_edit_spa" onclick="" type="button" class="button action action-default button-primary save-action">
+				<button onclick="saveEditDetail()" id="btn_edit_spa" type="button" class="button action action-default button-primary save-action">
 					<div class="button-inner">
 						<div class="button-icon icons-tick done"></div>
 						<div id="save_loading" class="button-icon fa fa-spin fa-refresh s-loading"></div>
 						<span class="msg msg-action-default">Lưu</span>
 					</div>
 				</button>
-				<button onclick="deleteUser()" id="btn_delete_spa" onclick="" type="button" class="button action action-default button-secondary save-action">
+				<button onclick="deleteUser()" id="btn_delete_spa" type="button" class="button action action-default button-secondary save-action">
 					<div class="button-inner">
 						<div class="button-icon icons-delete remove"></div>
 						<div id="remove_loading" class="button-icon fa fa-spin fa-refresh s-loading"></div>
 						<span class="msg msg-action-default">Xóa</span>
+					</div>
+				</button>
+				<button onclick="approveUser()" id="btn_approve_spa" type="button" class="button action action-default button-other save-action">
+					<div class="button-inner">
+						<div class="button-icon icons-tick approve"></div>
+						<div id="approve_loading" class="button-icon fa fa-spin fa-refresh s-loading"></div>
+						<span class="msg msg-action-default">Xác thực</span>
 					</div>
 				</button>
 				<small id="error_add_spa" style="color: red; display: none;">Nhập đầy đủ các trường có (*)</small>

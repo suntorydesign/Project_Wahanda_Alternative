@@ -75,7 +75,8 @@
 						<label style="color: #A09E9E;" class="control-label col-md-4">Tìm theo</label>
 						<div class="col-md-8">
 							<select id="sort_by" class="form-control">
-								<option value="1" selected="">Dịch vụ mới nhất</option>
+								<option value="5" selected="">Địa điểm gần bạn nhất</option>
+								<option value="1">Dịch vụ mới nhất</option>
 								<option value="2">Được đánh giá nhiều nhất</option>
 								<option value="3">Giá rẻ nhất</option>
 								<option value="4">Giá mắc nhất</option>
@@ -149,6 +150,11 @@
 				  	<li><a href="#">&raquo;</a></li> -->
 				</ul>
 			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<i class="fa fa-lg fa-map-marker text-orange"></i><small style="color: #a09e9e"><b> Vị trí hiện tại của bạn: </b></small><small style="color: #a09e9e" id="user_physical_location"><i>Bạn đã tắt chức năng chia sẽ vị trí của mình trên trình duyệt.</i></small>
+				</div>
+			</div>
 			<div style="border-bottom: 2px solid #ccc;" class="divider"></div>
 		</div>
 
@@ -173,29 +179,31 @@
 				<div class="filter-2">
 					<p class="filter-name">TÔI MUỐN ĐẶT THEO</p>
 					<div>
-						<input id="filter-2-1" type="checkbox" name=""> 
+						<input type="radio" value="0" id="appointment_type_booking" name="buying_type"> 
 						<label for="filter-2-1">Lựa chọn theo ngày giờ</label>
-						<span class="pull-right badge">24</span>
+						<span class="pull-right badge">0</span>
 					</div>
 					<div>
-						<input id="filter-2-2" type="checkbox" name=""> 
+						<input type="radio" value="1" id="voucher_type_booking" name="buying_type"> 
 						<label for="filter-2-2">Voucher</label>
-						<span class="pull-right badge">24</span>
+						<span class="pull-right badge">0</span>
 					</div>
 					<div>
-						<input id="filter-2-3" type="checkbox" name=""> 
+						<input type="radio" value="2" id="all_type_booking" name="buying_type" checked="checked"> 
 						<label for="filter-2-3">Tất cả</label>
 					</div>
 				</div>
 				<div class="divider"></div>
-
-				<div class="filter-3">
-					<p class="filter-name">ĐỊA ĐIỂM</p>
-					<select class="form-control">
-						<option value="">Quận 1</option>
-					</select>
+				
+				<div id="district_id_advance_field">
+					<div class="filter-3">
+						<p class="filter-name">ĐỊA ĐIỂM</p>
+						<select id="district_id_advance" class="form-control">
+							<option selected="selected" value="0">Tại...</option>
+						</select>
+					</div>
+					<div class="divider"></div>
 				</div>
-				<div class="divider"></div>
 
 				<div class="filter-4">
 					<p class="filter-name">LOẠI DỊCH VỤ</p>
@@ -309,4 +317,8 @@
 	var CURRENT_PAGE = 1;
 	var REVIEW_RESULT = 0;
 	var RESULT_PER_SHOW_MORE = "<?php echo RESULT_PER_SHOW_MORE; ?>";
+	var XCURR = '';
+	var YCURR = '';
+	var USER_ADDRESS_1 = '';
+	var USER_ADDRESS_2 = '';
 </script>

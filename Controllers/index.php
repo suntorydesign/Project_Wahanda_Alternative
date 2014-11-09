@@ -189,15 +189,27 @@ class Index extends Controller {
 
 	public function sendCreatePlaceMail() {
 		Session::initIdle();
+		$checkEmailExist = $this -> model -> checkSpaEmailExist($_POST['create_place_email']);
+		if ($checkEmailExist == 0) {
+		} else {
+			echo 800;
+			exit;
+		}
 		//Nội dung email
 		$body = '<h1>Thông báo từ BELEZA</h1>';
 		$body .= '<p>Xin chào Admin BELEZA tôi là: <strong>' . $_POST['create_place_name'] . '</strong></p>';
 		$body .= '<p>Tôi muốn tạo địa điểm trên BELEZA với tên là: ' . $_POST['create_place_com_name'] . '</p>';
-		$body .= '<p>Có thể liên lạc với tôi qua địa chỉ: ' . $_POST['create_place_address'] . '</p>';
-		$body .= '<p>Hoặc SĐT: ' . $_POST['create_place_phone'] . '</p>';
-		$body .= '<p>Hoặc Email: ' . $_POST['create_place_email'] . '</p>';
+		$body .= '<p>Địa chỉ địa điểm của tôi là: ' . $_POST['create_place_address'] . '</p>';
+		$body .= '<p>Mã Số Quận: ' . $_POST['create_place_district'] . '</p>';
+		$body .= '<p>Số ĐT: ' . $_POST['create_place_phone'] . '</p>';
+		$body .= '<p>Email: ' . $_POST['create_place_email'] . '</p>';
 		$body .= '<div align="right"><small><i><b>Khách hàng từ BELEZA</b></i></small></div>';
-
+		$data['user_full_name'] = $_POST['create_place_name'];
+		$data['user_email'] = $_POST['create_place_email'];
+		$data['user_business_name'] = $_POST['create_place_com_name'];
+		$data['user_phone'] = $_POST['create_place_phone'];
+		$data['user_address'] = $_POST['create_place_address'];
+		$data['user_district_id'] = $_POST['create_place_district'];
 		//Gửi mail local
 		$mail = new PHPMailer(TRUE);
 		$mail -> CharSet = "UTF-8";
@@ -223,7 +235,7 @@ class Index extends Controller {
 		if (!$mail -> Send()) {
 			echo "Mailer Error: " . $mail -> ErrorInfo;
 		} else {
-			echo 200;
+			$this -> model -> sendCreatePlaceMail($data);
 		}
 	}
 

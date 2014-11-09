@@ -68,6 +68,8 @@ function loadDistrict() {
 					html += '<option value="' + value.district_id + '">' + value.district_name + '</option>';
 				});
 				$('#district_field').append(html);
+				$('#create_place_district').append(html);
+				$('#district_id_advance').append(html);
 			}
 		}
 	});
@@ -624,7 +626,7 @@ function loadServiceDetail(user_service_id) {
 					jumbToTab('online_booking_zone');
 					$('#btn_online_booking_zone').attr('disabled', false);
 					$('#btn_evoucher_booking_zone').attr('disabled', true);
-				} else if(USER_SERVICE_USE_EVOUCHER == 1) {
+				} else if (USER_SERVICE_USE_EVOUCHER == 1) {
 					jumbToTab('evoucher_booking_zone');
 					$('#btn_online_booking_zone').attr('disabled', true);
 					$('#btn_evoucher_booking_zone').attr('disabled', false);
@@ -635,7 +637,7 @@ function loadServiceDetail(user_service_id) {
 					}
 					$('#e_quantity').html(evoucher_quantity);
 					$('#use_eVoucher').children().html(evou_html);
-				}else if(USER_SERVICE_USE_EVOUCHER == 2) {
+				} else if (USER_SERVICE_USE_EVOUCHER == 2) {
 					jumbToTab('online_booking_zone');
 					$('#btn_online_booking_zone').attr('disabled', false);
 					$('#btn_evoucher_booking_zone').attr('disabled', false);
@@ -643,10 +645,10 @@ function loadServiceDetail(user_service_id) {
 					// var due_month = date.getMonth();
 					// var due_date = date.getDate();
 					// if (date.getMonth() < 10) {
-						// due_month = '0' + date.getMonth();
+					// due_month = '0' + date.getMonth();
 					// }
 					// if (date.getDate() < 10) {
-						// due_date = '0' + date.getDate();
+					// due_date = '0' + date.getDate();
 					// }
 					$('#evoucher_expire div #evoucher_due_date').html('<strong>Ngày hết hạn eVoucher : </strong>' + formatDate(EVOUCHER_DUE_DATE));
 					var evoucher_quantity = '';
@@ -1396,7 +1398,7 @@ function getBookingInfo() {
 						$('#service_detail').modal('hide');
 						shoppingCartDetail();
 					} else {
-						
+
 					}
 					$('button.booking_button').attr('disabled', false);
 				});
@@ -1436,7 +1438,7 @@ function geteVoucherInfo() {
 						$('#service_detail').modal('hide');
 						shoppingCartDetail();
 					} else {
-						
+
 					}
 					$('button.booking_button').attr('disabled', false);
 				});
@@ -1488,7 +1490,7 @@ function shoppingCartDetail() {
 					html += '<td width="18%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
 					if (IS_PAYMENT_PAGE == '1') {
 						html += '<td width="2%"></td>';
-					}else{
+					} else {
 						html += '<td width="2%"><i class="fa fa-times pointer text-danger remove_cart"></i></td>';
 					}
 					html += '</tr>';
@@ -1507,7 +1509,7 @@ function shoppingCartDetail() {
 					html += '<td width="18%">' + parseInt(item.choosen_price) * parseInt(item.booking_quantity) + ' VNĐ</td>';
 					if (IS_PAYMENT_PAGE == '1') {
 						html += '<td width="2%"></td>';
-					}else{
+					} else {
 						html += '<td width="2%"><i class="fa fa-times pointer text-danger remove_cart"></i></td>';
 					}
 					html += '</tr>';
@@ -1535,7 +1537,7 @@ function shoppingCartDetail() {
 				APPOINTMENT_QUANTITY_LIST_BEFORE = getQuantityNumber('appointment_quantity');
 				EVOUCHER_QUANTITY_LIST_BEFORE = getQuantityNumber('eVoucher_quantity');
 				$('#Shopping_cart_info').modal('show');
-				$('.remove_cart').on('click', function(){
+				$('.remove_cart').on('click', function() {
 					$(this).parent().siblings().find('.quantity').val(0);
 					saveQuantityNumber();
 				});
@@ -1650,23 +1652,31 @@ function sendCreatePlaceMail() {
 						create_place_name : $('#create_place_name').val(),
 						create_place_phone : $('#create_place_phone').val(),
 						create_place_address : $('#create_place_address').val(),
+						create_place_district : $('#create_place_district').val(),
 						create_place_com_name : $('#create_place_com_name').val()
 					},
 					success : function(response) {
-						if(response == 200){
-							$('#waiting_for_create_place').fadeOut(function(){
+						if (response == 200) {
+							$('#waiting_for_create_place').fadeOut(function() {
 								alert('Gửi mail tạo địa điểm thành công!');
 								$('#create_place_modal').modal('hide');
 							});
-						}else{
-							$('#waiting_for_create_place').fadeOut(function(){
-								alert('Gửi mail tạo địa điểm thất bại, thử lại!');
-							});
+						} else {
+							if (response == 800) {
+								$('#error_message_create_place').text('Email đã đăng ký, chọn email khác !');
+								$('#error_message_create_place').fadeIn(function() {
+									$('#waiting_for_create_place').fadeOut();
+								});
+							} else {
+								$('#waiting_for_create_place').fadeOut(function() {
+									alert('Gửi mail tạo địa điểm thất bại, thử lại!');
+								});
+							}
 						}
 					}
 				});
 			} else {
-				$('#error_message_create_place').text('Email không hợp lệ ');
+				$('#error_message_create_place').text('Email không hợp lệ !');
 				$('#error_message_create_place').fadeIn(function() {
 					$('#waiting_for_create_place').fadeOut();
 				});

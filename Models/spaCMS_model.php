@@ -17,7 +17,7 @@ class SpaCMS_Model extends Model {
 	function login(){
 		$user_email 	= $_POST['user_email'];
 		$user_password 	= $_POST['user_password'];
-		$sql = "SELECT user_id, user_business_name FROM user WHERE user_email = :user_email AND user_password = :user_password";
+		$sql = "SELECT user_id, user_business_name FROM user WHERE user_email = :user_email AND user_password = :user_password AND user_delete_flg = 0 AND user_status_approve = 1";
 
 		$user = array(
 				':user_email' 		=> $user_email,

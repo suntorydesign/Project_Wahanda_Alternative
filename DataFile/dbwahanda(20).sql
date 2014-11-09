@@ -3,7 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
+<<<<<<< HEAD
 -- Generation Time: Nov 05, 2014 at 04:43 PM
+=======
+-- Generation Time: Nov 08, 2014 at 10:51 AM
+>>>>>>> 6c43f36aeedba9460e55b72fe32548c3ca185d4d
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -125,6 +129,7 @@ CREATE TABLE IF NOT EXISTS `booking` (
 
 INSERT INTO `booking` (`booking_id`, `booking_date`, `booking_total`, `booking_client_id`) VALUES
 ('BK00000001', '2014-10-12', 800000, 1),
+<<<<<<< HEAD
 ('BK1b4e8ce86f', '2014-10-29', 520000, 1),
 ('BK8131c14311', '2014-10-22', 1050000, 2),
 ('BK9d98f1c26d', '2014-10-22', 870000, 2),
@@ -132,6 +137,22 @@ INSERT INTO `booking` (`booking_id`, `booking_date`, `booking_total`, `booking_c
 ('BKcf9a7c4234', '2014-10-25', 520000, 2),
 ('BKeab08d11ab', '2014-10-28', 350000, 1),
 ('BKec1babed1f', '2014-10-28', 520000, 1);
+=======
+('BK16109cd12f', '2014-11-05', 1220000, 2),
+('BK1b4e8ce86f', '2014-10-29', 520000, 1),
+('BK32400d2c37', '2014-11-05', 1220000, 2),
+('BK8131c14311', '2014-10-22', 1050000, 2),
+('BK9d98f1c26d', '2014-10-22', 870000, 2),
+('BKa1ad78dc99', '2014-11-08', 700000, 2),
+('BKaf2b212507', '2014-11-05', 1220000, 2),
+('BKaf7d3aac66', '2014-11-05', 350000, 2),
+('BKc5f57b7c76', '2014-11-05', 1220000, 2),
+('BKc8398c85b0', '2014-10-22', 380000, 2),
+('BKcf9a7c4234', '2014-10-25', 520000, 2),
+('BKeab08d11ab', '2014-10-28', 350000, 1),
+('BKec1babed1f', '2014-10-28', 520000, 1),
+('BKfc80b3ff4c', '2014-11-05', 1220000, 2);
+>>>>>>> 6c43f36aeedba9460e55b72fe32548c3ca185d4d
 
 -- --------------------------------------------------------
 
@@ -153,7 +174,11 @@ CREATE TABLE IF NOT EXISTS `booking_detail` (
   `booking_detail_note` text NOT NULL,
   `booking_detail_is_confirm` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`booking_detail_id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
+=======
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
+>>>>>>> 6c43f36aeedba9460e55b72fe32548c3ca185d4d
 
 --
 -- Dumping data for table `booking_detail`
@@ -164,7 +189,16 @@ INSERT INTO `booking_detail` (`booking_detail_id`, `booking_detail_price`, `book
 (21, 380000, 1, '2014-10-24', '19:00:00', '19:00:00', 1, 23, 'BKc8398c85b0', 0, '', 0),
 (22, 520000, 1, '2014-10-24', '17:20:00', '17:20:00', 1, 3, 'BK9d98f1c26d', 0, '', 0),
 (24, 520000, 1, '2014-10-27', '14:40:00', '14:40:00', 1, 3, 'BKcf9a7c4234', 0, '', 0),
+<<<<<<< HEAD
 (25, 520000, 1, '2014-10-30', '12:00:00', '12:00:00', 1, 3, 'BKec1babed1f', 1, '', 1);
+=======
+(25, 520000, 1, '2014-10-30', '12:00:00', '12:00:00', 1, 3, 'BKec1babed1f', 1, '', 1),
+(31, 520000, 1, '2014-11-07', '13:20:00', '13:20:00', 1, 3, 'BK16109cd12f', 0, '', 0),
+(32, 520000, 1, '2014-11-06', '12:00:00', '12:00:00', 1, 3, 'BKfc80b3ff4c', 0, '', 0),
+(33, 520000, 1, '2014-11-06', '10:40:00', '10:40:00', 1, 3, 'BKc5f57b7c76', 0, '', 0),
+(34, 520000, 1, '2014-11-06', '09:20:00', '09:20:00', 1, 3, 'BK32400d2c37', 0, '', 0),
+(35, 520000, 1, '2014-11-06', '10:40:00', '10:40:00', 1, 3, 'BKaf2b212507', 0, '', 0);
+>>>>>>> 6c43f36aeedba9460e55b72fe32548c3ca185d4d
 
 -- --------------------------------------------------------
 
@@ -554,8 +588,26 @@ CREATE TABLE IF NOT EXISTS `e_voucher` (
 INSERT INTO `e_voucher` (`e_voucher_id`, `e_voucher_due_date`, `e_voucher_price`, `e_voucher_user_service_id`, `e_voucher_booking_id`, `e_voucher_user_id`, `e_voucher_status`, `e_voucher_updated`) VALUES
 ('E-032f2fe33c8862e4', '2015-03-28', 350000, 3, 'BKeab08d11ab', 1, 0, '2014-10-29 08:15:50'),
 ('E-032f2fe33c8862e5', '2015-03-22', 350000, 4, 'BK8131c14311', 1, 1, '2014-10-29 08:15:02'),
+<<<<<<< HEAD
 ('E-9405b6ef6803e29e', '2015-03-22', 350000, 4, 'BK9d98f1c26d', 1, 0, '0000-00-00 00:00:00'),
 ('E-b236f3ed8dcf0a4a', '2015-03-28', 350000, 4, 'BKeab08d11ab', 1, 0, '0000-00-00 00:00:00');
+=======
+('E-1bb4d7c8d8e60ba9', '2015-04-05', 350000, 4, 'BK16109cd12f', 1, 0, '2014-11-05 14:17:01'),
+('E-2a13db5caac6a90a', '2015-04-05', 350000, 4, 'BKc5f57b7c76', 1, 0, '2014-11-05 14:41:37'),
+('E-3c8b1176602cc0ca', '2015-04-05', 350000, 4, 'BK32400d2c37', 1, 0, '2014-11-05 14:46:35'),
+('E-6c0fd456e545ce58', '2015-04-05', 350000, 4, 'BKfc80b3ff4c', 1, 0, '2014-11-05 14:33:55'),
+('E-6c37979727a77dd9', '2015-04-05', 350000, 4, 'BKaf2b212507', 1, 0, '2014-11-05 14:55:00'),
+('E-6df4b25a0b284c5a', '2015-04-05', 350000, 4, 'BKfc80b3ff4c', 1, 0, '2014-11-05 14:33:55'),
+('E-75673077137b2563', '2015-04-05', 350000, 4, 'BK16109cd12f', 1, 0, '2014-11-05 14:17:01'),
+('E-7731ab8d86be645c', '2015-04-05', 350000, 4, 'BKaf7d3aac66', 1, 0, '2014-11-05 09:20:34'),
+('E-9405b6ef6803e29e', '2015-03-22', 350000, 4, 'BK9d98f1c26d', 1, 0, '0000-00-00 00:00:00'),
+('E-a25b4e504cf31481', '2015-04-05', 350000, 4, 'BKc5f57b7c76', 1, 0, '2014-11-05 14:41:37'),
+('E-a57fa5bbe6d121af', '2015-04-08', 350000, 4, 'BKa1ad78dc99', 1, 0, '2014-11-08 08:52:54'),
+('E-b236f3ed8dcf0a4a', '2015-03-28', 350000, 4, 'BKeab08d11ab', 1, 0, '0000-00-00 00:00:00'),
+('E-edc365abe740bafb', '2015-04-08', 350000, 4, 'BKa1ad78dc99', 1, 0, '2014-11-08 08:52:54'),
+('E-f7eac40a38b48577', '2015-04-05', 350000, 4, 'BK32400d2c37', 1, 0, '2014-11-05 14:46:35'),
+('E-ff97048de76a9416', '2015-04-05', 350000, 4, 'BKaf2b212507', 1, 0, '2014-11-05 14:55:00');
+>>>>>>> 6c43f36aeedba9460e55b72fe32548c3ca185d4d
 
 -- --------------------------------------------------------
 
@@ -646,10 +698,16 @@ CREATE TABLE IF NOT EXISTS `service` (
   `service_name` varchar(50) NOT NULL,
   `service_image` text NOT NULL,
   `service_service_type_id` int(11) NOT NULL,
+<<<<<<< HEAD
   PRIMARY KEY (`service_id`)
   -- FULLTEXT KEY `service_name` (`service_name`)
 ) ;
 -- ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+=======
+  PRIMARY KEY (`service_id`),
+  FULLTEXT KEY `service_name` (`service_name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+>>>>>>> 6c43f36aeedba9460e55b72fe32548c3ca185d4d
 
 --
 -- Dumping data for table `service`
@@ -674,6 +732,10 @@ INSERT INTO `service` (`service_id`, `service_name`, `service_image`, `service_s
 CREATE TABLE IF NOT EXISTS `service_type` (
   `service_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `service_type_name` varchar(50) NOT NULL,
+<<<<<<< HEAD
+=======
+  `service_type_name_short` varchar(255) NOT NULL,
+>>>>>>> 6c43f36aeedba9460e55b72fe32548c3ca185d4d
   `service_type_icon` varchar(255) NOT NULL,
   PRIMARY KEY (`service_type_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
@@ -682,6 +744,7 @@ CREATE TABLE IF NOT EXISTS `service_type` (
 -- Dumping data for table `service_type`
 --
 
+<<<<<<< HEAD
 INSERT INTO `service_type` (`service_type_id`, `service_type_name`, `service_type_icon`) VALUES
 (1, 'TÓC', 'fa-cut'),
 (2, 'BODY', 'fa-child'),
@@ -689,6 +752,15 @@ INSERT INTO `service_type` (`service_type_id`, `service_type_name`, `service_typ
 (4, 'MẶT', 'fa-smile-o'),
 (5, 'MASSAGE', 'fa-medkit'),
 (6, 'THỂ DỤC THẨM MỸ', 'fa-heart');
+=======
+INSERT INTO `service_type` (`service_type_id`, `service_type_name`, `service_type_name_short`, `service_type_icon`) VALUES
+(1, 'TÓC', 'TÓC', 'fa-cut'),
+(2, 'BODY', 'BODY', 'fa-child'),
+(3, 'MÓNG', 'MÓNG', 'fa-hand-o-up'),
+(4, 'MẶT', 'MẶT', 'fa-smile-o'),
+(5, 'MASSAGE', 'MAS', 'fa-medkit'),
+(6, 'THỂ DỤC THẨM MỸ', 'TDTM', 'fa-heart');
+>>>>>>> 6c43f36aeedba9460e55b72fe32548c3ca185d4d
 
 -- --------------------------------------------------------
 
@@ -759,20 +831,30 @@ CREATE TABLE IF NOT EXISTS `user` (
   `user_notification_email` varchar(50) NOT NULL,
   `user_limit_before_service` int(11) NOT NULL DEFAULT '180',
   `user_limit_before_booking` int(11) NOT NULL DEFAULT '30',
+<<<<<<< HEAD
   `user_delete_flg` int(11) NOT NULL DEFAULT '0',
   `user_is_use_evoucher` int(11) NOT NULL DEFAULT '1',
   `user_is_use_appointment` int(11) NOT NULL DEFAULT '1',
   `user_is_use_gift_voucher` int(11) NOT NULL DEFAULT '1',
+=======
+  `user_status_approve` int(11) NOT NULL DEFAULT '0',
+  `user_delete_flg` int(11) NOT NULL DEFAULT '0',
+>>>>>>> 6c43f36aeedba9460e55b72fe32548c3ca185d4d
   PRIMARY KEY (`user_id`),
   KEY `user_lvl_id` (`user_lvl_id`),
   KEY `user_type_business_id` (`user_type_business_id`),
   KEY `user_location_id` (`user_district_id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+=======
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+>>>>>>> 6c43f36aeedba9460e55b72fe32548c3ca185d4d
 
 --
 -- Dumping data for table `user`
 --
 
+<<<<<<< HEAD
 INSERT INTO `user` (`user_id`, `user_full_name`, `user_email`, `user_password`, `user_business_name`, `user_phone`, `user_address`, `user_facebook`, `user_googleplus`, `user_website`, `user_description`, `user_open_hour`, `user_post_code`, `user_lat`, `user_long`, `user_logo`, `user_slide`, `user_is_use_voucher`, `user_tax_code`, `user_pre_name`, `user_district_id`, `user_lvl_id`, `user_type_business_id`, `user_bank_acc_owner`, `user_bank_acc`, `user_bank_name`, `user_bank_address`, `user_bank_branch`, `user_company_name`, `user_company_address`, `user_company_delegate`, `user_company_tax_code`, `user_company_district_id`, `user_contact_name`, `user_contact_email`, `user_contact_phone`, `user_contact_role`, `user_notification_email`, `user_limit_before_service`, `user_limit_before_booking`, `user_delete_flg`, `user_is_use_evoucher`, `user_is_use_appointment`, `user_is_use_gift_voucher`) VALUES
 (1, 'Nguyễn Trung Việt', 'admincp@gmail.com', '0e246b470994ecdc91f7bfb3506f3e7d', 'Spa Ngọc Trinh', '0123456789', '188A3 Man Thiện, Q.9, Tp.HCM', 'facebook.com/trongloikt192', 'plus.google.com/trongloikt192', 'trongloikt192.vn', 'Ngọc Trinh SPA được thành lập năm 2007 với các dịch vụ dành cho phái nữ, qua nhiều năm kinh nghiệm chúng tôi đã nhận được sự tín nhiệm từ khách hàng và ngày một nâng cao trình độ phục vụ. Ngọc Trinh SPA có các chi nhánh tại Hà Nội và thành phố Hồ Chí Minh. Ngọc Trinh SPA hân hạnh phục vụ quý khách.', '{"2":[1,8,22],"3":[1,9,22],"4":[1,9,22],"5":[1,8,22],"6":[1,8,22],"7":[0,8,22],"8":[0,8,22]}', '7000', '', '', '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/1/sao365-9.jpg', '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/1/73225-1920x1200.jpg', 1, 'TX2001', 'GD. Lê Trọng Lợi', 769, 2, 1, 'Nguyễn Minh Nhật', 767236, 'Techcombank', '69 Thống Nhất, Q.Thủ Đức, Tp. HCM', 'Techcombank Q.Bình Thạnh', 'Brights VIệt Nam', 'Meritime Bank Tower, P.Bến Nghé, Q.1, Tp.HCM', 'GD. Lê Trọng Lợi', 'TX2001', 769, 'Nguyễn Trung Việt', 'viet_nt@gmail.com', '0123829222', 'Trưởng phòng', 'abc@gmail.com', 120, 84, 0, 0, 0, 0),
 (2, 'Lê Trông Lợi', 'admin@gmail.com', '0e246b470994ecdc91f7bfb3506f3e7d', 'Salon Hoàn Vũ', '0903676222', '47/8/5, Đường 2, Phường Bình An, Quận 2, TPHCM', 'www.facebook.com/vietnt134', 'plus.google.com/trongloikt192', 'xvideos.com', 'Salon Hoàn Vũ được thành lập năm 2012 với các dịch vụ dành cho các bạn nam, qua nhiều năm kinh nghiệm chúng tôi đã nhận được sự tín nhiệm từ khách hàng và ngày một nâng cao trình độ phục vụ. Salon có các chi nhánh tại Hà Nội và thành phố Hồ Chí Minh. Salon Hoàn Vũ hân hạnh phục vụ quý khách.', '{"2":[1,8,19],"3":[1,9,19],"4":[1,9,19],"5":[1,8,19],"6":[1,16,19],"7":[1,8,12],"8":[0,8,22]}', '7000', '', '', '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/2/262144-1920x1080.jpg', '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/2/573066-1680x1050.jpg', 0, 'TX007', 'CT. Daniel Nguyen Viet', 769, 2, 2, 'Cu ly trưởng', 1002001456, 'TrungVietBank', '69 Thống Nhất, Q.Thủ Đức, Tp. HCM', 'TrungVietBank Australia', 'Salon Hoàn Vũ', '', 'CT. Daniel Nguyen Viet', 'TX007', 769, '', '', '', '', '', 60, 30, 0, 1, 1, 1),
@@ -780,6 +862,16 @@ INSERT INTO `user` (`user_id`, `user_full_name`, `user_email`, `user_password`, 
 (4, 'Johnny English', 'hallobeautycare@gmail.com', '0e246b470994ecdc91f7bfb3506f3e7d', 'Hallo Beauty Care', '0903676222', '47/8/5, Đường 2, Phường Bình An, Quận 2, TPHCM', 'www.facebook.com/vietnt134', 'plus.google.com/trongloikt192', 'vietnt134.site40.net', 'Hallo được thành lập năm 2012 với các dịch vụ dành cho các bạn nam, qua nhiều năm kinh nghiệm chúng tôi đã nhận được sự tín nhiệm từ khách hàng và ngày một nâng cao trình độ phục vụ. Salon có các chi nhánh tại Hà Nội và thành phố Hồ Chí Minh. Hallo hân hạnh phục vụ quý khách.', '{"2":[1,8,19],"3":[1,9,19],"4":[1,9,19],"5":[1,8,19],"6":[1,16,19],"7":[1,8,12],"8":[0,8,22]}', '7000', '', '', '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/4/5739d_ORIG-2011_mens_health.jpg', '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/2/573066-1680x1050.jpg', 0, 'TX007', 'CT. Daniel Nguyen Viet', 763, 2, 3, 'Cu ly trưởng', 1002001456, 'TrungVietBank', '69 Thống Nhất, Q.Thủ Đức, Tp. HCM', 'TrungVietBank Australia', 'Spa Robot', '', 'CT. Daniel Nguyen Viet', 'TX007', 763, '', '', '', '', '', 60, 90, 0, 1, 1, 1),
 (5, 'Nguyễn Văn Bưởi', 'halloworld@gmail.com', '0e246b470994ecdc91f7bfb3506f3e7d', 'Hallo World Spa', '0903676222', '47/8/5, đường 2, phường Bình An, Quận 2', '', '', '', '', '{"2":[1,8,22],"3":[1,8,22],"4":[1,8,22],"5":[1,8,22],"6":[1,8,22],"7":[1,8,22],"8":[1,8,22]}', '', '', '', '', '', 0, '', '', 769, 0, 1, '', 0, '', '', '', '', '', '', '', 0, '', '', '', '', '', 180, 30, 0, 1, 1, 1),
 (6, 'Nguyễn Thị Hẻo Lánh', 'heolanh@gmail.com', '0e246b470994ecdc91f7bfb3506f3e7d', 'Heo Lánh Beauty Center', '0903676522', '218 Lý Tự Trọng, Quận 1, TPHCM', '', '', '', '', '{"2":[1,8,22],"3":[1,8,22],"4":[1,8,22],"5":[1,8,22],"6":[1,8,22],"7":[1,8,22],"8":[1,8,22]}', '', '', '', '', '', 0, '', '', 760, 0, 0, '', 0, '', '', '', '', '', '', '', 0, '', '', '', '', '', 180, 30, 0, 1, 1, 1);
+=======
+INSERT INTO `user` (`user_id`, `user_full_name`, `user_email`, `user_password`, `user_business_name`, `user_phone`, `user_address`, `user_facebook`, `user_googleplus`, `user_website`, `user_description`, `user_open_hour`, `user_post_code`, `user_lat`, `user_long`, `user_logo`, `user_slide`, `user_is_use_voucher`, `user_tax_code`, `user_pre_name`, `user_district_id`, `user_lvl_id`, `user_type_business_id`, `user_bank_acc_owner`, `user_bank_acc`, `user_bank_name`, `user_bank_address`, `user_bank_branch`, `user_company_name`, `user_company_address`, `user_company_delegate`, `user_company_tax_code`, `user_company_district_id`, `user_contact_name`, `user_contact_email`, `user_contact_phone`, `user_contact_role`, `user_notification_email`, `user_limit_before_service`, `user_limit_before_booking`, `user_status_approve`, `user_delete_flg`) VALUES
+(1, 'Nguyễn Trung Việt', 'admincp@gmail.com', '0e246b470994ecdc91f7bfb3506f3e7d', 'Spa Ngọc Trinh', '0123456789', '188A3 Man Thiện, Q.9, Tp.HCM', 'facebook.com/trongloikt192', 'plus.google.com/trongloikt192', 'trongloikt192.vn', 'Ngọc Trinh SPA được thành lập năm 2007 với các dịch vụ dành cho phái nữ, qua nhiều năm kinh nghiệm chúng tôi đã nhận được sự tín nhiệm từ khách hàng và ngày một nâng cao trình độ phục vụ. Ngọc Trinh SPA có các chi nhánh tại Hà Nội và thành phố Hồ Chí Minh. Ngọc Trinh SPA hân hạnh phục vụ quý khách.', '{"2":[1,8,22],"3":[1,9,22],"4":[1,9,22],"5":[1,8,22],"6":[1,8,22],"7":[0,8,22],"8":[0,8,22]}', '7000', '', '', '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/1/sao365-9.jpg', '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/1/73225-1920x1200.jpg', 1, 'TX2001', 'GD. Lê Trọng Lợi', 769, 2, 1, 'Nguyễn Minh Nhật', 767236, 'Techcombank', '69 Thống Nhất, Q.Thủ Đức, Tp. HCM', 'Techcombank Q.Bình Thạnh', 'Brights VIệt Nam', 'Meritime Bank Tower, P.Bến Nghé, Q.1, Tp.HCM', 'GD. Lê Trọng Lợi', 'TX2001', 769, 'Nguyễn Trung Việt', 'viet_nt@gmail.com', '0123829222', 'Trưởng phòng', '', 120, 84, 1, 0),
+(2, 'Lê Trông Lợi', 'admin@gmail.com', '0e246b470994ecdc91f7bfb3506f3e7d', 'Salon Hoàn Vũ', '0903676222', '47/8/5, Đường 2, Phường Bình An, Quận 2, TPHCM', 'www.facebook.com/vietnt134', 'plus.google.com/trongloikt192', 'xvideos.com', 'Salon Hoàn Vũ được thành lập năm 2012 với các dịch vụ dành cho các bạn nam, qua nhiều năm kinh nghiệm chúng tôi đã nhận được sự tín nhiệm từ khách hàng và ngày một nâng cao trình độ phục vụ. Salon có các chi nhánh tại Hà Nội và thành phố Hồ Chí Minh. Salon Hoàn Vũ hân hạnh phục vụ quý khách.', '{"2":[1,8,19],"3":[1,9,19],"4":[1,9,19],"5":[1,8,19],"6":[1,16,19],"7":[1,8,12],"8":[0,8,22]}', '7000', '', '', '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/2/262144-1920x1080.jpg', '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/2/573066-1680x1050.jpg', 0, 'TX007', 'CT. Daniel Nguyen Viet', 769, 2, 2, 'Cu ly trưởng', 1002001456, 'TrungVietBank', '69 Thống Nhất, Q.Thủ Đức, Tp. HCM', 'TrungVietBank Australia', 'Salon Hoàn Vũ', '', 'CT. Daniel Nguyen Viet', 'TX007', 769, '', '', '', '', '', 60, 30, 1, 0),
+(3, 'Nguyễn Minh Nhật', 'robotspa@gmail.com', '0e246b470994ecdc91f7bfb3506f3e7d', 'Spa Robot', '0903676222', '47/8/5, Đường 2, Phường Bình An, Quận 2, TPHCM', 'www.facebook.com/vietnt134', 'plus.google.com/trongloikt192', 'vietnt134.site40.net', 'Spa Robot được thành lập năm 2012 với các dịch vụ dành cho các bạn nam, qua nhiều năm kinh nghiệm chúng tôi đã nhận được sự tín nhiệm từ khách hàng và ngày một nâng cao trình độ phục vụ. Salon có các chi nhánh tại Hà Nội và thành phố Hồ Chí Minh. Salon Hoàn Vũ hân hạnh phục vụ quý khách.', '{"2":[1,8,19],"3":[1,9,19],"4":[1,9,19],"5":[1,8,19],"6":[1,16,19],"7":[1,8,12],"8":[0,8,22]}', '7000', '', '', '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/3/spa-robot.jpg', '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/2/573066-1680x1050.jpg', 0, 'TX007', 'CT. Daniel Nguyen Viet', 763, 2, 4, 'Cu ly trưởng', 1002001456, 'TrungVietBank', '69 Thống Nhất, Q.Thủ Đức, Tp. HCM', 'TrungVietBank Australia', 'Spa Robot', '', 'CT. Daniel Nguyen Viet', 'TX007', 763, '', '', '', '', '', 90, 60, 1, 0),
+(4, 'Johnny English', 'hallobeautycare@gmail.com', '0e246b470994ecdc91f7bfb3506f3e7d', 'Hallo Beauty Care', '0903676222', '47/8/5, Đường 2, Phường Bình An, Quận 2, TPHCM', 'www.facebook.com/vietnt134', 'plus.google.com/trongloikt192', 'vietnt134.site40.net', 'Hallo được thành lập năm 2012 với các dịch vụ dành cho các bạn nam, qua nhiều năm kinh nghiệm chúng tôi đã nhận được sự tín nhiệm từ khách hàng và ngày một nâng cao trình độ phục vụ. Salon có các chi nhánh tại Hà Nội và thành phố Hồ Chí Minh. Hallo hân hạnh phục vụ quý khách.', '{"2":[1,8,19],"3":[1,9,19],"4":[1,9,19],"5":[1,8,19],"6":[1,16,19],"7":[1,8,12],"8":[0,8,22]}', '7000', '', '', '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/4/5739d_ORIG-2011_mens_health.jpg', '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/2/573066-1680x1050.jpg', 0, 'TX007', 'CT. Daniel Nguyen Viet', 763, 2, 3, 'Cu ly trưởng', 1002001456, 'TrungVietBank', '69 Thống Nhất, Q.Thủ Đức, Tp. HCM', 'TrungVietBank Australia', 'Spa Robot', '', 'CT. Daniel Nguyen Viet', 'TX007', 763, '', '', '', '', '', 60, 90, 1, 0),
+(5, 'Nguyễn Văn Bưởi', 'halloworld@gmail.com', '0e246b470994ecdc91f7bfb3506f3e7d', 'Hallo World Spa', '0903676222', '47/8/5, đường 2, phường Bình An, Quận 2', '', '', '', '', '{"2":[1,8,22],"3":[1,8,22],"4":[1,8,22],"5":[1,8,22],"6":[1,8,22],"7":[1,8,22],"8":[1,8,22]}', '', '', '', '', '', 0, '', '', 769, 0, 1, '', 0, '', '', '', '', '', '', '', 0, '', '', '', '', '', 180, 30, 1, 0),
+(6, 'Nguyễn Thị Hẻo Lánh', 'heolanh@gmail.com', '0e246b470994ecdc91f7bfb3506f3e7d', 'Heo Lánh Beauty Center', '0903676222', '218 Lý Tự Trọng, Quận 1, TPHCM', '', '', '', '', '{"2":[1,8,22],"3":[1,8,22],"4":[1,8,22],"5":[1,8,22],"6":[1,8,22],"7":[1,8,22],"8":[1,8,22]}', '', '', '', '', '', 0, '', '', 760, 0, 0, '', 0, '', '', '', '', '', '', '', 0, '', '', '', '', '', 180, 30, 1, 0),
+(12, 'Nguyễn Việt', 'vietnt134@gmail.com', '1c2114e2332ee48eecc32ef15b07ed2f', 'Spa Hoàn Mỹ', '0903676222', '47/8/5 đường 2, phường Bình An, Quận 2, TP.HCM', '', '', '', '', '{"2":[1,8,22],"3":[1,8,22],"4":[1,8,22],"5":[1,8,22],"6":[1,8,22],"7":[1,8,22],"8":[1,8,22]}', '', '', '', '', '', 0, '', '', 769, 0, 0, '', 0, '', '', '', '', '', '', '', 0, '', '', '', '', '', 180, 30, 1, 0);
+>>>>>>> 6c43f36aeedba9460e55b72fe32548c3ca185d4d
 
 -- --------------------------------------------------------
 
@@ -857,19 +949,32 @@ CREATE TABLE IF NOT EXISTS `user_service` (
   `user_service_group_id` int(11) NOT NULL,
   `user_service_service_id` int(11) NOT NULL,
   `user_service_delete_flg` int(11) NOT NULL DEFAULT '0',
+<<<<<<< HEAD
   PRIMARY KEY (`user_service_id`)
   -- FULLTEXT KEY `user_service_name` (`user_service_name`)
 ); -- ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+=======
+  PRIMARY KEY (`user_service_id`),
+  FULLTEXT KEY `user_service_name` (`user_service_name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+>>>>>>> 6c43f36aeedba9460e55b72fe32548c3ca185d4d
 
 --
 -- Dumping data for table `user_service`
 --
 
 INSERT INTO `user_service` (`user_service_id`, `user_service_name`, `user_service_duration`, `user_service_full_price`, `user_service_sale_price`, `user_service_status`, `user_service_image`, `user_service_description`, `user_service_use_evoucher`, `user_service_is_featured`, `user_service_group_id`, `user_service_service_id`, `user_service_delete_flg`) VALUES
+<<<<<<< HEAD
 (1, 'Cắt tóc Hàn Quốc dành cho nữ', 30, '400000', '350000', 1, '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/1/73225-1920x1200.jpg', 'Đến với spa của chị Ngọc Trinh chúng ta sẽ được phục vụ tận tình, Spa bao gồm các dịch vụ về tóc, body...đồng thời khi đã là thành viên, quý khách sẽ được hưởng các ưu đãi có 1 không 2 của Spa, nhanh chân lên khi ưu đãi là có hạn', 0, 0, 1, 1, 1),
 (2, 'Massage toàn thân trắng da mịn màng', 30, '450000', '400000', 1, '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/1/20141012073134_images-2.jpg', 'Đến với spa của chị Ngọc Trinh chúng ta sẽ được phục vụ tận tình, Spa bao gồm các dịch vụ về tóc, body...đồng thời khi đã là thành viên, quý khách sẽ được hưởng các ưu đãi có 1 không 2 của Spa, nhanh chân lên khi ưu đãi là có hạn', 0, 0, 2, 5, 0),
 (3, 'Massage mặt (bonus làm móng)', 80, '600000', '520000', 1, '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/1/e266df_344b8d3569142667e34e9fb606d98fd12.jpg', 'Đến với spa của chị Ngọc Trinh chúng ta sẽ được phục vụ tận tình, Spa bao gồm các dịch vụ về tóc, body...đồng thời khi đã là thành viên, quý khách sẽ được hưởng các ưu đãi có 1 không 2 của Spa, nhanh chân lên khi ưu đãi là có hạn', 0, 1, 2, 4, 0),
 (4, 'Cắt tóc cô dâu', 45, '400000', '350000', 1, '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/1/hot-scissors-hair-cut1.jpg,//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/1/73225-1920x1200.jpg', 'Đến với spa của chị Ngọc Trinh chúng ta sẽ được phục vụ tận tình, Spa bao gồm các dịch vụ về tóc, body...đồng thời khi đã là thành viên, quý khách sẽ được hưởng các ưu đãi có 1 không 2 của Spa, nhanh chân lên khi ưu đãi là có hạn', 0, 1, 1, 1, 0),
+=======
+(1, 'Cắt tóc Hàn Quốc dành cho nữ', 30, '400000', '350000', 1, '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/1/73225-1920x1200.jpg', 'Đến với spa của chị Ngọc Trinh chúng ta sẽ được phục vụ tận tình, Spa bao gồm các dịch vụ về tóc, body...đồng thời khi đã là thành viên, quý khách sẽ được hưởng các ưu đãi có 1 không 2 của Spa, nhanh chân lên khi ưu đãi là có hạn', 2, 0, 1, 1, 1),
+(2, 'Massage toàn thân trắng da mịn màng', 30, '450000', '400000', 1, '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/1/20141012073134_images-2.jpg', 'Đến với spa của chị Ngọc Trinh chúng ta sẽ được phục vụ tận tình, Spa bao gồm các dịch vụ về tóc, body...đồng thời khi đã là thành viên, quý khách sẽ được hưởng các ưu đãi có 1 không 2 của Spa, nhanh chân lên khi ưu đãi là có hạn', 2, 0, 2, 5, 0),
+(3, 'Massage mặt (bonus làm móng)', 80, '600000', '520000', 1, '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/1/e266df_344b8d3569142667e34e9fb606d98fd12.jpg', 'Đến với spa của chị Ngọc Trinh chúng ta sẽ được phục vụ tận tình, Spa bao gồm các dịch vụ về tóc, body...đồng thời khi đã là thành viên, quý khách sẽ được hưởng các ưu đãi có 1 không 2 của Spa, nhanh chân lên khi ưu đãi là có hạn', 2, 1, 2, 4, 0),
+(4, 'Cắt tóc cô dâu', 45, '400000', '350000', 1, '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/1/hot-scissors-hair-cut1.jpg,//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/1/73225-1920x1200.jpg', 'Đến với spa của chị Ngọc Trinh chúng ta sẽ được phục vụ tận tình, Spa bao gồm các dịch vụ về tóc, body...đồng thời khi đã là thành viên, quý khách sẽ được hưởng các ưu đãi có 1 không 2 của Spa, nhanh chân lên khi ưu đãi là có hạn', 1, 1, 1, 1, 0),
+>>>>>>> 6c43f36aeedba9460e55b72fe32548c3ca185d4d
 (5, 'Làm móng Âu Mỹ', 40, '400000', '320000', 1, '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/2/j-4.jpeg', 'Đến với spa của Hoàn Vũ chúng ta sẽ được phục vụ tận tình, Spa bao gồm các dịch vụ về móng...đồng thời khi đã là thành viên, quý khách sẽ được hưởng các ưu đãi có 1 không 2 của Spa, nhanh chân lên khi ưu đãi là có hạn', 0, 1, 3, 6, 0),
 (6, 'Làm mặt (Massage)', 60, '400000', '380000', 1, '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/3/Oxygen-Facial.jpg', 'Đến với spa Robot chúng ta sẽ được phục vụ tận tình, đội ngũ nhân viên của Spa nhanh nhẹn như Robot, Spa bao gồm các dịch vụ về làm mặt và Massage...đồng thời khi đã là thành viên, quý khách sẽ được hưởng các ưu đãi có 1 không 2 của Spa, nhanh chân lên khi ưu đãi là có hạn', 0, 1, 4, 7, 0),
 (7, 'Thể dục thẩm mỹ kết hợp yoga', 60, '800000', '690000', 1, '//localhost:81/project_wahanda_alternative/public/assets/plugins/image-manager/upload/4/abhasa-spa-massage.jpg', 'Đến với Hallo chúng ta sẽ được phục vụ tận tình, đội ngũ nhân viên của Hallo nhanh nhẹn tận tâm, Salon bao gồm các dịch vụ về thể dục thẩm mỹ, chăm sóc body...đồng thời khi đã là thành viên, quý khách sẽ được hưởng các ưu đãi có 1 không 2 của Salon, nhanh chân lên khi ưu đãi là có hạn', 0, 0, 5, 8, 0),

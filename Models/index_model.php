@@ -206,6 +206,43 @@ SQL;
 			echo '[]';
 		}
 	}
+	
+	public function sendCreatePlaceMail($data){
+		$sql = <<<SQL
+INSERT INTO user(
+user_full_name
+, user_email
+, user_business_name
+, user_address
+, user_phone
+, user_district_id
+)
+VALUES(
+'{$data['user_full_name']}'
+, '{$data['user_email']}'
+, '{$data['user_business_name']}'
+, '{$data['user_address']}'
+, '{$data['user_phone']}'
+, '{$data['user_district_id']}'
+)
+SQL;
+		$insert = $this -> db -> prepare($sql);
+		$insert -> execute();
+		if ($insert -> rowCount() > 0) {
+			echo 200;
+		}else{
+			echo 0;
+		}
+	}
+	public function checkSpaEmailExist($email) {
+		$sql = <<<SQL
+SELECT COUNT(*) AS check_email
+FROM user
+WHERE user_email = '{$email}'
+SQL;
+		$select = $this -> db -> select($sql);
+		return $select[0]['check_email'];
+	}
 
 }
 ?>

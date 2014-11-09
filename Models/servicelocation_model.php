@@ -21,14 +21,28 @@ class servicelocation_model extends Model {
 		foreach ($service_name as $key => $value) {
 			$where .= "service.service_name LIKE '%{$value}%' OR ";
 		}
-		foreach ($service_name as $i => $item) {
+		foreach ($service_name as $key => $value) {
 			$where .= "user_service.user_service_name LIKE '%{$value}%' OR ";
 		}
-		foreach ($service_name as $i => $item) {
+		foreach ($service_name as $key => $value) {
 			$where .= "user.user_business_name LIKE '%{$value}%' OR ";
 		}
 		$where = substr($where, 0, strlen($where) - 4);
 		$where .= ')';
+		if($data['user_address_1'] != '' && $data['user_address_2'] != ''){
+			$where .= ' AND (';
+			$user_address_1 = explode(', ', $data['user_address_1']);
+			$user_address_2 = explode(', ', $data['user_address_2']);
+			foreach ($user_address_1 as $key => $value) {
+				$where .= "user.user_address LIKE '%{$value}%' OR ";
+			}
+			foreach ($user_address_2 as $key_1 => $value_1) {
+				$where .= "user.user_address LIKE '%{$value_1}%' OR ";
+			}
+			$where = substr($where, 0, strlen($where) - 4);
+			$where .= ')';
+		}
+		
 		// if($data['service_name'] == ''){
 			// $where = "WHERE (service.service_name LIKE '%{$data["service_name"]}%'";
 			// $where .= "OR user_service.user_service_name LIKE '%{$data["service_name"]}%')";
@@ -172,14 +186,27 @@ SQL;
 		foreach ($service_name as $key => $value) {
 			$where .= "service.service_name LIKE '%{$value}%' OR ";
 		}
-		foreach ($service_name as $i => $item) {
+		foreach ($service_name as $key => $value) {
 			$where .= "user_service.user_service_name LIKE '%{$value}%' OR ";
 		}
-		foreach ($service_name as $i => $item) {
+		foreach ($service_name as $key => $value) {
 			$where .= "user.user_business_name LIKE '%{$value}%' OR ";
 		}
 		$where = substr($where, 0, strlen($where) - 4);
 		$where .= ')';
+		if($data['user_address_1'] != '' && $data['user_address_2'] != ''){
+			$where .= ' AND (';
+			$user_address_1 = explode(', ', $data['user_address_1']);
+			$user_address_2 = explode(', ', $data['user_address_2']);
+			foreach ($user_address_1 as $key => $value) {
+				$where .= "user.user_address LIKE '%{$value}%' OR ";
+			}
+			foreach ($user_address_2 as $key_1 => $value_1) {
+				$where .= "user.user_address LIKE '%{$value_1}%' OR ";
+			}
+			$where = substr($where, 0, strlen($where) - 4);
+			$where .= ')';
+		}
 		// if($data['service_name'] == ''){
 			// $where = "WHERE (service.service_name LIKE '%{$data["service_name"]}%'";
 			// $where .= "OR user_service.user_service_name LIKE '%{$data["service_name"]}%')";
@@ -221,15 +248,38 @@ GROUP BY service.service_id
 SQL;
 		$select = $this -> db -> select($sql);
 		$return['service'] = $select;
+		$array_type_buy[] = array('user_service_use_evoucher' => 0
+							   ,'user_evoucher' => 0);
+		$array_type_buy[] = array('user_service_use_evoucher' => 1
+							   ,'user_evoucher' => 0);
 		$sql = <<<SQL
-SELECT user_service_use_evoucher,
-COUNT(*) AS user_evoucher
-FROM user_service
-WHERE user_service_delete_flg = 0
-GROUP BY user_service_use_evoucher
+SELECT user_service.user_service_use_evoucher,
+COUNT(*) AS use_evoucher
+FROM service_type
+INNER JOIN service ON service.service_service_type_id = service_type.service_type_id
+INNER JOIN user_service ON user_service.user_service_service_id = service.service_id
+INNER JOIN group_service ON group_service.group_service_id = user_service.user_service_group_id
+INNER JOIN user ON user.user_id = group_service.group_service_user_id
+{$where}
+AND user.user_district_id LIKE '%{$data["district_id"]}%'
+AND user.user_delete_flg = 0
+AND user_service.user_service_delete_flg = 0
+GROUP BY user_service.user_service_use_evoucher
 SQL;
 		$select = $this -> db -> select($sql);
-		$return['evoucher'] = $select;
+		foreach ($select as $key => $value) {
+			if($value['user_service_use_evoucher'] == 0){
+				$array_type_buy[0]['use_evoucher'] = $value['use_evoucher'];
+			}
+			if($value['user_service_use_evoucher'] == 1){
+				$array_type_buy[1]['use_evoucher'] = $value['use_evoucher'];
+			}
+			if($value['user_service_use_evoucher'] == 2){
+				$array_type_buy[0]['use_evoucher'] += $value['use_evoucher'];
+				$array_type_buy[1]['use_evoucher'] += $value['use_evoucher'];
+			}
+		}
+		$return['evoucher'] = $array_type_buy;
 		echo json_encode($return);
 	}
 
