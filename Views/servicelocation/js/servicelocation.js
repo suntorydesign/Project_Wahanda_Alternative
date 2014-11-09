@@ -1,7 +1,28 @@
 $(document).ready(function() {
-	loadResultSearch(1);
-	$('#sort_by').on('change', function() {
+	if(SERVICE_NAME == '' && DISTRICT_ID == ''){
+		loadDistrict();
+	}else{
+		$('#district_id_advance_field').hide();
+	}
+	if ($('#sort_by').val() == 5) {
+		var map;
+		var geocoder;
 		loadResultSearch(1);
+		google.maps.event.addDomListener(window, 'load', initialize);
+	} else {
+		loadResultSearch(1);
+	}
+	$('#sort_by').on('change', function() {
+		if ($(this).val() == 5) {
+			var map;
+			var geocoder;
+			initialize();
+		} else {
+			USER_ADDRESS_1 = '';
+			USER_ADDRESS_2 = '';
+			loadResultSearch(1);
+			loadAdvantageSearch();
+		}
 	});
 });
 
@@ -15,7 +36,9 @@ function loadResultSearch(page) {
 			service_name : SERVICE_NAME,
 			page : page,
 			district_id : DISTRICT_ID,
-			sort_by : $('#sort_by').val()
+			sort_by : $('#sort_by').val(),
+			user_address_1 : USER_ADDRESS_1,
+			user_address_2 : USER_ADDRESS_2
 		},
 		success : function(response) {
 			var total_row = response.total_row;
@@ -86,18 +109,18 @@ function loadResultSearch(page) {
 					index_type = 0;
 					html_more = '';
 					$.each(value.service_type, function(i, item) {
-						index_type++;				
+						index_type++;
 						if (index_type > 5) {
-							if(index_type == 6){
+							if (index_type == 6) {
 								html_more += '<span>' + item.service_type_name + '</span>';
-							}else{
+							} else {
 								html_more += '<span>, ' + item.service_type_name + '</span>';
 							}
-						}else{
+						} else {
 							html += '<div title="' + item.service_type_name + '" class="col-md-2 pointer type_tooltip"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa ' + item.service_type_icon + ' fa-stack-1x text-white"></i></span><p class="sv_loc_text">' + item.service_type_name_short + '</p></div>';
 						}
 					});
-					if(index_type > 5){
+					if (index_type > 5) {
 						html += '<div title="' + html_more + '" class="col-md-2 pointer type_tooltip"><span class="fa-stack">>>></span><p class="sv_loc_text">Khác</p></div>';
 					}
 					// html += '<div class="col-md-2 pointer"><span class="fa-stack">>>></span><p class="sv_loc_text">Khác</p></div>';
@@ -111,10 +134,10 @@ function loadResultSearch(page) {
 					html += '</span>';
 					html += '<a href="' + URL + 'service/servicePlace/' + value.user_id + '"><img href="' + URL + 'service/servicePlace/' + value.user_id + '" width="100%" class="img-responsive" src="' + value.user_logo + '"></a>';
 					html += '</div>';
-					
+
 					var index = 0;
 					$.each(value.user_service, function(key, item) {
-						if(index == 3){
+						if (index == 3) {
 							html += '<div style="display: none;" class="see_more_service_loc col-md-12">';
 							html += '<div class="row">';
 						}
@@ -139,7 +162,7 @@ function loadResultSearch(page) {
 						html += '</div>';
 						index++;
 					});
-					if(index > 3){
+					if (index > 3) {
 						html += '</div>';
 						html += '</div>';
 						html += '<div class="col-md-12">';
@@ -150,7 +173,11 @@ function loadResultSearch(page) {
 				});
 				$('#result-list').html(html);
 			} else {
-				$('#result-list').html('<h4>Không có địa điểm nào được tìm thấy...</h4>');
+				USER_ADDRESS_1 = '';
+				USER_ADDRESS_2 = '';
+				loadResultSearch(1);
+				loadAdvantageSearch();
+				// $('#result-list').html('<h4>Không có địa điểm nào được tìm thấy...</h4>');
 			}
 		},
 		complete : function() {
@@ -205,3 +232,40 @@ function loadResultSearch(page) {
 
 /*END LOAD RESULT SEARCH*/
 /*-----------------------*/
+
+/*INIT GOOGLE MAP API*/
+function initialize() {
+	directionsDisplay = new google.maps.DirectionsRenderer();
+	geocoder = new google.maps.Geocoder();
+	//default position these function in google map
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+			initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			//Get address name based on coordinate
+			var lat = position.coords.latitude;
+			var lng = position.coords.longitude;
+			var latlng = new google.maps.LatLng(lat, lng);
+			geocoder.geocode({
+				'latLng' : latlng
+			}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					// document.getElementById("streetName").innerHTML = (results[1].formatted_address);
+					// for ( i = 0; i < 7; i++) {
+					// alert(results[i].formatted_address);
+					// }
+					USER_ADDRESS_1 = results[0].formatted_address;
+					USER_ADDRESS_2 = results[1].formatted_address;
+					loadResultSearch(1);
+					loadAdvantageSearch();
+				} else {
+					alert('Geocoder failed due to: ' + status);
+				}
+			});
+			XCURR = position.coords.latitude;
+			YCURR = position.coords.longitude;
+		});
+	}
+}
+
+/*END INIT GOOGLE MAP API*/
+/*----------------------------*/

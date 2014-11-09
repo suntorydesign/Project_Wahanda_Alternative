@@ -13,7 +13,9 @@ function loadAdvantageSearch() {
 		dataType : 'json',
 		data : {
 			service_name : SERVICE_NAME,
-			district_id : DISTRICT_ID
+			district_id : DISTRICT_ID,
+			user_address_1 : USER_ADDRESS_1,
+			user_address_2 : USER_ADDRESS_2
 		},
 		success : function(response) {
 			var html = '';
@@ -41,6 +43,8 @@ function loadAdvantageSearch() {
 					html += '<a onclick=showMore("see_more_service_type","see_more_service_type_text") style="cursor: pointer">>>> <span class="see_more_service_type_text">Xem thêm</span> loại dịch vụ khác (' + (index - 5) + ')</a>';
 				}
 				$('#service_type').html(html);
+			}else{
+				$('#service_type').html('');
 			}
 			if (response.service[0] != null) {
 				$.each(response.service, function(key, value) {
@@ -59,6 +63,20 @@ function loadAdvantageSearch() {
 					html_2 += '<a onclick=showMore("see_more_service","see_more_service_text") style="cursor: pointer">>>> <span class="see_more_service_text">Xem thêm</span> loại dịch vụ khác (' + (index_2 - 5) + ')</a>';
 				}
 				$('#service').html(html_2);
+			}else{
+				$('#service').html('');
+			}
+			if (response.evoucher[0] != null) {
+				$.each(response.evoucher, function(key, value){
+					if(value.user_service_use_evoucher == '0'){
+						$('#appointment_type_booking').siblings('span').text(value.use_evoucher);
+					}else if(value.user_service_use_evoucher == '1'){
+						$('#voucher_type_booking').siblings('span').text(value.use_evoucher);
+					}
+				});
+			}else{
+				$('#appointment_type_booking').siblings('span').text('0');
+				$('#voucher_type_booking').siblings('span').text('0');
 			}
 		},
 		complete : function() {

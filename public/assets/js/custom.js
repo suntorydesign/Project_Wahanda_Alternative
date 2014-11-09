@@ -69,6 +69,7 @@ function loadDistrict() {
 				});
 				$('#district_field').append(html);
 				$('#create_place_district').append(html);
+				$('#district_id_advance').append(html);
 			}
 		}
 	});
