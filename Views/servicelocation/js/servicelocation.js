@@ -144,7 +144,7 @@ function loadResultSearch(page) {
 						html += '<div class="col-md-12 clearfix">';
 						html += '<div class="price clearfix">';
 						html += '<div class="col-sm-5 text-orange price-info-1">';
-						html += '<strong>' + shorten(item.user_service_name, 30) + '</strong>';
+						html += '<strong class="helper" title="' + item.user_service_name + '">' + shorten(item.user_service_name, 30) + '</strong>';
 						html += '</div>';
 						html += '<div class="col-sm-2 price-info-2">';
 						html += '<span class="fa-stack"><i></i><i class="fa fa-stack-2x fa-clock-o text-orange"></i></span> ' + item.user_service_duration + 'phút';
@@ -173,10 +173,14 @@ function loadResultSearch(page) {
 				});
 				$('#result-list').html(html);
 			} else {
-				USER_ADDRESS_1 = '';
-				USER_ADDRESS_2 = '';
-				loadResultSearch(1);
-				loadAdvantageSearch();
+				if(USER_ADDRESS_1 == '' && USER_ADDRESS_2 == ''){
+					$('#result-list').html('<h4>Không có địa điểm nào được tìm thấy...</h4>');		
+				}else{
+					USER_ADDRESS_1 = '';
+					USER_ADDRESS_2 = '';
+					loadResultSearch(1);
+					loadAdvantageSearch();
+				}
 				// $('#result-list').html('<h4>Không có địa điểm nào được tìm thấy...</h4>');
 			}
 		},
@@ -255,6 +259,7 @@ function initialize() {
 					// }
 					USER_ADDRESS_1 = results[0].formatted_address;
 					USER_ADDRESS_2 = results[1].formatted_address;
+					$('#user_physical_location i').text(' ' + USER_ADDRESS_2);
 					loadResultSearch(1);
 					loadAdvantageSearch();
 				} else {

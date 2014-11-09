@@ -63,11 +63,11 @@
 	<div class="row">
 		<div class="col-sm-offset-2 col-sm-8">
 			<div class="row section-title text-center">
-				<h2>- TẠO TÀI KHOẢN WAHANDA -</h2>
+				<h2>- TẠO TÀI KHOẢN BELEZA -</h2>
 				<span>
 					<i class="text-muted">
 						Hãy cho chúng tôi biết một chút về bản thân và chúng tôi sẽ thiết lập hồ sơ 
-						cá nhân của bạn, để bạn có thể gửi các ý kiến​​, hỏi những câu hỏi trên cộng đồng Wahanda, 
+						cá nhân của bạn, để bạn có thể gửi các ý kiến​​, hỏi những câu hỏi trên cộng đồng Beleza, 
 						và đặt chỗ thậm chí còn nhanh hơn trong lần tiếp theo.
 					</i> 
 				</span>
@@ -190,7 +190,7 @@
 							<div class="col-sm-12">
 								<button id="submit_reg" type="submit" class="btn btn-orange-black pull-right">
 									<span>
-										GIA NHẬP WAHANDA
+										GIA NHẬP BELEZA
 									</span>
 								</button>
 							</div>

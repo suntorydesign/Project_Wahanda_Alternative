@@ -150,6 +150,11 @@
 				  	<li><a href="#">&raquo;</a></li> -->
 				</ul>
 			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<i class="fa fa-lg fa-map-marker text-orange"></i><small style="color: #a09e9e"><b> Vị trí hiện tại của bạn: </b></small><small style="color: #a09e9e" id="user_physical_location"><i>Bạn đã tắt chức năng chia sẽ vị trí của mình trên trình duyệt.</i></small>
+				</div>
+			</div>
 			<div style="border-bottom: 2px solid #ccc;" class="divider"></div>
 		</div>
 

@@ -774,3 +774,6 @@ button.btn-close:hover, button.btn-close:focus, button.btn-close:active{
 .pointer{
 	cursor: pointer;
 }
+.helper{
+	cursor: help;
+}
