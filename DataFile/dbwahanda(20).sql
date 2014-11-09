@@ -646,9 +646,10 @@ CREATE TABLE IF NOT EXISTS `service` (
   `service_name` varchar(50) NOT NULL,
   `service_image` text NOT NULL,
   `service_service_type_id` int(11) NOT NULL,
-  PRIMARY KEY (`service_id`),
-  FULLTEXT KEY `service_name` (`service_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+  PRIMARY KEY (`service_id`)
+  -- FULLTEXT KEY `service_name` (`service_name`)
+) ;
+-- ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `service`
@@ -856,9 +857,9 @@ CREATE TABLE IF NOT EXISTS `user_service` (
   `user_service_group_id` int(11) NOT NULL,
   `user_service_service_id` int(11) NOT NULL,
   `user_service_delete_flg` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`user_service_id`),
-  FULLTEXT KEY `user_service_name` (`user_service_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+  PRIMARY KEY (`user_service_id`)
+  -- FULLTEXT KEY `user_service_name` (`user_service_name`)
+); -- ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
 
 --
 -- Dumping data for table `user_service`
