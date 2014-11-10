@@ -535,6 +535,12 @@ function loadServiceDetail(user_service_id) {
 					}
 					$('#' + key).val(value);
 					$('#' + key + ', .' + key).text(value);
+					if (key == 'user_long') {
+						USER_LNG = value;
+					}
+					if (key == 'user_lat') {
+						USER_LAT = value;
+					}
 					if (key == 'user_open_hour') {
 						json_user_open_hour = jQuery.parseJSON(value);
 						//console.log(json_user_open_hour);
@@ -601,13 +607,13 @@ function loadServiceDetail(user_service_id) {
 							}
 							if (separate_count > 3) {
 								if (hour[0] == 1) {
-									user_open_hour_2 += '<p><i>' + day + ' : từ ' + hour[1] + ' h - ' + hour[2] + ' h</i></p>';
+									user_open_hour_2 += '<p><i>' + day + ' : từ ' + hour[1] + ' - ' + hour[2] + ' giờ</i></p>';
 								} else if (hour[0] == 0) {
 									user_open_hour_2 += '<p><i>' + day + ' : Nghỉ</i></p>';
 								}
 							} else {
 								if (hour[0] == 1) {
-									user_open_hour_1 += '<p><i>' + day + ' : từ ' + hour[1] + ' h - ' + hour[2] + ' h</i></p>';
+									user_open_hour_1 += '<p><i>' + day + ' : từ ' + hour[1] + ' - ' + hour[2] + ' giờ</i></p>';
 								} else if (hour[0] == 0) {
 									user_open_hour_1 += '<p><i>' + day + ' : Nghỉ</i></p>';
 								}
@@ -881,10 +887,14 @@ function loadServiceDetail(user_service_id) {
 					});
 				}
 			});
+			initMap();
 		}
 	});
 }
-
+function initMap(){
+	var img_url = 
+	$("#user_latlng").attr("src", 'https://maps.googleapis.com/maps/api/staticmap?center=&zoom=15&size=450x150&markers=color:red|' + USER_LAT + ', ' + USER_LNG + '');
+}
 /*END LOAD SERVICE DETAIL*/
 /*-----------------------*/
 

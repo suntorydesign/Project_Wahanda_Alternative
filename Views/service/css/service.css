@@ -1,4 +1,15 @@
-
+.map img{
+	max-height: 500px;
+}
+.map .gmnoprint.gm-style-cc{
+	display: none;
+}
+.map .gm-style-cc{
+	display: none;
+}
+.map .gm-style div a img{
+	display: none;
+}
 #tabs {
 	/*border: 1px solid #CCC;*/
 	font-weight: 700;

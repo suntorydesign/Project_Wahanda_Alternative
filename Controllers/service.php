@@ -17,7 +17,8 @@ class service extends Controller {
 	public function servicePlace($user_id) {
 		Session::initIdle();
 		$this -> view -> style = array(URL . 'Views/service/css/service.css');
-		$this -> view -> script = array(URL . 'Views/service/js/service.js');
+		$this -> view -> script = array(URL . 'Views/service/js/service.js'
+									  , 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBUxUNFuJ09fVcA24HZcEq0gwxs37ESDo4&language=vi-VI');
 		$this -> view -> user_id = $user_id;
 		$this -> view -> render('service/index');
 	}

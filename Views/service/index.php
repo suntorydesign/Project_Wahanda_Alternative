@@ -537,13 +537,14 @@
 		<div class="col-md-4">
 			<div id="side-bar">
 				<div class="map">
-					<img style="margin-top: 10px; width: 100%; height: auto; box-shadow: 0.5px 1px 2.6px" class="img-responsive" src="https://maps.googleapis.com/maps/api/staticmap?sensor=false&zoom=15&size=397x327&maptype=roadmap&markers=icon%3Ahttps%3A%2F%2Fconnect.wahanda.com%2Fassets%2Fmap-marker.png|54.54516881%2C-1.27919913">
-					<div class="zoom-tool" style="margin: 10px 0 0 24px;">
+					<!-- <img style="margin-top: 10px; width: 100%; height: auto; box-shadow: 0.5px 1px 2.6px" class="img-responsive" src="https://maps.googleapis.com/maps/api/staticmap?sensor=false&zoom=15&size=397x327&maptype=roadmap&markers=icon%3Ahttps%3A%2F%2Fconnect.wahanda.com%2Fassets%2Fmap-marker.png|54.54516881%2C-1.27919913"> -->
+					<div id="map-canvas" style="margin-top: 10px; width: 100%; height: 280px; box-shadow: 0.5px 1px 2.6px"></div>
+					<!-- <div class="zoom-tool" style="margin: 10px 0 0 24px;">
 						<span class="fa fa-lg fa-stack">
 							<i class="fa fa-square fa-stack-2x text-white"></i>
 							<i class="fa fa-search-plus fa-stack-1x"></i>
 						</span>
-					</div>
+					</div> -->
 					<div class="text-center">
 						<br />
 						<span id="user_address" class="text-center"></span>
@@ -636,6 +637,7 @@
 					<img style="width: 100%; height: 500px" id="user_slide" src="" alt="" class="img-responsive" />
 				</div>
 			</div>
+			<br />
 		</div>
 	</div>
 </div>
@@ -643,4 +645,6 @@
 	var USER_ID = "<?php echo $this -> user_id; ?>";
 	var REVIEW_RESULT = 0;
 	var RESULT_PER_SHOW_MORE = "<?php echo RESULT_PER_SHOW_MORE; ?>";
+	var LAT = '';
+	var LNG = '';
 </script>

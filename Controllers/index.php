@@ -11,7 +11,8 @@ class Index extends Controller {
 
 	public function index() {
 		Session::initIdle();
-		$this -> view -> script = array(ASSETS . 'js/homepage.js');
+		$this -> view -> script = array(ASSETS . 'js/homepage.js'
+									  , 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBUxUNFuJ09fVcA24HZcEq0gwxs37ESDo4&language=vi-VI');
 		$this -> view -> render('index');
 	}
 

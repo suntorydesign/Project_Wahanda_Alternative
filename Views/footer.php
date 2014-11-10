@@ -287,8 +287,9 @@
 												<div class="col-md-12">
 													<h4><strong>VỀ ĐỊA ĐIỂM NÀY</strong></h4>
 												</div>
-												<div class="col-md-12" style="border: 3px solid #CCCCCA; padding: 10px">
-													<img height="120" style="" width="100%" src="https://maps.googleapis.com/maps/api/staticmap?sensor=false&amp;zoom=15&amp;size=397x98&amp;maptype=roadmap&amp;markers=icon%3Ahttps%3A%2F%2Fconnect.wahanda.com%2Fassets%2Fmap-marker.png%7C54.54516881%2C-1.27919913">
+												<div class="col-md-12" style="border: 1.5px solid #CCCCCA; padding: 4px">
+													<img id="user_latlng" height="130" style="" width="100%" src="">
+													<!-- <iframe id="user_latlng" width="100%" height="130" frameborder="0" style="border:0" src=""></iframe> -->
 												</div>
 											</div>
 											<div class="row">
@@ -760,6 +761,8 @@
 		var MAX_PAGINATION_ITEM = "<?php echo MAX_PAGINATION_ITEM; ?>";
 		var IDLE_TIME = "<?php echo IDLE_TIME; ?>";
 		var IDLE_CHECK = "<?php echo IDLE_CHECK; ?>";
+		var USER_LAT = '';
+		var USER_LNG = '';
 		var IS_PAYMENT_PAGE = '<?php 
 							      if(isset($this -> is_payment_page)){
 								      echo $this -> is_payment_page; 

@@ -1,4 +1,7 @@
 $(document).ready(function() {
+	var map;
+	var geocoder;
+	var marker;
 	loadLocationDetail();
 	loadLocationStarRating();
 	loadServiceStarRating();
@@ -39,13 +42,19 @@ function loadLocationDetail() {
 			if (response.user[0] != null) {
 				$.each(response.user[0], function(key, value) {
 					$('#' + key).html(value);
+					if (key == 'user_long') {
+						LNG = value;
+					}
+					if (key == 'user_lat') {
+						LAT = value;
+					}
 					if (key == 'user_description') {
 						$('#user_location_description').html(value);
 					}
-					if(key == 'user_slide'){
+					if (key == 'user_slide') {
 						$('#' + key).attr('src', value);
 					}
-					if(key == 'user_logo'){
+					if (key == 'user_logo') {
 						$('#' + key).attr('src', value);
 					}
 					if (key == 'user_open_hour') {
@@ -85,23 +94,23 @@ function loadLocationDetail() {
 							// user_open_hour += '</div>';
 							if (hour[0] == 1) {
 								user_open_hour += '<div class="col-sm-5">';
-								if(hour[1] <= 12){
-									if(hour[1] <= 9){
-										hours_1 = '0' + hour[1]+'am';
-									}else{
-										hours_1 = hour[1]+'am';
+								if (hour[1] <= 12) {
+									if (hour[1] <= 9) {
+										hours_1 = '0' + hour[1] + 'am';
+									} else {
+										hours_1 = hour[1] + 'am';
 									}
-								}else{
-									hours_1 = hour[1]+'pm';
+								} else {
+									hours_1 = hour[1] + 'pm';
 								}
-								if(hour[2] <= 12){
-									if(hour[2] <= 9){
-										hours_2 = '0' + hour[2]+'am';
-									}else{
-										hours_2 = hour[2]+'am';
+								if (hour[2] <= 12) {
+									if (hour[2] <= 9) {
+										hours_2 = '0' + hour[2] + 'am';
+									} else {
+										hours_2 = hour[2] + 'am';
 									}
-								}else{
-									hours_2 = hour[2]+'pm';
+								} else {
+									hours_2 = hour[2] + 'pm';
 								}
 								user_open_hour += '<span>' + hours_1 + ' - ' + hours_2 + '</span>';
 								user_open_hour += '</div>';
@@ -113,22 +122,22 @@ function loadLocationDetail() {
 							user_open_hour += '</div>';
 						});
 						$('#location_open_hour').html(user_open_hour);
-						if(response.array_voucher.appointment == 0){
+						if (response.array_voucher.appointment == 0) {
 							$('#use_appointment').show();
 							$('#use_appointment_2').show();
 							$('#use_appointment_3').hide();
 						}
-						if(response.array_voucher.evoucher == 0){
+						if (response.array_voucher.evoucher == 0) {
 							$('#use_e_voucher').show();
 							$('#use_e_voucher_2').show();
 							$('#use_e_voucher_3').hide();
 						}
-						if(response.array_voucher.gift_voucher == 0){
+						if (response.array_voucher.gift_voucher == 0) {
 							$('#use_gift_voucher').show();
 							$('#use_gift_voucher_2').show();
 							$('#use_gift_voucher_3').hide();
 						}
-						
+
 					}
 				});
 			}
@@ -143,10 +152,10 @@ function loadLocationDetail() {
 						html += '<div class="one-service" style="margin-bottom: 20px;">';
 						html += '<div style="font-size: 16px;" class="title">' + key + '</div>';
 						var index = 0;
-						var title_class ='show_' + title + '_more';
+						var title_class = 'show_' + title + '_more';
 						var title_class_text = 'show_' + title + '_more_text';
-						$.each(value, function(i, item) {		
-							if(index == 3){
+						$.each(value, function(i, item) {
+							if (index == 3) {
 								html += '<div style="display: none;" class=' + title_class + '>';
 							}
 							html += '<div class="divider"></div>';
@@ -160,7 +169,7 @@ function loadLocationDetail() {
 							html += '</div>';
 							index++;
 						});
-						if(index > 3){
+						if (index > 3) {
 							html += '</div>';
 							html += '<div class="divider"></div>';
 							html += '<button class="btn btn-orange" onclick=showMore("' + title_class + '","' + title_class_text + '")><span class=' + title_class_text + '>Xem thêm</span> ' + (index - 3) + ' dịch vụ</button>';
@@ -175,6 +184,7 @@ function loadLocationDetail() {
 		complete : function() {
 			loadPersonReview();
 			loadReview();
+			initialize();
 			$('.btn_location_booking').on('click', function(e) {
 				$(this).find('i.waiting_booking_detail').fadeIn();
 				USER_SERVICE_ID = $(this).attr('data-user-service');
@@ -824,4 +834,38 @@ function showMoreReview() {
 }
 
 /*END SHOW MORE REVIEW*/
+/*-----------------------*/
+
+/*INIT GOOGLE MAP*/
+function initialize() {
+	var directionsDisplay = new google.maps.DirectionsRenderer();
+	geocoder = new google.maps.Geocoder();
+	//default position these function in google map
+	var mapOptions = {
+		zoom : 16,
+		center : new google.maps.LatLng(0, 0),
+		panControl : false,
+		zoomControl : true,
+		zoomControlOptions : {
+			style : google.maps.ZoomControlStyle.SMALL,
+			// position : google.maps.ControlPosition.LEFT_CENTER
+		},
+		mapTypeControl : false,
+		scaleControl : false,
+		streetViewControl : false,
+		overviewMapControl : false,
+		rotateControl : false
+	};
+	// console.log(LAT);
+	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	directionsDisplay.setMap(map);
+	initialLocation = new google.maps.LatLng(LAT, LNG);
+	map.setCenter(initialLocation);
+	marker = new google.maps.Marker({
+		position : new google.maps.LatLng(LAT, LNG),
+		map : map,
+	});
+}
+
+/*END INIT GOOGLE MAP*/
 /*-----------------------*/
