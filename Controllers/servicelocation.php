@@ -45,6 +45,7 @@ class servicelocation extends Controller {
 		if(isset($_POST['service_name']) && isset($_POST['district_id'])){
 			$data['service_name'] = $_POST['service_name'];
 			$data['district_id'] = $_POST['district_id'];
+			$data['sort_by'] = $_POST['sort_by'];
 			$data['user_address_1'] = $_POST['user_address_1'];
 			$data['user_address_2'] = $_POST['user_address_2'];
 			$this -> model -> loadAdvantageSearch($data);

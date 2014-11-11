@@ -14,6 +14,7 @@ function loadAdvantageSearch() {
 		data : {
 			service_name : SERVICE_NAME,
 			district_id : DISTRICT_ID,
+			sort_by : $('#sort_by').val(),
 			user_address_1 : USER_ADDRESS_1,
 			user_address_2 : USER_ADDRESS_2
 		},
