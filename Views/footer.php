@@ -287,10 +287,17 @@
 												<div class="col-md-12">
 													<h4><strong>VỀ ĐỊA ĐIỂM NÀY</strong></h4>
 												</div>
-												<div class="col-md-12" style="border: 1.5px solid #CCCCCA; padding: 4px">
-													<img id="user_latlng" height="130" style="" width="100%" src="">
+												<div class="col-md-12 map" style="border: 1.5px solid #CCCCCA; padding: 4px; height: 140px; position: relative">
+													<!-- <img id="user_latlng" height="130" style="" width="100%" src=""> -->
 													<!-- <iframe id="user_latlng" width="100%" height="130" frameborder="0" style="border:0" src=""></iframe> -->
+													<div id="user_latlng" style="width: 100%; height: 130px;"></div>
+													<div style="position: absolute; z-index: 99999999999; bottom: 2px; right: 8px">
+														<small onclick="expandMap()" class="text-orange-black pointer pull-right"><b><i id="show_more_map">Xem bản đồ lớn</i></b></small>
+													</div>
 												</div>
+												<!-- <div class="col-md-12">
+													<small class="text-orange-black pointer pull-right"><b><i>Xem toàn bản đồ</i></b></small>
+												</div> -->
 											</div>
 											<div class="row">
 												<div class="col-md-12">

@@ -184,7 +184,9 @@ function loadLocationDetail() {
 		complete : function() {
 			loadPersonReview();
 			loadReview();
-			initialize();
+			// initialize();
+			var map;
+			initGoogleMap('map-canvas', LAT, LNG);
 			$('.btn_location_booking').on('click', function(e) {
 				$(this).find('i.waiting_booking_detail').fadeIn();
 				USER_SERVICE_ID = $(this).attr('data-user-service');
@@ -837,35 +839,35 @@ function showMoreReview() {
 /*-----------------------*/
 
 /*INIT GOOGLE MAP*/
-function initialize() {
-	var directionsDisplay = new google.maps.DirectionsRenderer();
-	geocoder = new google.maps.Geocoder();
-	//default position these function in google map
-	var mapOptions = {
-		zoom : 16,
-		center : new google.maps.LatLng(0, 0),
-		panControl : false,
-		zoomControl : true,
-		zoomControlOptions : {
-			style : google.maps.ZoomControlStyle.SMALL,
-			// position : google.maps.ControlPosition.LEFT_CENTER
-		},
-		mapTypeControl : false,
-		scaleControl : false,
-		streetViewControl : false,
-		overviewMapControl : false,
-		rotateControl : false
-	};
-	// console.log(LAT);
-	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-	directionsDisplay.setMap(map);
-	initialLocation = new google.maps.LatLng(LAT, LNG);
-	map.setCenter(initialLocation);
-	marker = new google.maps.Marker({
-		position : new google.maps.LatLng(LAT, LNG),
-		map : map,
-	});
-}
+// function initialize() {
+	// var directionsDisplay = new google.maps.DirectionsRenderer();
+	// geocoder = new google.maps.Geocoder();
+	// //default position these function in google map
+	// var mapOptions = {
+		// zoom : 16,
+		// center : new google.maps.LatLng(0, 0),
+		// panControl : false,
+		// zoomControl : true,
+		// zoomControlOptions : {
+			// style : google.maps.ZoomControlStyle.SMALL,
+			// // position : google.maps.ControlPosition.LEFT_CENTER
+		// },
+		// mapTypeControl : false,
+		// scaleControl : false,
+		// streetViewControl : false,
+		// overviewMapControl : false,
+		// rotateControl : false
+	// };
+	// // console.log(LAT);
+	// map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	// directionsDisplay.setMap(map);
+	// initialLocation = new google.maps.LatLng(LAT, LNG);
+	// map.setCenter(initialLocation);
+	// marker = new google.maps.Marker({
+		// position : new google.maps.LatLng(LAT, LNG),
+		// map : map,
+	// });
+// }
 
 /*END INIT GOOGLE MAP*/
 /*-----------------------*/

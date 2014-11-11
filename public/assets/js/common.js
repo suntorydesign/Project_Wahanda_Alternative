@@ -108,3 +108,39 @@ function showMore(cls, txt) {
 
 /*END SHOW MORE*/
 /*-----------------------*/
+
+/*INIT GOOGLE MAP*/
+function initGoogleMap(map_id, lat, long){
+	var directionsDisplay = new google.maps.DirectionsRenderer();
+	// var geocoder = new google.maps.Geocoder();
+	//default position these function in google map
+	var mapOptions = {
+		zoom : 16,
+		center : new google.maps.LatLng(0, 0),
+		panControl : false,
+		zoomControl : true,
+		zoomControlOptions : {
+			style : google.maps.ZoomControlStyle.SMALL,
+			// position : google.maps.ControlPosition.LEFT_CENTER
+		},
+		mapTypeControl : false,
+		scaleControl : false,
+		streetViewControl : false,
+		overviewMapControl : false,
+		rotateControl : false
+	};
+	// console.log(LAT);
+	map = new google.maps.Map(document.getElementById(map_id), mapOptions);
+	directionsDisplay.setMap(map);
+	google.maps.event.trigger(map, 'resize');
+	var initialLocation = new google.maps.LatLng(lat, long);
+	map.setCenter(initialLocation);
+	var marker = new google.maps.Marker({
+		position : new google.maps.LatLng(lat, long),
+		map : map,
+	});
+	// google.maps.event.trigger(map, 'resize');
+	// map.setZoom( map.getZoom() );
+}
+/*END INIT GOOGLE MAP*/
+/*-----------------------*/

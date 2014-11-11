@@ -17,6 +17,13 @@ $(document).ready(function() {
 			'overflow' : 'hidden',
 		});
 		$('#user_description_see_more').show();
+		$('.map').animate({height: 140});
+		$('.map #user_latlng').animate({height: 130});
+		$('#show_more_map').text('Xem bản đồ lớn');
+	});
+	$('#service_detail').on('shown.bs.modal', function(){
+		var map;
+		initGoogleMap('user_latlng', USER_LAT, USER_LNG);
 	});
 	/*LINK TO OTHER PAGE*/
 	$('#contact_link').click(function() {
@@ -887,14 +894,17 @@ function loadServiceDetail(user_service_id) {
 					});
 				}
 			});
-			initMap();
+			// initMap();
+			// $('.map #user_latlng').html('');
+			// initGoogleMap('user_latlng', USER_LAT, USER_LNG);
 		}
 	});
 }
+//FOR STATIC MAP BUT NOT GOOD
 function initMap(){
-	var img_url = 
 	$("#user_latlng").attr("src", 'https://maps.googleapis.com/maps/api/staticmap?center=&zoom=15&size=450x150&markers=color:red|' + USER_LAT + ', ' + USER_LNG + '');
 }
+///////////////////////
 /*END LOAD SERVICE DETAIL*/
 /*-----------------------*/
 
@@ -1706,4 +1716,26 @@ function clearCreatePlaceModal() {
 }
 
 /*END SEND CREATE PLACE MAIL*/
+/*----------------------------------*/
+
+/*EXPAND MAP*/
+function expandMap(){
+	if($('#show_more_map').text() == 'Xem bản đồ lớn'){
+		$('.map').animate({height: 460});
+		$('.map #user_latlng').animate({height: 450}, function(){
+			var map;
+			initGoogleMap('user_latlng', USER_LAT, USER_LNG);
+		});
+		$('#show_more_map').text('Thu nhỏ bản đồ');
+	}else if($('#show_more_map').text() == 'Thu nhỏ bản đồ'){
+		$('.map').animate({height: 140});
+		$('.map #user_latlng').animate({height: 130}, function(){
+			var map;
+			initGoogleMap('user_latlng', USER_LAT, USER_LNG);
+		});
+		$('#show_more_map').text('Xem bản đồ lớn');
+	}
+	
+}
+/*END EXPAND MAP/
 /*----------------------------------*/
