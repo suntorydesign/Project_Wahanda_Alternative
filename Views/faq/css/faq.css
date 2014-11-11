@@ -1,42 +1,47 @@
 
-
-.panel-orange {
-  border-color: #FAC147;
-  box-shadow: 1px 2px 3px #C9C6C6;
-  font-size: 14px;
-}
-.panel-orange > .panel-heading {
-  color: #333;
-  background-color: #FDBD0E;
-  border-color: #FAC147;
-  font-weight: 700;
-  font-size: 16px;
-  padding: 6px 15px;
-}
-.panel-orange > .panel-heading + .panel-collapse .panel-body {
-  border-top-color: #FAC147;
-}
-.panel-orange > .panel-footer + .panel-collapse .panel-body {
-  border-bottom-color: #FAC147;
+#faq-1 {
+    background-color: #000;
+    padding: 15px 0px;
+    
 }
 
-
-#content-wrap {
-	margin-bottom: 20px;
+#faq-1 .faq-1-title {
+    color: #FFCC00;
+    font-size: 22px;
 }
 
-.contact-image {
-	padding: 5px;
-	border: 1px solid #CCC;
-	box-shadow: 0 0 5px #D5D5D5;
+#faq-1 .faq-1-description {
+    color: #E0DEDE;
 }
 
-.contact-title-1 {
-	font-size: 18px;
-  font-weight: 600;
+#faq-2 {
+    
 }
 
-.contact-body-1 {
-  font-size: 14px;
-  margin-bottom: 20px;
+#faq-2 .faq-2-intro {
+    color: #7E7C7C;
+    font-size: 13px;
+    padding: 10px 0px;
+}
+
+#faq-2 .faq-2-intro a {
+    color: #7E7C7C;
+}
+
+#faq-2 .faq-2-intro a:hover {
+    color: #FFCC00;
+}
+
+#faq-2 .faq-2-title-q {
+    color: #7E7C7C;
+    font-weight: 400;
+    padding: 0px 0px 10px;
+}
+
+#faq-2 .input-q {
+    width: 100%;
+}
+
+#faq-3 {
+
 }

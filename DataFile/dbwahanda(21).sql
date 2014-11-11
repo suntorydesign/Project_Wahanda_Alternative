@@ -671,7 +671,7 @@ CREATE TABLE IF NOT EXISTS `service` (
   `service_name` varchar(50) NOT NULL,
   `service_image` text NOT NULL,
   `service_service_type_id` int(11) NOT NULL,
-  PRIMARY KEY (`service_id`),
+  PRIMARY KEY (`service_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
@@ -880,7 +880,7 @@ CREATE TABLE IF NOT EXISTS `user_service` (
   `user_service_group_id` int(11) NOT NULL,
   `user_service_service_id` int(11) NOT NULL,
   `user_service_delete_flg` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`user_service_id`),
+  PRIMARY KEY (`user_service_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
 
 --
