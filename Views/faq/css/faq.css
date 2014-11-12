@@ -34,8 +34,18 @@
 
 #faq-2 .faq-2-title-q {
     color: #7E7C7C;
-    font-weight: 400;
+    font-weight: 600;
     padding: 0px 0px 10px;
+}
+
+#faq-2 .faq-2-form .fa-lg:hover {
+    color: #FFCC00;
+    cursor: pointer;
+}
+
+#faq-2 .faq-2-title-c {
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
 #faq-2 .input-q {
@@ -43,5 +53,39 @@
 }
 
 #faq-3 {
+    margin-bottom: 20px;
+}
 
+#faq-3 .faq-3-q {
+    margin-bottom: 20px;
+}
+
+#faq-3 .faq-3-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+#faq-3 .title-q {
+    font-weight: 700;
+}
+
+#faq-3 .source-q {
+    font-size: 12px;
+}
+
+#faq-3 .answer-q {
+    color: #919191;
+}
+
+#faq-3 .rating-q {
+    color: #F7E318;
+}
+
+#faq-3 .answer-q a {
+    color: #919191;
+}
+
+#faq-3 .answer-q a:hover {
+    color: #FFCC00;
 }
