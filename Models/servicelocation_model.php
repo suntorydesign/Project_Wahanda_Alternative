@@ -29,18 +29,20 @@ class servicelocation_model extends Model {
 		}
 		$where = substr($where, 0, strlen($where) - 4);
 		$where .= ')';
-		if($data['user_address_1'] != '' && $data['user_address_2'] != ''){
-			$where .= ' AND (';
-			$user_address_1 = explode(', ', $data['user_address_1']);
-			$user_address_2 = explode(', ', $data['user_address_2']);
-			foreach ($user_address_1 as $key => $value) {
-				$where .= "user.user_address LIKE '%{$value}%' OR ";
+		if($data['sort_by'] == '5'){
+			if($data['user_address_1'] != '' && $data['user_address_2'] != ''){
+				$where .= ' AND (';
+				$user_address_1 = explode(', ', $data['user_address_1']);
+				$user_address_2 = explode(', ', $data['user_address_2']);
+				foreach ($user_address_1 as $key => $value) {
+					$where .= "user.user_address LIKE '%{$value}%' OR ";
+				}
+				foreach ($user_address_2 as $key_1 => $value_1) {
+					$where .= "user.user_address LIKE '%{$value_1}%' OR ";
+				}
+				$where = substr($where, 0, strlen($where) - 4);
+				$where .= ')';
 			}
-			foreach ($user_address_2 as $key_1 => $value_1) {
-				$where .= "user.user_address LIKE '%{$value_1}%' OR ";
-			}
-			$where = substr($where, 0, strlen($where) - 4);
-			$where .= ')';
 		}
 		
 		// if($data['service_name'] == ''){
@@ -194,18 +196,20 @@ SQL;
 		}
 		$where = substr($where, 0, strlen($where) - 4);
 		$where .= ')';
-		if($data['user_address_1'] != '' && $data['user_address_2'] != ''){
-			$where .= ' AND (';
-			$user_address_1 = explode(', ', $data['user_address_1']);
-			$user_address_2 = explode(', ', $data['user_address_2']);
-			foreach ($user_address_1 as $key => $value) {
-				$where .= "user.user_address LIKE '%{$value}%' OR ";
+		if($data['sort_by'] == '5'){
+			if($data['user_address_1'] != '' && $data['user_address_2'] != ''){
+				$where .= ' AND (';
+				$user_address_1 = explode(', ', $data['user_address_1']);
+				$user_address_2 = explode(', ', $data['user_address_2']);
+				foreach ($user_address_1 as $key => $value) {
+					$where .= "user.user_address LIKE '%{$value}%' OR ";
+				}
+				foreach ($user_address_2 as $key_1 => $value_1) {
+					$where .= "user.user_address LIKE '%{$value_1}%' OR ";
+				}
+				$where = substr($where, 0, strlen($where) - 4);
+				$where .= ')';
 			}
-			foreach ($user_address_2 as $key_1 => $value_1) {
-				$where .= "user.user_address LIKE '%{$value_1}%' OR ";
-			}
-			$where = substr($where, 0, strlen($where) - 4);
-			$where .= ')';
 		}
 		// if($data['service_name'] == ''){
 			// $where = "WHERE (service.service_name LIKE '%{$data["service_name"]}%'";
