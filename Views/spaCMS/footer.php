@@ -1,7 +1,5 @@
-	
-        
         <footer>
-        	
+            
         </footer>
     </body>
     <!-- Chèn link JavaScript-->
@@ -10,7 +8,7 @@
     <script src="<?php echo ASSETS ?>plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
    
     <script type="text/javascript">
-	  	// Active menu	
+        // Active menu  
         $(function() {
             var pgurl = window.location.href.substr( window.location.href.lastIndexOf("/") + 1 );
             $("#nav1 li a").each(function(){

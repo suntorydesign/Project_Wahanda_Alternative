@@ -32,7 +32,10 @@
 			<div class="wrapper1">
 			    <div class="wrapper2">
 			        <div class="wrapper3">
-			            <h1>Admin System</h1>
+			            <div align="center">
+			            	<img class="image-responsive logo-image" src="<?php echo ASSETS?>img/Beleza_logo_Final.png"/>
+			            </div>
+			            
 			            <form action="<?php echo URL . '/admincp/login' ?>" class="login-form" method="POST">
 				            <label class="unauthorised-error-message error-message hidden">
 			        			Sorry, we were unable to log you in. Please check your username and password are correct.
@@ -60,7 +63,7 @@
 			    </div>
 			</div>
 			
-			<div class="footer">
+			<!-- <div class="footer">
 			    <div class="logo"></div>
 			    <ul>
 			        <li><a href="https://www.wahanda.com/info/about-us/">About Us</a></li>
@@ -68,7 +71,7 @@
 			        <li class="terms">Terms Of Service</li>
 			        <li>© 2009-2014 WAHANDA</li>
 			    </ul>
-			</div>
+			</div> -->
 		</div>
     </body>
 </html>

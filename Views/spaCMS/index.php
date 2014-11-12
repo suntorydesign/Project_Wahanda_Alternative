@@ -63,10 +63,10 @@
 			<div class="footer">
 			    <div class="logo"></div>
 			    <ul>
-			        <li><a href="https://www.wahanda.com/info/about-us/">About Us</a></li>
-			        <li><a href="https://www.wahanda.com/info/get-in-touch/">Contact Us</a></li>
-			        <li class="terms">Terms Of Service</li>
-			        <li>© 2009-2014 WAHANDA</li>
+			        <!-- <li><a href="<?php echo URL ?>info/about-us/">About Us</a></li> -->
+			        <li><a href="<?php echo URL ?>contact">Contact Us</a></li>
+			        <!-- <li class="terms">Terms Of Service</li> -->
+			        <li>© 2014 BELEZA</li>
 			    </ul>
 			</div>
 		</div>
