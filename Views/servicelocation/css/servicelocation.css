@@ -176,3 +176,16 @@ p.sv_loc_text, span.sv_loc_text{
     margin-bottom: 0.45455em;
     text-transform: uppercase;
 }
+
+#side-bar{
+	position: relative;
+}
+#side-bar #not_allow_advance_search{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+	opacity: 0.6;
+	background-color: #FFFFFF; 
+	display: none;
+}

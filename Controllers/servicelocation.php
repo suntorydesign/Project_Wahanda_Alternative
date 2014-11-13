@@ -36,6 +36,12 @@ class servicelocation extends Controller {
 			$data['sort_by'] = $_POST['sort_by'];
 			$data['user_address_1'] = $_POST['user_address_1'];
 			$data['user_address_2'] = $_POST['user_address_2'];
+			$data['service_type_id'] = $_POST['service_type_id'];
+			$data['service_id'] = $_POST['service_id'];
+			$data['user_service_sale_price'] = $_POST['user_service_sale_price'];
+			$data['user_service_use_evoucher'] = $_POST['user_service_use_evoucher'];
+			$data['user_open_hour'] = $_POST['user_open_hour'];
+			$data['user_limit_before_booking'] = $_POST['user_limit_before_booking'];
 			$this -> model -> loadResultSearch($data);
 		}
 	}
@@ -48,7 +54,39 @@ class servicelocation extends Controller {
 			$data['sort_by'] = $_POST['sort_by'];
 			$data['user_address_1'] = $_POST['user_address_1'];
 			$data['user_address_2'] = $_POST['user_address_2'];
+			$data['service_type_id'] = $_POST['service_type_id'];
+			$data['service_id'] = $_POST['service_id'];
+			$data['user_open_hour'] = $_POST['user_open_hour'];
+			$data['user_limit_before_booking'] = $_POST['user_limit_before_booking'];
 			$this -> model -> loadAdvantageSearch($data);
+		}
+	}
+	
+	public function reloadService(){
+		Session::initIdle();
+		if(isset($_POST['service_name']) && isset($_POST['district_id'])){
+			$data['service_name'] = $_POST['service_name'];
+			$data['district_id'] = $_POST['district_id'];
+			$data['sort_by'] = $_POST['sort_by'];
+			$data['user_address_1'] = $_POST['user_address_1'];
+			$data['user_address_2'] = $_POST['user_address_2'];
+			$data['service_type_id'] = $_POST['service_type_id'];
+			$data['service_id'] = $_POST['service_id'];
+			$this -> model -> reloadService($data);
+		}
+	}
+	
+	public function reloadTypeBuy(){
+		Session::initIdle();
+		if(isset($_POST['service_name']) && isset($_POST['district_id'])){
+			$data['service_name'] = $_POST['service_name'];
+			$data['district_id'] = $_POST['district_id'];
+			$data['sort_by'] = $_POST['sort_by'];
+			$data['user_address_1'] = $_POST['user_address_1'];
+			$data['user_address_2'] = $_POST['user_address_2'];
+			$data['service_type_id'] = $_POST['service_type_id'];
+			$data['service_id'] = $_POST['service_id'];
+			$this -> model -> reloadTypeBuy($data);
 		}
 	}
 

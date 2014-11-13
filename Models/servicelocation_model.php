@@ -19,13 +19,13 @@ class servicelocation_model extends Model {
 		$service_name = explode(' ', $data["service_name"]);
 		$where = 'WHERE (';
 		foreach ($service_name as $key => $value) {
-			$where .= "service.service_name LIKE '%{$value}%' OR ";
+			$where .= "service.service_name LIKE N'%{$value}%' OR ";
 		}
 		foreach ($service_name as $key => $value) {
-			$where .= "user_service.user_service_name LIKE '%{$value}%' OR ";
+			$where .= "user_service.user_service_name LIKE N'%{$value}%' OR ";
 		}
 		foreach ($service_name as $key => $value) {
-			$where .= "user.user_business_name LIKE '%{$value}%' OR ";
+			$where .= "user.user_business_name LIKE N'%{$value}%' OR ";
 		}
 		$where = substr($where, 0, strlen($where) - 4);
 		$where .= ')';
@@ -35,16 +35,65 @@ class servicelocation_model extends Model {
 				$user_address_1 = explode(', ', $data['user_address_1']);
 				$user_address_2 = explode(', ', $data['user_address_2']);
 				foreach ($user_address_1 as $key => $value) {
-					$where .= "user.user_address LIKE '%{$value}%' OR ";
+					$where .= "user.user_address LIKE N'%{$value}%' OR ";
 				}
 				foreach ($user_address_2 as $key_1 => $value_1) {
-					$where .= "user.user_address LIKE '%{$value_1}%' OR ";
+					$where .= "user.user_address LIKE N'%{$value_1}%' OR ";
 				}
 				$where = substr($where, 0, strlen($where) - 4);
 				$where .= ')';
 			}
 		}
-		
+		if($data['service_type_id'] != ''){
+			$where .= "AND (";
+			$where .= "service.service_service_type_id = {$data['service_type_id']}";
+			if($data['service_id'] != ''){
+				$where .= ' AND (';
+				$data['service_id'] = rtrim($data['service_id'], ',');
+				$service_id = explode(',', $data['service_id']);
+				foreach ($service_id as $key_2 => $value_2) {
+					$where .= "service.service_id = '{$value_2}' OR ";
+				}
+				$where = substr($where, 0, strlen($where) - 4);
+				$where .= ")";
+			}
+			$where .= ")";
+		}else if($data['service_type_id'] == ''){
+			if($data['service_id'] != ''){
+				$where .= ' AND (';
+				$data['service_id'] = rtrim($data['service_id'], ',');
+				$service_id = explode(',', $data['service_id']);
+				foreach ($service_id as $key_2 => $value_2) {
+					$where .= "service.service_id = '{$value_2}' OR ";
+				}
+				$where = substr($where, 0, strlen($where) - 4);
+				$where .= ")";
+			}
+		}
+		if(isset($data['user_service_sale_price'])){
+			$where .= ' AND (';
+			$where .= "user_service_sale_price <= 5000000 AND user_service_sale_price > {$data['user_service_sale_price']}";
+			$where .= ")";
+		}
+		if(isset($data['user_service_use_evoucher'])){
+			$where .= ' AND (';
+			if($data['user_service_use_evoucher'] != 2){				
+				$where .= "user_service_use_evoucher = {$data['user_service_use_evoucher']} OR user_service_use_evoucher = 2";
+			}else{
+				$where .= "user_service_use_evoucher = 0 OR user_service_use_evoucher = 1 OR user_service_use_evoucher = 2";
+			}
+			$where .= ")";
+		}
+		if($data['user_open_hour'] != ''){
+			$where .= ' AND (';
+			$where .= " user_open_hour LIKE '%{$data['user_open_hour']}%'";
+			$where .= ')';
+		}
+		if($data['user_limit_before_booking'] != ''){
+			$where .= ' AND (';
+			$where .= " user_limit_before_booking >= '{$data['user_limit_before_booking']}'";
+			$where .= ')';
+		}
 		// if($data['service_name'] == ''){
 			// $where = "WHERE (service.service_name LIKE '%{$data["service_name"]}%'";
 			// $where .= "OR user_service.user_service_name LIKE '%{$data["service_name"]}%')";
@@ -75,7 +124,7 @@ FROM user, user_review
 WHERE user.user_id = user_review.user_id
 GROUP BY user_review.user_id) user_review ON user_review.user_id = user.user_id
 {$where}
-AND user.user_district_id LIKE '%{$data["district_id"]}%'
+AND user.user_district_id LIKE N'%{$data["district_id"]}%'
 AND user.user_delete_flg = 0
 AND user_service.user_service_delete_flg = 0
 SQL;
@@ -88,6 +137,7 @@ user.user_id
 ,user.user_address
 ,user.user_description
 ,user.user_logo
+,user.user_district_id
 ,IF(user_review.star_amount IS NULL,0,user_review.star_amount) AS star_amount
 FROM user
 INNER JOIN group_service ON user.user_id = group_service.group_service_user_id
@@ -100,7 +150,7 @@ FROM user, user_review
 WHERE user.user_id = user_review.user_id
 GROUP BY user_review.user_id) user_review ON user_review.user_id = user.user_id
 {$where}
-AND user.user_district_id LIKE '%{$data["district_id"]}%'
+AND user.user_district_id LIKE N'%{$data["district_id"]}%'
 AND user.user_delete_flg = 0
 AND user_service.user_service_delete_flg = 0
 {$order}
@@ -130,6 +180,7 @@ SQL;
 			$array[$key]['user_address'] = $value['user_address'];
 			$array[$key]['user_description'] = $value['user_description'];
 			$array[$key]['user_logo'] = $value['user_logo'];
+			$array[$key]['user_district_id'] = $value['user_district_id'];
 			$query = <<<SQL
 SELECT
 user_service.user_service_id
@@ -149,7 +200,7 @@ WHERE user.user_id = user_review.user_id
 GROUP BY user_review.user_id) user_review ON user_review.user_id = user.user_id
 {$where}
 AND user.user_id = {$value["user_id"]}
-AND user.user_district_id LIKE '%{$data["district_id"]}%'
+AND user.user_district_id LIKE N'%{$data["district_id"]}%'
 AND user.user_delete_flg = 0
 AND user_service.user_service_delete_flg = 0
 {$order}
@@ -186,13 +237,13 @@ SQL;
 		$service_name = explode(' ', $data["service_name"]);
 		$where = 'WHERE (';
 		foreach ($service_name as $key => $value) {
-			$where .= "service.service_name LIKE '%{$value}%' OR ";
+			$where .= "service.service_name LIKE N'%{$value}%' OR ";
 		}
 		foreach ($service_name as $key => $value) {
-			$where .= "user_service.user_service_name LIKE '%{$value}%' OR ";
+			$where .= "user_service.user_service_name LIKE N'%{$value}%' OR ";
 		}
 		foreach ($service_name as $key => $value) {
-			$where .= "user.user_business_name LIKE '%{$value}%' OR ";
+			$where .= "user.user_business_name LIKE N'%{$value}%' OR ";
 		}
 		$where = substr($where, 0, strlen($where) - 4);
 		$where .= ')';
@@ -202,14 +253,24 @@ SQL;
 				$user_address_1 = explode(', ', $data['user_address_1']);
 				$user_address_2 = explode(', ', $data['user_address_2']);
 				foreach ($user_address_1 as $key => $value) {
-					$where .= "user.user_address LIKE '%{$value}%' OR ";
+					$where .= "user.user_address LIKE N'%{$value}%' OR ";
 				}
 				foreach ($user_address_2 as $key_1 => $value_1) {
-					$where .= "user.user_address LIKE '%{$value_1}%' OR ";
+					$where .= "user.user_address LIKE N'%{$value_1}%' OR ";
 				}
 				$where = substr($where, 0, strlen($where) - 4);
 				$where .= ')';
 			}
+		}
+		if($data['user_open_hour'] != ''){
+			$where .= ' AND (';
+			$where .= " user_open_hour LIKE '%{$data['user_open_hour']}%'";
+			$where .= ')';
+		}
+		if($data['user_limit_before_booking'] != ''){
+			$where .= ' AND (';
+			$where .= " user_limit_before_booking >= '{$data['user_limit_before_booking']}'";
+			$where .= ')';
 		}
 		// if($data['service_name'] == ''){
 			// $where = "WHERE (service.service_name LIKE '%{$data["service_name"]}%'";
@@ -228,7 +289,7 @@ INNER JOIN user_service ON user_service.user_service_service_id = service.servic
 INNER JOIN group_service ON group_service.group_service_id = user_service.user_service_group_id
 INNER JOIN user ON user.user_id = group_service.group_service_user_id
 {$where}
-AND user.user_district_id LIKE '%{$data["district_id"]}%'
+AND user.user_district_id LIKE N'%{$data["district_id"]}%'
 AND user.user_delete_flg = 0
 AND user_service.user_service_delete_flg = 0
 GROUP BY service_type.service_type_id
@@ -245,7 +306,7 @@ INNER JOIN user_service ON user_service.user_service_service_id = service.servic
 INNER JOIN group_service ON group_service.group_service_id = user_service.user_service_group_id
 INNER JOIN user ON user.user_id = group_service.group_service_user_id
 {$where}
-AND user.user_district_id LIKE '%{$data["district_id"]}%'
+AND user.user_district_id LIKE N'%{$data["district_id"]}%'
 AND user.user_delete_flg = 0
 AND user_service.user_service_delete_flg = 0
 GROUP BY service.service_id
@@ -253,9 +314,9 @@ SQL;
 		$select = $this -> db -> select($sql);
 		$return['service'] = $select;
 		$array_type_buy[] = array('user_service_use_evoucher' => 0
-							   ,'user_evoucher' => 0);
+							   ,'use_evoucher' => 0);
 		$array_type_buy[] = array('user_service_use_evoucher' => 1
-							   ,'user_evoucher' => 0);
+							   ,'use_evoucher' => 0);
 		$sql = <<<SQL
 SELECT user_service.user_service_use_evoucher,
 COUNT(*) AS use_evoucher
@@ -265,7 +326,7 @@ INNER JOIN user_service ON user_service.user_service_service_id = service.servic
 INNER JOIN group_service ON group_service.group_service_id = user_service.user_service_group_id
 INNER JOIN user ON user.user_id = group_service.group_service_user_id
 {$where}
-AND user.user_district_id LIKE '%{$data["district_id"]}%'
+AND user.user_district_id LIKE N'%{$data["district_id"]}%'
 AND user.user_delete_flg = 0
 AND user_service.user_service_delete_flg = 0
 GROUP BY user_service.user_service_use_evoucher
@@ -279,8 +340,207 @@ SQL;
 				$array_type_buy[1]['use_evoucher'] = $value['use_evoucher'];
 			}
 			if($value['user_service_use_evoucher'] == 2){
-				$array_type_buy[0]['use_evoucher'] += $value['use_evoucher'];
-				$array_type_buy[1]['use_evoucher'] += $value['use_evoucher'];
+				$array_type_buy[0]['use_evoucher'] = $array_type_buy[0]['use_evoucher'] + $value['use_evoucher'];
+				$array_type_buy[1]['use_evoucher'] = $array_type_buy[1]['use_evoucher'] + $value['use_evoucher'];
+			}
+		}
+		$return['evoucher'] = $array_type_buy;
+		echo json_encode($return);
+	}
+	
+	public function reloadService($data){
+		$return = array();
+		$service_name = explode(' ', $data["service_name"]);
+		$where = 'WHERE (';
+		foreach ($service_name as $key => $value) {
+			$where .= "service.service_name LIKE N'%{$value}%' OR ";
+		}
+		foreach ($service_name as $key => $value) {
+			$where .= "user_service.user_service_name LIKE N'%{$value}%' OR ";
+		}
+		foreach ($service_name as $key => $value) {
+			$where .= "user.user_business_name LIKE N'%{$value}%' OR ";
+		}
+		$where = substr($where, 0, strlen($where) - 4);
+		$where .= ')';
+		if($data['sort_by'] == '5'){
+			if($data['user_address_1'] != '' && $data['user_address_2'] != ''){
+				$where .= ' AND (';
+				$user_address_1 = explode(', ', $data['user_address_1']);
+				$user_address_2 = explode(', ', $data['user_address_2']);
+				foreach ($user_address_1 as $key => $value) {
+					$where .= "user.user_address LIKE N'%{$value}%' OR ";
+				}
+				foreach ($user_address_2 as $key_1 => $value_1) {
+					$where .= "user.user_address LIKE N'%{$value_1}%' OR ";
+				}
+				$where = substr($where, 0, strlen($where) - 4);
+				$where .= ')';
+			}
+		}
+		if($data['service_type_id'] != ''){
+			$where .= "AND (";
+			$where .= "service_type.service_type_id = {$data['service_type_id']}";
+			if($data['service_id'] != ''){
+				$where .= ' AND (';
+				$data['service_id'] = rtrim($data['service_id'], ',');
+				$service_id = explode(',', $data['service_id']);
+				foreach ($service_id as $key_2 => $value_2) {
+					$where .= "service.service_id = '{$value_2}' OR ";
+				}
+				$where = substr($where, 0, strlen($where) - 4);
+				$where .= ")";
+			}
+			$where .= ")";
+		}else if($data['service_type_id'] == ''){
+			if($data['service_id'] != ''){
+				$where .= ' AND (';
+				$data['service_id'] = rtrim($data['service_id'], ',');
+				$service_id = explode(',', $data['service_id']);
+				foreach ($service_id as $key_2 => $value_2) {
+					$where .= "service.service_id = '{$value_2}' OR ";
+				}
+				$where = substr($where, 0, strlen($where) - 4);
+				$where .= ")";
+			}
+		}
+		$sql = <<<SQL
+SELECT service.service_id
+, service.service_name
+, COUNT(*) AS amount
+FROM service_type
+INNER JOIN service ON service.service_service_type_id = service_type.service_type_id
+INNER JOIN user_service ON user_service.user_service_service_id = service.service_id
+INNER JOIN group_service ON group_service.group_service_id = user_service.user_service_group_id
+INNER JOIN user ON user.user_id = group_service.group_service_user_id
+{$where}
+AND user.user_district_id LIKE N'%{$data["district_id"]}%'
+AND user.user_delete_flg = 0
+AND user_service.user_service_delete_flg = 0
+GROUP BY service.service_id
+SQL;
+		$select = $this -> db -> select($sql);
+		$return['service'] = $select;
+		$array_type_buy[] = array('user_service_use_evoucher' => 0
+							   ,'use_evoucher' => 0);
+		$array_type_buy[] = array('user_service_use_evoucher' => 1
+							   ,'use_evoucher' => 0);
+		$sql = <<<SQL
+SELECT user_service.user_service_use_evoucher,
+COUNT(*) AS use_evoucher
+FROM service_type
+INNER JOIN service ON service.service_service_type_id = service_type.service_type_id
+INNER JOIN user_service ON user_service.user_service_service_id = service.service_id
+INNER JOIN group_service ON group_service.group_service_id = user_service.user_service_group_id
+INNER JOIN user ON user.user_id = group_service.group_service_user_id
+{$where}
+AND user.user_district_id LIKE N'%{$data["district_id"]}%'
+AND user.user_delete_flg = 0
+AND user_service.user_service_delete_flg = 0
+GROUP BY user_service.user_service_use_evoucher
+SQL;
+		$select = $this -> db -> select($sql);
+		foreach ($select as $key => $value) {
+			if($value['user_service_use_evoucher'] == 0){
+				$array_type_buy[0]['use_evoucher'] = $value['use_evoucher'];
+			}
+			if($value['user_service_use_evoucher'] == 1){
+				$array_type_buy[1]['use_evoucher'] = $value['use_evoucher'];
+			}
+			if($value['user_service_use_evoucher'] == 2){
+				$array_type_buy[0]['use_evoucher'] = $array_type_buy[0]['use_evoucher'] + $value['use_evoucher'];
+				$array_type_buy[1]['use_evoucher'] = $array_type_buy[1]['use_evoucher'] + $value['use_evoucher'];
+			}
+		}
+		$return['evoucher'] = $array_type_buy;
+		echo json_encode($return);
+	}
+
+	public function reloadTypeBuy($data){
+		$return = array();
+		$service_name = explode(' ', $data["service_name"]);
+		$where = 'WHERE (';
+		foreach ($service_name as $key => $value) {
+			$where .= "service.service_name LIKE N'%{$value}%' OR ";
+		}
+		foreach ($service_name as $key => $value) {
+			$where .= "user_service.user_service_name LIKE N'%{$value}%' OR ";
+		}
+		foreach ($service_name as $key => $value) {
+			$where .= "user.user_business_name LIKE N'%{$value}%' OR ";
+		}
+		$where = substr($where, 0, strlen($where) - 4);
+		$where .= ')';
+		if($data['sort_by'] == '5'){
+			if($data['user_address_1'] != '' && $data['user_address_2'] != ''){
+				$where .= ' AND (';
+				$user_address_1 = explode(', ', $data['user_address_1']);
+				$user_address_2 = explode(', ', $data['user_address_2']);
+				foreach ($user_address_1 as $key => $value) {
+					$where .= "user.user_address LIKE N'%{$value}%' OR ";
+				}
+				foreach ($user_address_2 as $key_1 => $value_1) {
+					$where .= "user.user_address LIKE N'%{$value_1}%' OR ";
+				}
+				$where = substr($where, 0, strlen($where) - 4);
+				$where .= ')';
+			}
+		}
+		if($data['service_type_id'] != ''){
+			$where .= "AND (";
+			$where .= "service_type.service_type_id = {$data['service_type_id']}";
+			if($data['service_id'] != ''){
+				$where .= ' AND (';
+				$data['service_id'] = rtrim($data['service_id'], ',');
+				$service_id = explode(',', $data['service_id']);
+				foreach ($service_id as $key_2 => $value_2) {
+					$where .= "service.service_id = '{$value_2}' OR ";
+				}
+				$where = substr($where, 0, strlen($where) - 4);
+				$where .= ")";
+			}
+			$where .= ")";
+		}else if($data['service_type_id'] == ''){
+			if($data['service_id'] != ''){
+				$where .= ' AND (';
+				$data['service_id'] = rtrim($data['service_id'], ',');
+				$service_id = explode(',', $data['service_id']);
+				foreach ($service_id as $key_2 => $value_2) {
+					$where .= "service.service_id = '{$value_2}' OR ";
+				}
+				$where = substr($where, 0, strlen($where) - 4);
+				$where .= ")";
+			}
+		}
+		$array_type_buy[] = array('user_service_use_evoucher' => 0
+							   ,'use_evoucher' => 0);
+		$array_type_buy[] = array('user_service_use_evoucher' => 1
+							   ,'use_evoucher' => 0);
+		$sql = <<<SQL
+SELECT user_service.user_service_use_evoucher,
+COUNT(*) AS use_evoucher
+FROM service_type
+INNER JOIN service ON service.service_service_type_id = service_type.service_type_id
+INNER JOIN user_service ON user_service.user_service_service_id = service.service_id
+INNER JOIN group_service ON group_service.group_service_id = user_service.user_service_group_id
+INNER JOIN user ON user.user_id = group_service.group_service_user_id
+{$where}
+AND user.user_district_id LIKE N'%{$data["district_id"]}%'
+AND user.user_delete_flg = 0
+AND user_service.user_service_delete_flg = 0
+GROUP BY user_service.user_service_use_evoucher
+SQL;
+		$select = $this -> db -> select($sql);
+		foreach ($select as $key => $value) {
+			if($value['user_service_use_evoucher'] == 0){
+				$array_type_buy[0]['use_evoucher'] = $value['use_evoucher'];
+			}
+			if($value['user_service_use_evoucher'] == 1){
+				$array_type_buy[1]['use_evoucher'] = $value['use_evoucher'];
+			}
+			if($value['user_service_use_evoucher'] == 2){
+				$array_type_buy[0]['use_evoucher'] = $array_type_buy[0]['use_evoucher'] + $value['use_evoucher'];
+				$array_type_buy[1]['use_evoucher'] = $array_type_buy[1]['use_evoucher'] + $value['use_evoucher'];
 			}
 		}
 		$return['evoucher'] = $array_type_buy;

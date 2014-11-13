@@ -719,7 +719,9 @@
             });
         });
         $(function(){
+        	var today = new Date();
 			$('#date_to_appointment').datepicker({
+				startDate: today,
 		   		format: 'dd/mm/yyyy'
 		    }).on('changeDate', function(ev){
 			    $(this).datepicker('hide');
@@ -770,6 +772,7 @@
 		var IDLE_CHECK = "<?php echo IDLE_CHECK; ?>";
 		var USER_LAT = '';
 		var USER_LNG = '';
+		var CHOOSEN_DATE_ACTIVE = '';
 		var IS_PAYMENT_PAGE = '<?php 
 							      if(isset($this -> is_payment_page)){
 								      echo $this -> is_payment_page; 

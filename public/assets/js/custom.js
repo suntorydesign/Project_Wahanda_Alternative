@@ -71,12 +71,16 @@ function loadDistrict() {
 		success : function(response) {
 			if (response[0] != null) {
 				var html = '';
+				var html_2 = '';
 				$.each(response, function(key, value) {
 					html += '<option value="' + value.district_id + '">' + value.district_name + '</option>';
 				});
 				$('#district_field').append(html);
 				$('#create_place_district').append(html);
-				$('#district_id_advance').append(html);
+				$.each(response, function(key, value) {
+					html_2 += '<option style="display: none;" value="' + value.district_id + '">' + value.district_name + '</option>';
+				});
+				$('#district_id_advance').append(html_2);
 			}
 		}
 	});
@@ -897,6 +901,131 @@ function loadServiceDetail(user_service_id) {
 			// initMap();
 			// $('.map #user_latlng').html('');
 			// initGoogleMap('user_latlng', USER_LAT, USER_LNG);
+			if(CHOOSEN_DATE_ACTIVE != '' && CHOOSEN_DATE_ACTIVE != undefined){
+				var this_class;
+				$('#date_booking span').each(function() {
+					var this_date_val_1 = formatDate($(this).attr('value'));
+					var this_date_val_2 = formatDate(CHOOSEN_DATE_ACTIVE);
+					if (this_date_val_1 == this_date_val_2) {
+						this_class = $(this).attr('class');
+						this_class = this_class.split(' ');
+						$(this).addClass('active');
+						$(this).siblings().removeClass('active');
+						var time_html = '';
+						var service_remain = false;
+						$(this).addClass('active');
+						$(this).siblings().removeClass('active');
+						$('#time_booking').children().remove();
+						CHOOSEN_DATE = $(this).attr('value');
+						var temp_1_array = [];
+						switch($(this).attr('day-data')) {
+						case '2' :
+							temp_1_array = MON_OPEN_CLOSE;
+							break;
+						case '3' :
+							temp_1_array = TUE_OPEN_CLOSE;
+							break;
+						case '4' :
+							temp_1_array = WED_OPEN_CLOSE;
+							break;
+						case '5' :
+							temp_1_array = THU_OPEN_CLOSE;
+							break;
+						case '6' :
+							temp_1_array = FRI_OPEN_CLOSE;
+							break;
+						case '7' :
+							temp_1_array = SAT_OPEN_CLOSE;
+							break;
+						case '1' :
+							temp_1_array = SUN_OPEN_CLOSE;
+							break;
+						}
+						//console.log(temp_1_array['status']);
+						if (temp_1_array['status'] == '1') {
+							var current_hour_in_min = (TODAY_HOUR * 60) + TODAY_MINUTE;
+							var open_hour_in_min = parseInt(temp_1_array['open']) * 60;
+							if ($(this).attr('value') == TODAY_YEAR + '-' + TODAY_MONTH + '-' + TODAY_OF_MONTH) {
+								while (current_hour_in_min > open_hour_in_min) {
+									open_hour_in_min = open_hour_in_min + parseInt(USER_SERVICE_DURATION);
+								}
+								open_hour_in_min = open_hour_in_min + LIMIT_TIME_BEFORE_SERVICE;
+							}
+							var close_hour_in_min = parseInt(temp_1_array['close']) * 60;
+							var am_pm = '';
+							var minute;
+							var hour;
+							//console.log(close_hour_in_min);
+							//console.log(LIMIT_TIME_BEFORE_SERVICE);
+							while (close_hour_in_min > open_hour_in_min) {
+								service_remain = true;
+								if (open_hour_in_min <= 720) {
+									am_pm = 'am';
+								} else {
+									am_pm = 'pm';
+								}
+								if (open_hour_in_min % 60 < 10) {
+									minute = '0' + (open_hour_in_min % 60);
+								} else {
+									minute = open_hour_in_min % 60;
+								}
+								if ((open_hour_in_min - open_hour_in_min % 60) / 60 < 10) {
+									hour = '0' + ((open_hour_in_min - open_hour_in_min % 60) / 60);
+								} else {
+									hour = (open_hour_in_min - open_hour_in_min % 60) / 60;
+								}
+								time_html += '<hr/>';
+								time_html += '<div class="row" price-data="' + USER_SERVICE_SALE_PRICE + '" date-time-data="' + hour + ':' + minute + '">';
+								time_html += '<div class="col-md-offset-1 col-md-6"><strong>' + hour + ':' + minute + am_pm + '</strong></div>';
+								time_html += '<div class="col-md-5">' + USER_SERVICE_SALE_PRICE + ' VNĐ</div>';
+								time_html += '</div>';
+								open_hour_in_min = open_hour_in_min + parseInt(USER_SERVICE_DURATION);
+								$('#btn_user_service_price').text(USER_SERVICE_SALE_PRICE);
+							}
+						} else if (temp_1_array['status'] == '0') {
+							service_remain = true;
+							time_html += '<hr/>';
+							time_html += '<div class="row can_not_book">';
+							time_html += '<div class="col-md-offset-1 col-md-11 text-center"><strong>Dịch vụ không mở trong ngày này!<strong></div>';
+							time_html += '</div>';
+							time_html += '<hr/>';
+							$('#btn_user_service_price').text('');
+						}
+						if (time_html == '' && service_remain == false) {
+							time_html += '<hr/>';
+							time_html += '<div class="row can_not_book">';
+							time_html += '<div class="col-md-offset-1 col-md-11 text-center"><strong>Hết lịch hẹn trong ngày!<strong></div>';
+							time_html += '</div>';
+							time_html += '<hr/>';
+							$('#btn_user_service_price').text('');
+						}
+						$('#time_booking').html(time_html);
+		
+						$('#time_booking div.row:not(.can_not_book)').on('click', function() {
+							$(this).addClass('active');
+							$(this).siblings().removeClass('active');
+							CHOOSEN_TIME = $(this).attr('date-time-data');
+							CHOOSEN_PRICE = $(this).attr('price-data');
+							CHOOSEN_DATE_STORE = CHOOSEN_DATE;
+							console.log(CHOOSEN_DATE);
+							console.log(CHOOSEN_TIME);
+							console.log(CHOOSEN_PRICE);
+							console.log(USER_SERVICE_ID);
+						});
+						$('#time_booking div.row:not(.can_not_book)').each(function(index) {
+							if ($(this).attr('date-time-data') == CHOOSEN_TIME && CHOOSEN_DATE == CHOOSEN_DATE_STORE) {
+								$(this).addClass('active');
+								$(this).siblings().removeClass('active');
+							}
+						});
+					}
+				});
+				var week_order = this_class[0].split('_');
+				console.log(week_order);
+				for ( w = 0; w < (week_order[1] - 1); w++) {
+					clickNextWeek();
+				}
+			}
 		}
 	});
 }

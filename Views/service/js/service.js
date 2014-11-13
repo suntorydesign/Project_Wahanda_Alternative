@@ -52,7 +52,8 @@ function loadLocationDetail() {
 						$('#user_location_description').html(value);
 					}
 					if (key == 'user_slide') {
-						$('#' + key).attr('src', value);
+						var slide = value.split(',');
+						$('#' + key).attr('src', slide[0]);
 					}
 					if (key == 'user_logo') {
 						$('#' + key).attr('src', value);

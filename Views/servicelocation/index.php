@@ -160,6 +160,7 @@
 
 		<div class="col-md-4">
 			<div id="side-bar">
+				<div id="not_allow_advance_search"></div>
 				<p class="title">TÌM KIẾM KẾT QUẢ THEO BỘ LỌC</p>
 				<div class="divider"></div>
 
@@ -169,10 +170,10 @@
 						<i style="position: absolute;z-index: 1000; top: 30%;left: 12px;color: #777;" class="fa fa-calendar"></i>
 						<input onkeypress="inputNothing(event)" style="padding-left: 30px" maxlength="10" type="text" id="date_to_appointment" class="form-control date" placeHolder="Theo ngày">
 					</div>
-					<p></p>
+					<!-- <p></p>
 					<select class="form-control">
 						<option selected="" value="" disabled>Theo giờ</option>
-					</select>
+					</select> -->
 				</div>
 				<div class="divider"></div>
 
@@ -199,7 +200,7 @@
 					<div class="filter-3">
 						<p class="filter-name">ĐỊA ĐIỂM</p>
 						<select id="district_id_advance" class="form-control">
-							<option selected="selected" value="0">Tại...</option>
+							<option selected="selected" value="">Tại...</option>
 						</select>
 					</div>
 					<div class="divider"></div>
@@ -321,4 +322,12 @@
 	var YCURR = '';
 	var USER_ADDRESS_1 = '';
 	var USER_ADDRESS_2 = '';
+	var SERVICE_TYPE_SEARCH = '';
+	var SERVICE_SEARCH = '';
+	var PRICE_SEARCH = 0;
+	var USE_EVOUCHER = 2;
+	var BOOKING_DATE = '';
+	var USER_LIMIT_BEFORE_BOOKING = '';
+	var CHOOSEN_DATE_ACTIVE = '';
+	// var DISTRICT_ID_SEARCH = '';
 </script>
