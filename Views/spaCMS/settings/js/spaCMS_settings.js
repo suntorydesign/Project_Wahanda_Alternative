@@ -383,7 +383,7 @@ var UserFinance = function (){
                 $('input[name=user_company_delegate]').val(data[0]['user_company_delegate']);
                 $('textarea[name=user_company_address]').val(data[0]['user_company_address']);
                 $('input[name=user_company_tax_code]').val(data[0]['user_company_tax_code']);
-                $('select[name=user_company_country_id]').val(data[0]['user_company_country_id']);
+                $('select[name=user_company_country_id]').find('option[value="'+data[0]['user_company_country_id']+'"]').prop("selected", true);
                 $('input[name=user_contact_name]').val(data[0]['user_contact_name']);
                 $('input[name=user_contact_email]').val(data[0]['user_contact_email']);
                 $('input[name=user_contact_phone]').val(data[0]['user_contact_phone']);
@@ -521,7 +521,11 @@ var OnlineBooking = function() {
         
         var url = URL + 'spaCMS/settings/xhrGet_user_is_use_gvoucher';
         $.get(url, function(data){
-            select_ulbs.find('option[value="'+data['user_limit_before_service']+'"]').prop("selected",true);
+            if(data['user_is_use_gvoucher'] == 1) {
+                ckbox_uiugv.prop( "checked", true );
+            } else {
+                ckbox_uiugv.prop( "checked", false );
+            }
         }, 'json');
     }
 
@@ -553,11 +557,24 @@ var OnlineBooking = function() {
                     alert("Update Email notification error!");
                 }
             });
-
+            return false;
         });
     }
 
     var uiuev_form = $("#user_is_use_evoucher_form");
+    var xhrGet_user_is_use_evoucher = function() {
+        var ckbox_uiuev = $('input[name=user_is_use_evoucher]', uiuev_form);
+        
+        var url = URL + 'spaCMS/settings/xhrGet_user_is_use_evoucher';
+        $.get(url, function(data){
+            if(data['user_is_use_evoucher'] == 1) {
+                ckbox_uiuev.prop( "checked", true );
+            } else {
+                ckbox_uiuev.prop( "checked", false );
+            }
+        }, 'json');
+    }
+
     var xhrUpdate_user_is_use_evoucher = function() {
         uiuev_form.on('submit', function(e){
             e.preventDefault();
@@ -590,9 +607,20 @@ var OnlineBooking = function() {
         });
     }
 
-
-
     var uiua_form = $("#user_is_use_appointment_form");
+    var xhrGet_user_is_use_appointment = function() {
+        var ckbox_uiua = $('input[name=user_is_use_appointment]', uiua_form);
+        
+        var url = URL + 'spaCMS/settings/xhrGet_user_is_use_appointment';
+        $.get(url, function(data){
+            if(data['user_is_use_appointment'] == 1) {
+                ckbox_uiua.prop( "checked", true );
+            } else {
+                ckbox_uiua.prop( "checked", false );
+            }
+        }, 'json');
+    }
+
     var xhrUpdate_user_is_use_appointment = function() {
         uiua_form.on('submit', function(e){
             e.preventDefault();
@@ -672,8 +700,8 @@ var OnlineBooking = function() {
     return {
         init: function(){
             xhrGet_user_is_use_gvoucher();
-            // xhrGet_user_is_use_evoucher();
-            // xhrGet_user_is_use_appointment();
+            xhrGet_user_is_use_evoucher();
+            xhrGet_user_is_use_appointment();
             xhrGet_user_limit_before_booking();
 
             xhrUpdate_user_is_use_gvoucher();
@@ -694,12 +722,15 @@ var Sercurity = function (){
             var input_up_new = $('input[name=user_password_new]').val();
             var input_up_newc = $('input[name=user_password_new_confirm]').val();
 
+            var isNotMatch = false;
             var isSuccess = false;
             var loading = self.find('.loading');
             var done = self.find('.done');
             var warning_notmatch = $('.warning_notmatch');
             var warning_error = $('.warning_error');
 
+            warning_notmatch.hide();
+            warning_error.hide();
             loading.fadeIn();
             done.hide();
 
@@ -707,7 +738,8 @@ var Sercurity = function (){
                 var url = URL + 'spaCMS/settings/xhrUpdate_user_password';
                 $.post(url, {'user_password':input_up, 'user_password_new':input_up_new}, function(result){
                     if(result == 'password_error') {
-                        warning_error.fadeIn();
+                        isNotMatch = true;
+                        return false;
                     }
 
                     if(result == 'success') {
@@ -716,8 +748,13 @@ var Sercurity = function (){
                 })
                 .done(function(){
                     if(isSuccess) {
+                        sp_form[0].reset();
                         alert("Cập nhật thành công!");
-                    } else {
+                    } 
+                    else if(isNotMatch) {
+                        warning_error.fadeIn();
+                    }
+                    else {
                         alert("Update Password error!");
                     }
                 });
@@ -727,7 +764,6 @@ var Sercurity = function (){
 
             loading.hide();
             done.show();
-            return false;
         });
         
         

@@ -27,7 +27,7 @@
 					</div> </a>
 				</li>
 				<li id="security-tab" class="ui-state-default ui-corner-top">
-					<a href="#security" style="position: relative;" role="tab" data-toggle="tab"> <div class="nav-icon icons-nav-booking"></div>
+					<a href="#security" style="position: relative;" role="tab" data-toggle="tab"> <div class="nav-icon icons-nav-employees"></div>
 					<div class="title" style="position: absolute; height: 17px; top: 50%; margin-top: -8.5px;">
 						Bảo mật
 					</div> </a>
@@ -56,8 +56,8 @@
 									<span class="title">Mật khẩu xác thực không trùng khớp</span>
 									<!-- <div class="info">Vui lòng tắt.</div> -->
 								</div>
-								<div class="warning warning-archived">
-									<div class="icon icons-lock warning_error"></div>
+								<div class="warning warning-archived warning_error">
+									<div class="icon icons-lock"></div>
 									<span class="title">Mật khẩu hiện tại không chính xác</span>
 									<!-- <div class="info">Vui lòng tắt.</div> -->
 								</div>
@@ -169,7 +169,7 @@
 													<td class="label-part"><label for="user_district_id">Quận</label></td>
 													<td class="input-part">
 													<select id="user_district_id" name="user_district_id" class="required">
-														<option value="">Chưa chọn</option>
+														<option value="0">Chưa chọn</option>
 													</select></td>
 												</tr>
 												<tr id="loc_map" title="&lt;strong&gt;Location on the map&lt;/strong&gt; - Click on the map to enlarge it and drag the pointer to the exact location of your venue." class="form-row">

@@ -255,7 +255,7 @@ class SpaCMS_Settings_Model {
 		}
 		
 		$data = array(
-			"user_is_use_gift_voucher" => $user_is_use_gvoucher
+			"user_is_use_gvoucher" => $user_is_use_gvoucher
 		);
 		$result = $this->db->update("user", $data, "user_id = $user_id");
 		if($result) {
@@ -399,6 +399,38 @@ SQL;
 		$aQuery = <<<SQL
 		SELECT 
 			user_is_use_gvoucher
+		FROM 
+			user
+		WHERE 
+			user_id = {$user_id}
+SQL;
+		$data = $this->db->select($aQuery);
+
+		echo json_encode($data[0]);
+	}
+
+	function get_user_is_use_evoucher() {
+		$user_id = Session::get('user_id');
+
+		$aQuery = <<<SQL
+		SELECT 
+			user_is_use_evoucher
+		FROM 
+			user
+		WHERE 
+			user_id = {$user_id}
+SQL;
+		$data = $this->db->select($aQuery);
+
+		echo json_encode($data[0]);
+	}
+
+	function get_user_is_use_appointment() {
+		$user_id = Session::get('user_id');
+
+		$aQuery = <<<SQL
+		SELECT 
+			user_is_use_appointment
 		FROM 
 			user
 		WHERE 

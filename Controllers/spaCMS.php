@@ -357,6 +357,13 @@
 					$this->model->get_user_limit_before_booking();
 					break;
 
+				case 'xhrGet_user_is_use_evoucher':
+					$this->model->get_user_is_use_evoucher();
+					break;
+
+				case 'xhrGet_user_is_use_appointment':
+					$this->model->get_user_is_use_appointment();
+					break;
 
 				default:
 					$this->view->style = array(
