@@ -260,5 +260,13 @@ class SpaCMS_Model extends Model {
 	function update_user_limit_before_booking() {
 		SpaCMS_Settings_Model::update_user_limit_before_booking();
 	}
+	
+	function get_user_limit_before_booking() {
+		SpaCMS_Settings_Model::get_user_limit_before_booking();
+	}
+	
+	function get_user_is_use_gvoucher() {
+		SpaCMS_Settings_Model::get_user_is_use_gvoucher();
+	}
 
 }

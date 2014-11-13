@@ -516,6 +516,15 @@ var UserNotification = function() {
 
 var OnlineBooking = function() {
     var uiugv_form = $("#user_is_use_gvoucher_form");
+    var xhrGet_user_is_use_gvoucher = function() {
+        var ckbox_uiugv = $('input[name=user_is_use_gvoucher]', uiugv_form);
+        
+        var url = URL + 'spaCMS/settings/xhrGet_user_is_use_gvoucher';
+        $.get(url, function(data){
+            select_ulbs.find('option[value="'+data['user_limit_before_service']+'"]').prop("selected",true);
+        }, 'json');
+    }
+
     var xhrUpdate_user_is_use_gvoucher = function() {
         uiugv_form.on('submit', function(e){
             e.preventDefault();
@@ -618,9 +627,16 @@ var OnlineBooking = function() {
 
     var editOBs_form = $('#editOBs_form');
     var xhrGet_user_limit_before_booking = function() {
+        var input_ulbb = $('input[name=user_limit_before_booking]', editOBs_form);
+        var select_ulbs = $('select[name=user_limit_before_service]', editOBs_form);
         
+        var url = URL + 'spaCMS/settings/xhrGet_user_limit_before_booking';
+        $.get(url, function(data){
+            input_ulbb.val(data['user_limit_before_booking']);
+            select_ulbs.find('option[value="'+data['user_limit_before_service']+'"]').prop("selected",true);
+        }, 'json');
     }
-    
+
     var xhrUpdate_user_limit_before_booking = function() {
         editOBs_form.on("submit", function(e) {
             e.preventDefault();
@@ -655,6 +671,9 @@ var OnlineBooking = function() {
 
     return {
         init: function(){
+            xhrGet_user_is_use_gvoucher();
+            // xhrGet_user_is_use_evoucher();
+            // xhrGet_user_is_use_appointment();
             xhrGet_user_limit_before_booking();
 
             xhrUpdate_user_is_use_gvoucher();
@@ -708,9 +727,10 @@ var Sercurity = function (){
 
             loading.hide();
             done.show();
+            return false;
         });
         
-        return false;
+        
     }
 
     return {

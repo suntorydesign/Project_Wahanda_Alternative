@@ -349,6 +349,14 @@
 					$this->model->update_user_limit_before_booking();
 					break;
 
+				case 'xhrGet_user_is_use_gvoucher':
+					$this->model->get_user_is_use_gvoucher();
+					break;
+
+				case 'xhrGet_user_limit_before_booking':
+					$this->model->get_user_limit_before_booking();
+					break;
+
 
 				default:
 					$this->view->style = array(

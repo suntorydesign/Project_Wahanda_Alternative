@@ -375,4 +375,38 @@ class SpaCMS_Settings_Model {
 			echo 'error';
 		}
 	}
+
+	function get_user_limit_before_booking() {
+		$user_id = Session::get('user_id');
+
+		$aQuery = <<<SQL
+		SELECT 
+			user_limit_before_booking,
+			user_limit_before_service
+		FROM 
+			user
+		WHERE 
+			user_id = {$user_id}
+SQL;
+		$data = $this->db->select($aQuery);
+
+		echo json_encode($data[0]);
+	}
+
+	function get_user_is_use_gvoucher() {
+		$user_id = Session::get('user_id');
+
+		$aQuery = <<<SQL
+		SELECT 
+			user_is_use_gvoucher
+		FROM 
+			user
+		WHERE 
+			user_id = {$user_id}
+SQL;
+		$data = $this->db->select($aQuery);
+
+		echo json_encode($data[0]);
+	}
+
 }
