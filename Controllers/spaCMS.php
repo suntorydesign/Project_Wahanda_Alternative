@@ -341,6 +341,15 @@
 					$this->model->update_user_is_use_appointment();
 					break;
 
+				case 'xhrUpdate_user_password':
+					$this->model->update_user_password();
+					break;
+
+				case 'xhrUpdate_user_limit_before_booking':
+					$this->model->update_user_limit_before_booking();
+					break;
+
+
 				default:
 					$this->view->style = array(
 						ASSETS . 'plugins/image-manager/css/image-manager.min.css',

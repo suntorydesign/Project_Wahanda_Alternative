@@ -60,6 +60,7 @@ class SpaCMS_Calendar_Model {
 		WHERE 
 				a.appointment_user_id = {$user_id}
 			AND a.appointment_date BETWEEN '{$start_date}' AND '{$end_date}'
+			AND a.appointment_del_flag = 0
 SQL;
 		$data = $this->db->select($aQuery);
 
@@ -84,6 +85,7 @@ SQL;
 			AND bd.booking_detail_date BETWEEN '{$start_date}' AND '{$end_date}'
 			AND bd.booking_detail_booking_id = b.booking_id
 			AND c.client_id = b.booking_client_id
+			AND bd.booking_detail_del_flag = 0
 SQL;
 		$data = $this->db->select($aQuery);
 
@@ -340,15 +342,26 @@ SQL;
 		$data_id = $_POST['data_id'];
 		$data_type = $_POST['data_type'];
 
+		$data = array();
+		$where = null;
+
 		if($data_type == "appointment") {
-			$rs = $this->db->delete("appointment", "appointment_id = $data_id");
+			$data = array(
+				"appointment_del_flag" => 1
+			);
+			$where = "appointment_id = $data_id";
 		}
 
 		if($data_type == "booking_detail") {
-			$rs = $this->db->delete("booking_detail", "booking_detail_id = $data_id");	
+			$data = array(
+				"booking_detail_del_flag" => 1
+			);
+			$where = "booking_detail = $data_id";
 		}
 
-		if($rs) {
+		$result = $this->db->update("appointment", $data, $where);
+
+		if($result) {
 			echo "success";
 		} else {
 			echo "error";
@@ -383,7 +396,7 @@ SQL;
 			$data = array(
 				"appointment_status" => 1
 			);
-			$rs = $this->db->update("appointment", $data, "appointment_id = $data_id");
+			$result = $this->db->update("appointment", $data, "appointment_id = $data_id");
 		}
 
 		if($data_type == "booking_detail") {
@@ -391,10 +404,10 @@ SQL;
 			$data = array(
 				"booking_detail_status" => 1
 			);
-			$rs = $this->db->update("booking_detail", $data, "booking_detail_id = $data_id");	
+			$result = $this->db->update("booking_detail", $data, "booking_detail_id = $data_id");	
 		}
 
-		if($rs) {
+		if($result) {
 			echo "success";
 		} else {
 			echo "error";
@@ -429,7 +442,7 @@ SQL;
 				"appointment_client_birth" 	=> $_POST['client_birth'],
 				"appointment_client_note" 	=> $_POST['client_note']
 			);
-			$rs = $this->db->update("appointment", $data, "appointment_id = $data_id");
+			$result = $this->db->update("appointment", $data, "appointment_id = $data_id");
 		}
 
 		// if($data_type == "booking_detail") {
@@ -442,10 +455,10 @@ SQL;
 		// 		"client_birth" 	=> $_POST['client_birth'],
 		// 		"client_note" 	=> $_POST['client_note']
 		// 	);
-		// 	$rs = $this->db->update("client", $data, "client_id = $data_id");	
+		// 	$result = $this->db->update("client", $data, "client_id = $data_id");	
 		// }
 
-		if($rs) {
+		if($result) {
 			echo "success";
 		} else {
 			echo "error";
@@ -477,7 +490,7 @@ SQL;
 				"appointment_price" 		=> $_POST['appointment_price'],
 				"appointment_note" 			=> $_POST['appointment_note']
 			);
-			$rs = $this->db->update("appointment", $data, "appointment_id = $data_id");
+			$result = $this->db->update("appointment", $data, "appointment_id = $data_id");
 		}
 
 		if($data_type == "booking_detail") {
@@ -490,10 +503,49 @@ SQL;
 				"booking_detail_price" 			=> $_POST['appointment_price'],
 				"booking_detail_note" 			=> $_POST['appointment_note']
 			);
-			$rs = $this->db->update("booking_detail", $data, "booking_detail_id = $data_id");	
+			$result = $this->db->update("booking_detail", $data, "booking_detail_id = $data_id");	
 		}
 
-		if($rs) {
+		if($result) {
+
+			// Gửi mail thông báo
+			// $checkEmailExist = $this -> model -> checkSpaEmailExist($_POST['create_place_email']);
+			if ($checkEmailExist == 0) {
+			} else {
+				echo 800;
+				exit;
+			}
+			//Nội dung email
+			$body = '<h1>Thông báo từ BELEZA</h1>';
+			//Gửi mail local
+			$mail = new PHPMailer(TRUE);
+			$mail -> CharSet = "UTF-8";
+			// create a new object
+			$mail -> IsSMTP();
+			// enable SMTP
+			$mail -> SMTPDebug = 1;
+			// debugging: 1 = errors and messages, 2 = messages only
+			$mail -> SMTPAuth = true;
+			// authentication enabled
+			$mail -> SMTPSecure = 'ssl';
+			// secure transfer enabled REQUIRED for GMail
+			$mail -> Host = SMTP_MAIL;
+			$mail -> Port = 465;
+			// or 587
+			$mail -> IsHTML(true);
+			$mail -> Username = INFO_MAIL;
+			$mail -> Password = PASS_MAIL;
+			$mail -> SetFrom(INFO_MAIL, 'BELEZA VIETNAM');
+			$mail -> Subject = "Thông tin tạo địa điểm từ Beleza!";
+			$mail -> Body = $body;
+			$mail -> AddAddress(ADMIN_MAIL);
+			$mail -> Send();
+			// if (!$mail -> Send()) {
+			// 	echo "Mailer Error: " . $mail -> ErrorInfo;
+			// } else {
+			// 	$this -> model -> sendCreatePlaceMail($data);
+			// }
+
 			echo "success";
 		} else {
 			echo "error";
@@ -519,7 +571,7 @@ SQL;
 			$data = array(
 				"appointment_is_confirm" => 1
 			);
-			$rs = $this->db->update("appointment", $data, "appointment_id = $data_id");
+			$result = $this->db->update("appointment", $data, "appointment_id = $data_id");
 		}
 
 		if($data_type == "booking_detail") {
@@ -527,10 +579,10 @@ SQL;
 			$data = array(
 				"booking_detail_is_confirm" => 1
 			);
-			$rs = $this->db->update("booking_detail", $data, "booking_detail_id = $data_id");	
+			$result = $this->db->update("booking_detail", $data, "booking_detail_id = $data_id");	
 		}
 
-		if($rs) {
+		if($result) {
 			echo "success";
 		} else {
 			echo "error";

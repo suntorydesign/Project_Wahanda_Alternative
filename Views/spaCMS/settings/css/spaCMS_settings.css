@@ -17,3 +17,12 @@ img.logo-image, div.picture-logo {
 	font-size: 11.5px;
 	z-index: 9999;
 }
+
+#security-password .default-form {
+	margin-top: 20px;
+	margin-left: 40px;
+}
+
+.warning {
+	display: none;
+}

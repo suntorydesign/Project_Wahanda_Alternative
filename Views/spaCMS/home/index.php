@@ -51,7 +51,7 @@
 					</a>
 				</li>
 				<li class="b-venue-page">
-					<a class="l-venue-page" target="_blank" href="#"> 
+					<a class="l-venue-page" target="_blank" href="<?php echo URL . "service/servicePlace/" . Session::get('user_id'); ?>"> 
 						<span class="icon icons-web-link"></span> 
 						<span class="link-txt">Xem địa điểm trên Beleza</span> 
 					</a>
@@ -92,7 +92,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="https://www.wahanda.com/info/connect-faq/" target="_blank"> 
+					<a href="#" target="_blank"> 
 						<span class="icon icons-info-link"></span> 
 						<span class="link-txt">Xem những hỏi-đáp thường gặp - FAQ</span> 
 					</a>

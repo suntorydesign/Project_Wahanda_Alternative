@@ -468,7 +468,7 @@
                                         <input type="hidden" name="appointment_created" />
                                         <input type="hidden" name="appointment_updated" />
 
-                                        Bắt đầu lúc: 
+                                        <span style="line-height: 25px;">Bắt đầu lúc: </span>
                                         <select name="appointment_time_start" class="required appointment_time_start">
                                             <option value="07:00">07:00</option>
                                             <option value="08:00">08:00</option>

@@ -119,7 +119,7 @@ var GetMoreInfo = function () {
     return {
         init: function() {
             xhrGet_type_business();
-            // xhrGet_country();
+            xhrGet_country();
             xhrGet_district();
         }
     }
@@ -395,6 +395,7 @@ var UserFinance = function (){
     var xhrUpdate_user_company = function () {
         $('#user_company_form').on('submit', function(){
             var data = $(this).serialize();
+            var isSuccess = false;
             var loading = $(this).find('.loading');
             var done = $(this).find('.done');
             loading.fadeIn();
@@ -402,9 +403,20 @@ var UserFinance = function (){
             // console.log(data);
             var url = URL + 'spaCMS/settings/xhrUpdate_user_company';
             $.get(url, data, function(result) {
-                loading.fadeOut();
-                done.fadeIn();
-            }, 'json');
+                if(result == 'success') {
+                    isSuccess = true;
+                }
+                
+            })
+            .done(function() {
+                loading.hide();
+                done.show();
+                if(isSuccess) {
+                    alert('Cập nhật thành công!');
+                } else {
+                    alert('Update finance error!');
+                }
+            });
             return false;
         });
     }
@@ -604,23 +616,109 @@ var OnlineBooking = function() {
         });
     }
 
+    var editOBs_form = $('#editOBs_form');
+    var xhrGet_user_limit_before_booking = function() {
+        
+    }
+    
+    var xhrUpdate_user_limit_before_booking = function() {
+        editOBs_form.on("submit", function(e) {
+            e.preventDefault();
+            var self = $(this);
+            var data = self.serialize();
+
+            var isSuccess = false;
+            var loading = self.find('.loading');
+            var done = self.find('.done');
+            loading.fadeIn();
+            done.hide();
+
+            var url = URL + 'spaCMS/settings/xhrUpdate_user_limit_before_booking';
+            $.post(url, data, function(result) {
+                if(result == 'success') {
+                    isSuccess = true;
+                }
+            })
+            .done(function(){
+                loading.hide();
+                done.show();
+                if(isSuccess) {
+                    alert("Cập nhật thành công!");
+                } else {
+                    alert("Update Online Booking error!");
+                }
+            });
+
+            return false;
+        });
+    }
+
     return {
         init: function(){
+            xhrGet_user_limit_before_booking();
+
             xhrUpdate_user_is_use_gvoucher();
             xhrUpdate_user_is_use_evoucher();
             xhrUpdate_user_is_use_appointment();
+            xhrUpdate_user_limit_before_booking();
         }
     }
 }();
 
-// var UserDetail = function (){
+var Sercurity = function (){
+    var sp_form = $("#security_password_form");
+    var xhrUpdate_user_password = function() {
+        sp_form.on("submit", function(e){
+            e.preventDefault();
+            var self = $(this);
+            var input_up = $('input[name=user_password]').val();
+            var input_up_new = $('input[name=user_password_new]').val();
+            var input_up_newc = $('input[name=user_password_new_confirm]').val();
 
-//     return {
-//         init: function(){
-            
-//         }
-//     }
-// }();
+            var isSuccess = false;
+            var loading = self.find('.loading');
+            var done = self.find('.done');
+            var warning_notmatch = $('.warning_notmatch');
+            var warning_error = $('.warning_error');
+
+            loading.fadeIn();
+            done.hide();
+
+            if(input_up_new == input_up_newc) {
+                var url = URL + 'spaCMS/settings/xhrUpdate_user_password';
+                $.post(url, {'user_password':input_up, 'user_password_new':input_up_new}, function(result){
+                    if(result == 'password_error') {
+                        warning_error.fadeIn();
+                    }
+
+                    if(result == 'success') {
+                        isSuccess = true;
+                    }
+                })
+                .done(function(){
+                    if(isSuccess) {
+                        alert("Cập nhật thành công!");
+                    } else {
+                        alert("Update Password error!");
+                    }
+                });
+            } else {
+                warning_notmatch.fadeIn();
+            }
+
+            loading.hide();
+            done.show();
+        });
+        
+        return false;
+    }
+
+    return {
+        init: function(){
+            xhrUpdate_user_password();
+        }
+    }
+}();
 
 
 GetMoreInfo.init();
@@ -629,6 +727,6 @@ UserOpenHour.init();
 UserFinance.init();
 UserNotification.init();
 OnlineBooking.init();
-
+Sercurity.init();
 
 ImageManager.init();

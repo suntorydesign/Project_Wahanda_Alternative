@@ -252,5 +252,13 @@ class SpaCMS_Model extends Model {
 	function update_user_is_use_appointment() {
 		SpaCMS_Settings_Model::update_user_is_use_appointment();
 	}
+	
+	function update_user_password() {
+		SpaCMS_Settings_Model::update_user_password();
+	}
+	
+	function update_user_limit_before_booking() {
+		SpaCMS_Settings_Model::update_user_limit_before_booking();
+	}
 
 }

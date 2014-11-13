@@ -26,10 +26,83 @@
 						Online booking
 					</div> </a>
 				</li>
+				<li id="security-tab" class="ui-state-default ui-corner-top">
+					<a href="#security" style="position: relative;" role="tab" data-toggle="tab"> <div class="nav-icon icons-nav-booking"></div>
+					<div class="title" style="position: absolute; height: 17px; top: 50%; margin-top: -8.5px;">
+						Bảo mật
+					</div> </a>
+				</li>
 			</ul>
 		</div>
 
 		<div class="tab-content section-main">
+			<div class="tab-pane" id="security">
+				<div id="security-tabs" class="tabs-inner ui-tabs ui-widget ui-widget-content ui-corner-all">
+					<div class="nav3">
+						<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+							<li class="ui-state-default ui-corner-top active">
+								<a href="#security-password" role="tab" data-toggle="tab">Mật khẩu</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="tab-content tab-content-fix">
+					<div id="security-password" class="tab-pane active">
+						<form id="security_password_form" method="POST" action="#">
+							<div class="form-content">
+								<div class="warning warning-archived warning_notmatch">
+									<div class="icon icons-lock"></div>
+									<span class="title">Mật khẩu xác thực không trùng khớp</span>
+									<!-- <div class="info">Vui lòng tắt.</div> -->
+								</div>
+								<div class="warning warning-archived">
+									<div class="icon icons-lock warning_error"></div>
+									<span class="title">Mật khẩu hiện tại không chính xác</span>
+									<!-- <div class="info">Vui lòng tắt.</div> -->
+								</div>
+								<table cellspacing="0" cellpadding="0" class="default-form" style="width:508px;">
+									<tbody>
+										<tr class="form-row">
+											<td class="label-part"><label for="user_password">Mật khẩu hiện tại</label></td>
+											<td class="input-part">
+											<div class="txt-input">
+												<input type="password" id="user_password" name="user_password" required pattern=".{6,}" title="Ít nhất 6 ký tự">
+											</div></td>
+										</tr>
+										<tr class="form-row">
+											<td class="label-part"><label for="user_password_new" class="optional">Mật khẩu mới </label></td>
+											<td class="input-part">
+											<div class="txt-input">
+												<input type="password" id="user_password_new" name="user_password_new" required pattern=".{6,}" title="Ít nhất 6 ký tự">
+											</div></td>
+										</tr>
+										<tr class="form-row">
+											<td class="label-part"><label for="user_password_new_confirm" class="optional">Nhập lại</label></td>
+											<td class="input-part">
+											<div class="txt-input">
+												<input type="password" id="user_password_new_confirm" name="user_password_new_confirm" required pattern=".{6,}" title="Ít nhất 6 ký tự">
+											</div></td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+
+							<div class="form-actions">
+								<button class="button action action-default button-primary save-action" type="submit">
+									<div class="button-inner">
+										<div class="button-icon icons-tick done"></div>
+										<div class="button-icon fa fa-spin fa-refresh loading"></div>
+										<span class="msg msg-action-default">Lưu</span>
+									</div>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
 
 			<div class="tab-pane active" id="venue-settings">
 				<div id="venue-settings-tabs" class="tabs-inner ui-tabs ui-widget ui-widget-content ui-corner-all">
@@ -691,7 +764,7 @@
 										Khi chúng tôi nhận được đơn hàng từ khách hàng, chúng tôi sẽ gửi email cho bạn. Bạn có thể tùy chỉnh email bạn sử dụng để kiểm tra những thông tin này.
 									</p>
 								</div>
-								<div class="text-message-settings hidden">
+								<div class="text-message-settings">
 									<div class="part-title">Text message settings</div>
 									<div class="content-note b-premium" style="margin-left: 0px;">
 										<div class="icon icons-info"></div>
@@ -700,14 +773,14 @@
 											<a class="a-upgrade-dialog" href="#">Read more...</a>
 										</p>
 									</div>
-									<div class="send-text-reminder b-for-premium hidden">
+									<div class="send-text-reminder b-for-premium">
 										<input type="checkbox" value="true" name="client-notifications-sendSmsReminders" id="client-notifications-sendSmsReminders">
 										<label for="client-notifications-sendSmsReminders">Send text message reminder</label>
 
 										<div class="txt-input txt-input-mini"><input type="text" min="1" class="digits required" name="client-notifications-smsReminderHours" id="client-notifications-smsReminderHours"></div>
 										<label for="client-notifications-smsReminderHours">hour(s) before appointment</label>
 									</div>
-									<div class="send-messages-from b-for-premium hidden">
+									<div class="send-messages-from b-for-premium">
 										<label for="client-notifications-smsFromNumber">Send messages from this number:</label>
 										<div class="txt-input"><input type="text" class="mobile-phone-by-country" name="client-notifications-smsFromNumber" id="client-notifications-smsFromNumber"></div>
 									</div>
@@ -780,7 +853,7 @@
 									</table>
 								</div>
 								<div class="separating-line"></div>
-								<div class="text-message-settings hidden">
+								<div class="text-message-settings">
 									<div class="part-title">
 										Text message settings
 									</div>
@@ -846,6 +919,7 @@
 
 					<div class="tab-content tab-content-fix">
 						<div id="online-booking-settings" class="tab-pane active">
+							<form id="editOBs_form" action="#" method="POST">
 							<div class="form-content">
 								<div class="content-note">
 									<div class="icon icons-info"></div>
@@ -859,15 +933,15 @@
 										<tr data-tooltip="&lt;strong&gt;Lead time&lt;/strong&gt; - Set how soon the first time slot is available for online bookings. Bigger values prevent last minute bookings." class="form-row">
 											<td class="label-part"><label for="booking-settings-onlineBookingMinHours">Thời gian tối thiểu trước dịch vụ</label></td>
 											<td class="input-part">
-											<select id="booking-settings-onlineBookingMinHours" name="booking-settings-onlineBookingMinHours" class="required">
-												<option value="0">No closeout</option><option value="1">1 hour</option><option value="2">2 hours</option><option value="3">3 hours</option><option value="4">4 hours</option><option value="5">5 hours</option><option value="6">6 hours</option><option value="7">7 hours</option><option value="8">8 hours</option><option value="24">1 day</option><option value="48">2 days</option><option value="72">3 days</option><option value="120">5 days</option><option value="168">1 week</option><option value="336">2 weeks</option><option value="504">3 weeks</option><option value="672">4 weeks</option>
+											<select id="booking-settings-onlineBookingMinHours" name="user_limit_before_service" class="required">
+												<option value="0">Chưa chọn</option><option value="1">1 hour</option><option value="2">2 hours</option><option value="3">3 hours</option><option value="4">4 hours</option><option value="5">5 hours</option><option value="6">6 hours</option><option value="7">7 hours</option><option value="8">8 hours</option><option value="24">1 day</option><option value="48">2 days</option><option value="72">3 days</option><option value="120">5 days</option><option value="168">1 week</option><option value="336">2 weeks</option><option value="504">3 weeks</option><option value="672">4 weeks</option>
 											</select></td>
 										</tr>
 										<tr data-tooltip="&lt;strong&gt;Online booking limit&lt;/strong&gt; - Set how far in future your clients can book online." class="form-row">
 											<td class="label-part"><label for="policies-onlineBookingMaxDays">Giới hạn thời gian booking tối đa</label></td>
 											<td class="input-part">
 											<div class="txt-input txt-input-mini">
-												<input type="text" max="365" min="1" id="policies-onlineBookingMaxDays" name="onlineBookingMaxDays" class="required digits">
+												<input type="number" max="365" min="1" id="policies-onlineBookingMaxDays" name="user_limit_before_booking" required class="required digits" title="Nhập số ngày">
 											</div><span class="help-txt">ngày trong tương lai</span></td>
 										</tr>
 
@@ -884,6 +958,7 @@
 									</div>
 								</button>
 							</div>
+							</form>
 						</div>
 
 						<!-- GIFT VOUCHERS -->

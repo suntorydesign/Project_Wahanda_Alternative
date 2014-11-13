@@ -162,18 +162,24 @@ class SpaCMS_Settings_Model {
  		// print_r($data); die;
 		$sth = $this->db->update('user', $data, "user_id = $user_id");
 
-		if($sth){
-			echo json_encode(array(
-				'success' 	=> true,
-				'messages' 	=> null,
-				'data' 		=> array()
-			));
+		// if($sth){
+		// 	echo json_encode(array(
+		// 		'success' 	=> true,
+		// 		'messages' 	=> null,
+		// 		'data' 		=> array()
+		// 	));
+		// } else {
+		// 	echo json_encode(array(
+		// 		'success' 	=> false,
+		// 		'messages' 	=> null,
+		// 		'data' 		=> array()
+		// 	));
+		// }
+
+		if($sth) {
+			echo 'success';
 		} else {
-			echo json_encode(array(
-				'success' 	=> false,
-				'messages' 	=> null,
-				'data' 		=> array()
-			));
+			echo 'error';
 		}
 	}
 
@@ -307,5 +313,66 @@ class SpaCMS_Settings_Model {
 		WHERE user_id = $user_id";
 		$data = $this->db->select($query);
 		echo json_encode($data);
+	}
+
+	function update_user_password() {
+		$user_id = Session::get('user_id');
+		$user_password_new = $_POST['user_password_new'];
+		$user_password = $_POST['user_password'];
+		$data = array();
+		if( !self::check_user_password($user_password) ) {
+			echo 'password_error';
+		} else {
+
+			$data = array(
+				"user_password" => Hash::create('md5', $user_password_new, HASH_PASSWORD_KEY)
+			);
+
+			$result = $this->db->update("user", $data, "user_id = $user_id");
+
+			if($result) {
+				echo 'success';
+			} else {
+				echo 'error';
+			}
+		}
+	}
+
+	function check_user_password( $user_password ) {
+		$user_id = Session::get('user_id');
+
+		$sql = "SELECT user_id FROM user WHERE user_id = :user_id AND user_password = :user_password";
+
+		$user = array(
+				':user_id' 		=> $user_id,
+				':user_password' 	=> Hash::create('md5', $user_password, HASH_PASSWORD_KEY)
+			);
+
+		$sth = $this->db->prepare($sql);
+		$sth->execute($user);
+		$count = $sth->rowCount();
+
+		if($count > 0) {
+			return true;
+		}
+
+		return false;
+	}
+
+	function update_user_limit_before_booking() {
+		$user_id = Session::get('user_id');
+		
+		$data = array(
+			"user_limit_before_service" => $_POST["user_limit_before_service"],
+			"user_limit_before_booking" => $_POST["user_limit_before_booking"]
+		);
+
+		$result = $this->db->update("user", $data, "user_id = $user_id");
+
+		if($result) {
+			echo 'success';
+		} else {
+			echo 'error';
+		}
 	}
 }
