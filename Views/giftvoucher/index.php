@@ -132,9 +132,35 @@
 				<div class="modal-body" style="padding: 30px 20px 0px;">
 					<form class="form-horizontal">
 						<div class="form-group">
+							<label class="control-label col-sm-3">Tên người gửi</label>
+							<div class="col-sm-8">
+								<input autocomplete="off" class="form-control" type="text" id="gift_sender" name="gift_sender" placeholder="Nhập họ tên bạn..." />
+								<small style="color: red;"></small>
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="control-label col-sm-3">Email gửi tặng</label>
 							<div class="col-sm-8">
 								<input autocomplete="off" class="form-control" type="text" id="gift_email" name="gift_email" placeholder="Nhập email...VD:abc@example.com" />
+								<small style="color: red;"></small>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3">Hình thức</label>
+							<div class="col-sm-8">
+								<label class="radio-inline">
+								  	<input type="radio" id="gift_send_mail" name="gift_send_type" class="gift_send_type" checked="checked" value="1"> <small>Gửi mail</small>
+								</label>
+								<label class="radio-inline">
+								  	<input type="radio" id="gift_send_card" name="gift_send_type" class="gift_send_type" value="2"> <small>Gửi thiếp</small>
+								</label>
+								<small style="color: red;"></small>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3">Ngày gửi tặng</label>
+							<div class="col-sm-8">
+								<input autocomplete="off" class="form-control" type="text" id="gift_date" name="gift_date" placeholder="Ngày gửi tặng" />
 								<small style="color: red;"></small>
 							</div>
 						</div>
@@ -167,4 +193,5 @@
 </div>
 <script>
 	var GIFT_PRICE = '';
+	var GIFT_TYPE = 1;
 </script>

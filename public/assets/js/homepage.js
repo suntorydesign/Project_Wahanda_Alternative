@@ -2,7 +2,7 @@ $(document).ready(function() {
 	loadTopServiceList();
 	loadNewServiceList();
 	loadLocation();
-	loadDistrict();
+	
 	$('#user_description_see_more').on('click', function() {
 		$('#user_description').css({
 			'white-space' : 'normal',

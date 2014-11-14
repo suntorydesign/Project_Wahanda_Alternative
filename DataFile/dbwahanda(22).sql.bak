@@ -594,13 +594,6 @@ CREATE TABLE IF NOT EXISTS `gift_voucher` (
   `gift_voucher_code` varchar(50) NOT NULL,
   `gift_voucher_due_date` date NOT NULL,
   `gift_voucher_price` varchar(50) NOT NULL,
-  `gift_voucher_name` varchar(255) NOT NULL,
-  `gift_voucher_email` varchar(255) NOT NULL,
-  `gift_voucher_type` int(11) NOT NULL DEFAULT '1',
-  `gift_voucher_date` date NOT NULL,
-  `gift_voucher_status` int(11) NOT NULL DEFAULT '0',
-  `gift_voucher_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `gift_voucher_client_id` int(11) NOT NULL,
   PRIMARY KEY (`gift_voucher_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 

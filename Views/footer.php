@@ -720,7 +720,7 @@
         });
         $(function(){
         	var today = new Date();
-			$('#date_to_appointment').datepicker({
+			$('#date_to_appointment, #gift_date').datepicker({
 				startDate: today,
 		   		format: 'dd/mm/yyyy'
 		    }).on('changeDate', function(ev){

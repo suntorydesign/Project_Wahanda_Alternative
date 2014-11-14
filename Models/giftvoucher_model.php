@@ -73,9 +73,9 @@ VALUES (
 SQL;
 			$insert = $this -> db -> prepare($query);
 			$insert -> execute();
-			if($insert -> rowCount() > 0){
+			if ($insert -> rowCount() > 0) {
 				echo 200;
-			}else{
+			} else {
 				echo 0;
 			}
 		}
@@ -89,6 +89,18 @@ WHERE gift_voucher_code = '{$gift_voucher_code}'
 SQL;
 		$select = $this -> db -> select($sql);
 		return $select[0]['check_gift'];
+	}
+
+	function getDueDate($date) {
+		$gift_voucher_due_date = EVOUCHER_DUE_DATE;
+		$date = explode('/', $date);
+		$date = $date[2] . '-' . $date[1] . '-' . $date[0];
+		$sql = <<<SQL
+SELECT
+DATE_ADD('{$date}', INTERVAL {$gift_voucher_due_date} MONTH) as gift_voucher_due_date
+SQL;
+		$select = $this -> db -> select($sql);
+		return $select[0]['gift_voucher_due_date'];
 	}
 
 }

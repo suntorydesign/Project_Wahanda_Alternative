@@ -224,7 +224,7 @@ SQL;
 					$body .= '<hr/>';
 					$body .= $evoucher_content;
 					$body .= '<div align="right"><h3><b>TỔNG CỘNG: </b> '.$total_money_vnd.' VNĐ</h3></div>';
-					$body .= '<p>Chúc một bạn ngày mới tốt lành</p>';
+					$body .= '<p>Chúc bạn ngày mới tốt lành</p>';
 					$body .= '<div align="right"><small><i><b>Ban quản trị BELEZA</b></i></small></div>';
 		
 					//Gửi mail local
