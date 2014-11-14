@@ -168,9 +168,9 @@ class SpaCMS_Model extends Model {
 		SpaCMS_Reports_Model::get_sales_report();
 	}
 
-	// function get_sales_report() {
-	// 	SpaCMS_Reports_Model::get_sales_report();
-	// }
+	function get_booking_report() {
+		SpaCMS_Reports_Model::get_booking_report();
+	}
 
 	///////////////////////////// SETTING //////////////////////////
 	function get_type_business() {

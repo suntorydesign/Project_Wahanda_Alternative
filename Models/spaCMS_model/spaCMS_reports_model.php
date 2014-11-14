@@ -235,4 +235,30 @@ SQL;
 		echo json_encode($data_sales_report);
 	}
 
+
+	public function get_booking_report() {
+		$user_id = Session::get('user_id');
+
+		$aQuery = <<<SQL
+		SELECT 
+			b.booking_id,
+			bd.booking_detail_id,
+			c.client_name,
+			us.user_service_name,
+			b.booking_date,
+			bd.booking_detail_price,
+			bd.booking_detail_status
+		FROM 
+			booking b, booking_detail bd, client c, user_service us
+		WHERE 
+				bd.booking_detail_user_id = {$user_id}
+			AND	bd.booking_detail_booking_id = b.booking_id
+			AND b.booking_client_id = c.client_id
+			AND bd.booking_detail_user_service_id = us.user_service_id
+SQL;
+		$data = $this->db->select($aQuery);
+
+		echo json_encode($data);
+	}
+
 }

@@ -226,6 +226,10 @@
 				case 'xhrGet_sales_report':
 					$this->model->get_sales_report();
 					break;
+
+				case 'xhrGet_booking_report':
+					$this->model->get_booking_report();
+					break;
 					
 				default:
 					$this->view->style = array(

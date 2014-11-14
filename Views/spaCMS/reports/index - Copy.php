@@ -118,33 +118,81 @@
                     <div class="home-data">
                         <div class="portlet-body" style="margin-bottom: 30px">
                             <div class="table-container">
-                                <table class="table table-bordered table-hover" id="listOfBooking_table" >
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                Booking id </br>
-                                                Order ref#
-                                            </th>
-                                            <th>
-                                                Customer
-                                            </th>
-                                            <th>
-                                                Service
-                                            </th>
-                                            <th>
-                                                Price
-                                            </th>
-                                            <th>
-                                                Order date
-                                            </th>
-                                            <th>
-                                                Status
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
+                                <table class="table table-striped table-bordered table-hover" id="datatable_ajax">
+                                <thead>
+                                <tr role="row" class="heading">
+                                    <th width="10%">
+                                        Booking ID</br>
+                                        Order ref# 
+                                    </th>
+                                    <th width="15%">
+                                        Ngày hóa đơn
+                                    </th>
+                                    <th width="15%">
+                                        Khách hàng
+                                    </th>
+                                    <th width="30%">
+                                        Dịch vụ
+                                    </th>
+                                    <th width="10%">
+                                        Giá
+                                    </th>
+                                    <th width="10%">
+                                        Trạng thái
+                                    </th>
+                                    <th width="10%">
+                                        Actions
+                                    </th>
+                                </tr>
+                                <tr role="row" class="filter">
+                                    <td>
+                                        <input type="text" class="form-control form-filter input-sm" name="booking_detail_id">
+                                    </td>
+                                    <td>
+                                        <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                            <input type="text" class="form-control form-filter input-sm" readonly name="booking_date_from" placeholder="From">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                        <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                                            <input type="text" class="form-control form-filter input-sm" readonly name="booking_date_to" placeholder="To">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-filter input-sm" name="booking_client_name">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-filter input-sm" name="booking_user_service_name">
+                                    </td>
+                                    <td>
+                                        <div class="margin-bottom-5">
+                                            <input type="text" class="form-control form-filter input-sm" name="booking_detail_price_from" placeholder="From"/>
+                                        </div>
+                                        <input type="text" class="form-control form-filter input-sm" name="booking_detail_price_to" placeholder="To"/>
+                                    </td>
+                                    <td>
+                                        <select name="booking_detail_status" class="form-control form-filter input-sm">
+                                            <option value="">Select...</option>
+                                            <option value="1">Completed</option>
+                                            <option value="2">Deleted</option>
+                                            <option value="3">Confirmed</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <div class="margin-bottom-5">
+                                            <button class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-search"></i> Tìm kiếm</button>
+                                        </div>
+                                        <button class="btn btn-sm red filter-cancel"><i class="fa fa-times"></i> Reset</button>
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody role="alert" aria-live="polite" aria-relevant="all">
+                    
+                                </tbody>
                                 </table>
                             </div>
                         </div>
