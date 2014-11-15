@@ -310,6 +310,30 @@
 		</div>
 		<div class="col-md-2"></div>
 	</div>
+	<!-- Modal show map -->
+    <div id="location_map_info" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    	<div class="modal-dialog modal-lg">
+    		<div class="modal-content" style="border-radius:0;">
+    			<div class="modal-header" style="background-color: #FDBD0E; padding: 6px 10px;">
+		        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		        	<h4 class="modal-title" id="myModalLabel">
+		        		<strong><i class="fa fa-map-marker" style="font-size:16px;"></i> BẢN ĐỒ ĐỊA ĐIỂM</strong> 
+		        	</h4>
+		      	</div>
+		      	<div class="modal-body">
+		      		<div id="location_map" style="height: 500px; width: 100%;">
+		      		</div>
+		      		<br />
+		      		<div class="row">
+		      			<div class="col-md-12"><small><b>Khoảng cách: </b></small><small id="distance_map"></small></div>
+		      			<div class="col-md-12"><small><b>Thời gian đi: </b></small><small id="duration_map"></small></div>
+		      			<!-- <div class="col-md-6"><button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button></div> -->
+		      		</div>
+		      	</div>
+    		</div>
+    	</div>
+    </div>
+    <!-- End modal show map -->
 </div>
 <script>
 	var SERVICE_NAME = "<?php echo $this -> service; ?>";
@@ -320,6 +344,8 @@
 	var RESULT_PER_SHOW_MORE = "<?php echo RESULT_PER_SHOW_MORE; ?>";
 	var XCURR = '';
 	var YCURR = '';
+	var XLOC = '';
+	var YLOC = '';
 	var USER_ADDRESS_1 = '';
 	var USER_ADDRESS_2 = '';
 	var SERVICE_TYPE_SEARCH = '';
@@ -329,5 +355,8 @@
 	var BOOKING_DATE = '';
 	var USER_LIMIT_BEFORE_BOOKING = '';
 	var CHOOSEN_DATE_ACTIVE = '';
+	var USER_BUSINESS_NAME = '';
+	// var DISTANCE = '';
+	// var DURATION = '';
 	// var DISTRICT_ID_SEARCH = '';
 </script>

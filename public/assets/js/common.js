@@ -110,7 +110,7 @@ function showMore(cls, txt) {
 /*-----------------------*/
 
 /*INIT GOOGLE MAP*/
-function initGoogleMap(map_id, lat, long){
+function initGoogleMap(map_id, lat, long, has_directions_service){
 	var directionsDisplay = new google.maps.DirectionsRenderer();
 	// var geocoder = new google.maps.Geocoder();
 	//default position these function in google map
@@ -135,12 +135,61 @@ function initGoogleMap(map_id, lat, long){
 	google.maps.event.trigger(map, 'resize');
 	var initialLocation = new google.maps.LatLng(lat, long);
 	map.setCenter(initialLocation);
-	var marker = new google.maps.Marker({
-		position : new google.maps.LatLng(lat, long),
-		map : map,
-	});
-	// google.maps.event.trigger(map, 'resize');
-	// map.setZoom( map.getZoom() );
+	if(has_directions_service == 1 && (XCURR != '' && YCURR != '') && (XCURR != undefined && YCURR != undefined)){
+		var start = new google.maps.LatLng(XCURR, YCURR);
+		var end = new google.maps.LatLng(XLOC, YLOC);
+		var directionsService = new google.maps.DirectionsService();
+		var request = {
+            origin: start,
+            destination: end,
+            travelMode: google.maps.TravelMode.DRIVING
+            //travelMode: google.maps.TravelMode[type]
+        };
+        var infoWindow_1 = new google.maps.InfoWindow();
+        var curr_pos = new google.maps.LatLng(XCURR, YCURR);
+	    infoWindow_1.setOptions({
+	        content: "<div align='center' style='width: 130px'><small><b>Vị trí hiện tại của bạn</b></small></div>",
+	        position: curr_pos,
+	    });
+	    infoWindow_1.open(map);
+	    var infoWindow_2 = new google.maps.InfoWindow();
+        var curr_pos = new google.maps.LatLng(XLOC, YLOC);
+	    infoWindow_2.setOptions({
+	        content: "<div align='center' style='width: 130px'><small><b>" + USER_BUSINESS_NAME + "</b></small></div>",
+	        position: curr_pos,
+	    });
+	    infoWindow_2.open(map); 
+        directionsService.route(request, function (response, status) {         
+            if (status == google.maps.DirectionsStatus.OK) {  	
+                directionsDisplay.setDirections(response);
+            }
+        });
+        var service = new google.maps.DistanceMatrixService();
+		service.getDistanceMatrix({
+		      origins: [start],
+		      destinations: [end],
+		      travelMode: google.maps.TravelMode.DRIVING,
+		      unitSystem: google.maps.UnitSystem.METRIC,
+		      avoidHighways: false,
+		      avoidTolls: false
+		}, callback);
+	}else{
+		var marker = new google.maps.Marker({
+			position : new google.maps.LatLng(lat, long),
+			map : map,
+		});
+		$('#distance_map').text('Bạn đã tắt chức năng chỉa sẽ địa điểm trên trình duyệt');
+		$('#duration_map').text('Bạn đã tắt chức năng chỉa sẽ địa điểm trên trình duyệt');
+	}
 }
 /*END INIT GOOGLE MAP*/
 /*-----------------------*/
+function callback(response, status) {
+    if (status != google.maps.DistanceMatrixStatus.OK) {
+        alert('Error was: ' + status);
+    } else {
+        var results = response.rows[0].elements;
+        $('#distance_map').text(results[0].distance.text);
+		$('#duration_map').text(results[0].duration.text);
+    }
+}

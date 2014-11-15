@@ -1,4 +1,15 @@
-
+#location_map img{
+	max-height: 500px;
+}
+#location_map .gmnoprint.gm-style-cc{
+	display: none;
+}
+#location_map .gm-style-cc{
+	display: none;
+}
+#location_map .gm-style div a img{
+	display: none;
+}
 #result-total {
 	background-color: #FDBD0E;
 	padding-top: 10px;

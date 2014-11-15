@@ -137,6 +137,8 @@ user.user_id
 ,user.user_address
 ,user.user_description
 ,user.user_logo
+,user.user_lat
+,user.user_long
 ,user.user_district_id
 ,IF(user_review.star_amount IS NULL,0,user_review.star_amount) AS star_amount
 FROM user
@@ -180,6 +182,8 @@ SQL;
 			$array[$key]['user_address'] = $value['user_address'];
 			$array[$key]['user_description'] = $value['user_description'];
 			$array[$key]['user_logo'] = $value['user_logo'];
+			$array[$key]['user_lat'] = $value['user_lat'];
+			$array[$key]['user_long'] = $value['user_long'];
 			$array[$key]['user_district_id'] = $value['user_district_id'];
 			$query = <<<SQL
 SELECT

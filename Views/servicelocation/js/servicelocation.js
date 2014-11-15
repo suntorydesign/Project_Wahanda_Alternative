@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	if (DISTRICT_ID == '') {
-		loadDistrict();
+		// loadDistrict();
 	} else {
 		$('#district_id_advance_field').hide();
 	}
@@ -23,6 +23,10 @@ $(document).ready(function() {
 			loadResultSearch(1);
 			loadAdvantageSearch();
 		}
+	});
+	$('#location_map_info').on('shown.bs.modal', function(){
+		// console.log(XLOC);
+		initGoogleMap('location_map', XLOC, YLOC, 1);
 	});
 });
 
@@ -114,8 +118,8 @@ function loadResultSearch(page) {
 						}
 						html += '</div>';
 						html += '<div class="address clearfix">';
-						html += '<span style="cursor: help" title="' + value.user_address + '" class="pull-left">' + shorten(value.user_address, 38) + '</span>';
-						html += '<a class="pull-right" href="#">Show map >>></a>';
+						html += '<span style="cursor: help" title="' + value.user_address + '" class="pull-left">' + shorten(value.user_address, 40) + '</span>';
+						html += '<a data-value="' + value.user_business_name.toUpperCase() + '" onclick="showMap('+value.user_lat+','+value.user_long+')" class="pull-right show_map pointer">Bản đồ >>></a>';
 						html += '</div>';
 						html += '<div class="description clearfix">' + shorten(value.user_description, 250) + '</div>';
 						html += '<div class="services row">';
@@ -201,6 +205,9 @@ function loadResultSearch(page) {
 				$('#waiting_for_result_list').fadeOut(function() {
 					$('.processing_loading').hide();
 				});
+				$('.show_map').on('click', function(){
+					USER_BUSINESS_NAME = $(this).attr('data-value');
+				});
 				if (CURRENT_PAGE == 1 || CURRENT_PAGE == 2) {
 					$('ul.pagination li.item_1').show();
 					$('ul.pagination li.item_2').show();
@@ -249,6 +256,16 @@ function loadResultSearch(page) {
 }
 
 /*END LOAD RESULT SEARCH*/
+/*-----------------------*/
+
+/*SHOW MAP*/
+function showMap(lat, lng){
+	XLOC = lat;
+	YLOC = lng;
+	$('#location_map').children().remove();
+	$('#location_map_info').modal('show');
+}
+/*END SHOW MAP*/
 /*-----------------------*/
 
 /*INIT GOOGLE MAP API*/

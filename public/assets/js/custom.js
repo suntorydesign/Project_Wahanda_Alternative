@@ -24,7 +24,7 @@ $(document).ready(function() {
 	});
 	$('#service_detail').on('shown.bs.modal', function(){
 		var map;
-		initGoogleMap('user_latlng', USER_LAT, USER_LNG);
+		initGoogleMap('user_latlng', USER_LAT, USER_LNG, 0);
 	});
 	/*LINK TO OTHER PAGE*/
 	$('#contact_link').click(function() {
@@ -1854,14 +1854,14 @@ function expandMap(){
 		$('.map').animate({height: 460});
 		$('.map #user_latlng').animate({height: 450}, function(){
 			var map;
-			initGoogleMap('user_latlng', USER_LAT, USER_LNG);
+			initGoogleMap('user_latlng', USER_LAT, USER_LNG, 0);
 		});
 		$('#show_more_map').text('Thu nhỏ bản đồ');
 	}else if($('#show_more_map').text() == 'Thu nhỏ bản đồ'){
 		$('.map').animate({height: 140});
 		$('.map #user_latlng').animate({height: 130}, function(){
 			var map;
-			initGoogleMap('user_latlng', USER_LAT, USER_LNG);
+			initGoogleMap('user_latlng', USER_LAT, USER_LNG, 0);
 		});
 		$('#show_more_map').text('Xem bản đồ lớn');
 	}
