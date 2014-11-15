@@ -178,8 +178,8 @@ function initGoogleMap(map_id, lat, long, has_directions_service){
 			position : new google.maps.LatLng(lat, long),
 			map : map,
 		});
-		$('#distance_map').text('Bạn đã tắt chức năng chỉa sẽ địa điểm trên trình duyệt');
-		$('#duration_map').text('Bạn đã tắt chức năng chỉa sẽ địa điểm trên trình duyệt');
+		$('#distance_map').text('...');
+		$('#duration_map').text('...');
 	}
 }
 /*END INIT GOOGLE MAP*/

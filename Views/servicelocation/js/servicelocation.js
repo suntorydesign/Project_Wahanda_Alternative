@@ -32,6 +32,7 @@ $(document).ready(function() {
 
 /*LOAD RESULT SEARCH*/
 function loadResultSearch(page) {
+	$('#location_map_info').modal('hide');
 	$('.processing_loading').show();
 	$('#waiting_for_result_list').fadeIn(function() {	
 		$.ajax({
@@ -119,7 +120,7 @@ function loadResultSearch(page) {
 						html += '</div>';
 						html += '<div class="address clearfix">';
 						html += '<span style="cursor: help" title="' + value.user_address + '" class="pull-left">' + shorten(value.user_address, 40) + '</span>';
-						html += '<a data-value="' + value.user_business_name.toUpperCase() + '" onclick="showMap('+value.user_lat+','+value.user_long+')" class="pull-right show_map pointer">Bản đồ >>></a>';
+						html += '<a address-value="' + value.user_address + '" data-value="' + value.user_business_name.toUpperCase() + '" onclick="showMap('+value.user_lat+','+value.user_long+')" class="pull-right show_map pointer">Bản đồ >>></a>';
 						html += '</div>';
 						html += '<div class="description clearfix">' + shorten(value.user_description, 250) + '</div>';
 						html += '<div class="services row">';
@@ -207,6 +208,14 @@ function loadResultSearch(page) {
 				});
 				$('.show_map').on('click', function(){
 					USER_BUSINESS_NAME = $(this).attr('data-value');
+					$('#user_business_name_map').text(USER_BUSINESS_NAME + ': ');
+					USER_ADDRESS = $(this).attr('address-value');
+					$('#user_address').text(USER_ADDRESS);
+					if(USER_ADDRESS_2 == ''){
+						$('#current_address').text('...');
+					}else{
+						$('#current_address').text(USER_ADDRESS_2 + ' (tương đối)');
+					}
 				});
 				if (CURRENT_PAGE == 1 || CURRENT_PAGE == 2) {
 					$('ul.pagination li.item_1').show();

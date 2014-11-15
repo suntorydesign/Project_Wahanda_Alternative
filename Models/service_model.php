@@ -99,12 +99,12 @@ SQL;
 			}
 		}
 		$sql = <<<SQL
-SELECT user_is_use_voucher
+SELECT user_is_use_gvoucher
 FROM user
 WHERE user_id = {$user_id}
 SQL;
 		$select = $this -> db -> select($sql);
-		if($select[0]['user_is_use_voucher'] == 1){
+		if($select[0]['user_is_use_gvoucher'] == 1){
 			$array_voucher['gift_voucher'] = 1;
 		}
 		$return['array_voucher'] = $array_voucher;

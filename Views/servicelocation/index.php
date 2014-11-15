@@ -321,13 +321,20 @@
 		        	</h4>
 		      	</div>
 		      	<div class="modal-body">
-		      		<div id="location_map" style="height: 500px; width: 100%;">
+		      		<div id="location_map" style="height: 400px; width: 100%;">
 		      		</div>
 		      		<br />
 		      		<div class="row">
-		      			<div class="col-md-12"><small><b>Khoảng cách: </b></small><small id="distance_map"></small></div>
-		      			<div class="col-md-12"><small><b>Thời gian đi: </b></small><small id="duration_map"></small></div>
-		      			<!-- <div class="col-md-6"><button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button></div> -->
+		      			<div class="col-md-3"><small><b>Khoảng cách: </b></small><small id="distance_map"></small></div>
+		      			<div class="col-md-9"><small><b id="user_business_name_map"></b></small><small id="user_address"></small></div>
+		      		</div>
+		      		<div class="row">
+		      			<div class="col-md-3"><small><b>Thời gian đi: </b></small><small id="duration_map"></small></div>
+		      			<div class="col-md-9"><small><b>Vị trí hiện tại của bạn: </b></small><small id="current_address"></small></div>
+		      		</div>
+		      		<div class="divider" style="border-bottom: 1px solid #ccc;"></div>
+		      		<div class="row">
+		      			<div class="col-md-12 pull-right"><button type="button" class="btn btn-orange-black pull-right" data-dismiss="modal">Đóng</button></div>
 		      		</div>
 		      	</div>
     		</div>
@@ -356,6 +363,7 @@
 	var USER_LIMIT_BEFORE_BOOKING = '';
 	var CHOOSEN_DATE_ACTIVE = '';
 	var USER_BUSINESS_NAME = '';
+	var USER_ADDRESS = '';
 	// var DISTANCE = '';
 	// var DURATION = '';
 	// var DISTRICT_ID_SEARCH = '';

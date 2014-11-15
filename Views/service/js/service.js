@@ -187,7 +187,7 @@ function loadLocationDetail() {
 			loadReview();
 			// initialize();
 			var map;
-			initGoogleMap('map-canvas', LAT, LNG);
+			initGoogleMap('map-canvas', LAT, LNG, 0);
 			$('.btn_location_booking').on('click', function(e) {
 				$(this).find('i.waiting_booking_detail').fadeIn();
 				USER_SERVICE_ID = $(this).attr('data-user-service');
