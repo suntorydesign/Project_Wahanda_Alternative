@@ -509,14 +509,20 @@ SQL;
 		if($result) {
 
 			// Gửi mail thông báo
-			// $checkEmailExist = $this -> model -> checkSpaEmailExist($_POST['create_place_email']);
-			if ($checkEmailExist == 0) {
-			} else {
-				echo 800;
-				exit;
-			}
 			//Nội dung email
-			$body = '<h1>Thông báo từ BELEZA</h1>';
+			$body = '<h1>Thông sửa lịch hẹn trên BELEZA</h1>';
+			$body .= '<p>Chào bạn chúng tôi muốn đổi lịch hẹn của bạn!</p>';
+			$body .= '<p>Địa điểm: <--- Chỗ này tên spa (tên user)</p>';
+			$body .= '<p>Dịch vụ: ' . $_POST['user_service_service_id'] . '<--- Chỗ này cho tên dịch vụ</p>';
+			$body .= '<p>Ngày sửa đổi: ' . $_POST['appointment_date'] . '</p>';
+			$body .= '<p>Thời gian dịch vụ: ' . $_POST['appointment_time_start'] . '</p>';
+			$body .= '<p>Giá: ' . $_POST['appointment_price'] . '</p>';
+			$body .= '<p>Ghi chú: ' . $_POST['appointment_note'] . '</p>';
+			$body .= '<p>Bạn có muốn đổi lịch không nếu có hãy nhấn link dưới</p>';
+			$body .= '<a href="http:' . URL . '" >link để chấp nhận</a>';
+			$body .= '<p>Nếu không hãy nhấn link dưới</p>';
+			$body .= '<a href="http:' . URL . '" >link để chấp nhận</a>';
+			$body .= '<div align="right"><small><i><b>Ban quản trị BELEZA</b></i></small></div>';
 			//Gửi mail local
 			$mail = new PHPMailer(TRUE);
 			$mail -> CharSet = "UTF-8";
@@ -538,15 +544,13 @@ SQL;
 			$mail -> SetFrom(INFO_MAIL, 'BELEZA VIETNAM');
 			$mail -> Subject = "Thông tin tạo địa điểm từ Beleza!";
 			$mail -> Body = $body;
-			$mail -> AddAddress(ADMIN_MAIL);
-			$mail -> Send();
-			// if (!$mail -> Send()) {
-			// 	echo "Mailer Error: " . $mail -> ErrorInfo;
-			// } else {
-			// 	$this -> model -> sendCreatePlaceMail($data);
-			// }
-
-			echo "success";
+			$mail -> AddAddress('trongloikt192@gmail.com'); //<---- CHỖ NÀY MAIL CỦA NGƯỜI ĐẶT
+			// $mail -> Send();
+			if (!$mail -> Send()) {
+				echo "Mailer Error: " . $mail -> ErrorInfo;
+			} else {
+				echo "success";
+			}		
 		} else {
 			echo "error";
 		}
