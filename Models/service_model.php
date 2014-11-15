@@ -546,5 +546,17 @@ SQL;
 		}
 	}
 
+	public function get_user_slide($user_id) {
+		$aQuery = <<<SQL
+		SELECT user_slide
+		FROM user
+		WHERE user_id = {$user_id}
+SQL;
+
+		$data = $this->db->select($aQuery);
+
+		echo json_encode($data[0]);
+	}
+
 }
 ?>

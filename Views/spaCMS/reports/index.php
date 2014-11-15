@@ -4,12 +4,12 @@
             <ul id="nav2" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
                 <li class="ui-state-default ui-corner-top active" id="bookings-tab" style="display: list-item;">
                     <a href="#bookings" style="position: relative;" role="tab" data-toggle="tab">
-                        <div class="title vertically-centered" style="position: absolute; height: 17px; top: 50%; margin-top: -8.5px;">List of Bookings</div>
+                        <div class="title vertically-centered" style="position: absolute; height: 17px; top: 50%; margin-top: -8.5px;">Danh sách Bookings</div>
                     </a>
                 </li>
                 <li class="ui-state-default ui-corner-top" id="sales-tab" style="display: list-item;">
                     <a href="#sales" style="position: relative;" role="tab" data-toggle="tab">
-                        <div class="title vertically-centered" style="position: absolute; height: 17px; top: 50%; margin-top: -8.5px;">Sales Report</div>
+                        <div class="title vertically-centered" style="position: absolute; height: 17px; top: 50%; margin-top: -8.5px;">Báo cáo doanh thu</div>
                     </a>
                 </li>
             </ul>
@@ -21,7 +21,7 @@
             <div class="tab-pane active" id="bookings">
                 <div class="reports-bookings">
                     <div class="home-filters">
-                        <div class="filter-wrapper" id="filter-type">
+                        <div class="filter-wrapper hidden" id="filter-type">
                             <div id="bookings-menu" class="filter-current dropdown-toggle"  data-toggle="dropdown">
                                 All bookings and enquiries
                                 <div class="handler">
@@ -47,7 +47,7 @@
                             </ul>
                         </div>
 
-                        <div class="filter-wrapper" id="filter-subtype">
+                        <div class="filter-wrapper hidden" id="filter-subtype">
                             <div id="bookings-menu-type" class="filter-current dropdown-toggle"  data-toggle="dropdown">All types<span class="count">3</span>
                                 <div class="handler">
                                     <div class="icons-arrow-bottom2"></div>
@@ -62,7 +62,7 @@
                             </ul>
                         </div>
 
-                        <div class="filter-wrapper short" id="filter-date">
+                        <div class="filter-wrapper short hidden" id="filter-date">
                             <div id="bookings-menu-time" class="filter-current dropdown-toggle"  data-toggle="dropdown">
                                 Last 3 months
                                 <div class="handler">
@@ -106,7 +106,7 @@
                             </form>
                         </div>
 
-                        <div class="top-search reports-search">
+                        <div class="top-search reports-search hidden">
                             <div class="txt-input">
                                 <input type="text" placeholder="Search: client, phone#, order#..." id="top-search" name="top-search" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
                                 <a class="clear-search" href="#" style="display: none;"><div class="icons-clear-search-mini"></div></a>
@@ -126,19 +126,19 @@
                                                 Order ref#
                                             </th>
                                             <th>
-                                                Customer
+                                                Khách hàng
                                             </th>
                                             <th>
-                                                Service
+                                                Dịch vụ
                                             </th>
                                             <th>
-                                                Price
+                                                Giá
                                             </th>
                                             <th>
-                                                Order date
+                                                Ngày đặt
                                             </th>
                                             <th>
-                                                Status
+                                                Trạng thái
                                             </th>
                                         </tr>
                                     </thead>
@@ -172,7 +172,7 @@
                         <span class="title">Printed date</span>
                         <span class="date">2014-08-13 14:46</span>
                     </div>
-                    <h1>Sales summary</h1>
+                    <h1>Tổng doanh số bán hàng</h1>
                     <h2><?php echo Session::get('user_business_name');?></h2>
                     <div class="stats-group general">
                         <table>
@@ -180,24 +180,24 @@
                                 <tr>
                                     <th>&nbsp;</th>
                                     <th>
-                                        Total value
+                                        Tổng giá
                                     </th>
-                                    <th>Count</th>
+                                    <th>Số lượng</th>
                                 </tr>
                                 <tr class="important">
                                     <td>
-                                        <h3 class="period">Thursday</h3>
-                                        <span class="date">2014-08-07</span>
+                                        <h3 class="period">Chọn khoảng thời gian xuất báo cáo</h3>
+                                        <span class="date"></span>
                                     </td>
                                     <td>
-                                        <span class="highlighted">£40</span>
+                                        <span class="highlighted totalSale_value">0 đ</span>
                                         <div class="change positive hidden">
-                                            <div class="icon icons-change-up"></div>
+                                            <div class="icon ic ons-change-up"></div>
                                             <div class="value">17%</div>
                                         </div>
                                     </td>
                                     <td>
-                                        <span>1</span>
+                                        <span class="totalSale_count">1</span>
                                         <!--<div class="change positive">
                                         <div class="icon icons-change-up"></div>
                                             <div class="value">17%</div>
@@ -227,31 +227,29 @@
                     </div>
                     <div class="stats-group">
                         <table id="sale_report_by_service_group">
-                            <tbody><tr>
-                                <th><h3>By service group</h3></th>
-                                <th>Total value</th>
-                                <th>Count</th>
-                            </tr>
-                            <tr>
-                                <td><span>Body</span></td>
-                                <td><span>£40</span></td>
-                                <td><span>1</span></td>
-                            </tr>
-                        </tbody></table>
+                            <thead>
+                                <tr>
+                                    <th><h3>Nhóm dịch vụ tốt nhất</h3></th>
+                                    <th>Tổng giá</th>
+                                    <th>Số lượng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="stats-group">
                         <table id="sale_report_top_service">
-                            <tbody><tr>
-                                <th><h3>Top services</h3></th>
-                                <th>Total value</th>
-                                <th>Count</th>
-                            </tr>
-                            <tr>
-                                <td><span>Body Wraps</span></td>
-                                <td><span>£40</span></td>
-                                <td><span>1</span></td>
-                            </tr>
-                        </tbody></table>
+                            <thead>
+                                <tr>
+                                    <th><h3>Dịch vụ tốt nhất</h3></th>
+                                    <th>Tổng giá</th>
+                                    <th>Số lượng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

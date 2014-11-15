@@ -160,12 +160,12 @@ class SpaCMS_Model extends Model {
 
 
 	///////////////////////////// REPORTS //////////////////////////
-	function get_booking_detail() {
-		SpaCMS_Reports_Model::get_booking_detail();
-	}
+	// function get_booking_detail() {
+	// 	SpaCMS_Reports_Model::get_booking_detail();
+	// }
 
-	function get_sales_report() {
-		SpaCMS_Reports_Model::get_sales_report();
+	function get_sale_report() {
+		SpaCMS_Reports_Model::get_sale_report();
 	}
 
 	function get_booking_report() {

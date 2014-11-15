@@ -108,4 +108,8 @@ class service extends Controller {
 		}
 	}
 
+	public function xhrGet_user_slide() {
+		$user_id = $_GET['user_id'];
+		$this->model->get_user_slide($user_id);
+	}
 }

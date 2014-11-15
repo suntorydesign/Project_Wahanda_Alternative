@@ -28,6 +28,7 @@ $(document).ready(function() {
 		}
 	});
 
+	xhrGet_user_slide();
 });
 /*LOAD LOCATION DETAIL*/
 function loadLocationDetail() {
@@ -872,3 +873,39 @@ function showMoreReview() {
 
 /*END INIT GOOGLE MAP*/
 /*-----------------------*/
+
+
+function xhrGet_user_slide() {
+	var indicators = $(".ss-2-slide").find(".carousel-indicators");
+	var inner = $(".ss-2-slide").find(".carousel-inner");
+
+	var html_indicators = '<li data-target="#carousel-example-generic" data-slide-to=":index" class=":active"></li>';
+	var html_inner = '<div class="item :active">'
+				+		'<img src=":img_src" alt=":img_alt">'
+				+		'<div class="carousel-caption">'
+				+		':img_caption'
+				+		'</div>'
+				+	'</div>';
+
+	var url = URL + "service/xhrGet_user_slide";
+	$.get(url,{"user_id":USER_ID}, function(data){
+		var slides = data["user_slide"].split(",");
+		var out_indicators = '';
+		var out_inner = '';
+		$.each(slides, function(index, slide) {
+			out_indicators = html_indicators.replace(':index', index);
+
+			out_inner = html_inner.replace(':img_src', slide);
+			out_inner = out_inner.replace(':img_alt', '');
+			out_inner = out_inner.replace(':img_caption', '');
+
+			if(index == 0) {
+				out_indicators = out_indicators.replace(':active', 'active');
+				out_inner = out_inner.replace(':active', 'active');
+			}
+
+			indicators.append(out_indicators);
+			inner.append(out_inner);
+		});
+	}, 'json');
+}

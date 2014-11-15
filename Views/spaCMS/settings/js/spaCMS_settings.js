@@ -154,6 +154,8 @@ var UserDetail = function (){
     var xhrUpdate_user_detail = function() {
         $('#user_detail_form').on('submit', function(){
             var data = $(this).serialize();
+            
+            var isSuccess = false;
             var loading = $(this).find('.loading');
             var done = $(this).find('.done');
             loading.fadeIn();
@@ -161,9 +163,20 @@ var UserDetail = function (){
             var url = URL + 'spaCMS/settings/xhrUpdate_user_detail';
 
             $.post(url, data, function(result) {
-                loading.fadeOut();
-                done.fadeIn();
-            }, 'json');
+                if(result["success"] == true) {
+                    isSuccess = true;
+                }
+            }, 'json')
+            .done(function() {
+                loading.hide();
+                done.show();
+
+                if(isSuccess) {
+                    alert("Cập nhật thành công!");
+                } else {
+                    alert("Update user detail error!");
+                }
+            });
             return false;
         });
     }

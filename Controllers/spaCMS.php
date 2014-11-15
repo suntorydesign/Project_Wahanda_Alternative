@@ -219,12 +219,12 @@
 			Auth::handleSpaCMSLogin();
 
 			switch ($xhr) {
-				case 'xhrGet_booking_detail':
-					$this->model->get_booking_detail();
-					break;
+				// case 'xhrGet_booking_detail':
+				// 	$this->model->get_booking_detail();
+				// 	break;
 
-				case 'xhrGet_sales_report':
-					$this->model->get_sales_report();
+				case 'xhrGet_sale_report':
+					$this->model->get_sale_report();
 					break;
 
 				case 'xhrGet_booking_report':

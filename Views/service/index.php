@@ -1,62 +1,145 @@
 <div id="header-2" class="clearfix">
-	<!--
-	#################################
-		- THEMEPUNCH BANNER -
-	#################################
-	-->
-	<div class="tp-banner-container">
-		<div class="tp-banner" >
-			<ul>
-				<!-- SLIDE  -->
-				<li data-transition="fade" data-slotamount="7" data-masterspeed="1500" >
-					<!-- MAIN IMAGE -->
-					<img src="<?php echo ASSETS;?>img/slider-image-01.jpg"  alt="Spa Hồng Vân"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-					<!-- LAYERS -->
-					<!-- LAYER NR. 1 -->
-					<div class="tp-caption lightgrey_divider skewfromrightshort fadeout"
-						data-x="85"
-						data-y="224"
-						data-speed="500"
-						data-start="1200"
-						data-easing="Power4.easeOut">Spa Hồng Vân
-					</div>
-					Địa điểm 245 Trường Chinh, Tp.HCM
+	<div class="slide_service_wrap">
+		<div class="container">
+			<div class="ss-1">
+				<div class="col-md-5 ss-1-title-1">
+					LADIVA VIP SPA
+				</div>
+				<div class="col-md-7 ss-1-title-2">
+					CHĂM SÓC MÓNG CHUYÊN NGHIỆP
+				</div>
+			</div>
+			<div class="ss-2">
+				<div class="col-md-8 ss-2-slide">
+					<div id="carousel-us-generic" class="carousel slide" data-ride="carousel">
+						<!-- Indicators -->
+						<ol class="carousel-indicators">
 
-				</li>
-				<!-- SLIDE  -->
-				<li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000" >
-					<!-- MAIN IMAGE -->
-					<img src="<?php echo ASSETS;?>img/slider-image-02.jpg"  alt="Spa Ngọc Trinh"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-					<!-- LAYERS -->
-					<!-- LAYER NR. 1 -->
-					<div class="tp-caption lightgrey_divider skewfromrightshort fadeout"
-						data-x="85"
-						data-y="224"
-						data-speed="500"
-						data-start="1200"
-						data-easing="Power4.easeOut">My Caption
+						</ol>
+
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner" role="listbox">
+
+						</div>
+
+						<!-- Controls -->
+						<a class="left carousel-control" href="#carousel-us-generic" role="button" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#carousel-us-generic" role="button" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
 					</div>
-					...
-				</li>
-				<!-- SLIDE  -->
-				<li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000" >
-					<!-- MAIN IMAGE -->
-					<img src="<?php echo ASSETS;?>img/slider-image-03.png"  alt="Người mẫu"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-					<!-- LAYERS -->
-					<!-- LAYER NR. 1 -->
-					<div class="tp-caption lightgrey_divider skewfromrightshort fadeout"
-						data-x="85"
-						data-y="224"
-						data-speed="500"
-						data-start="1200"
-						data-easing="Power4.easeOut">My Caption
+				</div>
+
+				<div class="col-md-4" >
+					<div class="ss-2-rating" style="background-color: #ffffff;">
+						<div class="ss-2-rating-top clearfix">
+							<div class="col-md-6">
+								<div class="ss-2-ddg">
+									Điểm đánh giá
+								</div>
+								<div class="ss-2-point">
+									4.2
+								</div>
+								<div align="center">
+									<div class="ss-2-rating-1">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+									</div>
+									<span class="ss-2-rating-2">0 Lượt đánh giá</span>
+								</div>
+							</div>
+							<div class="col-md-6 ss-2-rating-detail">
+
+								<div class="row" style="margin-bottom: 10px;">
+									<div class="col-md-6" style="padding: 0 5px;">
+										<span class="ssr2-title pull-right">Sự nhiệt tình</span>
+									</div>
+									<div class="col-md-6 ssr2-star" style="padding: 0 5px;">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+									</div>
+								</div>
+								<div class="row" style="margin-bottom: 10px;">
+									<div class="col-md-6" style="padding: 0 5px;">
+										<span class="ssr2-title pull-right">Vệ sinh</span>
+									</div>
+									<div class="col-md-6 ssr2-star" style="padding: 0 5px;">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+									</div>
+								</div>
+								<div class="row" style="margin-bottom: 10px;">
+									<div class="col-md-6" style="padding: 0 5px;">
+										<span class="ssr2-title pull-right">Chất lượng</span>
+									</div>
+									<div class="col-md-6 ssr2-star" style="padding: 0 5px;">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+									</div>
+								</div>
+								<div class="row" style="margin-bottom: 10px;">
+									<div class="col-md-6" style="padding: 0 5px;">
+										<span class="ssr2-title pull-right">Nhân viên</span>
+									</div>
+									<div class="col-md-6 ssr2-star" style="padding: 0 5px;">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+									</div>
+								</div>
+								<div class="row" style="margin-bottom: 10px;">
+									<div class="col-md-6" style="padding: 0 5px;">
+										<span class="ssr2-title pull-right">Giá trị</span>
+									</div>
+									<div class="col-md-6 ssr2-star" style="padding: 0 5px;">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+
+						<div class="clearfix" align="center">
+							<div class="col-md-12">
+								<a class="btn btn-lg btn-block btn-orange ss-2-btn" href="#tab-services">
+									ĐẶT HẸN
+								</a>
+							</div>
+						</div>
+						
 					</div>
-					...
-				</li>
-				....
-			</ul>
+
+
+				</div>
+			</div>
 		</div>
 	</div>
+
+
+
+	
 </div>
 
 <div id="content-wrap">
