@@ -309,7 +309,7 @@
                             	<div class="button-inner">
                             		<div class="button-icon icons-tick done"></div>
                             		<div class="button-icon fa fa-spin fa-refresh loading"></div>
-	                            	Confirmed
+	                            	Xác thực
 	                            </div>
                             </button>
                             <button type="button" class="button button-edit change-only-this edit_appointment_action">
@@ -392,9 +392,10 @@
                                                 <div class="icon icons-phone"></div>
                                                 <span class="v-consumer-phone client_phone">+84 90 367 62 22</span>
                                             </li>
-                                            <li style="display: list-item;" class="consumer-email-row b-consumer-email hidden">
+                                            <li style="display: list-item;" class="consumer-email-row b-consumer-email">
                                                 <div class="icon icons-email"></div>
-                                                <span class=""><a href="mailto:" class="v-consumer-email client_mail">vietnt134@gmail.com</a></span>
+                                                <span class="v-consumer-email client_email"></span>
+                                                <input type="hidden" name="client_email" />
                                             </li>
                                             <li class="consumer-note-row b-customer-note">
                                                 <div class="client-note">

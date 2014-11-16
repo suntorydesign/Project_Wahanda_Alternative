@@ -507,50 +507,51 @@ SQL;
 		}
 
 		if($result) {
-
-			// Gửi mail thông báo
-			//Nội dung email
-			$body = '<h1>Thông sửa lịch hẹn trên BELEZA</h1>';
-			$body .= '<p>Chào bạn chúng tôi muốn đổi lịch hẹn của bạn!</p>';
-			$body .= '<p>Địa điểm: <--- Chỗ này tên spa (tên user)</p>';
-			$body .= '<p>Dịch vụ: ' . $_POST['user_service_service_id'] . '<--- Chỗ này cho tên dịch vụ</p>';
-			$body .= '<p>Ngày sửa đổi: ' . $_POST['appointment_date'] . '</p>';
-			$body .= '<p>Thời gian dịch vụ: ' . $_POST['appointment_time_start'] . '</p>';
-			$body .= '<p>Giá: ' . $_POST['appointment_price'] . '</p>';
-			$body .= '<p>Ghi chú: ' . $_POST['appointment_note'] . '</p>';
-			$body .= '<p>Bạn có muốn đổi lịch không nếu có hãy nhấn link dưới</p>';
-			$body .= '<a href="http:' . URL . '" >link để chấp nhận</a>';
-			$body .= '<p>Nếu không hãy nhấn link dưới</p>';
-			$body .= '<a href="http:' . URL . '" >link để chấp nhận</a>';
-			$body .= '<div align="right"><small><i><b>Ban quản trị BELEZA</b></i></small></div>';
-			//Gửi mail local
-			$mail = new PHPMailer(TRUE);
-			$mail -> CharSet = "UTF-8";
-			// create a new object
-			$mail -> IsSMTP();
-			// enable SMTP
-			$mail -> SMTPDebug = 1;
-			// debugging: 1 = errors and messages, 2 = messages only
-			$mail -> SMTPAuth = true;
-			// authentication enabled
-			$mail -> SMTPSecure = 'ssl';
-			// secure transfer enabled REQUIRED for GMail
-			$mail -> Host = SMTP_MAIL;
-			$mail -> Port = 465;
-			// or 587
-			$mail -> IsHTML(true);
-			$mail -> Username = INFO_MAIL;
-			$mail -> Password = PASS_MAIL;
-			$mail -> SetFrom(INFO_MAIL, 'BELEZA VIETNAM');
-			$mail -> Subject = "Thông tin tạo địa điểm từ Beleza!";
-			$mail -> Body = $body;
-			$mail -> AddAddress('trongloikt192@gmail.com'); //<---- CHỖ NÀY MAIL CỦA NGƯỜI ĐẶT
-			// $mail -> Send();
-			if (!$mail -> Send()) {
-				echo "Mailer Error: " . $mail -> ErrorInfo;
-			} else {
-				echo "success";
-			}		
+			if($data_type == "booking_detail") {
+				// Gửi mail thông báo
+				//Nội dung email
+				$body = '<h1>Thông báo đổi lịch hẹn từ BELEZA!</h1>';
+				$body .= '<p>Chào bạn chúng tôi đã đổi lịch hẹn của bạn!</p>';
+				$body .= '<p>Địa điểm: ' . Session::get('user_business_name') . '</p>';
+				$body .= '<p>Dịch vụ: ' . $_POST['user_service_service_id'] . '</p>';
+				$body .= '<p>Ngày sửa đổi: ' . $_POST['appointment_date'] . '</p>';
+				$body .= '<p>Thời gian dịch vụ: ' . $_POST['appointment_time_start'] . '</p>';
+				$body .= '<p>Giá: ' . $_POST['appointment_price'] . '</p>';
+				$body .= '<p>Ghi chú: ' . $_POST['appointment_note'] . '</p>';
+				// $body .= '<p>Bạn có muốn đổi lịch không nếu có hãy nhấn link dưới</p>';
+				// $body .= '<a href="http:' . URL . '" >link để chấp nhận</a>';
+				// $body .= '<p>Nếu không hãy nhấn link dưới</p>';
+				// $body .= '<a href="http:' . URL . '" >link để chấp nhận</a>';
+				$body .= '<div align="right"><small><i><b>Ban quản trị BELEZA</b></i></small></div>';
+				//Gửi mail local
+				$mail = new PHPMailer(TRUE);
+				$mail -> CharSet = "UTF-8";
+				// create a new object
+				$mail -> IsSMTP();
+				// enable SMTP
+				$mail -> SMTPDebug = 1;
+				// debugging: 1 = errors and messages, 2 = messages only
+				$mail -> SMTPAuth = true;
+				// authentication enabled
+				$mail -> SMTPSecure = 'ssl';
+				// secure transfer enabled REQUIRED for GMail
+				$mail -> Host = SMTP_MAIL;
+				$mail -> Port = 465;
+				// or 587
+				$mail -> IsHTML(true);
+				$mail -> Username = INFO_MAIL;
+				$mail -> Password = PASS_MAIL;
+				$mail -> SetFrom(INFO_MAIL, 'BELEZA VIETNAM');
+				$mail -> Subject = "[BELEZA] Thông báo đổi lịch hẹn!";
+				$mail -> Body = $body;
+				$mail -> AddAddress($_POST["client_email"]); //<---- CHỖ NÀY MAIL CỦA NGƯỜI ĐẶT
+				// $mail -> Send();
+				if (!$mail -> Send()) {
+					echo "Mailer Error: " . $mail -> ErrorInfo;
+				}
+			}
+				
+			echo "success";	
 		} else {
 			echo "error";
 		}
@@ -587,6 +588,49 @@ SQL;
 		}
 
 		if($result) {
+			if($data_type == "booking_detail") {
+				// Gửi mail thông báo
+				//Nội dung email
+				$body = '<h1>Thông báo xác thực lịch hẹn từ BELEZA!</h1>';
+				$body .= '<p>Chào bạn chúng tôi đã xác thực lịch hẹn của bạn!</p>';
+				$body .= '<p>Địa điểm: 	' . Session::get('user_business_name') . '</p>';
+				// $body .= '<p>Dịch vụ: 	' . $_POST['user_service_service_id'] . '</p>';
+				// $body .= '<p>Ngày: 		' . $_POST['appointment_date'] . '</p>';
+				// $body .= '<p>Thời gian dịch vụ: ' . $_POST['appointment_time_start'] . '</p>';
+				// $body .= '<p>Giá: ' . $_POST['appointment_price'] . '</p>';
+				// $body .= '<p>Ghi chú: ' . $_POST['appointment_note'] . '</p>';
+				// $body .= '<p>Bạn có muốn đổi lịch không nếu có hãy nhấn link dưới</p>';
+				// $body .= '<a href="http:' . URL . '" >link để chấp nhận</a>';
+				// $body .= '<p>Nếu không hãy nhấn link dưới</p>';
+				// $body .= '<a href="http:' . URL . '" >link để chấp nhận</a>';
+				$body .= '<div align="right"><small><i><b>Ban quản trị BELEZA</b></i></small></div>';
+				//Gửi mail local
+				$mail = new PHPMailer(TRUE);
+				$mail -> CharSet = "UTF-8";
+				// create a new object
+				$mail -> IsSMTP();
+				// enable SMTP
+				$mail -> SMTPDebug = 1;
+				// debugging: 1 = errors and messages, 2 = messages only
+				$mail -> SMTPAuth = true;
+				// authentication enabled
+				$mail -> SMTPSecure = 'ssl';
+				// secure transfer enabled REQUIRED for GMail
+				$mail -> Host = SMTP_MAIL;
+				$mail -> Port = 465;
+				// or 587
+				$mail -> IsHTML(true);
+				$mail -> Username = INFO_MAIL;
+				$mail -> Password = PASS_MAIL;
+				$mail -> SetFrom(INFO_MAIL, 'BELEZA VIETNAM');
+				$mail -> Subject = "[BELEZA] Thông báo xác thực lịch hẹn!";
+				$mail -> Body = $body;
+				$mail -> AddAddress($_POST["client_email"]); //<---- CHỖ NÀY MAIL CỦA NGƯỜI ĐẶT
+				// $mail -> Send();
+				if (!$mail -> Send()) {
+					echo "Mailer Error: " . $mail -> ErrorInfo;
+				}
+			}
 			echo "success";
 		} else {
 			echo "error";
