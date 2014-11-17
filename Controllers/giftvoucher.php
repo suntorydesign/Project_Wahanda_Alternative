@@ -39,5 +39,10 @@ class giftvoucher extends Controller {
 		}
 	}
 
+	public function loadPlaceUseGift() {
+		Session::initIdle();
+		$this -> model -> loadPlaceUseGift();
+	}
+
 }
 ?>

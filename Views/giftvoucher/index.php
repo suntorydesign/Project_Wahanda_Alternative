@@ -2,7 +2,7 @@
 
 <div id="header-2" class="clearfix">
 	<div class="gift-title" align="center">
-		<img src="<?php echo ASSETS;?>img/title.png"/>
+		<img class="img-responsive" src="<?php echo ASSETS;?>img/title.png"/>
 	</div>	
 	<div class="gift-action" align="center">
 		<button class="btn btn-sm btn-orange buy-giftvc-btn">MUA GIFT VOUCHER</button>
@@ -38,7 +38,7 @@
 		<div class="choice-voucher">
 			<div class="choice-voucher-wrap clearfix">
 				<h3 align="center" class="text-white">CHỌN MỘT THẺ QUÀ TẶNG Ý NGHĨA</h3>
-				<div class="clearfix" align="center">
+				<div class="row" align="center">
 					<ul class="list-inline" align="center">
 						<li>	
 							<button gift-price-data="200000" class="btn btn-default voucher-card-btn">
@@ -77,15 +77,15 @@
 	</div>
 
 	<div id="gift-voucher-2">
-		<div class="container">
+		<div class="container" align="center">
 			<p class="title" align="center">NHỮNG ĐỊA ĐIỂM CHẤP NHẬN THẺ QUÀ TẶNG TẠI TP HCM</p>
-			<ul class="list-inline" align="center">
-				<li>
-					<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS3dkwjx9g9FwH6d35p1xa-hCuY4Vc77ckIjObaxd4SrQPWxwY_6w">
-				</li>
-				<li>
-					<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS3dkwjx9g9FwH6d35p1xa-hCuY4Vc77ckIjObaxd4SrQPWxwY_6w">
-				</li>
+			<ul id="place_use_gift_voucher" class="list-inline" align="center">
+				<!-- <li>
+					<div align="center">
+						<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS3dkwjx9g9FwH6d35p1xa-hCuY4Vc77ckIjObaxd4SrQPWxwY_6w">
+						<p><small><b>Spa Sen</b><small></p>
+					</div>
+				</li> -->
 			</ul>
 		</div>
 	</div>

@@ -13,6 +13,7 @@ class service_model extends Model {
 		$query = <<<SQL
 SELECT 
 user_business_name
+,type_business.type_business_name
 ,user_open_hour
 ,user_long
 ,user_lat
@@ -23,7 +24,9 @@ user_business_name
 ,user_logo
 ,user_slide
 FROM user
-WHERE user_id = {$user_id}
+, type_business
+WHERE user.user_type_business_id = type_business.type_business_id
+AND user_id = {$user_id}
 AND user_delete_flg = 0
 SQL;
 		$select = $this -> db -> select($query);
@@ -87,14 +90,12 @@ AND user_service.user_service_delete_flg = 0
 GROUP BY user_service_use_evoucher
 SQL;
 		$select = $this -> db -> select($sql);
-		$array_voucher = array('evoucher' => 0
-							  ,'appointment' => 0
-							  ,'gift_voucher' => 0);
+		$array_voucher = array('evoucher' => 0, 'appointment' => 0, 'gift_voucher' => 0);
 		foreach ($select as $key => $value) {
-			if($key == 0 || $key == 2){
+			if ($key == 0 || $key == 2) {
 				$array_voucher['appointment'] = 1;
 			}
-			if($key == 1 || $key == 2){
+			if ($key == 1 || $key == 2) {
 				$array_voucher['evoucher'] = 1;
 			}
 		}
@@ -104,7 +105,7 @@ FROM user
 WHERE user_id = {$user_id}
 SQL;
 		$select = $this -> db -> select($sql);
-		if($select[0]['user_is_use_gvoucher'] == 1){
+		if ($select[0]['user_is_use_gvoucher'] == 1) {
 			$array_voucher['gift_voucher'] = 1;
 		}
 		$return['array_voucher'] = $array_voucher;
@@ -293,7 +294,7 @@ SQL;
 				$data['star_review'] = 0;
 			} else {
 				$star_review = $star_point / $client_amount;
-				
+
 				$data['star_review'] = round($star_review, 1);
 			}
 			$data['service_type_name'] = $select[0]['service_type_name'];
@@ -548,14 +549,49 @@ SQL;
 
 	public function get_user_slide($user_id) {
 		$aQuery = <<<SQL
-		SELECT user_slide
-		FROM user
-		WHERE user_id = {$user_id}
+SELECT user_slide
+FROM user
+WHERE user_id = {$user_id}
 SQL;
 
-		$data = $this->db->select($aQuery);
-
+		$data = $this -> db -> select($aQuery);
 		echo json_encode($data[0]);
+	}
+
+	public function loadConsultingQuestion($user_id) {
+		$sql = <<<SQL
+SELECT DISTINCT 
+user_business_name
+, service_type_id
+, service_type_name
+FROM service_type,
+service,
+user_service,
+group_service,
+user
+WHERE
+service_type.service_type_id = service.service_service_type_id
+AND service.service_id = user_service.user_service_service_id
+AND user_service.user_service_group_id = group_service.group_service_id
+AND user.user_id = group_service.group_service_user_id
+AND user.user_id = {$user_id}
+SQL;
+		$select = $this -> db -> select($sql);
+		echo json_encode($select);
+	}
+	
+	public function consulting($data){
+		$sql = <<<SQL
+SELECT 
+consulting_rule_result
+, consulting_rule_question
+FROM consulting_rule
+WHERE
+consulting_rule_suppose = '{$data['consulting_rule_suppose']}'
+AND consulting_rule_service_type_id = '{$data['service_type_id']}'
+SQL;
+		$select = $this -> db -> select($sql);
+		echo json_encode($select);
 	}
 
 }

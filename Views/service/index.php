@@ -2,11 +2,11 @@
 	<div class="slide_service_wrap">
 		<div class="container">
 			<div class="ss-1">
-				<div class="col-md-5 ss-1-title-1">
-					LADIVA VIP SPA
+				<div id="user_business_name" class="col-md-5 ss-1-title-1">
+					...
 				</div>
-				<div class="col-md-7 ss-1-title-2">
-					CHĂM SÓC MÓNG CHUYÊN NGHIỆP
+				<div id="type_business_name" class="col-md-7 ss-1-title-2">
+					...
 				</div>
 			</div>
 			<div class="ss-2">
@@ -37,33 +37,33 @@
 				<div class="col-md-4" >
 					<div class="ss-2-rating" style="background-color: #ffffff;">
 						<div class="ss-2-rating-top clearfix">
-							<div class="col-md-6">
+							<div class="col-md-5">
 								<div class="ss-2-ddg">
-									Điểm đánh giá
+									Đánh giá
 								</div>
-								<div class="ss-2-point">
-									4.2
+								<div id="location_slide_point" class="ss-2-point">
+									...
 								</div>
-								<div align="center">
+								<div id="location_slide_total_star" align="center">
 									<div class="ss-2-rating-1">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
 										<i class="fa fa-star-o"></i>
 										<i class="fa fa-star-o"></i>
 									</div>
-									<span class="ss-2-rating-2">0 Lượt đánh giá</span>
+									<span class="ss-2-rating-2">...</span>
 								</div>
 							</div>
-							<div class="col-md-6 ss-2-rating-detail">
+							<div id="location_slide_star" class="col-md-7 ss-2-rating-detail">
 
 								<div class="row" style="margin-bottom: 10px;">
 									<div class="col-md-6" style="padding: 0 5px;">
-										<span class="ssr2-title pull-right">Sự nhiệt tình</span>
+										<span class="ssr2-title pull-right">...</span>
 									</div>
 									<div class="col-md-6 ssr2-star" style="padding: 0 5px;">
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
 										<span class="fa fa-star-o"></span>
 										<span class="fa fa-star-o"></span>
 										<span class="fa fa-star-o"></span>
@@ -71,11 +71,11 @@
 								</div>
 								<div class="row" style="margin-bottom: 10px;">
 									<div class="col-md-6" style="padding: 0 5px;">
-										<span class="ssr2-title pull-right">Vệ sinh</span>
+										<span class="ssr2-title pull-right">...</span>
 									</div>
 									<div class="col-md-6 ssr2-star" style="padding: 0 5px;">
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
 										<span class="fa fa-star-o"></span>
 										<span class="fa fa-star-o"></span>
 										<span class="fa fa-star-o"></span>
@@ -83,11 +83,11 @@
 								</div>
 								<div class="row" style="margin-bottom: 10px;">
 									<div class="col-md-6" style="padding: 0 5px;">
-										<span class="ssr2-title pull-right">Chất lượng</span>
+										<span class="ssr2-title pull-right">...</span>
 									</div>
 									<div class="col-md-6 ssr2-star" style="padding: 0 5px;">
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
 										<span class="fa fa-star-o"></span>
 										<span class="fa fa-star-o"></span>
 										<span class="fa fa-star-o"></span>
@@ -95,11 +95,11 @@
 								</div>
 								<div class="row" style="margin-bottom: 10px;">
 									<div class="col-md-6" style="padding: 0 5px;">
-										<span class="ssr2-title pull-right">Nhân viên</span>
+										<span class="ssr2-title pull-right">...</span>
 									</div>
 									<div class="col-md-6 ssr2-star" style="padding: 0 5px;">
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
 										<span class="fa fa-star-o"></span>
 										<span class="fa fa-star-o"></span>
 										<span class="fa fa-star-o"></span>
@@ -107,11 +107,11 @@
 								</div>
 								<div class="row" style="margin-bottom: 10px;">
 									<div class="col-md-6" style="padding: 0 5px;">
-										<span class="ssr2-title pull-right">Giá trị</span>
+										<span class="ssr2-title pull-right">...</span>
 									</div>
 									<div class="col-md-6 ssr2-star" style="padding: 0 5px;">
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
 										<span class="fa fa-star-o"></span>
 										<span class="fa fa-star-o"></span>
 										<span class="fa fa-star-o"></span>
@@ -128,23 +128,20 @@
 								</a>
 							</div>
 						</div>
-						
 					</div>
-
-
 				</div>
 			</div>
 		</div>
 	</div>
 
-
-
-	
 </div>
-
 <div id="content-wrap">
+	<!-- <div id="consulting_btn" class="consulting pointer">
+		<span>TƯ VẤN </span>
+		<small class="fa fa-lg fa-check-square-o"></small>
+	</div> -->
 	<div class="container">
-
+		
 		<div class="col-md-8">
 			<div id="tabs" class="clearfix" >
 				<a href="#tab-introduce" style="text-decoration: none; color: #000;">
@@ -723,6 +720,73 @@
 			<br />
 		</div>
 	</div>
+	<!-- Modal consulting -->
+    <div id="consulting_info" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    	<div class="modal-dialog">
+    		<div class="modal-content" style="border-radius:0;">
+    			<div class="modal-header" style="background-color: #FDBD0E; padding: 6px 10px;">
+		        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		        	<h4 class="modal-title" id="myModalLabel">
+		        		<strong><i class="fa fa-support" style="font-size:16px;"></i> TƯ VẤN DỊCH VỤ</strong> 
+		        	</h4>
+		      	</div>
+		      	<div class="modal-body">
+		      		<div class="row">
+		      				<div class="col-md-12">
+		      					<span>
+		      						<b>Hãy trả lời các câu hỏi dưới đây, chúng tôi sẽ tư vấn cho bạn nên 
+		      						chọn dịch vụ nào phù hợp với bạn và với túi tiền của bạn</b>
+		      					</span>
+		      				</div>	      				
+		      			</div>
+		      			<br />
+		      		<div id="consulting_info_question">		
+		      			<!-- <div class="row">
+		      				<div class="col-md-12">
+		      					<span>Hãy chọn dịch vụ của spa chúng tôi</span>
+		      				</div>	      				
+		      			</div>
+		      			<br />
+		      			<div class="row">
+		      				<div class="col-md-12">
+		      					<div class="radio">
+			      					<label>
+	 									<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+										1
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+										2 
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+										3 
+									</label>
+								</div>
+		      				</div>	
+		      			</div> -->
+		      		</div>
+		      		<br />
+	      			<div class="row">
+	      				<div class="col-md-12 text-right">
+	      					<small class="text-danger" id="error_answer_consult" style="display: none;">
+	      						<b>Bạn chưa trả lời! </b>
+	      					</small>
+	      					<button id="btn_next_step" class="btn btn-orange-black">Tiếp tục <span class="fa fa-arrow-right"></span></button>
+	      				</div>	
+	      			</div>
+    			</div>
+    			<div class="modal-footer" style="padding: 15px 20px 15px;margin-top: 0px">
+		      		<button type="button" class="btn btn-default" data-dismiss="modal">Trở về</button>
+		      	</div>
+	    	</div>
+	    </div>
+    </div>
+    <!-- End modal consulting -->
 </div>
 <script>
 	var USER_ID = "<?php echo $this -> user_id; ?>";
@@ -730,4 +794,9 @@
 	var RESULT_PER_SHOW_MORE = "<?php echo RESULT_PER_SHOW_MORE; ?>";
 	var LAT = '';
 	var LNG = '';
+	var CONSULT_ANSWER = '';
+	var CONSULT_RESULT = '';
+	var CONSULT_SUPPOSE = '';
+	var CONSULT_SERVICE_TYPE = '';
+	var FIRST_QUES = 0;
 </script>
