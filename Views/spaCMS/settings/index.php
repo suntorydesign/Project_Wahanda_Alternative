@@ -859,7 +859,7 @@
 									</div>
 									<div class="send-sms">
 										<input type="checkbox" value="true" name="client-notifications-sendSMS" id="client-notifications-sendSMS">
-										<label for="client-notifications-sendSMS">Send text (SMS) new order confirmations for Wahanda bookings</label>
+										<label for="client-notifications-sendSMS">Gửi tin nhắn SMS khi có booking từ Beleza</label>
 									</div>
 									<table cellspacing="0" cellpadding="0" class="default-form hidden">
 										<tbody>
@@ -887,7 +887,7 @@
 									<div class="button-inner">
 										<div class="button-icon icons-tick done"></div>
 										<div class="button-icon fa fa-spin fa-refresh loading"></div>
-										<span class="msg msg-action-default">Save</span>
+										<span class="msg msg-action-default">Lưu</span>
 									</div>
 								</button>
 							</div>

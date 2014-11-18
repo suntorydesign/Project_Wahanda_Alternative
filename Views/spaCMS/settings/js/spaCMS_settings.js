@@ -146,7 +146,7 @@ var UserDetail = function (){
             $('input[name=user_email]').val(data[0]['user_email']);
             $('textarea[name=user_description]').val(data[0]['user_description']);
             // $('select[name=user_country_id]').val(data[0]['user_country_id']);
-            $('select[name=user_district_id]').find('option[value="'+data[0]['user_district_id']+'"]').prop("selected",true);
+            $('select[name=user_district_id]').find('option[value="'+data[0]['user_district_id']+'"]').prop("selected", true);
             $('select[name=user_type_business_id]').find('option[value="'+data[0]['user_type_business_id']+'"]').prop("selected",true);
         }, 'json');
     }
