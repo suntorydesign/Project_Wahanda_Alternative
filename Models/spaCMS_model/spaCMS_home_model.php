@@ -1,7 +1,6 @@
 <?php
 
 class SpaCMS_Home_Model {
-
 	/**
 	 * Tìm mã evoucher
 	 * @param $_POST['e_voucher_id'] : mã của evoucher đó
@@ -57,5 +56,23 @@ SQL;
 		} else {
 			echo 'error';
 		}
+	}
+
+
+	public function get_monthly_sales() {
+		$user_id = Session::get('user_id');
+		$aQuery = <<<SQL
+		SELECT 
+			COUNT(*) as total_count,
+			SUM(booking_detail_price) as total_value
+		FROM 
+			booking_detail
+		WHERE 
+				booking_detail_user_id = {$user_id}
+			AND ( booking_detail_date BETWEEN '2014-09-09' AND '2015-12-09' )
+SQL;
+		$data = $this->db->select($aQuery);
+
+		echo json_encode($data[0]);
 	}
 }

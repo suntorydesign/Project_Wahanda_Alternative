@@ -244,68 +244,6 @@ class SpaCMS_Settings_Model {
 		}
 	}
 
-	function update_user_is_use_gvoucher() {
-		$user_id = Session::get('user_id');
-		if(isset($_POST['user_is_use_gvoucher'])) {
-			if($_POST['user_is_use_gvoucher'] == true) {
-				$user_is_use_gvoucher = 1;
-			}
-		} else {
-			$user_is_use_gvoucher = 0;
-		}
-		
-		$data = array(
-			"user_is_use_gvoucher" => $user_is_use_gvoucher
-		);
-		$result = $this->db->update("user", $data, "user_id = $user_id");
-		if($result) {
-			echo 'success';
-		} else {
-			echo 'error';
-		}
-	}
-
-	function update_user_is_use_evoucher() {
-		$user_id = Session::get('user_id');
-		if(isset($_POST['user_is_use_evoucher'])) {
-			if($_POST['user_is_use_evoucher'] == true) {
-				$user_is_use_evoucher = 1;
-			}
-		} else {
-			$user_is_use_evoucher = 0;
-		}
-		
-		$data = array(
-			"user_is_use_evoucher" => $user_is_use_evoucher
-		);
-		$result = $this->db->update("user", $data, "user_id = $user_id");
-		if($result) {
-			echo 'success';
-		} else {
-			echo 'error';
-		}
-	}
-
-	function update_user_is_use_appointment() {
-		$user_id = Session::get('user_id');
-		if(isset($_POST['user_is_use_appointment'])) {
-			if($_POST['user_is_use_appointment'] == true) {
-				$user_is_use_appointment = 1;
-			}
-		} else {
-			$user_is_use_appointment = 0;
-		}
-		$data = array(
-			"user_is_use_appointment" => $user_is_use_appointment
-		);
-		$result = $this->db->update("user", $data, "user_id = $user_id");
-		if($result) {
-			echo 'success';
-		} else {
-			echo 'error';
-		}
-	}
-
 	function get_user_notification_email() {
 		$user_id = Session::get('user_id');
 		$query = "SELECT user_notification_email
@@ -315,7 +253,120 @@ class SpaCMS_Settings_Model {
 		echo json_encode($data);
 	}
 
-	function update_user_password() {
+	
+	////////////////////////////// ONLINE BOOKING ////////////////////////
+	public function get_user_limit_before_booking() {
+		$user_id = Session::get('user_id');
+
+		$aQuery = <<<SQL
+		SELECT 
+			user_limit_before_booking,
+			user_limit_before_service
+		FROM 
+			user
+		WHERE 
+			user_id = {$user_id}
+SQL;
+		$data = $this->db->select($aQuery);
+
+		echo json_encode($data[0]);
+	}
+
+	public function get_user_is_use_gvoucher() {
+		$user_id = Session::get('user_id');
+
+		$aQuery = <<<SQL
+		SELECT 
+			user_is_use_gvoucher
+		FROM 
+			user
+		WHERE 
+			user_id = {$user_id}
+SQL;
+		$data = $this->db->select($aQuery);
+
+		echo json_encode($data[0]);
+	}
+
+	public function get_user_is_use_evoucher() {
+		$user_id = Session::get('user_id');
+
+		$aQuery = <<<SQL
+		SELECT 
+			user_is_use_evoucher
+		FROM 
+			user
+		WHERE 
+			user_id = {$user_id}
+SQL;
+		$data = $this->db->select($aQuery);
+
+		echo json_encode($data[0]);
+	}
+
+	public function get_user_is_use_appointment() {
+		$user_id = Session::get('user_id');
+
+		$aQuery = <<<SQL
+		SELECT 
+			user_is_use_appointment
+		FROM 
+			user
+		WHERE 
+			user_id = {$user_id}
+SQL;
+		$data = $this->db->select($aQuery);
+
+		echo json_encode($data[0]);
+	}
+
+	public function update_online_booking() {
+		$user_id = Session::get('user_id');
+
+		if(isset($_POST['user_is_use_evoucher'])) {
+			if($_POST['user_is_use_evoucher'] == true) {
+				$user_is_use_evoucher = 1;
+			}
+		} else {
+			$user_is_use_evoucher = 0;
+		}
+
+		if(isset($_POST['user_is_use_gvoucher'])) {
+			if($_POST['user_is_use_gvoucher'] == true) {
+				$user_is_use_gvoucher = 1;
+			}
+		} else {
+			$user_is_use_gvoucher = 0;
+		}
+
+		if(isset($_POST['user_is_use_appointment'])) {
+			if($_POST['user_is_use_appointment'] == true) {
+				$user_is_use_appointment = 1;
+			}
+		} else {
+			$user_is_use_appointment = 0;
+		}
+
+		$data = array(
+			"user_limit_before_service" => $_POST["user_limit_before_service"],
+			"user_limit_before_booking" => $_POST["user_limit_before_booking"],
+			"user_is_use_evoucher" 		=> $user_is_use_evoucher,
+			"user_is_use_gvoucher" 		=> $user_is_use_gvoucher,
+			"user_is_use_appointment"	=> $user_is_use_appointment
+		);
+
+		$result = $this->db->update("user", $data, "user_id = $user_id");
+
+		if($result) {
+			echo 'success';
+		} else {
+			echo 'error';
+		}
+	}
+
+
+	////////////////////////// BẢO MẬT /////////////////////
+	public function update_user_password() {
 		$user_id = Session::get('user_id');
 		$user_password_new = $_POST['user_password_new'];
 		$user_password = $_POST['user_password'];
@@ -338,7 +389,7 @@ class SpaCMS_Settings_Model {
 		}
 	}
 
-	function check_user_password( $user_password ) {
+	public function check_user_password( $user_password ) {
 		$user_id = Session::get('user_id');
 
 		$sql = "SELECT user_id FROM user WHERE user_id = :user_id AND user_password = :user_password";
@@ -357,88 +408,6 @@ class SpaCMS_Settings_Model {
 		}
 
 		return false;
-	}
-
-	function update_user_limit_before_booking() {
-		$user_id = Session::get('user_id');
-		
-		$data = array(
-			"user_limit_before_service" => $_POST["user_limit_before_service"],
-			"user_limit_before_booking" => $_POST["user_limit_before_booking"]
-		);
-
-		$result = $this->db->update("user", $data, "user_id = $user_id");
-
-		if($result) {
-			echo 'success';
-		} else {
-			echo 'error';
-		}
-	}
-
-	function get_user_limit_before_booking() {
-		$user_id = Session::get('user_id');
-
-		$aQuery = <<<SQL
-		SELECT 
-			user_limit_before_booking,
-			user_limit_before_service
-		FROM 
-			user
-		WHERE 
-			user_id = {$user_id}
-SQL;
-		$data = $this->db->select($aQuery);
-
-		echo json_encode($data[0]);
-	}
-
-	function get_user_is_use_gvoucher() {
-		$user_id = Session::get('user_id');
-
-		$aQuery = <<<SQL
-		SELECT 
-			user_is_use_gvoucher
-		FROM 
-			user
-		WHERE 
-			user_id = {$user_id}
-SQL;
-		$data = $this->db->select($aQuery);
-
-		echo json_encode($data[0]);
-	}
-
-	function get_user_is_use_evoucher() {
-		$user_id = Session::get('user_id');
-
-		$aQuery = <<<SQL
-		SELECT 
-			user_is_use_evoucher
-		FROM 
-			user
-		WHERE 
-			user_id = {$user_id}
-SQL;
-		$data = $this->db->select($aQuery);
-
-		echo json_encode($data[0]);
-	}
-
-	function get_user_is_use_appointment() {
-		$user_id = Session::get('user_id');
-
-		$aQuery = <<<SQL
-		SELECT 
-			user_is_use_appointment
-		FROM 
-			user
-		WHERE 
-			user_id = {$user_id}
-SQL;
-		$data = $this->db->select($aQuery);
-
-		echo json_encode($data[0]);
 	}
 
 }

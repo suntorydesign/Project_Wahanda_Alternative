@@ -39,7 +39,7 @@
 			<button id="redeem" class="button button-primary redeem" type="button">
 				<div class="button-inner">
 					<div class="button-icon icons-voucher"></div>
-					Xác thực eVoucher
+					Xác thực voucher
 				</div>
 			</button>
 
@@ -127,6 +127,12 @@
 						<tr class="empty">
 							<td> Không có vé bookings tại thời điểm này </td>
 						</tr>
+						<tr class="empty">
+							<td> Không có vé bookings tại thời điểm này </td>
+						</tr>
+						<tr class="empty">
+							<td> Không có vé bookings tại thời điểm này </td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -140,14 +146,14 @@
 						<div class="totals">
 							<div class="stats-item">
 								<span class="title">Tổng lượt bookings</span>
-								<span class="value v-bookings">1</span>
+								<span class="value v-bookings">0</span>
 							</div>
 							<div class="stats-item">
-								<span class="title">Tổng doanh số tài chính - Total transaction value</span>
-								<span class="value v-ttv">£40.00</span>
+								<span class="title">Tổng doanh số tài chính</span>
+								<span class="value v-ttv">0 đ</span>
 							</div>
 						</div>
-						<div class="graph" id="monthly-sales-graph" style="min-height: 300px; position: relative;">
+						<div class="graph hidden" id="monthly-sales-graph" style="min-height: 300px; position: relative;">
 							<div dir="ltr" style="position: relative; width: 497px; height: 300px;">
 								<div style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;">
 									<svg width="497" height="300" aria-label="A chart." style="overflow: hidden;">
@@ -234,7 +240,7 @@
 							<table>
 								<thead>
 									<tr>
-										<th class="box-subhd">Tìm xem số lượt được bookings</th>
+										<th class="box-subhd">Tìm theo số lượt được bookings</th>
 										<td>Tháng
 										<br>
 										này</td>
@@ -361,14 +367,14 @@
 						<div class="voucher-note voucher-start" style="position: relative;">
 							<div class="voucher-note-inner vertically-centered" style="position: absolute; height: 101px; top: 50%; margin-top: -50.5px;">
 								<p class="main-title">
-									Vui lòng nhập mã eVoucher 
+									Vui lòng nhập mã voucher 
 								</p>
 								<ul class="simple-list">
 									<li>
-										Mã eVoucher sẽ được gửi tới email sau khi booking thành công.
+										Mã evoucher và gift voucher sẽ được gửi tới email sau khi booking thành công.
 									</li>
 									<li>
-										Chỉ kiểm tra việc xác thực eVoucher.
+										Chỉ kiểm tra việc xác thực evoucher và gift voucher.
 									</li>
 								</ul>
 							</div>

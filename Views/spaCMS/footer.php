@@ -4,8 +4,8 @@
     </body>
     <!-- Chèn link JavaScript-->
     <script src="<?php echo ASSETS ?>plugins/image-manager/js/jquery-1.8.3.min.js" type="text/javascript"></script>
-
     <script src="<?php echo ASSETS ?>plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo ASSETS ?>plugins/jquery-number/jquery.number.min.js" type="text/javascript"></script>
    
     <script type="text/javascript">
         // Active menu  

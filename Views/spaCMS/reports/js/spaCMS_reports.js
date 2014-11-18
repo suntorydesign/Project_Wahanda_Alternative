@@ -23,8 +23,8 @@ var BookingReport = function() {
                 out = html.replace(':booking_id', booking['booking_id']);
                 out = out.replace(':client_name', booking['client_name']);
                 out = out.replace(':user_service_name', booking['user_service_name']);
-                out = out.replace(':booking_detail_price', booking['booking_detail_price']);
-                out = out.replace(':booking_date', booking['booking_date']);
+                out = out.replace(':booking_detail_price', $.number( booking['booking_detail_price'] ));
+                out = out.replace(':booking_date', moment(booking['booking_date']).format("DD/MM/YYYY") );
                 out = out.replace(':booking_detail_status', booking['booking_detail_status'] == 0 ? status_0 : booking['booking_detail_status'] == 1 ? status_1 : status_2 );
                 lob.append(out);
             })
@@ -112,26 +112,32 @@ var SaleReport = function () {
             },
             // Chuyển định dạng ngày trước khi gửi request
             function (start, end) {
-                var from = start.format('YYYY-MM-DD');
-                var to = end.format('YYYY-MM-DD');
-                var url = URL + 'spaCMS/reports/xhrGet_sale_report';
-
-                $('#dashboard-report-range span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
-                $('.period').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+                var printed_date = $(".printed-date").find('.date');
+                printed_date.text(moment().format("DD/MM/YYYY HH:mm"));
 
                 var sr_bsg = $("#sale_report_by_service_group").find('tbody');
                 var sr_ts = $("#sale_report_top_service").find('tbody');
 
+                // clear report
+                sr_bsg.html('');
+                sr_ts.html('');
+                
+                $('#dashboard-report-range span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+                $('.period').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+
                 var html = '<tr>'
                         +   '<td>:name</td>'
-                        +   '<td>:value</td>'
+                        +   '<td>:value đ</td>'
                         +   '<td>:count</td>'
                         + '</tr>';
 
                 var out = '';
 
+                var from = start.format('YYYY-MM-DD');
+                var to = end.format('YYYY-MM-DD');
+                var url = URL + 'spaCMS/reports/xhrGet_sale_report';
                 $.get(url, {'from':from, 'to':to}, function(data){
-                    $(".totalSale_value").text(data['totalSale']['value']);
+                    $(".totalSale_value").text(data['totalSale']['value'] + ' đ');
                     $(".totalSale_count").text(data['totalSale']['count']);
 
                     $.each(data['groupServiceSale'], function(index, groupService){

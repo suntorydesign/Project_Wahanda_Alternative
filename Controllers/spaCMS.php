@@ -36,6 +36,10 @@
 				case 'xhrUpdate_e_voucher':
 					$this->model->update_e_voucher();
 					break;
+
+				case 'xhrGet_monthly_sales':
+					$this->model->get_monthly_sales();
+					break;
 					
 				default:
 					$this->view->style = array(
@@ -131,7 +135,6 @@
 					break;
 			}
 		}
-		
 
 		function calendar($xhr = false) {
 			Auth::handleSpaCMSLogin();
@@ -333,24 +336,8 @@
 					$this->model->get_user_notification_email();
 					break;
 
-				case 'xhrUpdate_user_is_use_gvoucher':
-					$this->model->update_user_is_use_gvoucher();
-					break;
-
-				case 'xhrUpdate_user_is_use_evoucher':
-					$this->model->update_user_is_use_evoucher();
-					break;
-
-				case 'xhrUpdate_user_is_use_appointment':
-					$this->model->update_user_is_use_appointment();
-					break;
-
 				case 'xhrUpdate_user_password':
 					$this->model->update_user_password();
-					break;
-
-				case 'xhrUpdate_user_limit_before_booking':
-					$this->model->update_user_limit_before_booking();
 					break;
 
 				case 'xhrGet_user_is_use_gvoucher':
@@ -367,6 +354,10 @@
 
 				case 'xhrGet_user_is_use_appointment':
 					$this->model->get_user_is_use_appointment();
+					break;
+
+				case 'xhrUpdate_online_booking':
+					$this->model->update_online_booking();
 					break;
 
 				default:

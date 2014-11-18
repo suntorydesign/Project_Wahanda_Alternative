@@ -18,6 +18,9 @@ $(document).ready(function() {
       else
         return string + this;
     };
+
+    Home.init();
+    redeemVoucher.init();
 }); 
 
 
@@ -119,26 +122,28 @@ var redeemVoucher = function() {
     
     var xhrUpdate_e_voucher = function() {
         redeem_action.on("click", function(){
-            var self = $(this);
-            var data_id = self.attr('data_id');
+            var cfirm = confirm('Xác thực evoucher này?');
+            if (cfirm == true) {
+                var self = $(this);
+                var data_id = self.attr('data_id');
 
-            var loading = self.find('.loading');
-            var done = self.find('.done');
-            loading.fadeIn();
-            done.hide();
+                var loading = self.find('.loading');
+                var done = self.find('.done');
+                loading.fadeIn();
+                done.hide();
 
-            var url = URL + "spaCMS/home/xhrUpdate_e_voucher";
-            $.post(url, {'data_id':data_id}, function(result){
-                if(result == 'success') {
-                    hide_all_screen();
-                    voucher_redeem_success.fadeIn();
-                }
-            })
-            .done(function(){
-                loading.hide();
-                done.fadeIn();
-            });
-
+                var url = URL + "spaCMS/home/xhrUpdate_e_voucher";
+                $.post(url, {'data_id':data_id}, function(result){
+                    if(result == 'success') {
+                        hide_all_screen();
+                        voucher_redeem_success.fadeIn();
+                    }
+                })
+                .done(function(){
+                    loading.hide();
+                    done.fadeIn();
+                });
+            }
             return false;
         })
     }
@@ -161,5 +166,28 @@ var redeemVoucher = function() {
     }
 }();
 
+var Home = function() {
+    var xhrGet_monthly_sales = function() {
+        var monthly_sales = $("#monthly-sales");
+        var v_bookings = monthly_sales.find(".v-bookings");
+        var v_ttv = monthly_sales.find(".v-ttv");
 
-redeemVoucher.init();
+        var url = URL + "spaCMS/home/xhrGet_monthly_sales";
+        $.get(url, function(data){
+            v_bookings.text(data['total_count']);
+            v_ttv.text( $.number(data['total_value']) + ' đ');
+        }, 'json')
+        .done(function(){
+            v_bookings.fadeOut();
+            v_ttv.fadeOut();
+            v_bookings.fadeIn();
+            v_ttv.fadeIn();
+        });
+    }
+
+    return {
+        init: function() {
+            xhrGet_monthly_sales();
+        }
+    }
+}();

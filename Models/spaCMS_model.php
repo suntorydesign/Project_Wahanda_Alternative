@@ -59,6 +59,10 @@ class SpaCMS_Model extends Model {
 		SpaCMS_Home_Model::update_e_voucher();
 	}
 
+	function get_monthly_sales() {
+		SpaCMS_Home_Model::get_monthly_sales();
+	}
+
 	///////////////////////////// CALENDAR //////////////////////////
 	function get_calendar() {
 		SpaCMS_Calendar_Model::get_calendar();
@@ -241,24 +245,8 @@ class SpaCMS_Model extends Model {
 		SpaCMS_Settings_Model::get_user_notification_email();
 	}
 	
-	function update_user_is_use_gvoucher() {
-		SpaCMS_Settings_Model::update_user_is_use_gvoucher();
-	}
-	
-	function update_user_is_use_evoucher() {
-		SpaCMS_Settings_Model::update_user_is_use_evoucher();
-	}
-	
-	function update_user_is_use_appointment() {
-		SpaCMS_Settings_Model::update_user_is_use_appointment();
-	}
-	
 	function update_user_password() {
 		SpaCMS_Settings_Model::update_user_password();
-	}
-	
-	function update_user_limit_before_booking() {
-		SpaCMS_Settings_Model::update_user_limit_before_booking();
 	}
 	
 	function get_user_limit_before_booking() {
@@ -275,6 +263,10 @@ class SpaCMS_Model extends Model {
 	
 	function get_user_is_use_appointment() {
 		SpaCMS_Settings_Model::get_user_is_use_appointment();
+	}
+	
+	function update_online_booking() {
+		SpaCMS_Settings_Model::update_online_booking();
 	}
 
 }

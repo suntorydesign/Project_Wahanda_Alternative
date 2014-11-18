@@ -168,9 +168,9 @@
                     
                 </div>
                 <div class="report-content">
-                    <div class="printed-date hidden">
-                        <span class="title">Printed date</span>
-                        <span class="date">2014-08-13 14:46</span>
+                    <div class="printed-date">
+                        <span class="title">Ngày in báo cáo</span>
+                        <span class="date"></span>
                     </div>
                     <h1>Tổng doanh số bán hàng</h1>
                     <h2><?php echo Session::get('user_business_name');?></h2>
@@ -197,7 +197,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="totalSale_count">1</span>
+                                        <span class="totalSale_count">0</span>
                                         <!--<div class="change positive">
                                         <div class="icon icons-change-up"></div>
                                             <div class="value">17%</div>

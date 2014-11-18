@@ -228,9 +228,9 @@ var MenuGroupService = function () {
             html_us += '</div>';
             html_us += ':list_user_service';
 
-        var html_price1 = '<span class="">:full_price vnđ</span>';
-        var html_price2 = '<span class="sku-price--previous">:full_price vnđ</span>';
-            html_price2 += '<span class="sku-price--discount">:sale_price vnđ</span>';
+        var html_price1 = '<span class="">:full_price đ</span>';
+        var html_price2 = '<span class="sku-price--previous">:full_price đ</span>';
+            html_price2 += '<span class="sku-price--discount">:sale_price đ</span>';
 
         var html_featured_label = '<span class="label label-featured v-fulfillment">Đặc trưng</span> ';
 
@@ -261,15 +261,15 @@ var MenuGroupService = function () {
                         out = out.replace(/:user_service_is_featured/g, us['user_service_is_featured']);
                         out = out.replace(/:user_service_description/g, us['user_service_description']);
                         out = out.replace(/:user_service_image/g, us['user_service_image']);
-                        out = out.replace(/:user_service_full_price/g, us['user_service_full_price']);
-                        out = out.replace(/:user_service_sale_price/g, us['user_service_sale_price']);
+                        out = out.replace(/:user_service_full_price/g, $.number( us['user_service_full_price'] ));
+                        out = out.replace(/:user_service_sale_price/g, $.number( us['user_service_sale_price'] ));
                         if( us['user_service_sale_price'] == '' ) {
                             out = out.replace(':price', html_price1);
-                            out = out.replace(':full_price', us['user_service_full_price']);
+                            out = out.replace(':full_price', $.number( us['user_service_full_price'] ));
                         } else {
                             out = out.replace(':price', html_price2);
-                            out = out.replace(':full_price', us['user_service_full_price']);
-                            out = out.replace(':sale_price', us['user_service_sale_price']);
+                            out = out.replace(':full_price', $.number( us['user_service_full_price'] ));
+                            out = out.replace(':sale_price', $.number( us['user_service_sale_price'] ));
                         }
                     });
                 }

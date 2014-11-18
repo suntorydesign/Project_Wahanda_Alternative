@@ -528,157 +528,8 @@ var UserNotification = function() {
 }();
 
 var OnlineBooking = function() {
-    var uiugv_form = $("#user_is_use_gvoucher_form");
-    var xhrGet_user_is_use_gvoucher = function() {
-        var ckbox_uiugv = $('input[name=user_is_use_gvoucher]', uiugv_form);
-        
-        var url = URL + 'spaCMS/settings/xhrGet_user_is_use_gvoucher';
-        $.get(url, function(data){
-            if(data['user_is_use_gvoucher'] == 1) {
-                ckbox_uiugv.prop( "checked", true );
-            } else {
-                ckbox_uiugv.prop( "checked", false );
-            }
-        }, 'json');
-    }
-
-    var xhrUpdate_user_is_use_gvoucher = function() {
-        uiugv_form.on('submit', function(e){
-            e.preventDefault();
-            var self = $(this);
-            var data = self.serialize();
-
-            var isSuccess = false;
-            var loading = self.find('.loading');
-            var done = self.find('.done');
-            loading.fadeIn();
-            done.hide();
-
-            // console.log(data);
-            var url = URL + 'spaCMS/settings/xhrUpdate_user_is_use_gvoucher';
-            $.post(url, data, function(result) {
-                if(result == 'success') {
-                    isSuccess = true;
-                }
-            })
-            .done(function(){
-                loading.hide();
-                done.show();
-                if(isSuccess) {
-                    alert("Cập nhật thành công!");
-                } else {
-                    alert("Update Email notification error!");
-                }
-            });
-            return false;
-        });
-    }
-
-    var uiuev_form = $("#user_is_use_evoucher_form");
-    var xhrGet_user_is_use_evoucher = function() {
-        var ckbox_uiuev = $('input[name=user_is_use_evoucher]', uiuev_form);
-        
-        var url = URL + 'spaCMS/settings/xhrGet_user_is_use_evoucher';
-        $.get(url, function(data){
-            if(data['user_is_use_evoucher'] == 1) {
-                ckbox_uiuev.prop( "checked", true );
-            } else {
-                ckbox_uiuev.prop( "checked", false );
-            }
-        }, 'json');
-    }
-
-    var xhrUpdate_user_is_use_evoucher = function() {
-        uiuev_form.on('submit', function(e){
-            e.preventDefault();
-            var self = $(this);
-            var data = self.serialize();
-
-            var isSuccess = false;
-            var loading = self.find('.loading');
-            var done = self.find('.done');
-            loading.fadeIn();
-            done.hide();
-
-            // console.log(data);
-            var url = URL + 'spaCMS/settings/xhrUpdate_user_is_use_evoucher';
-            $.post(url, data, function(result) {
-                if(result == 'success') {
-                    isSuccess = true;
-                }
-            })
-            .done(function(){
-                loading.hide();
-                done.show();
-                if(isSuccess) {
-                    alert("Cập nhật thành công!");
-                } else {
-                    alert("Update Email notification error!");
-                }
-            });
-
-        });
-    }
-
-    var uiua_form = $("#user_is_use_appointment_form");
-    var xhrGet_user_is_use_appointment = function() {
-        var ckbox_uiua = $('input[name=user_is_use_appointment]', uiua_form);
-        
-        var url = URL + 'spaCMS/settings/xhrGet_user_is_use_appointment';
-        $.get(url, function(data){
-            if(data['user_is_use_appointment'] == 1) {
-                ckbox_uiua.prop( "checked", true );
-            } else {
-                ckbox_uiua.prop( "checked", false );
-            }
-        }, 'json');
-    }
-
-    var xhrUpdate_user_is_use_appointment = function() {
-        uiua_form.on('submit', function(e){
-            e.preventDefault();
-            var self = $(this);
-            var data = self.serialize();
-
-            var isSuccess = false;
-            var loading = self.find('.loading');
-            var done = self.find('.done');
-            loading.fadeIn();
-            done.hide();
-
-            // console.log(data);
-            var url = URL + 'spaCMS/settings/xhrUpdate_user_is_use_appointment';
-            $.post(url, data, function(result) {
-                if(result == 'success') {
-                    isSuccess = true;
-                }
-            })
-            .done(function(){
-                loading.hide();
-                done.show();
-                if(isSuccess) {
-                    alert("Cập nhật thành công!");
-                } else {
-                    alert("Update Email notification error!");
-                }
-            });
-
-        });
-    }
-
     var editOBs_form = $('#editOBs_form');
-    var xhrGet_user_limit_before_booking = function() {
-        var input_ulbb = $('input[name=user_limit_before_booking]', editOBs_form);
-        var select_ulbs = $('select[name=user_limit_before_service]', editOBs_form);
-        
-        var url = URL + 'spaCMS/settings/xhrGet_user_limit_before_booking';
-        $.get(url, function(data){
-            input_ulbb.val(data['user_limit_before_booking']);
-            select_ulbs.find('option[value="'+data['user_limit_before_service']+'"]').prop("selected",true);
-        }, 'json');
-    }
-
-    var xhrUpdate_user_limit_before_booking = function() {
+    var xhrUpdate_online_booking = function() {
         editOBs_form.on("submit", function(e) {
             e.preventDefault();
             var self = $(this);
@@ -690,7 +541,7 @@ var OnlineBooking = function() {
             loading.fadeIn();
             done.hide();
 
-            var url = URL + 'spaCMS/settings/xhrUpdate_user_limit_before_booking';
+            var url = URL + 'spaCMS/settings/xhrUpdate_online_booking';
             $.post(url, data, function(result) {
                 if(result == 'success') {
                     isSuccess = true;
@@ -710,6 +561,56 @@ var OnlineBooking = function() {
         });
     }
 
+    var xhrGet_user_is_use_gvoucher = function() {
+        var ckbox_uiugv = $('input[name=user_is_use_gvoucher]', editOBs_form);
+        
+        var url = URL + 'spaCMS/settings/xhrGet_user_is_use_gvoucher';
+        $.get(url, function(data){
+            if(data['user_is_use_gvoucher'] == 1) {
+                ckbox_uiugv.prop( "checked", true );
+            } else {
+                ckbox_uiugv.prop( "checked", false );
+            }
+        }, 'json');
+    }
+
+    var xhrGet_user_is_use_evoucher = function() {
+        var ckbox_uiuev = $('input[name=user_is_use_evoucher]', editOBs_form);
+        
+        var url = URL + 'spaCMS/settings/xhrGet_user_is_use_evoucher';
+        $.get(url, function(data){
+            if(data['user_is_use_evoucher'] == 1) {
+                ckbox_uiuev.prop( "checked", true );
+            } else {
+                ckbox_uiuev.prop( "checked", false );
+            }
+        }, 'json');
+    }
+
+    var xhrGet_user_is_use_appointment = function() {
+        var ckbox_uiua = $('input[name=user_is_use_appointment]', editOBs_form);
+        
+        var url = URL + 'spaCMS/settings/xhrGet_user_is_use_appointment';
+        $.get(url, function(data){
+            if(data['user_is_use_appointment'] == 1) {
+                ckbox_uiua.prop( "checked", true );
+            } else {
+                ckbox_uiua.prop( "checked", false );
+            }
+        }, 'json');
+    }
+
+    var xhrGet_user_limit_before_booking = function() {
+        var input_ulbb = $('input[name=user_limit_before_booking]', editOBs_form);
+        var select_ulbs = $('select[name=user_limit_before_service]', editOBs_form);
+        
+        var url = URL + 'spaCMS/settings/xhrGet_user_limit_before_booking';
+        $.get(url, function(data){
+            input_ulbb.val(data['user_limit_before_booking']);
+            select_ulbs.find('option[value="'+data['user_limit_before_service']+'"]').prop("selected",true);
+        }, 'json');
+    }
+
     return {
         init: function(){
             xhrGet_user_is_use_gvoucher();
@@ -717,10 +618,7 @@ var OnlineBooking = function() {
             xhrGet_user_is_use_appointment();
             xhrGet_user_limit_before_booking();
 
-            xhrUpdate_user_is_use_gvoucher();
-            xhrUpdate_user_is_use_evoucher();
-            xhrUpdate_user_is_use_appointment();
-            xhrUpdate_user_limit_before_booking();
+            xhrUpdate_online_booking();
         }
     }
 }();

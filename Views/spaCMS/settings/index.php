@@ -905,15 +905,6 @@
 							<li class="ui-state-default ui-corner-top active">
 								<a href="#online-booking-settings" role="tab" data-toggle="tab">Cài đặt</a>
 							</li>
-							<li id="#online-booking-gvoucher-tab" class="ui-state-default ui-corner-top">
-								<a href="#online-booking-gvoucher" role="tab" data-toggle="tab">Gift Vouchers</a>
-							</li>
-							<li id="online-booking-evoucher-tab" class="ui-state-default ui-corner-top">
-								<a href="#online-booking-evoucher" role="tab" data-toggle="tab">EVouchers</a>
-							</li>
-							<li id="online-booking-appointment-tab" class="ui-state-default ui-corner-top">
-								<a href="#online-booking-appointment" role="tab" data-toggle="tab">Appointment</a>
-							</li>
 						</ul>
 					</div>
 
@@ -924,7 +915,7 @@
 								<div class="content-note">
 									<div class="icon icons-info"></div>
 									<p class="main-txt">
-										Bạn có thể thiết lập cách khách hàng của bạn đặt dịch vụ thông qua website W.A
+										Bạn có thể thiết lập cách khách hàng của bạn đặt dịch vụ thông qua website Beleza
 									</p>
 									</br>
 								</div>
@@ -944,7 +935,24 @@
 												<input type="number" max="365" min="1" id="policies-onlineBookingMaxDays" name="user_limit_before_booking" required class="required digits" title="Nhập số ngày">
 											</div><span class="help-txt">ngày trong tương lai</span></td>
 										</tr>
-
+										<tr class="form-row">
+											<td class="label-part">
+												<input type="checkbox" value="true" name="user_is_use_gvoucher" id="user_is_use_gvoucher">
+												<label for="user_is_use_gvoucher"> Đồng ý sử dụng Gift Vouchers </label>
+											</td>
+										</tr>
+										<tr class="form-row">
+											<td class="label-part">
+												<input type="checkbox" value="true" name="user_is_use_evoucher" id="user_is_use_evoucher">
+												<label for="user_is_use_evoucher"> Đồng ý sử dụng eVoucher </label>
+											</td>
+										</tr>
+										<tr class="form-row">
+											<td class="label-part">
+												<input type="checkbox" value="true" name="user_is_use_appointment" id="user_is_use_appointment">
+												<label for="user_is_use_appointment"> Đồng ý sử dụng Appointment </label>
+											</td>
+										</tr>
 									</tbody>
 								</table>
 							</div>

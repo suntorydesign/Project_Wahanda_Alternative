@@ -26,3 +26,7 @@ img.logo-image, div.picture-logo {
 .warning {
 	display: none;
 }
+
+#online-booking-settings .label-part {
+	text-align: left;
+}

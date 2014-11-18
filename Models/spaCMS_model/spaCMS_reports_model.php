@@ -53,35 +53,27 @@ SQL;
 		$data_totalSale = self::get_total_sale($user_id, $from, $to);
 		$data_sales_report['totalSale'] = array(
 			'name' => 'totalSale',
-			'value' => $data_totalSale['totalSale_value'],
+			'value' => number_format($data_totalSale['totalSale_value']),
 			'count' => $data_totalSale['totalSale_count']
 		);
 
 		// Doanh thu của Nhóm dịch vụ tốt nhất
 		$data_groupServiceSale = self::get_group_service_sale($user_id, $from, $to, $limit);
 		foreach ($data_groupServiceSale as $key => $group_service) {
-			$name = $group_service['group_service_name'];
-			$groupServiceSale_value = $group_service['groupServiceSale_value'];
-			$groupServiceSale_count = $group_service['groupServiceSale_count'];
-
 			$data_sales_report['groupServiceSale'][] = array(
-				'name' => $name,
-				'value' => $groupServiceSale_value,
-				'count' => $groupServiceSale_count
+				'name' => $group_service['group_service_name'],
+				'value' => number_format($group_service['groupServiceSale_value']),
+				'count' => $group_service['groupServiceSale_count']
 			);
 		}
 
 		// Doanh thu của dịch vụ tốt nhất
 		$data_topServiceSale = self::get_top_service_sale($user_id, $from, $to, $limit);
 		foreach ($data_topServiceSale as $key => $service) {
-			$name = $service['user_service_name'];
-			$topServiceSale_value = $service['topServiceSale_value'];
-			$topServiceSale_count = $service['topServiceSale_count'];
-
 			$data_sales_report['topServiceSale'][] = array(
-				'name' => $name,
-				'value' => $topServiceSale_value,
-				'count' => $topServiceSale_count
+				'name' => $service['user_service_name'],
+				'value' => number_format($service['topServiceSale_value']),
+				'count' => $service['topServiceSale_count']
 			);
 		}
 
@@ -100,6 +92,7 @@ SQL;
 		WHERE 
 				booking_detail_user_id = {$user_id}
 			AND ( booking_detail_date BETWEEN '{$from}' AND '{$to}' )
+			AND booking_detail_status = 1
 SQL;
 		$data = $this->db->select($aQuery);
 		
@@ -120,6 +113,7 @@ SQL;
 		WHERE 
 				bd.booking_detail_user_id = {$user_id}
 			AND ( bd.booking_detail_date BETWEEN '{$from}' AND '{$to}' )
+			AND bd.booking_detail_status = 1
 			AND gs.group_service_id = us.user_service_group_id
 			AND us.user_service_id = bd.booking_detail_user_service_id
 		GROUP BY (gs.group_service_id)
@@ -144,6 +138,7 @@ SQL;
 		WHERE 
 				bd.booking_detail_user_id = {$user_id}
 			AND ( bd.booking_detail_date BETWEEN '{$from}' AND '{$to}' )
+			AND bd.booking_detail_status = 1
 			AND us.user_service_id = bd.booking_detail_user_service_id
 		GROUP BY (bd.booking_detail_user_service_id)
 		ORDER BY (topServiceSale_value) DESC
