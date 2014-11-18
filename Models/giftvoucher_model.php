@@ -102,5 +102,26 @@ SQL;
 		$select = $this -> db -> select($sql);
 		return $select[0]['gift_voucher_due_date'];
 	}
+	
+	public function loadPlaceUseGift() {
+		Session::initIdle();
+		$sql = <<<SQL
+SELECT DISTINCT user_business_name, user_logo
+FROM user
+, group_service
+, user_service
+WHERE user.user_id = group_service.group_service_user_id
+AND group_service.group_service_id = user_service.user_service_group_id
+AND user_delete_flg = 0
+AND user_service_delete_flg = 0
+AND group_service_delete_flg = 0
+SQL;
+		$select = $this -> db -> select($sql);
+		if($select){
+			echo json_encode($select);
+		}else{
+			echo '[]';
+		}
+	}
 
 }

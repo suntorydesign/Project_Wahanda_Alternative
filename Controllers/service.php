@@ -17,8 +17,7 @@ class service extends Controller {
 	public function servicePlace($user_id) {
 		Session::initIdle();
 		$this -> view -> style = array(URL . 'Views/service/css/service.css');
-		$this -> view -> script = array(URL . 'Views/service/js/service.js'
-									  , 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBUxUNFuJ09fVcA24HZcEq0gwxs37ESDo4&language=vi-VI');
+		$this -> view -> script = array(URL . 'Views/service/js/service.js', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBUxUNFuJ09fVcA24HZcEq0gwxs37ESDo4&language=vi-VI');
 		$this -> view -> user_id = $user_id;
 		$this -> view -> render('service/index');
 	}
@@ -109,7 +108,25 @@ class service extends Controller {
 	}
 
 	public function xhrGet_user_slide() {
+		SESSION::initIdle();
 		$user_id = $_GET['user_id'];
-		$this->model->get_user_slide($user_id);
+		$this -> model -> get_user_slide($user_id);
 	}
+
+	public function loadConsultingQuestion() {
+		SESSION::initIdle();
+		if (isset($_POST['user_id'])) {
+			$this -> model -> loadConsultingQuestion($_POST['user_id']);
+		}
+	}
+
+	public function consulting() {
+		SESSION::initIdle();
+		if (isset($_POST['service_type_id']) && isset($_POST['consulting_rule_suppose'])) {
+			$data['service_type_id'] = $_POST['service_type_id'];
+			$data['consulting_rule_suppose'] = $_POST['consulting_rule_suppose'];
+			$this -> model -> consulting($data);
+		}
+	}
+
 }

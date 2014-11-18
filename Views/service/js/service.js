@@ -27,9 +27,125 @@ $(document).ready(function() {
 			setTimeIdle();
 		}
 	});
+	$('#consulting_btn').on('click', function() {
+		setTimeIdle();
+		loadConsultingQuestion();
 
-	xhrGet_user_slide();
+	});
 });
+
+/*CONSULTING*/
+function loadConsultingQuestion() {
+	$.ajax({
+		url : URL + 'service/loadConsultingQuestion',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			user_id : USER_ID
+		},
+		success : function(response) {
+			var html = '';
+			html += '<div class="row">';
+			html += '<div class="col-md-12">';
+			html += '<span>Hãy chọn dịch vụ của <b>' + response[0].user_business_name + '</b> chúng tôi</span>';
+			html += '</div>';
+			html += '</div>';
+			html += '<br />';
+			html += '<div class="row">';
+			html += '<div class="col-md-12">';
+			$.each(response, function(key, value) {
+				html += '<div class="radio">';
+				html += '<label>';
+				html += '<input type="radio" name="service_type_consult" value="' + value.service_type_id + '">';
+				html += value.service_type_name;
+				html += '</label>';
+				html += '</div>';
+			});
+			html += '</div>';
+			html += '</div>';
+			$('#consulting_info_question').html(html);
+		},
+		complete : function() {
+			$('#consulting_info').modal('show');
+			$('input[name="service_type_consult"]').on('click', function() {
+				CONSULT_ANSWER = $(this).val();
+				if (CONSULT_SERVICE_TYPE == '') {
+					CONSULT_SERVICE_TYPE = $(this).val();
+				}
+			});
+			$('#btn_next_step').on('click', function() {
+				if (CONSULT_ANSWER == '' || CONSULT_SERVICE_TYPE == '') {
+					$('#error_answer_consult').fadeIn(function() {
+						setTimeout(function() {
+							$('#error_answer_consult').fadeOut();
+						}, 800);
+					});
+				} else {
+					if (CONSULT_SUPPOSE == '') {
+						if(FIRST_QUES == 0){
+							FIRST_QUES++;
+						}else{
+							CONSULT_SUPPOSE = CONSULT_ANSWER;
+						}
+					} else {
+						CONSULT_SUPPOSE += ',' + CONSULT_ANSWER;
+					}
+					console.log(CONSULT_SUPPOSE);
+					consulting();
+				}
+			});
+		}
+	});
+}
+
+function consulting() {
+	$.ajax({
+		url : URL + 'service/consulting',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			service_type_id : CONSULT_SERVICE_TYPE,
+			consulting_rule_suppose : CONSULT_SUPPOSE
+		},
+		success : function(response) {
+			if(response[0] != null){
+				var html = '';
+				html += '<div class="row">';
+				html += '<div class="col-md-12">';
+				html += '<span><b>' + response[0].consulting_rule_question + '</b></span>';
+				html += '</div>';
+				html += '</div>';
+				html += '<br />';
+				html += '<div class="row">';
+				html += '<div class="col-md-12">';
+				var consulting_rule_result = response[0].consulting_rule_result.split(',');
+				$.each(consulting_rule_result, function(key, value) {
+					html += '<div class="radio">';
+					html += '<label>';
+					html += '<input type="radio" name="consulting_rule_result" value="' + value + '">';
+					html += value;
+					html += '</label>';
+					html += '</div>';
+				});
+				html += '</div>';
+				html += '</div>';
+				$('#consulting_info_question').html(html);
+			}else{
+				
+			}
+		},
+		complete : function() {
+			CONSULT_ANSWER = '';
+			$('input[name="consulting_rule_result"]').on('click', function() {
+				CONSULT_ANSWER = $(this).val();
+			});
+		}
+	});
+}
+
+/*END CONSULTING*/
+/*--------------------------*/
+
 /*LOAD LOCATION DETAIL*/
 function loadLocationDetail() {
 	$.ajax({
@@ -225,37 +341,49 @@ function loadLocationStarRating() {
 				// console.log(head);
 				// console.log(tail);
 				html += '<div class="col-xs-6"><span class="text-orange pull-left rating-point-1">' + head + '.' + round_tail + '</span>';
+				$('#location_slide_point').html(head + '.' + round_tail);
 				html += '</div>';
 				html += '<div class="col-xs-6 rating-point-2" align="center">';
 				html += '<span>Điểm đánh giá</span>';
 				html += '<div class="rating">';
+				var html_2 = '<div class="ss-2-rating-1">';
 				for (var i = 1; i <= head; i++) {
 					html += '<i class="fa fa-star"></i>';
+					html_2 += '<i class="fa fa-star"></i>';
 				}
 				if (tail != 0) {
 					if (tail == 0.9) {
 						html += '<i class="fa fa-star"></i>';
+						html_2 += '<i class="fa fa-star"></i>';
 					} else if (tail == 0.2 || tail == 0.3 || tail == 0.4 || tail == 0.5 || tail == 0.6 || tail == 0.7 || tail == 0.8) {
 						html += '<i class="fa fa-star-half-empty"></i>';
+						html_2 += '<i class="fa fa-star-half-empty"></i>';
 					} else if (tail == 0.1) {
 						html += '<i class="fa fa fa-star-o"></i>';
+						html_2 += '<i class="fa fa fa-star-o"></i>';
 					}
 					for (var j = head + 2; j <= 5; j++) {
 						html += '<i class="fa fa-star-o"></i>';
+						html_2 += '<i class="fa fa-star-o"></i>';
 					}
 				} else {
 					for (var j = head + 1; j <= 5; j++) {
 						html += '<i class="fa fa-star-o"></i>';
+						html_2 += '<i class="fa fa-star-o"></i>';
 					}
 				}
+				html_2 += '</div>';
 				html += '</div>';
 				html += '<span >' + response.general_info[0].client_amount + ' Lượt đánh giá</span>';
+				html_2 += '<span >' + response.general_info[0].client_amount + ' Lượt đánh giá</span>';
 				html += '</div>';
 				html += '';
 				$('#place_star_rating #user_review_overall').html(html);
+				$('#location_slide_total_star').html(html_2);
 			}
 			if (response.data[0] != null) {
 				var html_2 = '';
+				var html_3 = '';
 				// console.log(rating_value);
 				// console.log(head);
 				// console.log(tail);
@@ -265,40 +393,55 @@ function loadLocationStarRating() {
 					var tail = rating_value - head;
 					tail = Math.round(tail * 100) / 100;
 					// console.log(value.star_review);
+					html_3 += '<div class="row" style="margin-bottom: 10px;">';
 					html_2 += '<div class="col-xs-6" style="margin-bottom: 10px">';
+					html_3 += '<div class="col-md-6" style="padding: 0 5px;">';
 					html_2 += '<small class="pull-right">' + value.review_name + '</small></div>';
+					html_3 += '<span class="ssr2-title pull-right">' + value.review_name + '</span>';
+					html_3 += '</div>';
 					html_2 += '<div class="col-xs-6">';
+					html_3 += '<div class="col-md-6 ssr2-star" style="padding: 0 5px;">';
 					html_2 += '<div class="rating pull-left">';
 					for (var i = 1; i <= head; i++) {
 						html_2 += '<i class="fa fa-star"></i>';
+						html_3 += '<span class="fa fa-star"></span>';
 					}
 					if (tail != 0) {
 						if (tail == 0.9) {
 							html_2 += '<i class="fa fa-star"></i>';
+							html_3 += '<span class="fa fa-star"></span>';
 						} else if (tail == 0.2 || tail == 0.3 || tail == 0.4 || tail == 0.5 || tail == 0.6 || tail == 0.7 || tail == 0.8) {
 							html_2 += '<i class="fa fa-star-half-empty"></i>';
+							html_3 += '<span class="fa fa-star-half-empty"></span>';
 						} else if (tail == 0.1) {
 							html_2 += '<i class="fa fa fa-star-o"></i>';
+							html_3 += '<span class="fa fa-star-o"></span>';
 						}
 						for (var j = head + 2; j <= 5; j++) {
 							html_2 += '<i class="fa fa-star-o"></i>';
+							html_3 += '<span class="fa fa-star-o"></span>';
 						}
 					} else {
 						for (var j = head + 1; j <= 5; j++) {
 							html_2 += '<i class="fa fa-star-o"></i>';
+							html_3 += '<span class="fa fa-star-o"></span>';
 						}
 					}
 					html_2 += '</div>';
 					html_2 += '</div>';
+					html_3 += '</div>';
+					html_3 += '</div>';
 					html_2 += '<div class="clearfix"></div>';
 				});
 				//console.log(html_2);
 				$('#place_star_rating #user_review_properties').html(html_2);
+				$('#location_slide_star').html(html_3);
 			}
 		},
 		complete : function() {
 			$('#disallow-star-place').hide();
 			$('#waiting_for_star_rating').fadeOut();
+			xhrGet_user_slide();
 		}
 	});
 }
@@ -842,53 +985,49 @@ function showMoreReview() {
 
 /*INIT GOOGLE MAP*/
 // function initialize() {
-	// var directionsDisplay = new google.maps.DirectionsRenderer();
-	// geocoder = new google.maps.Geocoder();
-	// //default position these function in google map
-	// var mapOptions = {
-		// zoom : 16,
-		// center : new google.maps.LatLng(0, 0),
-		// panControl : false,
-		// zoomControl : true,
-		// zoomControlOptions : {
-			// style : google.maps.ZoomControlStyle.SMALL,
-			// // position : google.maps.ControlPosition.LEFT_CENTER
-		// },
-		// mapTypeControl : false,
-		// scaleControl : false,
-		// streetViewControl : false,
-		// overviewMapControl : false,
-		// rotateControl : false
-	// };
-	// // console.log(LAT);
-	// map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-	// directionsDisplay.setMap(map);
-	// initialLocation = new google.maps.LatLng(LAT, LNG);
-	// map.setCenter(initialLocation);
-	// marker = new google.maps.Marker({
-		// position : new google.maps.LatLng(LAT, LNG),
-		// map : map,
-	// });
+// var directionsDisplay = new google.maps.DirectionsRenderer();
+// geocoder = new google.maps.Geocoder();
+// //default position these function in google map
+// var mapOptions = {
+// zoom : 16,
+// center : new google.maps.LatLng(0, 0),
+// panControl : false,
+// zoomControl : true,
+// zoomControlOptions : {
+// style : google.maps.ZoomControlStyle.SMALL,
+// // position : google.maps.ControlPosition.LEFT_CENTER
+// },
+// mapTypeControl : false,
+// scaleControl : false,
+// streetViewControl : false,
+// overviewMapControl : false,
+// rotateControl : false
+// };
+// // console.log(LAT);
+// map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+// directionsDisplay.setMap(map);
+// initialLocation = new google.maps.LatLng(LAT, LNG);
+// map.setCenter(initialLocation);
+// marker = new google.maps.Marker({
+// position : new google.maps.LatLng(LAT, LNG),
+// map : map,
+// });
 // }
 
 /*END INIT GOOGLE MAP*/
 /*-----------------------*/
-
 
 function xhrGet_user_slide() {
 	var indicators = $(".ss-2-slide").find(".carousel-indicators");
 	var inner = $(".ss-2-slide").find(".carousel-inner");
 
 	var html_indicators = '<li data-target="#carousel-example-generic" data-slide-to=":index" class=":active"></li>';
-	var html_inner = '<div class="item :active">'
-				+		'<img src=":img_src" alt=":img_alt">'
-				+		'<div class="carousel-caption">'
-				+		':img_caption'
-				+		'</div>'
-				+	'</div>';
+	var html_inner = '<div class="item :active">' + '<img src=":img_src" alt=":img_alt">' + '<div class="carousel-caption">' + ':img_caption' + '</div>' + '</div>';
 
 	var url = URL + "service/xhrGet_user_slide";
-	$.get(url,{"user_id":USER_ID}, function(data){
+	$.get(url, {
+		"user_id" : USER_ID
+	}, function(data) {
 		var slides = data["user_slide"].split(",");
 		var out_indicators = '';
 		var out_inner = '';
@@ -899,7 +1038,7 @@ function xhrGet_user_slide() {
 			out_inner = out_inner.replace(':img_alt', '');
 			out_inner = out_inner.replace(':img_caption', '');
 
-			if(index == 0) {
+			if (index == 0) {
 				out_indicators = out_indicators.replace(':active', 'active');
 				out_inner = out_inner.replace(':active', 'active');
 			}

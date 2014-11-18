@@ -262,6 +262,10 @@ span.rating:hover{
 	color: #FCDF17;
 }
 
+.ss-2-rating .ss-2-rating-1 .fa{
+	margin-right: 6px;
+}
+
 .ss-2-rating .ss-2-rating-2 {
 	font-size: 13px;
 	color: #8B8A8A;
@@ -281,6 +285,10 @@ span.rating:hover{
 	font-size: 11px;
 }
 
+.ss-2-rating .ss-2-rating-detail .ssr2-star .fa{
+	margin-right: 4px;
+}
+
 .ss-2-btn {
 	border-radius: 8px;
 	font-weight: 700;
@@ -294,4 +302,28 @@ span.rating:hover{
 	/*max-width: 100%; */
 	/*height: 275px !important;*/
 	max-height: 275px !important;
+}
+
+.consulting{
+	position: fixed;
+	background-color: #4CAE4C;
+	/*width: 165px;*/
+	top: 50%;
+	padding: 7px;
+	border-radius: 0 20px 20px 0;
+}
+
+.consulting span, .consulting small{
+	color: #FFFFFF;
+	font-weight: bold
+	
+}
+
+.consulting:hover{
+	top: 49.5%;
+	background-color: #717171;
+	padding: 10px;
+}
+#consulting_info_question span, #consulting_info_question p, #consulting_info_question small, #consulting_info_question label{
+	color: #777;
 }

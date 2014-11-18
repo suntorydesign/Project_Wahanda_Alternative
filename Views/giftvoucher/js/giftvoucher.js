@@ -19,6 +19,7 @@ $(document).ready(function() {
 			GIFT_TYPE = $(this).val();
 		}
 	});
+	loadPlaceUseGift();
 });
 
 function saveGiftvoucher() {
@@ -53,13 +54,13 @@ function saveGiftvoucher() {
 						if (response == 200) {
 							jumpToOtherPage(URL + 'giftpayment');
 						} else if (response == 0) {
-							$('#waiting_for_gift').fadeOut(function(){
+							$('#waiting_for_gift').fadeOut(function() {
 								$('#login_modal').modal('show');
-							});						
-						} else if (response == 800){
-							$('#waiting_for_gift').fadeOut(function(){
+							});
+						} else if (response == 800) {
+							$('#waiting_for_gift').fadeOut(function() {
 								alert('Chưa nhập đầy đủ thông tin!');
-							});							
+							});
 						}
 					},
 					complete : function() {
@@ -72,6 +73,34 @@ function saveGiftvoucher() {
 					$('#waiting_for_gift').fadeOut();
 				});
 			}
+		}
+	});
+}
+
+function loadPlaceUseGift() {
+	$.ajax({
+		url : URL + 'giftvoucher/loadPlaceUseGift',
+		type : 'post',
+		success : function(response) {
+			var html = '';
+			if(response[0] != null){
+				console.log(response);
+				response = JSON.parse(response);
+				$.each(response, function(key, value){
+					html += '<li>';
+					html += '<div align="center">';
+					html += '<img style="height: 120px; width: 180px" class="img-responsive" src="' + value.user_logo + '">';
+					html += '<p><small><b>' + value.user_business_name + '</b></small></p>';
+					html += '</div>';
+					html += '</li>';
+				});
+				$('#place_use_gift_voucher').html(html);
+			}else{
+				
+			}
+		},
+		complete : function() {
+
 		}
 	});
 }
