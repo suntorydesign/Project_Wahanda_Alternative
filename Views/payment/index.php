@@ -57,7 +57,7 @@
 									<div class="form-group">
 										<small class="col-sm-12 payment_text"> SỐ THẺ </small>
 										<div class="col-sm-12">
-											<input onkeypress="inputNumbers(event)" class="form-control" type="text" id="client_card_number" name="client_card_number">
+											<input value="6011740673598830" onkeypress="inputNumbers(event)" class="form-control" type="text" id="client_card_number" name="client_card_number">
 										</div>
 									</div>
 								</div>

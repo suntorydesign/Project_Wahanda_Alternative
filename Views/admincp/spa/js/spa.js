@@ -17,6 +17,7 @@ function loadDistrict() {
 		success : function(response) {
 			if (response[0] != null) {
 				var html = '';
+				html += '<option value="" selected>Chọn quận (*)...</option>';
 				$.each(response, function(key, value) {
 					html += '<option value="' + value.district_id + '">' + value.district_name + '</option>';
 				});
@@ -97,7 +98,7 @@ function addSaveDetail() {
 			var user_district_id = $('#user_district_id').val();
 			var user_address = $('#user_address').val();
 			var user_phone = $('#user_phone').val();
-			if (user_email == '' || user_business_name == '' || user_address == '') {
+			if (user_email == '' || user_business_name == '' || user_address == '' || user_district_id == '') {
 				$('#error_add_spa').text('Nhập đầy đủ các trường có (*)');
 				$('#error_add_spa').fadeIn(function() {
 					$('div.s-loading').fadeOut(function() {

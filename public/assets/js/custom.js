@@ -1787,7 +1787,8 @@ function sendCreatePlaceMail() {
 		var create_place_phone = $('#create_place_phone').val();
 		var create_place_address = $('#create_place_address').val();
 		var create_place_com_name = $('#create_place_com_name').val();
-		if (create_place_name == '' || create_place_email == '' || create_place_phone == '' || create_place_address == '' || create_place_com_name == '') {
+		var create_place_district = $('#create_place_district').val();
+		if (create_place_district == '' || create_place_name == '' || create_place_email == '' || create_place_phone == '' || create_place_address == '' || create_place_com_name == '') {
 			$('#error_message_create_place').text('Nhập đầy đủ thông tin ');
 			$('#error_message_create_place').fadeIn(function() {
 				$('#waiting_for_create_place').fadeOut();

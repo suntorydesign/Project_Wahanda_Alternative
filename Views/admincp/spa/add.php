@@ -43,9 +43,9 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-4">Quận</label>
+						<label class="control-label col-md-4">Quận (*)</label>
 						<div class="col-md-8">
-							<select id="user_district_id" class="form-control">
+							<select style="color: #777;" id="user_district_id" class="form-control">
 								
 							</select>
 						</div>
@@ -53,7 +53,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-4">Số ĐT</label>
 						<div class="col-md-8">
-							<input id="user_phone" onkeypress="inputNumbers(event)" name="user_phone" class="form-control" type="text" placeholder="Nhập số điện thoại.." />
+							<input id="user_phone" onkeypress="inputNumbers(event)" name="user_phone" class="form-control" type="text" placeholder="Nhập số điện thoại..." />
 						</div>
 					</div>
 				</div>

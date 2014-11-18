@@ -228,14 +228,16 @@
 								<div class="form-group">
 									<label class="control-label col-sm-3">Địa chỉ</label>
 									<div class="col-sm-8">
-										<input autocomplete="off" class="form-control" type="text" id="create_place_address" name="create_place_address" placeholder="Địa chỉ..." />
+										<input autocomplete="off" class="form-control" type="text" id="create_place_address" name="create_place_address" placeholder="Địa chỉ (Hãy nhập đầy đủ quận, huyện)..." />
 										<small style="color: red;"></small>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-sm-3">Quận</label>
 									<div class="col-sm-8">
-										<select id="create_place_district" class="form-control"></select>
+										<select style="color: #777;" id="create_place_district" class="form-control">
+											<option value="">Chọn quận...</option>
+										</select>
 										<small style="color: red;"></small>
 									</div>
 								</div>
