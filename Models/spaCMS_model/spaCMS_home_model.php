@@ -101,15 +101,20 @@ SQL;
 			us.user_service_id,
 			us.user_service_name,
 			COUNT(*) as total_count_this_month,
-			COUNT(A.*) as total_count_pre_month
 		FROM 
 			booking_detail bd, user_service us,
-			(SELECT
-				*
-			FROM 
-
-			WHERE 
-				
+			(
+				SELECT
+					us.user_service_id, 
+					COUNT(*) as total_count_pre_month
+				FROM 
+					booking_detail bd, user_service us
+				WHERE 
+						bd.booking_detail_user_id = {$user_id}
+					AND bd.booking_detail_user_service_id = us.user_service_id
+					AND ( bd.booking_detail_date BETWEEN '{$pre_month_from}' AND '{$pre_month_to}' )
+				GROUP BY ( us.user_service_id )
+				ORDER BY ( total_count_this_month ) DESC
 			) A
 		WHERE 
 				bd.booking_detail_user_id = {$user_id}
