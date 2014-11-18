@@ -173,7 +173,9 @@ var Home = function() {
         var v_ttv = monthly_sales.find(".v-ttv");
 
         var url = URL + "spaCMS/home/xhrGet_monthly_sales";
-        $.get(url, function(data){
+        var this_month_from = moment().startOf('month').format("YYYY-MM-DD");
+        var this_month_to = moment().endOf('month').format("YYYY-MM-DD");
+        $.get(url, {'this_month_from':this_month_from, 'this_month_to':this_month_to}, function(data){
             v_bookings.text(data['total_count']);
             v_ttv.text( $.number(data['total_value']) + ' đ');
         }, 'json')
@@ -185,9 +187,38 @@ var Home = function() {
         });
     }
 
+    var xhrGet_top_services = function() {
+        var top_services = $("#top-services").find('.list-top-services');
+        var html = '<tr>'
+            +       '<th>:us_name</th>'
+            +       '<td>:total_count_this_month</td>'
+            +       '<td>:total_count_pre_month</td>'
+            +   '</tr>';
+
+        var url = URL + "spaCMS/home/xhrGet_top_services";
+        var this_month_from = moment().startOf('month').format("YYYY-MM-DD");
+        var this_month_to = moment().endOf('month').format("YYYY-MM-DD");
+        var pre_month_from = moment().subtract('month', 1).startOf('month').format("YYYY-MM-DD");
+        var pre_month_to = moment().subtract('month', 1).endOf('month').format("YYYY-MM-DD");
+        $.get(url, {'this_month_from':this_month_from, 'this_month_to':this_month_to, 'pre_month_from':pre_month_from, 'pre_month_to':pre_month_to}, function(data) {
+            var out = '';
+            $.each(data, function(index, value) {
+                out = html.replace(':us_name', value['user_service_name']);
+                out = out.replace(':total_count_this_month', value['total_count_this_month']);
+                out = out.replace(':total_count_pre_month', value['total_count_pre_month']);
+                top_services.append(out);
+            });
+        }, 'json')
+        .done(function() {
+            top_services.fadeOut();
+            top_services.fadeIn();
+        });
+    }
+
     return {
         init: function() {
             xhrGet_monthly_sales();
+            xhrGet_top_services();
         }
     }
 }();

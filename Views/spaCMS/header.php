@@ -56,23 +56,27 @@
                 <ul class="hidden"></ul>
             </div>
             <ul id="nav1">
-                <li class="" id="nav-notifications">
-                    <span class="notification-badge"> <span class="icons-notification"></span> <span class="notification-count">1</span> </span>
-                    <div class="notification-list hidden">
-                        <ul class="ddown radius-bottom">
+                <li id="nav-notifications">
+                    <span class="notification-badge"> 
+                        <span class="icons-notification"></span> 
+                        <span class="notification-count">1</span>
+                    </span>
+                    <div class="notification-list display_none" role="menu">
+                        <ul class="ddown radius-bottom" >
                             <li class="ddown-title">
                                 Items need action:
                             </li>
-
+                            
                             <li>
-                                <a href="./settings?prevalidate=fulfillment#venue/285925/notifications-settings/fulfillment"> <span class="notification-item">Fulfillment address not set</span> </a>
+                                <a href="./settings?prevalidate=fulfillment#venue/285925/notifications-settings/fulfillment"> 
+                                    <span class="notification-item">Fulfillment address not set</span> 
+                                </a>
                             </li>
                         </ul>
                         <div class="notification-badge-wrapper">
                             <span class="notification-badge"> <span class="icons-notification"></span> <span class="notification-count">1</span> </span>
                         </div>
                     </div>
-
                 </li>
                 <li id="nav-home">
                     <a title="Home" href="./home"> <div class="icons-nav-home"></div>
@@ -117,7 +121,7 @@
                             ?>
                         </div>
                     </div> </a>
-                    <ul id="logout" class="ddown" role="menu" style="display:none;">
+                    <ul id="logout" class="ddown display_none" role="menu">
                         <li>
                             <a href="<?php echo URL . 'spaCMS/logout' ?>"> <div class="icons-logout"></div> Thoát </a>
                         </li>

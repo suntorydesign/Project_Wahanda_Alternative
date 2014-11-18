@@ -236,7 +236,6 @@
 						<td class="content-box tops">
 						<div id="top-services">
 							<h2 class="box-hd">Dịch vụ tốt nhất</h2>
-
 							<table>
 								<thead>
 									<tr>
@@ -249,12 +248,8 @@
 										trước</td>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<th>Body Wraps</th>
-										<td>1</td>
-										<td>1</td>
-									</tr>
+								<tbody class="list-top-services">
+								
 								</tbody>
 							</table>
 						</div><div class="box-separator"></div>

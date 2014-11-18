@@ -40,6 +40,10 @@
 				case 'xhrGet_monthly_sales':
 					$this->model->get_monthly_sales();
 					break;
+
+				case 'xhrGet_top_services':
+					$this->model->get_top_services();
+					break;
 					
 				default:
 					$this->view->style = array(
@@ -257,7 +261,7 @@
 						ASSETS . 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.js',
 						ASSETS . 'js/core/app.js',
 						ASSETS . 'js/core/datatable.js',
-						ASSETS . 'plugins/bootstrap-daterangepicker/moment.min.js',
+						// ASSETS . 'plugins/bootstrap-daterangepicker/moment.min.js',
 						ASSETS . 'plugins/bootstrap-daterangepicker/daterangepicker.js',
 						ASSETS . 'js/spaCMS/index.js',
 						URL . 'Views/spaCMS/reports/js/spaCMS_reports.js'

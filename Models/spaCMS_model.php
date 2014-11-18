@@ -63,6 +63,10 @@ class SpaCMS_Model extends Model {
 		SpaCMS_Home_Model::get_monthly_sales();
 	}
 
+	function get_top_services() {
+		SpaCMS_Home_Model::get_top_services();
+	}
+
 	///////////////////////////// CALENDAR //////////////////////////
 	function get_calendar() {
 		SpaCMS_Calendar_Model::get_calendar();
