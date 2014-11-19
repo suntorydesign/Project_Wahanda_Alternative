@@ -211,7 +211,7 @@ function loadResultSearch(page) {
 					$('#user_business_name_map').text(USER_BUSINESS_NAME + ': ');
 					USER_ADDRESS = $(this).attr('address-value');
 					$('#user_address').text(USER_ADDRESS);
-					if(USER_ADDRESS_2 == ''){
+					if(USER_ADDRESS_2_TEMP == ''){
 						$('#current_address').text('...');
 					}else{
 						$('#current_address').text(USER_ADDRESS_2 + ' (tương đối)');
@@ -299,6 +299,7 @@ function initialize() {
 					// }
 					USER_ADDRESS_1 = results[0].formatted_address;
 					USER_ADDRESS_2 = results[1].formatted_address;
+					USER_ADDRESS_2_TEMP = results[1].formatted_address;
 					$('#user_physical_location i').text(' ' + USER_ADDRESS_2);
 					loadResultSearch(1);
 					loadAdvantageSearch();

@@ -558,7 +558,7 @@ SQL;
 		echo json_encode($data[0]);
 	}
 
-	public function loadConsultingQuestion($user_id) {
+	public function loadFirstConsultingQuestion($user_id) {
 		$sql = <<<SQL
 SELECT DISTINCT 
 user_business_name
@@ -575,23 +575,34 @@ AND service.service_id = user_service.user_service_service_id
 AND user_service.user_service_group_id = group_service.group_service_id
 AND user.user_id = group_service.group_service_user_id
 AND user.user_id = {$user_id}
+AND user_delete_flg = 0
+AND user_service_delete_flg = 0
 SQL;
 		$select = $this -> db -> select($sql);
 		echo json_encode($select);
 	}
 	
-	public function consulting($data){
+	public function loadConsultingQuestion($data){
 		$sql = <<<SQL
-SELECT 
-consulting_rule_result
-, consulting_rule_question
-FROM consulting_rule
-WHERE
-consulting_rule_suppose = '{$data['consulting_rule_suppose']}'
-AND consulting_rule_service_type_id = '{$data['service_type_id']}'
+SELECT question_id
+, question_content
+FROM question
+WHERE question_service_type_id = {$data['question_service_type_id']}
+AND question_delete_flg = 0
 SQL;
 		$select = $this -> db -> select($sql);
-		echo json_encode($select);
+		$select_array = array();
+		foreach ($select as $key => $value) {
+			$sql = <<<SQL
+SELECT *
+FROM fact
+WHERE fact_question_id = {$value['question_id']}
+AND fact_delete_flg = 0
+SQL;
+			$select_fact = $this -> db -> select($sql);
+			$select_array[$value['question_id'].') '.$value['question_content']] = $select_fact;
+		}
+		echo json_encode($select_array);
 	}
 
 }

@@ -136,10 +136,10 @@
 
 </div>
 <div id="content-wrap">
-	<!-- <div id="consulting_btn" class="consulting pointer">
+	<div id="consulting_btn" class="consulting pointer">
 		<span>TƯ VẤN </span>
 		<small class="fa fa-lg fa-check-square-o"></small>
-	</div> -->
+	</div>
 	<div class="container">
 		
 		<div class="col-md-8">
@@ -769,15 +769,16 @@
 								</div>
 		      				</div>	
 		      			</div> -->
-		      		</div>
-		      		<br />
-	      			<div class="row">
-	      				<div class="col-md-12 text-right">
-	      					<small class="text-danger" id="error_answer_consult" style="display: none;">
-	      						<b>Bạn chưa trả lời! </b>
-	      					</small>
-	      					<button id="btn_next_step" class="btn btn-orange-black">Tiếp tục <span class="fa fa-arrow-right"></span></button>
-	      				</div>	
+		      		
+			      		<!-- <br />
+		      			<div class="row">
+		      				<div class="col-md-12 text-right">
+		      					<small class="text-danger" id="error_answer_consult" style="display: none;">
+		      						<b>Bạn chưa trả lời! </b>
+		      					</small>
+		      					<button id="btn_next_step" class="btn btn-orange-black">Tiếp tục <span class="fa fa-arrow-right"></span></button>
+		      				</div>	
+		      			</div> -->
 	      			</div>
     			</div>
     			<div class="modal-footer" style="padding: 15px 20px 15px;margin-top: 0px">
@@ -798,5 +799,4 @@
 	var CONSULT_RESULT = '';
 	var CONSULT_SUPPOSE = '';
 	var CONSULT_SERVICE_TYPE = '';
-	var FIRST_QUES = 0;
 </script>

@@ -364,6 +364,7 @@
 	var CHOOSEN_DATE_ACTIVE = '';
 	var USER_BUSINESS_NAME = '';
 	var USER_ADDRESS = '';
+	var USER_ADDRESS_2_TEMP = '';
 	// var DISTANCE = '';
 	// var DURATION = '';
 	// var DISTRICT_ID_SEARCH = '';
