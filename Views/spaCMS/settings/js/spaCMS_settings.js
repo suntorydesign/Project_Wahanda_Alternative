@@ -283,6 +283,9 @@ var UserDetail = function (){
 
                 var LAT = $('input[name=user_lat]', loc_map).val();
                 var LNG = $('input[name=user_long]', loc_map).val();
+                input_ulat.val(LAT);
+                input_ulong.val(LNG);
+
                 var user_position = new google.maps.LatLng(LAT, LNG);
 
                 var marker;
