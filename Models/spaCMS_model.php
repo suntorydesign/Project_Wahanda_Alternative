@@ -276,5 +276,9 @@ class SpaCMS_Model extends Model {
 	function get_user_map() {
 		SpaCMS_Settings_Model::get_user_map();
 	}
+	
+	function update_user_map() {
+		SpaCMS_Settings_Model::update_user_map();
+	}
 
 }

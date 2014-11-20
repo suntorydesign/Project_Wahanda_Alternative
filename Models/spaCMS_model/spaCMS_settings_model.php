@@ -410,6 +410,9 @@ SQL;
 		return false;
 	}
 
+
+
+
 	public function get_user_map() {
 		$user_id = Session::get('user_id');
 
@@ -423,6 +426,23 @@ SQL;
 		$data = $this->db->select($aQuery);
 
 		echo json_encode($data[0]);
+	}
+
+	public function update_user_map() {
+		$user_id = Session::get('user_id');
+
+		$data = array(
+			"user_lat" => $_POST["user_lat"],
+			"user_long" => $_POST["user_long"]
+		);
+
+		$result = $this->db->update('user', $data, "user_id = $user_id");
+		
+		if($result) {
+			echo 'success';
+		} else {
+			echo 'error';
+		}
 	}
 
 

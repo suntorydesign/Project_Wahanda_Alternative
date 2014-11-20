@@ -368,6 +368,10 @@
 					$this->model->get_user_map();
 					break;
 
+				case 'xhrUpdate_user_map':
+					$this->model->update_user_map();
+					break;
+
 				default:
 					$this->view->style = array(
 						ASSETS . 'plugins/image-manager/css/image-manager.min.css',

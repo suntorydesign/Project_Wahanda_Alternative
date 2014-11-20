@@ -17207,9 +17207,12 @@ html body.menu-module #feedbackify .fby-tab {
 #venue-details-map #venue-details-map-container {
      border: 2px solid #74756f;
      float: left;
-     height: 498px;
+     /*height: 498px;*/
      overflow: hidden;
      width: 510px;
+     height: 100%;
+     margin: 0px;
+     padding: 0px;
 }
 
 #venue-details-map #venue-details-map-info {

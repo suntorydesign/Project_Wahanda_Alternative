@@ -1135,7 +1135,7 @@
 </div><!--// END Image Manager Modal -->
 
 
-<div id="venueDetailsMap_modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+<div id="venueDetailsMap_modal" class=" modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 	<div class="modal-dialog" style="width: 820px;">
 		<div class="modal-content">
 			<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable">
@@ -1146,11 +1146,13 @@
 					</a>
 				</div>
 				<div id="venue-details-map" style="width: auto; min-height: 107px; height: auto;" class="ui-dialog-content ui-widget-content">
+				<form id="editUserMap_form" action="#" method="POST">
 					<div class="dialog-content clearfix">
 						<div id="venue-details-map-container" style="z-index: 3000; position: relative; overflow: hidden; transform: translateZ(0px); background-color: rgb(229, 227, 223);">
-							<input type="hidden" name="user_lat" />
-							<input type="hidden" name="user_long" />
+							
 						</div>
+						<input type="hidden" name="user_lat" />
+						<input type="hidden" name="user_long" />
 						<div id="venue-details-map-info">
 							<div id="venue-details-map-address" class="b-full-address hidden">
 								<div class="part-title">Address</div>
@@ -1161,9 +1163,12 @@
 								</button>
 							</div>
 							<div class="instructions">
-								<p>You can drag the marker to the exact location of your venue and set the map's position.</p>
-								<p>We also store the scale you select for the map, so if it makes more sense to zoom in or out, feel free to move it until it's just right.</p>
-								<p>Please try to keep your venue as close to the centre of the map as possible.</p>
+								<!-- <p>You can drag the marker to the exact location of your venue and set the map's position.</p> -->
+								<p>Bạn có thể kéo các điểm đánh dấu đến vị trí chính xác của địa điểm của bạn và thiết lập vị trí của bản đồ.</p>
+								<!-- <p>We also store the scale you select for the map, so if it makes more sense to zoom in or out, feel free to move it until it's just right.</p> -->
+								<p>Chúng tôi cũng lưu trữ quy mô mà bạn chọn cho bản đồ , vì vậy nếu nó làm cho ý nghĩa hơn để phóng to hoặc thu , cảm thấy tự do để di chuyển nó cho đến khi nó vừa phải.</p>
+								<!-- <p>Please try to keep your venue as close to the centre of the map as possible.</p> -->
+								<p>Hãy cố gắng giữ cho địa điểm của bạn càng gần trung tâm bản đồ càng tốt.</p>
 							</div>
 						</div>
 					</div>
@@ -1175,8 +1180,9 @@
 								<span class="msg msg-action-default">Lưu</span>
 							</div>
 						</button>
-						<a href="javascript:;" class="button-cancel">Cancel</a>
+						<a href="javascript:;" class="button-cancel" data-dismiss="modal">Cancel</a>
 					</div>
+				</form>
 				</div>
 			</div>
 		</div>
