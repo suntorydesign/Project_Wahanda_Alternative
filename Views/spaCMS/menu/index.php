@@ -338,7 +338,7 @@
 															<option value="0">Ngưng hoạt động</option>
 														</select>
 													</tr>
-													<tr id="sold_as" title="<strong>Sell as</strong> - Service can be fulfilled as: <strong><em>Appointment</em></strong> - customers book in directly by finding available slots in your calendar. It’s much more convenient both for you and your customers. <strong><em>eVoucher</em></strong> - customers receive vouchers that they can redeem in your venue." class="form-row">
+													<tr id="sold_as" title="<strong>Sell as</strong> - Service can be fulfilled as: <strong><em>Appointment</em></strong> - customers book in directly by finding available slots in your calendar. It’s much more convenient both for you and your customers. <strong><em>eVoucher</em></strong> - customers receive vouchers that they can redeem in your venue." class="form-row hidden">
 														<td class="label-part"><label for="service-type">Sold as</label></td>
 														<td class="input-part">
 														<select id="fulfillment-types" name="user_service_use_evoucher">
@@ -548,7 +548,7 @@
 															<option value="0">Ngưng hoạt động</option>
 														</select>
 													</tr>
-													<tr id="sold_as" title="<strong>Sell as</strong> - Service can be fulfilled as: <strong><em>Appointment</em></strong> - customers book in directly by finding available slots in your calendar. It’s much more convenient both for you and your customers. <strong><em>eVoucher</em></strong> - customers receive vouchers that they can redeem in your venue." class="form-row">
+													<tr id="sold_as" title="<strong>Sell as</strong> - Service can be fulfilled as: <strong><em>Appointment</em></strong> - customers book in directly by finding available slots in your calendar. It’s much more convenient both for you and your customers. <strong><em>eVoucher</em></strong> - customers receive vouchers that they can redeem in your venue." class="form-row hidden">
 														<td class="label-part"><label for="service-type">Sold as</label></td>
 														<td class="input-part">
 														<select id="fulfillment-types" name="user_service_use_evoucher">
