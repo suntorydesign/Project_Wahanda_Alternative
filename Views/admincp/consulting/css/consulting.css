@@ -1,0 +1,22 @@
+b, strong{
+	font-weight: bold;
+}
+
+h3{
+	font-size: 24px;
+	margin-bottom: 5px;
+}
+
+.question{
+	margin-bottom: 8px;
+}
+
+.answer{
+	margin-left: 18px;
+	margin-bottom: 3px;
+	font-size: 16px;
+}
+
+.pointer{
+	cursor: pointer;
+}
