@@ -581,8 +581,8 @@ SQL;
 		$select = $this -> db -> select($sql);
 		echo json_encode($select);
 	}
-	
-	public function loadConsultingQuestion($data){
+
+	public function loadConsultingQuestion($data) {
 		$sql = <<<SQL
 SELECT question_id
 , question_content
@@ -600,9 +600,79 @@ WHERE fact_question_id = {$value['question_id']}
 AND fact_delete_flg = 0
 SQL;
 			$select_fact = $this -> db -> select($sql);
-			$select_array[$value['question_id'].') '.$value['question_content']] = $select_fact;
+			$select_array[$value['question_id'] . ') ' . $value['question_content']] = $select_fact;
 		}
 		echo json_encode($select_array);
+	}
+
+	public function consulting($data) {
+		SESSION::initIdle();
+		$rule_temp = '';
+		if (isset($_SESSION['rule_group'])) {
+			$rule_temp = $_SESSION['rule_group'];
+			if ($rule_temp == '') {
+				$rule_temp = $data['fact_id'];
+			} else {
+				$rule_temp .= ',' . $data['fact_id'];
+			}
+		}
+		$sql = <<<SQL
+SELECT COUNT(*) AS check_rule
+FROM rule
+WHERE rule_group = '{$rule_temp}'
+AND rule_delete_flg = 0
+SQL;
+		$select_rule_result = $this -> db -> select($sql);
+		if ($select_rule_result[0]['check_rule'] == 1) {
+			$sql = <<<SQL
+SELECT rule_result
+, rule_service_id
+FROM rule
+WHERE rule_group = '{$rule_temp}'
+AND rule_delete_flg = 0
+SQL;
+			$result = $this -> db -> select($sql);
+			$result[0]['rule_group'] = $rule_temp;
+			echo json_encode($result);
+		} else if ($select_rule_result[0]['check_rule'] == 0) {
+			$sql = <<<SQL
+SELECT COUNT(*) AS check_rule
+FROM rule
+WHERE rule_group LIKE '%{$rule_temp}%'
+AND rule_delete_flg = 0
+SQL;
+			$select_rule = $this -> db -> select($sql);
+			if ($select_rule[0]['check_rule'] > 0) {
+				if ($_SESSION['rule_group'] == '') {
+					$_SESSION['rule_group'] = $data['fact_id'];
+				} else {
+					$_SESSION['rule_group'] .= ',' . $data['fact_id'];
+				}
+			}
+			echo '[]';
+		}
+	}
+
+	public function loadAdviseService($data) {
+		$sql = <<<SQL
+SELECT user.user_id
+,user_service.user_service_id
+,user_service.user_service_name
+,user_service.user_service_full_price
+,user_service.user_service_sale_price
+,user_service.user_service_duration
+FROM service
+, user_service
+, group_service
+, user
+WHERE user.user_id = group_service.group_service_user_id
+AND user_service.user_service_group_id = group_service.group_service_id
+AND user_service.user_service_service_id = service.service_id
+AND user.user_id = {$data['user_id']}
+AND service.service_id = {$data['service_id']}
+SQL;
+		$select = $this -> db -> select($sql);
+		echo json_encode($select);
 	}
 
 }

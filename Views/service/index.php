@@ -616,7 +616,7 @@
 
 		<div class="col-md-4">
 			<div id="side-bar">
-				<div class="map">
+				<div class="map_1">
 					<!-- <img style="margin-top: 10px; width: 100%; height: auto; box-shadow: 0.5px 1px 2.6px" class="img-responsive" src="https://maps.googleapis.com/maps/api/staticmap?sensor=false&zoom=15&size=397x327&maptype=roadmap&markers=icon%3Ahttps%3A%2F%2Fconnect.wahanda.com%2Fassets%2Fmap-marker.png|54.54516881%2C-1.27919913"> -->
 					<div id="map-canvas" style="margin-top: 10px; width: 100%; height: 280px; box-shadow: 0.5px 1px 2.6px"></div>
 					<!-- <div class="zoom-tool" style="margin: 10px 0 0 24px;">
@@ -722,7 +722,7 @@
 	</div>
 	<!-- Modal consulting -->
     <div id="consulting_info" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    	<div class="modal-dialog">
+    	<div class="modal-dialog modal-lg">
     		<div class="modal-content" style="border-radius:0;">
     			<div class="modal-header" style="background-color: #FDBD0E; padding: 6px 10px;">
 		        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -799,4 +799,7 @@
 	var CONSULT_RESULT = '';
 	var CONSULT_SUPPOSE = '';
 	var CONSULT_SERVICE_TYPE = '';
+	var QUESTION_NUMBER = 1;
+	var CONSULT_SERVICE_TYPE_NAME = '';
+	var RULE_SERVICE_ID = '';
 </script>

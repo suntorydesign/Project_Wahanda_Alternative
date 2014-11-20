@@ -1,13 +1,13 @@
-.map img{
+.map_1 img{
 	max-height: 500px;
 }
-.map .gmnoprint.gm-style-cc{
+.map_1 .gmnoprint.gm-style-cc{
 	display: none;
 }
-.map .gm-style-cc{
+.map_1 .gm-style-cc{
 	display: none;
 }
-.map .gm-style div a img{
+.map_1 .gm-style div a img{
 	display: none;
 }
 #tabs {
@@ -326,4 +326,18 @@ span.rating:hover{
 }
 #consulting_info_question span, #consulting_info_question p, #consulting_info_question small, #consulting_info_question label{
 	color: #777;
+}
+
+.price-consult {
+	background-color: #FFF;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	box-shadow: 0 0 4px #CCC;
+	margin-bottom: 10px;
+}
+.price-consult .item-info-1{
+	padding-top: 5px
+}
+.price-consult .item-info-2, .price-consult .item-info-3{
+	padding-top: 2px
 }

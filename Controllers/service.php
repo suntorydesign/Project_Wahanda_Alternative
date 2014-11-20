@@ -17,9 +17,7 @@ class service extends Controller {
 	public function servicePlace($user_id) {
 		Session::initIdle();
 		$this -> view -> style = array(URL . 'Views/service/css/service.css');
-		$this -> view -> script = array(URL . 'Views/service/js/service.js'
-										, URL . 'Views/service/js/consult.js'
-										, 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBUxUNFuJ09fVcA24HZcEq0gwxs37ESDo4&language=vi-VI');
+		$this -> view -> script = array(URL . 'Views/service/js/service.js', URL . 'Views/service/js/consult.js', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBUxUNFuJ09fVcA24HZcEq0gwxs37ESDo4&language=vi-VI');
 		$this -> view -> user_id = $user_id;
 		$this -> view -> render('service/index');
 	}
@@ -118,6 +116,7 @@ class service extends Controller {
 	public function loadFirstConsultingQuestion() {
 		SESSION::initIdle();
 		if (isset($_POST['user_id'])) {
+			$_SESSION['rule_group'] = '';
 			$this -> model -> loadFirstConsultingQuestion($_POST['user_id']);
 		}
 	}
@@ -127,6 +126,23 @@ class service extends Controller {
 		if (isset($_POST['question_service_type_id'])) {
 			$data['question_service_type_id'] = $_POST['question_service_type_id'];
 			$this -> model -> loadConsultingQuestion($data);
+		}
+	}
+
+	public function consulting() {
+		SESSION::initIdle();
+		if (isset($_POST['fact_id'])) {
+			$data['fact_id'] = $_POST['fact_id'];
+			$this -> model -> consulting($data);
+		}
+	}
+
+	public function loadAdviseService() {
+		SESSION::initIdle();
+		if (isset($_POST['user_id'])&&isset($_POST['service_id'])) {
+			$data['user_id'] = $_POST['user_id'];
+			$data['service_id'] = $_POST['service_id'];
+			$this -> model -> loadAdviseService($data);
 		}
 	}
 
