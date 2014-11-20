@@ -192,7 +192,10 @@
 		<div class="modal-content">
 			<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable">
 				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
-					<span class="ui-dialog-title" id="ui-dialog-title-1">Dịch vụ</span><a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
+					<span class="ui-dialog-title" id="ui-dialog-title-1">Dịch vụ</span>
+					<a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button">
+						<span class="ui-icon ui-icon-closethick">close</span>
+					</a>
 				</div>
 				<div class="offer-form ui-dialog-content ui-widget-content" style="height: 550px;" scrolltop="0" scrollleft="0">
 					<form id="addUserService_form" action="#" method="POST" >

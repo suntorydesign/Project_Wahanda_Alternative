@@ -272,5 +272,9 @@ class SpaCMS_Model extends Model {
 	function update_online_booking() {
 		SpaCMS_Settings_Model::update_online_booking();
 	}
+	
+	function get_user_map() {
+		SpaCMS_Settings_Model::get_user_map();
+	}
 
 }

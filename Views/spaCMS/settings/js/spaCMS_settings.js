@@ -5,6 +5,10 @@ $("#venue_name, #venue_type, #venue_location_1, #venue_location_2, #venue_addres
     container : 'body'
 });
 
+$(document).ready(function(){
+    
+});
+
 function get_day_vi(day_en) {
     switch(day_en) {
         case '2': return "Thứ 2";
@@ -243,7 +247,151 @@ var UserDetail = function (){
                 self.html('');
             });
         }, 'json');
+    }
 
+    var xhrGet_user_map = function() {
+        var loc_map = $("#loc_map");
+        var input_ulat = $('input[name=user_lat]', loc_map);
+        var input_ulong = $('input[name=user_long]', loc_map);
+        var staticmap_img = $("#staticmap_img");
+
+        var url = URL + "spaCMS/settings/xhrGet_user_map";
+        var staticmap_src = "https://maps.googleapis.com/maps/api/staticmap?sensor=false&zoom=15&size=397x98&maptype=roadmap&markers=icon%3Ahttps%3A%2F%2Fconnect.wahanda.com%2Fassets%2Fmap-marker.png%7C:user_lat%2C:user_long";
+        $.get(url, function(data) {
+            staticmap_src = staticmap_src.replace(":user_lat", data["user_lat"]);
+            staticmap_src = staticmap_src.replace(":user_long", data["user_long"]);
+            staticmap_img.attr("src", staticmap_src);
+
+            input_ulat.val(data["user_lat"]);
+            input_ulong.val(data["user_long"]);
+        }, "json");
+    }
+
+    var xhrGetOM_edit_user_map = function() {
+        var vdm_modal = $("#venueDetailsMap_modal");
+        var input_ulat = $('input[name=user_lat]', vdm_modal);
+        var input_ulong = $('input[name=user_long]', vdm_modal);
+
+        var btnOM_eum = $("#btnOM_editUserMap");
+        btnOM_eum.on("click", function() {
+            var url = URL + "spaCMS/settings/xhrGet_user_map";
+            $.get(url, function(data) {
+
+            }, "json")
+            .done(function(){
+                if(isSuccess) {
+                    vdm_modal.modal("show");
+                } else {
+                    alert("Open modal edit user map error!");
+                }
+                
+            });
+
+            return false;
+        });
+        
+        // Get du lieu truoc khi Open Modal
+        // var map;
+        // var geocoder;
+        // var xCurr;
+        // var yCurr;
+        // var marker;
+        // function initialize() {
+        //     directionsDisplay = new google.maps.DirectionsRenderer();
+        //     geocoder = new google.maps.Geocoder();
+        //     //default position these function in google map
+        //     var mapOptions = {
+        //         zoom: 16,
+        //         center: new google.maps.LatLng(0, 0),
+
+        //         panControl: true,
+        //         panControlOptions: {
+        //             position: google.maps.ControlPosition.TOP_LEFT
+        //         },
+        //         zoomControl: true,
+        //         zoomControlOptions: {
+        //             style: google.maps.ZoomControlStyle.SMALL,
+        //             position: google.maps.ControlPosition.LEFT_CENTER
+        //         },
+        //         mapTypeControl: true,
+        //         mapTypeControlOptions: {
+        //             style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+        //             position: google.maps.ControlPosition.TOP_RIGHT
+        //         }
+        //     };
+        //     var map = new google.maps.Map(document.getElementById('venue-details-map-container'),mapOptions);
+        //     directionsDisplay.setMap(map);
+        //     var LNG = '';
+        //     var LAT = '';
+        //     if(LNG == '' && LAT == ''){
+        //         if (navigator.geolocation) {
+        //             navigator.geolocation.getCurrentPosition(function (position) {
+        //                 initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        //                 map.setCenter(initialLocation);
+
+        //                 marker = new google.maps.Marker({
+        //                     position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+        //                     map : map,
+        //                 });
+        //                 marker.setAnimation(google.maps.Animation.BOUNCE);
+        //                 //Get address name based on coordinate
+        //                 var lat = position.coords.latitude;
+        //                 var lng = position.coords.longitude;
+        //                 var latlng = new google.maps.LatLng(lat, lng);
+        //                 geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+        //                     console.log(results);
+        //                     if (status == google.maps.GeocoderStatus.OK) {
+        //                         //document.getElementById("streetName").innerHTML = (results[1].formatted_address);
+        //                         for(i = 0;i<7;i++){
+        //                             // alert(results[i].formatted_address);
+        //                         }
+        //                         //.substring(0,34) + '...'
+        //                     } else {
+        //                         alert('Geocoder failed due to: ' + status);
+        //                     }
+        //                 });
+        //                 xCurr = position.coords.latitude;
+        //                 yCurr = position.coords.longitude;
+        //                 //alert(xCurr +', '+ yCurr);
+        //                 marker.setMap(map);
+        //             });
+        //         }
+        //     }else{
+        //         initialLocation = new google.maps.LatLng(LAT, LNG);
+        //         map.setCenter(initialLocation);
+        //         marker = new google.maps.Marker({
+        //             position: new google.maps.LatLng(LAT, LNG),
+        //             map : map,
+        //         });
+        //         marker.setAnimation(google.maps.Animation.BOUNCE);
+        //     }
+            
+        //     google.maps.event.addListener(map, 'click', function (event) {
+        //         // marker.setVisible(true);
+        //         //alert(Math.sqrt(Math.abs(Math.pow(xCurr, 2) - Math.pow(event.latLng.lat(), 2))) + Math.sqrt(Math.abs(Math.pow(yCurr, 2) - Math.pow(event.latLng.lng(), 2))));
+        //         //if (Math.abs(event.latLng.lat() - xCurr) < 200 && Math.abs(event.latLng.lng()) < 200)
+        //         // if (Math.sqrt(Math.abs(Math.pow(xCurr, 2) - Math.pow(event.latLng.lat(), 2))) + Math.sqrt(Math.abs(Math.pow(yCurr, 2) - Math.pow(event.latLng.lng(), 2))) < 0.5) {
+        //         // console.log(event);
+        //         placeMarker(event.latLng);
+        //         marker.setAnimation(google.maps.Animation.BOUNCE);
+        //         // setTimeout(function () { document.getElementById('report').submit(); }, 1000);
+        //         // }
+        //     });
+        // }
+        // function placeMarker(location) {
+        //     if (marker) {
+        //         marker.setPosition(location);
+
+        //     } else {
+        //         marker = new google.maps.Marker({
+        //             position: location,
+        //             map: map,
+        //         });
+        //     }
+        //     console.log(location.lat());
+        //     console.log(location.lng());
+        // }
+        // google.maps.event.addDomListener(window, 'load', initialize);
 
     }
 
@@ -254,6 +402,8 @@ var UserDetail = function (){
             xhrGet_user_is_use_voucher();
             xhrUpdate_user_is_use_voucher();
             xhrGet_user_slide();
+            xhrGet_user_map();
+            xhrGetOM_edit_user_map();
         }
     }
 }();

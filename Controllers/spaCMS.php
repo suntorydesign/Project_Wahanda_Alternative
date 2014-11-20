@@ -364,6 +364,10 @@
 					$this->model->update_online_booking();
 					break;
 
+				case 'xhrGet_user_map':
+					$this->model->get_user_map();
+					break;
+
 				default:
 					$this->view->style = array(
 						ASSETS . 'plugins/image-manager/css/image-manager.min.css',
@@ -371,6 +375,7 @@
 					);
 
 					$this->view->script = array(
+						'https://maps.googleapis.com/maps/api/js?key=AIzaSyBUxUNFuJ09fVcA24HZcEq0gwxs37ESDo4&language=vi-VI',
 						ASSETS . 'plugins/image-manager/js/image-manager.js',
 						URL . 'Views/spaCMS/settings/js/spaCMS_settings.js'
 					);

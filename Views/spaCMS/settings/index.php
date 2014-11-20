@@ -36,73 +36,6 @@
 		</div>
 
 		<div class="tab-content section-main">
-			<div class="tab-pane" id="security">
-				<div id="security-tabs" class="tabs-inner ui-tabs ui-widget ui-widget-content ui-corner-all">
-					<div class="nav3">
-						<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
-							<li class="ui-state-default ui-corner-top active">
-								<a href="#security-password" role="tab" data-toggle="tab">Mật khẩu</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="tab-content tab-content-fix">
-					<div id="security-password" class="tab-pane active">
-						<form id="security_password_form" method="POST" action="#">
-							<div class="form-content">
-								<div class="warning warning-archived warning_notmatch">
-									<div class="icon icons-lock"></div>
-									<span class="title">Mật khẩu xác thực không trùng khớp</span>
-									<!-- <div class="info">Vui lòng tắt.</div> -->
-								</div>
-								<div class="warning warning-archived warning_error">
-									<div class="icon icons-lock"></div>
-									<span class="title">Mật khẩu hiện tại không chính xác</span>
-									<!-- <div class="info">Vui lòng tắt.</div> -->
-								</div>
-								<table cellspacing="0" cellpadding="0" class="default-form" style="width:508px;">
-									<tbody>
-										<tr class="form-row">
-											<td class="label-part"><label for="user_password">Mật khẩu hiện tại</label></td>
-											<td class="input-part">
-											<div class="txt-input">
-												<input type="password" id="user_password" name="user_password" required pattern=".{6,}" title="Ít nhất 6 ký tự">
-											</div></td>
-										</tr>
-										<tr class="form-row">
-											<td class="label-part"><label for="user_password_new" class="optional">Mật khẩu mới </label></td>
-											<td class="input-part">
-											<div class="txt-input">
-												<input type="password" id="user_password_new" name="user_password_new" required pattern=".{6,}" title="Ít nhất 6 ký tự">
-											</div></td>
-										</tr>
-										<tr class="form-row">
-											<td class="label-part"><label for="user_password_new_confirm" class="optional">Nhập lại</label></td>
-											<td class="input-part">
-											<div class="txt-input">
-												<input type="password" id="user_password_new_confirm" name="user_password_new_confirm" required pattern=".{6,}" title="Ít nhất 6 ký tự">
-											</div></td>
-										</tr>
-									</tbody>
-								</table>
-
-							</div>
-
-							<div class="form-actions">
-								<button class="button action action-default button-primary save-action" type="submit">
-									<div class="button-inner">
-										<div class="button-icon icons-tick done"></div>
-										<div class="button-icon fa fa-spin fa-refresh loading"></div>
-										<span class="msg msg-action-default">Lưu</span>
-									</div>
-								</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-
 
 			<div class="tab-pane active" id="venue-settings">
 				<div id="venue-settings-tabs" class="tabs-inner ui-tabs ui-widget ui-widget-content ui-corner-all">
@@ -175,16 +108,16 @@
 												<tr id="loc_map" title="&lt;strong&gt;Location on the map&lt;/strong&gt; - Click on the map to enlarge it and drag the pointer to the exact location of your venue." class="form-row">
 													<td class="label-part"><label for="">Vị trí trên bản đồ</label></td>
 													<td class="input-part">
-													<input disabled type="hidden" id="user_latitude" name="user_latitude" class="" value="54.54516881">
-													<input disabled type="hidden" id="user_gmapLatitude" name="user_gmapLatitude" class="" value="54.54457136">
-													<input disabled type="hidden" id="user_longitude" name="user_longitude" class="" value="-1.27919913">
-													<input disabled type="hidden" id="user_gmapLongitude" name="user_gmapLongitude" class="" value="-1.27979995">
-													<input disabled type="hidden" id="user_gmapScale" name="user_gmapScale" class="" value="15">
-													<div class="location-map-wrapper"><img alt="" src="https://maps.googleapis.com/maps/api/staticmap?sensor=false&amp;zoom=15&amp;size=397x98&amp;maptype=roadmap&amp;markers=icon%3Ahttps%3A%2F%2Fconnect.wahanda.com%2Fassets%2Fmap-marker.png%7C54.54516881%2C-1.27919913">
-														<div class="edit">
-															<a class="edit-location" href="javascript:;">Edit</a>
+														<div class="location-map-wrapper">
+															<input type="hidden" name="user_lat" />
+															<input type="hidden" name="user_long" />
+															<img id="staticmap_img" alt="" src="">
+															<div class="edit">
+																<a id="btnOM_editUserMap" class="edit-location" href="javascript:;">Edit</a>
+															</div>
 														</div>
-													</div><span class="location-txt">Vietnam</span></td>
+														<span class="location-txt hidden">Vietnam</span>
+													</td>
 												</tr>
 												<tr class="form-separator-row">
 													<td colspan="2"><span></span></td>
@@ -1062,6 +995,73 @@
 				</div>
 			</div><!-- END BOOKING SETTINGS -->
 
+			<div class="tab-pane" id="security">
+				<div id="security-tabs" class="tabs-inner ui-tabs ui-widget ui-widget-content ui-corner-all">
+					<div class="nav3">
+						<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+							<li class="ui-state-default ui-corner-top active">
+								<a href="#security-password" role="tab" data-toggle="tab">Mật khẩu</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="tab-content tab-content-fix">
+					<div id="security-password" class="tab-pane active">
+						<form id="security_password_form" method="POST" action="#">
+							<div class="form-content">
+								<div class="warning warning-archived warning_notmatch">
+									<div class="icon icons-lock"></div>
+									<span class="title">Mật khẩu xác thực không trùng khớp</span>
+									<!-- <div class="info">Vui lòng tắt.</div> -->
+								</div>
+								<div class="warning warning-archived warning_error">
+									<div class="icon icons-lock"></div>
+									<span class="title">Mật khẩu hiện tại không chính xác</span>
+									<!-- <div class="info">Vui lòng tắt.</div> -->
+								</div>
+								<table cellspacing="0" cellpadding="0" class="default-form" style="width:508px;">
+									<tbody>
+										<tr class="form-row">
+											<td class="label-part"><label for="user_password">Mật khẩu hiện tại</label></td>
+											<td class="input-part">
+											<div class="txt-input">
+												<input type="password" id="user_password" name="user_password" required pattern=".{6,}" title="Ít nhất 6 ký tự">
+											</div></td>
+										</tr>
+										<tr class="form-row">
+											<td class="label-part"><label for="user_password_new" class="optional">Mật khẩu mới </label></td>
+											<td class="input-part">
+											<div class="txt-input">
+												<input type="password" id="user_password_new" name="user_password_new" required pattern=".{6,}" title="Ít nhất 6 ký tự">
+											</div></td>
+										</tr>
+										<tr class="form-row">
+											<td class="label-part"><label for="user_password_new_confirm" class="optional">Nhập lại</label></td>
+											<td class="input-part">
+											<div class="txt-input">
+												<input type="password" id="user_password_new_confirm" name="user_password_new_confirm" required pattern=".{6,}" title="Ít nhất 6 ký tự">
+											</div></td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+
+							<div class="form-actions">
+								<button class="button action action-default button-primary save-action" type="submit">
+									<div class="button-inner">
+										<div class="button-icon icons-tick done"></div>
+										<div class="button-icon fa fa-spin fa-refresh loading"></div>
+										<span class="msg msg-action-default">Lưu</span>
+									</div>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- END SECURITY -->
 		</div>
 	</div>
 </div>
@@ -1134,3 +1134,51 @@
   </div>
 </div><!--// END Image Manager Modal -->
 
+
+<div id="venueDetailsMap_modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+	<div class="modal-dialog" style="width: 820px;">
+		<div class="modal-content">
+			<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable">
+				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+					<span class="ui-dialog-title" id="ui-dialog-title-venue-details-map">Venue location</span>
+					<a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button">
+						<span class="ui-icon ui-icon-closethick">close</span>
+					</a>
+				</div>
+				<div id="venue-details-map" style="width: auto; min-height: 107px; height: auto;" class="ui-dialog-content ui-widget-content">
+					<div class="dialog-content clearfix">
+						<div id="venue-details-map-container" style="z-index: 3000; position: relative; overflow: hidden; transform: translateZ(0px); background-color: rgb(229, 227, 223);">
+							<input type="hidden" name="user_lat" />
+							<input type="hidden" name="user_long" />
+						</div>
+						<div id="venue-details-map-info">
+							<div id="venue-details-map-address" class="b-full-address hidden">
+								<div class="part-title">Address</div>
+								<p class="v-full-address">My Canh Bao Dong Hoi Quang Binh, 7000, Samoa</p>
+								<button class="button button-basic a-geocode">
+									<div class="button-icon icons-pin"></div>
+									Find on map
+								</button>
+							</div>
+							<div class="instructions">
+								<p>You can drag the marker to the exact location of your venue and set the map's position.</p>
+								<p>We also store the scale you select for the map, so if it makes more sense to zoom in or out, feel free to move it until it's just right.</p>
+								<p>Please try to keep your venue as close to the centre of the map as possible.</p>
+							</div>
+						</div>
+					</div>
+					<div class="dialog-actions">
+						<button type="submit" class="button action action-default button-primary save-action">
+							<div class="button-inner">
+								<div class="button-icon icons-tick done"></div>
+								<div class="button-icon fa fa-spin fa-refresh loading"></div>
+								<span class="msg msg-action-default">Lưu</span>
+							</div>
+						</button>
+						<a href="javascript:;" class="button-cancel">Cancel</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

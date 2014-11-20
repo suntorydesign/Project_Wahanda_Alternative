@@ -410,4 +410,21 @@ SQL;
 		return false;
 	}
 
+	public function get_user_map() {
+		$user_id = Session::get('user_id');
+
+		$aQuery = <<<SQL
+		SELECT 
+			user_lat, 
+			user_long
+		FROM user
+		WHERE user_id = {$user_id}
+SQL;
+		$data = $this->db->select($aQuery);
+
+		echo json_encode($data[0]);
+	}
+
+
+
 }
