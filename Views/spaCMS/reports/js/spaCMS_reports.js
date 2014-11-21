@@ -9,12 +9,16 @@ var BookingReport = function() {
                 +   '<td>:user_service_name</td>'
                 +   '<td>:booking_detail_price đ</td>'
                 +   '<td>:booking_date</td>'
+                +   '<td>:booking_detail_is_confirm</td>'
                 +   '<td>:booking_detail_status</td>'
                 +   '</tr>';
 
-        var status_0 = '<span class="label label-sm label-info">Pending</span>';
-        var status_1 = '<span class="label label-sm label-success">Approve</span>';
-        var status_2 = '<span class="label label-sm label-danger">Block</span>';
+        var status_0 = '<span class="label label-sm label-default">Chưa hoàn thành</span>';
+        var status_1 = '<span class="label label-sm label-success">Hoàn thành</span>';
+        var status_2 = '<span class="label label-sm label-danger">Hủy</span>';
+
+        var status_cfirm_0 = '<span class="label label-sm label-danger">Chưa xác thực</span>';
+        var status_cfirm_1 = '<span class="label label-sm label-success">Xác thực</span>';
 
         var url = URL + 'spaCMS/reports/xhrGet_booking_report';
         var out = '';
@@ -25,6 +29,7 @@ var BookingReport = function() {
                 out = out.replace(':user_service_name', booking['user_service_name']);
                 out = out.replace(':booking_detail_price', $.number( booking['booking_detail_price'] ));
                 out = out.replace(':booking_date', moment(booking['booking_date']).format("DD/MM/YYYY") );
+                out = out.replace(':booking_detail_is_confirm', booking['booking_detail_is_confirm'] == 0 ? status_cfirm_0 : status_cfirm_1 );
                 out = out.replace(':booking_detail_status', booking['booking_detail_status'] == 0 ? status_0 : booking['booking_detail_status'] == 1 ? status_1 : status_2 );
                 lob.append(out);
             })
@@ -32,12 +37,13 @@ var BookingReport = function() {
         .done(function() {
             table_lob.dataTable({
                 "aoColumns": [
-                    { "sWidth": "15%" },
+                    { "sWidth": "13%" },
                     { "sWidth": "15%" },
                     { "sWidth": "30%", "sClass": "center", "bSortable": true },
                     null,
                     null,
-                    { "sWidth": "9%", "bSortable": false }
+                    { "sWidth": "11%", "bSortable": true },
+                    { "sWidth": "12%", "bSortable": true }
                 ],
                 "aLengthMenu": [
                     [5, 15, 20, -1],

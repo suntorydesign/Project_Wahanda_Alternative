@@ -138,6 +138,9 @@
                                                 Ngày đặt
                                             </th>
                                             <th>
+                                                Xác thực
+                                            </th>
+                                            <th>
                                                 Trạng thái
                                             </th>
                                         </tr>

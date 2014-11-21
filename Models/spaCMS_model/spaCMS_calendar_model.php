@@ -60,7 +60,7 @@ class SpaCMS_Calendar_Model {
 		WHERE 
 				a.appointment_user_id = {$user_id}
 			AND a.appointment_date BETWEEN '{$start_date}' AND '{$end_date}'
-			AND a.appointment_del_flag = 0
+			-- AND a.appointment_del_flag = 0
 SQL;
 		$data = $this->db->select($aQuery);
 
@@ -85,7 +85,7 @@ SQL;
 			AND bd.booking_detail_date BETWEEN '{$start_date}' AND '{$end_date}'
 			AND bd.booking_detail_booking_id = b.booking_id
 			AND c.client_id = b.booking_client_id
-			AND bd.booking_detail_del_flag = 0
+			-- AND bd.booking_detail_del_flag = 0
 SQL;
 		$data = $this->db->select($aQuery);
 

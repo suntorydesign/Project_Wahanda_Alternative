@@ -2,7 +2,7 @@
 
 class SpaCMS_Reports_Model {
 	/**
-	 * Báo cáo danh sách booking_detail (đã xác thực )
+	 * Báo cáo danh sách booking_detail
 	 * @param user_id
 	 * @return json
 	 */
@@ -17,12 +17,13 @@ class SpaCMS_Reports_Model {
 			us.user_service_name,
 			b.booking_date,
 			bd.booking_detail_price,
+			bd.booking_detail_is_confirm,
 			bd.booking_detail_status
 		FROM 
 			booking b, booking_detail bd, client c, user_service us
 		WHERE 
 				bd.booking_detail_user_id = {$user_id}
-			AND bd.booking_detail_is_confirm = 1 -- đã được xác thực
+			-- AND bd.booking_detail_is_confirm = 1 -- đã được xác thực
 			AND	bd.booking_detail_booking_id = b.booking_id
 			AND b.booking_client_id = c.client_id
 			AND bd.booking_detail_user_service_id = us.user_service_id

@@ -790,8 +790,8 @@
 									<div class="part-title">
 										Text message settings
 									</div>
-									<div class="send-sms">
-										<input type="checkbox" value="true" name="client-notifications-sendSMS" id="client-notifications-sendSMS">
+									<div class="send-sms" >
+										<input type="checkbox" disabled="disabled" value="true" name="client-notifications-sendSMS" id="client-notifications-sendSMS">
 										<label for="client-notifications-sendSMS">Gửi tin nhắn SMS khi có booking từ Beleza</label>
 									</div>
 									<table cellspacing="0" cellpadding="0" class="default-form hidden">
