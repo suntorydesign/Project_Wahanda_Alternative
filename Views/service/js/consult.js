@@ -164,7 +164,7 @@ function consulting() {
 				}
 			} else {
 				RULE_SERVICE_ID = response[0].rule_service_id;
-				var result_html = '<h4><b><u>Kết Quả</u></b></h4><span class="text-center" style="color: #912323;"><i>' + response[0].rule_result + '</i></span>';
+				var result_html = '<h4><b><u>Kết Quả</u></b></h4><span class="text-center" style="color: #3c763d;"><i>' + response[0].rule_result + '</i></span>';
 				$('#consulting_info_question').html(result_html);
 				loadAdviseService();
 			}
@@ -186,17 +186,20 @@ function loadAdviseService() {
 			service_id : RULE_SERVICE_ID
 		},
 		success : function(response) {
-			
-			$.each(response, function(i, item) {
-				html += '<div class="price-consult clearfix">';
-				html += '<div title="' + item.user_service_name + '" style="cursor: help;" class="col-sm-5 item-info-1 text-orange"><b>' + shorten(item.user_service_name, 40) + '</b></div>';
-				html += '<div class="col-sm-2 item-info-2"><span class="fa-stack"><i></i><i class="fa fa-stack-2x fa-clock-o text-orange"></i></span> <b>' + item.user_service_duration + ' phút</b></div>';
-				html += '<div class="col-sm-2 item-info-3"><span class="fa-stack"><i class="fa fa-certificate fa-stack-2x text-orange"></i><i class="fa fa-stack-1x text-white"><b>%</b></i></span><b> ' + Math.floor((item.user_service_full_price - item.user_service_sale_price) / item.user_service_full_price * 100) + '%</b></div>';
-				html += '<div class="col-sm-3 item-info-4">';
-				html += '<button data-user-service="' + item.user_service_id + '" type="button" class="btn btn-sm btn-orange btn_location_booking pull-right"><i style="display:none;" class="waiting_booking_detail fa fa-refresh fa-spin"></i> <i class="fa fa-lg fa-dollar text-white"></i> <span style="font-weight: bold; color: white" class="text-white">' + item.user_service_sale_price + ' đ</span></button>';
-				html += '</div>';
-				html += '</div>';
-			});
+			if(response[0] == null){
+				html += '<span class="text-center" style="color: #912323;"><i>Xin lỗi chúng tôi không có dịch vụ gợi ý cho bạn.</i></span>';
+			}else{
+				$.each(response, function(i, item) {
+					html += '<div class="price-consult clearfix">';
+					html += '<div title="' + item.user_service_name + '" style="cursor: help;" class="col-sm-5 item-info-1 text-orange"><b>' + shorten(item.user_service_name, 40) + '</b></div>';
+					html += '<div class="col-sm-2 item-info-2"><span class="fa-stack"><i></i><i class="fa fa-stack-2x fa-clock-o text-orange"></i></span> <b>' + item.user_service_duration + ' phút</b></div>';
+					html += '<div class="col-sm-2 item-info-3"><span class="fa-stack"><i class="fa fa-certificate fa-stack-2x text-orange"></i><i class="fa fa-stack-1x text-white"><b>%</b></i></span><b> ' + Math.floor((item.user_service_full_price - item.user_service_sale_price) / item.user_service_full_price * 100) + '%</b></div>';
+					html += '<div class="col-sm-3 item-info-4">';
+					html += '<button data-user-service="' + item.user_service_id + '" type="button" class="btn btn-sm btn-orange btn_location_booking pull-right"><i style="display:none;" class="waiting_booking_detail fa fa-refresh fa-spin"></i> <i class="fa fa-lg fa-dollar text-white"></i> <span style="font-weight: bold; color: white" class="text-white">' + item.user_service_sale_price + ' đ</span></button>';
+					html += '</div>';
+					html += '</div>';
+				});
+			}
 			$('#consulting_info_question').append(html);		
 		},
 		complete : function() {

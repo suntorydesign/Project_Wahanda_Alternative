@@ -670,6 +670,10 @@ AND user_service.user_service_group_id = group_service.group_service_id
 AND user_service.user_service_service_id = service.service_id
 AND user.user_id = {$data['user_id']}
 AND service.service_id = {$data['service_id']}
+AND service.service_delete_flg = 0
+AND user_service.user_service_delete_flg = 0
+AND group_service.group_service_delete_flg = 0
+AND user.user_delete_flg = 0
 SQL;
 		$select = $this -> db -> select($sql);
 		echo json_encode($select);
