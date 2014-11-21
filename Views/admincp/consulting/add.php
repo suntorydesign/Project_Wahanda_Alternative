@@ -47,23 +47,26 @@
 				<div class="row">
 					<div class="col-md-12 form-horizontal">
 						<div class="form-group">
-							<label class="control-label col-md-2">Luật</label>
-							<div class="col-md-10">
-								<input placeholder="Chọn giả thuyết ở form câu hỏi..." class="form-control" id="rule_result" name="" type="text" readonly="readonly" />
+							<label class="control-label col-md-3">Luật (*)</label>
+							<div class="col-md-8">
+								<input placeholder="Chọn giả thuyết ở form câu hỏi..." class="form-control" id="rule_group" name="" type="text" readonly="readonly" />
+							</div>
+							<div class="col-md-1">
+								<button class="btn btn-default" id="refresh_rule"><i class="fa fa-refresh"></i></button>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-2">Dịch vụ</label>
-							<div class="col-md-10">
+							<label class="control-label col-md-3">Dịch vụ (*)</label>
+							<div class="col-md-9">
 								<select class="form-control" id="rule_service" name="">
 									<option value="">Chọn dịch vụ để gợi ý sau khi tư vấn...</option>
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-2">Kết luận</label>
-							<div class="col-md-10">
-								<input placeholder="Kết luận từ luật tư vấn..." class="form-control" id="" name="" type="text"/>
+							<label class="control-label col-md-3">Kết luận (*)</label>
+							<div class="col-md-9">
+								<input placeholder="Kết luận từ luật tư vấn..." class="form-control" id="rule_result" name="" type="text"/>
 							</div>
 						</div>
 					</div>
@@ -73,14 +76,14 @@
 		<hr />
 		<div class="row">
 			<div class="col-md-12">
-				<button onclick="" type="button" class="button action action-default button-primary save-action">
+				<button onclick="saveRule()" type="button" class="button action action-default button-primary save-action">
 					<div class="button-inner">
 						<div class="button-icon icons-tick done"></div>
 						<div class="button-icon fa fa-spin fa-refresh s-loading"></div>
 						<span class="msg msg-action-default">Thêm</span>
 					</div>
 				</button>
-				<small id="error_add_spa" style="color: red; display: none;">Nhập đầy đủ các trường có (*)</small>
+				<small id="error_add_consult" style="color: red; display: none;">Nhập đầy đủ các trường có (*)</small>
 			</div>
 		</div>
 	</div>

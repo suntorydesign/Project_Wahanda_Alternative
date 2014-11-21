@@ -10,34 +10,49 @@
 			</button>
 		</div>
 	</div>
+
 	<div class="main-content table-responsive">
+		<div class="col-md-12 form-horizontal">
+			<div class="form-group">
+				<b class="control-label col-md-2">Chọn loại dịch vụ</b>
+				<div class="col-md-4">
+					<select class="form-control" id="rule_service_type" name="">
+						<option value="">Chọn loại dịch vụ...</option>
+					</select>
+				</div>
+			</div>
+			<hr />
+		</div>
+		
 		<table id="rule_list" class="table table-hover" width="100%" cellspacing="0">
-	        <thead>
-	            <tr>
-	                <th><b>ID</b></th>
-	                <th><b>Tập Luật</b></th>
-	                <th><b>Kết Luận</b></th>
-	                <th><b>Dịch Vụ Gợi Ý Sau Tư Vấn</b></th>
-	            </tr>
-	        </thead>
-	 
-	        <tfoot>
-	            <tr>
-	                <th><b>ID</b></th>
-	                <th><b>Tập Luật</b></th>
-	                <th><b>Kết Luận</b></th>
-	                <th><b>Dịch Vụ Gợi Ý Sau Tư Vấn</b></th>
-	            </tr>
-	        </tfoot>
-	 
-	        <tbody>
-	            
-	        </tbody>
-	    </table>
+			<thead>
+				<tr>
+					<th style="width: 5%"><b>ID</b></th>
+					<th style="width: 15%"><b>Tập Luật</b></th>
+					<th style="width: 50%"><b>Kết Luận</b></th>
+					<th style="width: 20%"><b>Dịch Vụ Gợi Ý Sau Tư Vấn</b></th>
+				</tr>
+			</thead>
+
+			<tfoot>
+				<tr>
+					<th style="width: 5%"><b>ID</b></th>
+					<th style="width: 15%"><b>Tập Luật</b></th>
+					<th style="width: 50%"><b>Kết Luận</b></th>
+					<th style="width: 20%"><b>Dịch Vụ Gợi Ý Sau Tư Vấn</b></th>
+				</tr>
+			</tfoot>
+
+			<tbody>
+
+			</tbody>
+		</table>
 	</div>
 </div>
 <script>
 	var IS_INDEX = 1;
 	var IS_ADD = 0;
 	var IS_EDIT = 0;
+	var RULE_SERVICE_TYPE_ID = '';
+	var oTable;
 </script>

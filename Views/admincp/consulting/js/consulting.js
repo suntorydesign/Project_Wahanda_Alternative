@@ -1,9 +1,19 @@
 $(document).ready(function() {
 	if (IS_INDEX == 1 && IS_ADD == 0 && IS_EDIT == 0) {
-		loadRuleList();
+		loadRuleServiceType();
+		// $('#rule_list').DataTable();
+		oTable = $('#rule_list').dataTable();
+		$('#rule_service_type').on('change', function() {
+			RULE_SERVICE_TYPE_ID = $(this).val();
+			loadRuleList();
+		});
 	}
 	if (IS_INDEX == 0 && IS_ADD == 1 && IS_EDIT == 0) {
 		loadRuleServiceType();
+		$('#refresh_rule').on('click', function() {
+			$('#rule_group').val('');
+			FACT = '';
+		});
 	}
 });
 
@@ -20,25 +30,35 @@ function loadRuleList() {
 		url : URL + 'admincp_consulting/loadRuleList',
 		type : 'post',
 		dataType : 'json',
+		data : {
+			question_service_type_id : RULE_SERVICE_TYPE_ID
+		},
 		success : function(response) {
 			if (response[0] != null) {
-				var html = '';
-				$.each(response, function(i, item) {
-					html += '<tr>';
-					$.each(item, function(key, value) {
-						html += '<td>';
-						html += value;
-						html += '</td>';
-					});
-					html += '</tr>';
-				});
-				$('#rule_list tbody').html(html);
+				// var html = '';
+				// $.each(response, function(i, item) {
+					// html += '<tr>';
+					// $.each(item, function(key, value) {
+						// html += '<td>';
+						// html += value;
+						// html += '</td>';
+					// });
+					// html += '</tr>';
+				// });
+				// $('#rule_list tbody').html(html);
+				oTable.fnClearTable();
+				oTable.fnAddData(response);
+			} else {
+				// $('#rule_list tbody').html('');
+				oTable.fnClearTable();
+				oTable.fnAddData(response);
 			}
 		},
 		complete : function() {
-			$('#rule_list').DataTable();
+
 		}
 	});
+
 }
 
 function loadRuleServiceType() {
@@ -56,12 +76,16 @@ function loadRuleServiceType() {
 			}
 		},
 		complete : function() {
-			$('#rule_service_type').on('change', function() {
-				RULE_SERVICE_TYPE_ID = $(this).val();
-				// console.log(RULE_SERVICE_TYPE_ID);
-				loadRuleService();
-				loadQuestionList();
-			});
+			if (IS_INDEX == 0 && IS_ADD == 1 && IS_EDIT == 0) {
+				$('#rule_service_type').on('change', function() {
+					RULE_SERVICE_TYPE_ID = $(this).val();
+					// console.log(RULE_SERVICE_TYPE_ID);
+					$('#rule_group').val('');
+					FACT = '';
+					loadRuleService();
+					loadQuestionList();
+				});
+			}
 		}
 	});
 }
@@ -117,16 +141,16 @@ function loadQuestionList() {
 			}
 		},
 		complete : function() {
-			$('.answer.fact_group').on('click', function(){
+			$('.answer.fact_group').on('click', function() {
 				// console.log($(this).attr('fact-id'));
 				// console.log($(this).attr('service-type-id'));
 				FACT_ID = $(this).attr('fact-id');
 				QUESTION_ID = $(this).attr('question-id');
-				if(FACT != ''){
+				if (FACT != '') {
 					checkFactExist();
-				}else if(FACT == ''){
+				} else if (FACT == '') {
 					FACT = FACT_ID;
-					$('#rule_result').val(FACT);
+					$('#rule_group').val(FACT);
 				}
 				// console.log(FACT_ID);
 				// console.log(FACT);
@@ -135,7 +159,7 @@ function loadQuestionList() {
 	});
 }
 
-function checkFactExist(){
+function checkFactExist() {
 	$.ajax({
 		url : URL + 'admincp_consulting/checkFactExist',
 		type : 'post',
@@ -147,11 +171,57 @@ function checkFactExist(){
 		},
 		success : function(response) {
 			FACT = response;
-			$('#rule_result').val(FACT);
+			$('#rule_group').val(FACT);
 		},
-		complete : function(){
+		complete : function() {
 			FACT_ID = '';
 			QUESTION_ID = '';
 		}
+	});
+}
+
+function saveRule() {
+	$('#error_add_consult').fadeOut();
+	$('div.done').fadeOut(function() {
+		$('div.s-loading').fadeIn(function() {
+			var rule_group = $('#rule_group').val();
+			var rule_result = $('#rule_result').val();
+			var rule_service = $('#rule_service').val();
+			if (rule_group == '' || rule_result == '' || rule_service == '') {
+				$('#error_add_consult').text('Nhập đầy đủ các trường có (*)');
+				$('#error_add_consult').fadeIn(function() {
+					$('div.s-loading').fadeOut(function() {
+						$('div.done').fadeIn();
+					});
+				});
+			} else {
+				$.ajax({
+					url : URL + 'admincp_consulting/saveRule',
+					type : 'post',
+					// dataType : 'json',
+					data : {
+						rule_group : rule_group,
+						rule_result : rule_result,
+						rule_service : rule_service
+					},
+					success : function(response) {
+						if (response == 200) {
+							alert('Thêm luật thành công');
+							jumpToOtherPage(URL + 'admincp_consulting');
+						} else {
+							$('#error_add_consult').text('Luật đã tồn tại vui lòng chọn lại!');
+							$('#error_add_consult').fadeIn(function() {
+								$('div.s-loading').fadeOut(function() {
+									$('div.done').fadeIn();
+								});
+							});
+						}
+					},
+					complete : function() {
+
+					}
+				});
+			}
+		});
 	});
 }

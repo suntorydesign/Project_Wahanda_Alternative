@@ -19,7 +19,9 @@ class admincp_consulting extends Controller {
 
 	public function loadRuleList() {
 		Auth::handleAdminLogin();
-		$this -> model -> loadRuleList();
+		if(isset($_POST['question_service_type_id'])){
+			$this -> model -> loadRuleList($_POST['question_service_type_id']);
+		}
 	}
 
 	public function addRuleDetail() {
@@ -38,6 +40,16 @@ class admincp_consulting extends Controller {
 		Auth::handleAdminLogin();
 		if (isset($_POST['service_type_id'])) {
 			$this -> model -> loadRuleService($_POST['service_type_id']);
+		}
+	}
+	
+	public function saveRule(){
+		Auth::handleAdminLogin();
+		if(isset($_POST['rule_group']) && isset($_POST['rule_result']) && isset($_POST['rule_service'])){
+			$data['rule_group'] = $_POST['rule_group'];
+			$data['rule_result'] = $_POST['rule_result'];
+			$data['rule_service'] = $_POST['rule_service'];
+			$this -> model -> saveRule($data);
 		}
 	}
 
