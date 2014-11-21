@@ -302,7 +302,7 @@
 											<div class="row">
 												<div class="col-md-12">
 													<h5 class="text-center"><b style="text-transform: uppercase;" class="user_business_name">SUNSPA RESORT</b></h5>
-													<p class="text-center"><span id="user_address">Đ.2, P.Bình An, Q.2, TP.HCM</span> | SĐT: <span id="user_contact_phone">0903676222</span> | Email: <span id="user_contact_email">vietnt134@gmail.com</span></p>
+													<p class="text-center"><span id="user_address">Đ.2, P.Bình An, Q.2, TP.HCM</span> | SĐT: <span id="user_phone">0903676222</span> | Email: <span id="user_email">vietnt134@gmail.com</span></p>
 												</div>
 											</div>
 											<hr />
@@ -734,6 +734,7 @@
         var USERNAME = "<?php if(isset($_SESSION['client_username']))
 							      echo $_SESSION['client_username']; 
 						?>";
+		var USER_EMAIL = '';
 		var USER_SERVICE_ID = '';
 		var USER_ID_2 = '';
 		var USER_BUSINESS_NAME = '';

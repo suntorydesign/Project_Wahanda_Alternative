@@ -553,6 +553,9 @@ function loadServiceDetail(user_service_id) {
 					if (key == 'user_lat') {
 						USER_LAT = value;
 					}
+					if (key == 'user_email') {
+						USER_EMAIL = value;
+					}
 					if (key == 'user_open_hour') {
 						json_user_open_hour = jQuery.parseJSON(value);
 						//console.log(json_user_open_hour);
@@ -1535,7 +1538,8 @@ function getBookingInfo() {
 				choosen_price : CHOOSEN_PRICE,
 				user_business_name : USER_BUSINESS_NAME,
 				user_service_name : USER_SERVICE_NAME,
-				booking_quantity : 1
+				booking_quantity : 1,
+				user_email : USER_EMAIL
 			},
 			success : function(response) {
 				//console.log(response);
@@ -1575,7 +1579,8 @@ function geteVoucherInfo() {
 				choosen_price : USER_SERVICE_SALE_PRICE,
 				user_business_name : USER_BUSINESS_NAME,
 				user_service_name : USER_SERVICE_NAME,
-				booking_quantity : $('#e_quantity').val()
+				booking_quantity : $('#e_quantity').val(),
+				user_email : USER_EMAIL
 			},
 			success : function(response) {
 				//console.log(response);

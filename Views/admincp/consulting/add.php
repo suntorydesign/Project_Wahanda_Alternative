@@ -20,44 +20,25 @@
 						<div class="form-group">
 							<label class="control-label col-md-4">Chọn loại dịch vụ</label>
 							<div class="col-md-8">
-								<select class="form-control" id="" name="">
+								<select class="form-control" id="rule_service_type" name="">
 									<option value="">Chọn loại dịch vụ...</option>
 								</select>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-12">
-						<div id="" class="well" style="max-height: 340px; overflow-y: scroll;">
-							<div class="question-field">
-								<p class="question">1) Hãy cho biết giới tính của bạn</p>
-								<p class="answer pointer"><b>Nam</b></p>
-								<p class="answer pointer"><b>Nữ</b></p>
-							</div>
-							<div class="question-field">
-								<p class="question">2) Hãy cho biết giới tính của bạn</p>
-								<p class="answer pointer"><b>Nam</b></p>
-								<p class="answer pointer"><b>Nữ</b></p>
-							</div>
-							<div class="question-field">
-								<p class="question">3) Hãy cho biết giới tính của bạn</p>
-								<p class="answer pointer"><b>Nam</b></p>
-								<p class="answer pointer"><b>Nữ</b></p>
-							</div>
-							<div class="question-field">
-								<p class="question">4) Hãy cho biết giới tính của bạn</p>
-								<p class="answer pointer"><b>Nam</b></p>
-								<p class="answer pointer"><b>Nữ</b></p>
-							</div>
-							<div class="question-field">
-								<p class="question">5) Hãy cho biết giới tính của bạn</p>
-								<p class="answer pointer"><b>Nam</b></p>
-								<p class="answer pointer"><b>Nữ</b></p>
-							</div>
-							<div class="question-field">
-								<p class="question">6) Hãy cho biết giới tính của bạn</p>
-								<p class="answer pointer"><b>Nam</b></p>
-								<p class="answer pointer"><b>Nữ</b></p>
-							</div>
+						<div id="question_list" class="well" style="max-height: 340px; overflow-y: scroll;">
+							<!-- <div class="question-field">
+								<p class="question">
+									1) Hãy cho biết giới tính của bạn
+								</p>
+								<p fact-id="" question-id="" class="answer pointer">
+									<b>Nam</b>
+								</p>
+								<p fact-id="" question-id="" class="answer pointer">
+									<b>Nữ</b>
+								</p>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -68,13 +49,13 @@
 						<div class="form-group">
 							<label class="control-label col-md-2">Luật</label>
 							<div class="col-md-10">
-								<input placeholder="Chọn giả thuyết ở form câu hỏi..." class="form-control" id="" name="" type="text" readonly="readonly" />
+								<input placeholder="Chọn giả thuyết ở form câu hỏi..." class="form-control" id="rule_result" name="" type="text" readonly="readonly" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-2">Dịch vụ</label>
 							<div class="col-md-10">
-								<select class="form-control" id="" name="">
+								<select class="form-control" id="rule_service" name="">
 									<option value="">Chọn dịch vụ để gợi ý sau khi tư vấn...</option>
 								</select>
 							</div>
@@ -104,4 +85,12 @@
 		</div>
 	</div>
 </div>
-<script></script>
+<script>
+	var IS_INDEX = 0;
+	var IS_ADD = 1;
+	var IS_EDIT = 0;
+	var RULE_SERVICE_TYPE_ID = '';
+	var FACT = '';
+	var FACT_ID = '';
+	var QUESTION_ID = '';
+</script>

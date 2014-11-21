@@ -37,4 +37,7 @@
 	</div>
 </div>
 <script>
+	var IS_INDEX = 1;
+	var IS_ADD = 0;
+	var IS_EDIT = 0;
 </script>

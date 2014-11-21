@@ -142,6 +142,7 @@ INSERT INTO booking_detail(
 ,`booking_detail_user_service_id`
 ,`booking_detail_booking_id`
 ,`booking_detail_status`
+,`booking_detail_created`
 )
 VALUES(
 '{$value['choosen_price']}'
@@ -153,6 +154,7 @@ VALUES(
 , '{$value['user_service_id']}'
 , '{$booking_id}'
 , {$status}
+, NOW()
 )
 SQL;
 								$insert_2 = $this -> db -> prepare($query);
@@ -163,6 +165,39 @@ SQL;
 													   <span><b>Số lượng:</b> '.$value['booking_quantity'].' </span>
 													   </p><hr/>';
 							}
+							//email body
+							$body = '<h1>BELEZA Thông báo</h1>';
+							$body .= '<p>Có khách hàng đã đặt hẹn ở địa điểm của bạn trên BELEZA</p>';
+							$body .= '<p>Mã booking là: ' . $booking_content . '</p>';
+							$body .= '<p>Chi tiết cuộc hẹn</p>';
+							$body .= '<hr/>';
+							$body .= $appointment_content;
+							$body .= '<p>Chúc bạn ngày mới tốt lành</p>';
+							$body .= '<div align="right"><small><i><b>Ban quản trị BELEZA</b></i></small></div>';
+				
+							//Gửi mail local
+							$mail = new PHPMailer(TRUE);
+							$mail -> CharSet = "UTF-8";
+							// create a new object
+							$mail -> IsSMTP();
+							// enable SMTP
+							$mail -> SMTPDebug = 1;
+							// debugging: 1 = errors and messages, 2 = messages only
+							$mail -> SMTPAuth = true;
+							// authentication enabled
+							$mail -> SMTPSecure = 'ssl';
+							// secure transfer enabled REQUIRED for GMail
+							$mail -> Host = SMTP_MAIL;
+							$mail -> Port = 465;
+							// or 587
+							$mail -> IsHTML(true);
+							$mail -> Username = INFO_MAIL;
+							$mail -> Password = PASS_MAIL;
+							$mail -> SetFrom(INFO_MAIL, 'BELEZA VIETNAM');
+							$mail -> Subject = "Thông tin khách hàng đặt hẹn từ Beleza!";
+							$mail -> Body = $body;
+							$mail -> AddAddress($value['user_email']);
+							$mail -> Send();
 						}
 						if (isset($_SESSION['eVoucher_detail'])) {
 							foreach ($_SESSION['eVoucher_detail'] as $key => $value) {
@@ -208,6 +243,39 @@ SQL;
 													    </p><hr/>';
 								}
 							}
+							//email body
+							$body = '<h1>BELEZA Thông báo</h1>';
+							$body .= '<p>Có khách hàng đã đặt hẹn ở địa điểm của bạn trên BELEZA</p>';
+							$body .= '<p>Mã booking là: ' . $booking_content . '</p>';
+							$body .= '<p>Chi tiết E voucher</p>';
+							$body .= '<hr/>';
+							$body .= $evoucher_content;
+							$body .= '<p>Chúc bạn ngày mới tốt lành</p>';
+							$body .= '<div align="right"><small><i><b>Ban quản trị BELEZA</b></i></small></div>';
+				
+							//Gửi mail local
+							$mail = new PHPMailer(TRUE);
+							$mail -> CharSet = "UTF-8";
+							// create a new object
+							$mail -> IsSMTP();
+							// enable SMTP
+							$mail -> SMTPDebug = 1;
+							// debugging: 1 = errors and messages, 2 = messages only
+							$mail -> SMTPAuth = true;
+							// authentication enabled
+							$mail -> SMTPSecure = 'ssl';
+							// secure transfer enabled REQUIRED for GMail
+							$mail -> Host = SMTP_MAIL;
+							$mail -> Port = 465;
+							// or 587
+							$mail -> IsHTML(true);
+							$mail -> Username = INFO_MAIL;
+							$mail -> Password = PASS_MAIL;
+							$mail -> SetFrom(INFO_MAIL, 'BELEZA VIETNAM');
+							$mail -> Subject = "Thông tin khách hàng mua e-voucher từ Beleza!";
+							$mail -> Body = $body;
+							$mail -> AddAddress($value['user_email']);
+							$mail -> Send();
 						}
 					} else {
 						echo 0;
@@ -217,12 +285,16 @@ SQL;
 					$body = '<h1>BELEZA Xác Nhận</h1>';
 					$body .= '<p>Bạn đã đặt hẹn trên BELEZA</p>';
 					$body .= '<p>Mã booking của bạn là: ' . $booking_content . '</p>';
-					$body .= '<p>Chi tiết cuộc hẹn</p>';
-					$body .= '<hr/>';
-					$body .= $appointment_content;
-					$body .= '<p>Chi tiết E voucher</p>';
-					$body .= '<hr/>';
-					$body .= $evoucher_content;
+					if($appointment_content != ''){
+						$body .= '<p>Chi tiết cuộc hẹn</p>';
+						$body .= '<hr/>';
+						$body .= $appointment_content;
+					}
+					if($evoucher_content != ''){
+						$body .= '<p>Chi tiết E voucher</p>';
+						$body .= '<hr/>';
+						$body .= $evoucher_content;
+					}
 					$body .= '<div align="right"><h3><b>TỔNG CỘNG: </b> '.$total_money_vnd.' VNĐ</h3></div>';
 					$body .= '<p>Chúc bạn ngày mới tốt lành</p>';
 					$body .= '<div align="right"><small><i><b>Ban quản trị BELEZA</b></i></small></div>';
