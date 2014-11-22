@@ -61,6 +61,7 @@ class SpaCMS_Calendar_Model {
 				a.appointment_user_id = {$user_id}
 			AND a.appointment_date BETWEEN '{$start_date}' AND '{$end_date}'
 			-- AND a.appointment_del_flag = 0
+			AND ( a.appointment_status = 0 OR a.appointment_status = 1 )
 SQL;
 		$data = $this->db->select($aQuery);
 
@@ -86,6 +87,7 @@ SQL;
 			AND bd.booking_detail_booking_id = b.booking_id
 			AND c.client_id = b.booking_client_id
 			-- AND bd.booking_detail_del_flag = 0
+			AND ( bd.booking_detail_status = 0 OR bd.booking_detail_status = 1 )
 SQL;
 		$data = $this->db->select($aQuery);
 
@@ -122,10 +124,10 @@ SQL;
 			a.appointment_client_note as 'data_client_note',
 			a.appointment_status as 'data_status',
 			a.appointment_is_confirm as 'data_is_confirm',
-			us.user_service_full_price as 'data_us_full_price', 
-			us.user_service_sale_price as 'data_us_sale_price',
+			-- us.user_service_full_price as 'data_us_full_price', 
+			-- us.user_service_sale_price as 'data_us_sale_price',
 			a.appointment_created as 'data_created',
-			a.appointment_updated as 'data_update'
+			a.appointment_updated as 'data_updated'
 		FROM 
 			appointment a, 
 			user_service us
@@ -169,10 +171,10 @@ SQL;
 			c.client_note as 'data_client_note',
 			bd.booking_detail_status as 'data_status',
 			bd.booking_detail_is_confirm as 'data_is_confirm',
-			us.user_service_full_price as 'data_us_full_price', 
-			us.user_service_sale_price as 'data_us_sale_price',
-			b.booking_date as 'data_created'
-			-- b.booking_updated as 'data_updated'
+			-- us.user_service_full_price as 'data_us_full_price', 
+			-- us.user_service_sale_price as 'data_us_sale_price',
+			bd.booking_detail_created as 'data_created',
+			bd.booking_detail_updated as 'data_updated'
 		FROM 
 			booking b, 
 			booking_detail bd, 
@@ -347,14 +349,14 @@ SQL;
 
 		if($data_type == "appointment") {
 			$data = array(
-				"appointment_del_flag" => 1
+				"appointment_status" => 2
 			);
 			$where = "appointment_id = $data_id";
 		}
 
 		if($data_type == "booking_detail") {
 			$data = array(
-				"booking_detail_del_flag" => 1
+				"booking_detail_status" => 2
 			);
 			$where = "booking_detail = $data_id";
 		}

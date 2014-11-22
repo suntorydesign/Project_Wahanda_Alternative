@@ -226,8 +226,9 @@
                                     </tr>
                                     <tr>
                                         <th>Status</th>
-                                        <td><span class="status-complete label label-confirmed display_none" style="display: none;">Hoàn thành</span>
-                                        	<span class="status status-uncomplete display_none" style="display: none;">Chưa hoàn thành</span>
+                                        <td><span class="label label-confirmed status-complete display_none">Hoàn thành</span>
+                                        	<span class="status status-uncomplete display_none">Chưa hoàn thành</span>
+                                        	<span class="label label-critical status-cancel display_none">Đã hủy</span>
                                         </td>
                                     </tr>
                                     
@@ -289,7 +290,8 @@
                             <div class="appointment-meta">
                                 Đặt lúc: <span class="full-date appointment_created">19/08/2014, 13:40</span>
                                 <!-- - -->
-                                <!-- Sửa đổi lúc: <span class="full-date appointment_updated">19/08/2014, 13:40</span> -->
+                                <span class="separator">|</span>
+                                Sửa đổi lúc: <span class="full-date appointment_updated">19/08/2014, 13:40</span>
                                 <div class="hidden">
                                 	<span class="separator">|</span>
                                 	Source:<span class="source">Added in Connect by minhnhat</span>
@@ -305,13 +307,13 @@
                             </div>
                         </div>
                         <div class="dialog-actions b-standard-actions">
-                            <button type="button" class="button button-primary btnAct_confirm_appointment">
+                            <div><button type="button" class="button button-primary confirm_appointment_action">
                             	<div class="button-inner">
                             		<div class="button-icon icons-tick done"></div>
                             		<div class="button-icon fa fa-spin fa-refresh loading"></div>
 	                            	Xác thực
 	                            </div>
-                            </button>
+                            </button></div>
                             <button type="button" class="button button-edit change-only-this edit_appointment_action">
                                 <div class="button-inner">
                                 	<div class="button-icon icons-edit2 done"></div>

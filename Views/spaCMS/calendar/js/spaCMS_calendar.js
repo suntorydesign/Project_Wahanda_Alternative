@@ -8,6 +8,7 @@ var Calendar = function(){
     var edit_appointment_action = cA_modal.find('.edit_appointment_action');
     var delete_appointment_action = cA_modal.find('.delete_appointment_action');
     var complete_appointment_action = cA_modal.find('.complete_appointment_action');
+    var confirm_appointment_action = cA_modal.find('.confirm_appointment_action');
 
     var eCA_modal = $("#editConfirmedAppointment_modal");
     var eCA_form = $('#editConfirmedAppointment_form');
@@ -224,6 +225,7 @@ var Calendar = function(){
                 // DOM trạng thái lịch hẹn
                 var app_status_0  = cA_modal.find('.status-uncomplete');
                 var app_status_1  = cA_modal.find('.status-complete');
+                var app_status_2  = cA_modal.find('.status-cancel');
                 // DOM thông tin khách hàng
                 var client_name   = cA_modal.find('.client_name');
                 var client_phone  = cA_modal.find('.client_phone');
@@ -231,7 +233,7 @@ var Calendar = function(){
                 var client_note   = cA_modal.find('.client_note');
                 // 
                 var app_created   = cA_modal.find('.appointment_created');
-                // var app_updated   = cA_modal.find('.appointment_updated');
+                var app_updated   = cA_modal.find('.appointment_updated');
 
                 // Xác định url event của appointment hay booking_detail
                 var url     = null;
@@ -261,11 +263,11 @@ var Calendar = function(){
                     day.text(date.getDate());
                     month.text(date.getMonth() + 1);
                     year.text(date.getFullYear());
-                    time.text(data[0]['data_time_start']);
+                    time.text(data[0]['data_time_start'].substr(0,5));
 
                     us_name.text(data[0]['data_us_name']);
                     us_duration.text(data[0]['data_us_duration'] + " phút");
-                    us_price.text(data[0]['data_price'] + " đ");
+                    us_price.text($.number(data[0]['data_price']) + " đ");
                     if(data[0]['data_client_phone'] !== '') {
                         client_phone.text(data[0]['data_client_phone']);
                     } else {
@@ -277,12 +279,18 @@ var Calendar = function(){
                     client_note.text(data[0]['data_client_note']);
 
                     // Thông báo trạng thái dịch vụ 
-                    if(data[0]['data_status'] == '1') {
-                        app_status_1.show();
-                        app_status_0.hide();
-                    } else {
+                    if(data[0]['data_status'] == 0) {
                         app_status_1.hide();
                         app_status_0.show();
+                        app_status_2.hide();
+                    } else if(data[0]['data_status'] == 1){
+                        app_status_1.show();
+                        app_status_0.hide();
+                        app_status_2.hide();
+                    } else {
+                        app_status_1.hide();
+                        app_status_0.hide();
+                        app_status_2.show();
                     }
 
                     // 
@@ -298,35 +306,44 @@ var Calendar = function(){
                     }
 
                     // Thông báo trạng thái đã xác thực
-                    var btnAct_cA = cA_modal.find('.btnAct_confirm_appointment');
                     var is_confirm_0 = cA_modal.find('.is_confirm_0');
                     var is_confirm_1 = cA_modal.find('.is_confirm_1');
                     if(data[0]['data_is_confirm'] == 1) {
                         is_confirm_0.hide();
                         is_confirm_1.show();
-                        btnAct_cA.hide();
+                        // confirm_appointment_action.hide();
+                        confirm_appointment_action.parent().hide();
                     } else {
                         is_confirm_0.show();
                         is_confirm_1.hide();
-                        btnAct_cA.show();
+                        // confirm_appointment_action.show();
+                        confirm_appointment_action.parent().show();
                     }
 
                     // Thông báo trạng thái đã hoàn thành
                     //// ẩn btnDaHoanThanh, btnXacThuc và btnSuaLichHen
-                    if(data[0]['data_status'] == 1){
+                    if(data[0]['data_status'] == 0){
+                        complete_appointment_action.show();
+                        confirm_appointment_action.show();
+                        edit_appointment_action.show();
+                        delete_appointment_action.show();
+                    } else if(data[0]['data_status'] == 1){
                         complete_appointment_action.hide();
                         edit_appointment_action.hide();
-                        btnAct_cA.hide();
-                    } else {
-                        complete_appointment_action.show();
-                        btnAct_cA.show();
-                        edit_appointment_action.show();
-                    }
+                        confirm_appointment_action.hide();
+                        delete_appointment_action.hide();
+                    } 
+                    // else {
+                    //     complete_appointment_action.show();
+                    //     confirm_appointment_action.show();
+                    //     edit_appointment_action.show();
+                    //     delete_appointment_action.hide();
+                    // }
                     
 
                     //
-                    app_created.text(data[0]['data_created']);
-                    // app_updated.text(data[0]['data_update']);
+                    app_created.text( moment(data[0]['data_created']).format("DD/MM/YYYY HH:mm:ss") );
+                    app_updated.text( moment(data[0]['data_updated']).format("DD/MM/YYYY HH:mm:ss") );
 
                     // Xác định id lịch hẹn và appointment hay booking_detail cho việc edit lịch hẹn
                     // edit_appointment_action.attr("onClick", "editConfirmedAppointment_modal("+data[0]['data_id']+","+"'appointment'"+")");
@@ -342,9 +359,9 @@ var Calendar = function(){
                     complete_appointment_action.attr("data_type", data_type);
 
                     // Xác định id lịch hẹn và appointment hay booking_detail cho việc xác thực lịch hẹn
-                    btnAct_cA.attr("data_id", data[0]['data_id']);
-                    btnAct_cA.attr("data_type", data_type);
-                    btnAct_cA.attr("client_email", data[0]['data_client_email']);
+                    confirm_appointment_action.attr("data_id", data[0]['data_id']);
+                    confirm_appointment_action.attr("data_type", data_type);
+                    confirm_appointment_action.attr("client_email", data[0]['data_client_email']);
                     /////////// EVENT 
 
                 }, 'json').done(function() {
@@ -697,8 +714,7 @@ var Calendar = function(){
         });
         
         // Confirm appointment
-        var btnAct_cA = cA_modal.find('.btnAct_confirm_appointment');
-        btnAct_cA.on("click", function(){
+        confirm_appointment_action.on("click", function(){
             if (confirm('Xác thực lịch hẹn này?')) {
                 var self = $(this);
                 var is_confirm_0 = cA_modal.find('.is_confirm_0');
@@ -732,7 +748,7 @@ var Calendar = function(){
                         is_confirm_0.hide();
                         is_confirm_1.hide();
                         is_confirm_1.fadeIn(); // Thay đổi trạng thái
-                        btnAct_cA.fadeOut(); // Ẩn nút xác thực
+                        confirm_appointment_action.fadeOut(); // Ẩn nút xác thực
                     } else {
                         alert("Confirmed appointment error!");
                     }
@@ -767,6 +783,7 @@ var Calendar = function(){
                         // DOM trạng thái lịch hẹn
                         var app_status_0  = cA_modal.find('.status-uncomplete');
                         var app_status_1  = cA_modal.find('.status-complete');
+                        var app_status_2  = cA_modal.find('.status-cancel');
                         var url = URL + "spaCMS/calendar/xhrUpdate_appointment_status";
                         $.post(url, {"data_id":data_id, "data_type":data_type}, function(result){
                             // console.log(result);
@@ -781,13 +798,15 @@ var Calendar = function(){
                             if(isSuccess) {
                                 app_status_0.hide();
                                 app_status_1.fadeIn();
+                                app_status_2.hide();
                                 complete_appointment_action.fadeOut();
                                 edit_appointment_action.fadeOut();
-                                edit_appointment_action.fadeOut();
-                                btnAct_cA.hide();
+                                delete_appointment_action.fadeOut();
+                                confirm_appointment_action.hide();
                             } else {
                                 app_status_0.fadeIn();
                                 app_status_1.hide();
+                                app_status_2.hide();
                                 alert("Update appointment status error");
                             }
                         });
@@ -870,7 +889,7 @@ var Calendar = function(){
             }
 
             $.get(url, {"data_id":data_id}, function(data){
-                console.log(data);
+                // console.log(data);
                 if(data.length == 0) return false;
                 isSuccess = true;
                 // DOM 

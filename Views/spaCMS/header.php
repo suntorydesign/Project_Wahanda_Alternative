@@ -87,25 +87,25 @@
                 <li id="nav-calendar">
                     <a title="Calendar" href="./calendar"> <div class="icons-nav-calendar"></div>
                     <div class="title">
-                        Lịch Books
+                        LỊCH BOOKS
                     </div> </a>
                 </li>
                 <li id="nav-menu">
                     <a title="Menu" href="./menu"> <div class="icons-nav-menu"></div>
                     <div class="title">
-                        Dịch vụ
+                        DỊCH VỤ
                     </div> </a>
                 </li>
                 <li id="nav-reports">
                     <a title="Reports" href="./reports"> <div class="icons-nav-reports"></div>
                     <div class="title">
-                        Báo cáo
+                        BÁO CÁO
                     </div> </a>
                 </li>
                 <li id="nav-settings">
                     <a title="Settings" href="./settings"> <div class="icons-nav-settings"></div>
                     <div class="title">
-                        Cài đặt
+                        CÀI ĐẶT
                     </div> </a>
                 </li>
             </ul>
