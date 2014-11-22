@@ -163,7 +163,6 @@ var EvoucherReport = function() {
                     out = out.replace(':evoucher_due_date', evoucher['e_voucher_due_date'] );
 
                     due_date = evoucher['e_voucher_due_date'];  
-                    console.log(dates.compare(today, due_date));
                     if( dates.compare(today, due_date) == 1) {
                         out = out.replace(':status_expires', status_expires );
                     } else {
@@ -177,29 +176,29 @@ var EvoucherReport = function() {
         }, 'json')
         .done(function() {
             table_loe.dataTable({
-                "aoColumns": [
-                    { "sWidth": "13%" },
-                    { "sWidth": "15%" },
-                    { "sWidth": "30%" },
-                    null,
-                    null,
-                    null
-                ],
-                "aLengthMenu": [
-                    [5, 15, 20, -1],
-                    [5, 15, 20, "All"] // change per page values here
-                ],
+                // "aoColumns": [
+                //     { "sWidth": "13%" },
+                //     { "sWidth": "15%" },
+                //     { "sWidth": "30%" },
+                //     null,
+                //     null,
+                //     null
+                // ],
+                // "aLengthMenu": [
+                //     [5, 15, 20, -1],
+                //     [5, 15, 20, "All"] // change per page values here
+                // ],
 
-                // set the initial value
-                "iDisplayLength": 10,
-                "sPaginationType": "bootstrap",
-                "oLanguage": {
-                    "sLengthMenu": "_MENU_ records",
-                    "oPaginate": {
-                        "sPrevious": "Prev",
-                        "sNext": "Next"
-                    }
-                }
+                // // set the initial value
+                // "iDisplayLength": 10,
+                // "sPaginationType": "bootstrap",
+                // "oLanguage": {
+                //     "sLengthMenu": "_MENU_ records",
+                //     "oPaginate": {
+                //         "sPrevious": "Prev",
+                //         "sNext": "Next"
+                //     }
+                // }
             });
 
             jQuery('#listOfEvoucher_table .dataTables_filter input').addClass("form-control input-medium input-inline"); // modify table search input

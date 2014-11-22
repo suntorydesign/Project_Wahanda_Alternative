@@ -81,56 +81,35 @@ var ImageManager = function () {
     }
 }();
 
-var GetMoreInfo = function () {
+var UserDetail = function (){
     var xhrGet_type_business = function() {
         var url = URL + 'spaCMS/settings/xhrGet_type_business';
         var options_type_business = '';
         user_type_business_id
-        $.get(url, function(data){
+        var xhr = $.get(url, function(data){
             $.each(data, function(index, value){
                 options_type_business += '<option value="' + value['type_business_id'] + '">' + value['type_business_name'] + '</option>';
             });
             //
             $('#user_type_business_id').html(options_type_business);
         }, 'json');
-    }
-
-    var xhrGet_country = function() {
-        var url = URL + 'spaCMS/settings/xhrGet_country';
-        var options_country = '';
-        $.get(url, function(data){
-            $.each(data, function(index, value){
-                options_country += '<option value="' + value['country_id'] + '">' + value['country_name'] + '</option>';
-            });
-            //
-            $('#user_country_id').html(options_country);
-            $('#user_company_country_id').html(options_country);
-        }, 'json');
+        return xhr;
     }
 
     var xhrGet_district = function() {
         var url = URL + 'spaCMS/settings/xhrGet_district';
         var options_district = '';
-        $.get(url, function(data){
+        var xhr = $.get(url, function(data){
             $.each(data, function(index, value){
                 options_district += '<option value="' + value['district_id'] + '">' + value['district_name'] + '</option>';
             });
             //
             $('#user_district_id').append(options_district);
         }, 'json');
+        return xhr;
     }
 
-    return {
-        init: function() {
-            xhrGet_type_business();
-            xhrGet_country();
-            xhrGet_district();
-        }
-    }
-}();
-
-var UserDetail = function (){
-
+    //////////////
     var xhrGet_user_detail = function() {
         var url = URL + 'spaCMS/settings/xhrGet_user_detail';
         $.get(url, function(data){
@@ -150,8 +129,13 @@ var UserDetail = function (){
             $('input[name=user_email]').val(data[0]['user_email']);
             $('textarea[name=user_description]').val(data[0]['user_description']);
             // $('select[name=user_country_id]').val(data[0]['user_country_id']);
-            $('select[name=user_district_id]').find('option[value="'+data[0]['user_district_id']+'"]').prop("selected", true);
-            $('select[name=user_type_business_id]').find('option[value="'+data[0]['user_type_business_id']+'"]').prop("selected",true);
+            xhrGet_district().done(function(){
+                $('select[name=user_district_id]').find('option[value="'+data[0]['user_district_id']+'"]').prop("selected", true);
+            });
+            xhrGet_type_business().done(function() {
+                $('select[name=user_type_business_id]').find('option[value="'+data[0]['user_type_business_id']+'"]').prop("selected",true);
+            });
+            
         }, 'json');
     }
 
@@ -497,6 +481,20 @@ var UserOpenHour = function (){
 }();
 
 var UserFinance = function (){
+    var xhrGet_country = function() {
+        var url = URL + 'spaCMS/settings/xhrGet_country';
+        var options_country = '';
+        var xhr = $.get(url, function(data){
+            $.each(data, function(index, value){
+                options_country += '<option value="' + value['country_id'] + '">' + value['country_name'] + '</option>';
+            });
+            //
+            $('#user_country_id').html(options_country);
+            $('#user_company_country_id').html(options_country);
+        }, 'json');
+        return xhr;
+    }
+
     var xhrGet_user_company = function () {
         var url = URL + 'spaCMS/settings/xhrGet_user_company';
         $.get(url, function(data){
@@ -505,7 +503,9 @@ var UserFinance = function (){
                 $('input[name=user_company_delegate]').val(data[0]['user_company_delegate']);
                 $('textarea[name=user_company_address]').val(data[0]['user_company_address']);
                 $('input[name=user_company_tax_code]').val(data[0]['user_company_tax_code']);
-                $('select[name=user_company_country_id]').find('option[value="'+data[0]['user_company_country_id']+'"]').prop("selected", true);
+                xhrGet_country().done(function(){
+                    $('select[name=user_company_country_id]').find('option[value="'+data[0]['user_company_country_id']+'"]').prop("selected", true);
+                });
                 $('input[name=user_contact_name]').val(data[0]['user_contact_name']);
                 $('input[name=user_contact_email]').val(data[0]['user_contact_email']);
                 $('input[name=user_contact_phone]').val(data[0]['user_contact_phone']);
@@ -796,8 +796,6 @@ var Sercurity = function (){
     }
 }();
 
-
-GetMoreInfo.init();
 UserDetail.init();
 UserOpenHour.init();
 UserFinance.init();
