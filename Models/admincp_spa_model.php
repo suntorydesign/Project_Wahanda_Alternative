@@ -43,6 +43,7 @@ user_full_name
 , user_address
 , user_phone
 , user_district_id
+, user_status_approve
 )
 VALUES(
 '{$data['user_full_name']}'
@@ -52,6 +53,7 @@ VALUES(
 , '{$data['user_address']}'
 , '{$data['user_phone']}'
 , '{$data['user_district_id']}'
+, 1
 )
 SQL;
 		$insert = $this -> db -> prepare($sql);

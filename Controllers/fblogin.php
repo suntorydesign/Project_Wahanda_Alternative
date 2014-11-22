@@ -54,8 +54,8 @@ class fblogin extends Controller {
 		//1.Start Session
 		Session::initIdle();
 		//2.Use app id,secret and redirect url
-		$app_id = '1519995188216019';
-		$app_secret = 'b8c037c995dcee5e43bc6d1038f68606';
+		$app_id = APP_ID;
+		$app_secret = APP_SECRET;
 		$redirect_url = 'http:' . URL . 'fblogin/processFBLogin';
 
 		//3.Initialize application, create helper object and get fb sess
@@ -68,8 +68,8 @@ class fblogin extends Controller {
 		//1.Start Session
 		Session::initIdle();
 		//2.Use app id,secret and redirect url
-		$app_id = '1519995188216019';
-		$app_secret = 'b8c037c995dcee5e43bc6d1038f68606';
+		$app_id = APP_ID;
+		$app_secret = APP_SECRET;
 		$redirect_url = 'http:' . URL . 'fblogin/processFBLogin';
 
 		//3.Initialize application, create helper object and get fb sess

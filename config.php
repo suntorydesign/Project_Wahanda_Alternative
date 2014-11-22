@@ -53,3 +53,6 @@ define('INFO_MAIL', 'info@beleza.vn');
 define('PASS_MAIL', '12345678');
 // 1 USD = ? VNĐ
 define('TRAN_CURRENCY', 21000);
+// App secret App id FB login
+define('APP_ID', '1519995188216019');
+define('APP_SECRET', 'b8c037c995dcee5e43bc6d1038f68606');

@@ -553,7 +553,7 @@ function loadServiceDetail(user_service_id) {
 					if (key == 'user_lat') {
 						USER_LAT = value;
 					}
-					if (key == 'user_email') {
+					if (key == 'user_notification_email') {
 						USER_EMAIL = value;
 					}
 					if (key == 'user_open_hour') {
@@ -801,6 +801,7 @@ function loadServiceDetail(user_service_id) {
 					console.log(CHOOSEN_TIME);
 					console.log(CHOOSEN_PRICE);
 					console.log(USER_SERVICE_ID);
+					console.log(USER_EMAIL);
 				});
 				$('#time_booking div.row:not(.can_not_book)').each(function(index) {
 					if ($(this).attr('date-time-data') == CHOOSEN_TIME && CHOOSEN_DATE == CHOOSEN_DATE_STORE) {
