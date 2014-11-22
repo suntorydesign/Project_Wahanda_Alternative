@@ -234,7 +234,7 @@
 						</div></td>
 						<td class="empty"><span>&nbsp;</span></td>
 						<td class="content-box tops">
-						<div id="top-services">
+						<!-- <div id="top-services">
 							<h2 class="box-hd">Dịch vụ tốt nhất</h2>
 							<table>
 								<thead>
@@ -252,12 +252,28 @@
 								
 								</tbody>
 							</table>
+						</div><div class="box-separator"></div> -->
+
+						<div id="top-services">
+							<h2 class="box-hd">Dịch vụ tốt nhất</h2>
+							<table>
+								<thead>
+									<tr>
+										<th class="box-subhd">Tìm theo số lượt được bookings</th>
+										<td>Lượt
+										<br>
+										book</td>
+									</tr>
+								</thead>
+								<tbody class="list-top-services">
+								
+								</tbody>
+							</table>
 						</div><div class="box-separator"></div>
 
 
 						<div id="top-performers hidden" style="display:none;">
 							<h2 class="box-hd v-title">Top employees</h2>
-
 							<table>
 								<thead>
 									<tr>
