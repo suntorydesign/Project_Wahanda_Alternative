@@ -165,7 +165,7 @@ SQL;
 			$insert -> execute();
 			if ($insert -> rowCount() > 0) {
 				echo 200;
-			}else{
+			} else {
 				echo 0;
 			}
 		}
@@ -179,6 +179,63 @@ WHERE rule_group = '{$rule_group}'
 SQL;
 		$select = $this -> db -> select($sql);
 		return $select[0]['check_rule'];
+	}
+
+	public function loadRuleDetailEdit($rule_id) {
+		$sql = <<<SQL
+SELECT rule_id
+, rule_group
+, rule_result
+, rule_service_id
+, service_service_type_id
+FROM rule
+, service
+, service_type
+WHERE rule.rule_service_id = service.service_id
+AND service.service_service_type_id = service_type.service_type_id
+AND rule_delete_flg = 0
+AND service_delete_flg = 0
+AND service_type_delete_flg = 0
+AND rule_id = {$rule_id}
+SQL;
+		$select = $this -> db -> select($sql);
+		if ($select) {
+			echo json_encode($select);
+		} else {
+			echo '[]';
+		}
+	}
+
+	public function editRule($data) {
+		$sql = <<<SQL
+UPDATE rule
+SET rule_group = '{$data['rule_group']}'
+, rule_result = '{$data['rule_result']}'
+, rule_service_id = {$data['rule_service']}
+WHERE rule_id = {$data['rule_id']}
+SQL;
+		$update = $this -> db -> prepare($sql);
+		$update -> execute();
+		if ($update -> rowCount() > 0) {
+			echo 200;
+		} else {
+			echo 0;
+		}
+	}
+	
+	public function deleteRule($data) {
+		$sql = <<<SQL
+UPDATE rule
+SET rule_delete_flg = 1
+WHERE rule_id = {$data['rule_id']}
+SQL;
+		$update = $this -> db -> prepare($sql);
+		$update -> execute();
+		if ($update -> rowCount() > 0) {
+			echo 200;
+		} else {
+			echo 0;
+		}
 	}
 
 }

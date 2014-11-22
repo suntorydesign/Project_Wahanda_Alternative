@@ -28,17 +28,17 @@
 					</div>
 					<div class="col-md-12">
 						<div id="question_list" class="well" style="max-height: 340px; overflow-y: scroll;">
-							<!-- <div class="question-field">
+							<div class="question-field">
 								<p class="question">
-									1) Hãy cho biết giới tính của bạn
+									1) ...
 								</p>
 								<p fact-id="" question-id="" class="answer pointer">
-									<b>Nam</b>
+									<b>...</b>
 								</p>
 								<p fact-id="" question-id="" class="answer pointer">
-									<b>Nữ</b>
+									<b>...</b>
 								</p>
-							</div> -->
+							</div>
 						</div>
 					</div>
 				</div>

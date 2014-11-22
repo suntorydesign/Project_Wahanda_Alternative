@@ -20,3 +20,7 @@ h3{
 .pointer{
 	cursor: pointer;
 }
+
+tbody tr td{
+	cursor: pointer;
+}
