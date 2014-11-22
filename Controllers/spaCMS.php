@@ -238,6 +238,10 @@
 					$this->model->get_sale_report();
 					break;
 
+				case 'xhrGet_evoucher_report':
+					$this->model->get_evoucher_report();
+					break;
+
 				case 'xhrGet_booking_report':
 					$this->model->get_booking_report();
 					break;

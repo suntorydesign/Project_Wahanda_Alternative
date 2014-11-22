@@ -7,6 +7,11 @@
                         <div class="title vertically-centered" style="position: absolute; height: 17px; top: 50%; margin-top: -8.5px;">Danh sách Bookings</div>
                     </a>
                 </li>
+                <li class="ui-state-default ui-corner-top" id="evouchers-tab" style="display: list-item;">
+                    <a href="#evouchers" style="position: relative;" role="tab" data-toggle="tab">
+                        <div class="title vertically-centered" style="position: absolute; height: 17px; top: 50%; margin-top: -8.5px;">Danh sách Evoucher</div>
+                    </a>
+                </li>
                 <li class="ui-state-default ui-corner-top" id="sales-tab" style="display: list-item;">
                     <a href="#sales" style="position: relative;" role="tab" data-toggle="tab">
                         <div class="title vertically-centered" style="position: absolute; height: 17px; top: 50%; margin-top: -8.5px;">Báo cáo doanh thu</div>
@@ -155,6 +160,49 @@
                 </div>
             </div>
 
+            <!-- Evouchers -->
+            <div class="tab-pane" id="evouchers">
+                <div class="reports-evouchers">
+                    <div class="home-filters"></div>
+                    <div class="home-data">
+                        <div class="portlet-body" style="margin-bottom: 30px">
+                            <div class="table-container">
+                                <table class="table table-bordered table-hover" id="listOfEvoucher_table" >
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Booking id </br>
+                                                Order ref#
+                                            </th>
+                                            <th>
+                                                Khách hàng
+                                            </th>
+                                            <th>
+                                                Dịch vụ
+                                            </th>
+                                            <th>
+                                                Giá
+                                            </th>
+                                            <th>
+                                                Ngày đặt
+                                            </th>
+                                            <th>
+                                                Hạn sử dụng
+                                            </th>
+                                            <th>
+                                                Trạng thái
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Sales reports -->
             <div class="tab-pane" id="sales">

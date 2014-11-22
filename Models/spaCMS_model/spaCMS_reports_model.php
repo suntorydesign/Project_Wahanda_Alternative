@@ -33,6 +33,42 @@ SQL;
 		echo json_encode($data);
 	}
 
+	/**
+	 * Báo cáo danh sách evoucher
+	 * @param user_id
+	 * @return json
+	 */
+	public function get_evoucher_report() {
+		$user_id = Session::get('user_id');
+		
+		$aQuery = <<<SQL
+		SELECT 
+			b.booking_id,
+			-- e.booking_detail_id,
+			c.client_name,
+			us.user_service_name,
+			b.booking_date,
+			e.e_voucher_price,
+			e.e_voucher_due_date,
+			e.e_voucher_status
+		FROM 
+			booking b, 
+			e_voucher e, 
+			client c, 
+			user_service us
+		WHERE 
+				e.e_voucher_user_id = {$user_id}
+			AND	e.e_voucher_booking_id = b.booking_id
+			AND b.booking_client_id = c.client_id
+			AND e.e_voucher_user_service_id = us.user_service_id
+SQL;
+		$data = $this->db->select($aQuery);
+
+
+
+		echo json_encode($data);
+	}
+
 
 	/**
 	 * Báo cáo doanh thu từ ngày <from> cho đến ngày <to>

@@ -180,6 +180,10 @@ class SpaCMS_Model extends Model {
 		SpaCMS_Reports_Model::get_sale_report();
 	}
 
+	function get_evoucher_report() {
+		SpaCMS_Reports_Model::get_evoucher_report();
+	}
+
 	function get_booking_report() {
 		SpaCMS_Reports_Model::get_booking_report();
 	}

@@ -1,3 +1,56 @@
+// Source: http://stackoverflow.com/questions/497790
+var dates = {
+    convert:function(d) {
+        // Converts the date in d to a date-object. The input can be:
+        //   a date object: returned without modification
+        //  an array      : Interpreted as [year,month,day]. NOTE: month is 0-11.
+        //   a number     : Interpreted as number of milliseconds
+        //                  since 1 Jan 1970 (a timestamp) 
+        //   a string     : Any format supported by the javascript engine, like
+        //                  "YYYY/MM/DD", "MM/DD/YYYY", "Jan 31 2009" etc.
+        //  an object     : Interpreted as an object with year, month and date
+        //                  attributes.  **NOTE** month is 0-11.
+        return (
+            d.constructor === Date ? d :
+            d.constructor === Array ? new Date(d[0],d[1],d[2]) :
+            d.constructor === Number ? new Date(d) :
+            d.constructor === String ? new Date(d) :
+            typeof d === "object" ? new Date(d.year,d.month,d.date) :
+            NaN
+        );
+    },
+    compare:function(a,b) {
+        // Compare two dates (could be of any type supported by the convert
+        // function above) and returns:
+        //  -1 : if a < b
+        //   0 : if a = b
+        //   1 : if a > b
+        // NaN : if a or b is an illegal date
+        // NOTE: The code inside isFinite does an assignment (=).
+        return (
+            isFinite(a=this.convert(a).valueOf()) &&
+            isFinite(b=this.convert(b).valueOf()) ?
+            (a>b)-(a<b) :
+            NaN
+        );
+    },
+    inRange:function(d,start,end) {
+        // Checks if date in d is between dates in start and end.
+        // Returns a boolean or NaN:
+        //    true  : if d is between start and end (inclusive)
+        //    false : if d is before start or after end
+        //    NaN   : if one or more of the dates is illegal.
+        // NOTE: The code inside isFinite does an assignment (=).
+       return (
+            isFinite(d=this.convert(d).valueOf()) &&
+            isFinite(start=this.convert(start).valueOf()) &&
+            isFinite(end=this.convert(end).valueOf()) ?
+            start <= d && d <= end :
+            NaN
+        );
+    }
+}
+
 
 var BookingReport = function() {
     var table_lob = $("#listOfBooking_table");
@@ -71,6 +124,93 @@ var BookingReport = function() {
     return {
         init: function() {
             xhrGet_booking_report();
+        }
+    }
+}();
+
+var EvoucherReport = function() {
+    var table_loe = $("#listOfEvoucher_table");
+    var xhrGet_evoucher_report = function() {
+        var loe = table_loe.find('tbody');
+        var html = '<tr>'
+                +   '<td>:booking_id</td>'
+                +   '<td>:client_name</td>'
+                +   '<td>:user_service_name</td>'
+                +   '<td>:evoucher_price đ</td>'
+                +   '<td>:booking_date</td>'
+                +   '<td>:evoucher_due_date :status_expires</td>'
+                +   '<td>:evoucher_status</td>'
+                +   '</tr>';
+
+        var status_0 = '<span class="label label-sm label-default">Chưa sử dụng</span>';
+        var status_1 = '<span class="label label-sm label-success">Đã sử dụng</span>';
+
+        var status_expires = '<span class="label label-sm label-danger">Hết hạn</span>';
+
+        var today = moment().format("YYYY-MM-DD");
+        var due_date = null;
+
+        var url = URL + 'spaCMS/reports/xhrGet_evoucher_report';
+        var out = '';
+        $.get(url, function(data){
+            if(data.length > 0) {
+                $.each(data, function(key, evoucher){
+                    out = html.replace(':booking_id', evoucher['booking_id']);
+                    out = out.replace(':client_name', evoucher['client_name']);
+                    out = out.replace(':user_service_name', evoucher['user_service_name']);
+                    out = out.replace(':evoucher_price', $.number( evoucher['e_voucher_price'] ));
+                    out = out.replace(':booking_date', moment(evoucher['booking_date']).format("DD/MM/YYYY") );
+                    out = out.replace(':evoucher_due_date', evoucher['e_voucher_due_date'] );
+
+                    due_date = evoucher['e_voucher_due_date'];  
+                    console.log(dates.compare(today, due_date));
+                    if( dates.compare(today, due_date) == 1) {
+                        out = out.replace(':status_expires', status_expires );
+                    } else {
+                        out = out.replace(':status_expires', '' );
+                    }
+                    out = out.replace(':evoucher_status', evoucher['e_voucher_status'] == 0 ? status_0 : status_1 );
+                    loe.append(out);
+                });
+            }
+            
+        }, 'json')
+        .done(function() {
+            table_loe.dataTable({
+                "aoColumns": [
+                    { "sWidth": "13%" },
+                    { "sWidth": "15%" },
+                    { "sWidth": "30%" },
+                    null,
+                    null,
+                    null
+                ],
+                "aLengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "All"] // change per page values here
+                ],
+
+                // set the initial value
+                "iDisplayLength": 10,
+                "sPaginationType": "bootstrap",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ records",
+                    "oPaginate": {
+                        "sPrevious": "Prev",
+                        "sNext": "Next"
+                    }
+                }
+            });
+
+            jQuery('#listOfEvoucher_table .dataTables_filter input').addClass("form-control input-medium input-inline"); // modify table search input
+            jQuery('#listOfEvoucher_table .dataTables_length select').addClass("form-control input-xsmall"); // modify table per page dropdown
+            jQuery('#listOfEvoucher_table .dataTables_length select').select2(); // initialize select2 dropdown
+        });
+    }
+
+    return {
+        init: function() {
+            xhrGet_evoucher_report();
         }
     }
 }();
@@ -171,4 +311,5 @@ var SaleReport = function () {
 }();
 
 BookingReport.init();
+EvoucherReport.init();
 SaleReport.init();
