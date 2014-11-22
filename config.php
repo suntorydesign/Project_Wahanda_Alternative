@@ -24,7 +24,7 @@ define('MAX_QUANTITY_EVOUCHER', 9);
 define('MAX_PAGINATION_ITEM', 5);
 
 //IDLE TIME (secs)
-define('IDLE_TIME', 60 * 9);
+define('IDLE_TIME', 60 * 20);
 
 //IDLE TIME (milisecs)
 define('IDLE_CHECK', 60000 * 1);

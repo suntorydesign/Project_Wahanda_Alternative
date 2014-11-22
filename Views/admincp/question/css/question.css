@@ -1,0 +1,16 @@
+b, strong{
+	font-weight: bold;
+}
+
+h3{
+	font-size: 24px;
+	margin-bottom: 5px;
+}
+
+.pointer{
+	cursor: pointer;
+}
+
+tbody tr td{
+	cursor: pointer;
+}
