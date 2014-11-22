@@ -119,17 +119,11 @@
 		</div>
 
 		<div class="content-box home-bookings b-home-bookings">
-			<h2 class="box-hd"> Bookings chưa xác nhận <span class="amount v-count hidden" style="display: none;"></span></h2>
+			<h2 class="box-hd"> Bookings chưa xác nhận <span class="amount v-count">0</span></h2>
 			<a class="view-all" href="<?php echo URL ."spaCMS/reports";?>">Xem tất cả bookings</a>
 			<div class="data-table">
 				<table>
-					<tbody>
-						<tr class="empty">
-							<td> Không có vé bookings tại thời điểm này </td>
-						</tr>
-						<tr class="empty">
-							<td> Không có vé bookings tại thời điểm này </td>
-						</tr>
+					<tbody id="list_appointment_not_confirm">
 						<tr class="empty">
 							<td> Không có vé bookings tại thời điểm này </td>
 						</tr>

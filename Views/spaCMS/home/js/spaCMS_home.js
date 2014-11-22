@@ -238,10 +238,52 @@ var Home = function() {
         });
     }
 
+    var xhrGet_appointment_not_confirm = function() {
+
+        var v_count = $(".v-count");
+        var lanc = $("#list_appointment_not_confirm");
+
+        var html = '<tr class="empty">'
+                +   '<td> :data_us_name </td>'
+                +   '<td> :data_client_name </td>'
+                +   '<td> Ngày :data_date, :data_time_start </td>'
+                +   '<td> :data_type </td>'
+                +'</tr>';
+
+        label_0 = "";
+        label_1 = "";
+
+        var out = '';
+        var url = URL + "spaCMS/home/xhrGet_appointment_not_confirm";
+        $.get(url, function(data) {
+            var len = data.length;
+            if(len > 0) {
+                lanc.html('');
+
+                $.each(data, function(index, value) {
+                    out = html.replace(":data_us_name", value["data_us_name"]);
+                    out = out.replace(":data_client_name", value["data_client_name"]);
+                    out = out.replace(":data_date", value["data_date"]);
+                    out = out.replace(":data_time_start", value["data_time_start"]);
+                    out = out.replace(":data_type", (value["data_type"] == 'a' ? 'Appointment' : 'Bookings') );
+
+                    lanc.append(out);
+                });
+            }
+            
+            v_count.text(len);
+        }, 'json')
+        .done(function() {
+            v_count.fadeOut();
+            v_count.fadeIn();
+        });
+    }
+
     return {
         init: function() {
             xhrGet_monthly_sales();
             xhrGet_top_services();
+            xhrGet_appointment_not_confirm();
         }
     }
 }();

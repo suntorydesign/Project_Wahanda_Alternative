@@ -156,4 +156,84 @@ SQL;
 	public function get_top_services_pre_month() {
 
 	}
+
+	public function get_appointment_not_confirm() {
+		$user_id = Session::get('user_id');
+		// Thời gian hiện tại
+		$today = date("Y-m-d");
+		// $today = "2014-10-27";
+
+		// echo $today; exit();
+
+		$appointments 	= self::get_appointments_not_confirm($user_id, $today);
+		$bookings 		= self::get_bookings_not_confirm($user_id, $today);
+
+		$data = array();
+		foreach ($appointments as $a) {
+			$data[] = array(
+				'data_us_name' 		=> $a['data_us_name'],
+				'data_client_name' 	=> $a['data_client_name'],
+				'data_date' 		=> $a['data_date'],
+				'data_time_start' 	=> $a['data_time_start'],
+				'data_type' 		=> 'a'
+			);
+		}
+
+		foreach ($bookings as $b) {
+			$data[] = array(
+				'data_us_name' 		=> $b['data_us_name'],
+				'data_client_name' 	=> $b['data_client_name'],
+				'data_date' 		=> $b['data_date'],
+				'data_time_start' 	=> $b['data_time_start'],
+				'data_type' 		=> 'b'
+			);
+		}
+
+		echo json_encode($data);
+	}
+
+	public function get_appointments_not_confirm($user_id, $today) {
+		$aQuery = <<<SQL
+		SELECT 
+			us.user_service_name as data_us_name,
+			a.appointment_client_name as data_client_name,
+			a.appointment_date as data_date,
+			a.appointment_time_start as data_time_start
+		FROM 
+			appointment a, user_service us
+		WHERE 
+				a.appointment_user_id = {$user_id}
+			AND a.appointment_user_service_id = us.user_service_id
+			AND a.appointment_date >= '{$today}'
+			AND a.appointment_is_confirm = 0
+SQL;
+		$data = $this->db->select($aQuery);
+
+		return $data;
+	}
+
+	public function get_bookings_not_confirm($user_id, $today) {
+		$aQuery = <<<SQL
+		SELECT 
+			us.user_service_name as data_us_name,
+			c.client_name as data_client_name,
+			bd.booking_detail_date as data_date,
+			bd.booking_detail_time_start as data_time_start
+		FROM 
+			booking b,
+			booking_detail bd, 
+			user_service us,
+			client c
+		WHERE 
+				bd.booking_detail_user_id = {$user_id}
+			AND bd.booking_detail_user_service_id = us.user_service_id
+			AND bd.booking_detail_booking_id = b.booking_id
+			AND b.booking_client_id = c.client_id
+			AND bd.booking_detail_date >= '{$today}'
+			AND bd.booking_detail_is_confirm = 0
+SQL;
+		$data = $this->db->select($aQuery);
+
+		return $data;
+	}
 }

@@ -67,6 +67,10 @@ class SpaCMS_Model extends Model {
 		SpaCMS_Home_Model::get_top_services();
 	}
 
+	function get_appointment_not_confirm() {
+		SpaCMS_Home_Model::get_appointment_not_confirm();
+	}
+
 	///////////////////////////// CALENDAR //////////////////////////
 	function get_calendar() {
 		SpaCMS_Calendar_Model::get_calendar();

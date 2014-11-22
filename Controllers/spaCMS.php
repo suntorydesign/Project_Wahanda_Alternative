@@ -44,6 +44,10 @@
 				case 'xhrGet_top_services':
 					$this->model->get_top_services();
 					break;
+
+				case 'xhrGet_appointment_not_confirm':
+					$this->model->get_appointment_not_confirm();
+					break;
 					
 				default:
 					$this->view->style = array(
