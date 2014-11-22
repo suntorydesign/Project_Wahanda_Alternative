@@ -548,13 +548,13 @@
 															<option value="0">Ngưng hoạt động</option>
 														</select>
 													</tr>
-													<tr id="sold_as" title="<strong>Sell as</strong> - Service can be fulfilled as: <strong><em>Appointment</em></strong> - customers book in directly by finding available slots in your calendar. It’s much more convenient both for you and your customers. <strong><em>eVoucher</em></strong> - customers receive vouchers that they can redeem in your venue." class="form-row hidden">
-														<td class="label-part"><label for="service-type">Sold as</label></td>
+													<tr id="sold_as" title="<strong>Sell as</strong> - Service can be fulfilled as: <strong><em>Appointment</em></strong> - customers book in directly by finding available slots in your calendar. It’s much more convenient both for you and your customers. <strong><em>eVoucher</em></strong> - customers receive vouchers that they can redeem in your venue." class="form-row">
+														<td class="label-part"><label for="service-type">Hình thức bán</label></td>
 														<td class="input-part">
 														<select id="fulfillment-types" name="user_service_use_evoucher">
-															<option value="AE">Appointment or eVoucher</option>
-															<option value="A">Appointment</option>
-															<option value="E">eVoucher</option>
+															<option value="2">Appointment or eVoucher</option>
+															<option value="1">Appointment</option>
+															<option value="0">eVoucher</option>
 														</select></td>
 													</tr>
 												</tbody>

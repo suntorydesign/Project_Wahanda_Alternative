@@ -1,10 +1,8 @@
 <?php
-
 class admincp_consulting_model extends Model {
 	function __construct() {
 		parent::__construct();
 	}
-
 	public function loadRuleList($question_service_type_id) {
 		$sql = <<<SQL
 SELECT DISTINCT rule_id
@@ -40,7 +38,6 @@ SQL;
 			echo "[]";
 		}
 	}
-
 	public function loadRuleServiceType() {
 		$sql = <<<SQL
 SELECT service_type_id
@@ -55,7 +52,6 @@ SQL;
 			echo "[]";
 		}
 	}
-
 	public function loadRuleService($service_type_id) {
 		$sql = <<<SQL
 SELECT service_id
@@ -74,7 +70,6 @@ SQL;
 			echo "[]";
 		}
 	}
-
 	public function loadQuestionList($service_type_id) {
 		$sql = <<<SQL
 SELECT question_id
@@ -105,7 +100,6 @@ SQL;
 		}
 		// print_r($result_array);
 	}
-
 	public function checkFactExist($data) {
 		$fact = explode(',', $data['fact']);
 		foreach ($fact as $key => $value) {
@@ -143,7 +137,6 @@ SQL;
 		}
 		echo $fact_sec_result;
 	}
-
 	public function saveRule($data) {
 		$check_rule = self::checkExistRule($data['rule_group']);
 		if ($check_rule == 1) {
@@ -170,7 +163,6 @@ SQL;
 			}
 		}
 	}
-
 	public function checkExistRule($rule_group) {
 		$sql = <<<SQL
 SELECT COUNT(*) AS check_rule
@@ -180,7 +172,6 @@ SQL;
 		$select = $this -> db -> select($sql);
 		return $select[0]['check_rule'];
 	}
-
 	public function loadRuleDetailEdit($rule_id) {
 		$sql = <<<SQL
 SELECT rule_id
@@ -205,7 +196,6 @@ SQL;
 			echo '[]';
 		}
 	}
-
 	public function editRule($data) {
 		$sql = <<<SQL
 UPDATE rule
@@ -237,5 +227,4 @@ SQL;
 			echo 0;
 		}
 	}
-
 }

@@ -1,5 +1,6 @@
 <?php
-
+	date_default_timezone_set('Asia/Ho_Chi_Minh');
+	
 	require 'config.php';
 	require 'paths.php';
 

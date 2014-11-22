@@ -169,7 +169,6 @@ var MenuGroupService = function () {
             $.get(url, function(data){
                 $.each(data, function(key, value){
                     out = opt.replace(/:service_type_name/g, value['service_type_name']);
-                    // out = out.replace(':service_type_name', value['service_type_name']);
                     select_gsn.append(out);
                 });
 

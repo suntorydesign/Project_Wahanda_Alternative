@@ -163,8 +163,6 @@ SQL;
 		$today = date("Y-m-d");
 		// $today = "2014-10-27";
 
-		// echo $today; exit();
-
 		$appointments 	= self::get_appointments_not_confirm($user_id, $today);
 		$bookings 		= self::get_bookings_not_confirm($user_id, $today);
 
@@ -206,6 +204,7 @@ SQL;
 			AND a.appointment_user_service_id = us.user_service_id
 			AND a.appointment_date >= '{$today}'
 			AND a.appointment_is_confirm = 0
+			AND ( a.appointment_status = 0 OR a.appointment_status = 1 )
 SQL;
 		$data = $this->db->select($aQuery);
 
@@ -231,6 +230,7 @@ SQL;
 			AND b.booking_client_id = c.client_id
 			AND bd.booking_detail_date >= '{$today}'
 			AND bd.booking_detail_is_confirm = 0
+			AND ( bd.booking_detail_status = 0 OR bd.booking_detail_status = 1 )
 SQL;
 		$data = $this->db->select($aQuery);
 

@@ -247,7 +247,10 @@ SQL;
 			}
 			$data["$key"] = $value;
 		}
-		
+
+		// Thời gian tạo appointment
+		$data["appointment_created"] = date("Y-m-d H:m:s");
+
 		if( $this->db->insert('appointment', $data) ){
 			echo 'success';
 		} else {
