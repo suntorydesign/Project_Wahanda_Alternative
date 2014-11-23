@@ -89,18 +89,18 @@ var BookingReport = function() {
         }, 'json')
         .done(function() {
             table_lob.dataTable({
-                "aoColumns": [
-                    { "sWidth": "13%" },
-                    { "sWidth": "15%" },
-                    { "sWidth": "30%", "sClass": "center", "bSortable": true },
-                    null,
-                    null,
-                    { "sWidth": "11%", "bSortable": true },
-                    { "sWidth": "12%", "bSortable": true }
-                ],
+                // "aoColumns": [
+                //     { "sWidth": "13%" },
+                //     { "sWidth": "15%" },
+                //     { "sWidth": "30%", "sClass": "center", "bSortable": true },
+                //     null,
+                //     null,
+                //     { "sWidth": "11%", "bSortable": true },
+                //     { "sWidth": "12%", "bSortable": true }
+                // ],
                 "aLengthMenu": [
-                    [5, 15, 20, -1],
-                    [5, 15, 20, "All"] // change per page values here
+                    [10, 25, 50, 100, -1],
+                    [10, 25, 50, 100, "All"] // change per page values here
                 ],
 
                 // set the initial value
@@ -177,33 +177,34 @@ var EvoucherReport = function() {
         .done(function() {
             table_loe.dataTable({
                 // "aoColumns": [
-                //     { "sWidth": "13%" },
-                //     { "sWidth": "15%" },
-                //     { "sWidth": "30%" },
-                //     null,
-                //     null,
-                //     null
+                //     // { "sWidth": "10%" },
+                //     // { "sWidth": "15%" },
+                //     // { "sWidth": "30%", "bSortable": true },
+                //     // { "sWidth": "11%", "bSortable": true },
+                //     // { "sWidth": "12%", "bSortable": true },
+                //     // { "sWidth": "11%", "bSortable": true },
+                //     // { "sWidth": "12%", "bSortable": true }
                 // ],
-                // "aLengthMenu": [
-                //     [5, 15, 20, -1],
-                //     [5, 15, 20, "All"] // change per page values here
-                // ],
+                "aLengthMenu": [
+                    [10, 25, 50, 100, -1],
+                    [10, 25, 50, 100, "All"] // change per page values here
+                ],
 
-                // // set the initial value
-                // "iDisplayLength": 10,
-                // "sPaginationType": "bootstrap",
-                // "oLanguage": {
-                //     "sLengthMenu": "_MENU_ records",
-                //     "oPaginate": {
-                //         "sPrevious": "Prev",
-                //         "sNext": "Next"
-                //     }
-                // }
+                // set the initial value
+                "iDisplayLength": 10,
+                "sPaginationType": "bootstrap",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ records",
+                    "oPaginate": {
+                        "sPrevious": "Prev",
+                        "sNext": "Next"
+                    }
+                }
             });
 
-            jQuery('#listOfEvoucher_table .dataTables_filter input').addClass("form-control input-medium input-inline"); // modify table search input
-            jQuery('#listOfEvoucher_table .dataTables_length select').addClass("form-control input-xsmall"); // modify table per page dropdown
-            jQuery('#listOfEvoucher_table .dataTables_length select').select2(); // initialize select2 dropdown
+            jQuery('#listOfEvoucher_table_wrapper .dataTables_filter input').addClass("form-control input-medium input-inline"); // modify table search input
+            jQuery('#listOfEvoucher_table_wrapper .dataTables_length select').addClass("form-control input-xsmall"); // modify table per page dropdown
+            jQuery('#listOfEvoucher_table_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
         });
     }
 

@@ -20,7 +20,10 @@ class SpaCMS_Reports_Model {
 			bd.booking_detail_is_confirm,
 			bd.booking_detail_status
 		FROM 
-			booking b, booking_detail bd, client c, user_service us
+			booking b, 
+			booking_detail bd, 
+			client c, 
+			user_service us
 		WHERE 
 				bd.booking_detail_user_id = {$user_id}
 			-- AND bd.booking_detail_is_confirm = 1 -- đã được xác thực
@@ -81,7 +84,7 @@ SQL;
 		$user_id = Session::get('user_id');
 		$from 	= $_GET['from'];
 		$to 	= $_GET['to'];
-		$limit 	= 3;
+		$limit 	= 5;
 
 		// Result
 		$data_sales_report = array();
@@ -120,20 +123,42 @@ SQL;
 
 	// Tổng doanh thu
 	public function get_total_sale($user_id, $from, $to) {
-		$aQuery = <<<SQL
+		$aQuery_bookings = <<<SQL
 		SELECT 
-			SUM(booking_detail_price) as totalSale_value,
+			SUM(bd.booking_detail_price) as totalSale_value,
 			COUNT(*) as totalSale_count
 		FROM 
-			booking_detail
+			booking b,
+			booking_detail bd
 		WHERE 
-				booking_detail_user_id = {$user_id}
-			AND ( booking_detail_date BETWEEN '{$from}' AND '{$to}' )
-			AND booking_detail_status = 1
+				bd.booking_detail_user_id = {$user_id}
+			AND bd.booking_detail_booking_id = b.booking_id
+			AND ( b.booking_date BETWEEN '{$from}' AND '{$to}' )
+			-- AND booking_detail_status = 1
 SQL;
-		$data = $this->db->select($aQuery);
+		$data_booking = $this->db->select($aQuery_bookings);
+
+		$aQuery_evoucher = <<<SQL
+		SELECT 
+			SUM(e.e_voucher_price) as totalSale_value,
+			COUNT(*) as totalSale_count
+		FROM 
+			booking b,
+			e_voucher e
+		WHERE 
+				e.e_voucher_user_id = {$user_id}
+			AND e.e_voucher_booking_id = b.booking_id
+			AND ( b.booking_date BETWEEN '{$from}' AND '{$to}' )
+			-- AND booking_detail_status = 1
+SQL;
+		$data_evoucher = $this->db->select($aQuery_evoucher);
 		
-		return $data[0];
+		$data = array(
+			"totalSale_value" => ($data_booking[0]["totalSale_value"] + $data_evoucher[0]["totalSale_value"]),
+			"totalSale_count" => ($data_booking[0]["totalSale_count"] + $data_evoucher[0]["totalSale_count"])
+		);
+
+		return $data;
 	}
 
 	// Doanh thu của những Nhóm dịch vụ tốt nhất
