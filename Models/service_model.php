@@ -592,7 +592,9 @@ AND question_delete_flg = 0
 SQL;
 		$select = $this -> db -> select($sql);
 		$select_array = array();
+		$index = 0;
 		foreach ($select as $key => $value) {
+			$index++;
 			$sql = <<<SQL
 SELECT *
 FROM fact
@@ -600,7 +602,7 @@ WHERE fact_question_id = {$value['question_id']}
 AND fact_delete_flg = 0
 SQL;
 			$select_fact = $this -> db -> select($sql);
-			$select_array[$value['question_id'] . ') ' . $value['question_content']] = $select_fact;
+			$select_array[$index . ') ' . $value['question_content']] = $select_fact;
 		}
 		echo json_encode($select_array);
 	}

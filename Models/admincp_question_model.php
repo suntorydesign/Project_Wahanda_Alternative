@@ -51,4 +51,54 @@ SQL;
 		}
 	}
 
+	public function addQuestion($data) {
+		$question_id = ($this -> getQuestionID()) + 1;
+		$sql = <<<SQL
+INSERT INTO question(
+question_id
+, question_content
+, question_service_type_id
+)
+values(
+$question_id
+, '{$data['question_content']}'
+, '{$data['question_service_type_id']}'
+)
+SQL;
+		$insert = $this -> db -> prepare($sql);
+		$insert -> execute();
+		if ($insert -> rowCount() > 0) {
+			$answer = explode(',', $data['question_answer']);
+			foreach ($answer as $key => $value) {
+				$sql = <<<SQL
+INSERT INTO fact(
+fact_answer
+, fact_question_id
+)
+values(
+'{$value}'
+, {$question_id}
+)
+SQL;
+				$insert = $this -> db -> prepare($sql);
+				$insert -> execute();
+			}
+			echo 200;
+		} else {
+			echo 0;
+		}
+
+	}
+
+	public function getQuestionID() {
+		$sql = <<<SQL
+SELECT question_id
+FROM question
+ORDER BY question_id DESC
+LIMIT 1
+SQL;
+		$select = $this -> db -> select($sql);
+		return $select[0]['question_id'];
+	}
+
 }

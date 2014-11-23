@@ -3,10 +3,10 @@ $(document).ready(function() {
 		oTable = $('#question_list').dataTable({
 			"oLanguage" : {
 				"sZeroRecords" : "Không có dữ liệu nào cả.",
-				"sSearch": "Tìm kiếm: ",
-				"sLengthMenu": "Hiển thị &nbsp;&nbsp; _MENU_ &nbsp;&nbsp; dòng.",
-				"sInfo": "Hiển thị _START_ đến _END_ của _TOTAL_ dòng.",
-				"sInfoEmpty": "Hiển thị 0 đến 0 của 0 dòng."
+				"sSearch" : "Tìm kiếm: ",
+				"sLengthMenu" : "Hiển thị &nbsp;&nbsp; _MENU_ &nbsp;&nbsp; dòng.",
+				"sInfo" : "Hiển thị _START_ đến _END_ của _TOTAL_ dòng.",
+				"sInfoEmpty" : "Hiển thị 0 đến 0 của 0 dòng."
 			}
 		});
 		loadServiceTypeList();
@@ -41,7 +41,7 @@ function loadServiceTypeList() {
 	});
 }
 
-function loadQuestionList(){
+function loadQuestionList() {
 	$.ajax({
 		url : URL + 'admincp_question/loadQuestionList',
 		type : 'post',
@@ -67,24 +67,83 @@ function addQuestionDetail() {
 	jumpToOtherPage(URL + 'admincp_question/addQuestionDetail');
 }
 
-function returnToQuestion(){
+function returnToQuestion() {
 	jumpToOtherPage(URL + 'admincp_question');
 }
 
-function addMoreAnswer(){
+function addMoreAnswer() {
 	var html = '<div class="form-group">';
-	html += '<label class="control-label col-md-4">Câu trả lời (*)</label>';
+	html += '<label class="control-label col-md-4">Câu trả lời</label>';
 	html += '<div class="col-md-8">';
-	html += '<input placeholder="Nhập câu trả lời (*)..." class="form-control question_answer"  name="" type="text"/>';
+	html += '<input placeholder="Nhập câu trả lời..." class="form-control question_answer"  name="" type="text"/>';
 	html += '</div>';
 	html += '</div>';
 	$('#answer_field').append(html);
 }
 
-function addQuestion(){
-	$('.question_answer').each(function(){
-		if($(this).val() != ''){
-			alert($(this).val());
-		}		
+function addQuestion() {
+	$('div.done').fadeOut(function() {
+		$('div.s-loading').fadeIn(function() {
+			var count_answer = 0;
+			var question_answer = '';
+			$('.question_answer').each(function() {
+				if ($(this).val() != '') {
+					if (question_answer == '') {
+						question_answer = $(this).val();
+					} else {
+						question_answer += ',' + $(this).val();
+					}
+					count_answer++;
+				}
+			});
+			var question_service_type_id = $('#question_service_type_id').val();
+			var question_content = $('#question_content').val();
+			if (question_service_type_id == '' || question_content == '') {
+				$('#error_add_question').text('Nhập đầy đủ các trường có (*).');
+				$('#error_add_question').fadeIn(function() {
+					$('div.s-loading').fadeOut(function() {
+						$('div.done').fadeIn();
+					});
+				});
+			} else {
+				if (count_answer < 2) {
+					$('#error_add_question').text('Phải có ít nhất 2 câu trả lời.');
+					$('#error_add_question').fadeIn(function() {
+						$('div.s-loading').fadeOut(function() {
+							$('div.done').fadeIn();
+						});
+					});
+				} else {
+					$('#error_add_question').fadeOut(function() {
+						$('div.s-loading').fadeOut(function() {
+							$('div.done').fadeIn(function() {
+								$.ajax({
+									url : URL + 'admincp_question/addQuestion',
+									type : 'post',
+									// dataType : 'json',
+									data : {
+										question_answer : question_answer,
+										question_service_type_id : question_service_type_id,
+										question_content : question_content
+									},
+									success : function(response){
+										if(response == 200){
+											alert('Thêm thành công !');
+											jumpToOtherPage(URL + 'admincp_question');
+										}else{
+											alert('Thêm thất bại !');
+										}
+									},
+									complete : function(){
+										
+									}
+								});
+							});
+						});
+					});
+				}
+			}
+		});
 	});
+
 }
