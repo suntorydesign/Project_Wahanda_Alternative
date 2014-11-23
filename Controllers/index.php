@@ -240,5 +240,16 @@ class Index extends Controller {
 		}
 	}
 
+	public function checkBookingLimit(){
+		Session::initIdle();
+		if(isset($_POST['user_limit_booking']) && isset($_POST['choosen_date']) && isset($_POST['choosen_time']) && isset($_POST['user_service_id'])){
+			$data['user_limit_booking'] = $_POST['user_limit_booking'];
+			$data['choosen_date'] = $_POST['choosen_date'];
+			$data['choosen_time'] = $_POST['choosen_time'];
+			$data['user_service_id'] = $_POST['user_service_id'];
+			$this -> model -> checkBookingLimit($data);
+		}
+	}
+
 }
 ?>

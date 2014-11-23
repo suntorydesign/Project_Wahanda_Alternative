@@ -556,6 +556,9 @@ function loadServiceDetail(user_service_id) {
 					if (key == 'user_notification_email') {
 						USER_EMAIL = value;
 					}
+					if(key == 'user_limit_booking'){
+						USER_BOOKING_LIMIT = value;
+					}
 					if (key == 'user_open_hour') {
 						json_user_open_hour = jQuery.parseJSON(value);
 						//console.log(json_user_open_hour);
@@ -792,11 +795,37 @@ function loadServiceDetail(user_service_id) {
 				$('#time_booking').html(time_html);
 
 				$('#time_booking div.row:not(.can_not_book)').on('click', function() {
-					$(this).addClass('active');
-					$(this).siblings().removeClass('active');
 					CHOOSEN_TIME = $(this).attr('date-time-data');
 					CHOOSEN_PRICE = $(this).attr('price-data');
 					CHOOSEN_DATE_STORE = CHOOSEN_DATE;
+					$(this).addClass('active');
+					$(this).siblings().removeClass('active');
+					$.ajax({
+						url : URL + 'index/checkBookingLimit',
+						type : 'post',
+						// dataType : 'json',
+						data : {
+							user_limit_booking : USER_BOOKING_LIMIT,
+							choosen_date : CHOOSEN_DATE,
+							choosen_time : CHOOSEN_TIME,
+							user_service_id : USER_SERVICE_ID
+						},
+						success : function(response){
+							if(response == 200){
+								
+							}else{
+								alert('Dịch vụ đã quá số lượng, vui lòng chọn giờ khác!');
+								$('#time_booking div.row:not(.can_not_book)').removeClass('active');
+								CHOOSEN_DATE = '';
+								CHOOSEN_DATE_STORE = '';
+								CHOOSEN_TIME = '';
+								CHOOSEN_PRICE = '';
+							}
+						},
+						complete : function(){
+							
+						}
+					});
 					console.log(CHOOSEN_DATE);
 					console.log(CHOOSEN_TIME);
 					console.log(CHOOSEN_PRICE);
@@ -891,15 +920,42 @@ function loadServiceDetail(user_service_id) {
 					}
 					$('#time_booking').html(time_html);
 					$('#time_booking div.row:not(.can_not_book)').on('click', function() {
-						$(this).addClass('active');
-						$(this).siblings().removeClass('active');
 						CHOOSEN_TIME = $(this).attr('date-time-data');
 						CHOOSEN_PRICE = $(this).attr('price-data');
 						CHOOSEN_DATE_STORE = CHOOSEN_DATE;
+						$(this).addClass('active');
+						$(this).siblings().removeClass('active');
+						$.ajax({
+							url : URL + 'index/checkBookingLimit',
+							type : 'post',
+							// dataType : 'json',
+							data : {
+							user_limit_booking : USER_BOOKING_LIMIT,
+							choosen_date : CHOOSEN_DATE,
+							choosen_time : CHOOSEN_TIME,
+							user_service_id : USER_SERVICE_ID
+							},
+							success : function(response){
+								if(response == 200){
+									
+								}else{
+									alert('Dịch vụ đã quá số lượng, vui lòng chọn giờ khác!');
+									$('#time_booking div.row:not(.can_not_book)').removeClass('active');
+									CHOOSEN_DATE = '';
+									CHOOSEN_DATE_STORE = '';
+									CHOOSEN_TIME = '';
+									CHOOSEN_PRICE = '';
+								}
+							},
+							complete : function(){
+								
+							}
+						});
 						console.log(CHOOSEN_DATE);
 						console.log(CHOOSEN_TIME);
 						console.log(CHOOSEN_PRICE);
 						console.log(USER_SERVICE_ID);
+						console.log(USER_EMAIL);
 					});
 				}
 			});
@@ -1007,15 +1063,42 @@ function loadServiceDetail(user_service_id) {
 						$('#time_booking').html(time_html);
 		
 						$('#time_booking div.row:not(.can_not_book)').on('click', function() {
-							$(this).addClass('active');
-							$(this).siblings().removeClass('active');
 							CHOOSEN_TIME = $(this).attr('date-time-data');
 							CHOOSEN_PRICE = $(this).attr('price-data');
 							CHOOSEN_DATE_STORE = CHOOSEN_DATE;
+							$(this).addClass('active');
+							$(this).siblings().removeClass('active');
+							$.ajax({
+								url : URL + 'index/checkBookingLimit',
+								type : 'post',
+								// dataType : 'json',
+								data : {
+									user_limit_booking : USER_BOOKING_LIMIT,
+									choosen_date : CHOOSEN_DATE,
+									choosen_time : CHOOSEN_TIME,
+									user_service_id : USER_SERVICE_ID
+								},
+								success : function(response){
+									if(response == 200){
+										
+									}else{
+										alert('Dịch vụ đã quá số lượng, vui lòng chọn giờ khác!');
+										$('#time_booking div.row:not(.can_not_book)').removeClass('active');
+										CHOOSEN_DATE = '';
+										CHOOSEN_DATE_STORE = '';
+										CHOOSEN_TIME = '';
+										CHOOSEN_PRICE = '';
+									}
+								},
+								complete : function(){
+									
+								}
+							});
 							console.log(CHOOSEN_DATE);
 							console.log(CHOOSEN_TIME);
 							console.log(CHOOSEN_PRICE);
 							console.log(USER_SERVICE_ID);
+							console.log(USER_EMAIL);
 						});
 						$('#time_booking div.row:not(.can_not_book)').each(function(index) {
 							if ($(this).attr('date-time-data') == CHOOSEN_TIME && CHOOSEN_DATE == CHOOSEN_DATE_STORE) {
@@ -1034,6 +1117,27 @@ function loadServiceDetail(user_service_id) {
 		}
 	});
 }
+
+/*CHECK BOOKING LIMIT*/
+// function checkBookingLimit(){
+	// $.ajax({
+		// url : URL + 'index/checkBookingLimit',
+		// type : 'post',
+		// dataType : 'json',
+		// data : {
+			// user_limit_booking : USER_BOOKING_LIMIT,
+			// choosen_date : CHOOSEN_DATE,
+			// choosen_time : CHOOSEN_TIME
+		// },
+		// success : function(response){
+// 			
+		// },
+// 		
+	// });
+// }
+/*END CHECK BOOKING LIMIT*/
+/*-----------------------*/
+
 //FOR STATIC MAP BUT NOT GOOD
 function initMap(){
 	$("#user_latlng").attr("src", 'https://maps.googleapis.com/maps/api/staticmap?center=&zoom=15&size=450x150&markers=color:red|' + USER_LAT + ', ' + USER_LNG + '');

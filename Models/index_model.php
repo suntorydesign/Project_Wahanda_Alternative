@@ -185,6 +185,7 @@ user.`user_phone`,
 user.`user_notification_email`,
 user.`user_limit_before_service`,
 user.`user_limit_before_booking`,
+user.`user_limit_booking`,
 group_service.`group_service_name`,
 DAYOFWEEK(CURRENT_DATE) AS day_of_week,
 DAYOFMONTH(CURRENT_DATE) AS day_of_month,
@@ -243,6 +244,23 @@ WHERE user_email = '{$email}'
 SQL;
 		$select = $this -> db -> select($sql);
 		return $select[0]['check_email'];
+	}
+	
+	public function checkBookingLimit($data) {
+		$sql = <<<SQL
+SELECT
+IF(SUM(booking_detail_quantity) IS NULL, 0, SUM(booking_detail_quantity)) AS check_booking
+FROM booking_detail
+WHERE booking_detail_user_service_id = {$data['user_service_id']}
+AND booking_detail_date = '{$data['choosen_date']}'
+AND booking_detail_time_start = '{$data['choosen_time']}'
+SQL;
+		$select = $this -> db -> select($sql);
+		if($select[0]['check_booking'] >= $data['user_limit_booking']){
+			echo 0;
+		}else{
+			echo 200;
+		}
 	}
 
 }
