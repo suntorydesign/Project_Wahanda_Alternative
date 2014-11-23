@@ -10,6 +10,9 @@ $(document).ready(function() {
         container : 'body'
     });
 
+    $("input[name=user_service_full_price]").number( true, 0 );
+    $("input[name=user_service_sale_price]").number( true, 0 );
+
 	// // After checked Check box on Edit group name modal form, show/hidden settings correspondence
  //    $("input#jit-checkbox").change(function(){
  //        if(this.checked) {
@@ -204,7 +207,7 @@ var MenuGroupService = function () {
         var html_us = '<div class="offers ui-sortable">';
                 html_us += '<div class="offer edit-offer" data-sid=":user_service_service_id" data-id=":user_service_id" data-gid=":user_service_group_id"';
                 html_us += 'data-name=":user_service_name" data-duration=":user_service_duration" data-price=":user_service_full_price" data-sale=":user_service_sale_price" data-featured=":user_service_is_featured" ';
-                html_us += 'data-status=":user_service_status" data-description=":user_service_description" data-image=":user_service_image" data-toggle="modal" data-target="#editUserServices_modal">';
+                html_us += 'data-status=":user_service_status" data-description=":user_service_description" data-image=":user_service_image" data-uevoucher=":user_service_use_evoucher" data-bookinglimit=":user_service_booking_limit" data-toggle="modal" data-target="#editUserServices_modal">';
                     html_us += '<div class="offer-in">';
                         html_us += '<div class="main clearfix">';
                             html_us += '<div class="icon icons-treatment"></div>';
@@ -259,16 +262,18 @@ var MenuGroupService = function () {
                         }
                         out = out.replace(/:user_service_is_featured/g, us['user_service_is_featured']);
                         out = out.replace(/:user_service_description/g, us['user_service_description']);
+                        out = out.replace(/:user_service_use_evoucher/g, us['user_service_use_evoucher']);
+                        out = out.replace(/:user_service_booking_limit/g, us['user_service_booking_limit']);
                         out = out.replace(/:user_service_image/g, us['user_service_image']);
-                        out = out.replace(/:user_service_full_price/g, $.number( us['user_service_full_price'] ));
-                        out = out.replace(/:user_service_sale_price/g, $.number( us['user_service_sale_price'] ));
+                        out = out.replace(/:user_service_full_price/g,  us['user_service_full_price'] );
+                        out = out.replace(/:user_service_sale_price/g, us['user_service_sale_price'] );
                         if( us['user_service_sale_price'] == '' ) {
                             out = out.replace(':price', html_price1);
-                            out = out.replace(':full_price', $.number( us['user_service_full_price'] ));
+                            out = out.replace(':full_price', $.number( us['user_service_full_price'] ) );
                         } else {
                             out = out.replace(':price', html_price2);
-                            out = out.replace(':full_price', $.number( us['user_service_full_price'] ));
-                            out = out.replace(':sale_price', $.number( us['user_service_sale_price'] ));
+                            out = out.replace(':full_price', $.number( us['user_service_full_price'] ) );
+                            out = out.replace(':sale_price', $.number( us['user_service_sale_price'] ) );
                         }
                     });
                 }
@@ -314,6 +319,8 @@ var MenuGroupService = function () {
                 var user_service_image      = self.attr('data-image');
                 var user_service_is_featured = self.attr('data-featured');
                 var user_service_description = self.attr('data-description');
+                var user_service_use_evoucher = self.attr('data-uevoucher');
+                var user_service_booking_limit = self.attr('data-bookinglimit');
 
                 // set data
                 $('#select2_editService').select2("val", user_service_service_id);
@@ -321,11 +328,13 @@ var MenuGroupService = function () {
                 $('input[name=user_service_service_id]', editUserService_form).val(user_service_service_id);
                 $('input[name=user_service_id]', editUserService_form).val(user_service_id);
                 $('input[name=user_service_name]', editUserService_form).val(user_service_name);
-                $('select[name=user_service_duration]', editUserService_form).val(user_service_duration);
+                $('select[name=user_service_duration]', editUserService_form).find('option[value="' + user_service_duration + '"]').prop("selected", true);
                 // $('input[name=user_service_is_featured]', editUserService_form).val(user_service_is_featured);
                 $('input[name=user_service_sale_price]', editUserService_form).val(user_service_sale_price);
                 $('input[name=user_service_full_price]', editUserService_form).val(user_service_full_price);
-                $('select[name=user_service_status]', editUserService_form).val(user_service_status);
+                $('select[name=user_service_status]', editUserService_form).find('option[value="' + user_service_status + '"]').prop("selected", true);
+                $('select[name=user_service_use_evoucher]', editUserService_form).find('option[value="' + user_service_use_evoucher + '"]').prop("selected", true);
+                $('input[name=user_service_booking_limit]', editUserService_form).val( user_service_booking_limit );
                 $('textarea[name=user_service_description]', editUserService_form).val(user_service_description);
                 if( user_service_is_featured === '1') {
                     $('input[name=user_service_is_featured]', editUserService_form).attr('checked', true);

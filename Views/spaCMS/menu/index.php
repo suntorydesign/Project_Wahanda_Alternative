@@ -293,10 +293,10 @@
 														<td class="label-part sku-rrp"><label>Giá gốc </label></td>
 														<td data-tooltips="&lt;strong&gt;Full and Sale price&lt;/strong&gt; - Full price is the pricelist price of your service. If you are offering a special price on this offer, add it to Sale price." class="tooltips tooltips-top input-part">
 														<div class="txt-input txt-input-mini form-element-wrapper">
-															<input type="number" min="0" class="required number" value="" name="user_service_full_price" required pattern=".{6,}" title="Hãy nhập giá tiền cho dịch vụ" >
+															<input type="text" min="0" class="required number" value="" name="user_service_full_price" required pattern=".{6,}" title="Hãy nhập giá tiền cho dịch vụ" >
 														</div><label class="optional"> Giá khuyến mãi </label>
 														<div class="txt-input txt-input-mini form-element-wrapper">
-															<input type="number" class="number sku-amount" value="" name="user_service_sale_price">
+															<input type="text" class="number sku-amount" value="" name="user_service_sale_price">
 														</div></td>
 													</tr>
 												</tbody>
@@ -338,14 +338,20 @@
 															<option value="0">Ngưng hoạt động</option>
 														</select>
 													</tr>
-													<tr id="sold_as" title="<strong>Sell as</strong> - Service can be fulfilled as: <strong><em>Appointment</em></strong> - customers book in directly by finding available slots in your calendar. It’s much more convenient both for you and your customers. <strong><em>eVoucher</em></strong> - customers receive vouchers that they can redeem in your venue." class="form-row hidden">
-														<td class="label-part"><label for="service-type">Sold as</label></td>
+													<tr id="sold_as" title="<strong>Sell as</strong> - Service can be fulfilled as: <strong><em>Appointment</em></strong> - customers book in directly by finding available slots in your calendar. It’s much more convenient both for you and your customers. <strong><em>eVoucher</em></strong> - customers receive vouchers that they can redeem in your venue." class="form-row">
+														<td class="label-part"><label for="fulfillment-types">Hình thức bán</label></td>
 														<td class="input-part">
 														<select id="fulfillment-types" name="user_service_use_evoucher">
-															<option value="AE">Appointment or eVoucher</option>
-															<option value="A">Appointment</option>
-															<option value="E">eVoucher</option>
+															<option value="2">Appointment và Evoucher</option>
+															<option value="0">Appointment</option>
+															<option value="1">Evoucher</option>
 														</select></td>
+													</tr>
+													<tr id="booking_limit" title="<strong>Giới hạn book</strong> - Giới hạn số lượt book cho dịch vụ trong khoảng giờ" class="form-row">
+														<td class="label-part"><label >Giới hạn book</label></td>
+														<td>
+															<input class="input_usbl" type="number" name="user_service_booking_limit" value="1" parent="[1-9]" min="0" title=""/>
+														</td>
 													</tr>
 												</tbody>
 											</table>
@@ -503,10 +509,10 @@
 														<td class="label-part sku-rrp"><label>Giá gốc </label></td>
 														<td data-tooltips="&lt;strong&gt;Full and Sale price&lt;/strong&gt; - Full price is the pricelist price of your service. If you are offering a special price on this offer, add it to Sale price." class="tooltips tooltips-top input-part">
 														<div class="txt-input txt-input-mini form-element-wrapper">
-															<input type="number" min="0" class="required number" value="" name="user_service_full_price" required pattern=".{6,}" title="Hãy nhập giá tiền cho dịch vụ" >
+															<input type="text" min="0" class="required number" value="" name="user_service_full_price" required pattern=".{6,}" title="Hãy nhập giá tiền cho dịch vụ" >
 														</div><label class="optional"> Giá khuyến mãi </label>
 														<div class="txt-input txt-input-mini form-element-wrapper">
-															<input type="number" class="number sku-amount" value="" name="user_service_sale_price">
+															<input type="text" class="number sku-amount" value="" name="user_service_sale_price">
 														</div></td>
 													</tr>
 												</tbody>
@@ -552,10 +558,16 @@
 														<td class="label-part"><label for="service-type">Hình thức bán</label></td>
 														<td class="input-part">
 														<select id="fulfillment-types" name="user_service_use_evoucher">
-															<option value="2">Appointment or eVoucher</option>
-															<option value="1">Appointment</option>
-															<option value="0">eVoucher</option>
+															<option value="2">Appointment và Evoucher</option>
+															<option value="0">Appointment</option>
+															<option value="1">Evoucher</option>
 														</select></td>
+													</tr>
+													<tr id="booking_limit" title="<strong>Giới hạn book</strong> - Giới hạn số lượt book cho dịch vụ trong khoảng giờ" class="form-row">
+														<td class="label-part"><label >Giới hạn book</label></td>
+														<td>
+															<input class="input_usbl" type="number" name="user_service_booking_limit" parent="[1-9]" min="0" title=""/>
+														</td>
 													</tr>
 												</tbody>
 											</table>

@@ -3,3 +3,8 @@
 	font-weight: bold;
 	font-size: 18px;
 }
+
+.input_usbl {
+	width: 60px;
+	padding-left: 2px;
+}

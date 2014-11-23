@@ -14,7 +14,7 @@ class SpaCMS_Home_Model {
 			booking_detail bd
 		WHERE 
 				bd.booking_detail_user_id = {$user_id}
-			-- AND bd.booking_detail_date >= '{$today}'
+			AND bd.booking_detail_date >= '{$today}'
 			AND bd.booking_detail_is_confirm = 0
 			AND ( bd.booking_detail_status = 0 OR bd.booking_detail_status = 1 )
 SQL;
