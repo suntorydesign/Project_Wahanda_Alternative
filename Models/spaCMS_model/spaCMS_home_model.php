@@ -52,7 +52,7 @@ SQL;
 			
 		WHERE 
 				e.e_voucher_user_id = {$user_id}
-			AND ( b.booking_date BETWEEN '{$yesterday}' AND '{$today}' )
+			-- AND ( b.booking_date BETWEEN '{$yesterday}' AND '{$today}' )
 SQL;
 		$data = $this->db->select($aQuery);
 

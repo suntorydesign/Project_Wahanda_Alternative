@@ -56,7 +56,7 @@
                 <ul class="hidden"></ul>
             </div>
             <ul id="nav1">
-                <li id="nav-notifications">
+                <li id="nav-notifications" class="display_none">
                     <span class="notification-badge display_none"> 
                         <span class="icons-notification"></span> 
                         <span class="notification-count">0</span>
