@@ -18,10 +18,10 @@
 				<div class="row">
 					<div class="col-md-12 form-horizontal">
 						<div class="form-group">
-							<label class="control-label col-md-4">Chọn loại dịch vụ</label>
+							<label class="control-label col-md-4">Chọn loại dịch vụ (*)</label>
 							<div class="col-md-8">
 								<select class="form-control" id="question_service_type_id" name="">
-									<option value="">Chọn loại dịch vụ...</option>
+									<option value="">Chọn loại dịch vụ (*)...</option>
 								</select>
 							</div>
 						</div>
@@ -38,15 +38,15 @@
 				<div class="row">
 					<div class="col-md-12 form-horizontal" id="answer_field">
 						<div class="form-group">
-							<label class="control-label col-md-4">Câu trả lời (*)</label>
+							<label class="control-label col-md-4">Câu trả lời</label>
 							<div class="col-md-8">
-								<input placeholder="Nhập câu trả lời (*)..." class="form-control question_answer" name="" type="text"/>
+								<input placeholder="Nhập câu trả lời..." class="form-control question_answer" name="" type="text"/>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">Câu trả lời (*)</label>
+							<label class="control-label col-md-4">Câu trả lời</label>
 							<div class="col-md-8">
-								<input placeholder="Nhập câu trả lời (*)..." class="form-control question_answer"  name="" type="text"/>
+								<input placeholder="Nhập câu trả lời..." class="form-control question_answer"  name="" type="text"/>
 							</div>
 						</div>			
 					</div>
@@ -71,7 +71,7 @@
 						<span class="msg msg-action-default">Thêm</span>
 					</div>
 				</button>
-				<small id="error_add_consult" style="color: red; display: none;">Nhập đầy đủ các trường có (*)</small>
+				<small id="error_add_question" style="color: red; display: none;">Nhập đầy đủ các trường có (*).</small>
 			</div>
 		</div>
 	</div>

@@ -35,4 +35,14 @@ class admincp_question extends Controller {
 		$this -> view -> render_admincp('question/add');
 	}
 
+	public function addQuestion() {
+		Auth::handleAdminLogin();
+		if (isset($_POST['question_answer']) && isset($_POST['question_service_type_id']) && isset($_POST['question_content'])) {
+			$data['question_answer'] = $_POST['question_answer'];
+			$data['question_service_type_id'] = $_POST['question_service_type_id'];
+			$data['question_content'] = $_POST['question_content'];
+			$this -> model -> addQuestion($data);
+		}
+	}
+
 }
