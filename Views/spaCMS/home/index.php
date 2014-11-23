@@ -147,6 +147,17 @@
 								<span class="value v-ttv">0 đ</span>
 							</div>
 						</div>
+						<div class="totals">
+							<div class="stats-item">
+								<span class="title">Tổng lượt evoucher</span>
+								<span class="value v-evouchers">0</span>
+							</div>
+							<div class="stats-item">
+								<span class="title">Tổng doanh số tài chính</span>
+								<span class="value v-tte">0 đ</span>
+							</div>
+						</div>
+
 						<div class="graph hidden" id="monthly-sales-graph" style="min-height: 300px; position: relative;">
 							<div dir="ltr" style="position: relative; width: 497px; height: 300px;">
 								<div style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;">
@@ -259,11 +270,25 @@
 										book</td>
 									</tr>
 								</thead>
-								<tbody class="list-top-services">
+								<tbody class="list-top-services-booking">
 								
 								</tbody>
 							</table>
-						</div><div class="box-separator"></div>
+							<div class="box-separator"></div>
+							<table>
+								<thead>
+									<tr>
+										<th class="box-subhd">Tìm theo số lượt mua evoucher</th>
+										<td>Lượt
+										<br>
+										mua</td>
+									</tr>
+								</thead>
+								<tbody class="list-top-services-evoucher">
+								
+								</tbody>
+							</table>
+						</div><!-- <div class="box-separator"></div> -->
 
 
 						<div id="top-performers hidden" style="display:none;">

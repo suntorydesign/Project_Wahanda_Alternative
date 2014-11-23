@@ -72,6 +72,11 @@
                                     <span class="notification-item">Fulfillment address not set</span> 
                                 </a>
                             </li>
+                            <li>
+                                <a href="./settings?prevalidate=fulfillment#venue/285925/notifications-settings/fulfillment"> 
+                                    <span class="notification-item">Fulfillment address not set</span> 
+                                </a>
+                            </li>
                         </ul>
                         <div class="notification-badge-wrapper">
                             <span class="notification-badge"> <span class="icons-notification"></span> <span class="notification-count">1</span> </span>

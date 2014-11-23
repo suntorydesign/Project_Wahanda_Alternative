@@ -171,19 +171,29 @@ var Home = function() {
         var monthly_sales = $("#monthly-sales");
         var v_bookings = monthly_sales.find(".v-bookings");
         var v_ttv = monthly_sales.find(".v-ttv");
+        var v_evouchers = monthly_sales.find(".v-evouchers");
+        var v_tte = monthly_sales.find(".v-tte");
 
-        var url = URL + "spaCMS/home/xhrGet_monthly_sales";
+        
         var this_month_from = moment().startOf('month').format("YYYY-MM-DD");
         var this_month_to = moment().endOf('month').format("YYYY-MM-DD");
+        var url = URL + "spaCMS/home/xhrGet_monthly_sales";
         $.get(url, {'this_month_from':this_month_from, 'this_month_to':this_month_to}, function(data){
-            v_bookings.text(data['total_count']);
-            v_ttv.text( $.number(data['total_value']) + ' đ');
+            v_bookings.text(data['total_booking_count']);
+            v_ttv.text( $.number(data['total_booking_value']) + ' đ');
+            v_evouchers.text(data['total_evoucher_count']);
+            v_tte.text( $.number(data['total_evoucher_value']) + ' đ');
         }, 'json')
         .done(function(){
             v_bookings.fadeOut();
             v_ttv.fadeOut();
+            v_evouchers.fadeOut();
+            v_tte.fadeOut();
+
             v_bookings.fadeIn();
             v_ttv.fadeIn();
+            v_evouchers.fadeIn();
+            v_tte.fadeIn();
         });
     }
 
@@ -217,24 +227,41 @@ var Home = function() {
     // }
 
     var xhrGet_top_services = function() {
-        var top_services = $("#top-services").find('.list-top-services');
+        var top_services_booking = $("#top-services").find('.list-top-services-booking');
+        var top_services_evoucher = $("#top-services").find('.list-top-services-evoucher');
         var html = '<tr>'
             +       '<th>:us_name</th>'
             +       '<td>:total_book</td>'
             +   '</tr>';
 
-        var url = URL + "spaCMS/home/xhrGet_top_services";
+        // booking
+        var url = URL + "spaCMS/home/xhrGet_top_services_booking";
         $.get(url, function(data) {
             var out = '';
             $.each(data, function(index, value) {
                 out = html.replace(':us_name', value['user_service_name']);
                 out = out.replace(':total_book', value['total_book']);
-                top_services.append(out);
+                top_services_booking.append(out);
             });
         }, 'json')
         .done(function() {
-            top_services.fadeOut();
-            top_services.fadeIn();
+            top_services_booking.fadeOut();
+            top_services_booking.fadeIn();
+        });
+
+        // evoucher
+        var url = URL + "spaCMS/home/xhrGet_top_services_evoucher";
+        $.get(url, function(data) {
+            var out = '';
+            $.each(data, function(index, value) {
+                out = html.replace(':us_name', value['user_service_name']);
+                out = out.replace(':total_book', value['total_evoucher']);
+                top_services_evoucher.append(out);
+            });
+        }, 'json')
+        .done(function() {
+            top_services_evoucher.fadeOut();
+            top_services_evoucher.fadeIn();
         });
     }
 

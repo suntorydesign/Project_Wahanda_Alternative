@@ -41,8 +41,12 @@
 					$this->model->get_monthly_sales();
 					break;
 
-				case 'xhrGet_top_services':
-					$this->model->get_top_services();
+				case 'xhrGet_top_services_booking':
+					$this->model->get_top_services_booking();
+					break;
+
+				case 'xhrGet_top_services_evoucher':
+					$this->model->get_top_services_evoucher();
 					break;
 
 				case 'xhrGet_appointment_not_confirm':

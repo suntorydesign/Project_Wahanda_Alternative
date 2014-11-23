@@ -50,6 +50,8 @@ class SpaCMS_Model extends Model {
 		exit;
 	}
 
+	
+
 	///////////////////////////// HOME //////////////////////////
 	function get_redeem_voucher() {
 		SpaCMS_Home_Model::get_redeem_voucher();
@@ -63,8 +65,12 @@ class SpaCMS_Model extends Model {
 		SpaCMS_Home_Model::get_monthly_sales();
 	}
 
-	function get_top_services() {
-		SpaCMS_Home_Model::get_top_services();
+	function get_top_services_booking() {
+		SpaCMS_Home_Model::get_top_services_booking();
+	}
+
+	function get_top_services_evoucher() {
+		SpaCMS_Home_Model::get_top_services_evoucher();
 	}
 
 	function get_appointment_not_confirm() {

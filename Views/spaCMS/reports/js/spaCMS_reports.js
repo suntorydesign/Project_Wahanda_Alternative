@@ -137,7 +137,7 @@ var EvoucherReport = function() {
                 +   '<td>:client_name</td>'
                 +   '<td>:user_service_name</td>'
                 +   '<td>:evoucher_price đ</td>'
-                +   '<td>:booking_date</td>'
+                +   '<td>:booking_date :status_new</td>'
                 +   '<td>:evoucher_due_date :status_expires</td>'
                 +   '<td>:evoucher_status</td>'
                 +   '</tr>';
@@ -146,9 +146,12 @@ var EvoucherReport = function() {
         var status_1 = '<span class="label label-sm label-success">Đã sử dụng</span>';
 
         var status_expires = '<span class="label label-sm label-danger">Hết hạn</span>';
+        var status_new = '<span class="label label-sm label-danger">Mới</span>';
 
         var today = moment().format("YYYY-MM-DD");
+        var yesterday = moment().subtract('days', 1).format("YYYY-MM-DD");
         var due_date = null;
+        var booking_date = null;
 
         var url = URL + 'spaCMS/reports/xhrGet_evoucher_report';
         var out = '';
@@ -159,9 +162,17 @@ var EvoucherReport = function() {
                     out = out.replace(':client_name', evoucher['client_name']);
                     out = out.replace(':user_service_name', evoucher['user_service_name']);
                     out = out.replace(':evoucher_price', $.number( evoucher['e_voucher_price'] ));
-                    out = out.replace(':booking_date', moment(evoucher['booking_date']).format("DD/MM/YYYY") );
-                    out = out.replace(':evoucher_due_date', evoucher['e_voucher_due_date'] );
 
+                    out = out.replace(':booking_date', moment(evoucher['booking_date']).format("DD/MM/YYYY") );
+                    booking_date = evoucher['booking_date'];
+                    // Nếu evoucher được đặt hôm nay hoặc hôm qua thì được xem là evoucher mới
+                    if( dates.compare(today, booking_date) == 0 || dates.compare(yesterday, booking_date) == 0) {
+                        out = out.replace(':status_new', status_new );
+                    } else {
+                        out = out.replace(':status_new', '' );
+                    }
+                    
+                    out = out.replace(':evoucher_due_date', evoucher['e_voucher_due_date'] );
                     due_date = evoucher['e_voucher_due_date'];  
                     if( dates.compare(today, due_date) == 1) {
                         out = out.replace(':status_expires', status_expires );
