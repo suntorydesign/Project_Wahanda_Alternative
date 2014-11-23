@@ -157,6 +157,8 @@ SQL;
 	}
 
 	function loadServiceDetail($user_service_id = 1) {
+		$hour = date('H');
+		$min = date('i');
 		$evoucher_due_date = EVOUCHER_DUE_DATE;
 		$query = <<<SQL
 SELECT 
@@ -188,8 +190,8 @@ DAYOFWEEK(CURRENT_DATE) AS day_of_week,
 DAYOFMONTH(CURRENT_DATE) AS day_of_month,
 YEAR(CURRENT_DATE) AS year,
 MONTH(CURRENT_DATE) AS month,
-HOUR(CURRENT_TIME) as hour,
-MINUTE(CURRENT_TIME) as minute,
+{$hour} as hour,
+{$min} as minute,
 DATE_ADD(CURRENT_DATE, INTERVAL {$evoucher_due_date} MONTH) as evoucher_due_date
 FROM user_service,user,group_service
 WHERE user.user_id = group_service.group_service_user_id
