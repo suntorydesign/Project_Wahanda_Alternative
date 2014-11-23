@@ -23,9 +23,16 @@ class admincp_question extends Controller {
 
 	public function loadQuestionList() {
 		Auth::handleAdminLogin();
-		if(isset($_POST['service_type_id'])){
+		if (isset($_POST['service_type_id'])) {
 			$this -> model -> loadQuestionList($_POST['service_type_id']);
 		}
+	}
+
+	public function addQuestionDetail() {
+		Auth::handleAdminLogin();
+		$this -> view -> style = array(URL . 'Views/admincp/question/css/question.css');
+		$this -> view -> script = array(URL . 'Views/admincp/question/js/question.js');
+		$this -> view -> render_admincp('question/add');
 	}
 
 }

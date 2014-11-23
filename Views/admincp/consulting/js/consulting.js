@@ -2,7 +2,15 @@ $(document).ready(function() {
 	if (IS_INDEX == 1 && IS_ADD == 0 && IS_EDIT == 0) {
 		loadRuleServiceType();
 		// $('#rule_list').DataTable();
-		oTable = $('#rule_list').dataTable();
+		oTable = $('#rule_list').dataTable({
+			"oLanguage" : {
+				"sZeroRecords" : "Không có dữ liệu nào cả.",
+				"sSearch": "Tìm kiếm: ",
+				"sLengthMenu": "Hiển thị &nbsp;&nbsp; _MENU_ &nbsp;&nbsp; dòng.",
+				"sInfo": "Hiển thị _START_ đến _END_ của _TOTAL_ dòng.",
+				"sInfoEmpty": "Hiển thị 0 đến 0 của 0 dòng."
+			}
+		});
 		$('#rule_service_type').on('change', function() {
 			RULE_SERVICE_TYPE_ID = $(this).val();
 			loadRuleList();

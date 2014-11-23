@@ -2,7 +2,7 @@
 	<div class="sidebar">
 		<div class="venue-info">
 			<h3>Quản lý câu hỏi</h3>
-			<button onclick="addRuleDetail()" class="button button-primary redeem" type="button">
+			<button onclick="addQuestionDetail()" class="button button-primary redeem" type="button">
 				<div class="button-inner">
 					<div class="button-icon icons-plus"></div>
 					Thêm câu hỏi tư vấn
@@ -14,8 +14,8 @@
 	<div class="main-content table-responsive">
 		<div class="col-md-12 form-horizontal">
 			<div class="form-group">
-				<b class="control-label col-md-2">Chọn loại dịch vụ</b>
-				<div class="col-md-4">
+				<b class="control-label col-md-4">Chọn bộ câu hỏi ứng với loại dịch vụ</b>
+				<div class="col-md-3">
 					<select class="form-control" id="question_service_type_id" name="">
 						<option value="">Chọn loại dịch vụ...</option>
 					</select>

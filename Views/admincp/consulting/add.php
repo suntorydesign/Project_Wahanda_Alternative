@@ -92,8 +92,4 @@
 	var IS_INDEX = 0;
 	var IS_ADD = 1;
 	var IS_EDIT = 0;
-	var RULE_SERVICE_TYPE_ID = '';
-	var FACT = '';
-	var FACT_ID = '';
-	var QUESTION_ID = '';
 </script>

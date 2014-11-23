@@ -14,8 +14,8 @@
 	<div class="main-content table-responsive">
 		<div class="col-md-12 form-horizontal">
 			<div class="form-group">
-				<b class="control-label col-md-2">Chọn loại dịch vụ</b>
-				<div class="col-md-4">
+				<b class="control-label col-md-4">Chọn tập luật ứng với loại dịch vụ</b>
+				<div class="col-md-3">
 					<select class="form-control" id="rule_service_type" name="">
 						<option value="">Chọn loại dịch vụ...</option>
 					</select>
