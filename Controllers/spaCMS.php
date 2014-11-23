@@ -29,6 +29,10 @@
 		function home($xhr = false) {
 			Auth::handleSpaCMSLogin();
 			switch ($xhr) {
+				case 'xhrGet_notification':
+					$this->model->get_notification();
+					break;
+
 				case 'xhrGet_redeem_voucher':
 					$this->model->get_redeem_voucher();
 					break;

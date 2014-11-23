@@ -53,6 +53,10 @@ class SpaCMS_Model extends Model {
 	
 
 	///////////////////////////// HOME //////////////////////////
+	function get_notification() {
+		SpaCMS_Home_Model::get_notification();
+	}
+	
 	function get_redeem_voucher() {
 		SpaCMS_Home_Model::get_redeem_voucher();
 	}

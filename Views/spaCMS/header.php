@@ -57,30 +57,38 @@
             </div>
             <ul id="nav1">
                 <li id="nav-notifications">
-                    <span class="notification-badge"> 
+                    <span class="notification-badge display_none"> 
                         <span class="icons-notification"></span> 
-                        <span class="notification-count">1</span>
+                        <span class="notification-count">0</span>
                     </span>
                     <div class="notification-list display_none" role="menu">
                         <ul class="ddown radius-bottom" >
                             <li class="ddown-title">
                                 Items need action:
                             </li>
-                            
-                            <li>
-                                <a href="./settings?prevalidate=fulfillment#venue/285925/notifications-settings/fulfillment"> 
-                                    <span class="notification-item">Fulfillment address not set</span> 
+
+                            <li class="notification-booking-confirm">
+                                <a href="<?php echo URL ?>spaCMS/reports#"> 
+                                    <span class="notification-item"><span class="b-count">0</span> lịch book cần được xác nhận</span> 
                                 </a>
                             </li>
-                            <li>
-                                <a href="./settings?prevalidate=fulfillment#venue/285925/notifications-settings/fulfillment"> 
-                                    <span class="notification-item">Fulfillment address not set</span> 
-                                </a>
+                            <li class="notification-appointment-confirm">
+                                <!-- <a href="./settings?prevalidate=fulfillment#venue/285925/notifications-settings/fulfillment">  -->
+                                    <span class="notification-item"><span class="a-count">0</span> lịch hẹn cần được xác nhận</span> 
+                                <!-- </a> -->
+                            </li>
+                            <li class="notification-evoucher-new">
+                                <!-- <a href="./settings?prevalidate=fulfillment#venue/285925/notifications-settings/fulfillment">  -->
+                                    <span class="notification-item"><span class="e-count">0</span> evoucher mới được đặt mua</span> 
+                                <!-- </a> -->
                             </li>
                         </ul>
-                        <div class="notification-badge-wrapper">
-                            <span class="notification-badge"> <span class="icons-notification"></span> <span class="notification-count">1</span> </span>
-                        </div>
+                        <!-- <div class="notification-badge-wrapper">
+                            <span class="notification-badge"> 
+                                <span class="icons-notification"></span> 
+                                <span class="notification-count">0</span> 
+                            </span>
+                        </div> -->
                     </div>
                 </li>
                 <li id="nav-home">

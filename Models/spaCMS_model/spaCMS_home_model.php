@@ -2,6 +2,84 @@
 
 class SpaCMS_Home_Model {
 	/**
+	 * Get notification
+	 * @param $user_id
+	 * @return json
+	 */
+	public function get_no_booking_count( $user_id, $today ) {
+		$aQuery = <<<SQL
+		SELECT 
+			COUNT(*) as no_b_count
+		FROM 
+			booking_detail bd
+		WHERE 
+				bd.booking_detail_user_id = {$user_id}
+			-- AND bd.booking_detail_date >= '{$today}'
+			AND bd.booking_detail_is_confirm = 0
+			AND ( bd.booking_detail_status = 0 OR bd.booking_detail_status = 1 )
+SQL;
+		$data = $this->db->select($aQuery);
+
+		return $data[0];
+	}
+
+	public function get_no_appointment_count( $user_id, $today ) {
+		$aQuery = <<<SQL
+		SELECT 
+			COUNT(*) as no_a_count
+		FROM 
+			appointment a
+		WHERE 
+				a.appointment_user_id = {$user_id}
+			AND a.appointment_date >= '{$today}'
+			AND a.appointment_is_confirm = 0
+			AND ( a.appointment_status = 0 OR a.appointment_status = 1 )
+SQL;
+		$data = $this->db->select($aQuery);
+
+		return $data[0];
+	}
+
+	public function get_no_e_count( $user_id, $today ) {
+		$yesterday = date("Y-m-d", time() - 60 * 60 * 24);
+
+		$aQuery = <<<SQL
+		SELECT 
+			COUNT(*) as no_e_count
+		FROM 
+			booking b 
+				RIGHT JOIN e_voucher e ON b.booking_id = e.e_voucher_booking_id
+			
+		WHERE 
+				e.e_voucher_user_id = {$user_id}
+			AND ( b.booking_date BETWEEN '{$yesterday}' AND '{$today}' )
+SQL;
+		$data = $this->db->select($aQuery);
+
+		return $data[0];
+	}
+
+	public function get_notification() {
+		$user_id = Session::get('user_id');
+
+		$today = date("Y-m-d");
+
+		$data_booking = self::get_no_booking_count( $user_id, $today );
+		$data_apointment = self::get_no_appointment_count( $user_id, $today );
+		$data_evoucher = self::get_no_e_count( $user_id, $today );
+
+		$data = array(
+			"no_b_count"	=> $data_booking["no_b_count"],
+			"no_a_count"	=> $data_apointment["no_a_count"],
+			"no_e_count"	=> $data_evoucher["no_e_count"],
+			"no_tt_count" 	=> ( $data_booking["no_b_count"] + $data_apointment["no_a_count"] + $data_evoucher["no_e_count"] )
+		);
+
+		echo json_encode($data);
+	}
+
+
+	/**
 	 * Tìm mã evoucher
 	 * @param $_POST['e_voucher_id'] : mã của evoucher đó
 	 * @return json

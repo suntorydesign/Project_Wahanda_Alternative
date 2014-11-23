@@ -67,8 +67,6 @@ SQL;
 SQL;
 		$data = $this->db->select($aQuery);
 
-
-
 		echo json_encode($data);
 	}
 

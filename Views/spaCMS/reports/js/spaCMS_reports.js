@@ -187,6 +187,7 @@ var EvoucherReport = function() {
         }, 'json')
         .done(function() {
             table_loe.dataTable({
+                "aaSorting": [[ 4, "desc" ]],
                 // "aoColumns": [
                 //     // { "sWidth": "10%" },
                 //     // { "sWidth": "15%" },
@@ -200,7 +201,6 @@ var EvoucherReport = function() {
                     [10, 25, 50, 100, -1],
                     [10, 25, 50, 100, "All"] // change per page values here
                 ],
-
                 // set the initial value
                 "iDisplayLength": 10,
                 "sPaginationType": "bootstrap",
