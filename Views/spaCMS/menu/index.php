@@ -350,7 +350,7 @@
 													<tr id="booking_limit" title="<strong>Giới hạn book</strong> - Giới hạn số lượt book cho dịch vụ trong khoảng giờ" class="form-row">
 														<td class="label-part"><label >Giới hạn book</label></td>
 														<td>
-															<input class="input_usbl" type="number" name="user_service_booking_limit" value="1" parent="[1-9]" min="0" title=""/>
+															<input class="input_usbl" type="number" name="user_service_limit_booking" value="1" parent="[1-9]" min="0" title=""/>
 														</td>
 													</tr>
 												</tbody>
@@ -566,7 +566,7 @@
 													<tr id="booking_limit" title="<strong>Giới hạn book</strong> - Giới hạn số lượt book cho dịch vụ trong khoảng giờ" class="form-row">
 														<td class="label-part"><label >Giới hạn book</label></td>
 														<td>
-															<input class="input_usbl" type="number" name="user_service_booking_limit" parent="[1-9]" min="0" title=""/>
+															<input class="input_usbl" type="number" name="user_service_limit_booking" parent="[1-9]" min="0" title=""/>
 														</td>
 													</tr>
 												</tbody>

@@ -858,7 +858,7 @@
 											<td class="label-part"><label for="booking-settings-onlineBookingMinHours">Thời gian tối thiểu trước dịch vụ</label></td>
 											<td class="input-part">
 											<select id="booking-settings-onlineBookingMinHours" name="user_limit_before_service" class="required">
-												<option value="0">Chưa chọn</option><option value="1">1 hour</option><option value="2">2 hours</option><option value="3">3 hours</option><option value="4">4 hours</option><option value="5">5 hours</option><option value="6">6 hours</option><option value="7">7 hours</option><option value="8">8 hours</option><option value="24">1 day</option><option value="48">2 days</option><option value="72">3 days</option><option value="120">5 days</option><option value="168">1 week</option><option value="336">2 weeks</option><option value="504">3 weeks</option><option value="672">4 weeks</option>
+												<option value="0">Chưa chọn</option><option value="60">1 tiếng</option><option value="120">2 tiếng</option><option value="180">3 tiếng</option><option value="240">4 tiếng</option><option value="300">5 tiếng</option><option value="360">6 tiếng</option><option value="420">7 tiếng</option><option value="480">8 tiếng</option><option value="1440">1 ngày</option><option value="2880">2 ngày</option><option value="4320">3 ngày</option><option value="7200">5 ngày</option><option value="10080">1 tuần</option><option value="20160">2 tuần</option><option value="30240">3 tuần</option><option value="40320">4 tuần</option>
 											</select></td>
 										</tr>
 										<tr data-tooltip="&lt;strong&gt;Online booking limit&lt;/strong&gt; - Set how far in future your clients can book online." class="form-row">

@@ -28,7 +28,7 @@ class SpaCMS_Menu_Model {
 					'user_service_status' 		=> $u_service['user_service_status'],
 					'user_service_is_featured' 	=> $u_service['user_service_is_featured'],
 					'user_service_use_evoucher' => $u_service['user_service_use_evoucher'],
-					'user_service_booking_limit'=> $u_service['user_service_booking_limit'],
+					'user_service_limit_booking'=> $u_service['user_service_limit_booking'],
 					'user_service_description' 	=> $u_service['user_service_description'],
 					'user_service_image' 		=> $u_service['user_service_image'],
 					'user_service_service_id' 	=> $u_service['user_service_service_id'],
@@ -86,7 +86,7 @@ SQL;
 			us.user_service_status,
 			us.user_service_description,
 			us.user_service_use_evoucher,
-			us.user_service_booking_limit,
+			us.user_service_limit_booking,
 			us.user_service_group_id,
 			us.user_service_is_featured,
 			us.user_service_image
