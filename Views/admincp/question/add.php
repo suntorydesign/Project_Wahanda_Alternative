@@ -1,11 +1,11 @@
 <div id="home-holder" class="content-holder pending">
 	<div class="sidebar">
 		<div class="venue-info">
-			<h3 class="title-admincp">Quản lý luật tư vấn</h3>
+			<h3 class="title-admincp">Quản lý câu hỏi</h3>
 			<button onclick="returnToQuestion()" id="" class="button button-primary redeem" type="button">
 				<div class="button-inner">
 					<div class="button-icon icons-arrow-left2"></div>
-					Trờ về trang luật tư vấn
+					Trờ về trang câu hỏi
 				</div>
 			</button>
 		</div>

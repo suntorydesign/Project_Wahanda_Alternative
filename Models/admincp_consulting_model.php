@@ -108,6 +108,7 @@ SELECT COUNT(*) AS check_fact_id
 FROM fact
 WHERE fact_id = {$value}
 AND fact_question_id = {$data['question_id']}
+AND fact_delete_flg = 0
 SQL;
 			$select = $this -> db -> select($sql);
 			if ($select[0]['check_fact_id'] != 0) {
@@ -168,6 +169,7 @@ SQL;
 SELECT COUNT(*) AS check_rule
 FROM rule
 WHERE rule_group = '{$rule_group}'
+AND rule_delete_flg = 0
 SQL;
 		$select = $this -> db -> select($sql);
 		return $select[0]['check_rule'];

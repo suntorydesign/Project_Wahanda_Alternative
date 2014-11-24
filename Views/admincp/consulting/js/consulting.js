@@ -293,6 +293,8 @@ function editRule() {
 					$('#error_edit_consult').fadeIn(function() {
 						$('#edit_loading').fadeOut(function() {
 							$('div.done').fadeIn();
+							$('#btn_edit_rule').attr('disabled', false);
+							$('#btn_delete_rule').attr('disabled', false);
 						});
 					});
 				} else {
