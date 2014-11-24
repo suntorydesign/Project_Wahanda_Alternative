@@ -696,7 +696,7 @@ function loadServiceDetail(user_service_id) {
 				indicators.html('');
 				inner.html('');
 				var html_indicators = '<li data-target="#carousel-usd-generic" data-slide-to=":index" class=":active"></li>';
-				var html_inner = '<div class="item :active">' + '<img src=":img_src" alt=":img_alt">' + '<div class="carousel-caption">' + ':img_caption' + '</div>' + '</div>';
+				var html_inner = '<div class="item :active">' + '<img width="100%" src=":img_src" alt=":img_alt">' + '<div class="carousel-caption">' + ':img_caption' + '</div>' + '</div>';
 
 				var slides = response[0]["user_service_image"].split(",");
 				var out_indicators = '';
