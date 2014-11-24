@@ -7,6 +7,7 @@
     <script src="<?php echo ASSETS ?>plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="<?php echo ASSETS ?>plugins/jquery-number/jquery.number.min.js" type="text/javascript"></script>
     <script src="<?php echo ASSETS ?>plugins/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+    <script src="<?php echo ASSETS ?>plugins/jquery-confirm/jquery.confirm.min.js" type="text/javascript"></script>
     <script src="<?php echo ASSETS ?>js/spaCMS/spaCMS.js" type="text/javascript"></script>
    
     <script type="text/javascript">

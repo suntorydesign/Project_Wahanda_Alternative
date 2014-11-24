@@ -28,6 +28,8 @@
 
         <link rel="stylesheet" href="<?php echo ASSETS ?>plugins/font-awesome/css/font-awesome.min.css" type="text/css"  />
 
+        <link rel="stylesheet" href="<?php echo ASSETS ?>plugins/jquery-confirm/jquery.confirm.css" type="text/css"  />
+
         <link rel="stylesheet" href="<?php echo ASSETS ?>css/spaCMS/spaCMS.css" type="text/css"  />
 
         <!-- <link rel="stylesheet" href="<?php echo URL ?>public/assets/css/spaCMS/tooltip.css" type="text/css"  /> -->

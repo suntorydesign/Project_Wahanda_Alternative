@@ -563,31 +563,45 @@ var MenuGroupService = function () {
     }
 
     var xhrDelete_user_service = function() {
-        $("#deleteUserService").on('click', function() {
-            var form    = $('#editUserService_form')
-            var self    = $(this);
-            var loading = self.find('.d-loading');
-            var done    = self.find('.d-done');
-            var user_service_id = $('input[name=user_service_id]', form).val();
-            loading.fadeIn();
-            done.hide();
+        $("#deleteUserService").confirm({
+            title:"Xóa dịch vụ",
+            text:"Bạn có thực sự chắc chắn xóa bỏ dịch vụ này?",
+            confirm: function(button) {
+                var form    = $('#editUserService_form')
+                var self    = $(this);
+                var loading = self.find('.d-loading');
+                var done    = self.find('.d-done');
+                var user_service_id = $('input[name=user_service_id]', form).val();
+                loading.fadeIn();
+                done.hide();
 
-            var url = URL + 'spaCMS/menu/xhrDelete_user_service';
-            $.post(url, {'user_service_id':user_service_id}, function(result) {
-                if(result === 'success') {
-                    // Refresh list
-                    xhrGet_group_user_service();
-                    xhrGet_user_service_featured();
-                    // Hide Modal
-                    $('.button-cancel', form).click();
-                    alert('Xóa thành công!');
-                } else {
-                    alert('Sorry! Can not edit this service! :(');
-                }
-                loading.fadeOut();
-                done.fadeIn();
-            });
-            return false;
+                var url = URL + 'spaCMS/menu/xhrDelete_user_service';
+                $.post(url, {'user_service_id':user_service_id}, function(result) {
+                    if(result === 'success') {
+                        // Refresh list
+                        xhrGet_group_user_service();
+                        xhrGet_user_service_featured();
+                        // Hide Modal
+                        $('.button-cancel', form).click();
+                        alert('Xóa thành công!');
+                    } else {
+                        alert('Sorry! Can not edit this service! :(');
+                    }
+                    loading.fadeOut();
+                    done.fadeIn();
+                });
+                return false;
+            },
+            cancel: function(button) {
+                // do nothing
+            },
+            confirmButton: "Đồng ý",
+            cancelButton: "Hủy"
+        });
+
+
+        $("#deleteUserService").on('click', function() {
+            
         });
     }
 
