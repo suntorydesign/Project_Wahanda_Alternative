@@ -250,6 +250,5 @@ class Index extends Controller {
 			$this -> model -> checkBookingLimit($data);
 		}
 	}
-
 }
 ?>

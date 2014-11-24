@@ -689,7 +689,33 @@ function loadServiceDetail(user_service_id) {
 				loadLocationStarRatingDetail();
 				loadServiceStarRatingDetail();
 				loadReviewDetail();
-				///////////////////////////////////
+				/////////////////////////////////// SLIDE /////////////
+
+				var indicators = $("#us_slide").find(".carousel-indicators");
+				var inner = $("#us_slide").find(".carousel-inner");
+				indicators.html('');
+				inner.html('');
+				var html_indicators = '<li data-target="#carousel-usd-generic" data-slide-to=":index" class=":active"></li>';
+				var html_inner = '<div class="item :active">' + '<img src=":img_src" alt=":img_alt">' + '<div class="carousel-caption">' + ':img_caption' + '</div>' + '</div>';
+
+				var slides = response[0]["user_service_image"].split(",");
+				var out_indicators = '';
+				var out_inner = '';
+				$.each(slides, function(index, slide) {
+					out_indicators = html_indicators.replace(':index', index);
+
+					out_inner = html_inner.replace(':img_src', slide);
+					out_inner = out_inner.replace(':img_alt', '');
+					out_inner = out_inner.replace(':img_caption', '');
+
+					if (index == 0) {
+						out_indicators = out_indicators.replace(':active', 'active');
+						out_inner = out_inner.replace(':active', 'active');
+					}
+
+					indicators.append(out_indicators);
+					inner.append(out_inner);
+				});
 			}
 			else {
 				$('#error_service_detail_modal_body').show();
@@ -1980,3 +2006,4 @@ function expandMap(){
 }
 /*END EXPAND MAP/
 /*----------------------------------*/
+

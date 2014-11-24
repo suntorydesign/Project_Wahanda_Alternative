@@ -39,8 +39,29 @@
 						<div class="row">
 							<div class="col-md-7" data-spy="scroll" data-target="#service_nav" >
 								<div class="row">
-									<div class="col-md-12">
-										<img id="user_logo" height="auto" width="100%" src="<?php echo ASSETS; ?>img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" />
+									<div id="us_slide" class="col-md-12">
+										<!-- <img id="user_logo" height="auto" width="100%" src="<?php echo ASSETS; ?>img/tp-hcm-thanh-dai-cong-truong-thi-cong-metro-1408499845_490x294.jpg" /> -->
+										<div id="carousel-usd-generic" class="carousel slide" data-ride="carousel">
+											<!-- Indicators -->
+											<ol class="carousel-indicators">
+
+											</ol>
+
+											<!-- Wrapper for slides -->
+											<div class="carousel-inner" role="listbox">
+
+											</div>
+
+											<!-- Controls -->
+											<a class="left carousel-control" href="#carousel-usd-generic" role="button" data-slide="prev">
+												<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+												<span class="sr-only">Previous</span>
+											</a>
+											<a class="right carousel-control" href="#carousel-usd-generic" role="button" data-slide="next">
+												<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+												<span class="sr-only">Next</span>
+											</a>
+										</div>
 									</div>
 									<div class="col-md-12">
 										<br />

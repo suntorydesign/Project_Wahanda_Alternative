@@ -904,7 +904,7 @@ function xhrGet_user_slide() {
 	var indicators = $(".ss-2-slide").find(".carousel-indicators");
 	var inner = $(".ss-2-slide").find(".carousel-inner");
 
-	var html_indicators = '<li data-target="#carousel-example-generic" data-slide-to=":index" class=":active"></li>';
+	var html_indicators = '<li data-target="#carousel-us-generic" data-slide-to=":index" class=":active"></li>';
 	var html_inner = '<div class="item :active">' + '<img src=":img_src" alt=":img_alt">' + '<div class="carousel-caption">' + ':img_caption' + '</div>' + '</div>';
 
 	var url = URL + "service/xhrGet_user_slide";
